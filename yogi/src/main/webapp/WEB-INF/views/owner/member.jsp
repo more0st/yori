@@ -10,7 +10,6 @@
 <style type="text/css">
 .whole-container {
 	min-height: 800px;
-	background: #fafafa;
 }
 
 </style>
@@ -22,12 +21,12 @@
 	</header>
 	
 	<div>
-		사장님 로그인
+		사장님 회원가입
 	</div>
 
 </div>
 <footer>
-	<jsp:include page="/WEB-INF/views/fragment/ownerfooter.jsp"/>
+	<jsp:include page="/WEB-INF/views/fragment/ownerfooter.jsp"/>		
 </footer>
 </body>
 </html>

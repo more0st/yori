@@ -8,9 +8,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/owner/*")
 public class OwnerController {
 	
+	@GetMapping("home")
+	public String home() {
+		
+		return "owner/home";
+	}
+	
 	@GetMapping("login")
 	public String login() {
 		
 		return "owner/login";
+	}
+	
+	@GetMapping("member")
+	public String member() {
+		
+		return "owner/member";
 	}
 }
