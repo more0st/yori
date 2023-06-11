@@ -62,6 +62,10 @@ header .login-button > span {
 	font-size: 12px;
 }
 
+header .login-button > span:hover {
+	cursor: default;
+}
+
 header .login-div:hover {
 	cursor: pointer;
 }
