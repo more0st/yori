@@ -17,6 +17,6 @@ public class OrderController {
 	@GetMapping("complete")
 	public String complete() {
 		
-		return "order/complete";
+		return "order/orderComplete";
 	}
 }
