@@ -10,6 +10,7 @@
 <style type="text/css">
 .whole-container {
 	min-height: 800px;
+	background: #fafafa;
 }
 
 </style>
@@ -17,16 +18,16 @@
 <body style="padding: 0;">
 <div class="whole-container">
 	<header>	
-		<jsp:include page="/WEB-INF/views/fragment/ownerheader.jsp"/>
+		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
 	</header>
 	
 	<div>
-		사장님 홈
+		공지사항
 	</div>
 
 </div>
 <footer>
-	<jsp:include page="/WEB-INF/views/fragment/ownerfooter.jsp"/>
+	<jsp:include page="/WEB-INF/views/fragment/footer.jsp"/>		
 </footer>
 </body>
 </html>

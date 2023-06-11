@@ -10,7 +10,6 @@
 <style type="text/css">
 .whole-container {
 	min-height: 800px;
-	background: #fafafa;
 }
 
 </style>

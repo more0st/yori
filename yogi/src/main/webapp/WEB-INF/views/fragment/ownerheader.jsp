@@ -14,12 +14,13 @@
 	
 header .navigation {
 	width: 100%;
-	height: 78px;
+	height: 60px;
 	background: white;
+	border-bottom: 1px solid #d9d9d9;
 }
 	
 header .menubar {
-	width: 70%;
+	width: 90%;
 	height: 100%;
 	margin: 0 auto;
 	display: flex;
@@ -42,10 +43,8 @@ header .logo > span {
 	
 header .login-button {
 	border: none;
-	color: white;
-	background: #fa0050;
-	border-radius: 5px;
-	width: 150px;
+	color: #00000099;
+	width: 100px;
 	height: 40px;
 	text-align: center;
 	display: flex;
@@ -55,11 +54,15 @@ header .login-button {
 header .login-div {
 	height: 20px;
 	margin: 0 auto;
-	font-size: 20x;
-	font-weight: bold;
+	font-size: 12px;
 }
 
-header .login-button:hover {
+header .login-button > span {
+	height: 20px;
+	font-size: 12px;
+}
+
+header .login-div:hover {
 	cursor: pointer;
 }
 </style>
@@ -69,6 +72,6 @@ header .login-button:hover {
 		<div class="logo" onclick="location.href='${pageContext.request.contextPath}/owner/home'">
 			<img style="height: 16px; margin: 0 auto; display: block" src="${pageContext.request.contextPath}/resources/picture/logo.jpg"><span>사장님</span>
 		</div>
-		<div class="login-button"><div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/login'">로그인</div><span>|</span><div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/member'">회원가입</div></div>
+		<div class="login-button"><div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/login'">로그인</div><span>&nbsp;|&nbsp;</span><div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/member'">회원가입</div></div>
 	</div>
 </div>
