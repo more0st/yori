@@ -67,7 +67,7 @@ footer .info-info {
 			<a href="#" class="rink">개인정보처리방침</a><div>&nbsp;|&nbsp;</div>
 			<a href="#" class="rink">포인트정책</a><div>&nbsp;|&nbsp;</div>
 			<a href="#" class="rink">회사소개</a><div>&nbsp;|&nbsp;</div>
-			<a href="#" class="rink">요기요사장님</a><div>&nbsp;|&nbsp;</div>
+			<a href="${pageContext.request.contextPath}/owner/login" class="rink">요기요사장님</a><div>&nbsp;|&nbsp;</div>
 			<a href="#" class="rink">입점문의</a><div>&nbsp;|&nbsp;</div>
 			<a href="#" class="rink">공지사항</a>
 		</div>

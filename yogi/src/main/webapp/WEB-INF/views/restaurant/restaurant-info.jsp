@@ -23,6 +23,7 @@
 	
 	<div>
 		가게 정보
+		<a href="${pageContext.request.contextPath}/order/order"> 결제 화면 </a>
 	</div>
 
 </div>
