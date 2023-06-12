@@ -11,7 +11,13 @@
 .whole-container {
 	min-height: 800px;
 	background: #fafafa;
-	margin:20px;
+}
+
+.order{
+	width: 1100px;
+	margin: 30px auto;
+	display:flex;
+	justify-content: center;
 }
 
 .title1{
@@ -30,19 +36,28 @@
 }
 
 .content{
-	
 	margin: 10px;
+}
+
+.requestText{
+	resize: none;
+	outline: none;
+	width:100%;
+	padding:10px;
+	height: 100px;
 }
 
 .orderInfo{
 	float: left;
-	width: 65%;
+	width: 700px;
 	border: 1px solid #D8D8D8;
+	white-space: nowrap;
+	margin-right: 20px;
 }
 
 .orderList{
 	float: right;
-	width: 30%;
+	width: 330px;
 	border: 1px solid #D8D8D8;
 }
 
@@ -78,9 +93,17 @@ input{
 }
 
 .btnPay{
-	width:100%;
-	
+	width: 100%;
+	height: 46px;
+	font-size: 18px;
+	background: #fa0050;
+	border:none;
+	color:white;
+	margin-top:5px;
+	border-radius: 4px;
 }
+
+
 
 </style>
 </head>
@@ -90,7 +113,7 @@ input{
 		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
 	</header>
 
-	<div>
+	<div class="order">
 		<form action="${pageContext.request.contextPath}/order/complete">
 			<div class="orderInfo">
 				<div>
@@ -121,7 +144,7 @@ input{
 				<div>
 					<p class="title">주문시 요청사항</p>
 					<div class="content">
-						<p> <textarea rows="3" cols="50"></textarea> </p> 
+						<textarea class="requestText"></textarea>
 					</div>
 				</div>
 				
@@ -151,7 +174,7 @@ input{
 				
 				<div class="lightgray">이용약관, 개인정보 수집 및 이용, 개인정보 제3자 제공 , 전자금융거래 이용약관, 만 14세 이상 이용자 내용 확인하였으며 결제에 동의합니다.</div>
 				
-				<button type="submit" class="btnPay">결제</button>
+				<button type="submit" class="btnPay">결제하기</button>
 			</div>
 		</form>	
 		
