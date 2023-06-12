@@ -113,6 +113,8 @@
 			</div>
 		</div>
 		
+		
+		<!-- 배달정보 값 받아서 넣어주기 -->
 		<div>
 			<p class="title">배달정보</p>
 			<div class="content">
@@ -142,7 +144,7 @@
 			<p class="title">주문내역</p>
 			<div class="content">
 				<div>
-				<!-- forEach -->
+				<!-- forEach 문 사용해서 메뉴/가격 -->
 					<div class="menu">
 						<p class="keyword">족발 大</p><p class="detail">36,000원</p> 
 					</div>	
