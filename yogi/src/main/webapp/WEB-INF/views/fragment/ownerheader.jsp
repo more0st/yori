@@ -75,6 +75,8 @@ header .login-div:hover {
 }
 </style>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/bootstrap5/js/bootstrap.bundle.min.js"></script>
+
 <div class="navigation">
 	<div class="menubar">
 		<div class="logo" onclick="location.href='${pageContext.request.contextPath}/owner/home'">
