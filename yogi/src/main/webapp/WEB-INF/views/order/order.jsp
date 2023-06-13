@@ -143,6 +143,12 @@ td{
 	justify-content: center;
 }
 
+input[type=text] {
+	height: 30px;
+	width: 100%;
+	padding: 10px;
+}
+
 input[type=radio] {
 	display: none;	
 }
@@ -158,7 +164,7 @@ input[type=radio] {
 }
 
 .applybutton {
-	width: 50px;
+	width: 60px;
 	height: 30px;
 	background: white;
 	color: #fa0050;
@@ -170,6 +176,7 @@ input[type=radio] {
 	cursor: pointer;
 	background: #fa0050;
 	color: white;
+	height: 30px;
 }
 
 .content-coupon {
@@ -177,6 +184,15 @@ input[type=radio] {
 	align-items: center;
 	gap: 10px;
 }
+
+.contenttable {
+	width: 100%;
+}
+
+.contenttable td:first-child {
+  width: 150px;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -219,7 +235,7 @@ function selectPaymentMethod(element) {
 				<div>
 					<p class="title">배달정보</p>
 					<div class="content">
-						<table>
+						<table class="contenttable">
 						<tr>
 							<td><p class="bold"> 주소 </p> </td> 
 							<td><input class="inputtext" type="text" value="배송지 주소 불러오기" readonly="readonly"></td>
