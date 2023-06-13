@@ -82,6 +82,6 @@ header .login-div:hover {
 		<div class="logo" onclick="location.href='${pageContext.request.contextPath}/owner/home'">
 			<img style="height: 60px; margin: 0 auto; display: block" src="${pageContext.request.contextPath}/resources/picture/logo.png"><span>사장님</span>
 		</div>
-		<div class="login-button"><div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/login'">로그인</div><span>&nbsp;|&nbsp;</span><div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/member'">회원가입</div></div>
+		<div class="login-button"><div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/login'">로그인</div><span>&nbsp;|&nbsp;</span><div class="login-div" onclick="location.href='${pageContext.request.contextPath}/member/choice'">회원가입</div></div>
 	</div>
 </div>

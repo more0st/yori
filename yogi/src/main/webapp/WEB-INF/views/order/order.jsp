@@ -231,7 +231,7 @@ function selectPaymentMethod(element) {
 
 	<div class="order">
 		<!-- onclick으로 유효성 검사와 action 버튼 submit 수정하기 input태그 name 속성 주기 -->
-		<form action="${pageContext.request.contextPath}/order/complete">
+		<form name="orderForm" action="${pageContext.request.contextPath}/order/complete">
 			<div class="orderInfo">
 				<div>
 					<div class="title1">결제하기</div>
@@ -301,7 +301,7 @@ function selectPaymentMethod(element) {
 				
 				<button type="submit" class="btnPay">결제하기</button>
 			</div>
-		</form>	
+		</form>
 		
 	</div>
 </div>

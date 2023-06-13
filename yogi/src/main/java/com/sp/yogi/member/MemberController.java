@@ -19,4 +19,10 @@ public class MemberController {
 		
 		return "member/member";
 	}
+	
+	@GetMapping("choice")
+	public String choice() {
+		
+		return "member/memberchoice";
+	}
 }

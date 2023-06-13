@@ -106,7 +106,7 @@
 				<a>아이디 찾기</a><span>&nbsp;|&nbsp;</span><a>비밀번호 찾기</a>
 			</div>
 			<button class="login-btn" type="button">로그인</button>
-			<a href="${pageContext.request.contextPath}/member/member">
+			<a href="${pageContext.request.contextPath}/member/choice">
 				<img class="member-img" src="${pageContext.request.contextPath}/resources/picture/signin_banner.png">
 			</a>
 		</div>
