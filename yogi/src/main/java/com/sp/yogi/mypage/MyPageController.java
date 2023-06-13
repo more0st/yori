@@ -18,6 +18,21 @@ public class MyPageController {
 		return "mypage/orderList";
 	}
 	
+	// sp1의 블로그 참조할 것
+	// {orderNum} : 템플릿 변수
+	// @GetMapping("{orderNum}/orderDetail")
+	@GetMapping("orderDetail")
+	public String orderDetail() {
+		
+		return "mypage/orderDetail";
+	}
+	
+	@GetMapping("myReview")
+	public String myReview() {
+		
+		return "mypage/myReview";
+	}
+	
 	@GetMapping("likeList")
 	public String likeList() {
 		return "mypage/likeList";

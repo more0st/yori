@@ -13,7 +13,6 @@
 	background: #fafafa;
 }
 
-
 </style>
 </head>
 <body style="padding: 0;">
@@ -24,7 +23,9 @@
 	
 	<!-- 메뉴 -->
 	<jsp:include page="/WEB-INF/views/mypage/mymenu.jsp"/>
+	뒤로 
 	
+	메뉴 상세
 	
 	
 </div>
