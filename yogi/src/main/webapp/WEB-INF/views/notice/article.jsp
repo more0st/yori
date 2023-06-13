@@ -13,6 +13,11 @@
 	background: #fafafa;
 }
 
+.notice-wrap {
+	width: 700px;
+	margin: 0 auto;
+}
+
 .notice-list {
 	padding-top: 15px;
 	padding-left: 15px;
@@ -35,7 +40,7 @@
 .n-body {
 	border: 1px solid #eee;
 	width: 700px;
-	height: 670px;
+	min-height: 200px;
 	background-color: white;
 	margin: 0 auto;
 	padding: 0px 20px 20px;
@@ -46,12 +51,21 @@
     border: 1px solid #ccc;
     background: #fff url(../image/ico-lt.png?v=6f834f8…) no-repeat 10px 10px;
     background-size: 5px;
-    padding: 7px 12px 4px 21px;
+    padding: 7px 12px 4px 10px;
     margin: 10px 0 0 0;
     position: relative;
     overflow: hidden;
     text-decoration: none;
     font-size: 14px;
+    color: black;
+}
+
+.btn-list:hover {
+    color: black;
+}
+
+.notice-list:hover {
+    color: black;
 }
 
 </style>
@@ -63,10 +77,10 @@
 	</header>
 	
 	<div class="notice-wrap">
-		<div style="padding-left: 120px; padding-top: 20px; padding-bottom: 10px;">
-			공지사항
-		
-		
+		<div style="padding-top: 20px; padding-bottom: 10px; margin: 0 auto;">
+			
+			<a class="btn-list" href="${pageContext.request.contextPath}/notice/home" >&lt; 목록으로
+			</a>
 			<div class="notice-list">
 			[공지] 개인정보처리방침 일부 변경 안내
 				<div class="n-date">
@@ -85,8 +99,6 @@
 				</div>
 			</div>
 			
-			<a class="btn-list" href="${pageContext.request.contextPath}/notice/home" onclick="$location.url('/notice/')">◁ 목록으로
-			</a>
 			
 		</div>
 	</div>	<!-- class="notice-wrap" -->

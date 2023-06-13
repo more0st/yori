@@ -24,6 +24,7 @@
 	font-weight: bold;
 	font-size: 14px;
 	background-color: white;
+	color: black;
 }
 
 .n-date {
@@ -35,6 +36,15 @@
 
 .n-article {
 	text-decoration: none;
+	color: black;
+}
+
+.notice-list:hover {
+    color: black;
+}
+
+.n-article:hover {
+    color: black;
 }
 
 </style>
@@ -54,7 +64,6 @@
 		
 	<div class="notice-wrap">
 		<div style="padding-left: 120px; padding-top: 20px; padding-bottom: 10px;">
-			공지사항
 		
 		<!-- c:for each로 div 태그 돌리기.. -->
 			<c:forEach var="subject" items="noticeList">
