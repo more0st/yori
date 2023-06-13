@@ -23,11 +23,10 @@
 	font-size: 32px;
 	font-weight: bold;
 	color: #fa0050;
-	margin-bottom: 30px;
 }
 
 .login-ment > img {
-	width: 150px;
+	width: 270px;
 	margin-right: 20px;
 }
 
@@ -113,7 +112,7 @@ td {
 	<form action="" name="loginForm" method="post">
 		<div class="login-form">
 			<div class="login-ment">
-				<img src="${pageContext.request.contextPath}/resources/picture/logo-remove.png"><span>사장님</span>
+				<img src="${pageContext.request.contextPath}/resources/picture/logo.png"><span>사장님</span>
 			</div>
 			<div class="login-box">
 				<table class="login-table">

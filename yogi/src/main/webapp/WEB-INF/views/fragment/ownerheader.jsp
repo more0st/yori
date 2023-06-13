@@ -33,7 +33,7 @@ header .menubar {
 	}
 	
 header .logo {
-	width: 120px;
+	width: 180px;
 	cursor: pointer;
 	display: flex;
 	justify-content: space-between;
@@ -80,7 +80,7 @@ header .login-div:hover {
 <div class="navigation">
 	<div class="menubar">
 		<div class="logo" onclick="location.href='${pageContext.request.contextPath}/owner/home'">
-			<img style="height: 16px; margin: 0 auto; display: block" src="${pageContext.request.contextPath}/resources/picture/logo.jpg"><span>사장님</span>
+			<img style="height: 60px; margin: 0 auto; display: block" src="${pageContext.request.contextPath}/resources/picture/logo.png"><span>사장님</span>
 		</div>
 		<div class="login-button"><div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/login'">로그인</div><span>&nbsp;|&nbsp;</span><div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/member'">회원가입</div></div>
 	</div>

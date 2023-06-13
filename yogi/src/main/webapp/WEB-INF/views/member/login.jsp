@@ -24,12 +24,11 @@
 	font-size: 50px;
 	font-weight: bold;
 	color: #fa0050;
-	padding: 10px;
-	margin: 10px auto;
+	margin: 0 auto;
 }
 
 .login-ment > img {
-	width: 117px;
+	width: 250px;
 }
 
 .login-input > .id {
@@ -96,7 +95,7 @@
 	<form action="" method="post" name="loginForm">
 		<div class="login-form">
 			<div class="login-ment">
-				<img src="${pageContext.request.contextPath}/resources/picture/logo-remove.png">
+				<img src="${pageContext.request.contextPath}/resources/picture/logo.png">
 			</div>
 			<div class="login-input">
 				<!-- 로그인 email로 하면 name 바꾸기 -->

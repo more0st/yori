@@ -67,7 +67,7 @@ header .login-button:hover {
 <div class="navigation">
 	<div class="menubar">
 		<div class="logo" onclick="location.href='${pageContext.request.contextPath}/home/home'">
-			<img style="height: 38px; margin: 0 auto; display: block" src="${pageContext.request.contextPath}/resources/picture/logo.jpg">
+			<img style="height: 85px; margin: 0 auto; display: block" src="${pageContext.request.contextPath}/resources/picture/logo.png">
 		</div>
 		<button class="login-button" onclick="location.href='${pageContext.request.contextPath}/member/login'"><div class="login-div">로그인</div></button>
 	</div>
