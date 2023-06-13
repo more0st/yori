@@ -13,4 +13,17 @@ public class NoticeController {
 		
 		return "notice/home";
 	}
+	
+	@GetMapping("write")
+	public String write() {
+		
+		return "notice/write";
+	}
+	
+	@GetMapping("article")
+	public String article() {
+		
+		return "notice/article";
+	}
+	
 }
