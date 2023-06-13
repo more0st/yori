@@ -56,8 +56,8 @@
 			<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/member/member';">정보수정</div>
 		</div>
 	</div>
-	홈
 	
+	주문내역
 </div>
 <footer>
 	<jsp:include page="/WEB-INF/views/fragment/footer.jsp"/>		

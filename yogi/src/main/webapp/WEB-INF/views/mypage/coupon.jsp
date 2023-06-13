@@ -56,7 +56,8 @@
 			<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/member/member';">정보수정</div>
 		</div>
 	</div>
-	홈
+	
+	쿠폰
 	
 </div>
 <footer>

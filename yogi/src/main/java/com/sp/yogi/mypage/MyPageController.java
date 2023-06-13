@@ -12,5 +12,19 @@ public class MyPageController {
 	public String myhome() {
 		return "mypage/myhome";
 	}
+
+	@GetMapping("orderList")
+	public String orderList() {
+		return "mypage/orderList";
+	}
 	
+	@GetMapping("likeList")
+	public String likeList() {
+		return "mypage/likeList";
+	}
+	
+	@GetMapping("coupon")
+	public String coupon() {
+		return "mypage/coupon";
+	}
 }
