@@ -13,6 +13,26 @@
 	background: #fafafa;
 }
 
+.category-box {
+	width: 100%;
+	border-top: 1px solid #d9d9d9;
+	border-bottom: 1px solid #d9d9d9;
+	background: white;
+	display: flex;
+	justify-content: center;
+}
+
+.category-info {
+	padding: 20px 15px;
+	font-size: 14px;
+	white-space: nowrap;
+}
+
+.category-info:hover {
+	background: black;
+	color: white;
+	cursor: pointer;
+}
 </style>
 </head>
 <body style="padding: 0;">
@@ -20,6 +40,13 @@
 	<header>	
 		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
 	</header>
+	
+	<div class="category-box">
+		<div class="category-info">주문내역</div>
+		<div class="category-info">찜목록</div>
+		<div class="category-info">쿠폰함</div>
+		<div class="category-info">정보수정</div>
+	</div>
 	
 	<div>
 		마이 페이지

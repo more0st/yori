@@ -10,10 +10,9 @@
 <title>요기요</title>
 <style type="text/css">
 .whole-container {
-	min-height: 800px;
+	min-height: 720px;
 	background: #fafafa;
 }
-
 
 .body-main {
 	max-width: 700px;
@@ -101,7 +100,6 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-
 }
 
 /* body-container */
@@ -248,70 +246,72 @@ function deleteFile(noticePhotoNum) {
 </header>
 
 <main>
-	<div class="container body-container">
-	    <div class="body-title">
-			<h2> 공지사항 </h2>
-	    </div>
-	    
-	    <div class="body-main mx-auto">
-			<form name="noticeForm" method="post" enctype="multipart/form-data">
-				<table class="table table-border table-form">
-					<tr> 
-						<td>제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
-						<td> 
-							<input type="text" name="noticeSubject" maxlength="100" class="form-control" value="${dto.noticeSubject}">
-						</td>
-					</tr>
-					
-				
-					
-					<tr> 
-						<td valign="top">내&nbsp;&nbsp;&nbsp;&nbsp;용</td>
-						<td> 
-							<textarea name="noticeContent" class="form-control">${dto.noticeContent}</textarea>
-						</td>
-					</tr>
-					
-					<tr>
-						<td>첨&nbsp;&nbsp;&nbsp;&nbsp;부</td>
-						<td> 
-							<input type="file" name="selectFile" accept="image/*" multiple="multiple" class="form-control">
-						</td>
-					</tr>
-					
-					<c:if test="${mode == 'update' }">
-						<tr>
-							<td>등록이미지</td>
-							<td>
-								<div class="img-box">
-									<c:forEach var="vo" items="${listFile}">
-										<img src="${pageContext.request.contextPath}/uploads/notice/${vo.noticePhotoName}"
-											onclick="deleteFile('${vo.noticePhotoNum}');">
-									</c:forEach>
-								</div>
+	<div class="whole-container">
+		<div class="container body-container">
+		    <div class="body-title">
+				<h2> 공지사항 </h2>
+		    </div>
+		    
+		    <div class="body-main mx-auto">
+				<form name="noticeForm" method="post" enctype="multipart/form-data">
+					<table class="table table-border table-form">
+						<tr> 
+							<td>제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
+							<td> 
+								<input type="text" name="noticeSubject" maxlength="100" class="form-control" value="${dto.noticeSubject}">
 							</td>
 						</tr>
-					</c:if>
-				</table>
+						
 					
-				<table class="table">
-					<tr> 
-						<td align="center">
-							<button type="button" class="butn" onclick="sendOk();">${mode=="update"?"수정완료":"등록완료"}</button>
-							<button type="reset" class="butn">다시입력</button>
-							<button type="button" class="butn" onclick="location.href='${pageContext.request.contextPath}/notice/list.do';">${mode=="update"?"수정취소":"등록취소"}</button>
-							<c:if test="${mode=='update' }">
-								<input type="hidden" name="noticeNum" value="${dto.noticeNum}">
-								<input type="hidden" name="page" value="${page}">
-							</c:if>							
-						</td>
-					</tr>
-				</table>
-		
-			</form>
-
-	    </div>
-	</div>
+						
+						<tr> 
+							<td valign="top">내&nbsp;&nbsp;&nbsp;&nbsp;용</td>
+							<td> 
+								<textarea name="noticeContent" class="form-control">${dto.noticeContent}</textarea>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>첨&nbsp;&nbsp;&nbsp;&nbsp;부</td>
+							<td> 
+								<input type="file" name="selectFile" accept="image/*" multiple="multiple" class="form-control">
+							</td>
+						</tr>
+						
+						<c:if test="${mode == 'update' }">
+							<tr>
+								<td>등록이미지</td>
+								<td>
+									<div class="img-box">
+										<c:forEach var="vo" items="${listFile}">
+											<img src="${pageContext.request.contextPath}/uploads/notice/${vo.noticePhotoName}"
+												onclick="deleteFile('${vo.noticePhotoNum}');">
+										</c:forEach>
+									</div>
+								</td>
+							</tr>
+						</c:if>
+					</table>
+						
+					<table class="table">
+						<tr> 
+							<td align="center">
+								<button type="button" class="butn" onclick="sendOk();">${mode=="update"?"수정완료":"등록완료"}</button>
+								<button type="reset" class="butn">다시입력</button>
+								<button type="button" class="butn" onclick="location.href='${pageContext.request.contextPath}/notice/list.do';">${mode=="update"?"수정취소":"등록취소"}</button>
+								<c:if test="${mode=='update' }">
+									<input type="hidden" name="noticeNum" value="${dto.noticeNum}">
+									<input type="hidden" name="page" value="${page}">
+								</c:if>							
+							</td>
+						</tr>
+					</table>
+			
+				</form>
+	
+		    </div>
+		</div>
+	</div>	
 </main>
 
 <footer>
