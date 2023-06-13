@@ -92,7 +92,7 @@
 
 .hstyle{
 	margin:10px; 
-	border: 1px dotted #eee;
+	border: 1px dotted #333;
 }
 
 .bordereee {

@@ -6,6 +6,9 @@
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendor/bootstrap5/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendor/bootstrap5/icon/bootstrap-icons.css" type="text/css">
+
 <style type="text/css">
 	* {
 		margin: 0;

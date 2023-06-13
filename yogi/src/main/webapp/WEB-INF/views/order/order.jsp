@@ -28,7 +28,7 @@
 	padding-left: 10px;
 }
 
-.title{
+.titlehead{
 	background: #E6E6E6;
 	height: 40px;
 	padding : 10px 0;
@@ -37,6 +37,7 @@
 
 .content{
 	margin: 10px;
+	padding: 0 10px;
 }
 
 .requestText{
@@ -88,8 +89,7 @@
 }
 
 td{
-	padding-left: 10px;
-	padding-bottom: 10px;
+	padding: 10px;
 }
 
 .inputtext {
@@ -193,6 +193,11 @@ input[type=radio] {
   width: 150px;
 }
 
+.tdcenter {
+	display: flex;
+	align-items: center;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -229,15 +234,15 @@ function selectPaymentMethod(element) {
 		<form action="${pageContext.request.contextPath}/order/complete">
 			<div class="orderInfo">
 				<div>
-					<p class="title1">결제하기</p>
+					<div class="title1">결제하기</div>
 				</div>
 				
 				<div>
-					<p class="title">배달정보</p>
+					<p class="titlehead">배달정보</p>
 					<div class="content">
 						<table class="contenttable">
 						<tr>
-							<td><p class="bold"> 주소 </p> </td> 
+							<td class="tdcenter bold">주소</td>
 							<td><input class="inputtext" type="text" value="배송지 주소 불러오기" readonly="readonly"></td>
 						</tr>	
 						<tr>
@@ -246,7 +251,7 @@ function selectPaymentMethod(element) {
 						</tr>
 						
 						<tr>
-							<td><p class="bold"> 휴대전화번호 </p> </td>
+							<td class="tdcenter bold">휴대전화번호</td>
 							<td><input class="inputtext" type="text" value=""> </td>
 						</tr>
 						</table>
@@ -254,29 +259,29 @@ function selectPaymentMethod(element) {
 				</div>
 				
 				<div>
-					<p class="title">주문시 요청사항</p>
+					<p class="titlehead">주문시 요청사항</p>
 					<div class="content">
 						<textarea class="requestText"></textarea>
 					</div>
 				</div>
 				
 				<div>
-					<p class="title">결제수단 선택</p>
+					<p class="titlehead">결제수단 선택</p>
 					<div class="content">
 						<p class="bold">요기서 결제</p>
 						<div class="radio">
 							<div class="radioinput" onclick="selectPaymentMethod(this)">
-								<input type="radio" name="payment" value="card"><p><i class="fa-solid fa-credit-card"></i>&nbsp;카드결제</p>
+								<input type="radio" name="payment" value="card"><div><i class="fa-solid fa-credit-card"></i>&nbsp;카드결제</div>
 							</div>
 							<div class="radioinput" onclick="selectPaymentMethod(this)">
-								<input type="radio" name="payment" value="cash"><p><i class="fa-solid fa-coins"></i>&nbsp;현금결제</p>
+								<input type="radio" name="payment" value="cash"><div><i class="fa-solid fa-coins"></i>&nbsp;현금결제</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				
 				<div>
-					<p class="title">할인방법 선택</p>
+					<p class="titlehead">할인방법 선택</p>
 					<div class="content">
 						<div class="content-coupon bold"><div> 쿠폰 : </div><input class="inputtext" type="text" placeholder="쿠폰 코드 입력"> <button class="applybutton" type="button">적용</button></div>
 					</div>
@@ -284,7 +289,7 @@ function selectPaymentMethod(element) {
 			</div>
 			
 			<div class="orderList">
-				<p class="title">주문내역</p>
+				<div class="titlehead">주문내역</div>
 				<div class="listContent">
 					<div class="menu white">$가게이름</div>
 					<!-- foreach 돌리기 -->

@@ -104,6 +104,7 @@
 .restaurant-info:hover {
 	cursor: pointer;
 	background: #eee;
+	color: #333333;
 }
 
 .res-img {
