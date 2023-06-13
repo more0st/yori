@@ -19,11 +19,6 @@
 	padding-top: 15px;
 }
 
-
-.body-main {
-	max-width: 700px;
-}
-
 /* form-control */
 .butn {
 	color: #333;
@@ -83,24 +78,15 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
 
 tr.hover:hover { cursor: pointer; background: #f5fffa; }
 
-
-
 .text-left { text-align: left; }
 .text-right { text-align: right; }
-.text-center { text-align: center; }
 
 .clear { clear: both; }
 .clear:after { content:''; display:block; clear: both; }
 
 .mx-auto { margin-left: auto; margin-right: auto; }
 
-.container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
+
 
 /* body-container */
 .body-container {
@@ -137,16 +123,6 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 	padding-top: 35px;
 }
 
-.table-list thead > tr:first-child { background: skyblue; }
-.table-list th, .table-list td { text-align: center; }
-.table-list .left { text-align: left; padding-left: 5px; }
-
-.table-list .num { width: 60px; color: #ff5522; }
-.table-list .subject { color: #ff5522; }
-.table-list .name { width: 100px; color: #ff5522; }
-.table-list .date { width: 100px; color: #ff5522; }
-.table-list .hit { width: 70px; color: #ff5522; }
-.table-list .file { width: 50px; color: #ff5522; }
 
 .table-form td { padding: 7px 0; }
 .table-form p { line-height: 200%; }
@@ -158,43 +134,9 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 	border: 1px solid #999;
 	width: 96%;
 }
-	
-@media (min-width: 576px) {
-	.container {
-	    max-width: 540px;
-	}
-}
-@media (min-width: 768px) {
-	.container {
-	    max-width: 720px;
-	}
-}
-@media (min-width: 992px) {
-	.container {
-		max-width: 960px;
-	}
-}
-@media (min-width: 1200px) {
-	.container {
-	    max-width: 750px;
-	}
-}
 
-.img-box {
-	max-width: 600px;
-	padding: 5px;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	overflow-x: auto;
-}
-.img-box img {
-	width: 37px; height: 37px;
-	margin-right: 5px;
-	flex: 0 0 auto;
-	cursor: pointer;
-}
+
+
 	
 </style>
 
