@@ -16,7 +16,7 @@
 .orderComplete{
 	width: 800px;
 	margin: 30px auto;
-	border: 1.3px solid #eee;
+	
 }
 
 .title1{
@@ -45,6 +45,8 @@
 
 .fbfbef{
 	background:#FBFBEF;
+	border: 1.3px solid #eee;
+	margin-bottom: 10px;
 }
 
 .orderDone{
@@ -93,6 +95,11 @@
 	border: 1px dotted #eee;
 }
 
+.bordereee {
+	border: 1.3px solid #eee;
+	background: white;
+}
+
 </style>
 </head>
 <body style="padding: 0;">
@@ -102,7 +109,7 @@
 	</header>
 
 	<div class="orderComplete">
-		<div>
+		<div class="bordereee">
 			<p class="title1">주문완료</p>
 			<div class="content1">
 				<div class="content1">
@@ -115,7 +122,7 @@
 		
 		
 		<!-- 배달정보 값 받아서 넣어주기 -->
-		<div>
+		<div class="bordereee">
 			<p class="title">배달정보</p>
 			<div class="content">
 				<table style="border-spacing: 0 10px;">
@@ -129,12 +136,8 @@
 					</tr>	
 					<tr>
 						<td class="keyword bold">주문 식당</td> 
-						<td>서울 강남구 역삼동</td> 
+						<td><span>서울 강남구 역삼동</span>&nbsp;<span>11-2 1203호</span></td> 
 					</tr>	
-					<tr>
-						<td class="keyword"></td> 
-						<td>11-2 1203호</td> 
-					</tr>
 				</table>
 			</div>
 		</div>

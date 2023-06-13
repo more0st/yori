@@ -113,6 +113,10 @@ td{
 	border-radius: 4px;
 }
 
+.btnPay:hover {
+	cursor: pointer;
+}
+
 .access {
 	border-right: none;
 	border-left: none;
@@ -156,14 +160,16 @@ input[type=radio] {
 .applybutton {
 	width: 50px;
 	height: 30px;
-	background: #fa0050;
-	color: white;
-	border: none;
+	background: white;
+	color: #fa0050;
+	border: 1px solid #fa0050;
 	border-radius: 5px;
 }
 
 .applybutton:hover {
 	cursor: pointer;
+	background: #fa0050;
+	color: white;
 }
 
 .content-coupon {
@@ -216,7 +222,7 @@ function selectPaymentMethod(element) {
 						<table>
 						<tr>
 							<td><p class="bold"> 주소 </p> </td> 
-							<td><input class="inputtext" type="text" value="배송지 주소 불러오기"></td>
+							<td><input class="inputtext" type="text" value="배송지 주소 불러오기" readonly="readonly"></td>
 						</tr>	
 						<tr>
 							<td></td>
@@ -239,7 +245,7 @@ function selectPaymentMethod(element) {
 				</div>
 				
 				<div>
-					<p class="title">결제수단 선택(현장 결제는 지원하지 않습니다.)</p>
+					<p class="title">결제수단 선택</p>
 					<div class="content">
 						<p class="bold">요기서 결제</p>
 						<div class="radio">
