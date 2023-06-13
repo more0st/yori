@@ -40,9 +40,9 @@
 .n-body {
 	border: 1px solid #eee;
 	width: 700px;
-	min-height: 200px;
+	min-height: 520px;
 	background-color: white;
-	margin: 0 auto;
+	margin: 0 auto 20px auto;
 	padding: 0px 20px 20px;
 }
 
