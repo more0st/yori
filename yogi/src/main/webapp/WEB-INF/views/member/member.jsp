@@ -27,10 +27,6 @@
 	padding: 24px 0px;
 }
 
-.row-title {
-
-}
-
 .check-butn {
 	position: absolute;
     top: 0px;
@@ -48,6 +44,7 @@
 	margin: 0 auto;
 	border-radius: 4px;
 	padding: 25px;
+	background: white;
 }
 
 </style>
@@ -203,9 +200,9 @@ function userIdCheck() {
 										placeholder="아이디">
 							</div>
 							<div class="col-3 ps-1">
-								<c:if test="${mode=='member'}">
+								
 									<button type="button" class="btn btn-light" onclick="userIdCheck();">아이디중복검사</button>
-								</c:if>
+								
 							</div>
 						</div>
 						<c:if test="${mode=='member'}">
@@ -216,16 +213,25 @@ function userIdCheck() {
 			 
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label" for="userPwd">패스워드</label>
-					<div class="col-sm-10">
+					<div class="col-sm-7">
 			            <input type="password" name="userPwd" id="userPwd" class="form-control" autocomplete="off" placeholder="패스워드">
 			            <small class="form-control-plaintext">패스워드는 5~10자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.</small>
 			        </div>
 			    </div>
 			    
-			 
+			 	
+			 	<div class="row mb-3">
+			        <label class="col-sm-2 col-form-label" for="userName">닉네임</label>
+			        <div class="col-sm-7">
+			            <input type="text" name="userNickName" id="userNickName" class="form-control" value="${dto.userNickName}" 
+			            		${mode=="update" ? "readonly='readonly' ":""}
+			            		placeholder="닉네임">
+			        </div>
+			    </div>
+			 	
 			    <div class="row mb-3">
 			        <label class="col-sm-2 col-form-label" for="userName">이름</label>
-			        <div class="col-sm-10">
+			        <div class="col-sm-7">
 			            <input type="text" name="userName" id="userName" class="form-control" value="${dto.userName}" 
 			            		${mode=="update" ? "readonly='readonly' ":""}
 			            		placeholder="이름">
@@ -234,7 +240,7 @@ function userIdCheck() {
 			 
 			    <div class="row mb-3">
 			        <label class="col-sm-2 col-form-label" for="birth">생년월일</label>
-			        <div class="col-sm-10">
+			        <div class="col-sm-7">
 			            <input type="date" name="birth" id="birth" class="form-control" value="${dto.birth}" placeholder="생년월일">
 			            
 			        </div>
@@ -242,7 +248,7 @@ function userIdCheck() {
 			
 			    <div class="row mb-3" style="display: flex; align-items: center;">
 			        <label class="col-sm-2 col-form-label" for="selectEmail" >이메일</label>
-			        <div class="col-sm-10 row">
+			        <div class="col-sm-8 row">
 						<div class="col-3 pe-0">
 							<select name="selectEmail" id="selectEmail" class="form-select" onchange="changeEmail();" style="margin-top: 24px;">
 								<option value="">선 택</option>
@@ -254,7 +260,7 @@ function userIdCheck() {
 							</select>
 						</div>
 						
-						<div class="col input-group">
+						<div class="col input-group" style="width: 180px;">
 							<input type="text" name="email1" class="form-control" maxlength="30" value="${dto.email1}" >
 						    <span class="input-group-text p-1" style="border: none; background: none;">@</span>
 							<input type="text" name="email2" class="form-control" maxlength="30" value="${dto.email2}" readonly="readonly">
