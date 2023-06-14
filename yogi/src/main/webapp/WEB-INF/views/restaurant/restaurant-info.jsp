@@ -28,9 +28,10 @@
 }
 
 .cart-info {
-	border: 1px solid black;
 	width: 30%;
-	min-height: 100px;	
+	height: 100px;	
+	position: sticky;
+	top: 20px;
 }
 
 .res-title {
@@ -207,11 +208,59 @@
 	color: #999;
 }
 
-.information-table td:nth-child(2) {
-}
-
 .information-table td {
 	padding: 5px;
+}
+
+.cart-top {
+	background: black;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+	font-size: 
+}
+
+.cart-top-icon {
+	border: none;
+	color: white;
+	font-size: 16px;
+	background: none;
+}
+
+.no-cart {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100px;
+	border: 1px solid #d9d9d9;
+	background: white;
+}
+
+.cart-tip {
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	background: white;
+	border: 1px solid #d9d9d9;
+	border-top: none;
+	width: 100%;
+	height: 40px;
+	padding: 10px;
+}
+
+.cart-bottom {
+	margin-top: 10px;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	width: 100%;
+	height: 40px;
+}
+
+.cart-button {
+	
 }
 
 </style>
@@ -354,7 +403,7 @@
 								<br>
 								돼지고기<br>
 								베이컨-미국산<br>
-								
+								<br>
 								닭고기<br>
 								국내산-너겟킹,롱치킨버거,몬스터와퍼,몬스터X,(바비큐)치킨버거<br>
 								외국산(덴마크산,스웨덴산,태국산 등)-바삭킹<br>
@@ -366,7 +415,32 @@
 			</div>
 		</div>
 		<div class="cart-info">
+			<div class="cart-top">
+				<div>
+					주문표
+				</div>
+				<div>
+					<button class="cart-top-icon" type="button" onclick=""><i class="fa-solid fa-trash-can"></i></button>
+				</div>
+			</div>
 			
+			<!-- 장바구니에 아무 항목도 없을 때 -->
+			<div class="no-cart">
+				주문표에 담긴 메뉴가 없습니다.
+			</div>
+			
+			<!-- 장바구니에 주문이 들어갔을 때 -->
+			<div>
+				ddddd<br>
+				dd
+			</div>
+			
+			<div class="cart-tip">
+				배달요금 1,000원 별도
+			</div>
+			<div class="cart-bottom">
+				<button class="cart-button" type="button">주문하기</button>
+			</div>
 		</div>
 	</div>
 

@@ -69,7 +69,8 @@ footer .info-info {
 			<a href="#" class="rink">회사소개</a><div>&nbsp;|&nbsp;</div>
 			<a href="${pageContext.request.contextPath}/owner/login" class="rink">요기요사장님</a><div>&nbsp;|&nbsp;</div>
 			<a href="#" class="rink">입점문의</a><div>&nbsp;|&nbsp;</div>
-			<a href="${pageContext.request.contextPath}/notice/home" class="rink">공지사항</a>
+			<a href="${pageContext.request.contextPath}/notice/home" class="rink">공지사항</a><div>&nbsp;|&nbsp;</div>
+			<a href="${pageContext.request.contextPath}/faq/home" class="rink">1:1 문의</a>
 		</div>
 	</div>
 	
