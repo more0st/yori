@@ -40,6 +40,7 @@
 }
 
 .res-name {
+	background: #d9d9d9;
 	padding: 10px;
 	color: #333;
 	font-weight: bold;
@@ -172,6 +173,47 @@
 	padding: 20px;
 }
 
+.information-category {
+	min-height: 100px;
+	margin-bottom: 20px;
+}
+
+.information-category-head {
+	padding: 10px;
+	border-bottom: 1px solid #666;
+	font-weight: bold;
+}
+
+.information-category-head > i {
+	color: #666;
+}
+
+.information-category-body {
+	padding: 10px;
+}
+
+.information-category-body > img {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.information-table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.information-table td:first-child {
+	width: 150px;
+	color: #999;
+}
+
+.information-table td:nth-child(2) {
+}
+
+.information-table td {
+	padding: 5px;
+}
+
 </style>
 </head>
 <body style="padding: 0;">
@@ -193,7 +235,7 @@
 					<div class="res-center">
 						<div>
 							<span class="res-rank">★ 5.0</span><br>
-							<span class="res-999">최소주문금액</span>&nbsp;&nbsp;<span class="res-333">17,900원</span>
+							<span class="res-999">최소주문금액</span>&nbsp;&nbsp;<span class="res-333">6,000원</span>
 						</div>
 					</div>
 				</div>
@@ -219,7 +261,7 @@
 					</div>
 					
 					<!-- foreach로 돌리기 -->
-					<!-- if로 img없으면 생략 -->
+					<!-- image가 없는 리뷰라면 if로 생략하기 -->
 					<div class="review">
 						<div class="review-top">
 							<div class="review-name">
@@ -238,7 +280,8 @@
 							<div class="review-name">
 								<div class="res-333" style="font-weight: bold;">박상훈님</div><div class="review-date">2023-06-13</div>
 							</div>
-							<div><button class="report-btn">신고</button></div>
+							<!-- 자신의 리뷰라면 삭제 -->
+							<div><button type="button" class="report-btn">신고</button></div>
 						</div>
 						<img class="review-img" src="${pageContext.request.contextPath}/resources/picture/amazing.png">
 						<div class="review-content">
@@ -251,17 +294,72 @@
 				<!-- 정보 -->
 				<div class="res-show3" style="display: none;">
 					<div class="res-information">
-						<div>
-							사장님알림
+						<div  class="information-category">
+							<div class="information-category-head">
+								<i class="fa-solid fa-bullhorn"></i>&nbsp;사장님알림
+							</div>
+							<div class="information-category-body">
+								<!-- img 하는가 없으면 안넣어도 되고 해도 안하면 if로 없애도 되공 -->
+								<img src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
+								딜리버리 서비스 메뉴의 가격은 매장 가격과 상이할 수 있습니다.
+							</div>
 						</div>
-						<div>
-							업체정보
+						<div  class="information-category">
+							<div class="information-category-head">
+								<i class="fa-solid fa-store"></i>&nbsp;업체정보
+							</div>
+							<div class="information-category-body">
+								<table class="information-table">
+									<tr>
+										<td>영업시간</td>
+										<td>10:00 ~ 24:00</td>
+									<tr>
+									<tr>
+										<td>전화번호</td>
+										<td>02-920-0202</td>
+									<tr>
+									<tr>
+										<td>주소</td>
+										<td>서울특별시 마포구 월드컵북로 21 풍성빌딩 101호</td>
+									<tr>
+								</table>
+							</div>
 						</div>
-						<div>
-							사업자정보
+						<div class="information-category">
+							<div class="information-category-head">
+								<i class="bi bi-newspaper"></i>&nbsp;사업자정보
+							</div>
+							<div class="information-category-body">
+								<table class="information-table">
+									<tr>
+										<td>상호명</td>
+										<td>(주)비케이알</td>
+									<tr>
+									<tr>
+										<td>사업자등록번호</td>
+										<td>102-20-02022</td>
+									<tr>
+								</table>
+							</div>
 						</div>
-						<div>
-							원산지표시						
+						<div class="information-category">
+							<div class="information-category-head">
+								<i class="fa-solid fa-sign-hanging"></i>&nbsp;원산지정보
+							</div>
+							<div class="information-category-body">
+								쇠고기<br>
+								와퍼,버거패티-뉴질랜드산과 호주산 섞음<br>
+								와퍼패티 - 호주산 : 사용 매장 확인 https://burgerk.page.link/nutrition<br>
+								스테이크패티-호주산과 뉴질랜드산 섞음 : 몬스터X<br>
+								<br>
+								돼지고기<br>
+								베이컨-미국산<br>
+								
+								닭고기<br>
+								국내산-너겟킹,롱치킨버거,몬스터와퍼,몬스터X,(바비큐)치킨버거<br>
+								외국산(덴마크산,스웨덴산,태국산 등)-바삭킹<br>
+								외국산(브라질산,태국산,미국산 등)-치킨킹,치킨킹BLT
+							</div>						
 						</div>
 					</div>
 				</div>

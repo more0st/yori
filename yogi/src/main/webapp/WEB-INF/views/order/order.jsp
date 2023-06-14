@@ -268,7 +268,6 @@ function selectPaymentMethod(element) {
 				<div>
 					<p class="titlehead">결제수단 선택</p>
 					<div class="content">
-						<p class="bold">요기서 결제</p>
 						<div class="radio">
 							<div class="radioinput" onclick="selectPaymentMethod(this)">
 								<input type="radio" name="payment" value="card"><div><i class="fa-solid fa-credit-card"></i>&nbsp;카드결제</div>

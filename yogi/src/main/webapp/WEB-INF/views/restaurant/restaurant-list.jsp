@@ -20,6 +20,7 @@
 	background: white;
 	display: flex;
 	justify-content: center;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .category-info {

@@ -40,6 +40,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .login-table {
@@ -76,6 +78,7 @@ td {
 .rink:hover {
 	cursor: pointer;
 	text-decoration: underline;
+	color: #fa0050;
 }
 
 .input {
@@ -84,7 +87,9 @@ td {
 	outline: none;
 	border: 1px solid #afafaf;
 	padding: 5px 15px;
-	color: #616161
+	color: #616161;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .login-button2 {
@@ -95,6 +100,8 @@ td {
 	color: white;
 	font-size: 20px;
 	font-weight: bold;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .login-button2:hover {
