@@ -76,9 +76,6 @@
   color: #ffca08;
 }
 
-.modal-body{
-	margin: 0 auto;
-}
 </style>
 </head>
 <body style="padding: 0;">
@@ -93,12 +90,12 @@
 	<div class="tablediv">
 		<div class="search">
 			<input type="text" name="keyword" class="keyword">
-			<button type="button" class="btn btn-primary">검색</button>
+			<button type="button" class="btn btn-secondary">검색</button>
 		</div>
 		<br>
 		
-		<table class="table table-hover">
-			<tr class="table-primary border">
+		<table class="table">
+			<tr class="table-secondary border">
 				<th>주문번호</th>
 				<th>업체이름</th>
 				<th>금액</th>
@@ -140,33 +137,59 @@
 				<!-- 해당 주문번호 맞춰서 이동하도록. -->
 				<td><button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/mypage/orderDetail';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
 			</tr>
+			
+			
+			<tr class="border" >
+				<td>4444</td>
+				<td>재혁이네 치킨집</td>
+				<td>18,000원</td>
+				<td>주문완료</td>
+				<td><button type="button" class="reviewbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">리뷰작성</button></td>
+				<!-- 해당 주문번호 맞춰서 이동하도록. -->
+				<td><button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/mypage/orderDetail';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
+			</tr>
 		</table>
 		
 		
 	</div>	
 </div>
 
-<!-- 모달 내용 -->
+<!-- 모달 -->
 <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">모달 제목</h5>
+        <h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div class="rating">
-		  <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
-		  <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
-		  <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
-		  <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
-		  <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
-		</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary">저장</button>
-      </div>
+      <form> 
+	      <div class="modal-body">
+	      	<i class="fa-solid fa-chart-simple" style="color: #a8c4f5;"></i>&nbsp;리뷰 별점 <br>
+	        <div class="rating">
+			  <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+			  <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+			  <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+			  <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+			  <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+			</div>
+			
+			<div>
+				<br><i class="fa-regular fa-comment-dots" style="color: #a8c4f5;"></i>&nbsp;리뷰 내용<br><br>
+				<textarea rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
+				
+				<input type="file" name="selectFile" accept="image/*" class="form-control">
+			</div>
+			<div>
+				
+			</div>
+			
+			
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	        <button type="button" class="btn btn-primary">저장</button>
+	      </div>
+      </form>
     </div>
   </div>
 </div>
