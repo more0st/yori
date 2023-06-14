@@ -251,16 +251,85 @@
 }
 
 .cart-bottom {
-	margin-top: 10px;
+	margin-top: 20px;
 	display: flex;
-	justify-content: right;
+	justify-content: center;
 	align-items: center;
 	width: 100%;
 	height: 40px;
 }
 
 .cart-button {
-	
+	width: 100%;
+	border: none;
+	background: #fa0050;
+	height: 50px;
+	border-radius: 5px;
+	color: white;
+	font-weight: bold;
+}
+
+.yes-cart {
+	border: 1px solid #d9d9d9;
+	border-top: none;
+	background: white;
+	padding: 10px;
+	font-size: 14px;
+}
+
+.cart-price {
+	background: none;
+	border: none;
+	outline: none;
+}
+
+.yes-cart-top {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.yes-cart-top > button {
+	border: none;
+	background: none;
+	font-size: 16px;
+}
+
+.quantity-btn {
+	border: 1px solid #fa0050;
+	background: none;
+	font-size: 16px;
+	color: #fa0050;
+	width: 22px;
+	height: 22px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cart-quantity {
+	text-align: center;
+	border: none;
+	width: 40px;
+	font-size: 14px;
+}
+
+.yes-cart-bottom {
+	display: flex;
+	justify-content: space-between;
+}
+
+.cart-total {
+	height: 50px;
+	background: #fff8eb;
+	color: #fa0050;
+	padding: 10px;
+	border: 1px solid #d9d9d9;
+	border-top: none;
+	font-weight: bold;
+	display: flex;
+	justify-content: right;
+	align-items: center;
 }
 
 </style>
@@ -430,16 +499,36 @@
 			</div>
 			
 			<!-- 장바구니에 주문이 들어갔을 때 -->
-			<div>
-				ddddd<br>
-				dd
+			<div class="yes-cart">
+				<div class="yes-cart-top">
+					<div style="font-weight: bold;">
+						기네스 머쉬룸 와퍼 세트	
+					</div>
+					<button type="button" onclick=""><i class="fa-regular fa-circle-xmark"></i></button>
+				</div>
+				<div class="yes-cart-bottom">
+					<div>
+						<input class="cart-price" value="7,000원" readonly="readonly">
+					</div>
+					<div style="display: flex;">
+						<button type='button' class='quantity-btn minus' data-product-id='" + productId + "'><i class='fa-solid fa-minus'></i></button>
+						<input name='cart-quantity' class='cart-quantity' value='1' readonly='readonly'>
+						<button type='button' class='quantity-btn plus' data-product-id='" + productId + "'><i class='fa-solid fa-plus'></i></button>
+					</div>
+				</div>
 			</div>
 			
 			<div class="cart-tip">
 				배달요금 1,000원 별도
 			</div>
+			
+			<!-- 장바구니에 메뉴가 담길 시 출력 -->
+			<div class="cart-total">
+				합계 : 7,000원			
+			</div>
+			
 			<div class="cart-bottom">
-				<button class="cart-button" type="button">주문하기</button>
+				<button class="cart-button" type="button" onclick="location.href='${pageContext.request.contextPath}/order/order'">주문하기</button>
 			</div>
 		</div>
 	</div>
