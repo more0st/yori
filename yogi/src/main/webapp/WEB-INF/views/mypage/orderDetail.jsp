@@ -24,6 +24,10 @@
 	gap:10px;
 }
 
+.right{
+	width: 500px;
+}
+
 </style>
 </head>
 <body style="padding: 0;">
@@ -44,31 +48,32 @@
 		
 		<table class="table">
 			<tr class="table-primary border">
-				<th>배송이 완료되었습니다.</th>
+				<th colspan="2">주문번호 : 12341234</th>
 			</tr>
 			
-			<tr class="border" >
+			<tr class="border">
 				<th>상훈이네 족발집</th>
 			</tr>
 
-			<tr class="border" >
+			<tr class="border">
 				<td>주문일시 : 2023년 06월 14일 (수) 16:00</td>
-				<td>주문번호 : 12341234</td>
 			</tr>
 			
 			<!-- forEach -->
 			<tr class="border" >
 			<th>족발(대)</th>
+			<th class="right">50,000원</th>
 
 			</tr>
 			<tr class="border" >
+				<!-- forEach -->
 				<td>
 					- 옵션1 : 고기추가 (+30,000원)<br>
-					- 옵션2 : 막국수 (+15,000원)<br>
-					55,000원
 				</td>
+				<!-- /forEach -->	
 			</tr>
-
+			
+			<!-- /forEach -->
 		</table>
 	</div>	
 	
