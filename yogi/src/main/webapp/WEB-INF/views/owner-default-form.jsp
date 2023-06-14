@@ -10,6 +10,7 @@
 <style type="text/css">
 .whole-container {
 	min-height: 800px;
+	padding-bottom: 20px;
 }
 
 </style>

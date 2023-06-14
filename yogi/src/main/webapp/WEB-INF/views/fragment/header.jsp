@@ -16,6 +16,12 @@
 		box-sizing: border-box;
 	}
 	
+.whole-container {
+	min-height: 800px;
+	background: #fafafa;
+	padding-bottom: 20px;
+}
+	
 header .navigation {
 	width: 100%;
 	height: 78px;

@@ -152,8 +152,12 @@
 		</div>
 	</div>
 	</form>
-	
+		
 	<div class="category-box">
+		<a class="category-info" href="${pageContext.request.contextPath}/">
+			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/event.png">
+			<span class="category-info-title">이벤트</span>
+		</a>
 		<a class="category-info" href="${pageContext.request.contextPath}/restaurant/list">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-01.png">
 			<span class="category-info-title">전체보기</span>
