@@ -13,17 +13,22 @@
   scroll-behavior: smooth;
 }
 
+/* 원본 color #f6f9ff */
 body {
   font-family: "Open Sans", sans-serif;
-  background: #f6f9ff;
+  background: #fcf5f7;
   color: #444444;
 }
 
+/* 원본 color #4154f1
+요리조리 #fa0050 */
 a {
   color: #4154f1;
   text-decoration: none;
 }
 
+/* 원본 color #717ff5 
+요리조리 #fa0050 */
 a:hover {
   color: #717ff5;
   text-decoration: none;
@@ -679,22 +684,27 @@ h6 {
   margin: 10px 0 5px 15px;
 }
 
+/* 원본 color: #4154f1;
+#e05c87;
+*/
 .sidebar-nav .nav-link {
   display: flex;
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #4154f1;
+  color: #e05c87;
   transition: 0.3;
   background: #f6f9ff;
   padding: 10px 15px;
   border-radius: 4px;
 }
 
+/*   #4154f1;
+*/
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #4154f1;
+  color: #f53372;
 }
 
 .sidebar-nav .nav-link.collapsed {
@@ -706,13 +716,19 @@ h6 {
   color: #899bbd;
 }
 
+/* 원본 color: #4154f1;
+#e05c87;
+*/
 .sidebar-nav .nav-link:hover {
-  color: #4154f1;
+  color: #e05c87;
   background: #f6f9ff;
 }
 
+/* 원본 color: #4154f1;
+#f53372;
+*/
 .sidebar-nav .nav-link:hover i {
-  color: #4154f1;
+  color: #f53372;
 }
 
 .sidebar-nav .nav-link .bi-chevron-down {
@@ -748,13 +764,19 @@ h6 {
   border-radius: 50%;
 }
 
+/* 원본 color: #4154f1;
+#e05c87;
+*/
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
-  color: #4154f1;
+  color: #e05c87;
 }
 
+/* 원본 color: #4154f1;
+#f53372;
+*/
 .sidebar-nav .nav-content a.active i {
-  background-color: #4154f1;
+  background-color: #f53372;
 }
 
 /*--------------------------------------------------------------
