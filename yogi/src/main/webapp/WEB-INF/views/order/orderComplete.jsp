@@ -126,8 +126,12 @@
 			<p class="title">배달정보</p>
 			<div class="content">
 				<table style="border-spacing: 0 10px;">
-					<tr style="">
-						<td class="keyword bold">주문 식당</td> 
+					<tr>
+						<td class="keyword bold">주문번호</td> 
+						<td>202306150101</td> 
+					</tr>
+					<tr>
+						<td class="keyword bold">주문식당</td> 
 						<td>상훈이네 족발</td> 
 					</tr>	
 					<tr>
@@ -135,7 +139,7 @@
 						<td>현금 결제</td> 
 					</tr>	
 					<tr>
-						<td class="keyword bold">주문 식당</td> 
+						<td class="keyword bold">배달주소</td> 
 						<td><span>서울 강남구 역삼동</span>&nbsp;<span>11-2 1203호</span></td> 
 					</tr>	
 				</table>

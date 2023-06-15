@@ -14,7 +14,7 @@
 }
 
 .tablediv{
-   width: 800px;
+   width: 700px;
    margin: 30px auto;
 }
 
@@ -58,32 +58,56 @@
          
          <!-- forEach -->
          <tr class="border" >
-         <th>족발(대)</th>
-         <th class="right">50,000원</th>
-
+	         <th>족발(대)</th>
+	         <th class="right">50,000원</th>
          </tr>
+
          <tr class="border" >
             <!-- forEach -->
-            <td>
-               - 옵션1 : 고기추가 (+30,000원)<br>
-            </td>
+            <td>- 옵션1 : 고기추가 (+30,000원) <br></td>
             <!-- /forEach -->   
          </tr>
-         <!-- /forEach -->
+	</table>
+	
+    <table class="table">    
+         <tr class="table-secondary border">
+            <th colspan="2">결제정보</th>
+         </tr>    
          
+         <!-- /forEach -->
          <tr class="border">
-            <th>전체금액</th>
-            <th class="right">150,000원</th>
+            <td>전체금액</td>
+            <td class="right">150,000원</td>
          </tr>
 
          <tr class="border">
             <th>결제방법</th>
             <td class="right">카카오페이</td>
          </tr>
-         
-
-
       </table>
+      
+    <table class="table">    
+         <tr class="table-secondary border">
+            <th colspan="2">배달정보</th>
+         </tr>    
+         
+         <!-- /forEach -->
+         <tr class="border">
+            <td>배달주소</td>
+            <td class="right">서울 강남구 역삼동 11-2 1203호</td>
+         </tr>
+
+         <tr class="border">
+            <td>전화번호</td>
+            <td class="right">010-1111-1111</td>
+         </tr>
+         
+          <tr class="border">
+            <td>요청사항</td>
+            <td class="right">단무지 빼주세요.</td>
+         </tr>
+         
+      </table>      
    </div>   
    
 </div>
