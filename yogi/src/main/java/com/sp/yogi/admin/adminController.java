@@ -7,9 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller("admin.adminController")
 @RequestMapping("/admin/*")
 public class adminController {
-	@GetMapping("admin")
+	@GetMapping("main")
 	public String home() {
-		
 		return "admin/index";
+	}
+	
+	@GetMapping("resList")
+	public String list() {
+		return "admin/list";
+	}
+	
+	@GetMapping("orderList")
+	public String orderList() {
+		return "admin/orderList";
 	}
 }

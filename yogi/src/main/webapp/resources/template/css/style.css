@@ -1253,3 +1253,55 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
+
+
+
+
+
+/*--------------------------------------------------------------
+요리조리 커스텀 
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+요리조리 커스텀 
+--------------------------------------------------------------*/
+
+
+
+/*--------------------------------------------------------------
+요리조리 커스텀 - admin/list
+--------------------------------------------------------------*/
+.admin-restaurantList-table thead th {
+	text-align : center;
+}
+
+.admin-restaurantList-table tbody td {
+	vertical-align: middle;
+	text-align : center;
+}
+
+.admin-restaurantList-table tbody td:nth-child(2n) {
+	max-width: 160px;
+}
+
+
+
+.admin-orderList-table thead th {
+	text-align : center;
+}
+
+.admin-orderList-table tbody td {
+	vertical-align: middle;
+	text-align : center;
+}
+
+.admin-orderList-table tbody td:nth-child(2n) {
+	max-width: 160px;
+}
+.admin-orderList-table tbody td:nth-child(5n) {
+	max-width: 250px;
+}
+.admin-orderList-table tbody td:nth-child(6n) {
+	max-width: 160px;
+}
+
