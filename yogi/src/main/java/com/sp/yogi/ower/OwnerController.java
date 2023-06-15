@@ -25,4 +25,10 @@ public class OwnerController {
 		
 		return "owner/member";
 	}
+	
+	@GetMapping("index")
+	public String index() {
+		
+		return "owner/index";
+	}
 }
