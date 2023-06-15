@@ -1137,7 +1137,6 @@
                   <img src="assets/img/news-3.jpg" alt="">
                   <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
                   <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
-                </div>
 
                 <div class="post-item clearfix">
                   <img src="assets/img/news-4.jpg" alt="">

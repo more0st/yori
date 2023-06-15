@@ -76,9 +76,6 @@ footer .info-info {
 	
 	
 	<div class="info">
-		<div class="footerlogo" onclick="location.href='${pageContext.request.contextPath}/home/home'">
-			<img style="height: 85px; display: block" src="${pageContext.request.contextPath}/resources/picture/logo.png">
-		</div>
 		<div class="info-title">주식회사 쌍요기요</div>
 		<div class="info-info">서울 마포구 월드컵북로 21 풍성빌딩 2층 | 대표이사 : 김지윤 | 사업자등록번호:123-xx-45678 사업자정보확인통신판매업신고:제 2023-서울마포-0713호 | 개인정보담당자 : admin@naver.com | 제휴문의 : admin@naver.com | 고객만족센터 : admin@naver.com | 호스팅 제공자: 쌍요기요 주식회사</div>
 	</div>

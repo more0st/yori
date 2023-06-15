@@ -81,6 +81,11 @@
   color: #ffca08;
 }
 
+.paging{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 </style>
 </head>
 <body style="padding: 0;">
@@ -155,6 +160,9 @@
 			</tr>
 		</table>
 		
+		<div class="paging">
+		1 2 3
+		</div>
 		
 	</div>	
 </div>
@@ -187,8 +195,6 @@
 			<div>
 				
 			</div>
-			
-			
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>

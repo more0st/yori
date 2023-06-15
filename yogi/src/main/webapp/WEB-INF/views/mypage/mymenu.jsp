@@ -14,9 +14,19 @@
 	border-top: 1px solid #d9d9d9;
 	border-bottom: 1px solid #d9d9d9;
 	background: white;
+	display: flex;
+	justify-content: center;
 }
 
 .category-box2 {
+	width: 70%;
+	background: white;
+	display: flex;
+	justify-content: left;
+	margin:0 auto;
+}
+
+.category-box3 {
 	width: 70%;
 	background: white;
 	display: flex;
@@ -35,14 +45,28 @@
 	color: white;
 	cursor: pointer;
 }
+
+.category-box1 {
+	width:1100px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	
+}
+
+
 </style>
 
 <div class="category-box">
-	<div class="category-box2">
-		<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/myhome';">홈</div>
-		<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/orderList';">주문내역</div>
-		<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/likeList';">찜목록</div>
-		<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/coupon';">쿠폰함</div>
-		<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/member/check';">정보수정</div>
+	<div class="category-box1">
+		<div class="category-box2">
+			<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/myhome';"><i class="bi bi-house-fill"></i></div>
+		</div>
+		<div class="category-box3">
+			<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/orderList';">주문내역</div>
+			<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/likeList';">찜목록</div>
+			<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/coupon';">쿠폰함</div>
+			<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/member/check';">정보수정</div>
+		</div>
 	</div>
 </div>
