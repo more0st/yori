@@ -20,7 +20,7 @@
 
 .backPage{
 	display: flex;
-	justify-content: right;
+	justify-content: left;
 	gap:10px;
 }
 
@@ -38,7 +38,6 @@
 	
 	<!-- 메뉴 -->
 	<jsp:include page="/WEB-INF/views/mypage/mymenu.jsp"/>
-	뒤로 
 	
 		<div class="tablediv">
 		<div class="backPage">

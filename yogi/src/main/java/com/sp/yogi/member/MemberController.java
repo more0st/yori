@@ -2,6 +2,7 @@ package com.sp.yogi.member;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller("member.memberController")
@@ -14,8 +15,26 @@ public class MemberController {
 		return "member/login";
 	}
 	
+	@GetMapping("check")
+	public String check() {
+		
+		return "member/check";
+	}
+	
+	@PostMapping("check")
+	public String checkSubmit() {
+		
+		return "member/check";
+	}
+	
 	@GetMapping("member")
 	public String member() {
+		
+		return "member/member";
+	}
+	
+	@PostMapping("member")
+	public String memberSubmit() {
 		
 		return "member/member";
 	}

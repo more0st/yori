@@ -43,6 +43,6 @@
 		<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/orderList';">주문내역</div>
 		<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/likeList';">찜목록</div>
 		<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/coupon';">쿠폰함</div>
-		<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/member/member';">정보수정</div>
+		<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/member/check';">정보수정</div>
 	</div>
 </div>
