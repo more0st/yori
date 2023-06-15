@@ -68,6 +68,7 @@ header .login-button:hover {
 }
 </style>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/bootstrap5/js/bootstrap.bundle.min.js"></script>
 
 <div class="navigation">
