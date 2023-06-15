@@ -58,8 +58,8 @@
          
          <!-- forEach -->
          <tr class="border" >
-	         <th>족발(대)</th>
-	         <th class="right">50,000원</th>
+	         <td>족발(대)</td>
+	         <td class="right">50,000원</td>
          </tr>
 
          <tr class="border" >
