@@ -18,7 +18,9 @@
 	margin: 30px auto;
 }
 
-.body-container {
+.table-light {
+		text-align: center; 
+		vertical-align:middle;
 }
 
 </style>
@@ -43,7 +45,7 @@ function sendOk() {
         return;
     }
 
-    f.action = "${pageContext.request.contextPath}/inquiry/${mode}";
+    f.action = "${pageContext.request.contextPath}/faq/${mode}";
     f.submit();
 }
 </script>
@@ -54,18 +56,19 @@ function sendOk() {
 	<header>	
 		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
 	</header>
-<div class="container">
+<div class="container" style="max-width: 800px; padding: 20px 15px 20px 15px;">
 	<div class="body-container">	
 		<div class="body-title">
 			<h3><i class="bi bi-question-diamond"></i> 1:1 문의 </h3>
 		</div>
+		<hr>
 		
 		<div class="body-main">
 		
 			<form name="myForm" method="post">
 				<table class="table mt-5 write-form">
 					<tr>
-						<td class="table-light col-sm-2" scope="row">구 분</td>
+						<td class="table-light col-sm-2" scope="row" style="text-align: center; vertical-align:middle; ">구 분</td>
 						<td>
 							<select name="category" class="form-select">
 								<option value="결제문의" ${dto.category=="결제문의"?"selected='selected'":"" }>결제문의</option>
@@ -93,7 +96,7 @@ function sendOk() {
 					<tr>
 						<td class="table-light col-sm-2" scope="row">내 용</td>
 						<td>
-							<textarea name="content" id="content" class="form-control">${dto.content}</textarea>
+							<textarea name="content" id="content" class="form-control" style="min-height: 200px;">${dto.content}</textarea>
 						</td>
 					</tr>
 				</table>
@@ -101,9 +104,9 @@ function sendOk() {
 				<table class="table table-borderless">
  					<tr>
 						<td class="text-center">
-							<button type="button" class="btn btn-dark" onclick="sendOk();">${mode=='update'?'수정완료':'등록하기'}&nbsp;<i class="bi bi-check2"></i></button>
+							<button type="button" class="btn btn-danger" onclick="sendOk();">${mode=='update'?'수정완료':'등록하기'}&nbsp;<i class="bi bi-check2"></i></button>
 							<button type="reset" class="btn btn-light">다시입력</button>
-							<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/inquiry/list';">${mode=='update'?'수정취소':'등록취소'}&nbsp;<i class="bi bi-x"></i></button>
+							<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/faq/home';">${mode=='update'?'수정취소':'등록취소'}&nbsp;<i class="bi bi-x"></i></button>
 							<c:if test="${mode=='update'}">
 								<input type="hidden" name="num" value="${dto.num}">
 								<input type="hidden" name="page" value="${page}">

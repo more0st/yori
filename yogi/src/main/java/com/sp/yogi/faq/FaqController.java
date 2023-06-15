@@ -13,5 +13,17 @@ public class FaqController {
 		
 		return "faq/home";
 	}
+	
+	@GetMapping("write")
+	public String write() {
+		
+		return "faq/write";
+	}
+	
+	@GetMapping("article")
+	public String article() {
+		
+		return "faq/article";
+	}
 
 }
