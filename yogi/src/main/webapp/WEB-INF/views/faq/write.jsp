@@ -66,7 +66,7 @@ function sendOk() {
 		<div class="body-main">
 		
 			<form name="myForm" method="post">
-				<table class="table mt-5 write-form">
+				<table class="table mt-5 write-form" style="border-top: 2px solid gray;">
 					<tr>
 						<td class="table-light col-sm-2" scope="row" style="text-align: center; vertical-align:middle; ">구 분</td>
 						<td>
