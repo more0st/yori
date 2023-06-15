@@ -313,6 +313,7 @@
 	border: none;
 	width: 40px;
 	font-size: 14px;
+	outline: none;
 }
 
 .yes-cart-bottom {
@@ -369,7 +370,65 @@
 				
 				<!-- 메뉴 -->
 				<div class="res-show1">
-				메뉴
+					
+					
+					<div class="accordion" id="accordionExample">
+					
+					  <div class="accordion-item">
+					    <h2 class="accordion-header" id="1">
+					      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#wapper" aria-expanded="true" aria-controls="wapper">
+					        와퍼
+					      </button>
+					    </h2>
+					    <div id="wapper" class="accordion-collapse collapse show" aria-labelledby="1" data-bs-parent="#accordionExample">
+					      <div class="accordion-body">
+					        기네스 머쉬룸 와퍼
+					      </div>
+					      <div class="accordion-body">
+					        치킨 와퍼
+					      </div>
+					      <div class="accordion-body">
+					        와퍼
+					      </div>
+					    </div>
+					  </div>
+					  
+					  <div class="accordion-item">
+					    <h2 class="accordion-header" id="2">
+					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#potato" aria-expanded="false" aria-controls="potato">
+					        감자튀김
+					      </button>
+					    </h2>
+					    <div id="potato" class="accordion-collapse collapse" aria-labelledby="2" data-bs-parent="#accordionExample">
+					      <div class="accordion-body">
+					        감자튀김 s
+					      </div>
+					      <div class="accordion-body">
+					        감자튀김 L
+					      </div>
+					    </div>
+					  </div>
+					  
+					  <div class="accordion-item">
+					    <h2 class="accordion-header" id="3">
+					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#drink" aria-expanded="false" aria-controls="drink">
+					       	음료
+					      </button>
+					    </h2>
+					    <div id="drink" class="accordion-collapse collapse" aria-labelledby="3" data-bs-parent="#accordionExample">
+					      <div class="accordion-body">
+					        콜라
+					      </div>
+					      <div class="accordion-body">
+					        스프라이트
+					      </div>
+					    </div>
+					  </div>
+				
+					</div>
+					
+					
+					
 				</div>
 				
 				<!-- 리뷰 -->
