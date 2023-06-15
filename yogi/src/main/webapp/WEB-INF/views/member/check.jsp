@@ -28,6 +28,9 @@
 		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
 	</header>
 	
+	<!-- 메뉴 -->
+	<jsp:include page="/WEB-INF/views/mypage/mymenu.jsp"/>
+	
 	<div class="container">
 	<div class="body-container">	
 
