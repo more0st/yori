@@ -29,7 +29,7 @@ header .navigation {
 }
 	
 header .menubar {
-	width: 70%;
+	width: 1100px;
 	height: 100%;
 	margin: 0 auto;
 	display: flex;

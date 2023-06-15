@@ -334,6 +334,38 @@
 	align-items: center;
 }
 
+.accordion {
+	background: #d9d9d9;
+}
+
+.accordion .accordion-button {
+    background-color: #d9d9d9;
+    color: #333;
+    border-radius: 0;
+}
+
+.accordion .accordion-button:not(.collapsed) {
+    background-color: #d9d9d9;
+    color: #333;
+    border-radius: 0;
+}
+
+.accordion-collapse {
+	cursor: pointer;
+}
+
+.accordion-body {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+.menu-img {
+	width: 60px;
+	height: 60px;
+	overfit: cover;
+}
+
 </style>
 </head>
 <body style="padding: 0;">
@@ -382,13 +414,31 @@
 					    </h2>
 					    <div id="wapper" class="accordion-collapse collapse show" aria-labelledby="1" data-bs-parent="#accordionExample">
 					      <div class="accordion-body">
-					        기네스 머쉬룸 와퍼
+					      	<div>
+								<div style="font-weight: bold; margin-bottom: 5px;">기네스 머쉬룸 와퍼</div>
+								<div>7,000원</div>					      	
+					      	</div>
+					      	<div>
+					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/mushroom.png">
+					      	</div>
 					      </div>
 					      <div class="accordion-body">
-					        치킨 와퍼
+					      	<div>
+								<div style="font-weight: bold; margin-bottom: 5px;">치킨 와퍼</div>
+								<div>6,000원</div>					      	
+					      	</div>
+					      	<div>
+					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/chicken.png">
+					      	</div>
 					      </div>
 					      <div class="accordion-body">
-					        와퍼
+					      	<div>
+								<div style="font-weight: bold; margin-bottom: 5px;">와퍼</div>
+								<div>5,500원</div>					      	
+					      	</div>
+					      	<div>
+					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/wapper.png">
+					      	</div>
 					      </div>
 					    </div>
 					  </div>
@@ -401,10 +451,22 @@
 					    </h2>
 					    <div id="potato" class="accordion-collapse collapse" aria-labelledby="2" data-bs-parent="#accordionExample">
 					      <div class="accordion-body">
-					        감자튀김 s
+					      	<div>
+								<div style="font-weight: bold; margin-bottom: 5px;">감자튀김 s</div>
+								<div>1,800원</div>					      	
+					      	</div>
+					      	<div>
+					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/potato.png">
+					      	</div>
 					      </div>
 					      <div class="accordion-body">
-					        감자튀김 L
+					      	<div>
+								<div style="font-weight: bold; margin-bottom: 5px;">감자튀김 L</div>
+								<div>2,500원</div>					      	
+					      	</div>
+					      	<div>
+					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/potato.png">
+					      	</div>
 					      </div>
 					    </div>
 					  </div>
@@ -417,10 +479,22 @@
 					    </h2>
 					    <div id="drink" class="accordion-collapse collapse" aria-labelledby="3" data-bs-parent="#accordionExample">
 					      <div class="accordion-body">
-					        콜라
+					      	<div>
+								<div style="font-weight: bold; margin-bottom: 5px;">콜라</div>
+								<div>2,000원</div>					      	
+					      	</div>
+					      	<div>
+					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/coke.png">
+					      	</div>
 					      </div>
 					      <div class="accordion-body">
-					        스프라이트
+					      	<div>
+								<div style="font-weight: bold; margin-bottom: 5px;">스프라이트</div>
+								<div>2,000원</div>					      	
+					      	</div>
+					      	<div>
+					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/cider.png">
+					      	</div>
 					      </div>
 					    </div>
 					  </div>
@@ -578,13 +652,33 @@
 				</div>
 			</div>
 			
+			<div class="yes-cart">
+				<div class="yes-cart-top">
+					<div style="font-weight: bold;">
+						너켓킹 8개
+					</div>
+					<button type="button" onclick=""><i class="fa-regular fa-circle-xmark"></i></button>
+				</div>
+				<div class="yes-cart-bottom">
+					<div>
+						<input class="cart-price" value="3,000원" readonly="readonly">
+					</div>
+					<div style="display: flex;">
+						<button type='button' class='quantity-btn minus' data-product-id='" + productId + "'><i class='fa-solid fa-minus'></i></button>
+						<input name='cart-quantity' class='cart-quantity' value='1' readonly='readonly'>
+						<button type='button' class='quantity-btn plus' data-product-id='" + productId + "'><i class='fa-solid fa-plus'></i></button>
+					</div>
+				</div>
+			</div>
+			
+			
 			<div class="cart-tip">
 				배달요금 1,000원 별도
 			</div>
 			
 			<!-- 장바구니에 메뉴가 담길 시 출력 -->
 			<div class="cart-total">
-				합계 : 7,000원			
+				합계 : 11,000원			
 			</div>
 			
 			<div class="cart-bottom">
