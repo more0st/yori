@@ -14,7 +14,7 @@
 }
 
 .tablediv{
-   width: 1000px;
+   width: 800px;
    margin: 30px auto;
 }
 
