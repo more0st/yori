@@ -897,6 +897,7 @@ const choiceMenu = document.querySelector('.choice-menu');
 	// 모달 창 띄우기
 		$('#menu-modal').modal('show');
 	});
+	
 </script>
 
 </body>
