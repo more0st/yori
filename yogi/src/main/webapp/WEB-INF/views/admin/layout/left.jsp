@@ -229,13 +229,13 @@
       </li><!-- End Forms Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" href="#">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" href="${pageContext.request.contextPath}/admin/memberManage/list">
           <i class="bi bi-layout-text-window-reverse"></i><span>회원관리</span>
         </a>
       </li><!-- End Tables Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" href="#">
+        <a class="nav-link collapsed" data-bs-target="#charts-nav" href="${pageContext.request.contextPath}/admin/report/list">
           <i class="bi bi-bar-chart"></i><span>신고관리</span>
         </a>
       </li><!-- End Charts Nav -->

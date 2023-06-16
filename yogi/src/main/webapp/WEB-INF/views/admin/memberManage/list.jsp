@@ -28,7 +28,7 @@
 					<table class="table table-hover admin-restaurantList-table">
 						<thead>
 							<tr>
-								<th scope="col">#</th>
+								<th scope="col">회원번호</th>
 								<th scope="col">이름</th>
 								<th scope="col">아이디</th>
 								<th scope="col">닉네임</th>
@@ -40,8 +40,8 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th scope="row">1</th>
-								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail" class="text-primary">김상훈</a></td>
+								<th scope="row" style="text-align: center;">1</th>
+								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail" class="text-primary">박상훈</a></td>
 								<td>sang*****</td>
 								<td>땅후니</td>
 								<td>2016-05-25</td>
@@ -55,45 +55,36 @@
 								</td>
 							</tr>
 							<tr>
-								<th scope="row">2</th>
-								<td>Bridie Kessler</td>
-								<td>Developer</td>
-								<td>35</td>
-								<td>2014-12-05</td>
-								<td>28</td>
-								<td>정지</td>
+								<th scope="row" style="text-align: center;">2</th>
+								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail" class="text-primary">박상훈</a></td>
+								<td>sang*****</td>
+								<td>땅후니</td>
 								<td>2016-05-25</td>
+								<td>1일전</td>
+								<td>정상</td>
+								<td>
+									<div class="d-grid gap-2 d-md-block">
+										<button type="button" class="btn btn-outline-secondary btn-sm">정지</button>
+										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
+									</div>
+								</td>
 							</tr>
 							<tr>
-								<th scope="row">3</th>
-								<td>Ashleigh Langosh</td>
-								<td>Finance</td>
-								<td>45</td>
-								<td>2011-08-12</td>
-								<td>28</td>
-								<td>탈퇴</td>
+								<th scope="row" style="text-align: center;">3</th>
+								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail" class="text-primary">박상훈</a></td>
+								<td>sang*****</td>
+								<td>땅후니</td>
 								<td>2016-05-25</td>
+								<td>1일전</td>
+								<td>정상</td>
+								<td>
+									<div class="d-grid gap-2 d-md-block">
+										<button type="button" class="btn btn-outline-secondary btn-sm">정지</button>
+										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
+									</div>
+								</td>
 							</tr>
-							<tr>
-								<th scope="row">4</th>
-								<td>Angus Grady</td>
-								<td>HR</td>
-								<td>34</td>
-								<td>2012-06-11</td>
-								<td>28</td>
-								<td>28</td>
-								<td>2016-05-25</td>
-							</tr>
-							<tr>
-								<th scope="row">5</th>
-								<td>Raheem Lehner</td>
-								<td>Dynamic Division Officer</td>
-								<td>47</td>
-								<td>2011-04-19</td>
-								<td>28</td>
-								<td>28</td>
-								<td>2016-05-25</td>
-							</tr>
+						
 						</tbody>
 					</table>
 				</div>
