@@ -590,6 +590,7 @@
                   <div style="display: flex; justify-content: center; gap : 5px;">
 	                  <button type="button" class="btn btn-primary">승인</button>
 	                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">거절</button>
+		              <button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/admin/store/storeList'">목록</button>
 	                  <!-- 거절사유 입력하는 모달 띄우기 -->
                   </div>
                 </div>
