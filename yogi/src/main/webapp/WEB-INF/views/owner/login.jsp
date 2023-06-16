@@ -113,9 +113,6 @@ td {
 </head>
 <body style="padding: 0;">
 <div class="whole-container">
-	<header>	
-		<jsp:include page="/WEB-INF/views/fragment/ownerheader.jsp"/>
-	</header>
 	
 	<form action="" name="loginForm" method="post">
 		<div class="login-form">
@@ -142,8 +139,5 @@ td {
 	</form>
 
 </div>
-<footer>
-	<jsp:include page="/WEB-INF/views/fragment/ownerfooter.jsp"/>
-</footer>
 </body>
 </html>

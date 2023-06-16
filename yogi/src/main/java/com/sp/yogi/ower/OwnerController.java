@@ -11,19 +11,19 @@ public class OwnerController {
 	@GetMapping("home")
 	public String home() {
 		
-		return "owner/home";
+		return ".ownerLayout";
 	}
 	
 	@GetMapping("login")
 	public String login() {
 		
-		return "owner/login";
+		return ".owner.login";
 	}
 	
 	@GetMapping("member")
 	public String member() {
 		
-		return "owner/member";
+		return ".owner.member";
 	}
 	
 }
