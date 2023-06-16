@@ -14,30 +14,31 @@
 }
 
 .login-form {
-	margin: 0 auto;
-	width: 800px;
+	margin: 150px auto 0;
+	width: 700px;
 	min-height: 300px;
 	text-align: center;
 }
 
 .login-ment {
-	font-size: 50px;
-	font-weight: bold;
+	font-size: 20px;
+	font-weight: 900;
 	color: #fa0050;
 	margin: 0 auto;
 }
 
 .login-ment > img {
-	width: 250px;
+	width: 140px;
+	margin-bottom: 7px;
 }
 
-.login-input > .id {
+.login-input > .name {
   border-bottom: none;
 }
 
 .login-input > input {
-	width: 100%;
-	height: 45px;
+	width: 80%;
+	height: 55px;
 	outline: none;
 	border: 1px solid #d9d9d9;
 	padding: 10px 10px 10px 15px;
@@ -68,11 +69,12 @@
 
 .login-btn {
 	border: none;
-	width: 100%;
-	height: 45px;
+	width: 80%;
+	height: 55px;
 	color: white;
 	font-size: 16px;
 	background: #ccc;
+	margin-top: 20px;
 }
 
 .login-btn:hover {
@@ -95,22 +97,13 @@
 	<form action="" method="post" name="loginForm">
 		<div class="login-form">
 			<div class="login-ment">
-				<img src="${pageContext.request.contextPath}/resources/picture/logo.png">
+				<img src="${pageContext.request.contextPath}/resources/picture/logo.png">아이디찾기
 			</div>
 			<div class="login-input">
-				<!-- 로그인 email로 하면 name 바꾸기 -->
-				<input class="login-input id" type="text" name="id" placeholder="이메일 주소 입력(필수)"><br>
-				<input class="login-input pwd" type="password" name="pwd" placeholder="비밀번호 입력(필수)">
+				<input class="login-input name" type="text" name="name" placeholder="이름 입력(필수)">
+				<input class="login-input email" type="text" name="email" placeholder="이메일 주소 입력(필수)"><br>
 			</div>
-			<div class="login-find">
-				<a href="${pageContext.request.contextPath}/member/findId">아이디 찾기</a>
-				<span>&nbsp;|&nbsp;</span>
-				<a href="${pageContext.request.contextPath}/member/findPwd">비밀번호 찾기</a>
-			</div>
-			<button class="login-btn" type="button">로그인</button>
-			<a href="${pageContext.request.contextPath}/member/choice">
-				<img class="member-img" src="${pageContext.request.contextPath}/resources/picture/signin_banner.png">
-			</a>
+			<button class="login-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/member/complete'">확인</button>
 		</div>
 	</form>
 

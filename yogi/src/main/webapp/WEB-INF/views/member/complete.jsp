@@ -14,34 +14,33 @@
 }
 
 .login-form {
-	margin: 0 auto;
-	width: 800px;
+	margin: 150px auto 0;
+	width: 700px;
 	min-height: 300px;
 	text-align: center;
 }
 
 .login-ment {
-	font-size: 50px;
-	font-weight: bold;
+	font-size: 20px;
+	font-weight: 900;
 	color: #fa0050;
 	margin: 0 auto;
 }
 
 .login-ment > img {
-	width: 250px;
+	width: 140px;
+	margin-bottom: 7px;
 }
 
-.login-input > .id {
-  border-bottom: none;
+.complete {
+	margin-left : 70px;
+	width: 80%;
+	height: 100px;
+	font-weight: 800;
+	font-size: 25px;
+	color: #fa0050;
 }
 
-.login-input > input {
-	width: 100%;
-	height: 45px;
-	outline: none;
-	border: 1px solid #d9d9d9;
-	padding: 10px 10px 10px 15px;
-}
 
 .login-find {
 	height: 50px;
@@ -68,11 +67,12 @@
 
 .login-btn {
 	border: none;
-	width: 100%;
-	height: 45px;
+	width: 80%;
+	height: 55px;
 	color: white;
 	font-size: 16px;
 	background: #ccc;
+	margin-top: 20px;
 }
 
 .login-btn:hover {
@@ -97,20 +97,11 @@
 			<div class="login-ment">
 				<img src="${pageContext.request.contextPath}/resources/picture/logo.png">
 			</div>
-			<div class="login-input">
-				<!-- 로그인 email로 하면 name 바꾸기 -->
-				<input class="login-input id" type="text" name="id" placeholder="이메일 주소 입력(필수)"><br>
-				<input class="login-input pwd" type="password" name="pwd" placeholder="비밀번호 입력(필수)">
+			<div class="complete">
+				<span>임시비밀번호가 메일로 발송되었습니다.</span>
+			
 			</div>
-			<div class="login-find">
-				<a href="${pageContext.request.contextPath}/member/findId">아이디 찾기</a>
-				<span>&nbsp;|&nbsp;</span>
-				<a href="${pageContext.request.contextPath}/member/findPwd">비밀번호 찾기</a>
-			</div>
-			<button class="login-btn" type="button">로그인</button>
-			<a href="${pageContext.request.contextPath}/member/choice">
-				<img class="member-img" src="${pageContext.request.contextPath}/resources/picture/signin_banner.png">
-			</a>
+			<button class="login-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/home/home'">확인</button>
 		</div>
 	</form>
 
