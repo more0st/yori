@@ -2,12 +2,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>요기요</title>
+
 <style type="text/css">
 .whole-container {
 	min-height: 720px;
@@ -134,10 +129,6 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 	border: 1px solid #999;
 	width: 96%;
 }
-
-
-
-	
 </style>
 
 <script type="text/javascript">
@@ -178,14 +169,8 @@ function deleteFile(noticePhotoNum) {
 	
 }
 </c:if>
-
 </script>
-</head>
-<body>
 
-<header>
-		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
-</header>
 
 <main>
 	<div class="whole-container">
@@ -255,10 +240,3 @@ function deleteFile(noticePhotoNum) {
 		</div>
 	</div>	
 </main>
-
-<footer>
-	<jsp:include page="/WEB-INF/views/fragment/footer.jsp"/>	
-</footer>
-
-</body>
-</html>

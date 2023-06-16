@@ -244,7 +244,7 @@
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/notice/write">
           <i class="bi bi-person"></i>
           <span>공지사항</span>
         </a>
