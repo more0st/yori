@@ -2,11 +2,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>요기요</title>
+
 <style type="text/css">
 .whole-container {
 	min-height: 800px;
@@ -51,7 +47,6 @@
 	border:1px solid #d9d9d9;
 }
 
-
 .rating {
   display: inline-block;
 }
@@ -87,13 +82,9 @@
 	align-items: center;
 }
 </style>
-</head>
-<body style="padding: 0;">
+
+
 <div class="whole-container">
-	<header>	
-		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
-	</header>
-	
 	<!-- 메뉴 -->
 	<jsp:include page="/WEB-INF/views/mypage/mymenu.jsp"/>
 	
@@ -163,7 +154,6 @@
 		<div class="paging">
 		1 2 3
 		</div>
-		
 	</div>	
 </div>
 
@@ -205,11 +195,6 @@
   </div>
 </div>
 
-<footer>
-	<jsp:include page="/WEB-INF/views/fragment/footer.jsp"/>		
-</footer>
-
-
 <script type="text/javascript">
 var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
 
@@ -218,6 +203,3 @@ function reviewSubmit(){
 	
 }
 </script>
-
-</body>
-</html>
