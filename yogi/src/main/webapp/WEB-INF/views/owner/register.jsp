@@ -37,7 +37,7 @@
 .body-main {
 	width: 900px;
 	border: 1px solid #eee;
-	margin: 30px auto;
+	margin: 130px auto;
 	border-radius: 4px;
 	padding: 25px;
 	background: white;
