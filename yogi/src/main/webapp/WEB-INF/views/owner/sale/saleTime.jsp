@@ -18,8 +18,8 @@
 
 .list-table th {
 	padding: 10px;
-	background: #fa0050;
-	color: white;
+	background: #fafafa;
+	color: #333;
 	border-top: 2px solid black;
 	border-bottom: 2px solid black;
 }
@@ -64,7 +64,7 @@
 	display: flex;
 	align-items: center;
 	width: 180px;
-	border-bottom: 3px solid #fa0050;
+	border-bottom: 3px solid #333;
 	padding-left: 10px;
 }
 
@@ -81,9 +81,10 @@
 	text-align: center;
 	width: 100px;
 	border-radius: 10px 0 0 10px;
+	border: 1px solid #d9d9d9;
 	padding: 10px;
-	background: #fa0050;
-	color: white;
+	background: #fafafa;
+	color: #333;
 	font-weight: bold;
 }
 
