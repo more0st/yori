@@ -9,6 +9,12 @@
 <meta charset="UTF-8">
 <title>요기요</title>
 
+<style type="text/css">
+	body {
+		background: white;
+	}
+</style>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
