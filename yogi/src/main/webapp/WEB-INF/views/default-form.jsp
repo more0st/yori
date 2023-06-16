@@ -5,10 +5,6 @@
 
 <style type="text/css">
 
-body {
-	background: #fafafa;
-}
-
 .whole-container {
 	min-height: 800px;
 	background: #fafafa;
@@ -17,9 +13,6 @@ body {
 </style>
 
 <div class="whole-container">
-	<header>	
-		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
-	</header>
 	
 	<div>
 		<!-- 내용 -->
