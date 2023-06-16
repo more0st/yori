@@ -2,11 +2,6 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>요기요</title>
 <style type="text/css">
 body {
 	background: #fafafa;
@@ -115,8 +110,7 @@ td {
 }
 
 </style>
-</head>
-<body style="padding: 0;">
+<main id="main" class="main">
 <div class="whole-container">
 	
 	<form action="" name="loginForm" method="post">
@@ -144,5 +138,4 @@ td {
 	</form>
 
 </div>
-</body>
-</html>
+</main>

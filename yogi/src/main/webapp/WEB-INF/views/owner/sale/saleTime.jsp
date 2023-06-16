@@ -15,7 +15,7 @@
 <main id="main" class="main">
 <div class="whole-container">
 	
-	<div style="width: 100%; text-align: center;">
+	<div style="width: 1100px; text-align: center;">
 		기간별 매출관리
 	</div>
 
