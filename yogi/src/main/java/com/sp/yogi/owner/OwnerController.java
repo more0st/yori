@@ -1,4 +1,4 @@
-package com.sp.yogi.ower;
+package com.sp.yogi.owner;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
