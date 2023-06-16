@@ -13,4 +13,10 @@ public class OwnerMenuController {
 		
 		return ".owner.menu.menuCategory";
 	}
+	
+	@RequestMapping(value = "menuDetail", method = RequestMethod.GET)
+	public String menuDetail() throws Exception {
+		
+		return ".owner.menu.menuDetail";
+	}
 }
