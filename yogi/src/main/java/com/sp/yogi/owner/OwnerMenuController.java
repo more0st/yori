@@ -11,6 +11,6 @@ public class OwnerMenuController {
 	@RequestMapping(value = "menuCategory", method = RequestMethod.GET)
 	public String menuCategory() throws Exception {
 		
-		return ".owner.order.menuCategory";
+		return ".owner.menu.menuCategory";
 	}
 }
