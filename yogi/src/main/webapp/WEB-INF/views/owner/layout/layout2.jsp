@@ -48,7 +48,10 @@
 <style type="text/css">
 	body {
 		background: #fafafa;
+		padding-top: 60px;
 	}
+	
+	
 </style>
 
 
