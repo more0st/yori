@@ -45,7 +45,7 @@
 								<td>Designer</td>
 								<td>02-935-8989</td>
 								<td>2016-05-25</td>
-								<td><a class="btn btn-primary btn-sm" href="#"
+								<td><a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/admin/resManage/orderList"
 									role="button">주문내역</a></td>
 								<td>정상</td>
 								<td>

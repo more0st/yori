@@ -8,7 +8,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between" >
-      <a href="${pageContext.request.contextPath}/admin/main" class="logo d-flex align-items-center">
+      <a href="${pageContext.request.contextPath}/admin" class="logo d-flex align-items-center">
         <img src="${pageContext.request.contextPath}/resources/logoImg/admin.png" class="img-fluid" alt="" >
       </a>
     </div><!-- End Logo -->
@@ -203,7 +203,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link " href="${pageContext.request.contextPath}/admin">
           <i class="bi bi-grid"></i>
           <span>Home</span>
         </a>
@@ -215,13 +215,8 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="${pageContext.request.contextPath}/admin/resList">
+            <a href="${pageContext.request.contextPath}/admin/resManage/list">
               <i class="bi bi-circle"></i><span>업체 리스트</span>
-            </a>
-          </li>
-          <li>
-            <a href="${pageContext.request.contextPath}/admin/orderList">
-              <i class="bi bi-circle"></i><span>업체별주문내역확인</span>
             </a>
           </li>
         </ul>
