@@ -6,7 +6,29 @@
 * {
 	white-space: nowrap;
 }
+
+.overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 </style>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const elements = document.querySelectorAll('.overflow-ellipsis');
+      
+      const maxLength = 20;
+      let text = element.innerText;
+      
+      if (text.length > maxLength) {
+        text = text.substring(0, maxLength) + '...';
+      }
+      
+      element.innerText = text;
+    });
+  </script>
+
   <main id="main" class="main">
     <div class="pagetitle">
       <h1>주문리스트</h1>
@@ -58,7 +80,7 @@
                         <td><a href="${pageContext.request.contextPath}/owner/order/orderDetail" class="text-primary">국밥 1개 외 3건 ...</a></td>
                         <td>55,000원</td>
                         <td>010-1234-2345</td>
-                        <td>고기많이주세요고기많이주세요고기많이주세요고기많이주세요</td>
+                        <td id="myElement" class="overflow-ellipsis">고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요</td>
                         <td>
 							<button type="button" class="btn btn-secondary" disabled>접수대기</button>
                         </td>
@@ -70,7 +92,7 @@
                         <td><a href="${pageContext.request.contextPath}/owner/order/orderDetail" class="text-primary">국밥 3개  외 3건 ...</a></td>
                         <td>30,000원</td>
                         <td>010-1234-2345</td>
-                        <td>국물많이주세요</td>
+                        <td class="overflow-ellipsis">국물많이주세요국물많이주세요국물많이주세요국물많이주세요국물많이주세요국물많이주세요국물많이주세요국물많이주세요국물많이주세요국물많이주세요국물많이주세요</td>
                         <td>
                         	<button type="button" class="btn btn-secondary" disabled>접수대기</button>
                         </td>
@@ -82,7 +104,7 @@
                         <td><a href="${pageContext.request.contextPath}/owner/order/orderDetail" class="text-primary">국밥 2개  외 3건 ...</a></td>
                         <td>32,000원</td>
                         <td>010-1234-2345</td>
-                        <td>요청사항 x</td>
+                        <td id="myElement" class="overflow-ellipsis">요청사항 x</td>
                         <td>
                         	<button type="button" class="btn btn-secondary" disabled>접수대기</button>
                         </td>
@@ -133,7 +155,7 @@
                         <td><a href="${pageContext.request.contextPath}/owner/order/orderDetail" class="text-primary">국밥 1개 외 3건 ...</a></td>
                         <td>15,000원</td>
                         <td>010-1234-2345</td>
-                        <td>고기많이주세요고기많이주세요고기많이주세요고기많이주세요</td>
+                        <td id="myElement" class="overflow-ellipsis">고기많이주세요고기많이주세요고기많이주세요고기많이주세요</td>
                         <td>
                         	<button type="button" class="btn btn-success" disabled>배달완료</button>
                         </td>
