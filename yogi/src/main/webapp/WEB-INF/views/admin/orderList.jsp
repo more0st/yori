@@ -472,7 +472,7 @@
 			<div class="card">
 				<div class="card-body">
 
-					<h3 class="card-title">1523건</h3>
+					<h3 class="card-title">1523 건</h3>
 
 					<table class="table table-hover admin-orderList-table">
 						<thead>
@@ -480,7 +480,7 @@
 								<th scope="col">#</th>
 								<th scope="col">메뉴</th>
 								<th scope="col">주문자</th>
-								<th scope="col">주문자 전화번호</th>
+								<th scope="col">전화번호</th>
 								<th scope="col">배달주소</th>
 								<th scope="col">요청사항</th>
 								<th scope="col">주문일자</th>

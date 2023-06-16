@@ -472,7 +472,7 @@
 			<div class="card">
 				<div class="card-body">
 
-					<h3 class="card-title">사장님 100분</h3>
+					<h3 class="card-title">1000 건</h3>
 
 					<table class="table table-hover admin-restaurantList-table">
 						<thead>

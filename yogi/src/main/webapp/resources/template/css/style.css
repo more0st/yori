@@ -1296,7 +1296,7 @@ h6 {
 }
 
 .admin-orderList-table tbody td:nth-child(2n) {
-	max-width: 160px;
+	max-width: 180px;
 }
 .admin-orderList-table tbody td:nth-child(5n) {
 	max-width: 250px;
