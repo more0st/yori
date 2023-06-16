@@ -2,6 +2,7 @@ package com.sp.yogi.owner;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller("owner.ownerController")
@@ -25,11 +26,4 @@ public class OwnerController {
 		
 		return ".owner.member";
 	}
-	
-	@GetMapping("register")
-	public String register() {
-		
-		return ".owner.register";
-	}
-	
 }
