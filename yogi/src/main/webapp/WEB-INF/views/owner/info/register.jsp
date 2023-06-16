@@ -5,26 +5,26 @@
 
 <style type="text/css">
 .whole-container {
-	min-height: 800px;
-	padding-bottom: 20px;
+   min-height: 800px;
+   padding-bottom: 20px;
 }
 
 .memberForm {
-	width: 930px;
-	height: 1100px;
-	border: 1px solid #eee;
-	background: white;
-	margin: 0 auto;
-	border-radius: 4px;
-	padding: 15px 30px;
+   width: 930px;
+   height: 1100px;
+   border: 1px solid #eee;
+   background: white;
+   margin: 0 auto;
+   border-radius: 4px;
+   padding: 15px 30px;
 }
 
 .input-group {
-	padding: 24px 0px;
+   padding: 24px 0px;
 }
 
 .check-butn {
-	position: absolute;
+   position: absolute;
     top: 0px;
     left: 0px;
     width: 100%;
@@ -35,12 +35,12 @@
 }
 
 .body-main {
-	width: 900px;
-	border: 1px solid #eee;
-	margin: 130px auto;
-	border-radius: 4px;
-	padding: 25px;
-	background: white;
+   width: 900px;
+   border: 1px solid #eee;
+   margin: 130px auto;
+   border-radius: 4px;
+   padding: 25px;
+   background: white;
 }
 </style>
 

@@ -30,4 +30,10 @@ public class OwnerInfoController {
 		
 		return ".owner.info.register";
 	}
+	
+   @RequestMapping(value = "afterRegister", method = RequestMethod.GET)
+   public String afterRegister() {
+      
+      return ".owner.info.afterRegister";
+   }
 }
