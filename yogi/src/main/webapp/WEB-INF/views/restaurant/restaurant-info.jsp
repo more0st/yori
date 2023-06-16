@@ -600,7 +600,7 @@ body {
 					    			<!-- foreach 돌릴 부분 -->
 					    			<div class="modal-option">
 					    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-					    					<input class="modal-radio" type="radio"><div>추가 없음</div>
+					    					<input class="modal-radio" type="checkbox"><div>추가 없음</div>
 					    				</div>
 					    				<div>
 					    					추가비용없음
@@ -608,7 +608,7 @@ body {
 					    			</div>
 					    			<div class="modal-option">
 					    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-					    					<input class="modal-radio" type="radio"><div>감자튀김 S</div>
+					    					<input class="modal-radio" type="checkbox"><div>감자튀김 S</div>
 					    				</div>
 					    				<div>
 					    					1,800원
@@ -616,7 +616,7 @@ body {
 					    			</div>
 					    			<div class="modal-option">
 					    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-					    					<input class="modal-radio" type="radio"><div>감자튀김 L</div>
+					    					<input class="modal-radio" type="checkbox"><div>감자튀김 L</div>
 					    				</div>
 					    				<div>
 					    					2,500원
