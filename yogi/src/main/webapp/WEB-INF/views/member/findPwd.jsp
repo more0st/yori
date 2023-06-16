@@ -2,11 +2,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>요기요</title>
+
 <style type="text/css">
 .whole-container {
 	min-height: 800px;
@@ -87,13 +83,8 @@
 }
 
 </style>
-</head>
-<body style="padding: 0;">
+
 <div class="whole-container">
-	<header>	
-		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
-	</header>
-	
 	<form action="" method="post" name="loginForm">
 		<div class="login-form">
 			<div class="login-ment">
@@ -106,10 +97,4 @@
 			<button class="login-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/member/complete'">확인</button>
 		</div>
 	</form>
-
 </div>
-<footer>
-	<jsp:include page="/WEB-INF/views/fragment/footer.jsp"/>		
-</footer>
-</body>
-</html>

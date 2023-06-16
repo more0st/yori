@@ -2,11 +2,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>요기요</title>
+ 
 <style type="text/css">
 .whole-container {
 	min-height: 800px;
@@ -197,38 +193,9 @@ input[type=radio] {
 	display: flex;
 	align-items: center;
 }
-
 </style>
 
-<script type="text/javascript">
-
-let selectedElement = null;
-
-function selectPaymentMethod(element) {
-    const radioInput = element.querySelector('input[type="radio"]');
-    radioInput.checked = true;
-    
-    // 이전에 선택된 요소의 스타일 제거
-    if (selectedElement) {
-        selectedElement.classList.remove('selected');
-    }
-    
-    // 선택된 요소에 스타일 추가
-    element.classList.add('selected');
-    
-    // 선택된 요소 저장
-    selectedElement = element;
-}
-
-</script>
-
-</head>
-<body style="padding: 0;">
 <div class="whole-container">
-	<header>	
-		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
-	</header>
-
 	<div class="order">
 		<!-- onclick으로 유효성 검사와 action 버튼 submit 수정하기 input태그 name 속성 주기 -->
 		<form name="orderForm" action="${pageContext.request.contextPath}/order/complete">
@@ -301,12 +268,26 @@ function selectPaymentMethod(element) {
 				<button type="submit" class="btnPay">결제하기</button>
 			</div>
 		</form>
-		
 	</div>
 </div>
-<footer>
-	<jsp:include page="/WEB-INF/views/fragment/footer.jsp"/>		
-</footer>
 
-</body>
-</html>
+<script type="text/javascript">
+
+let selectedElement = null;
+
+function selectPaymentMethod(element) {
+    const radioInput = element.querySelector('input[type="radio"]');
+    radioInput.checked = true;
+    
+    // 이전에 선택된 요소의 스타일 제거
+    if (selectedElement) {
+        selectedElement.classList.remove('selected');
+    }
+    
+    // 선택된 요소에 스타일 추가
+    element.classList.add('selected');
+    
+    // 선택된 요소 저장
+    selectedElement = element;
+}
+</script>

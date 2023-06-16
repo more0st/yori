@@ -2,11 +2,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>요기요</title>
+
 <style type="text/css">
 .whole-container {
 	min-height: 800px;
@@ -22,24 +18,9 @@
 	text-align: center;
 	vertical-align: center;
 }
-
 </style>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boot-board.css" type="text/css">
 
-<script type="text/javascript">
-function searchList() {
-	const f = document.searchForm;
-	f.submit();
-}
-</script>
-
-</head>
-<body style="padding: 0;">
 <div class="whole-container">
-	<header>	
-		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
-	</header>
-	
 	<div class="container" style="max-width: 800px; padding : 20px 15px 20px 15px ;">
 	<div class="body-container">	
 		<div class="body-title">
@@ -129,8 +110,10 @@ function searchList() {
 	</div>
 
 </div>
-<footer>
-	<jsp:include page="/WEB-INF/views/fragment/footer.jsp"/>		
-</footer>
-</body>
-</html>
+
+<script type="text/javascript">
+function searchList() {
+	const f = document.searchForm;
+	f.submit();
+}
+</script>

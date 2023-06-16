@@ -2,11 +2,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>요기요</title>
+
 <style type="text/css">
 .whole-container {
 	min-height: 800px;
@@ -48,145 +44,8 @@
 }
 
 </style>
-<script type="text/javascript">
-function memberOk() {
-	const f = document.memberForm;
-	let str;
 
-	str = f.userId.value;
-	if( !/^[a-z][a-z0-9_]{4,9}$/i.test(str) ) { 
-		alert("아이디를 다시 입력 하세요. ");
-		f.userId.focus();
-		return;
-	}
-
-	let mode = "${mode}";
-	if(mode === "member" && f.userIdValid.value === "false") {
-		str = "아이디 중복 검사가 실행되지 않았습니다.";
-		$("#userId").parent().find(".help-block").html(str);
-		f.userId.focus();
-		return;
-	}
-	
-	str = f.userPwd.value;
-	if( !/^(?=.*[a-z])(?=.*[!@#$%^*+=-]|.*[0-9]).{5,10}$/i.test(str) ) { 
-		alert("패스워드를 다시 입력 하세요. ");
-		f.userPwd.focus();
-		return;
-	}
-	
-    str = f.userName.value;
-    if( !/^[가-힣]{2,5}$/.test(str) ) {
-        alert("이름을 다시 입력하세요. ");
-        f.userName.focus();
-        return;
-    }
-
-    str = f.birth.value;
-    if( !str ) {
-        alert("생년월일를 입력하세요. ");
-        f.birth.focus();
-        return;
-    }
-    
-    str = f.tel1.value;
-    if( !str ) {
-        alert("전화번호를 입력하세요. ");
-        f.tel1.focus();
-        return;
-    }
-
-    str = f.tel2.value;
-    if( !/^\d{3,4}$/.test(str) ) {
-        alert("숫자만 가능합니다. ");
-        f.tel2.focus();
-        return;
-    }
-
-    str = f.tel3.value;
-    if( !/^\d{4}$/.test(str) ) {
-    	alert("숫자만 가능합니다. ");
-        f.tel3.focus();
-        return;
-    }
-    
-    str = f.email1.value.trim();
-    if( !str ) {
-        alert("이메일을 입력하세요. ");
-        f.email1.focus();
-        return;
-    }
-
-    str = f.email2.value.trim();
-    if( !str ) {
-        alert("이메일을 입력하세요. ");
-        f.email2.focus();
-        return;
-    }
-
-   	f.action = "${pageContext.request.contextPath}/member/${mode}";
-    f.submit();
-}
-
-function changeEmail() {
-    const f = document.memberForm;
-	    
-    let str = f.selectEmail.value;
-    if(str !== "direct") {
-        f.email2.value = str; 
-        f.email2.readOnly = true;
-        f.email1.focus(); 
-    }
-    else {
-        f.email2.value = "";
-        f.email2.readOnly = false;
-        f.email1.focus();
-    }
-}
-
-function userIdCheck() {
-	// 아이디 중복 검사
-	let userId = $("#userId").val();
-
-	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(userId)) { 
-		var str = "아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.";
-		$("#userId").focus();
-		$("#userId").parent().find(".help-block").html(str);
-		return;
-	}
-	
-	let url = "${pageContext.request.contextPath}/member/userIdCheck";
-	let query = "userId=" + userId;
-	$.ajax({
-		type:"POST"
-		,url:url
-		,data:query
-		,dataType:"json"
-		,success:function(data) {
-			let passed = data.passed;
-
-			if(passed === "true") {
-				let str = "<span style='color:blue; font-weight: bold;'>" + userId + "</span> 아이디는 사용가능 합니다.";
-				$(".userId-box").find(".help-block").html(str);
-				$("#userIdValid").val("true");
-			} else {
-				let str = "<span style='color:red; font-weight: bold;'>" + userId + "</span> 아이디는 사용할수 없습니다.";
-				$(".userId-box").find(".help-block").html(str);
-				$("#userId").val("");
-				$("#userIdValid").val("false");
-				$("#userId").focus();
-			}
-		}
-	});
-}
-</script>
-</head>
-<body style="padding: 0;">
 <div class="whole-container">
-	<header>	
-		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
-	</header>
-		
 		<div class="body-main">
 
 			<form name="memberForm" method="post">
@@ -388,8 +247,135 @@ function userIdCheck() {
     }
 </script>
 
-<footer>
-	<jsp:include page="/WEB-INF/views/fragment/footer.jsp"/>		
-</footer>
-</body>
-</html>
+<script type="text/javascript">
+function memberOk() {
+	const f = document.memberForm;
+	let str;
+
+	str = f.userId.value;
+	if( !/^[a-z][a-z0-9_]{4,9}$/i.test(str) ) { 
+		alert("아이디를 다시 입력 하세요. ");
+		f.userId.focus();
+		return;
+	}
+
+	let mode = "${mode}";
+	if(mode === "member" && f.userIdValid.value === "false") {
+		str = "아이디 중복 검사가 실행되지 않았습니다.";
+		$("#userId").parent().find(".help-block").html(str);
+		f.userId.focus();
+		return;
+	}
+	
+	str = f.userPwd.value;
+	if( !/^(?=.*[a-z])(?=.*[!@#$%^*+=-]|.*[0-9]).{5,10}$/i.test(str) ) { 
+		alert("패스워드를 다시 입력 하세요. ");
+		f.userPwd.focus();
+		return;
+	}
+	
+    str = f.userName.value;
+    if( !/^[가-힣]{2,5}$/.test(str) ) {
+        alert("이름을 다시 입력하세요. ");
+        f.userName.focus();
+        return;
+    }
+
+    str = f.birth.value;
+    if( !str ) {
+        alert("생년월일를 입력하세요. ");
+        f.birth.focus();
+        return;
+    }
+    
+    str = f.tel1.value;
+    if( !str ) {
+        alert("전화번호를 입력하세요. ");
+        f.tel1.focus();
+        return;
+    }
+
+    str = f.tel2.value;
+    if( !/^\d{3,4}$/.test(str) ) {
+        alert("숫자만 가능합니다. ");
+        f.tel2.focus();
+        return;
+    }
+
+    str = f.tel3.value;
+    if( !/^\d{4}$/.test(str) ) {
+    	alert("숫자만 가능합니다. ");
+        f.tel3.focus();
+        return;
+    }
+    
+    str = f.email1.value.trim();
+    if( !str ) {
+        alert("이메일을 입력하세요. ");
+        f.email1.focus();
+        return;
+    }
+
+    str = f.email2.value.trim();
+    if( !str ) {
+        alert("이메일을 입력하세요. ");
+        f.email2.focus();
+        return;
+    }
+
+   	f.action = "${pageContext.request.contextPath}/member/${mode}";
+    f.submit();
+}
+
+function changeEmail() {
+    const f = document.memberForm;
+	    
+    let str = f.selectEmail.value;
+    if(str !== "direct") {
+        f.email2.value = str; 
+        f.email2.readOnly = true;
+        f.email1.focus(); 
+    }
+    else {
+        f.email2.value = "";
+        f.email2.readOnly = false;
+        f.email1.focus();
+    }
+}
+
+function userIdCheck() {
+	// 아이디 중복 검사
+	let userId = $("#userId").val();
+
+	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(userId)) { 
+		var str = "아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.";
+		$("#userId").focus();
+		$("#userId").parent().find(".help-block").html(str);
+		return;
+	}
+	
+	let url = "${pageContext.request.contextPath}/member/userIdCheck";
+	let query = "userId=" + userId;
+	$.ajax({
+		type:"POST"
+		,url:url
+		,data:query
+		,dataType:"json"
+		,success:function(data) {
+			let passed = data.passed;
+
+			if(passed === "true") {
+				let str = "<span style='color:blue; font-weight: bold;'>" + userId + "</span> 아이디는 사용가능 합니다.";
+				$(".userId-box").find(".help-block").html(str);
+				$("#userIdValid").val("true");
+			} else {
+				let str = "<span style='color:red; font-weight: bold;'>" + userId + "</span> 아이디는 사용할수 없습니다.";
+				$(".userId-box").find(".help-block").html(str);
+				$("#userId").val("");
+				$("#userIdValid").val("false");
+				$("#userId").focus();
+			}
+		}
+	});
+}
+</script>
