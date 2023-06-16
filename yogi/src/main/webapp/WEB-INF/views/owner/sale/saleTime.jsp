@@ -12,10 +12,12 @@
 
 </style>
 
+<main id="main" class="main">
 <div class="whole-container">
 	
-	<div>
+	<div style="width: 100%; text-align: center;">
 		기간별 매출관리
 	</div>
 
 </div>
+</main>

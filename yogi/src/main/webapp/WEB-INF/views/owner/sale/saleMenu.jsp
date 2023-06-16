@@ -11,7 +11,7 @@
 }
 
 </style>
-
+<main id="main" class="main">
 <div class="whole-container">
 	
 	<div>
@@ -19,3 +19,4 @@
 	</div>
 
 </div>
+</main>	

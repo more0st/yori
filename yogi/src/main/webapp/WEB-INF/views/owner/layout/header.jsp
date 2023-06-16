@@ -83,7 +83,7 @@
   
   
   <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
+  <aside id="sidebar" class="sidebar sidebar-hidden">
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
@@ -166,7 +166,7 @@
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/owner/register"> <!-- update로 -->
+        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/owner/info/check"> <!-- 정보수정이니까 update로 -->
           <i class="bi bi-person"></i>
           <span>정보수정</span>
         </a>
