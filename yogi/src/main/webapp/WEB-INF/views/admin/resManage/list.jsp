@@ -7,11 +7,11 @@
 	<main id="main" class="main">
 
 		<div class="pagetitle">
-			<h1>List</h1>
+			<h1>업체 목록</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="index.html">admin</a></li>
-					<li class="breadcrumb-item active">List</li>
+					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin">admin</a></li>
+					<li class="breadcrumb-item active">RestaurantList</li>
 				</ol>
 			</nav>
 		</div>

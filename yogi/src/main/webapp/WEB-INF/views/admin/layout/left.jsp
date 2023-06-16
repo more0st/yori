@@ -215,7 +215,7 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="${pageContext.request.contextPath}/admin/resManage/list">
+            <a href="${pageContext.request.contextPath}/admin/resManage/main">
               <i class="bi bi-circle"></i><span>업체 리스트</span>
             </a>
           </li>

@@ -6,11 +6,12 @@
 	<main id="main" class="main">
 
 		<div class="pagetitle">
-			<h1>List</h1>
+			<h1>주문내역</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="index.html">admin</a></li>
-					<li class="breadcrumb-item active">List</li>
+					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin">admin</a></li>
+					<li class="breadcrumb-item ">RestaurantList</li>
+					<li class="breadcrumb-item active">주문내역</li>
 				</ol>
 			</nav>
 		</div>

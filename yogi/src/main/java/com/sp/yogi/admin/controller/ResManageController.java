@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller("admin.resManageController")
 @RequestMapping("/admin/resManage/*")
 public class ResManageController {
-	@RequestMapping(value = "list", method = RequestMethod.GET)
+	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String list() throws Exception {
 		
 		return ".admin.resManage.list";
