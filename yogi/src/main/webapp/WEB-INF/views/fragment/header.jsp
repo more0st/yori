@@ -10,6 +10,10 @@
 		box-sizing: border-box;
 	}
 	
+body {
+	background: #fafafa;
+}
+	
 .whole-container {
 	min-height: 800px;
 	background: #fafafa;
@@ -49,7 +53,7 @@ header .login-button {
 	align-items: center;
 }
 
-.login-div {
+header .login-div {
 	height: 20px;
 	margin: 0 auto;
 	font-size: 20x;
@@ -60,6 +64,7 @@ header .login-button:hover {
 	cursor: pointer;
 }
 </style>
+
 <header id="header" class="header">
 <div class="navigation">
 	<div class="menubar">

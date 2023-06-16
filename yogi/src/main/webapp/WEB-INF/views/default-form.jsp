@@ -4,10 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
 <style type="text/css">
+
+body {
+	background: #fafafa;
+}
+
 .whole-container {
 	min-height: 800px;
 	background: #fafafa;
-	padding-bottom: 20px;
 }
 
 </style>
