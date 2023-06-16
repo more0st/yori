@@ -11,7 +11,7 @@
 
 <style type="text/css">
 	body {
-		background: white;
+		background: #fafafa;
 	}
 </style>
 
