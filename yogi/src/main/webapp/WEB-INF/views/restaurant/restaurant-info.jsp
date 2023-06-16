@@ -2,12 +2,16 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<title>`$`으로 가게 이름 넣기</title>
+
 <style type="text/css">
+
+body {
+	background: #fafafa;
+}
+
 .whole-container {
 	min-height: 800px;
 	background: #fafafa;
-	padding-bottom: 20px;
 }
 
 .info-form {
@@ -437,10 +441,6 @@
 
 </style>
 <div class="whole-container">
-	<header>	
-		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
-	</header>
-	
 	<div class="info-form">
 		<div class="res-info">
 			<div class="res-title">
@@ -838,8 +838,8 @@
 
 <script type="text/javascript">
 
-// DOM 요소들 가져오기
-const choiceMenu = document.querySelector('.choice-menu');
+	// DOM 요소들 가져오기
+	const choiceMenu = document.querySelector('.choice-menu');
 	const choiceReview = document.querySelector('.choice-review');
 	const choiceInfo = document.querySelector('.choice-info');
 	

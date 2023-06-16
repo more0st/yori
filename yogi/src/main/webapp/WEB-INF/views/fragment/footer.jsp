@@ -4,6 +4,8 @@
 footer {
 	font-size: 12px;
 	padding: 0;
+	background: white;
+	padding-bottom: 20px;
 }
 
 footer .inner {

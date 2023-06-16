@@ -13,7 +13,6 @@
 .whole-container {
 	min-height: 800px;
 	background: #fafafa;
-	padding-bottom: 20px;
 }
 	
 header .navigation {
