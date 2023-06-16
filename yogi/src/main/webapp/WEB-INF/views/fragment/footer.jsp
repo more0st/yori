@@ -71,7 +71,7 @@ footer .info-info {
 			<a href="#" class="rink">포인트정책</a><div>&nbsp;|&nbsp;</div>
 			<a href="#" class="rink">회사소개</a><div>&nbsp;|&nbsp;</div>
 			<a href="${pageContext.request.contextPath}/owner/login" class="rink">요기요사장님</a><div>&nbsp;|&nbsp;</div>
-			<a href="${pageContext.request.contextPath}/owner/register" class="rink">입점문의</a><div>&nbsp;|&nbsp;</div>
+			<a href="${pageContext.request.contextPath}/owner/info/register" class="rink">입점문의</a><div>&nbsp;|&nbsp;</div>
 			<a href="${pageContext.request.contextPath}/notice/home" class="rink">공지사항</a><div>&nbsp;|&nbsp;</div>
 			<a href="${pageContext.request.contextPath}/faq/home" class="rink">1:1 문의</a>
 		</div>
