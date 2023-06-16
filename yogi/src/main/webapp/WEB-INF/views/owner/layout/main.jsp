@@ -9,7 +9,6 @@ main {
   		background: #fafafa;
   	}
   
-  	footer { background: white; }
 </style>
 <main id="main" class="main">
 

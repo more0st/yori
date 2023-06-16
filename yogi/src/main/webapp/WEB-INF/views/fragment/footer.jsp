@@ -3,6 +3,7 @@
 <style>
 footer {
 	font-size: 12px;
+	padding: 0;
 }
 
 footer .inner {
@@ -59,7 +60,7 @@ footer .info-info {
 }
 
 </style>
-
+<footer id="footer" class="footer">
 <div class="inner">
 	<div class="rink-group">
 		<div class="rink-div">
@@ -81,3 +82,4 @@ footer .info-info {
 	</div>
 
 </div>
+</footer>

@@ -15,6 +15,7 @@ footer .inner {
 footer .rink {
 	text-decoration: none;
 	color: #818181;
+	font-size: 12px;
 }
 
 footer .rink:hover {

@@ -48,7 +48,13 @@
     	<put-attribute name="body" value="/WEB-INF/views/owner/{1}.jsp" />
 	</definition>
 	
-	
+	<!-- 일반 -->
+	<definition name=".mainLayout" template="/WEB-INF/views/fragment/layout.jsp">
+	    <put-attribute name="title" value="요기요" />
+	  	<put-attribute name="header" value="/WEB-INF/views/fragment/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/home/home.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/fragment/footer.jsp" />
+	</definition>
 	<definition name=".*.*.*" extends=".mainLayout">
       <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp"/>
     </definition>

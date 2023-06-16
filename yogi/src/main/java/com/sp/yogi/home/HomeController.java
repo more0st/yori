@@ -11,12 +11,7 @@ public class HomeController {
 	@GetMapping("home")
 	public String home() {
 		
-		return "home/home";
+		return ".mainLayout";
 	}
 	
-	@GetMapping("header")
-	public String header() {
-		
-		return "default-form";
-	}
 }

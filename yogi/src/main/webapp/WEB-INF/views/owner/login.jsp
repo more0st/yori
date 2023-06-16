@@ -8,8 +8,13 @@
 <meta charset="UTF-8">
 <title>요기요</title>
 <style type="text/css">
+body {
+	background: #fafafa;
+}
+
 .whole-container {
 	min-height: 800px;
+	background: #fafafa;
 }
 
 .login-form {

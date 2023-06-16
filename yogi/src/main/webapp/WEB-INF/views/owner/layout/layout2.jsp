@@ -46,7 +46,9 @@
 </head>
 
 <style type="text/css">
- 
+	body {
+		background: #fafafa;
+	}
 </style>
 
 

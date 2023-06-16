@@ -3,12 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
    
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendor/bootstrap5/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendor/bootstrap5/icon/bootstrap-icons.css" type="text/css">
-
 <style type="text/css">
 	* {
 		margin: 0;
@@ -56,7 +50,7 @@ header .login-button {
 	align-items: center;
 }
 
-header .login-div {
+.login-div {
 	height: 20px;
 	margin: 0 auto;
 	font-size: 20x;
@@ -67,9 +61,7 @@ header .login-button:hover {
 	cursor: pointer;
 }
 </style>
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/bootstrap5/js/bootstrap.bundle.min.js"></script>
-
+<header id="header" class="header">
 <div class="navigation">
 	<div class="menubar">
 		<div class="logo" onclick="location.href='${pageContext.request.contextPath}/home/home'">
@@ -78,3 +70,4 @@ header .login-button:hover {
 		<button class="login-button" onclick="location.href='${pageContext.request.contextPath}/member/login'"><div class="login-div">로그인</div></button>
 	</div>
 </div>
+</header>
