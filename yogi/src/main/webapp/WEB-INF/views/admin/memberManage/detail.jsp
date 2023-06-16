@@ -44,8 +44,6 @@
                         <th scope="col">이메일</th>
                         <th scope="col">전화번호</th>
                         <th scope="col">주소</th>
-                        <th scope="col">등록일자</th>
-                        <th scope="col">마지막접속</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -58,15 +56,15 @@
                         <td>sang**@naver.com</td>
                         <td>010-****-****</td>
                         <td><span>경기도 일산동구 좋은 아파트 좋은동 좋은호</span></td>
-                        <td>2023-06-16</td>
-                        <td><span>2023-06-15</span></td>
+                        
+                        
                       </tr>
                     </tbody>
                   </table>
                   <table class="table table-bordered">
                       <tr>
-                        <th scope="col" style="width: 500px;">리뷰 수</th>
-                        <td style="width: 400px;">3개</td>
+                        <th scope="col" style="width: 480px;">리뷰 수</th>
+                        <td style="width: 402px;">3개</td>
                       </tr>
                       <tr>
                         <th scope="col">주문횟수</th>
@@ -75,6 +73,14 @@
                       <tr>
                         <th scope="col">신고당한횟수</th>
                         <td>1회</td>
+                      </tr>
+                      <tr>
+                        <th scope="col">등록일자</th>
+                       <td>2023-06-16</td>
+                      </tr>
+                      <tr>
+                        <th scope="col">마지막접속</th>
+                       <td><span>2023-06-15</span></td>
                       </tr>
                   </table>
                   <div style="display: flex; justify-content: center; gap : 5px;">
