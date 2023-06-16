@@ -10,12 +10,12 @@ public class MyPageController {
 	
 	@GetMapping("myhome")
 	public String myhome() {
-		return "mypage/myhome";
+		return ".mypage.myhome";
 	}
 
 	@GetMapping("orderList")
 	public String orderList() {
-		return "mypage/orderList";
+		return ".mypage.orderList";
 	}
 	
 	// sp1의 블로그 참조할 것
@@ -24,22 +24,22 @@ public class MyPageController {
 	@GetMapping("orderDetail")
 	public String orderDetail() {
 		
-		return "mypage/orderDetail";
+		return ".mypage.orderDetail";
 	}
 	
 	@GetMapping("myReview")
 	public String myReview() {
 		
-		return "mypage/myReview";
+		return ".mypage.myReview";
 	}
 	
 	@GetMapping("likeList")
 	public String likeList() {
-		return "mypage/likeList";
+		return ".mypage.likeList";
 	}
 	
 	@GetMapping("coupon")
 	public String coupon() {
-		return "mypage/coupon";
+		return ".mypage.coupon";
 	}
 }

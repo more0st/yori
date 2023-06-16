@@ -11,12 +11,12 @@ public class NoticeController {
 	@GetMapping("home")
 	public String home() {
 		
-		return "notice/home";
+		return ".notice.home";
 	}
 	
 	@GetMapping("article")
 	public String article() {
 		
-		return "notice/article";
+		return ".notice.article";
 	}
 }

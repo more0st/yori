@@ -11,12 +11,12 @@ public class RestaurantController {
 	@GetMapping("list")
 	public String list() {
 		
-		return "restaurant/restaurant-list";
+		return ".restaurant.restaurant-list";
 	}
 	
 	@GetMapping("info")
 	public String info() {
 		
-		return "restaurant/restaurant-info";
+		return ".restaurant.restaurant-info";
 	}
 }

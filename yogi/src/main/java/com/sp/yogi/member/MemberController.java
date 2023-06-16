@@ -12,48 +12,48 @@ public class MemberController {
 	@GetMapping("login")
 	public String login() {
 		
-		return "member/login";
+		return ".member.login";
 	}
 	
 	@GetMapping("check")
 	public String check() {
 		
-		return "member/check";
+		return ".member.check";
 	}
 	
 	@PostMapping("check")
 	public String checkSubmit() {
 		
-		return "member/check";
+		return ".member.check";
 	}
 	
 	@GetMapping("member")
 	public String member() {
 		
-		return "member/member";
+		return ".member.member";
 	}
 	
 	@PostMapping("member")
 	public String memberSubmit() {
 		
-		return "member/member";
+		return ".member.member";
 	}
 	
 	@GetMapping("choice")
 	public String choice() {
 		
-		return "member/memberchoice";
+		return ".member.memberchoice";
 	}
 
 	@GetMapping("findId")
 	public String findId() {
 		
-		return "member/findId";
+		return ".member.findId";
 	}
 
 	@GetMapping("findPwd")
 	public String findPwd() {
 		
-		return "member/findPwd";
+		return ".member.findPwd";
 	}
 }

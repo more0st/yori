@@ -131,47 +131,6 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 }
 </style>
 
-<script type="text/javascript">
-function sendOk() {
-    const f = document.noticeForm;
-	let str;
-	
-    str = f.noticeSubject.value.trim();
-    if(!str) {
-        alert("제목을 입력하세요. ");
-        f.noticeSubject.focus();
-        return;
-    }
-
-    str = f.noticeContent.value.trim();
-    if(!str) {
-        alert("내용을 입력하세요. ");
-        f.noticeContent.focus();
-        return;
-    }
-    
-    let mode = "${mode}";
-    
-
-    f.action = "${pageContext.request.contextPath}/notice/${mode}_ok.do";
-    f.submit();
-}
-
-<c:if test="${mode == 'update'}">
-function deleteFile(noticePhotoNum) {
-	let cnt = $(".img-box").find("img").length;
-	
-	if(confirm('이미지를 삭제하시겠습니까 ?')){
-		let query = "noticeNum=${dto.noticeNum}&noticePhotoNum=" + noticePhotoNum + "&page=${page}";
-		let url = "${pageContext.request.contextPath}/notice/deleteFile.do";
-		location.href = url + "?" + query;
-	}
-	
-}
-</c:if>
-</script>
-
-
 <main>
 	<div class="whole-container">
 		<div class="container body-container">
@@ -240,3 +199,44 @@ function deleteFile(noticePhotoNum) {
 		</div>
 	</div>	
 </main>
+
+
+<script type="text/javascript">
+function sendOk() {
+    const f = document.noticeForm;
+	let str;
+	
+    str = f.noticeSubject.value.trim();
+    if(!str) {
+        alert("제목을 입력하세요. ");
+        f.noticeSubject.focus();
+        return;
+    }
+
+    str = f.noticeContent.value.trim();
+    if(!str) {
+        alert("내용을 입력하세요. ");
+        f.noticeContent.focus();
+        return;
+    }
+    
+    let mode = "${mode}";
+    
+
+    f.action = "${pageContext.request.contextPath}/notice/${mode}_ok.do";
+    f.submit();
+}
+
+<c:if test="${mode == 'update'}">
+function deleteFile(noticePhotoNum) {
+	let cnt = $(".img-box").find("img").length;
+	
+	if(confirm('이미지를 삭제하시겠습니까 ?')){
+		let query = "noticeNum=${dto.noticeNum}&noticePhotoNum=" + noticePhotoNum + "&page=${page}";
+		let url = "${pageContext.request.contextPath}/notice/deleteFile.do";
+		location.href = url + "?" + query;
+	}
+	
+}
+</c:if>
+</script>

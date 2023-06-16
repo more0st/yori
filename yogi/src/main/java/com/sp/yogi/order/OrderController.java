@@ -11,12 +11,12 @@ public class OrderController {
 	@GetMapping("order")
 	public String order() {
 		
-		return "order/order";
+		return ".order.order";
 	}
 	
 	@GetMapping("complete")
 	public String complete() {
 		
-		return "order/orderComplete";
+		return ".order.orderComplete";
 	}
 }

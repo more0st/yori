@@ -11,19 +11,19 @@ public class FaqController {
 	@GetMapping("home")
 	public String home() {
 		
-		return "faq/home";
+		return ".faq.home";
 	}
 	
 	@GetMapping("write")
 	public String write() {
 		
-		return "faq/write";
+		return ".faq.write";
 	}
 	
 	@GetMapping("article")
 	public String article() {
 		
-		return "faq/article";
+		return ".faq.article";
 	}
 
 }
