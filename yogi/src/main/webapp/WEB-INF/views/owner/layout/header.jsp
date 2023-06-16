@@ -32,7 +32,7 @@
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
               모든 주문내역 보기
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+              <a href="${pageContext.request.contextPath}/owner/order/orderList"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -100,7 +100,7 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
+            <a href="${pageContext.request.contextPath}/owner/order/orderList">
               <i class="bi bi-circle"></i><span>주문리스트</span>
             </a>
           </li>
@@ -113,13 +113,8 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a href="${pageContext.request.contextPath}/owner/menu/menuCategory">
               <i class="bi bi-circle"></i><span>메뉴 카테고리 관리</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>메뉴 관리</span>
             </a>
           </li>
         </ul>
@@ -131,17 +126,12 @@
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="charts-chartjs.html">
+            <a href="${pageContext.request.contextPath}/owner/market/marketinfo">
               <i class="bi bi-circle"></i><span>가게 정보</span>
             </a>
           </li>
           <li>
-            <a href="charts-apexcharts.html">
-              <i class="bi bi-circle"></i><span>결제 정보</span>
-            </a>
-          </li>
-          <li>
-            <a href="charts-apexcharts.html">
+            <a href="${pageContext.request.contextPath}/owner/market/review">
               <i class="bi bi-circle"></i><span>리뷰 관리</span>
             </a>
           </li>
@@ -154,12 +144,12 @@
         </a>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="icons-bootstrap.html">
+            <a href="${pageContext.request.contextPath}/owner/sale/saleTime">
               <i class="bi bi-circle"></i><span>기간별 매출관리</span>
             </a>
           </li>
           <li>
-            <a href="icons-remix.html">
+            <a href="${pageContext.request.contextPath}/owner/sale/saleMenu">
               <i class="bi bi-circle"></i><span>메뉴별 매출관리</span>
             </a>
           </li>
@@ -176,7 +166,7 @@
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/owner/register"> <!-- update로 -->
           <i class="bi bi-person"></i>
           <span>정보수정</span>
         </a>
