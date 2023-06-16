@@ -2,11 +2,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>요기요</title>
+
 <style type="text/css">
 .whole-container {
 	min-height: 800px;
@@ -22,40 +18,10 @@
 		text-align: center; 
 		vertical-align:middle;
 }
-
 </style>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boot-board.css" type="text/css">
 
-<script type="text/javascript">
-function sendOk() {
-    const f = document.myForm;
-	let str;
-	
-    str = f.subject.value.trim();
-    if(!str) {
-        alert("제목을 입력하세요. ");
-        f.subject.focus();
-        return;
-    }
 
-    str = f.content.value.trim();
-    if(!str) {
-        alert("내용을 입력하세요. ");
-        f.content.focus();
-        return;
-    }
-
-    f.action = "${pageContext.request.contextPath}/faq/${mode}";
-    f.submit();
-}
-</script>
-</head>
-<body>
 <div class="whole-container">
-
-	<header>	
-		<jsp:include page="/WEB-INF/views/fragment/header.jsp"/>
-	</header>
 <div class="container" style="max-width: 800px; padding: 20px 15px 20px 15px;">
 	<div class="body-container">	
 		<div class="body-title">
@@ -120,12 +86,3 @@ function sendOk() {
 	</div>
 </div>
 </div>
-
-
-
-
-<footer>
-	<jsp:include page="/WEB-INF/views/fragment/footer.jsp"/>		
-</footer>
-</body>
-</html>

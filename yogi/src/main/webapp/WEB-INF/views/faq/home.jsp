@@ -18,14 +18,17 @@
 	text-align: center;
 	vertical-align: center;
 }
+
 </style>
+
 
 <div class="whole-container">
 	<div class="container" style="max-width: 800px; padding : 20px 15px 20px 15px ;">
 	<div class="body-container">	
 		<div class="body-title">
-			<h3><i class="bi bi-question-diamond"></i> 1:1 문의 </h3>
+			<h3> 1:1 문의 </h3>
 		</div>
+		<hr><br>
 		
 		<div class="body-main">
 

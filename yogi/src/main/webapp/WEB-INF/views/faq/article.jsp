@@ -19,7 +19,7 @@
 	<div class="container" style="max-width: 800px; padding: 20px 15px 20px 15px;">
 		<div class="body-container">	
 			<div class="body-title">
-				<h3><i class="bi bi-question-diamond"></i> 1:1 문의 </h3>
+				<h3> 1:1 문의 </h3>
 			</div>
 			
 			<div class="body-main">
@@ -113,4 +113,5 @@
 			</div>
 		</div>
 	</div>
+
 </div>

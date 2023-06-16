@@ -26,4 +26,10 @@ public class OwnerController {
 		return ".owner.member";
 	}
 	
+	@GetMapping("register")
+	public String register() {
+		
+		return ".owner.register";
+	}
+	
 }
