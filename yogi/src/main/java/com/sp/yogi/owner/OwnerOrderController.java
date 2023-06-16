@@ -13,4 +13,9 @@ public class OwnerOrderController {
 		
 		return ".owner.order.orderList";
 	}
+	@RequestMapping(value = "orderDetail", method = RequestMethod.GET)
+	public String orderDetail() throws Exception {
+		
+		return ".owner.order.orderDetail";
+	}
 }
