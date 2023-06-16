@@ -18,7 +18,7 @@
 		메뉴 카테고리
 		
 		카테고리 선택하면 해당 카테고리 상세메뉴 수정 가능하게
-		<a href="${pageContext.request.contextPath}/owner/menu/menuDetail"></a>
+		<a href="${pageContext.request.contextPath}/owner/menu/menuDetail">콜콜</a>
 	</div>
 
 </div>

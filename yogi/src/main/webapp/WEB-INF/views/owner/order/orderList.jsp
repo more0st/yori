@@ -8,7 +8,6 @@
 .whole-container {
 	min-height: 800px;
 	background: #fafafa;
-	padding-top: 60px;
 }
 
 </style>
