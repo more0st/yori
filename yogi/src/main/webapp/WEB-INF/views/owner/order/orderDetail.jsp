@@ -2,6 +2,36 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<style>
+* {
+	white-space: nowrap;
+}
+
+.overflow-ellipsis {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+th {
+width: 10%;
+}
+	
+</style>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+	  const elements = document.querySelectorAll('.overflow-ellipsis');
+
+	  const maxLength = 20;
+
+	  elements.forEach(element => {
+	    let text = element.innerText;
+
+	    if (text.length > maxLength) {
+	      element.classList.add('overflow-ellipsis');
+	    }
+	  });
+	});
+</script>
 
   <main id="main" class="main">
     <div class="pagetitle">
@@ -60,7 +90,7 @@
                       </tr>
                       <tr>
                         <th scope="col">요청사항</th>
-                        <td>고기많이주세요</td>
+                        <td class="overflow-ellipsis" >고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요</td>
                       </tr>
                   </table>
                 
@@ -77,13 +107,13 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row"><a href="#">1</a></th>
+                        <th scope="row">1</th>
                         <td>돼지국밥</td>
                         <td>1개</td>
                         <td>12,000원</td>
                       </tr>
                       <tr>
-                        <th scope="row"><a href="#">2</a></th>
+                        <th scope="row">2</th>
                         <td>순대국밥</td>
                         <td>1개</td>
                         <td>12,000원</td>
@@ -125,6 +155,7 @@
 	                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">취소</button>
 		              <button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderList'">목록</button>
 	                  <!-- 거절사유 입력하는 모달 띄우기 -->
+	                  <!-- 접수 시 : 완료목록으로 넘어가고, (접수/취소) 버튼 대신 배달완료처리하는 버튼 띄우기 -->
                   </div>
                 </div>
               </div>
