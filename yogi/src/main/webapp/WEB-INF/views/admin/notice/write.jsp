@@ -6,7 +6,6 @@
 <style type="text/css">
 .whole-container {
 	min-height: 720px;
-	background: #fafafa;
 }
 
 .body-main {
@@ -131,7 +130,7 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 }
 </style>
 
-<main>
+<main id="main" class="main">
 	<div class="whole-container">
 		<div class="container body-container">
 		    <div class="body-title">
@@ -184,7 +183,7 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 							<td align="center">
 								<button type="button" class="butn" onclick="sendOk();">${mode=="update"?"수정완료":"등록완료"}</button>
 								<button type="reset" class="butn">다시입력</button>
-								<button type="button" class="butn" onclick="location.href='${pageContext.request.contextPath}/notice/list.do';">${mode=="update"?"수정취소":"등록취소"}</button>
+								<button type="button" class="butn" onclick="location.href='${pageContext.request.contextPath}/admin/notice/list';">${mode=="update"?"수정취소":"등록취소"}</button>
 								<c:if test="${mode=='update' }">
 									<input type="hidden" name="noticeNum" value="${dto.noticeNum}">
 									<input type="hidden" name="page" value="${page}">
@@ -223,7 +222,8 @@ function sendOk() {
     let mode = "${mode}";
     
 
-    f.action = "${pageContext.request.contextPath}/notice/${mode}_ok.do";
+    //f.action = "${pageContext.request.contextPath}/notice/${mode}_ok.do";
+    f.action = "#";
     f.submit();
 }
 

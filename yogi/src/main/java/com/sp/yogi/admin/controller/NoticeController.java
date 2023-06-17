@@ -12,4 +12,14 @@ public class NoticeController {
 	public String write() throws Exception{
 		return ".admin.notice.write";
 	}
+	
+	@RequestMapping(value = "article", method=RequestMethod.GET)
+	public String article() throws Exception{
+		return ".admin.notice.article";
+	}
+	
+	@RequestMapping(value = "list", method=RequestMethod.GET)
+	public String list() throws Exception{
+		return ".admin.notice.list";
+	}
 }
