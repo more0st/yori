@@ -140,7 +140,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-patch-plus-fill"></i>&nbsp;메뉴 추가</h5>
+        <h5 class="modal-title" id="exampleModalLabel">메뉴 추가</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form> 
@@ -247,6 +247,7 @@
 			      	<select class="form-select">
 					  <option value="value1" selected="selected">품절</option>
 					  <option value="value2">판매중</option>
+					  <option value="value3">숨김</option>
 					</select>
 			      </div>
 	      

@@ -29,6 +29,10 @@
 	border: 1px solid #d9d9d9;
 	width: 100%;
 }
+
+.bigbtn{
+	padding: 15px;
+}
 </style>
 
 <main id="main" class="main">
@@ -57,12 +61,12 @@
 			
 			<div class="container text-center">
 				<div class="row row-cols-3 g-2">
-					<div class="col"><button type="button" class="btn btn-light graybtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/menuDetail'">메뉴카테고리1</button></div>
-					<div class="col"><button type="button" class="btn btn-light graybtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/menuDetail'">메뉴카테고리2</button></div>
-					<div class="col"><button type="button" class="btn btn-light graybtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/menuDetail'">메뉴카테고리3</button></div>
-					<div class="col"><button type="button" class="btn btn-light graybtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/menuDetail'">메뉴카테고리4</button></div>
-					<div class="col"><button type="button" class="btn btn-light graybtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/menuDetail'">메뉴카테고리5</button></div>
-					<div class="col"><button type="button" class="btn btn-light graybtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/menuDetail'">메뉴카테고리6</button></div>
+					<div class="col"><button type="button" class="btn btn-light graybtn bigbtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/menuDetail'">메뉴카테고리1</button></div>
+					<div class="col"><button type="button" class="btn btn-light graybtn bigbtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/menuDetail'">메뉴카테고리2</button></div>
+					<div class="col"><button type="button" class="btn btn-light graybtn bigbtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/menuDetail'">메뉴카테고리3</button></div>
+					<div class="col"><button type="button" class="btn btn-light graybtn bigbtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/menuDetail'">메뉴카테고리4</button></div>
+					<div class="col"><button type="button" class="btn btn-light graybtn bigbtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/menuDetail'">메뉴카테고리5</button></div>
+					<div class="col"><button type="button" class="btn btn-light graybtn bigbtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/menuDetail'">메뉴카테고리6</button></div>
 				</div>
 			</div>
 				
@@ -91,7 +95,6 @@
 	      </div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 	        <button type="button" class="btn btn-primary">저장</button>
 	      </div>
       </form>
@@ -104,41 +107,45 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">메뉴 카테고리 수정</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-eraser-fill"></i>&nbsp;메뉴 카테고리 수정</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form> 
 	      <div class="modal-body">
 	      <table class="table">
 	      		<tr>
-	      			<th>카테고리명</th>
-	      			<th>상태</th>
-	      			<th>삭제설정</th>
+	      			<th>&nbsp;&nbsp;카테고리명</th>
+	      			<th class="text-center">상태</th>
+	      			<th class="text-center">수정</th>
+	      			<th class="text-center">삭제</th>
 	      		</tr>
 	      		
 	      		<!-- forEach -->
 	      		<tr>
-	      			<td class="align-middle">카테고리1</td>
+	      			<td class="align-middle"><input type="text" value="카테고리1" class="form-control border-0" readonly="readonly"></td>
 	      			<td class="align-middle">사용중</td>
+	      			<td class="align-middle"><button type="button" class="btn btn-outline-secondary">수정</button></td>
 	      			<td class="align-middle"><button type="button" class="btn btn-outline-secondary">삭제</button></td>
 	      		</tr>
 	      		<!-- /forEach -->
 	      		
 	      		<tr>
-	      			<td class="align-middle">카테고리2</td>
+	      			<td class="align-middle"><input type="text" value="카테고리2" class="form-control border-0" readonly="readonly"></td>
 	      			<td class="align-middle">사용중</td>
+	      			<td class="align-middle"><button type="button" class="btn btn-outline-secondary">수정</button></td>
 	      			<td class="align-middle"><button type="button" class="btn btn-outline-secondary">삭제</button></td>
 	      		</tr>
 	      		<tr>
-	      			<td class="align-middle">카테고리3</td>
+	      			<td class="align-middle"><input type="text" value="카테고리3" class="form-control border-0" readonly="readonly"></td>
 	      			<td class="align-middle">사용중</td>
+	      			<td class="align-middle"><button type="button" class="btn btn-outline-secondary">수정</button></td>
 	      			<td class="align-middle"><button type="button" class="btn btn-outline-secondary">삭제</button></td>
 	      		</tr>
 	      </table>
 	      
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	        <button type="button" class="btn btn-primary">저장</button>
 	      </div>
       </form>
     </div>

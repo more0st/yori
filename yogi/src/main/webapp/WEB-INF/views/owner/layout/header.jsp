@@ -122,11 +122,6 @@
               <i class="bi bi-circle"></i><span>옵션 관리</span>
             </a>
           </li>
-          <li>
-            <a href="${pageContext.request.contextPath}/owner/menu/#">
-              <i class="bi bi-circle"></i><span>품절 관리</span>
-            </a>
-          </li>
         </ul>
       </li><!-- End Tables Nav -->
       
