@@ -136,7 +136,6 @@ body {
 .review-top {
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 10px;
 }
 
 .review-name {
@@ -439,6 +438,27 @@ body {
 	color: white;
 }
 
+.ownerReview {
+	background: #f0f0f0;
+	margin: 10px;
+	padding: 10px;
+}
+
+.ownerReview-top {
+	display: flex;
+	color: #333;
+}
+
+.owerReview-content {
+	padding: 10px;
+	color: #666;
+}
+
+.review-rating {
+	color: #ffa800;
+	margin-bottom: 10px;
+}
+
 </style>
 <div class="whole-container">
 	<div class="info-form">
@@ -666,12 +686,25 @@ body {
 							<div class="review-name">
 								<div class="res-333" style="font-weight: bold;">박상훈님</div><div class="review-date">2023-06-13</div>
 							</div>
+							<!-- 자신의 리뷰라면 삭제 -->
 							<div><button class="report-btn">신고</button></div>
 						</div>
+						<div class="review-rating">★★★★★</div>
 						<img class="review-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
 						<div class="review-content">
 							맛있는 버거킹
 						</div>
+						
+						<!-- 사장님 답글 -->
+						<div class="ownerReview">
+							<div class="ownerReview-top">
+								<i class="bi bi-arrow-return-right"></i>&nbsp;<div class="res-333" style="font-weight: bold;">사장님</div>&nbsp;<div class="review-date">2023-06-17</div>
+							</div>
+							<div class="ownerReview-content">
+								맛잇게 먹어서 감사해요
+							</div>
+						</div>
+						
 					</div>
 					
 					<div class="review">
@@ -682,6 +715,7 @@ body {
 							<!-- 자신의 리뷰라면 삭제 -->
 							<div><button type="button" class="report-btn">신고</button></div>
 						</div>
+						<div class="review-rating">★★★★★</div>
 						<img class="review-img" src="${pageContext.request.contextPath}/resources/picture/amazing.png">
 						<div class="review-content">
 							맛있는 버거킹
