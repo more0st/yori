@@ -51,7 +51,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 30px;
+	gap: 20px;
 	font-size: 20px;
 	font-weight: bold;
 	color: #333;
