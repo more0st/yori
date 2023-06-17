@@ -40,6 +40,12 @@
 	margin-bottom:7px;
 }
 
+.menuDetail{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 </style>
 
 
@@ -73,9 +79,8 @@
 					<div>
 						<img class="res-img imgsize" src="${pageContext.request.contextPath}/resources/picture/cider.png">
 					</div>
-					<div>
-						<div>사이다</div>
-						<div>2,500원</div>
+					<div class="menuDetail">
+						<div><h5>사이다</h5>2,500원</div>
 					</div>
 				</div>
 				<div>	
@@ -101,9 +106,8 @@
 					<div>
 						<img class="res-img imgsize" src="${pageContext.request.contextPath}/resources/picture/cider.png">
 					</div>
-					<div>
-						<div>사이다</div>
-						<div>1,500원</div>
+					<div class="menuDetail">
+						<div><h5>사이다</h5>1,500원</div>
 					</div>
 				</div>
 				<div>	
