@@ -12,6 +12,10 @@
 	background: white;
 	margin: 30px auto;
 }
+
+.bold{
+	font-weight: bold;
+}
 </style>
 
 
@@ -103,14 +107,41 @@
 					<table class="table table-borderless mb-2">
 						<tr>
 							<td width="50%">
-								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/faq/list?${query}';">리스트</button>
+								<button type="button" class="btn btn-light" onclick="deleteInquiry('${dto.num}');">질문삭제</button>
+								<button type="button" class="btn btn-light" onclick="">답변삭제</button>
 							</td>
 							<td class="text-end">
-								<button type="button" class="btn btn-danger" onclick="location.href='${pageContext.request.contextPath}/admin/faq/write';">질문답변</button>
-								<button type="button" class="btn btn-light" onclick="deleteInquiry('${dto.num}');">질문삭제</button>
+								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/faq/list?${query}';">리스트</button>
 							</td>
 						</tr>
 					</table>
+					
+				<c:if test="${empty dto.answer}">
+					<div class="reply">
+						<form name="answerForm" method="post">
+							<div class='form-header'>
+								<span class="bold">답변달기</span><span> - 문의에 대한 답변을 입력 하세요</span>
+							</div>
+							
+							<table class="table reply-form">
+								<tr>
+									<td>
+										<textarea class='form-control' name='answer'></textarea>
+									</td>
+								</tr>
+								<tr>
+								   <td align='right'>
+								        <button type='button' class='btn btn-outline-secondary' onclick="sendAnswerOk()">답변 등록</button>
+								        <input type="hidden" name="num" value="${dto.num}">
+								        <input type="hidden" name="page" value="${page}">
+								        <input type="hidden" name="condition" value="${condition}">
+								        <input type="hidden" name="keyword" value="${keyword}">
+								    </td>
+								 </tr>
+							</table>
+						</form>
+					</div>
+				</c:if>
 		
 				</div>
 			</div>
