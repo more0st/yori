@@ -85,7 +85,7 @@
 						<button type="button" class="btn btn-light" style="vertical-align: left;" onclick="location.href='${pageContext.request.contextPath}/faq/home';" title="새로고침"><i class="bi bi-arrow-counterclockwise"></i></button>
 					</div>
 					<div class="col-6 text-center">
-						<form class="row" name="searchForm" action="${pageContext.request.contextPath}/faq/home" method="post">
+						<form class="row" name="searchForm" action="${pageContext.request.contextPath}/admin/faq/list" method="post">
 							<div class="col-auto p-1">
 								<select name="condition" class="form-select">
 									<option value="all" ${condition=="all"?"selected='selected'":""}>제목+내용</option>
