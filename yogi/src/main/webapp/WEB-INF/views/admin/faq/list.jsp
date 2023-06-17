@@ -82,7 +82,7 @@
 	
 				<div class="row board-list-footer">
 					<div class="col">
-						<button type="button" class="btn btn-light" style="vertical-align: left;" onclick="location.href='${pageContext.request.contextPath}/faq/home';" title="새로고침"><i class="bi bi-arrow-counterclockwise"></i></button>
+						<button type="button" class="btn btn-light" style="vertical-align: left;" onclick="location.href='${pageContext.request.contextPath}/admin/faq/list';" title="새로고침"><i class="bi bi-arrow-counterclockwise"></i></button>
 					</div>
 					<div class="col-6 text-center">
 						<form class="row" name="searchForm" action="${pageContext.request.contextPath}/admin/faq/list" method="post">
