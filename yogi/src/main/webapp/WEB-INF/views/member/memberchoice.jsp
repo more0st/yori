@@ -74,7 +74,7 @@
 		</div>
 		<div class="twobutton">
 			<div class="choice-button" onclick="location.href='${pageContext.request.contextPath}/member/member'"><i class="fa-solid fa-user"></i><div><span style="color: #fa0050;">일반</span> 회원가입</div></div>
-			<div class="choice-button" onclick="location.href='${pageContext.request.contextPath}/owner/member'"><i class="fa-solid fa-person-rifle"></i><div><span style="color: #fa0050;">사장님</span> 회원가입</div></div>
+			<div class="choice-button" onclick="location.href='${pageContext.request.contextPath}/owner/member'"><i class="fa-solid fa-utensils"></i><div><span style="color: #fa0050;">사장님</span> 회원가입</div></div>
 		</div>
 	</div>
 
