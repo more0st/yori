@@ -22,7 +22,7 @@
 
 <main id="main" class="main">
 	<div class="whole-container">
-		<div class="container" style="max-width: 800px; padding : 20px 15px 20px 15px ;">
+		<div class="container" style="max-width: 900px; padding : 20px 15px 20px 15px ;">
 		<div class="body-container">	
 			<div class="body-title">
 				<h3> 1:1 문의 </h3>
