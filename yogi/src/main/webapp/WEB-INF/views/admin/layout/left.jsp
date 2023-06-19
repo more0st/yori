@@ -270,6 +270,14 @@
           <span>1:1문의</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
+      
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/">
+          <i class="ri-cake-2-fill"></i>
+          <span>이벤트</span>
+        </a>
+      </li><!-- End Event Page Nav -->
     </ul>
 
   </aside><!-- End Sidebar-->
