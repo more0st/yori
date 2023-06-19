@@ -33,10 +33,10 @@
 }
 
 .rep-parent {
-	margin-left: 10px;
-	margin-bottom: 25px;
+	padding:15px;
+	background: #eee;
+	border-radius: 5px;
 }
-
 
 .rep-1 {
 	display: inline-block;
@@ -68,6 +68,7 @@
 	width: 10%;
 	font-weight: 700;
 }
+
 </style>
 
 <main id="main" class="main">
