@@ -129,6 +129,13 @@
 			<div class="list-title">
 				메뉴별 매출 관리
 			</div>
+			<div class="btn-group" role="group" aria-label="Basic" style="margin-left: 300px;">
+				<button type="button" class="btn btn-primary">1일</button>
+				<button type="button" class="btn btn-primary">1주일</button>
+				<button type="button" class="btn btn-primary">1달</button>
+				<button type="button" class="btn btn-primary">1년</button>
+				<button type="button" class="btn btn-dark">전체</button>
+			</div>
 			<div class="search-box">
 				<div class="search-input">
 					<input type="text" class="menuSearch shadow-sm">
@@ -140,32 +147,26 @@
 			<thead>
 			<tr>
 				<th class="center">번호</th>
-				<th class="center">주문번호</th>
-				<th class="center">유저아이디</th>
 				<th class="center">메뉴</th>
-				<th class="center">배달지</th>
-				<th class="center">전화번호</th>
 				<th class="center">가격</th>
+				<th class="center">판매수량</th>
+				<th class="center">총합</th>
 			</tr>
 			</thead>
 			<tbody>
 			<tr>
 				<td class="center">2</td>
-				<td>2023061619150101</td>
-				<td>wldbsqkqh</td>
-				<td>기네스 머쉬룸 와퍼</td>
-				<td>서울시 마포구 월드컵북로 21 풍성빌딩 201호</td>
-				<td>010-1111-1111</td>
-				<td class="right">7,000원</td>
+				<td class="center">기네스 머쉬룸 와퍼</td>
+				<td class="center">7,000원</td>
+				<td class="center">2</td>
+				<td class="center">14,000원</td>
 			</tr>
 			<tr>
 				<td class="center">1</td>
-				<td>2023061619120431</td>
-				<td>Tkddyd</td>
-				<td>와퍼 세트</td>
-				<td>서울시 마포구 월드컵북로 21 풍성빌딩 202호</td>
-				<td>010-1111-2222</td>
-				<td class="right">6,000원</td>
+				<td class="center">와퍼 세트</td>
+				<td class="center">6,000원</td>
+				<td class="center">3</td>
+				<td class="center">18,000원</td>
 			</tr>
 			</tbody>
 		</table>
@@ -174,7 +175,7 @@
 				총계
 			</div>
 			<div class="list-table-bottom-right shadow-sm">
-				13,000원
+				32,000원
 			</div>
 		</div>
 	</div>

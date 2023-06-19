@@ -4,6 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style type="text/css">
+.whole-container {
+	min-height: 800px;
+	background: #fafafa;
+}
 
 .result-notification {
 	width: 600px;
@@ -11,7 +15,7 @@
 	border: 1px solid black;
 	background-color: #fa0050;
 	margin: 0 auto;
-	margin-top: 200px;
+	margin-top: 100px;
 	text-align: center;
 	vertical-align: middle;
 	border-top-left-radius: 20px;
@@ -28,7 +32,7 @@
 	border-top-color: white;
 	background-color: white;
 	margin: 0 auto;
-	margin-bottom: 200px;
+	margin-bottom: 30px;
 	text-align: center;
 	border-bottom-left-radius: 20px;
 	border-bottom-right-radius: 20px;
@@ -40,6 +44,8 @@
 
 </style>
 
+<main id="main" class="main">
+<div class="whole-container">
 <div class="result-notification">
 	입점 신청 승인 결과 
 </div>
@@ -53,4 +59,10 @@
 	거절 사유 : 서류 미비 / 업종 불명확
 </div>
 	
-	
+<div style="display: flex; justify-content: center;">
+	<button type="button" class="btn btn-primary btn-sm" onclick="location.href='${pageContext.request.contextPath}/owner/info/register';"
+					style="margin: 0 auto; width: 140px; height: 60px; font-size: 20px; text-align: center; vertical-align: center;"
+					>입점 재신청</button>
+</div>	
+</div>
+</main>
