@@ -5,26 +5,31 @@
 
 <style>
 .column1 {
-	width: 10px;
+	width: 62px;
 	height: 20px;
 	padding: 20px;
+	 white-space: nowrap;
 }
 
 .column2 {
-	width: 100px;
+	width: 200px;
+	 white-space: nowrap;
 }
 
 .column3 {
-	width: 60px;
+	width: 150px;
+	 white-space: nowrap;
 }
 
 .column4 {
 	width: 140px;
 	color: red;
+	 white-space: nowrap;
 }
 
 .column5 {
 	width: 50px;
+	 white-space: nowrap;
 }
 </style>
 
@@ -45,13 +50,13 @@
 					<h5 class="card-title">
 						신고 목록 <span>| Today</span>
 					</h5>
-					<table class="table table-borderless" style="width: 1620px;">
+					<table class="table-borderlesss" style="width: 1390px;">
 						<thead>
 							<tr>
 								<th scope="col" class="column1">번호</th>
 								<th scope="col" class="column2">신고 업체</th>
 								<th scope="col" class="column3">신고된 회원</th>
-								<th scope="col" style="width: 143px;">신고 사유</th>
+								<th scope="col" style="width: 140px;">신고 사유</th>
 								<th scope="col" class="column5">신고 일자</th>
 							</tr>
 						</thead>
@@ -66,7 +71,7 @@
 									data-bs-toggle="collapse" data-bs-target="#content_1"
 									aria-expanded="false" aria-controls="content_1"
 									style="height: 70px;">
-									<table class="table table-borderless ">
+									<table class="table-borderlesss " style="width: 1420px;">
 										<tr
 											style="text-align: left; vertical-align: middle; padding-top: 20px;">
 											<th scope="col" class="column1">1</th>
@@ -123,10 +128,11 @@
 							<h2 class="accordion-header" id="2">
 								<button class="accordion-button collapsed" type="button"
 									data-bs-toggle="collapse" data-bs-target="#content_2"
-									aria-expanded="false" aria-controls="content_2">
-									<table class="table table-borderless">
+									aria-expanded="false" aria-controls="content_2" 
+									style="height: 70px;">
+									<table class="table-borderlesss" style="width: 1420px;">
 										<tbody>
-											<tr style="text-align: left;">
+											<tr style="text-align: left; vertical-align: middle; padding-top: 20px;">
 												<th scope="col" class="column1">2</th>
 												<th scope="col" class="column2">재혁이네 치킨집</th>
 												<th scope="col" class="column3">강재혁</th>
