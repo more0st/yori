@@ -32,35 +32,41 @@
 	white-space: nowrap;
 }
 
-.ssibal-parent {
+.rep-parent {
 	margin-left: 10px;
 	margin-bottom: 25px;
 }
 
 
-.ssibal-1 {
+.rep-1 {
 	display: inline-block;
 	width: 10%;
+	font-weight: 700;
 }
 
-.ssibal-2 {
+.rep-2 {
 	display: inline-block;
-	width: 20%
+	width: 20%;
+	font-weight: 700;
 }
 
-.ssibal-3 {
+.rep-3 {
 	display: inline-block;
-	width: 20%
+	width: 20%;
+	font-weight: 700;
 }
 
-.ssibal-4 {
+.rep-4 {
 	display: inline-block;
-	width: 30%
+	width: 30%;
+	color: red;
+	font-weight: 700;
 }
 
-.ssibal-5 {
+.rep-5 {
 	display: inline-block;
-	width: 10%
+	width: 10%;
+	font-weight: 700;
 }
 </style>
 
@@ -81,33 +87,22 @@
 					<h5 class="card-title">
 						신고 목록 <span>| Today</span>
 					</h5>
-					<table class="table-borderlesss" style="width: 1390px;">
-						<thead>
-							<tr>
-								<th scope="col" class="column1">번호</th>
-								<th scope="col" class="column2">신고 업체</th>
-								<th scope="col" class="column3">신고된 회원</th>
-								<th scope="col" style="width: 140px;">신고 사유</th>
-								<th scope="col" class="column5">신고 일자</th>
-							</tr>
-						</thead>
-					</table>
 
 					<!-- ----------------------------------------------------------------------- -->
-					<div class="container-sm ssibal-parent">
-						<div class="ssibal-1">
+					<div class="container-fluid rep-parent">
+						<div class="rep-1">
 							<span>번호</span>
 						</div>
-						<div class="ssibal-2">
+						<div class="rep-2">
 							<span>신고 업체</span>
 						</div>
-						<div class="ssibal-3">
+						<div class="rep-3">
 							<span>신고된 회원</span>
 						</div>
-						<div class="ssibal-4">
+						<div class="rep-4">
 							<span>신고 사유</span>
 						</div>
-						<div class="ssibal-5">
+						<div class="rep-5">
 							<span>신고 일자</span>
 						</div>
 					</div>
@@ -147,19 +142,19 @@
 									data-bs-toggle="collapse" data-bs-target="#content_1"
 									aria-expanded="false" aria-controls="content_1"
 									style="height: 70px;">
-									<div class="ssibal-1">
-										<span>번호</span>
+									<div class="rep-1">
+										<span>1</span>
 									</div>
-									<div class="ssibal-2">
+									<div class="rep-2">
 										<span>상훈이네 족발집</span>
 									</div>
-									<div class="ssibal-3">
+									<div class="rep-3">
 										<span>박상훈</span>
 									</div>
-									<div class="ssibal-4">
+									<div class="rep-4">
 										<span>부적절한 언어 사용</span>
 									</div>
-									<div class="ssibal-5">
+									<div class="rep-5">
 										<span>2023-06-15</span>
 									</div>
 								</button>
@@ -211,16 +206,21 @@
 									data-bs-toggle="collapse" data-bs-target="#content_2"
 									aria-expanded="false" aria-controls="content_2"
 									style="height: 70px;">
-									<table class="table-borderlesss" style="width: 1420px;">
-										<tr
-											style="text-align: left; vertical-align: middle; padding-top: 20px;">
-											<th scope="col" class="column1">2</th>
-											<th scope="col" class="column2">재혁이네 치킨집</th>
-											<th scope="col" class="column3">강재혁</th>
-											<th scope="col" class="column4">별점 테러</th>
-											<th scope="col" class="column5">2023-06-15</th>
-										</tr>
-									</table>
+									<div class="rep-1">
+										<span>2</span>
+									</div>
+									<div class="rep-2">
+										<span>재혁이네 치킨집</span>
+									</div>
+									<div class="rep-3">
+										<span>강재혁</span>
+									</div>
+									<div class="rep-4">
+										<span>별점 테러</span>
+									</div>
+									<div class="rep-5">
+										<span>2023-06-15</span>
+									</div>
 								</button>
 							</h2>
 							<div id="content_2" class="accordion-collapse collapse"
