@@ -76,11 +76,17 @@
   color: #ffca08;
 }
 
+
 .paging{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+
+.reviewUpdate{
+	background: #d9d9d9;
+}
+
 </style>
 
 
@@ -111,7 +117,7 @@
 				<td>상훈이네 족발집</td>
 				<td>36,000원</td>
 				<td>주문완료</td>
-				<td><button type="button" class="reviewbtn" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="reviewSubmit()">리뷰작성</button></td>
+				<td><button type="button" class="reviewbtn reviewUpdate" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" onclick="reviewSubmit()">리뷰수정</button></td>
 				<!-- 해당 주문번호 맞춰서 이동하도록. -->
 				<td><button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/mypage/orderDetail';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
 			</tr>
@@ -124,7 +130,7 @@
 				<td>15,000원</td>
 				<td>주문완료</td>
 				<td>
-				<button type="button" class="reviewbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">리뷰작성</button>
+				<button type="button" class="reviewbtn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰작성</button>
 				<!-- 해당 주문번호 맞춰서 이동하도록. -->
 				<td><button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/mypage/orderDetail';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
 			</tr>
@@ -134,7 +140,7 @@
 				<td>승현이네 국밥집</td>
 				<td>12,000원</td>
 				<td>주문완료</td>
-				<td><button type="button" class="reviewbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">리뷰작성</button></td>
+				<td><button type="button" class="reviewbtn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰작성</button></td>
 				<!-- 해당 주문번호 맞춰서 이동하도록. -->
 				<td><button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/mypage/orderDetail';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
 			</tr>
@@ -145,7 +151,7 @@
 				<td>재혁이네 치킨집</td>
 				<td>18,000원</td>
 				<td>주문완료</td>
-				<td><button type="button" class="reviewbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">리뷰작성</button></td>
+				<td><button type="button" class="reviewbtn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰작성</button></td>
 				<!-- 해당 주문번호 맞춰서 이동하도록. -->
 				<td><button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/mypage/orderDetail';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
 			</tr>
@@ -158,7 +164,9 @@
 </div>
 
 <!-- 모달 -->
-<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<!-- 리뷰 작성 모달 -->
+<div class="modal" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -195,8 +203,49 @@
   </div>
 </div>
 
+<!-- 리뷰수정모달 -->
+<div class="modal" id="reviewUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form> 
+	      <div class="modal-body">
+	      	<i class="fa-solid fa-chart-simple" style="color: #a8c4f5;"></i>&nbsp;리뷰 별점 <br>
+	        <div class="rating">
+			  <input type="radio" id="star15" name="rating2" value="5" /><label for="star15"></label>
+			  <input type="radio" id="star14" name="rating2" value="4" /><label for="star14"></label>
+			  <input type="radio" id="star13" name="rating2" value="3" /><label for="star13"></label>
+			  <input type="radio" id="star12" name="rating2" value="2" /><label for="star12"></label>
+			  <input type="radio" id="star11" name="rating2" value="1" /><label for="star11"></label>
+			</div>
+			
+			<div>
+				<br><i class="fa-regular fa-comment-dots" style="color: #a8c4f5;"></i>&nbsp;리뷰 내용<br><br>
+				<textarea rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;">작성한 내용 불러오기</textarea>
+				
+				<input type="file" name="selectFile" accept="image/*" class="form-control">
+			</div>
+			<div>
+				
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	        <button type="button" class="btn btn-primary">저장</button>
+	      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
-var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+var reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
+var reviewUpdateModal = new bootstrap.Modal(document.getElementById('reviewUpdateModal'));
+var rating = 3;
+
 
 // 리뷰 작성시 별점 확인 후. 리뷰 작성 못하도록.
 function reviewSubmit(){

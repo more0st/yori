@@ -22,15 +22,6 @@
     padding-right: 40px;
 }
 
-.title-container >p {
-	font-size: 36px;
-    font-weight: 700;
-    line-height: 1.3em;
-    letter-spacing: -.06em;
-    margin-top: 15px;
-
-}
-
 .whole-container {
 	min-height: 800px;
 	background: #fafafa;
@@ -76,6 +67,15 @@
 	justify-content: center;
 }
 
+.event-info p {
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+.event-info span {
+	color: #BDBDBD;
+}
+
 .btn-box {
 	margin-top : 10px;
 	margin-left : 10px;
@@ -105,9 +105,17 @@
 	font-weight: 700;
 }
 
+.eventMove{
+	cursor: pointer;
+	font-size: 25px;
+    font-weight: bold;
+    line-height: 1.3em;
+    letter-spacing: -.06em;
+}
+
 </style>
 
-<div class="contain title-container"><p>이벤트</p></div>
+<div class="contain title-container"><div  onclick="location.href='${pageContext.request.contextPath}/event/eventList'" class="eventMove">이벤트</div></div>
 	<div class="contain whole-container">
 		<div class="btn-box">
 			<button id="eventbtn1" class="eventbtn">전체보기</button>

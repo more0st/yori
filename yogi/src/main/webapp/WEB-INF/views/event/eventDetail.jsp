@@ -26,14 +26,6 @@
     padding-right: 40px;
 }
 
-.title-container >p {
-	font-size: 36px;
-    font-weight: 700;
-    line-height: 1.3em;
-    letter-spacing: -.06em;
-    margin-top: 15px;
-}
-
 .whole-container {
 	min-height: 800px;
 	background: #fafafa;
@@ -96,31 +88,42 @@
 }
 
 .flexbetween {
-width: 100%;
-display: flex;
-justify-content: space-between;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 }
 
 .listdiv {
-display: flex;
-justify-content: right;
+	display: flex;
+	justify-content: right;
 }
 
 .listbtn {
-background: #fa0050;
-color: white;
-border-radius: 10px;
-border: none;
-font-weight: 600;
-font-size: 20px;
-width: 100px;
-margin-top: 10px;
+	background: #fa0050;
+	color: white;
+	border-radius: 10px;
+	border: none;
+	font-weight: 600;
+	font-size: 15px;
+	width: 100px;
+	padding:12px;
+}
 
+.imgdiv{
+	margin-bottom: 50px;
+}
+
+.eventMove{
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 25px;
+    line-height: 1.3em;
+    letter-spacing: -.06em;
 }
 
 </style>
 
-<div class="contain title-container"><p>이벤트</p></div>
+<div class="contain title-container"><div class="eventMove" onclick="location.href='${pageContext.request.contextPath}/event/eventList'">이벤트</div></div>
 	<div class="contain whole-container">
 		<div class="event-box">
 			<div class="event-info">
@@ -129,7 +132,7 @@ margin-top: 10px;
 				<h3>이번엔 요리조리요에서 100만원 받아가세요</h3>
 				<div>2023-06-01</div>
 				</div>
-				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'" class="imgdiv">
 					<img src="${pageContext.request.contextPath}/resources/picture/event-01.jpg">
 				</div>
 				
