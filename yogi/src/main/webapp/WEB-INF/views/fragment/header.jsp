@@ -110,6 +110,10 @@ header .dropdown-item {
 			</button>
 		  	<ul class="dropdown-menu">
 		    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/myhome">마이페이지</a></li>
+		    	
+		    	<!-- 관리자일 경우에만 -->
+		    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin">관리자페이지</a></li>
+		    	
 		    	<li><a class="dropdown-item" href="#">로그아웃</a></li>
 		  	</ul>
 		</div>

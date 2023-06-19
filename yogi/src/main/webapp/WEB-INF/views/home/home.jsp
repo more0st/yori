@@ -59,11 +59,6 @@
 		cursor: pointer;
 	}
 	
-	.location-btn {
-		background: white;
-		color: #fa0050;
-	}
-	
 	.search-btn {
 		background: #ff843A;
 		color: white;
@@ -137,7 +132,7 @@
 				<img class="ment-pic" src="${pageContext.request.contextPath}/resources/picture/deliverment.png">
 			</div>
 			<div class="inputbox">
-				<button type="button" class="location-btn"><i class="fa-solid fa-location-crosshairs"></i></button><input type="text" name="address" class="address-search" placeholder="건물명, 도로명, 지번으로 검색하세요."><button type="button" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+				<input type="text" name="address" class="address-search" placeholder="건물명, 도로명, 지번으로 검색하세요."><button type="button" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
 			</div>
 		</div>
 	</div>
