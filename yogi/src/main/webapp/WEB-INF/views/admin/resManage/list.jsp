@@ -39,6 +39,8 @@
 							</tr>
 						</thead>
 						<tbody>
+						
+							<!-- foreach 돌려야하는 tr 태그 -->
 							<tr>
 								<th scope="row">1</th>
 								<td>Brandon Jacob</td>
@@ -55,6 +57,9 @@
 									</div>
 								</td>
 							</tr>
+							
+							
+							
 							<tr>
 								<th scope="row">2</th>
 								<td>Bridie Kessler</td>

@@ -142,7 +142,7 @@ $(function(){
 		<div class="card">
 			<div class="card-body">
 
-
+				<!-- foreach 돌려야 하는 div 태그 -->
 				<div class="accordion" id="accordionPanelsStayOpenExample">
 					<div class="accordion-item">
 						<h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -159,19 +159,15 @@ $(function(){
 								<span>대 - 5000원</span><br> <span>중 - 3000원</span><br>
 								<span>소 - 1000원</span><br>
 							</div>
-							
-							<div class="dropdown" style="display: inline-block; float: right; padding: 10px;">
-								<button class="btn btn-secondary dropdown-toggle" type="button"
-									data-bs-toggle="dropdown" aria-expanded="false">
-									Dropdown button</button>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="#">수정</a></li>
-									<li><a class="dropdown-item" href="#">삭제</a></li>
-								</ul>
+							<div style="display: inline-block; float: right; padding: 20px;">
+							<button type="button" class="btn btn-secondary btn-sm" >삭제</button>
 							</div>
-							
 						</div>
 					</div>
+					
+					
+					
+					
 					<div class="accordion-item">
 						<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
 							<button class="accordion-button collapsed" type="button"

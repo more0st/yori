@@ -39,6 +39,8 @@
 							</tr>
 						</thead>
 						<tbody>
+							
+							<!-- foreach 돌려야하는 tr 태그 -->
 							<tr>
 								<th scope="row">1</th>
 								<td>후라이드 3마리, 양념 5마리, 콜라 1.5리터 5개, 피자 두마리</td>
@@ -49,6 +51,9 @@
 								<td>202306150531</td>
 								<td>156,000</td>
 							</tr>
+							
+							
+							
 							<tr>
 								<th scope="row">2</th>
 								<td>Bridie Kessler</td>
