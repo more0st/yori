@@ -20,8 +20,7 @@
 
 
   <!-- Favicons -->
-  <link href="${pageContext.request.contextPath}/resources/template/img/hamburger.png" rel="icon">
-  <link href="${pageContext.request.contextPath}/resources/template/img/hamburger.png" rel="apple-touch-icon">
+  <link href="${pageContext.request.contextPath}/resources/template/img/hamburger.png" rel="icon" type="image/x-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">

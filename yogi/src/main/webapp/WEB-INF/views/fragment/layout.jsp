@@ -9,6 +9,9 @@
 <meta charset="UTF-8">
 <title>요기요</title>
 
+<link href="${pageContext.request.contextPath}/resources/template/img/hamburger.png" rel="icon" type="image/x-icon">
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">

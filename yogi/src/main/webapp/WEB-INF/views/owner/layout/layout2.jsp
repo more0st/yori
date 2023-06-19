@@ -19,8 +19,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="${pageContext.request.contextPath}/resources/template/img/favicon.png" rel="icon">
-  <link href="${pageContext.request.contextPath}/resources/template/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="${pageContext.request.contextPath}/resources/template/img/hamburger.png" rel="icon" type="image/x-icon">
+  <link href="${pageContext.request.contextPath}/resources/template/img/hamburger.png" rel="hamburger">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
