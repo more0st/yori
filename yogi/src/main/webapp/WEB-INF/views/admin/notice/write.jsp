@@ -8,6 +8,10 @@
 	min-height: 720px;
 }
 
+.main {
+	background: #fafafa;
+}
+
 .body-main {
 	max-width: 700px;
 	padding-top: 15px;
@@ -85,6 +89,9 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 /* body-container */
 .body-container {
 	min-height: 500px;
+	width: 800px;
+	background: white;
+	border-radius: 10px;
 }
 
 .body-title {
@@ -92,7 +99,7 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
     padding-top: 35px;
     padding-bottom: 7px;
     margin: 0 0 25px 0;
-    border-bottom: 2px solid #eee;;
+    border-bottom: 2px solid #eee;
 }
 
 .body-title h2 {
@@ -132,14 +139,14 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 
 <main id="main" class="main">
 	<div class="whole-container">
-		<div class="container body-container">
+		<div class="container body-container shadow">
 		    <div class="body-title">
 				<h2> 공지사항 </h2>
 		    </div>
 		    
 		    <div class="body-main mx-auto">
 				<form name="noticeForm" method="post" enctype="multipart/form-data">
-					<table class="table table-border table-form">
+					<table class="table table-border table-form shadow-sm">
 						<tr> 
 							<td>제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
 							<td> 

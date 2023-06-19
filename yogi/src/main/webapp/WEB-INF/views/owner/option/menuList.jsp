@@ -57,7 +57,7 @@
 	<hr>
 		<div class="category shadow">
 			<div>
-				<h6><i class="bi bi-pin-angle-fill"></i>&nbsp;옵션1</h6>
+				<h6><i class="bi bi-pin-angle-fill"></i>&nbsp;카테고리1</h6>
 				<hr>
 			</div>
 			
@@ -89,7 +89,7 @@
 	<hr>
 		<div class="category shadow">
 			<div>
-				<h6><i class="bi bi-pin-angle-fill"></i>&nbsp;옵션1</h6>
+				<h6><i class="bi bi-pin-angle-fill"></i>&nbsp;카테고리2</h6>
 				<hr>
 			</div>
 			
