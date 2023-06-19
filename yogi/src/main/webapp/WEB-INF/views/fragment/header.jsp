@@ -62,6 +62,32 @@ header .login-div {
 
 header .login-button:hover {
 	cursor: pointer;
+	color: white;
+	background: #fa0050;
+}
+
+header .login-button:focus {
+	cursor: pointer;
+	color: white;
+	background: #fa0050;
+}
+
+header .login-button:active {
+	cursor: pointer;
+	color: white;
+	background: #fa0050;
+}
+
+header .dropdiv {
+	height: 20px;
+	margin: 0 auto;
+	font-size: 20x;
+	font-weight: bold;
+	width: 100px;
+}
+
+header .dropdown-item {
+	text-align: center;
 }
 </style>
 
@@ -71,7 +97,23 @@ header .login-button:hover {
 		<div class="logo" onclick="location.href='${pageContext.request.contextPath}/home/home'">
 			<img style="height: 85px; margin: 0 auto; display: block" src="${pageContext.request.contextPath}/resources/picture/logo.png">
 		</div>
+		
+		<!-- 로그인 전 -->
+		<!-- 
 		<button class="login-button" onclick="location.href='${pageContext.request.contextPath}/member/login'"><div class="login-div">로그인</div></button>
+		 -->
+		 
+		<!-- 로그인 후 -->
+		<div class="dropdown">
+		 	<button class="btn login-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+		    	<div class="dropdiv">박상훈님</div>
+			</button>
+		  	<ul class="dropdown-menu">
+		    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/myhome">마이페이지</a></li>
+		    	<li><a class="dropdown-item" href="#">로그아웃</a></li>
+		  	</ul>
+		</div>
+		
 	</div>
 </div>
 </header>
