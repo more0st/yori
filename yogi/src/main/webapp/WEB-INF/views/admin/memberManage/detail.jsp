@@ -48,7 +48,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row"><a href="#">1</a></th>
+                        <td scope="row">1</td>
                         <td>sangh***</td>
                         <td>박상훈</td>
                         <td><span>땅후니</span></td>

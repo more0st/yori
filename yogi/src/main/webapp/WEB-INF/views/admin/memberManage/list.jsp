@@ -49,7 +49,7 @@
 								<td>정상</td>
 								<td>
 									<div class="d-grid gap-2 d-md-block">
-										<button type="button" class="btn btn-outline-secondary btn-sm">정지</button>
+										<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">정지</button>
 										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
 									</div>
 								</td>
@@ -64,7 +64,7 @@
 								<td>정상</td>
 								<td>
 									<div class="d-grid gap-2 d-md-block">
-										<button type="button" class="btn btn-outline-secondary btn-sm">정지</button>
+										<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">정지</button>
 										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
 									</div>
 								</td>
@@ -79,7 +79,7 @@
 								<td>정상</td>
 								<td>
 									<div class="d-grid gap-2 d-md-block">
-										<button type="button" class="btn btn-outline-secondary btn-sm">정지</button>
+										<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">정지</button>
 										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
 									</div>
 								</td>
@@ -91,7 +91,30 @@
 			</div>
 		</section>
 
-
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">정지 사유</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <form> 
+		      <div class="modal-body">
+				<div>
+					<textarea rows="5" cols="52" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
+				</div>
+				<div>
+					
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		        <button type="button" class="btn btn-primary">보내기</button>
+		      </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
 
 
 
