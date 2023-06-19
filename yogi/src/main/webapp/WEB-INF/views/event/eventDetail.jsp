@@ -42,7 +42,7 @@
 
 .event-box {
 	margin: 0 auto;
-	width: 1100px;
+	width: 900px;
 	padding: 20px;
 	gap: 20px;
 }
@@ -55,6 +55,11 @@
 	padding: 20px;
 	margin-bottom: 20px;
 }
+
+.event-info p{
+	font-weight: bold;
+}
+
 .event-list {
 	background: white;
 	width: 50%;
@@ -121,6 +126,12 @@
     letter-spacing: -.06em;
 }
 
+.dateDiv{
+	display: flex;
+    align-items: flex-end;
+    color: #bdbdbd;
+}
+
 </style>
 
 <div class="contain title-container"><div class="eventMove" onclick="location.href='${pageContext.request.contextPath}/event/eventList'">이벤트</div></div>
@@ -130,7 +141,7 @@
 				<p>요리조리요 이벤트</p>
 				<div class="flexbetween borderdiv">
 				<h3>이번엔 요리조리요에서 100만원 받아가세요</h3>
-				<div>2023-06-01</div>
+				<div class="dateDiv">2023-06-01</div>
 				</div>
 				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'" class="imgdiv">
 					<img src="${pageContext.request.contextPath}/resources/picture/event-01.jpg">

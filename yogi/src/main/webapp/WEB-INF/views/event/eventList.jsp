@@ -28,7 +28,7 @@
 }
 
 .event-box img {
-	width : 100%;
+	width : 90%;
     overflow-clip-margin: content-box;
     overflow: clip;
     border-radius: 30px;
@@ -86,11 +86,11 @@
 .eventbtn {
 	background: white;
 	color: black;
-	width: 170px;
+	width: 150px;
 	height: 50px;
 	border: 1px solid #eee;
 	border-radius : 10px;
-	font-size: 20px;
+	font-size: 17px;
 	font-weight: 700;
 }
 
