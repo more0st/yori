@@ -128,7 +128,7 @@
 					<img src="${pageContext.request.contextPath}/resources/picture/event-01.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
-				<h3>이번엔 요리조리요에서 100만원 받아가세요</h3>
+				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
 			<div class="event-info">
@@ -136,7 +136,7 @@
 					<img src="${pageContext.request.contextPath}/resources/picture/event-02.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
-				<h3>이번엔 요리조리요에서 100만원 받아가세요</h3>
+				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
 			<div class="event-info">
@@ -144,7 +144,7 @@
 					<img src="${pageContext.request.contextPath}/resources/picture/event-03.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
-				<h3>이번엔 요리조리요에서 100만원 받아가세요</h3>
+				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
 			<div class="event-info">
@@ -152,7 +152,7 @@
 					<img src="${pageContext.request.contextPath}/resources/picture/event-04.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
-				<h3>이번엔 요리조리요에서 100만원 받아가세요</h3>
+				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
 			<div class="event-info">
@@ -160,7 +160,7 @@
 					<img src="${pageContext.request.contextPath}/resources/picture/event-05.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
-				<h3>이번엔 요리조리요에서 100만원 받아가세요</h3>
+				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
 			<div class="event-info">
@@ -168,7 +168,7 @@
 					<img src="${pageContext.request.contextPath}/resources/picture/event-06.png">
 				</div>
 				<p>요리조리요 이벤트</p>
-				<h3>이번엔 요리조리요에서 100만원 받아가세요</h3>
+				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
 			<div class="event-info">
@@ -176,7 +176,7 @@
 					<img src="${pageContext.request.contextPath}/resources/picture/event-09.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
-				<h3>이번엔 요리조리요에서 100만원 받아가세요</h3>
+				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
 			<div class="event-info">
@@ -184,7 +184,7 @@
 					<img src="${pageContext.request.contextPath}/resources/picture/event-10.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
-				<h3>이번엔 요리조리요에서 100만원 받아가세요</h3>
+				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
 			<div class="event-info">
@@ -192,7 +192,7 @@
 					<img src="${pageContext.request.contextPath}/resources/picture/event-11.png">
 				</div>
 				<p>요리조리요 이벤트</p>
-				<h3>이번엔 요리조리요에서 100만원 받아가세요</h3>
+				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
 
