@@ -141,18 +141,18 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 
 <main id="main" class="main">
 	<div class="whole-container">
-		<div class="container body-container">
+		<div class="container body-container" >
 		    <div class="body-title">
-				<h2> 공지사항 </h2>
+				<h2> 이벤트 </h2>
 		    </div>
 		    
 		    <div class="body-main mx-auto">
-				<form name="noticeForm" method="post" enctype="multipart/form-data">
+				<form name="eventForm" method="post" enctype="multipart/form-data">
 					<table class="table table-border table-form">
 						<tr> 
 							<td>제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
 							<td> 
-								<input type="text" name="noticeSubject" maxlength="100" class="form-control" value="${dto.noticeSubject}">
+								<input type="text" name="eventSubject" maxlength="100" class="form-control" value="">
 							</td>
 						</tr>
 						
@@ -161,10 +161,18 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 						<tr> 
 							<td valign="top">내&nbsp;&nbsp;&nbsp;&nbsp;용</td>
 							<td> 
-								<textarea name="noticeContent" class="form-control">${dto.noticeContent}</textarea>
+								<textarea name="eventContent" class="form-control"></textarea>
 							</td>
 						</tr>
 						
+						<tr>
+							<td>기&nbsp;&nbsp;&nbsp;&nbsp;간</td>
+							<td> 
+								<input type="date" name="start_date"> ~ 
+								<input type="date" name="end_date">  
+								&nbsp;종료&nbsp;<input type="checkbox" name="enabled">
+							</td>
+						</tr>
 						<tr>
 							<td>첨&nbsp;&nbsp;&nbsp;&nbsp;부</td>
 							<td> 
@@ -172,14 +180,13 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 							</td>
 						</tr>
 						
-						<c:if test="${mode == 'update' }">
+						<c:if test="${mode == 'update'}">
 							<tr>
 								<td>등록이미지</td>
 								<td>
 									<div class="img-box">
 										<c:forEach var="vo" items="${listFile}">
-											<img src="${pageContext.request.contextPath}/uploads/notice/${vo.noticePhotoName}"
-												onclick="deleteFile('${vo.noticePhotoNum}');">
+											<img src="${pageContext.request.contextPath}/resources/picture/event-01.jpg">
 										</c:forEach>
 									</div>
 								</td>
@@ -192,9 +199,9 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 							<td align="center">
 								<button type="button" class="btn btn-primary" onclick="sendOk();">${mode=="update"?"수정완료":"등록완료"}</button>
 								<button type="reset" class="btn btn-primary">다시입력</button>
-								<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/notice/list';">${mode=="update"?"수정취소":"등록취소"}</button>
+								<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/event/list';">${mode=="update"?"수정취소":"등록취소"}</button>
 								<c:if test="${mode=='update' }">
-									<input type="hidden" name="noticeNum" value="${dto.noticeNum}">
+									<input type="hidden" name="eventNum" value="${dto.noticeNum}">
 									<input type="hidden" name="page" value="${page}">
 								</c:if>							
 							</td>
