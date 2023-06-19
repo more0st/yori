@@ -19,7 +19,7 @@
         
         
         <li class="nav-item dropdown pe-3">
-            <span class="d-none d-md-block">김선영</span>
+            <span class="d-none d-md-block">김선영(선영이네 피자집)</span>
         </li><!-- End Profile Nav -->
 
         <li class="nav-item dropdown">
