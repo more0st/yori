@@ -36,11 +36,6 @@
     margin: 0 auto;
 }
 
-.event-box img:hover {
-    opacity:0.5;
-    cursor: pointer;
-}
-
 .event-box {
 	margin: 0 auto;
 	width: 1300px;
@@ -60,7 +55,13 @@
 	position: relative;
 	overflow: hidden;
 	padding: 10px;
+	cursor: pointer;
 }
+
+.event-info:hover{
+    opacity:0.5;
+}
+
 .event-info > div {
 	width: 100%;
 	display: flex;
@@ -97,11 +98,8 @@
 .eventbtn:active {
 	background: #fa0050;
 	color: white;
-	width: 170px;
-	height: 50px;
 	border: 1px solid #eee;
 	border-radius : 10px;
-	font-size: 20px;
 	font-weight: 700;
 }
 
@@ -123,72 +121,72 @@
 			<button id="eventbtn3" class="eventbtn">종료</button>
 		</div>
 		<div class="event-box">
-			<div class="event-info">
-				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+				<div>
 					<img src="${pageContext.request.contextPath}/resources/picture/event-01.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
 				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
-			<div class="event-info">
-				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+				<div>
 					<img src="${pageContext.request.contextPath}/resources/picture/event-02.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
 				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
-			<div class="event-info">
-				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+				<div>
 					<img src="${pageContext.request.contextPath}/resources/picture/event-03.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
 				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
-			<div class="event-info">
-				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+				<div>
 					<img src="${pageContext.request.contextPath}/resources/picture/event-04.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
 				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
-			<div class="event-info">
-				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+				<div>
 					<img src="${pageContext.request.contextPath}/resources/picture/event-05.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
 				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
-			<div class="event-info">
-				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+				<div>
 					<img src="${pageContext.request.contextPath}/resources/picture/event-06.png">
 				</div>
 				<p>요리조리요 이벤트</p>
 				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
-			<div class="event-info">
-				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+				<div>
 					<img src="${pageContext.request.contextPath}/resources/picture/event-09.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
 				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
-			<div class="event-info">
-				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+				<div>
 					<img src="${pageContext.request.contextPath}/resources/picture/event-10.jpg">
 				</div>
 				<p>요리조리요 이벤트</p>
 				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
 				<span>2023-06-01 ~ 2023-06-30</span>
 			</div>
-			<div class="event-info">
-				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+				<div>
 					<img src="${pageContext.request.contextPath}/resources/picture/event-11.png">
 				</div>
 				<p>요리조리요 이벤트</p>
