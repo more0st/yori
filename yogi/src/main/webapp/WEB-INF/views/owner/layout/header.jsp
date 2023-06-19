@@ -118,7 +118,7 @@
             </a>
           </li>
           <li>
-            <a href="${pageContext.request.contextPath}/owner/menu/#">
+            <a href="${pageContext.request.contextPath}/owner/option/menuList">
               <i class="bi bi-circle"></i><span>옵션 관리</span>
             </a>
           </li>
