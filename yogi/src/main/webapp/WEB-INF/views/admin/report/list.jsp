@@ -8,28 +8,59 @@
 	width: 62px;
 	height: 20px;
 	padding: 20px;
-	 white-space: nowrap;
+	white-space: nowrap;
 }
 
 .column2 {
 	width: 200px;
-	 white-space: nowrap;
+	white-space: nowrap;
 }
 
 .column3 {
 	width: 150px;
-	 white-space: nowrap;
+	white-space: nowrap;
 }
 
 .column4 {
 	width: 140px;
 	color: red;
-	 white-space: nowrap;
+	white-space: nowrap;
 }
 
 .column5 {
 	width: 50px;
-	 white-space: nowrap;
+	white-space: nowrap;
+}
+
+.ssibal-parent {
+	margin-left: 10px;
+	margin-bottom: 25px;
+}
+
+
+.ssibal-1 {
+	display: inline-block;
+	width: 10%;
+}
+
+.ssibal-2 {
+	display: inline-block;
+	width: 20%
+}
+
+.ssibal-3 {
+	display: inline-block;
+	width: 20%
+}
+
+.ssibal-4 {
+	display: inline-block;
+	width: 30%
+}
+
+.ssibal-5 {
+	display: inline-block;
+	width: 10%
 }
 </style>
 
@@ -62,7 +93,52 @@
 						</thead>
 					</table>
 
+					<!-- ----------------------------------------------------------------------- -->
+					<div class="container-sm ssibal-parent">
+						<div class="ssibal-1">
+							<span>번호</span>
+						</div>
+						<div class="ssibal-2">
+							<span>신고 업체</span>
+						</div>
+						<div class="ssibal-3">
+							<span>신고된 회원</span>
+						</div>
+						<div class="ssibal-4">
+							<span>신고 사유</span>
+						</div>
+						<div class="ssibal-5">
+							<span>신고 일자</span>
+						</div>
+					</div>
 
+<!-- 
+					<div class="accordion" id="accordionExample">
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="1">
+								<button class="accordion-button collapsed" type="button"
+									aria-expanded="false" style="height: 70px;">
+									<div class="ssibal-1">
+										<span>번호</span>
+									</div>
+									<div class="ssibal-2">
+										<span>신고 업체</span>
+									</div>
+									<div class="ssibal-3">
+										<span>신고된 회원</span>
+									</div>
+									<div class="ssibal-4">
+										<span>신고 사유</span>
+									</div>
+									<div class="ssibal-5">
+										<span>신고 일자</span>
+									</div>
+								</button>
+							</h2>
+						</div>
+					</div>
+ -->
+					<!-- ----------------------------------------------------------------------- -->
 
 					<div class="accordion" id="accordionExample">
 						<div class="accordion-item">
@@ -71,16 +147,21 @@
 									data-bs-toggle="collapse" data-bs-target="#content_1"
 									aria-expanded="false" aria-controls="content_1"
 									style="height: 70px;">
-									<table class="table-borderlesss " style="width: 1420px;">
-										<tr
-											style="text-align: left; vertical-align: middle; padding-top: 20px;">
-											<th scope="col" class="column1">1</th>
-											<th scope="col" class="column2">상훈이네 족발집</th>
-											<th scope="col" class="column3">박상훈</th>
-											<th scope="col" class="column4">부적절한 언어 사용</th>
-											<th scope="col" class="column5">2023-06-15</th>
-										</tr>
-									</table>
+									<div class="ssibal-1">
+										<span>번호</span>
+									</div>
+									<div class="ssibal-2">
+										<span>상훈이네 족발집</span>
+									</div>
+									<div class="ssibal-3">
+										<span>박상훈</span>
+									</div>
+									<div class="ssibal-4">
+										<span>부적절한 언어 사용</span>
+									</div>
+									<div class="ssibal-5">
+										<span>2023-06-15</span>
+									</div>
 								</button>
 							</h2>
 							<div id="content_1" class="accordion-collapse collapse"
@@ -128,18 +209,17 @@
 							<h2 class="accordion-header" id="2">
 								<button class="accordion-button collapsed" type="button"
 									data-bs-toggle="collapse" data-bs-target="#content_2"
-									aria-expanded="false" aria-controls="content_2" 
+									aria-expanded="false" aria-controls="content_2"
 									style="height: 70px;">
 									<table class="table-borderlesss" style="width: 1420px;">
-										<tbody>
-											<tr style="text-align: left; vertical-align: middle; padding-top: 20px;">
-												<th scope="col" class="column1">2</th>
-												<th scope="col" class="column2">재혁이네 치킨집</th>
-												<th scope="col" class="column3">강재혁</th>
-												<th scope="col" class="column4">별점 테러</th>
-												<th scope="col" class="column5">2023-06-15</th>
-											</tr>
-										</tbody>
+										<tr
+											style="text-align: left; vertical-align: middle; padding-top: 20px;">
+											<th scope="col" class="column1">2</th>
+											<th scope="col" class="column2">재혁이네 치킨집</th>
+											<th scope="col" class="column3">강재혁</th>
+											<th scope="col" class="column4">별점 테러</th>
+											<th scope="col" class="column5">2023-06-15</th>
+										</tr>
 									</table>
 								</button>
 							</h2>
