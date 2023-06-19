@@ -132,6 +132,10 @@
     color: #bdbdbd;
 }
 
+.event-info h3{
+	font-family : 'Jalnan';
+}
+
 </style>
 
 <div class="contain title-container"><div class="eventMove" onclick="location.href='${pageContext.request.contextPath}/event/eventList'">이벤트</div></div>

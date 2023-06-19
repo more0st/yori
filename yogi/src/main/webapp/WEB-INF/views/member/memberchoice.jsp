@@ -9,6 +9,7 @@
 	background: #fafafa;
 	display: flex;
 	align-items: center;
+	font-family : 'Jalnan';
 }
 
 .button-container {

@@ -23,6 +23,14 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/bootstrap5/js/bootstrap.bundle.min.js"></script>
 
+
+<style type="text/css">
+@font-face {
+  font-family : 'Jalnan';
+  src: url('../fonts/Jalnan.woff') format('woff');
+}
+</style>
+
 </head>
 <body>
 

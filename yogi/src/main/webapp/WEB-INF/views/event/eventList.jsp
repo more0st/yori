@@ -73,6 +73,10 @@
 	margin-top: 5px;
 }
 
+.event-info h4{
+	font-family : 'Jalnan';
+}
+
 .event-info span {
 	color: #BDBDBD;
 }
