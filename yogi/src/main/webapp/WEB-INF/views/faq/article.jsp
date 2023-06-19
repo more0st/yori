@@ -30,7 +30,7 @@
 							<td colspan="2" align="center" class="px-0 pb-0">
 								<div class="row gx-0">
 									<div class="col-sm-1 bg-primary me-1">
-										<p class="form-control-plaintext text-white">Q.</p>
+										<p class="form-control-plaintext text-white">Q</p>
 									</div>
 									<div class="col bg-primary">
 										<p class="form-control-plaintext text-white">${dto.subject}</p>
@@ -65,14 +65,14 @@
 					</tbody>
 				</table>
 				
-				<c:if test="${not empty dto.answer}">
+				<!-- 답변 없을 때는	c:if test="${not empty dto.answer}" 로 가리기	-->
 					<table class="table mb-0">
 						<tbody>
 							<tr>
 								<td colspan="2" align="center" class="p-0">
 									<div class="row gx-0">
 										<div class="col-sm-1 bg-success me-1">
-											<p class="form-control-plaintext text-white">A.</p>
+											<p class="form-control-plaintext text-white">A</p>
 										</div>
 										<div class="col bg-success">
 											<p class="form-control-plaintext text-white">[답변] ${dto.subject}</p>
@@ -97,7 +97,7 @@
 							</tr>
 						</tbody>
 					</table>
-				</c:if>
+				<!-- /c:if> -->
 				
 				<table class="table table-borderless mb-2">
 					<tr>

@@ -35,7 +35,7 @@
 								<td colspan="2" align="center" class="px-0 pb-0">
 									<div class="row gx-0">
 										<div class="col-sm-1 bg-primary me-1">
-											<p class="form-control-plaintext text-white">Q.</p>
+											<p class="form-control-plaintext text-white">Q</p>
 										</div>
 										<div class="col bg-primary">
 											<p class="form-control-plaintext text-white">${dto.subject}</p>
@@ -70,14 +70,15 @@
 						</tbody>
 					</table>
 					
-					<c:if test="${not empty dto.answer}">
+					<!-- 답변 없을 때는	c:if test="${not empty dto.answer}" 로 가리기	-->
+					
 						<table class="table mb-0">
 							<tbody>
 								<tr>
 									<td colspan="2" align="center" class="p-0">
 										<div class="row gx-0">
 											<div class="col-sm-1 bg-success me-1">
-												<p class="form-control-plaintext text-white">A.</p>
+												<p class="form-control-plaintext text-white">A</p>
 											</div>
 											<div class="col bg-success">
 												<p class="form-control-plaintext text-white">[답변] ${dto.subject}</p>
@@ -102,7 +103,7 @@
 								</tr>
 							</tbody>
 						</table>
-					</c:if>
+					<!-- /c:if> -->
 					
 					<table class="table table-borderless mb-2">
 						<tr>
@@ -120,25 +121,20 @@
 					<div class="reply">
 						<form name="answerForm" method="post">
 							<div class='form-header'>
-								<span class="bold">답변달기</span><span> - 문의에 대한 답변을 입력 하세요</span>
+								<span class="bold">&nbsp;&nbsp;&nbsp;답변달기</span><span> - 문의에 대한 답변을 입력 하세요</span>
 							</div>
 							
-							<table class="table reply-form">
-								<tr>
-									<td>
-										<textarea class='form-control' name='answer'></textarea>
-									</td>
-								</tr>
-								<tr>
-								   <td align='right'>
-								        <button type='button' class='btn btn-outline-secondary' onclick="sendAnswerOk()">답변 등록</button>
-								        <input type="hidden" name="num" value="${dto.num}">
-								        <input type="hidden" name="page" value="${page}">
-								        <input type="hidden" name="condition" value="${condition}">
-								        <input type="hidden" name="keyword" value="${keyword}">
-								    </td>
-								 </tr>
-							</table>
+							<div style="margin-top: 10px; margin-left: 10px; margin-bottom: 15px;">
+								<textarea class='form-control' name='answer'></textarea>
+							</div>	
+							
+							<div align='right'>
+						        <button type='button' class='btn btn-outline-secondary' onclick="sendAnswerOk()">답변 등록</button>
+						        <input type="hidden" name="num" value="${dto.num}">
+						        <input type="hidden" name="page" value="${page}">
+						        <input type="hidden" name="condition" value="${condition}">
+						        <input type="hidden" name="keyword" value="${keyword}">
+							</div>
 						</form>
 					</div>
 				</c:if>
