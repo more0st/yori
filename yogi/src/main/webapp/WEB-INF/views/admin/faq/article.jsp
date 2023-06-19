@@ -16,6 +16,10 @@
 .bold{
 	font-weight: bold;
 }
+
+.bordergray{
+	border: 1px solid #d9d9d9;
+}
 </style>
 
 
@@ -108,11 +112,11 @@
 					<table class="table table-borderless mb-2">
 						<tr>
 							<td width="50%">
-								<button type="button" class="btn btn-light" onclick="deleteInquiry('${dto.num}');">질문삭제</button>
-								<button type="button" class="btn btn-light" onclick="">답변삭제</button>
+								<button type="button" class="btn btn-light bordergray" onclick="deleteInquiry('${dto.num}');">질문삭제</button>
+								<button type="button" class="btn btn-light bordergray" onclick="">답변삭제</button>
 							</td>
 							<td class="text-end">
-								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/faq/list?${query}';">리스트</button>
+								<button type="button" class="btn btn-light bordergray" onclick="location.href='${pageContext.request.contextPath}/admin/faq/list?${query}';">리스트</button>
 							</td>
 						</tr>
 					</table>
