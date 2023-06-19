@@ -86,6 +86,7 @@
 				<div>	
 					<div style="display:flex;">
 						<button type="button" class="btn graybtn" data-bs-toggle="modal" data-bs-target="#soldOutModal">판매중</button>
+						<button type="button" class="btn graybtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/option'">옵션관리</button>
 						&nbsp;
 						<div class="dropdown">
 						  	<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

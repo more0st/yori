@@ -19,4 +19,10 @@ public class OwnerMenuController {
 		
 		return ".owner.menu.menuDetail";
 	}
+	
+	@RequestMapping(value = "option", method = RequestMethod.GET)
+	public String option() throws Exception {
+		
+		return ".owner.menu.optionReg";
+	}
 }

@@ -20,9 +20,4 @@ public class ResManageController {
 		return ".admin.resManage.orderList";
 	}
 	
-	@RequestMapping(value = "option", method = RequestMethod.GET)
-	public String option() throws Exception {
-		
-		return ".admin.resManage.optionReg";
-	}
 }
