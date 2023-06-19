@@ -42,21 +42,10 @@
 }
 
 .btn-list {
-    display: inline-block;
     border: 1px solid #ccc;
-    background: #fff url(../image/ico-lt.png?v=6f834f8…) no-repeat 10px 10px;
-    background-size: 5px;
-    padding: 7px 12px 4px 10px;
-    margin: 10px 0 0 0;
-    position: relative;
-    overflow: hidden;
-    text-decoration: none;
     font-size: 14px;
-    color: black;
-}
-
-.btn-list:hover {
-    color: black;
+    color:black;
+    margin-bottom: 10px;
 }
 
 .notice-list:hover {
@@ -72,8 +61,7 @@
 		<div class="notice-wrap">
 			<div style="padding-top: 20px; padding-bottom: 10px; margin: 0 auto;">
 				
-				<a class="btn-list" href="${pageContext.request.contextPath}/admin/notice/list"><i class="bi bi-caret-left-fill"></i> 목록으로
-				</a>
+				<a class="btn btn-outline-secondary btn-list" href="${pageContext.request.contextPath}/admin/notice/list"><i class="bi bi-caret-left-fill"></i> 목록으로</a>
 				<div class="notice-list">
 				[공지] 개인정보처리방침 일부 변경 안내
 					<div class="n-date">

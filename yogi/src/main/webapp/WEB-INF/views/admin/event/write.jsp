@@ -14,7 +14,7 @@
 }
 
 .body-main {
-	max-width: 600px;
+	max-width: 700px;
 	padding-top: 15px;
 }
 
@@ -126,6 +126,9 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 	padding-top: 35px;
 }
 
+.dateinput{
+	width:40%;
+}
 
 .table-form td { padding: 7px 0; }
 .table-form p { line-height: 200%; }
@@ -167,16 +170,16 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 						
 						<tr>
 							<td>기&nbsp;&nbsp;&nbsp;&nbsp;간</td>
-							<td> 
-								<input type="date" name="start_date"> ~ 
-								<input type="date" name="end_date">  
-								&nbsp;종료&nbsp;<input type="checkbox" name="enabled">
+							<td> <div style="display:flex; justify-content: space-between;">
+								<input type="date" name="start_date" class="form-control dateinput"> ~ 
+								<input type="date" name="end_date" class="form-control dateinput">  
+								<div><div>&nbsp;종료&nbsp;</div><input type="checkbox" name="enabled"></div>
+								</div>
 							</td>
 						</tr>
 						<tr>
 							<td>첨&nbsp;&nbsp;&nbsp;&nbsp;부</td>
 							<td> 
-								<input type="file" name="selectFile" accept="image/*" multiple="multiple" class="form-control">
 							</td>
 						</tr>
 						
