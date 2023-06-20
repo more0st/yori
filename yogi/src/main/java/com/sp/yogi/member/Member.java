@@ -1,12 +1,17 @@
 package com.sp.yogi.member;
 
+/**
+ * @author user
+ *
+ */
 public class Member {
-	private long memberIdx;
+	private long memberNum;
 	private int membership;
 	private String userId;
 	private String userName;
+	private String nickName;
 	private String userPwd;
-	private String register_date;
+	private String reg_date;
 	private String modify_date;
 	private String last_login;
 	private String email;
@@ -22,11 +27,18 @@ public class Member {
 	private String addr2;
 	private int enabled;
 	
-	public long getMemberIdx() {
-		return memberIdx;
+	
+	public String getNickName() {
+		return nickName;
 	}
-	public void setMemberIdx(long memberIdx) {
-		this.memberIdx = memberIdx;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public long getMemberNum() {
+		return memberNum;
+	}
+	public void setMemberNum(long memberNum) {
+		this.memberNum = memberNum;
 	}
 	public int getMembership() {
 		return membership;
@@ -52,11 +64,11 @@ public class Member {
 	public void setUserPwd(String userPwd) {
 		this.userPwd = userPwd;
 	}
-	public String getRegister_date() {
-		return register_date;
+	public String getReg_date() {
+		return reg_date;
 	}
-	public void setRegister_date(String register_date) {
-		this.register_date = register_date;
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 	public String getModify_date() {
 		return modify_date;
