@@ -396,7 +396,7 @@
 				</div>
 	    	</div>
 	  		<div class="modal-footer">
-	    		<button type="button" class="modal-button addCart">취소하기</button>
+	    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
 	    		<button type="button" class="modal-button toOrder">등록하기</button>
 	  		</div>
 		</div>
@@ -424,7 +424,7 @@
 				</div>
 	    	</div>
 	  		<div class="modal-footer">
-	    		<button type="button" class="modal-button addCart">취소하기</button>
+	    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
 	    		<button type="button" class="modal-button toOrder">등록하기</button>
 	  		</div>
 		</div>
@@ -448,7 +448,7 @@
     				</div>
 	    	</div>
 	  		<div class="modal-footer">
-	    		<button type="button" class="modal-button addCart">취소하기</button>
+	    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
 	    		<button type="button" class="modal-button toOrder">등록하기</button>
 	  		</div>
 		</div>
@@ -467,7 +467,7 @@
     			<textarea class="modal-text"></textarea>
 	    	</div>
 	  		<div class="modal-footer">
-	    		<button type="button" class="modal-button addCart">취소하기</button>
+	    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
 	    		<button type="button" class="modal-button toOrder">등록하기</button>
 	  		</div>
 		</div>
