@@ -175,7 +175,7 @@
 	</div>
 	</form>
 	
-	<div class="location"><i class="fa-solid fa-store"></i>&nbsp;<span>박상훈</span>님 근처의 음식점</div>
+	<div class="location"><i class="fa-solid fa-store"></i>&nbsp;<span>${sessionScope.member.userName}</span>님 근처의 음식점</div>
 	<div class="restaurant-list">
 		<a class="restaurant-info" href="${pageContext.request.contextPath}/restaurant/info">
 			<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">

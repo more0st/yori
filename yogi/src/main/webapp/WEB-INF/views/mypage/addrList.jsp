@@ -121,20 +121,16 @@ table tr:first-child td:nth-child(4) {
 					<td class="addrTd">주소 2</td>
 					<td class="addrTd td1">삭제</td>
 				</tr>
-				<tr>
-					<td class="addrTd td1">1</td>
-					<td class="addrTd td1">11111</td>
-					<td class="addrTd">경기도 고양시 일산동구 마두1동</td>
-					<td class="addrTd">301동 105호</td>
-					<td class="addrTd td1"><button class="addrBtn addrBtn-in"><i class="bi bi-x-lg"></i></button></td>
-				</tr>
-				<tr>
-					<td class="addrTd td1">2</td>
-					<td class="addrTd td1">11111</td>
-					<td class="addrTd">경기도 고양시 일산동구 마두1동</td>
-					<td class="addrTd">301동 104호</td>
-					<td class="addrTd td1"><button class="addrBtn addrBtn-in"><i class="bi bi-x-lg"></i></button></td>
-				</tr>
+				<c:forEach var="addr" items="${addr}" varStatus="status">
+					<tr>
+						<td class="addrTd td1"><c:out value="${status.count}"/></td>
+						<td class="addrTd td1">${addr.zip}</td>
+						<td class="addrTd">${addr.addr1}</td>
+						<td class="addrTd">${addr.addr2}</td>
+						<td class="addrTd td1"><button class="addrBtn addrBtn-in" onclick="deleteAddr(${addr.addressNum});"><i class="bi bi-x-lg"></i></button></td>
+					</tr>
+					<input type="hidden" value="${addr.addressNum}">
+				</c:forEach>
 			</table>
 		</div>
 	</div>
@@ -147,6 +143,7 @@ table tr:first-child td:nth-child(4) {
 		    		<h5 class="modal-title">원산지 정보 작성</h5>
 		    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		   		</div>
+		    	<form name="addrForm" method="post">
 		    	<div class="modal-body">
 		    		<div class="row mb-1">
 			      	  <label class="col-sm-2 col-form-label" for="zip" style="line-height: 70px; vertical-align: middle; white-space: nowrap;">우편번호</label>
@@ -171,8 +168,9 @@ table tr:first-child td:nth-child(4) {
 		    	</div>
 		  		<div class="modal-footer">
 		    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
-		    		<button type="button" class="modal-button toOrder">등록하기</button>
+		    		<button type="button" class="modal-button toOrder" onclick="sendOk();">등록하기</button>
 		  		</div>
+		  		</form>
 			</div>
 		</div>
 	</div>
@@ -185,6 +183,40 @@ document.getElementById("submenu-modal1").addEventListener("click", function() {
 // 모달 창 띄우기
 	$('#menu-modal1').modal('show');
 });
+
+function sendOk() {
+	const f = document.addrForm;
+	
+	let str = f.zip.value.trim();
+	if(!str) {
+		alert("우편번호를 입력하세요.");
+		f.zip.focus();
+		return;
+	}
+	
+	str = f.addr2.value.trim();
+	if(!str) {
+		alert("상세주소를 입력하세요.");
+		f.addr2.focus();
+		return;
+	}
+	
+	f.action = "${pageContext.request.contextPath}/mypage/addrWrite";
+	f.submit();
+}
+
+function deleteAddr(addressNum) {
+	
+	var result = confirm("주소를 삭제하시겠습니까?");
+    
+    // 확인 버튼을 눌렀을 때만 주소 삭제
+    if (result) {
+        // 주소 삭제를 위한 작업 수행
+        // addressNum을 파라미터로 사용하여 필요한 로직을 구현
+
+        location.href = '${pageContext.request.contextPath}/mypage/addrDelete?addressNum=' + addressNum;
+    }
+}
 
 </script>
 

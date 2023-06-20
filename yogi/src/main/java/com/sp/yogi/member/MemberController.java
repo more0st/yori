@@ -1,6 +1,7 @@
 package com.sp.yogi.member;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -18,11 +19,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sp.yogi.home.Home;
+import com.sp.yogi.home.HomeService;
+
 @Controller("member.memberController")
 @RequestMapping("/member/*")
 public class MemberController {
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+	private HomeService homeservice;
 
 	@RequestMapping(value = "member", method = RequestMethod.GET)
 	public String memberForm(Model model) {
@@ -108,6 +115,12 @@ public class MemberController {
 		} else {
 			uri = "redirect:" + uri;
 		}
+		
+		Long memberNum = info.getMemberNum();
+		
+		List<Home> addr = homeservice.listAddr(memberNum);
+		
+		model.addAttribute("addr", addr);
 
 		return ".home.home";
 	}

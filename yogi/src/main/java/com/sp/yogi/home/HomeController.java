@@ -32,11 +32,6 @@ public class HomeController {
 		
 		List<Home> addr = service.listAddr(memberNum);
 		
-		for(Home home : addr ) {
-			
-			System.out.println(home.getAddr1());
-		}
-		
 		model.addAttribute("addr", addr);
 		
 		return ".mainLayout";

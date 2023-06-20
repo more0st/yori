@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage">
+
+<!-- 템플릿 -->
+
+<!-- 주소록 저장 -->
+<insert id="insertAddr" parameterType="com.sp.yogi.mypage.MyPage">
+	INSERT INTO addressBook (addressNum, userId, zip, addr1, addr2) 
+		VALUES (addr_seq.nextval, #{userId}, #{zip}, #{addr1}, #{addr2})
+</insert>
+
+<!-- 주소록 삭제 -->
+<delete id="deleteAddr" parameterType="com.sp.yogi.home.Home">
+	DELETE FROM addressBook WHERE addressNum = #{addressNum} and userId = #{userId}
+</delete>
+
+</mapper>

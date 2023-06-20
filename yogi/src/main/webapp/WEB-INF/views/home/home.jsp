@@ -166,12 +166,12 @@
 					</button>
 					<div class="dropdown-menu">
 						<c:if test="${not empty sessionScope.member}">
-							<c:if test="${empty addr}">
-								<div class="dropdown-content">주소록을 추가하세요.</div>
-							</c:if>
 					    	<c:forEach var="addr" items="${addr}">
 					    		<div class="dropdown-content" onclick="location.href='${pageContext.request.contextPath}/restaurant/list';">${addr.addr1}</div>
 					    	</c:forEach>
+							<c:if test="${empty addr}">
+								<div class="dropdown-content">주소록을 추가하세요.</div>
+							</c:if>
 						</c:if>
 						<c:if test="${empty sessionScope.member}">
 							<div class="dropdown-content">로그인 후 이용하세요.</div>
@@ -179,7 +179,6 @@
 			  		</div>
 		  		</div>
 				<button type="button" class="search-btn" onclick="location.href='${pageContext.request.contextPath}/mypage/addrList';"><i class="bi bi-plus-lg"></i></button>		 
-				 		
 			</div>
 		</div>
 	</div>

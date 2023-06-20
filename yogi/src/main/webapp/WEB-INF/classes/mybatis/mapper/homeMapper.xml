@@ -8,7 +8,7 @@
 <!-- 주소록 불러오기 -->
 <select id="listAddr" parameterType="Long" resultType="com.sp.yogi.home.Home">
 
-	SELECT addr1
+	SELECT addressNum, zip, addr1, addr2
 	FROM addressBook a
 	JOIN member1 m1 ON m1.userId = a.userId
 	WHERE memberNum = #{memberNum}
