@@ -3,6 +3,39 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
+
+<style>
+header .login-div {
+	height: 20px;
+	margin: 0 auto;
+	font-size: 16px;
+}
+
+header .login-button > span {
+	height: 20px;
+	font-size: 12px;
+}
+
+header .login-button > span:hover {
+	cursor: default;
+}
+
+header .login-div:hover {
+	cursor: pointer;
+}
+
+header .login-button {
+	border: none;
+	color: #00000099;
+	width: 200px;
+	height: 40px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	margin-right: 30px;
+}
+
+</style>
 <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -14,12 +47,15 @@
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
+    <c:if test="${not empty sessionScope.owner}">
       <ul class="d-flex align-items-center">
 
         
         
         <li class="nav-item dropdown pe-3">
-            <span class="d-none d-md-block">김선영(선영이네 피자집)</span>
+            <span class="d-none d-md-block">${sessionScope.owner.userName} 사장님(${sessionScope.owner.restaurantName})</span>
+      
+        
         </li><!-- End Profile Nav -->
 
         <li class="nav-item dropdown">
@@ -77,8 +113,14 @@
         </li><!-- End Notification Nav -->
 
       </ul>
+	</c:if>
+	<c:if test="${empty sessionScope.owner}">
+		<div class="login-button">
+			<div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/login'">로그인</div><span>&nbsp;|&nbsp;</span>
+			<div class="login-div" onclick="location.href='${pageContext.request.contextPath}/member/choice'">회원가입</div>
+		</div>
+	</c:if>
     </nav><!-- End Icons Navigation -->
-
   </header><!-- End Header -->
   
   
