@@ -91,7 +91,7 @@ public class MemberController {
 
 		// 세션에 로그인 정보 저장
 		SessionInfo info = new SessionInfo();
-		info.setMemberIdx(dto.getMemberNum());
+		info.setMemberNum(dto.getMemberNum());
 		info.setUserId(dto.getUserId());
 		info.setUserName(dto.getUserName());
 		info.setMembership(dto.getMembership());

@@ -2,7 +2,7 @@ package com.sp.yogi.member;
 
 // 세션에 저장할 정보(아이디, 이름, 권한 등)
 public class SessionInfo {
-	private long memberIdx;
+	private long memberNum;
 	private String userId;
 	private String userName;
 	private int membership;
@@ -14,11 +14,11 @@ public class SessionInfo {
 	public void setAddr1(String addr1) {
 		this.addr1 = addr1;
 	}
-	public long getMemberIdx() {
-		return memberIdx;
+	public long getMemberNum() {
+		return memberNum;
 	}
-	public void setMemberIdx(long memberIdx) {
-		this.memberIdx = memberIdx;
+	public void setMemberNum(long memberNum) {
+		this.memberNum = memberNum;
 	}
 	public String getUserId() {
 		return userId;
