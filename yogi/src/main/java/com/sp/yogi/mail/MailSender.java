@@ -58,9 +58,9 @@ public class MailSender {
 			// 네이버 : 메일 아래부분 환경설정 클릭후 POP3등을 허용
             //       POP3/SMTP, IMAP/SMTP 사용함 설정(나머지는 기본 설정)
 
-			String username = "아이디@naver.com"; // 네이버 사용자;
+			String username = "yoriad0514"; // 네이버 사용자;
 			// String username = "아이디"; // gmail 사용자;
-			String password = "패스워드"; // 패스워드;
+			String password = "jzpjfvqzbonknjyy"; // 패스워드;
 			return new PasswordAuthentication(username, password);
 		}
 	}
@@ -127,11 +127,11 @@ public class MailSender {
 		// SMTP 서버의 계정 설정
 		// Naver와 연결할 경우 네이버 아이디
 		// Gmail과 연결할 경우 Gmail 아이디
-		p.put("mail.smtp.user", "아이디");
+		p.put("mail.smtp.user", "yoriad0514");
 
 		// SMTP 서버 정보 설정
-		String host = "smtp.naver.com"; // 네이버
-		// String host = "smtp.gmail.com"; // gmail
+		//String host = "smtp.naver.com"; // 네이버
+		String host = "smtp.gmail.com"; // gmail
 		
 		p.put("mail.smtp.host", host);
 
