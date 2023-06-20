@@ -44,157 +44,170 @@
 }
 </style>
 
-
-<div class="whole-container">
-	<div class="body-main">
-			<form name="memberForm" method="post">
-			 	<div class="row mb-3">
-			        <label class="col-sm-2 col-form-label" for="businessNum">사업자등록번호</label>
-			        <div class="col-sm-7">
-			            <input type="text" name="businessNum" id="businessNum" pattern="\d{3}-\d{2}-\d{5}" required="required" class="form-control" value="${dto.businessNum}" 
-			            		${mode=="update" ? "readonly='readonly' ":""}
-			            		maxlength="10"
-			            		placeholder="사업자등록번호">
-			            <small class="form-control-plaintext">사업자등록번호는 숫자 10자리만 입력해주세요.</small>		
-			        </div>
-			    </div>
-			 	
-			    <div class="row mb-3">
-			        <label class="col-sm-2 col-form-label" for="restaurantName">상호명</label>
-			        <div class="col-sm-7">
-			            <input type="text" name="restaurantName" id="restaurantName" class="form-control" value="${dto.restaurantName}" 
-			            		${mode=="update" ? "readonly='readonly' ":""}
-			            		placeholder="상호명">
-			        </div>
-			    </div>
-			    
-			    <div class="row mb-3">
-			        <label class="col-sm-2 col-form-label" for="ownerName">대표자명</label>
-			        <div class="col-sm-7">
-			            <input type="text" name="ownerName" id="ownerName" class="form-control" value="${dto.ownerName}" 
-			            		${mode=="update" ? "readonly='readonly' ":""}
-			            		placeholder="대표자명">
-			        </div>
-			    </div>
-			 
-			
-			    <div class="row mb-3" style="display: flex; align-items: center;">
-			        <label class="col-sm-2 col-form-label" for="selectownerEmail" >대표 이메일</label>
-			        <div class="col-sm-8 row">
-						<div class="col-3 pe-0">
-							<select name="selectownerEmail" id="selectownerEmail" class="form-select" onchange="changeownerEmail();" style="margin-top: 24px;">
-								<option value="">선 택</option>
-								<option value="naver.com" ${dto.ownerEmail2=="naver.com" ? "selected='selected'" : ""}>네이버 메일</option>
-								<option value="gmail.com" ${dto.ownerEmail2=="gmail.com" ? "selected='selected'" : ""}>지 메일</option>
-								<option value="hanmail.net" ${dto.ownerEmail2=="hanmail.net" ? "selected='selected'" : ""}>한 메일</option>
-								<option value="hotmail.com" ${dto.ownerEmail2=="hotmail.com" ? "selected='selected'" : ""}>핫 메일</option>
-								<option value="direct">직접입력</option>
-							</select>
+<main id="main" class="main">
+	<div class="whole-container">
+		<div class="body-main">
+				<form name="memberForm" method="post">
+				 	<div class="row mb-3">
+				        <label class="col-sm-2 col-form-label" for="businessNum">사업자등록번호</label>
+				        <div class="col-sm-7">
+				            <input type="text" name="businessNum" id="businessNum" pattern="\d{3}-\d{2}-\d{5}" required="required" class="form-control" value="${dto.businessNum}" 
+				            		${mode=="update" ? "readonly='readonly' ":""}
+				            		maxlength="10"
+				            		placeholder="사업자등록번호">
+				            <small class="form-control-plaintext">사업자등록번호는 숫자 10자리만 입력해주세요.</small>		
+				        </div>
+				    </div>
+				 	
+				    <div class="row mb-3">
+				        <label class="col-sm-2 col-form-label" for="restaurantName">상호명</label>
+				        <div class="col-sm-7">
+				            <input type="text" name="restaurantName" id="restaurantName" class="form-control" value="${dto.restaurantName}" 
+				            		${mode=="update" ? "readonly='readonly' ":""}
+				            		placeholder="상호명">
+				        </div>
+				    </div>
+				    
+				    <div class="row mb-3" style="display: flex; align-items: center;">
+				        <label class="col-sm-2 col-form-label" for="selectownerCategory" >업장 종류</label>
+				        <div class="col-sm-8 row">
+							<div class="col-3 pe-0">
+								<select name="categoryNum" id="selectownerCategory" class="form-select" style="margin-top: 24px;">
+									<option value="">선 택</option>
+									<option value="1" ${dto.categoryNum=="1" ? "selected='selected'" : ""}>프랜차이즈</option>
+								</select>
+							</div>
+				        </div>
+				    </div>
+				    
+				    <div class="row mb-3">
+				        <label class="col-sm-2 col-form-label" for="ownerName">대표자명</label>
+				        <div class="col-sm-7">
+				            <input type="text" name="ownerName" id="ownerName" class="form-control" value="${dto.ownerName}" 
+				            		${mode=="update" ? "readonly='readonly' ":""}
+				            		placeholder="대표자명">
+				        </div>
+				    </div>
+				 
+				
+				    <div class="row mb-3" style="display: flex; align-items: center;">
+				        <label class="col-sm-2 col-form-label" for="selectownerEmail" >대표 이메일</label>
+				        <div class="col-sm-8 row">
+							<div class="col-3 pe-0">
+								<select name="email" id="selectownerEmail" class="form-select" onchange="changeownerEmail();" style="margin-top: 24px;">
+									<option value="">선 택</option>
+									<option value="naver.com" ${dto.email2=="naver.com" ? "selected='selected'" : ""}>네이버 메일</option>
+									<option value="gmail.com" ${dto.email2=="gmail.com" ? "selected='selected'" : ""}>지 메일</option>
+									<option value="hanmail.net" ${dto.email2=="hanmail.net" ? "selected='selected'" : ""}>한 메일</option>
+									<option value="hotmail.com" ${dto.email2=="hotmail.com" ? "selected='selected'" : ""}>핫 메일</option>
+									<option value="direct">직접입력</option>
+								</select>
+							</div>
+							
+							<div class="col input-group" style="width: 180px;">
+								<input type="text" name="email1" class="form-control" maxlength="30" value="${dto.email1}" >
+							    <span class="input-group-text p-1" style="border: none; background: none;">@</span>
+								<input type="text" name="email2" class="form-control" maxlength="30" value="${dto.email2}" readonly="readonly">
+							</div>		
+		
+				        </div>
+				    </div>
+				    
+				    <div class="row mb-3">
+				        <label class="col-sm-2 col-form-label" for="ownerTel1">대표 전화번호</label>
+				        <div class="col-sm-10 row">
+							<div class="col-sm-3 pe-1">
+								<input type="text" name="ownerTel1" id="ownerTel1" class="form-control" value="${dto.ownerTel1}" maxlength="3">
+							</div>
+							<div class="col-sm-1 px-1" style="width: 2%;">
+								<p class="form-control-plaintext text-center">-</p>
+							</div>
+							<div class="col-sm-3 px-1">
+								<input type="text" name="ownerTel2" id="ownerTel2" class="form-control" value="${dto.ownerTel2}" maxlength="4">
+							</div>
+							<div class="col-sm-1 px-1" style="width: 2%;">
+								<p class="form-control-plaintext text-center">-</p>
+							</div>
+							<div class="col-sm-3 ps-1">
+								<input type="text" name="ownerTel3" id="ownerTel3" class="form-control" value="${dto.ownerTel3}" maxlength="4">
+							</div>
+				        </div>
+				    </div>
+				    
+				    <div class="row mb-3">
+				        <label class="col-sm-2 col-form-label" for="restaurantTel1">사업장 전화번호</label>
+				        <div class="col-sm-10 row">
+							<div class="col-sm-3 pe-1">
+								<input type="text" name="restaurantTel1" id="restaurantTel1" class="form-control" value="${dto.restaurantTel1}" maxlength="3">
+							</div>
+							<div class="col-sm-1 px-1" style="width: 2%;">
+								<p class="form-control-plaintext text-center">-</p>
+							</div>
+							<div class="col-sm-3 px-1">
+								<input type="text" name="restaurantTel2" id="restaurantTel2" class="form-control" value="${dto.restaurantTel2}" maxlength="4">
+							</div>
+							<div class="col-sm-1 px-1" style="width: 2%;">
+								<p class="form-control-plaintext text-center">-</p>
+							</div>
+							<div class="col-sm-3 ps-1">
+								<input type="text" name="restaurantTel3" id="restaurantTel3" class="form-control" value="${dto.restaurantTel3}" maxlength="4">
+							</div>
+				        </div>
+				    </div>
+				
+				    <div class="row mb-3">
+				        <label class="col-sm-2 col-form-label" for="zip" style="line-height: 70px; vertical-align: middle;">우편번호</label>
+				        <div class="col-sm-5">
+				       		<div class="input-group">
+				           		<input type="text" name="zip" id="zip" class="form-control" placeholder="우편번호" value="${dto.zip}" readonly="readonly">
+			           			<button class="btn btn-light" type="button" style="margin-left: 3px;" onclick="daumPostcode();">우편번호 검색</button>
+				           	</div>
 						</div>
-						
-						<div class="col input-group" style="width: 180px;">
-							<input type="text" name="ownerEmail1" class="form-control" maxlength="30" value="${dto.ownerEmail1}" >
-						    <span class="input-group-text p-1" style="border: none; background: none;">@</span>
-							<input type="text" name="ownerEmail2" class="form-control" maxlength="30" value="${dto.ownerEmail2}" readonly="readonly">
-						</div>		
+				    </div>
+			
+				    <div class="row mb-3">
+				        <label class="col-sm-2 col-form-label" for="restaurantAddr1">사업장 주소</label>
+				        <div class="col-sm-10">
+				       		<div>
+				           		<input type="text" name="restaurantAddr1" id="restaurantAddr1" class="form-control" placeholder="기본 주소" value="${dto.restaurantAddr1}" readonly="readonly">
+				           	</div>
+				       		<div style="margin-top: 5px;">
+				       			<input type="text" name="restaurantAddr2" id="restaurantAddr2" class="form-control" placeholder="상세 주소" value="${dto.restaurantAddr2}">
+							</div>
+						</div>
+				    </div>
+			
+				    <div class="row mb-3">
+				        <label class="col-sm-2 col-form-label" for="agree">약관 동의</label>
+						<div class="col-sm-8" style="padding-top: 5px;">
+							<input type="checkbox" id="agree" name="agree"
+								class="form-check-input"
+								checked="checked"
+								style="margin-left: 0;"
+								onchange="form.sendButton.disabled = !checked">
+							<label class="form-check-label">
+								[필수] 개인정보 수집 및 이용에 동의합니다.
+							</label>
+						</div>
+				    </div>
+				     
+				    <div class="row mb-3">
+				        <div class="text-center">
+				            <button type="button" name="sendButton" class="btn btn-danger" onclick="memberOk();"> 회원가입/수정하기 <i class="bi bi-check2"></i></button>
+				            
+							<input type="hidden" name="userIdValid" id="userIdValid" value="false">
+				        </div>
+				    </div>
+				
+				    <div class="row">
+						<p class="form-control-plaintext text-center">${message}</p>
+				    </div>
+				</form>
 	
-			        </div>
-			    </div>
-			    
-			    <div class="row mb-3">
-			        <label class="col-sm-2 col-form-label" for="ownerTel1">대표 전화번호</label>
-			        <div class="col-sm-10 row">
-						<div class="col-sm-3 pe-1">
-							<input type="text" name="ownerTel1" id="ownerTel1" class="form-control" value="${dto.ownerTel1}" maxlength="3">
-						</div>
-						<div class="col-sm-1 px-1" style="width: 2%;">
-							<p class="form-control-plaintext text-center">-</p>
-						</div>
-						<div class="col-sm-3 px-1">
-							<input type="text" name="ownerTel2" id="ownerTel2" class="form-control" value="${dto.ownerTel2}" maxlength="4">
-						</div>
-						<div class="col-sm-1 px-1" style="width: 2%;">
-							<p class="form-control-plaintext text-center">-</p>
-						</div>
-						<div class="col-sm-3 ps-1">
-							<input type="text" name="ownerTel3" id="ownerTel3" class="form-control" value="${dto.ownerTel3}" maxlength="4">
-						</div>
-			        </div>
-			    </div>
-			    
-			    <div class="row mb-3">
-			        <label class="col-sm-2 col-form-label" for="restaurantTel1">사업장 전화번호</label>
-			        <div class="col-sm-10 row">
-						<div class="col-sm-3 pe-1">
-							<input type="text" name="restaurantTel1" id="restaurantTel1" class="form-control" value="${dto.restaurantTel1}" maxlength="3">
-						</div>
-						<div class="col-sm-1 px-1" style="width: 2%;">
-							<p class="form-control-plaintext text-center">-</p>
-						</div>
-						<div class="col-sm-3 px-1">
-							<input type="text" name="restaurantTel2" id="restaurantTel2" class="form-control" value="${dto.restaurantTel2}" maxlength="4">
-						</div>
-						<div class="col-sm-1 px-1" style="width: 2%;">
-							<p class="form-control-plaintext text-center">-</p>
-						</div>
-						<div class="col-sm-3 ps-1">
-							<input type="text" name="restaurantTel3" id="restaurantTel3" class="form-control" value="${dto.restaurantTel3}" maxlength="4">
-						</div>
-			        </div>
-			    </div>
-			
-			    <div class="row mb-3">
-			        <label class="col-sm-2 col-form-label" for="zip" style="line-height: 70px; vertical-align: middle;">우편번호</label>
-			        <div class="col-sm-5">
-			       		<div class="input-group">
-			           		<input type="text" name="zip" id="zip" class="form-control" placeholder="우편번호" value="${dto.zip}" readonly="readonly">
-		           			<button class="btn btn-light" type="button" style="margin-left: 3px;" onclick="daumPostcode();">우편번호 검색</button>
-			           	</div>
-					</div>
-			    </div>
-		
-			    <div class="row mb-3">
-			        <label class="col-sm-2 col-form-label" for="restaurantAddr1">사업장 주소</label>
-			        <div class="col-sm-10">
-			       		<div>
-			           		<input type="text" name="restaurantAddr1" id="restaurantAddr1" class="form-control" placeholder="기본 주소" value="${dto.restaurantAddr1}" readonly="readonly">
-			           	</div>
-			       		<div style="margin-top: 5px;">
-			       			<input type="text" name="restaurantAddr2" id="restaurantAddr2" class="form-control" placeholder="상세 주소" value="${dto.restaurantAddr2}">
-						</div>
-					</div>
-			    </div>
-		
-			    <div class="row mb-3">
-			        <label class="col-sm-2 col-form-label" for="agree">약관 동의</label>
-					<div class="col-sm-8" style="padding-top: 5px;">
-						<input type="checkbox" id="agree" name="agree"
-							class="form-check-input"
-							checked="checked"
-							style="margin-left: 0;"
-							onchange="form.sendButton.disabled = !checked">
-						<label class="form-check-label">
-							[필수] 개인정보 수집 및 이용에 동의합니다.
-						</label>
-					</div>
-			    </div>
-			     
-			    <div class="row mb-3">
-			        <div class="text-center">
-			            <button type="button" name="sendButton" class="btn btn-danger" onclick="memberOk();"> 회원가입/수정하기 <i class="bi bi-check2"></i></button>
-			            
-						<input type="hidden" name="userIdValid" id="userIdValid" value="false">
-			        </div>
-			    </div>
-			
-			    <div class="row">
-					<p class="form-control-plaintext text-center">${message}</p>
-			    </div>
-			</form>
-
-		</div>
-
-</div>
+			</div>
+	
+	</div>
+</main>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -268,17 +281,17 @@ function memberOk() {
         return;
     }
 
-    str = f.ownerEmail1.value.trim();
+    str = f.email1.value.trim();
     if( !str ) {
         alert("이메일을 입력하세요. ");
-        f.ownerEmail1.focus();
+        f.email1.focus();
         return;
     }
 
-    str = f.ownerEmail2.value.trim();
+    str = f.email2.value.trim();
     if( !str ) {
         alert("이메일을 입력하세요. ");
-        f.ownerEmail2.focus();
+        f.email2.focus();
         return;
     }
     
@@ -331,23 +344,23 @@ function memberOk() {
         return;
     }
 
-   	f.action = "${pageContext.request.contextPath}/";
+   	f.action = "${pageContext.request.contextPath}/owner/info/register";
     f.submit();
 }
 
 function changeownerEmail() {
     const f = document.memberForm;
 	    
-    let str = f.selectownerEmail.value;
+    let str = f.email.value;
     if(str !== "direct") {
-        f.ownerEmail2.value = str; 
-        f.ownerEmail2.readOnly = true;
-        f.ownerEmail1.focus(); 
+        f.email2.value = str; 
+        f.email2.readOnly = true;
+        f.email1.focus(); 
     }
     else {
-        f.ownerEmail2.value = "";
-        f.ownerEmail2.readOnly = false;
-        f.ownerEmail1.focus();
+        f.email2.value = "";
+        f.email2.readOnly = false;
+        f.email1.focus();
     }
 }
 
