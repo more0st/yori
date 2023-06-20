@@ -80,7 +80,7 @@
     </update>
     
     <update id="updateMember1" parameterType="com.sp.yogi.member.Member">
-		UPDATE member1 SET userPwd=#{userPwd}, modify_date=SYSDATE
+		UPDATE member1 SET userPwd=#{userPwd}, modify_date=SYSDATE, nickName=#{nickName}
 		WHERE userId=#{userId}
     </update>
 	

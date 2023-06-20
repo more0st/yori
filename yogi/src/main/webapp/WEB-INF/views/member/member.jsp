@@ -83,7 +83,7 @@
 			        <label class="col-sm-2 col-form-label" for="nickName">닉네임</label>
 			        <div class="col-sm-7">
 			            <input type="text" name="nickName" id="nickName" class="form-control" value="${dto.nickName}" 
-			            		${mode=="update" ? "readonly='readonly' ":""}
+			            		
 			            		placeholder="닉네임">
 			        </div>
 			    </div>
