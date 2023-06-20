@@ -70,6 +70,7 @@
 
 .list-table-bottom {
 	display: flex;
+	justify-content: space-between;
 	justify-content: right;
 }
 
@@ -109,6 +110,8 @@
 .search-box {
 	display: flex;
 	justify-content: right;
+	margin-bottom: 10px;
+	margin-right: 500px;
 }
 
 .search-button {
@@ -117,6 +120,13 @@
 	border: 1px solid #d9d9d9;;
 	border-radius: 0 10px 10px 0;
 	width: 40px;
+}
+
+.btn-group {
+	display: flex;
+	justify-content: right;
+	margin-bottom: 20px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 </style>
@@ -129,20 +139,17 @@
 			<div class="list-title">
 				메뉴별 매출 관리
 			</div>
-			<div class="btn-group" role="group" aria-label="Basic" style="margin-left: 300px;">
+			
+			<div class="btn-group" role="group" aria-label="Basic">
 				<button type="button" class="btn btn-primary">1일</button>
 				<button type="button" class="btn btn-primary">1주일</button>
 				<button type="button" class="btn btn-primary">1달</button>
 				<button type="button" class="btn btn-primary">1년</button>
 				<button type="button" class="btn btn-dark">전체</button>
 			</div>
-			<div class="search-box">
-				<div class="search-input">
-					<input type="text" class="menuSearch shadow-sm">
-				</div>
-				<button type="button" class="search-button shadow-sm"><i class="bi bi-search"></i></button>
-			</div>
 		</div>
+		
+			
 		<table class="list-table">
 			<thead>
 			<tr>
@@ -171,6 +178,13 @@
 			</tbody>
 		</table>
 		<div class="list-table-bottom">
+			<div class="search-box">
+				<div class="search-input">
+					<input type="text" class="menuSearch shadow-sm">
+				</div>
+				<button type="button" class="search-button shadow-sm"><i class="bi bi-search"></i></button>
+			</div>
+		
 			<div class="list-table-bottom-left shadow-sm">
 				총계
 			</div>
