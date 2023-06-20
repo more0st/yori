@@ -37,7 +37,21 @@
 									</div>
 								</div>
 							</td>
-						</tr>				
+						</tr>	
+						<tr>
+						<td colspan="2" style="border-bottom: none;">
+							<div class="row row-cols-6 img-box">
+								<c:forEach var="vo" items="${listFile}">
+									<div class="col p-1">
+										<img src="${pageContext.request.contextPath}/uploads/album/${vo.imageFilename}"
+											class="img-thumbnail w-100 h-100" style="max-height: 130px;"
+											onclick="imageViewer('${pageContext.request.contextPath}/uploads/album/${vo.imageFilename}');">
+									</div>
+								</c:forEach>
+							</div>
+						</td>
+					</tr>
+									
 					
 						<tr>
 							<td width="50%">

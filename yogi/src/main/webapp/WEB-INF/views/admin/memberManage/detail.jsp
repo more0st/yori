@@ -33,7 +33,7 @@
                 <div class="card-body">
                   <h5 class="card-title">멤버상세내역 <span>김상훈</span></h5>
 
-                  <table class="table table-bordered datatable">
+                  <table class="table table-bordered">
                     <thead>
                       <tr>
                         <th scope="col">회원번호</th>
