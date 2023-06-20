@@ -41,6 +41,17 @@
 	font-size: 20px;
 }
 
+.messagediv{
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	margin-top: 3px;
+}
+
+.message{
+	color: blue;
+}
+
 
 </style>
 
@@ -52,17 +63,26 @@
 	
 <div class="notify-paragraph">
 	입점 신청 요청이 <br>
-	승인 대기중입니다. / 승인 거절되었습니다.
+	<div class="messagediv"><div class="message">${message} 승인</div> &nbsp;상태 입니다.</div>
 	
 	<!-- 승인 거절 시 사유 보임 -->
-	<br><br><br>
-	거절 사유 : 서류 미비 / 업종 불명확
-</div>
+	<br><br>
 	
-<div style="display: flex; justify-content: center;">
-	<button type="button" class="btn btn-primary btn-sm" onclick="location.href='${pageContext.request.contextPath}/owner/info/register';"
-					style="margin: 0 auto; width: 140px; height: 60px; font-size: 20px; text-align: center; vertical-align: center;"
-					>입점 재신청</button>
-</div>	
+	<c:if test="${status == '0'}">	
+		거절 사유 : 서류 미비 / 업종 불명확
+	</c:if>
+	
+</div>
+
+<!-- 숫자로 보낼지 string으로 보낼지 고려 -->
+<!-- 거절 상태(0)일 경우 -->
+<c:if test="${status == '0'}">	
+	<div style="display: flex; justify-content: center;">
+		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='${pageContext.request.contextPath}/owner/info/register';"
+				style="margin: 0 auto; width: 140px; height: 60px; font-size: 20px; text-align: center; vertical-align: center;">
+				입점 재신청</button>
+	</div>
+</c:if>		
+
 </div>
 </main>

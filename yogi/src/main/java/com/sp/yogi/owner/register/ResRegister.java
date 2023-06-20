@@ -1,4 +1,4 @@
-package com.sp.yogi.owner;
+package com.sp.yogi.owner.register;
 
 // 입점을 위한 업체 정보
 public class ResRegister {
@@ -8,25 +8,15 @@ public class ResRegister {
 	private String restaurantAddr1;	// 사업자 주소1
 	private String restaurantAddr2;	// 사업자 주소2
 	private String restaurantTel;	// 사업자 전화번호
-	private String ownerName;		// 대표자명
-	private String ownerTel;		// 대표 전화번호
-	private String ownerEmail;		// 대표 이메일
+
 	private String reg_date;		// 입점 일자
-	
-	private String email1;		
-	private String email2;	
-	
+
 	private String restaurantTel1;		
 	private String restaurantTel2;		
 	private String restaurantTel3;		
 
-	private String ownerTel1;		
-	private String ownerTel2;		
-	private String ownerTel3;			
-	
 	private Long categoryNum;		// 카테고리 번호
 	private Long categoryName;		// 카테고리 이름
-	
 	
 	
 	public Long getRestaurantNum() {
@@ -65,43 +55,12 @@ public class ResRegister {
 	public void setRestaurantTel(String restaurantTel) {
 		this.restaurantTel = restaurantTel;
 	}
-	public String getOwnerName() {
-		return ownerName;
-	}
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
-	}
-	public String getOwnerTel() {
-		return ownerTel;
-	}
-	public void setOwnerTel(String ownerTel) {
-		this.ownerTel = ownerTel;
-	}
-	public String getOwnerEmail() {
-		return ownerEmail;
-	}
-	public void setOwnerEmail(String ownerEmail) {
-		this.ownerEmail = ownerEmail;
-	}
 	public String getReg_date() {
 		return reg_date;
 	}
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
-	public String getEmail1() {
-		return email1;
-	}
-	public void setEmail1(String email1) {
-		this.email1 = email1;
-	}
-	public String getEmail2() {
-		return email2;
-	}
-	public void setEmail2(String email2) {
-		this.email2 = email2;
-	}
-	
 	public Long getCategoryNum() {
 		return categoryNum;
 	}
@@ -114,7 +73,6 @@ public class ResRegister {
 	public void setCategoryName(Long categoryName) {
 		this.categoryName = categoryName;
 	}
-	
 	public String getRestaurantTel1() {
 		return restaurantTel1;
 	}
@@ -132,23 +90,5 @@ public class ResRegister {
 	}
 	public void setRestaurantTel3(String restaurantTel3) {
 		this.restaurantTel3 = restaurantTel3;
-	}
-	public String getOwnerTel1() {
-		return ownerTel1;
-	}
-	public void setOwnerTel1(String ownerTel1) {
-		this.ownerTel1 = ownerTel1;
-	}
-	public String getOwnerTel2() {
-		return ownerTel2;
-	}
-	public void setOwnerTel2(String ownerTel2) {
-		this.ownerTel2 = ownerTel2;
-	}
-	public String getOwnerTel3() {
-		return ownerTel3;
-	}
-	public void setOwnerTel3(String ownerTel3) {
-		this.ownerTel3 = ownerTel3;
 	}
 }

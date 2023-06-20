@@ -1,4 +1,4 @@
-package com.sp.yogi.owner;
+package com.sp.yogi.owner.register;
 
 // 입점문의 - 입점 정보 등록
 public interface ResRegisterService {

@@ -91,60 +91,6 @@
 				    </div>
 				    
 				    <div class="row mb-3">
-				        <label class="col-sm-2 col-form-label" for="ownerName">대표자명</label>
-				        <div class="col-sm-7">
-				            <input type="text" name="ownerName" id="ownerName" class="form-control" value="${dto.ownerName}" 
-				            		${mode=="update" ? "readonly='readonly' ":""}
-				            		placeholder="대표자명">
-				        </div>
-				    </div>
-				 
-				
-				    <div class="row mb-3" style="display: flex; align-items: center;">
-				        <label class="col-sm-2 col-form-label" for="selectownerEmail" >대표 이메일</label>
-				        <div class="col-sm-8 row">
-							<div class="col-3 pe-0">
-								<select name="email" id="selectownerEmail" class="form-select" onchange="changeownerEmail();" style="margin-top: 24px;">
-									<option value="">선 택</option>
-									<option value="naver.com" ${dto.email2=="naver.com" ? "selected='selected'" : ""}>네이버 메일</option>
-									<option value="gmail.com" ${dto.email2=="gmail.com" ? "selected='selected'" : ""}>지 메일</option>
-									<option value="hanmail.net" ${dto.email2=="hanmail.net" ? "selected='selected'" : ""}>한 메일</option>
-									<option value="hotmail.com" ${dto.email2=="hotmail.com" ? "selected='selected'" : ""}>핫 메일</option>
-									<option value="direct">직접입력</option>
-								</select>
-							</div>
-							
-							<div class="col input-group" style="width: 180px;">
-								<input type="text" name="email1" class="form-control" maxlength="30" value="${dto.email1}" >
-							    <span class="input-group-text p-1" style="border: none; background: none;">@</span>
-								<input type="text" name="email2" class="form-control" maxlength="30" value="${dto.email2}" readonly="readonly">
-							</div>		
-		
-				        </div>
-				    </div>
-				    
-				    <div class="row mb-3">
-				        <label class="col-sm-2 col-form-label" for="ownerTel1">대표 전화번호</label>
-				        <div class="col-sm-10 row">
-							<div class="col-sm-3 pe-1">
-								<input type="text" name="ownerTel1" id="ownerTel1" class="form-control" value="${dto.ownerTel1}" maxlength="3">
-							</div>
-							<div class="col-sm-1 px-1" style="width: 2%;">
-								<p class="form-control-plaintext text-center">-</p>
-							</div>
-							<div class="col-sm-3 px-1">
-								<input type="text" name="ownerTel2" id="ownerTel2" class="form-control" value="${dto.ownerTel2}" maxlength="4">
-							</div>
-							<div class="col-sm-1 px-1" style="width: 2%;">
-								<p class="form-control-plaintext text-center">-</p>
-							</div>
-							<div class="col-sm-3 ps-1">
-								<input type="text" name="ownerTel3" id="ownerTel3" class="form-control" value="${dto.ownerTel3}" maxlength="4">
-							</div>
-				        </div>
-				    </div>
-				    
-				    <div class="row mb-3">
 				        <label class="col-sm-2 col-form-label" for="restaurantTel1">사업장 전화번호</label>
 				        <div class="col-sm-10 row">
 							<div class="col-sm-3 pe-1">
@@ -268,7 +214,6 @@
 function memberOk() {
 	const f = document.memberForm;
 	let str;
-
 	
     str = f.businessNum.value;
     if( !/^\d{10}$/.test(str) ) {
@@ -281,48 +226,6 @@ function memberOk() {
     if( !str ) {
         alert("상호명을 입력하세요. ");
         f.restaurantName.focus();
-        return;
-    }
-    
-    str = f.ownerName.value;
-    if( !/^[가-힣]{2,5}$/.test(str) ) {
-        alert("대표자명을 다시 입력하세요. ");
-        f.ownerName.focus();
-        return;
-    }
-
-    str = f.email1.value.trim();
-    if( !str ) {
-        alert("이메일을 입력하세요. ");
-        f.email1.focus();
-        return;
-    }
-
-    str = f.email2.value.trim();
-    if( !str ) {
-        alert("이메일을 입력하세요. ");
-        f.email2.focus();
-        return;
-    }
-    
-    str = f.ownerTel1.value;
-    if( !str ) {
-        alert("대표 전화번호를 입력하세요. ");
-        f.ownerTel1.focus();
-        return;
-    }
-
-    str = f.ownerTel2.value;
-    if( !/^\d{3,4}$/.test(str) ) {
-        alert("숫자만 가능합니다. ");
-        f.ownerTel2.focus();
-        return;
-    }
-
-    str = f.ownerTel3.value;
-    if( !/^\d{4}$/.test(str) ) {
-    	alert("숫자만 가능합니다. ");
-        f.ownerTel3.focus();
         return;
     }
     
@@ -356,22 +259,6 @@ function memberOk() {
 
    	f.action = "${pageContext.request.contextPath}/owner/info/register";
     f.submit();
-}
-
-function changeownerEmail() {
-    const f = document.memberForm;
-	    
-    let str = f.email.value;
-    if(str !== "direct") {
-        f.email2.value = str; 
-        f.email2.readOnly = true;
-        f.email1.focus(); 
-    }
-    else {
-        f.email2.value = "";
-        f.email2.readOnly = false;
-        f.email1.focus();
-    }
 }
 
 </script>

@@ -1,4 +1,4 @@
-package com.sp.yogi.owner;
+package com.sp.yogi.owner.register;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,16 +20,8 @@ public class ResRegisterServiceImpl implements ResRegisterService{
 	public void insertResRegister(ResRegister dto) throws Exception {
 		
 		try {
-			if (dto.getEmail1().length() != 0 && dto.getEmail2().length() != 0) {
-				dto.setOwnerEmail(dto.getEmail1() + "@" + dto.getEmail2());
-			}
-
 			if (dto.getRestaurantTel1().length() != 0 && dto.getRestaurantTel2().length() != 0 && dto.getRestaurantTel3().length() != 0) {
 				dto.setRestaurantTel(dto.getRestaurantTel1() + "-" + dto.getRestaurantTel2() + "-" + dto.getRestaurantTel3());
-			}
-			
-			if (dto.getOwnerTel1().length() != 0 && dto.getOwnerTel2().length() != 0 && dto.getOwnerTel3().length() != 0) {
-				dto.setOwnerTel(dto.getOwnerTel1() + "-" + dto.getOwnerTel2() + "-" + dto.getOwnerTel3());
 			}
 			
 			// 사장님 로그인 할 경우 체크.
