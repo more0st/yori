@@ -87,11 +87,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member readMember(long memberIdx) {
+	public Member readMember(long memberNum) {
 		Member dto = null;
 
 		try {
-			dto = dao.selectOne("member.readMember2", memberIdx);
+			dto = dao.selectOne("member.readMember2", memberNum);
 
 			if (dto != null) {
 				if (dto.getEmail() != null) {
