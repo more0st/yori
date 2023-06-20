@@ -7,7 +7,15 @@ public class SessionInfo {
 	private String userName;
 	private int membership;
 	private String addr1;
+	private long restaurantNum;
+
 	
+	public long getRestaurantNum() {
+		return restaurantNum;
+	}
+	public void setRestaurantNum(long restaurantNum) {
+		this.restaurantNum = restaurantNum;
+	}
 	public String getAddr1() {
 		return addr1;
 	}

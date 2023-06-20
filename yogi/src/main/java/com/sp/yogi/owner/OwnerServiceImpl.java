@@ -1,4 +1,4 @@
-package com.sp.yogi.member;
+package com.sp.yogi.owner;
 
 import java.util.Map;
 import java.util.Random;
@@ -10,8 +10,8 @@ import com.sp.yogi.common.dao.CommonDAO;
 import com.sp.yogi.mail.Mail;
 import com.sp.yogi.mail.MailSender;
 
-@Service("member.memberService")
-public class MemberServiceImpl implements MemberService {
+@Service("owner.ownerService")
+public class OwnerServiceImpl implements OwnerService {
 	@Autowired
 	private CommonDAO dao;
 
@@ -19,11 +19,11 @@ public class MemberServiceImpl implements MemberService {
 	private MailSender mailSender;
 	
 	@Override
-	public Member loginMember(String userId) {
-		Member dto = null;
+	public Owner loginOwner(String userId) {
+		Owner dto = null;
 
 		try {
-			dto = dao.selectOne("owner.loginMember", userId);
+			dto = dao.selectOne("owner.loginOwner", userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void insertMember(Member dto) throws Exception {
+	public void insertOwner(Owner dto) throws Exception {
 		try {
 			if (dto.getEmail1().length() != 0 && dto.getEmail2().length() != 0) {
 				dto.setEmail(dto.getEmail1() + "@" + dto.getEmail2());
@@ -42,15 +42,15 @@ public class MemberServiceImpl implements MemberService {
 				dto.setTel(dto.getTel1() + "-" + dto.getTel2() + "-" + dto.getTel3());
 			}
 
-			long memberSeq = dao.selectOne("owner.memberSeq");
-			dto.setMemberNum(memberSeq);
+			long ownerSeq = dao.selectOne("owner.ownerSeq");
+			dto.setRestaurantNum(ownerSeq);
 
 			// 회원정보 저장
-			dao.insertData("owner.insertMember", memberSeq);
+			dao.insertData("owner.insertOwner", ownerSeq);
 
-			// dao.insertData("member.insertMember1", dto);
-			// dao.insertData("member.insertMember2", dto);
-			dao.updateData("owner.insertMember12", dto); // member1, member2 테이블 동시에
+			// dao.insertData("owner.insertOwner1", dto);
+			// dao.insertData("owner.insertOwner2", dto);
+			dao.updateData("owner.insertOwner12", dto); // owner1, owner2 테이블 동시에
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -58,11 +58,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member readMember(String userId) {
-		Member dto = null;
+	public Owner readOwner(String userId) {
+		Owner dto = null;
 
 		try {
-			dto = dao.selectOne("owner.readMember", userId);
+			dto = dao.selectOne("owner.readOwner", userId);
 
 			if (dto != null) {
 				if (dto.getEmail() != null) {
@@ -87,11 +87,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member readMember(long memberNum) {
-		Member dto = null;
+	public Owner readOwner(long ownerNum) {
+		Owner dto = null;
 
 		try {
-			dto = dao.selectOne("owner.readMember2", memberNum);
+			dto = dao.selectOne("owner.readOwner2", ownerNum);
 
 			if (dto != null) {
 				if (dto.getEmail() != null) {
@@ -115,9 +115,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void updateMembership(Map<String, Object> map) throws Exception {
+	public void updateOwnership(Map<String, Object> map) throws Exception {
 		try {
-			dao.updateData("owner.updateMembership", map);
+			dao.updateData("owner.updateOwnership", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -135,7 +135,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void updateMember(Member dto) throws Exception {
+	public void updateOwner(Owner dto) throws Exception {
 		try {
 			if (dto.getEmail1().length() != 0 && dto.getEmail2().length() != 0) {
 				dto.setEmail(dto.getEmail1() + "@" + dto.getEmail2());
@@ -145,8 +145,8 @@ public class MemberServiceImpl implements MemberService {
 				dto.setTel(dto.getTel1() + "-" + dto.getTel2() + "-" + dto.getTel3());
 			}
 
-			dao.updateData("owner.updateMember1", dto);
-			dao.updateData("owner.updateMember2", dto);
+			dao.updateData("owner.updateOwner1", dto);
+			dao.updateData("owner.updateOwner2", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -154,13 +154,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void deleteMember(Map<String, Object> map) throws Exception {
+	public void deleteOwner(Map<String, Object> map) throws Exception {
 		try {
-			map.put("membership", 0);
-			updateMembership(map);
+			map.put("ownership", 0);
+			updateOwnership(map);
 
-			dao.deleteData("owner.deleteMember2", map);
-			dao.deleteData("owner.deleteMember1", map);
+			dao.deleteData("owner.deleteOwner2", map);
+			dao.deleteData("owner.deleteOwner1", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -168,7 +168,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void generatePwd(Member dto) throws Exception {
+	public void generatePwd(Owner dto) throws Exception {
 		// 10 자리 임시 패스워드 생성
 		StringBuilder sb = new StringBuilder();
 		Random rd = new Random();
@@ -196,7 +196,7 @@ public class MemberServiceImpl implements MemberService {
 
 		if (b) {
 			dto.setUserPwd(sb.toString());
-			updateMember(dto);
+			updateOwner(dto);
 		} else {
 			throw new Exception("이메일 전송중 오류가 발생했습니다.");
 		}

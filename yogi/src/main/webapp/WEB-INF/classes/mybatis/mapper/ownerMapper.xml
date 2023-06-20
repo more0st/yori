@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="owner">
+	<select id="loginOwner" parameterType="String" resultType="com.sp.yogi.owner.Owner">
+		SELECT restaurantNum, userId, userName, userPwd, reg_date, modify_date, last_login
+		FROM restaurantId 
+		WHERE userId = #{userId} AND enabled != 0
+	</select>
+	
+	<update id="updateLastLogin" parameterType="String">
+		UPDATE restaurantId SET last_login = SYSDATE, failure_cnt = 0
+		WHERE userId=#{userId}
+	</update>
+	
+    <select id="ownerSeq" resultType="Long">
+       SELECT restaurantId_seq.NEXTVAL FROM dual 
+    </select>
+
+    <insert id="insertOwner" parameterType="com.sp.yogi.owner.Owner">
+		INSERT INTO restaurantId(restaurantNum, userId, userName, userPwd, enabled, reg_date, 
+								modify_date, failure_cnt, status, reject_cnt, email, tel) 
+		VALUES (#{restaurantNum}, #{userId}, #{userName}, #{userPwd}, 1, SYSDATE, SYSDATE, 0, 1, 0, #{email}, #{tel}) 
+    </insert>
+   
+	
+   
+    <!-- member 테이블 정보 삭제  -->    
+    <delete id="deleteOwner" parameterType="String">
+		DELETE FROM restaurantNum WHERE userId=#{userId}
+    </delete>
+    
+
+	
+</mapper>

@@ -151,7 +151,7 @@ function memberOk() {
         return;
     }
 
-   	f.action = "${pageContext.request.contextPath}/member/${mode}";
+   	f.action = "${pageContext.request.contextPath}/owner/${mode}";
     f.submit();
 }
 
@@ -166,7 +166,7 @@ function userIdCheck() {
 		return;
 	}
 	
-	let url = "${pageContext.request.contextPath}/member/userIdCheck";
+	let url = "${pageContext.request.contextPath}/owner/userIdCheck";
 	let query = "userId=" + userId;
 	$.ajax({
 		type:"POST"

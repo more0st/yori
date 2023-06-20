@@ -110,10 +110,33 @@ td {
 }
 
 </style>
+
+<script type="text/javascript">
+function sendLogin() {
+    const f = document.loginForm;
+	let str;
+	
+	str = f.userId.value.trim();
+    if(!str) {
+        f.userId.focus();
+        return;
+    }
+
+    str = f.userPwd.value.trim();
+    if(!str) {
+        f.userPwd.focus();
+        return;
+    }
+
+    f.action = "${pageContext.request.contextPath}/owner/login";
+    f.submit();
+}
+</script>
+
 <main id="main" class="main">
 <div class="whole-container">
 	
-	<form action="" name="loginForm" method="post">
+	<form action="post" name="loginForm" method="post">
 		<div class="login-form">
 			<div class="login-ment">
 				<img src="${pageContext.request.contextPath}/resources/picture/logo.png"><span>사장님</span>
@@ -122,12 +145,12 @@ td {
 				<table class="login-table">
 					<tr>
 						<td class="login-input left">아이디</td>
-						<td style="width: 60%"><input class="login-table input" type="text" name="id"></td>
-						<td rowspan="2" class="center"><button class="login-button2" type="button" onclick="">로그인</button></td>
+						<td style="width: 60%"><input class="login-table input" type="text" name="userId"></td>
+						<td rowspan="2" class="center"><button class="login-button2" type="button" onclick="sendLogin();">로그인</button></td>
 					</tr>
 					<tr>
 						<td class="login-input left">비밀번호</td>
-						<td style="width: 60%"><input class="login-table input" type="password" name="pwd"></td>
+						<td style="width: 60%"><input class="login-table input" type="password" name="userPwd"></td>
 					</tr>
 					<tr>
 						<td colspan="3" class="center"><a class="login-table rink" href="${pageContext.request.contextPath}/owner/member">회원가입</a>&nbsp;<span class="rink">|</span>&nbsp;<a class="login-table rink" href="#">아이디/비밀번호 찾기</a></td>
