@@ -31,12 +31,13 @@
 }
 
 .complete {
-   margin-left : 70px;
-   width: 80%;
+   width: 100%;
    height: 100px;
-   font-weight: 800;
+   font-weight: 600;
    font-size: 25px;
-   color: #fa0050;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 
@@ -82,6 +83,12 @@
    margin: 20px auto;
 }
 
+.titlediv{
+	font-family: 'Jalnan';
+	padding:20px;
+	font-size: 25px;
+}
+
 </style>
 
 <main id="main" class="main">
@@ -89,14 +96,12 @@
    <form action="" method="post" name="loginForm">
       <div class="login-form">
          <div class="login-ment">
-            <img src="${pageContext.request.contextPath}/resources/picture/logo.png">
+            <div class="titlediv">요리조리요 ${title}</div>
          </div>
          <div class="complete">
-         <h4>${title}</h4>
-            <span>박상훈님 회원가입이 완료되었습니다.<br>메인으로 돌아가 로그인바랍니다.${message}</span>
-         
+            <span>${message}</span>
          </div>
-         <button class="login-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/home/home'">확인</button>
+         <button class="login-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/owner/home'">확인</button>
       </div>
    </form>
 </div>

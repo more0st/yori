@@ -46,11 +46,11 @@ public class OwnerServiceImpl implements OwnerService {
 			dto.setRestaurantNum(ownerSeq);
 
 			// 회원정보 저장
-			dao.insertData("owner.insertOwner", ownerSeq);
+			dao.insertData("owner.insertOwner", dto);
 
 			// dao.insertData("owner.insertOwner1", dto);
 			// dao.insertData("owner.insertOwner2", dto);
-			dao.updateData("owner.insertOwner12", dto); // owner1, owner2 테이블 동시에
+			// dao.updateData("owner.insertOwner12", dto); // owner1, owner2 테이블 동시에
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
