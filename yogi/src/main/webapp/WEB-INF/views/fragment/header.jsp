@@ -101,25 +101,27 @@ header .dropdown-item {
 		</div>
 		
 		<!-- 로그인 전 -->
-		
-		<button class="login-button" onclick="location.href='${pageContext.request.contextPath}/member/login'"><div class="login-div">로그인</div></button>
-	
-		 
+		<c:if test="${empty sessionScope}">
+			<button class="login-button" onclick="location.href='${pageContext.request.contextPath}/member/login'"><div class="login-div">로그인</div></button>
+		</c:if>
+			 
 		<!-- 로그인 후 -->
-		<div class="dropdown">
-		 	<button class="btn login-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-		    	<div class="dropdiv">박상훈님</div>
-			</button>
-		  	<ul class="dropdown-menu">
-		    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/myhome">마이페이지</a></li>
-		    	
-		    	<!-- 관리자일 경우에만 -->
-		    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin">관리자페이지</a></li>
-		    	
-		    	<li><a class="dropdown-item" href="#">로그아웃</a></li>
-		  	</ul>
-		</div>
-		
+		<c:if test="${not empty sessionScope}">	
+			<div class="dropdown">
+			 	<button class="btn login-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+			    	<div class="dropdiv">${sessionScope.member.userNickname}</div>
+				</button>
+			  	<ul class="dropdown-menu">
+			    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/myhome">마이페이지</a></li>
+			    	
+			    	<!-- 관리자일 경우에만 -->
+			    	<c:if test="${sessionScope.member.membership == 99 || sessionScope.member.userName == '관리자'}">
+			    		<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin">관리자페이지</a></li>
+			    	</c:if>
+			    	<li><a class="dropdown-item" href="#">로그아웃</a></li>
+			  	</ul>
+			</div>
+		</c:if>
 	</div>
 </div>
 </header>
