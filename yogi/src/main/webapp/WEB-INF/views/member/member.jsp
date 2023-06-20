@@ -80,9 +80,9 @@
 			    
 			 	
 			 	<div class="row mb-3">
-			        <label class="col-sm-2 col-form-label" for="userName">닉네임</label>
+			        <label class="col-sm-2 col-form-label" for="nickName">닉네임</label>
 			        <div class="col-sm-7">
-			            <input type="text" name="userNickName" id="userNickName" class="form-control" value="${dto.userNickName}" 
+			            <input type="text" name="nickName" id="nickName" class="form-control" value="${dto.nickName}" 
 			            		${mode=="update" ? "readonly='readonly' ":""}
 			            		placeholder="닉네임">
 			        </div>
@@ -106,10 +106,10 @@
 			    </div>
 			
 			    <div class="row mb-3" style="display: flex; align-items: center;">
-			        <label class="col-sm-2 col-form-label" for="selectEmail" >이메일</label>
+			        <label class="col-sm-2 col-form-label" for="email" >이메일</label>
 			        <div class="col-sm-8 row">
 						<div class="col-3 pe-0">
-							<select name="selectEmail" id="selectEmail" class="form-select" onchange="changeEmail();" style="margin-top: 24px;">
+							<select name="email" id="email" class="form-select" onchange="changeEmail();" style="margin-top: 24px;">
 								<option value="">선 택</option>
 								<option value="naver.com" ${dto.email2=="naver.com" ? "selected='selected'" : ""}>네이버 메일</option>
 								<option value="gmail.com" ${dto.email2=="gmail.com" ? "selected='selected'" : ""}>지 메일</option>
@@ -330,7 +330,7 @@ function memberOk() {
 function changeEmail() {
     const f = document.memberForm;
 	    
-    let str = f.selectEmail.value;
+    let str = f.email.value;
     if(str !== "direct") {
         f.email2.value = str; 
         f.email2.readOnly = true;
