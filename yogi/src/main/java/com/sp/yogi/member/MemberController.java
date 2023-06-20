@@ -109,7 +109,7 @@ public class MemberController {
 			uri = "redirect:" + uri;
 		}
 
-		return uri;
+		return ".home.home";
 	}
 
 	@RequestMapping(value = "logout")
