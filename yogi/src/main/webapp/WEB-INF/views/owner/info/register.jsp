@@ -229,6 +229,14 @@ function memberOk() {
         return;
     }
     
+    // 카테고리
+    str = f.categoryNum.value;
+    if( !str ) {
+        alert("카테고리를 선택하세요. ");
+        f.categoryNum.focus();
+        return;
+    }
+    
     str = f.restaurantTel1.value;
     if( !str ) {
         alert("사업장 전화번호를 입력하세요. ");
@@ -256,6 +264,8 @@ function memberOk() {
         f.restaurantAddr1.focus();
         return;
     }
+    
+   
 
    	f.action = "${pageContext.request.contextPath}/owner/info/register";
     f.submit();
