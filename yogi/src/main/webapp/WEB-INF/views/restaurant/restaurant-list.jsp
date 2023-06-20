@@ -38,8 +38,14 @@
 	border-bottom: 1px solid #d9d9d9;
 }
 
+.search-box2 {
+	width: 800px;
+	display: flex;
+	justify-content: space-between;
+}
+
 .search-info {
-	width: 30%;
+	width: 50%;
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -47,14 +53,14 @@
 }
 
 .search-info > input {
-	width: 80%;
+	width: 250px;
 	height: 40px;
 	padding: 0 15px;
 	outline: none;
 }
 
 .search-info > select {
-	width: 80%;
+	width: 250px;
 	height: 40px;
 	padding: 0 15px;
 }
@@ -153,6 +159,7 @@
 	
 	<form name="searchForm">
 	<div class="search-box">
+	<div class="search-box2">
 		<div class="search-info">
 			<input type="text" name="keyword" id="keywordval" placeholder="음식점이나 메뉴를 검색하세요."> 
 		</div>
@@ -162,10 +169,9 @@
 				<option value="rank"  			${condition=="rank"?"selected='selected'":"" }>별점순</option>
 				<option value="review"  		${condition=="review"?"selected='selected'":"" }>리뷰 많은순</option>
 				<option value="minPrice"  		${condition=="minPrice"?"selected='selected'":"" }>최소 주문 금액순</option>
-				<option value="distance"  		${condition=="distance"?"selected='selected'":"" }>거리순</option>
-				<option value="deliverTime"  	${condition=="deliverTime"?"selected='selected'":"" }>배달 시간순</option>
 			</select>
-		</div>			
+		</div>
+	</div>			
 	</div>
 	</form>
 	
@@ -176,7 +182,7 @@
 			<span>
 				<span class="res-title">버거킹 홍대점</span><br>
 				<span class="res-info res-rank">★ 4.7</span><span class="res-division">|</span><span class="res-info">리뷰 18</span><br>
-				<span class="res-info res-80">6,000원 이상 배달</span><span class="res-division">|</span><span class="res-info res-80">48~53분</span>
+				<span class="res-info res-80">6,000원 이상 배달</span><span class="res-division">
 			</span>
 		</a>
 		<a class="restaurant-info">
@@ -184,7 +190,7 @@
 			<span>
 				<span class="res-title">어메이징 농카이</span><br>
 				<span class="res-info res-rank">★ 4.8</span><span class="res-division">|</span><span class="res-info">리뷰 245</span><br>
-				<span class="res-info res-80">8,000원 이상 배달</span><span class="res-division">|</span><span class="res-info res-80">20~35분</span>
+				<span class="res-info res-80">8,000원 이상 배달</span><span class="res-division">
 			</span>
 		</a>
 		<a class="restaurant-info">
@@ -192,7 +198,7 @@
 			<span>
 				<span class="res-title">다운타우너 연남점</span><br>
 				<span class="res-info res-rank">★ 5.0</span><span class="res-division">|</span><span class="res-info">리뷰 154</span><br>
-				<span class="res-info res-80">10,000원 이상 배달</span><span class="res-division">|</span><span class="res-info res-80">35~55분</span>
+				<span class="res-info res-80">10,000원 이상 배달</span><span class="res-division">
 			</span>
 		</a>
 	</div>
