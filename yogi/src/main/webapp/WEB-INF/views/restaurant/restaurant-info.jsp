@@ -48,6 +48,19 @@ body {
 	font-weight: bold;
 	font-size: 15.4px;
 	border-bottom: 1px solid #d9d9d9;
+	display: flex;
+	justify-content: space-between;
+}
+
+.res-name-left {
+	width: 80%;
+}
+
+.res-name-right {
+	width: 10%;
+	color: #fa0050;
+	text-align: right;
+	cursor: pointer;
 }
 
 .res-main {
@@ -465,7 +478,7 @@ body {
 		<div class="res-info">
 			<div class="res-title">
 				<div class="res-name">
-					버거킹 홍대점
+					<div class="res-name-left">버거킹 홍대점</div><div class="res-name-right"><i class="bi bi-heart-fill"></i></div>
 				</div>
 				<div class="res-main">
 					<div>

@@ -63,6 +63,7 @@
 			<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/myhome';"><i class="bi bi-house-fill"></i></div>
 		</div>
 		<div class="category-box3">
+			<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/addrList';">주소록</div>
 			<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/orderList';">주문내역</div>
 			<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/likeList';">찜목록</div>
 			<div class="category-info" onclick="location.href='${pageContext.request.contextPath}/mypage/coupon';">쿠폰함</div>

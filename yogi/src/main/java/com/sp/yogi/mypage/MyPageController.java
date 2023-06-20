@@ -42,4 +42,9 @@ public class MyPageController {
 	public String coupon() {
 		return ".mypage.coupon";
 	}
+	
+	@GetMapping("addrList")
+	public String addrList() {
+		return ".mypage.addrList";
+	}
 }

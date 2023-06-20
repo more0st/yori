@@ -84,6 +84,7 @@ header .dropdiv {
 	font-size: 20x;
 	font-weight: bold;
 	width: 100px;
+	color: white;
 }
 
 header .dropdown-item {

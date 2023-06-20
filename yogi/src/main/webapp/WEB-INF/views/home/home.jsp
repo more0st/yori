@@ -36,8 +36,8 @@
 		display: flex;
 		justify-content: center;
 		gap: 5px;
-		margin: 0 auto;
 	}
+	
 	.ment-div {
 		justify-content: center;
 		display: flex;
@@ -122,13 +122,31 @@
 		transform-origin: right bottom;
 	}
 	.address-button {
-		width: 90%;
+		width: 100%;
 		background: white;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		margin: 0 auto;
+		border: none;
+	}
+	
+	.address-button:focus {
+		border: none;
 	}
 	
 	.dropdown-content {
 		width: 350px;
 		text-align: center;
+		cursor: pointer;
+	}
+	
+	.dropdiv {
+		height: 20px;
+		margin: 0 auto;
+		font-size: 20x;
+		width: 100px;
+		color: #333;
 	}
 	
 </style>
@@ -142,18 +160,18 @@
 				<img class="ment-pic" src="${pageContext.request.contextPath}/resources/picture/deliverment.png">
 			</div>
 			<div class="inputbox">
-				<input type="text" name="address" class="address-search" placeholder="건물명, 도로명, 지번으로 검색하세요."><button type="button" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-				
 				<div class="dropdown address-search">
 				 	<button class="btn address-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 				    	<div class="dropdiv">배달지 선택</div>
 					</button>
-					<ul class="dropdown-menu">
-				    	<li class="dropdown-content">경기도 고양시 일산동구 마두1동</li>
+					<div class="dropdown-menu">
+				    	<div class="dropdown-content" onclick="location.href='${pageContext.request.contextPath}/restaurant/list';">경기도 고양시 일산동구 마두1동</div>
 				    	
-				    	<li class="dropdown-content">경기도 고양시 일산동구 백석동</li>
-			  		</ul>
+				    	<div class="dropdown-content" onclick="location.href='${pageContext.request.contextPath}/restaurant/list';">경기도 고양시 일산동구 백석동</div>
+			  		</div>
 		  		</div>
+				<button type="button" class="search-btn" onclick="location.href='${pageContext.request.contextPath}/mypage/addrList';"><i class="bi bi-plus-lg"></i></button>		 
+				 		
 			</div>
 		</div>
 	</div>
