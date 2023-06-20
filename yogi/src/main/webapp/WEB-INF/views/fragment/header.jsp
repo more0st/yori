@@ -99,9 +99,9 @@ header .dropdown-item {
 		</div>
 		
 		<!-- 로그인 전 -->
-		<!-- 
+		
 		<button class="login-button" onclick="location.href='${pageContext.request.contextPath}/member/login'"><div class="login-div">로그인</div></button>
-		 -->
+	
 		 
 		<!-- 로그인 후 -->
 		<div class="dropdown">

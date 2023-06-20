@@ -72,6 +72,7 @@
 		width: 280px;
 		padding-left: 15px;
 		padding-right: 15px;
+		background: white;
 	}
 	
 	.category-box {
@@ -133,6 +134,17 @@
 			</div>
 			<div class="inputbox">
 				<input type="text" name="address" class="address-search" placeholder="건물명, 도로명, 지번으로 검색하세요."><button type="button" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+				
+				<div class="dropdown address-search">
+				 	<button class="btn login-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				    	<div class="dropdiv">배달지 선택</div>
+					</button>
+					<ul class="dropdown-menu">
+				    	<li>경기도 고양시 일산동구 마두1동</li>
+				    	
+				    	<li>경기도 고양시 일산동구 백석동</li>
+			  		</ul>
+		  		</div>
 			</div>
 		</div>
 	</div>
