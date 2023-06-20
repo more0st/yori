@@ -109,7 +109,7 @@ header .dropdown-item {
 		<c:if test="${not empty sessionScope}">	
 			<div class="dropdown">
 			 	<button class="btn login-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-			    	<div class="dropdiv">${sessionScope.member.userNickname}</div>
+			    	<div class="dropdiv">${sessionScope.member.userId}</div>
 				</button>
 			  	<ul class="dropdown-menu">
 			    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/myhome">마이페이지</a></li>
