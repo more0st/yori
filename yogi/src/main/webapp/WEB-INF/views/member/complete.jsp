@@ -14,6 +14,8 @@
    width: 700px;
    min-height: 300px;
    text-align: center;
+   background: white;
+   border: 1px solid #d9d9d9;
 }
 
 .login-ment {
@@ -91,7 +93,7 @@
          </div>
          <div class="complete">
          <h4>${title}</h4>
-            <span>${message}</span>
+            <span>박상훈님 회원가입이 완료되었습니다.<br>메인으로 돌아가 로그인바랍니다.${message}</span>
          
          </div>
          <button class="login-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/home/home'">확인</button>
