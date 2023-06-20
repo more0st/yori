@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="home">
+
+<!-- 템플릿 -->
+
+<!-- 주소록 불러오기 -->
+<select id="listAddr" parameterType="Long" resultType="com.sp.yogi.home.Home">
+
+	SELECT addr1
+	FROM addressBook a
+	JOIN member1 m1 ON m1.userId = a.userId
+	WHERE memberNum = #{memberNum}
+
+</select>
+
+
+
+</mapper>

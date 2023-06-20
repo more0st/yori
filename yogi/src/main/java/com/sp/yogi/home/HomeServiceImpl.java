@@ -1,5 +1,7 @@
 package com.sp.yogi.home;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,19 +13,17 @@ public class HomeServiceImpl implements HomeService {
 	private CommonDAO dao;
 	
 	@Override
-	public String readName(long num) {
-		String userName = null;
+	public List<Home> listAddr(Long memberNum) {
+		List<Home> list = null;
 		
 		try {
-			System.out.println("num : " + num);
-			userName = dao.selectOne("home.readName", num);
-			System.out.println("userName : " + userName);
+			list = dao.selectList("home.listAddr", memberNum);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return userName;
+		return list;
 	}
 
 }

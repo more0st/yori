@@ -1,8 +1,16 @@
 package com.sp.yogi.home;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.sp.yogi.member.SessionInfo;
+
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller("home.homeController")
@@ -12,11 +20,24 @@ public class HomeController {
 	private HomeService service;
 
 	@GetMapping("home")
-	public String home() {
+	public String home(HttpSession session, Model model) {
 		
-		String userName = service.readName(1L);
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
-		System.out.println("유저네임 : " + userName);
+		if(info == null) {
+			return ".mainLayout";
+		}
+		
+		Long memberNum = info.getMemberNum();
+		
+		List<Home> addr = service.listAddr(memberNum);
+		
+		for(Home home : addr ) {
+			
+			System.out.println(home.getAddr1());
+		}
+		
+		model.addAttribute("addr", addr);
 		
 		return ".mainLayout";
 	}
