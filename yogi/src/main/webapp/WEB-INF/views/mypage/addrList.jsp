@@ -46,6 +46,7 @@ table tr:first-child td:nth-child(4) {
 	color: white;
 	padding: 5px;
 	height: 40px;
+	border: none;
 }
 .addrBtn-top {
 	width: 170px;
