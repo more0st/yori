@@ -28,17 +28,15 @@
 	margin-bottom: 7px;
 }
 
-.login-input > .id {
-  border-bottom: none;
+.complete {
+	margin-left : 70px;
+	width: 80%;
+	height: 100px;
+	font-weight: 800;
+	font-size: 25px;
+	color: #fa0050;
 }
 
-.login-input > input {
-	width: 80%;
-	height: 55px;
-	outline: none;
-	border: 1px solid #d9d9d9;
-	padding: 10px 10px 10px 15px;
-}
 
 .login-find {
 	height: 50px;
@@ -88,13 +86,13 @@
 	<form action="" method="post" name="loginForm">
 		<div class="login-form">
 			<div class="login-ment">
-				<img src="${pageContext.request.contextPath}/resources/picture/logo.png">비밀번호찾기
+				<img src="${pageContext.request.contextPath}/resources/picture/logo.png">
 			</div>
-			<div class="login-input">
-				<input class="login-input id" type="text" name="id" placeholder="아이디 입력(필수)">
-				<input class="login-input email" type="text" name="email" placeholder="이메일 주소 입력(필수)"><br>
+			<div class="complete">
+				<span>임시비밀번호가 메일로 발송되었습니다.</span>
+			
 			</div>
-			<button class="login-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/member/findPwd'">확인</button>
+			<button class="login-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/home/home'">확인</button>
 		</div>
 	</form>
 </div>

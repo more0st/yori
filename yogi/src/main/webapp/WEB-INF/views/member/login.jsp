@@ -99,6 +99,11 @@
 				<a href="${pageContext.request.contextPath}/member/findPwd">비밀번호 찾기</a>
 			</div>
 			<button class="login-btn" type="button">로그인</button>
+			
+			<div class="d-grid">
+				<p class="form-control-plaintext text-center text-primary">${message}</p>
+            </div>
+			
 			<a href="${pageContext.request.contextPath}/member/choice">
 				<img class="member-img" src="${pageContext.request.contextPath}/resources/picture/signin_banner.png">
 			</a>
