@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
 		Member dto = null;
 
 		try {
-			dto = dao.selectOne("owner.loginMember", userId);
+			dto = dao.selectOne("member.loginMember", userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -42,15 +42,15 @@ public class MemberServiceImpl implements MemberService {
 				dto.setTel(dto.getTel1() + "-" + dto.getTel2() + "-" + dto.getTel3());
 			}
 
-			long memberSeq = dao.selectOne("owner.memberSeq");
+			long memberSeq = dao.selectOne("member.memberSeq");
 			dto.setMemberNum(memberSeq);
 
 			// 회원정보 저장
-			dao.insertData("owner.insertMember", memberSeq);
+			dao.insertData("member.insertMember", memberSeq);
 
 			// dao.insertData("member.insertMember1", dto);
 			// dao.insertData("member.insertMember2", dto);
-			dao.updateData("owner.insertMember12", dto); // member1, member2 테이블 동시에
+			dao.updateData("member.insertMember12", dto); // member1, member2 테이블 동시에
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -62,7 +62,7 @@ public class MemberServiceImpl implements MemberService {
 		Member dto = null;
 
 		try {
-			dto = dao.selectOne("owner.readMember", userId);
+			dto = dao.selectOne("member.readMember", userId);
 
 			if (dto != null) {
 				if (dto.getEmail() != null) {
@@ -91,7 +91,7 @@ public class MemberServiceImpl implements MemberService {
 		Member dto = null;
 
 		try {
-			dto = dao.selectOne("owner.readMember2", memberNum);
+			dto = dao.selectOne("member.readMember2", memberNum);
 
 			if (dto != null) {
 				if (dto.getEmail() != null) {
@@ -117,7 +117,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void updateMembership(Map<String, Object> map) throws Exception {
 		try {
-			dao.updateData("owner.updateMembership", map);
+			dao.updateData("member.updateMembership", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -127,7 +127,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void updateLastLogin(String userId) throws Exception {
 		try {
-			dao.updateData("owner.updateLastLogin", userId);
+			dao.updateData("member.updateLastLogin", userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -145,8 +145,8 @@ public class MemberServiceImpl implements MemberService {
 				dto.setTel(dto.getTel1() + "-" + dto.getTel2() + "-" + dto.getTel3());
 			}
 
-			dao.updateData("owner.updateMember1", dto);
-			dao.updateData("owner.updateMember2", dto);
+			dao.updateData("member.updateMember1", dto);
+			dao.updateData("member.updateMember2", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -159,8 +159,8 @@ public class MemberServiceImpl implements MemberService {
 			map.put("membership", 0);
 			updateMembership(map);
 
-			dao.deleteData("owner.deleteMember2", map);
-			dao.deleteData("owner.deleteMember1", map);
+			dao.deleteData("member.deleteMember2", map);
+			dao.deleteData("member.deleteMember1", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
