@@ -80,7 +80,27 @@
 	margin: 20px auto;
 }
 </style>
+<script type="text/javascript">
+function sendLogin() {
+    const f = document.loginForm;
+	let str;
+	
+	str = f.userId.value.trim();
+    if(!str) {
+        f.userId.focus();
+        return;
+    }
 
+    str = f.userPwd.value.trim();
+    if(!str) {
+        f.userPwd.focus();
+        return;
+    }
+
+    f.action = "${pageContext.request.contextPath}/member/login";
+    f.submit();
+}
+</script>
 
 <div class="whole-container">
 	<form action="" method="post" name="loginForm">
@@ -90,15 +110,15 @@
 			</div>
 			<div class="login-input">
 				<!-- 로그인 email로 하면 name 바꾸기 -->
-				<input class="login-input id" type="text" name="id" placeholder="이메일 주소 입력(필수)"><br>
-				<input class="login-input pwd" type="password" name="pwd" placeholder="비밀번호 입력(필수)">
+				<input class="login-input id" type="text" name="userId" placeholder="아이디 입력(필수)"><br>
+				<input class="login-input pwd" type="password" name="userPwd" placeholder="비밀번호 입력(필수)">
 			</div>
 			<div class="login-find">
 				<a href="${pageContext.request.contextPath}/member/findId">아이디 찾기</a>
 				<span>&nbsp;|&nbsp;</span>
 				<a href="${pageContext.request.contextPath}/member/findPwd">비밀번호 찾기</a>
 			</div>
-			<button class="login-btn" type="button">로그인</button>
+			<button class="login-btn" type="button" onclick="sendLogin();">로그인</button>
 			
 			<div class="d-grid">
 				<p class="form-control-plaintext text-center text-primary">${message}</p>
