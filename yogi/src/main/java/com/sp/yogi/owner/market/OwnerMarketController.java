@@ -1,4 +1,4 @@
-package com.sp.yogi.owner;
+package com.sp.yogi.owner.market;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
