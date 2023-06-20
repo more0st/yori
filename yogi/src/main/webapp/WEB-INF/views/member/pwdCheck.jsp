@@ -15,43 +15,67 @@
 	justify-content: center;
 	align-items: center;
 }
+
+.pwdtitle {
+font-size: 30px;
+font-weight: 900;
+color: #fa0050;
+}
+
+.pwdfindform {
+   margin: 150px auto 0;
+   width: 700px;
+   min-height: 300px;
+   text-align: center;
+   background: white;
+   border: 1px solid #d9d9d9;
+   padding : 50px;
+}
+
+.pwdbtn {
+	border: none;
+   width: 100%;
+   height: 55px;
+   color: white;
+   font-size: 16px;
+   background: #ccc;
+   margin-top: 20px;
+}
+
+.pwdbtn:hover {
+   cursor: pointer;
+}
 	
 </style>
 
-<div class="whole-container">
-	<!-- 메뉴 -->
-	<jsp:include page="/WEB-INF/views/mypage/mymenu.jsp"/>
-	
-	<div class="container">
-	<div class="body-container">	
-
-            <div class="col-md-7">
-                <div class="border mt-5 p-4">
-                    <form name="pwdForm" method="post" class="row g-3">
-                        <h3 class="text-center fw-bold">패스워드 재확인</h3>
-                        
+<main>
+	<div class="whole-container">
+			<!-- 메뉴 -->
+			<jsp:include page="/WEB-INF/views/mypage/mymenu.jsp"/>
+			
+		                <div class="pwdfindform">
+		                    <form name="pwdForm" method="post" class="row g-3">
+		                        <h3 class="pwdtitle">패스워드 재확인</h3>
+		                        
+				                <div class="d-grid">
+									<p class="form-control-plaintext text-center">정보보호를 위해 패스워드를 다시 한 번 입력해주세요.</p>
+				                </div>
+		                        
+		                        <div class="d-grid">
+		                            <input type="password" name="userPwd" class="form-control form-control-lg" placeholder="패스워드">
+		                        </div>
+		                        <div class="d-grid">
+		                            <button type="button" class="pwdbtn" onclick="sendOk();">확인 <i class="bi bi-check2"></i> </button>
+		                            <input type="hidden" name="mode" value="${mode}">
+		                        </div>
+		                    </form>
+		
 		                <div class="d-grid">
-							<p class="form-control-plaintext text-center">정보보호를 위해 패스워드를 다시 한 번 입력해주세요.</p>
+							<p class="form-control-plaintext text-center">${message}</p>
 		                </div>
-                        
-                        <div class="d-grid">
-                            <input type="password" name="userPwd" class="form-control form-control-lg" placeholder="패스워드">
-                        </div>
-                        <div class="d-grid">
-                            <button type="button" class="btn btn-lg btn-primary" onclick="sendOk();">확인 <i class="bi bi-check2"></i> </button>
-                            <input type="hidden" name="mode" value="${mode}">
-                        </div>
-                    </form>
-
-                <div class="d-grid">
-					<p class="form-control-plaintext text-center">${message}</p>
-                </div>
-            </div>
-        </div>
-	</div>
-</div>
-
-</div>
+		            </div>
+		        </div>
+</main>
 
 <script type="text/javascript">
 function sendOk() {
@@ -63,7 +87,7 @@ function sendOk() {
 		f.userPwd.focus();
 		return;
 	}
-	f.action = "${pageContext.request.contextPath}/member/member";
+	f.action = "${pageContext.request.contextPath}/member/check";
 	f.submit();
 }
 </script>

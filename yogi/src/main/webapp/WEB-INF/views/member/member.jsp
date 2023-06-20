@@ -59,9 +59,9 @@
 										placeholder="아이디">
 							</div>
 							<div class="col-3 ps-1">
-								
+								<c:if test="${mode=='member'}">
 									<button type="button" class="btn btn-light" onclick="userIdCheck();">아이디중복검사</button>
-								
+								</c:if>
 							</div>
 						</div>
 						<c:if test="${mode=='member'}">
@@ -170,7 +170,7 @@
 						</div>
 					</div>
 			    </div>
-		
+				<c:if test="${mode =='member'}">
 			    <div class="row mb-3">
 			        <label class="col-sm-2 col-form-label" for="agree">약관 동의</label>
 					<div class="col-sm-8" style="padding-top: 5px;">
@@ -184,10 +184,10 @@
 						</label>
 					</div>
 			    </div>
-			     
+			     </c:if>
 			    <div class="row mb-3">
 			        <div class="text-center">
-			            <button type="button" name="sendButton" class="btn btn-danger" onclick="memberOk();"> 회원가입 <i class="bi bi-check2"></i></button>
+			            <button type="button" name="sendButton" class="btn btn-danger" onclick="memberOk();"> ${mode=='update'?'수정완료':'회원가입'} <i class="bi bi-check2"></i></button>
 			            
 						<input type="hidden" name="userIdValid" id="userIdValid" value="false">
 			        </div>

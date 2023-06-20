@@ -92,8 +92,8 @@
             <img src="${pageContext.request.contextPath}/resources/picture/logo.png">
          </div>
          <div class="complete">
-         <h4>${title}</h4>
-            <span>박상훈님 회원가입이 완료되었습니다.<br>메인으로 돌아가 로그인바랍니다.${message}</span>
+         <!--<h4>${title}</h4>-->
+            <span>${message}</span>
          
          </div>
          <button class="login-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/home/home'">확인</button>
