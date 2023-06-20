@@ -75,6 +75,16 @@
 								<select name="categoryNum" id="selectownerCategory" class="form-select" style="margin-top: 24px;">
 									<option value="">선 택</option>
 									<option value="1" ${dto.categoryNum=="1" ? "selected='selected'" : ""}>프랜차이즈</option>
+									<option value="2" ${dto.categoryNum=="2" ? "selected='selected'" : ""}>치킨</option>
+									<option value="3" ${dto.categoryNum=="3" ? "selected='selected'" : ""}>피자/양식</option>
+									<option value="4" ${dto.categoryNum=="4" ? "selected='selected'" : ""}>중국집</option>
+									<option value="5" ${dto.categoryNum=="5" ? "selected='selected'" : ""}>한식</option>
+									<option value="6" ${dto.categoryNum=="6" ? "selected='selected'" : ""}>일식/돈까스</option>
+									<option value="7" ${dto.categoryNum=="7" ? "selected='selected'" : ""}>족발/보쌈</option>
+									<option value="8" ${dto.categoryNum=="8" ? "selected='selected'" : ""}>야식</option>
+									<option value="9" ${dto.categoryNum=="9" ? "selected='selected'" : ""}>분식</option>
+									<option value="10" ${dto.categoryNum=="10" ? "selected='selected'" : ""}>카페/디저트</option>
+									<option value="11" ${dto.categoryNum=="11" ? "selected='selected'" : ""}>편의점/마트</option>
 								</select>
 							</div>
 				        </div>
