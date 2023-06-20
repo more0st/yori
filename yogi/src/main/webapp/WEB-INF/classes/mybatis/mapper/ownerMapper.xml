@@ -23,6 +23,10 @@
 		VALUES (#{restaurantNum}, #{userId}, #{userName}, #{userPwd}, 1, SYSDATE, SYSDATE, 0, 1, 0, #{email}, #{tel}) 
     </insert>
    
+   <!-- 아이디 있는지 체크 -->
+	<select id="readOwner" parameterType="String" resultType="com.sp.yogi.owner.Owner">
+		SELECT userId FROM restaurantId WHERE userId=#{userId}
+	</select>   
 	
    
     <!-- member 테이블 정보 삭제  -->    

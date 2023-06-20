@@ -86,6 +86,50 @@
 			        </div>
 			    </div>
 			 
+			    <div class="row mb-3" style="display: flex; align-items: center;">
+			        <label class="col-sm-2 col-form-label" for="selectownerEmail" >이메일</label>
+			        <div class="col-sm-8 row">
+						<div class="col-3 pe-0">
+							<select name="email" id="selectownerEmail" class="form-select" onchange="changeownerEmail();" style="margin-top: 24px;">
+								<option value="">선 택</option>
+								<option value="naver.com" ${dto.email2=="naver.com" ? "selected='selected'" : ""}>네이버 메일</option>
+								<option value="gmail.com" ${dto.email2=="gmail.com" ? "selected='selected'" : ""}>지 메일</option>
+								<option value="hanmail.net" ${dto.email2=="hanmail.net" ? "selected='selected'" : ""}>한 메일</option>
+								<option value="hotmail.com" ${dto.email2=="hotmail.com" ? "selected='selected'" : ""}>핫 메일</option>
+								<option value="direct">직접입력</option>
+							</select>
+						</div>
+
+						<div class="col input-group" style="width: 180px;">
+							<input type="text" name="email1" class="form-control" maxlength="30" value="${dto.email1}" >
+						    <span class="input-group-text p-1" style="border: none; background: none;">@</span>
+							<input type="text" name="email2" class="form-control" maxlength="30" value="${dto.email2}" readonly="readonly">
+						</div>		
+
+			        </div>
+			    </div>
+
+			    <div class="row mb-3">
+			        <label class="col-sm-2 col-form-label" for="tel">전화번호</label>
+			        <div class="col-sm-10 row">
+						<div class="col-sm-3 pe-1">
+							<input type="text" name="tel1" id="tel1" class="form-control" value="${dto.tel1}" maxlength="3">
+						</div>
+						<div class="col-sm-1 px-1" style="width: 2%;">
+							<p class="form-control-plaintext text-center">-</p>
+						</div>
+						<div class="col-sm-3 px-1">
+							<input type="text" name="tel2" id="ownerTel2" class="form-control" value="${dto.tel2}" maxlength="4">
+						</div>
+						<div class="col-sm-1 px-1" style="width: 2%;">
+							<p class="form-control-plaintext text-center">-</p>
+						</div>
+						<div class="col-sm-3 ps-1">
+							<input type="text" name="tel3" id="ownerTel3" class="form-control" value="${dto.tel3}" maxlength="4">
+						</div>
+			        </div>
+			    </div>
+			 
 		
 			    <div class="row mb-3">
 			        <label class="col-sm-2 col-form-label" for="agree">약관 동의</label>
@@ -150,9 +194,59 @@ function memberOk() {
         f.userName.focus();
         return;
     }
+    
+    str = f.email1.value.trim();
+    if( !str ) {
+        alert("이메일을 입력하세요. ");
+        f.email1.focus();
+        return;
+    }
+    
+    str = f.email2.value.trim();
+    if( !str ) {
+        alert("이메일을 입력하세요. ");
+        f.email2.focus();
+        return;
+    }
+    
+    str = f.tel1.value;
+    if( !str ) {
+        alert("전화번호를 입력하세요. ");
+        f.tel1.focus();
+        return;
+    }
+    str = f.tel2.value;
+    if( !/^\d{3,4}$/.test(str) ) {
+        alert("숫자만 가능합니다. ");
+        f.tel2.focus();
+        return;
+    }
+    str = f.tel3.value;
+    if( !/^\d{4}$/.test(str) ) {
+    	alert("숫자만 가능합니다. ");
+        f.tel3.focus();
+        return;
+    }
 
    	f.action = "${pageContext.request.contextPath}/owner/${mode}";
     f.submit();
+}
+
+// 이메일 선택시 naver.com 등 뒤에 작성
+function changeownerEmail() {
+    const f = document.memberForm;
+	    
+    let str = f.email.value;
+    if(str !== "direct") {
+        f.email2.value = str; 
+        f.email2.readOnly = true;
+        f.email1.focus(); 
+    }
+    else {
+        f.email2.value = "";
+        f.email2.readOnly = false;
+        f.email1.focus();
+    }
 }
 
 function userIdCheck() {

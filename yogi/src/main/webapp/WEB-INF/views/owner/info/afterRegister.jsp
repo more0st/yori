@@ -63,7 +63,7 @@
 	
 <div class="notify-paragraph">
 	입점 신청 요청이 <br>
-	<div class="messagediv"><div class="message">${message} 승인</div> &nbsp;상태 입니다.</div>
+	<div class="messagediv"><div class="message">${message}</div> &nbsp;상태 입니다.</div>
 	
 	<!-- 승인 거절 시 사유 보임 -->
 	<br><br>
