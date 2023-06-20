@@ -120,7 +120,7 @@ public class MemberController {
 		// 세션에 저장된 모든 정보 지우고, 세션초기화
 		session.invalidate();
 
-		return "redirect:/";
+		return ".home.home";
 	}
 
 	@RequestMapping(value = "check", method = RequestMethod.GET)
