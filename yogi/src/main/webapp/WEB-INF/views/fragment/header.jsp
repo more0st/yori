@@ -118,7 +118,7 @@ header .dropdown-item {
 			    	<c:if test="${sessionScope.member.membership == 99 || sessionScope.member.userName == '관리자'}">
 			    		<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin">관리자페이지</a></li>
 			    	</c:if>
-			    	<li><a class="dropdown-item" href="#">로그아웃</a></li>
+			    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 			  	</ul>
 			</div>
 		</c:if>
