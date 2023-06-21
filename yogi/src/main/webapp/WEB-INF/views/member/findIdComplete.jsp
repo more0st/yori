@@ -28,17 +28,15 @@
 	margin-bottom: 7px;
 }
 
-.login-input > .name {
-  border-bottom: none;
+.complete {
+	margin-left : 70px;
+	width: 80%;
+	height: 100px;
+	font-weight: 800;
+	font-size: 25px;
+	color: #fa0050;
 }
 
-.login-input > input {
-	width: 80%;
-	height: 55px;
-	outline: none;
-	border: 1px solid #d9d9d9;
-	padding: 10px 10px 10px 15px;
-}
 
 .login-find {
 	height: 50px;
@@ -84,45 +82,17 @@
 
 </style>
 
-<script type="text/javascript">
-function sendOk() {
-	const f = document.idForm;
-
-	let str = f.userName.value.trim();
-	if(!str) {
-		alert("이름을 입력하세요. ");
-		f.userName.focus();
-		return;
-	}
-	
-	str = f.email.value.trim();
-	if(!str) {
-		alert("이메일 입력하세요. ");
-		f.email.focus();
-		return;
-	}
-
-	f.action = "${pageContext.request.contextPath}/member/findId";
-	f.submit();
-}
-</script>
-
 <div class="whole-container">
-	<form action="" method="post" name="idForm">
+	<form action="" method="post" name="loginForm">
 		<div class="login-form">
 			<div class="login-ment">
-				<img src="${pageContext.request.contextPath}/resources/picture/logo.png">아이디찾기
+				<img src="${pageContext.request.contextPath}/resources/picture/logo.png">
 			</div>
-			<div class="login-input">
-				<input class="login-input name" type="text" name="userName" placeholder="이름 입력(필수)">
-				<input class="login-input email" type="text" name="email" placeholder="이메일 주소 입력(필수)"><br>
-			</div>
-			<button class="login-btn" type="button" onclick="sendOk();">확인</button>
+			<div class="complete">
+				<span>아이디가 메일로 발송되었습니다.</span>
 			
-			<div class="d-grid">
-					<p class="form-control-plaintext text-center py-3">${message}</p>
-            </div>
+			</div>
+			<button class="login-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/home/home'">확인</button>
 		</div>
 	</form>
-
 </div>

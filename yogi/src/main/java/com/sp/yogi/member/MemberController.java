@@ -233,6 +233,65 @@ public class MemberController {
 		return model;
 	}
 	
+	// 아이디 찾기
+	@RequestMapping(value="findId", method=RequestMethod.GET)
+	public String idFindForm(HttpSession session) throws Exception {
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		if(info != null) {
+			return "redirect:/";
+		}
+		
+		return ".member.findId";
+	}
+	
+	@RequestMapping(value = "findId", method = RequestMethod.POST)
+	public String idFindSubmit(@RequestParam String userName,
+			@RequestParam String email,
+			RedirectAttributes reAttr,
+			Model model) throws Exception {
+		
+				
+		Member dto = service.readMemberEmail(email);
+		
+		if(dto == null || dto.getEmail() == null || dto.getEnabled() == 0) {
+			model.addAttribute("message", "등록된 아이디가 아닙니다.");
+			return ".member.findId";
+		}
+		
+		if(! dto.getEmail().matches(email)) {
+			model.addAttribute("message", "등록된 정보가 다릅니다.");
+			return ".member.findId";
+		}
+	
+		
+		try {
+			service.sendIdInfo(dto);
+		} catch (Exception e) {
+			model.addAttribute("message", "이메일 전송이 실패했습니다.");
+			return ".member.findId";
+		}
+		
+		StringBuilder sb=new StringBuilder();
+		sb.append("회원님의 이메일로 아이디를 전송했습니다.<br>");
+		
+		reAttr.addFlashAttribute("title", "아이디 찾기");
+		reAttr.addFlashAttribute("message", sb.toString());
+		
+		return "redirect:/member/findIdComplete";
+	}
+	
+	@RequestMapping(value = "findIdComplete")
+	public String findIdComplete(@ModelAttribute("message") String message) throws Exception {
+
+		// 컴플릿 페이지(complete.jsp)의 출력되는 message와 title는 RedirectAttributes 값이다.
+		// F5를 눌러 새로 고침을 하면 null이 된다.
+		
+		if (message == null || message.length() == 0) // F5를 누른 경우
+			return "redirect:/";
+		
+		return ".member.findIdComplete";
+	}
+	
 	// 패스워드 찾기
 	@RequestMapping(value="findPwd", method=RequestMethod.GET)
 	public String pwdFindForm(HttpSession session) throws Exception {
@@ -246,6 +305,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "findPwd", method = RequestMethod.POST)
 	public String pwdFindSubmit(@RequestParam String userId,
+			@RequestParam String email,
 			RedirectAttributes reAttr,
 			Model model) throws Exception {
 		
@@ -254,6 +314,11 @@ public class MemberController {
 			model.addAttribute("message", "등록된 아이디가 아닙니다.");
 			return ".member.findPwd";
 		}
+		if(! dto.getEmail().matches(email)) {
+			model.addAttribute("message", "등록된 정보가 다릅니다.");
+			return ".member.findPwd";
+		}
+	
 		
 		try {
 			service.generatePwd(dto);
@@ -272,7 +337,17 @@ public class MemberController {
 		return "redirect:/member/findPwdComplete";
 	}
 	
-	
+	@RequestMapping(value = "findPwdComplete")
+	public String findPwdComplete(@ModelAttribute("message") String message) throws Exception {
+
+		// 컴플릿 페이지(complete.jsp)의 출력되는 message와 title는 RedirectAttributes 값이다.
+		// F5를 눌러 새로 고침을 하면 null이 된다.
+		
+		if (message == null || message.length() == 0) // F5를 누른 경우
+			return "redirect:/";
+		
+		return ".member.findPwdComplete";
+	}
 
 
 	@GetMapping("choice")
@@ -281,11 +356,6 @@ public class MemberController {
 		return ".member.memberchoice";
 	}
 
-	@GetMapping("findId")
-	public String findId() {
-
-		return ".member.findId";
-	}
 
 
 }
