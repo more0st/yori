@@ -20,6 +20,39 @@
 }
 </style>
 
+<script type="text/javascript">
+function sendOk() {
+    const f = document.faqForm;
+	let str;
+	
+    str = f.subject.value.trim();
+    if(!str) {
+        alert("제목을 입력하세요. ");
+        f.subject.focus();
+        return;
+    }
+    str = f.content.value.trim();
+    if(!str) {
+        alert("내용을 입력하세요. ");
+        f.content.focus();
+        return;
+    }
+    
+    let mode = "${mode}";
+    if( (mode === "write") && (!f.selectFile.value) ) {
+        alert("이미지 파일을 추가 하세요. ");
+        f.selectFile.focus();
+        return;
+    }
+    
+    
+    f.action = "${pageContext.request.contextPath}/faq/write";
+    f.submit();
+}
+
+    
+</script>
+
 
 <div class="whole-container">
 	<div class="container"
@@ -32,7 +65,7 @@
 
 			<div class="body-main">
 
-				<form name="myForm" method="post">
+				<form  name="faqForm" method="post" enctype="multipart/form-data">
 					<table class="table mt-5 write-form"
 						style="border-top: 2px solid gray;">
 						<tr>
@@ -52,8 +85,7 @@
 
 						<tr>
 							<td class="table-light col-sm-2" scope="row">제 목</td>
-							<td><input type="text" name="subject" class="form-control"
-								value="${dto.subject}"></td>
+							<td><input type="text" name="subject"  class="form-control"	value="${dto.subject}"></td>
 						</tr>
 
 						<tr>

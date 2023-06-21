@@ -55,24 +55,14 @@
 						<tr>
 							<td>${dto.category}</td>
 							<td class="left">
-								<a href="${articleUrl}&num=${dto.num}">${dto.subject}</a>
+								<a href="${articleUrl}&num=${dto.qnum}">${dto.subject}</a>
 							</td>
-							<td>${dto.userName}</td>
+							<td>${sessionScope.member.userName}</td>
 							<td>${dto.reg_date}</td>
-							<td>${(empty dto.answer_date)?"답변대기":"답변완료"}</td>
+							<td>${(empty dto.answer)?"답변대기":"답변완료"}</td>
 						</tr>
 					</c:forEach>
 					
-						<!-- 게시글 test -->
-						<tr>
-							<td>카테고리</td>
-							<td class="left">
-								<a href="${pageContext.request.contextPath}/faq/article" style="text-decoration: none; color: black;">문의글 test</a>
-							</td>
-							<td>김자바</td>
-							<td>2023-06-13</td>
-							<td>${(empty dto.answer_date)?"답변대기":"답변완료"}</td>
-						</tr>
 						
 				</tbody>
 			</table>
