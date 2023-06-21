@@ -115,7 +115,6 @@ public class OwnerController {
 			return ".owner.home";
 		}
 		info.setRestaurantName(owner.getRestaurantName());
-		System.out.println(owner.getRestaurantName() + " : 검색결과");
 
 		session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
 		
@@ -211,7 +210,7 @@ public class OwnerController {
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String updateSubmit(Owner dto, final RedirectAttributes reAttr, Model model) {
+	public String updateSubmit(Owner dto, final RedirectAttributes reAttr, Model model, HttpSession session) {
 
 		try {
 			service.updateOwner(dto);
@@ -224,7 +223,31 @@ public class OwnerController {
 
 		reAttr.addFlashAttribute("title", "회원 정보 수정");
 		reAttr.addFlashAttribute("message", sb.toString());
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		session.removeAttribute("member");
+		
+		Owner owner = service.readOwner(dto.getUserId());
+		info.setRestaurantNum(dto.getRestaurantNum());
+		info.setUserId(dto.getUserId());
+		info.setUserName(dto.getUserName());
+		
+		Owner owner2 = new Owner();
+		owner2 = service.readRestaurant(dto.getUserId());
+		
+		if(owner2 == null) {
+			session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
+			
+			session.setAttribute("member", info);
+			
+			return ".owner.home";
+		}
+		info.setRestaurantName(owner2.getRestaurantName());
 
+		session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
+		
+		session.setAttribute("member", info);
+		
 		return "redirect:/owner/complete";
 	}
 
