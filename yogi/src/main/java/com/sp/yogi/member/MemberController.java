@@ -251,13 +251,13 @@ public class MemberController {
 	@RequestMapping(value = "emailCheck", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> emailCheck(@RequestParam String email) throws Exception {
-		
+
 		String p = "true";
 		Member dto = service.readMemberEmail(email);
 		if (dto != null) {
 			p = "false";
 		}
-		
+
 		Map<String, Object> model = new HashMap<>();
 		model.put("passed", p);
 		return model;
@@ -288,7 +288,7 @@ public class MemberController {
 			return ".member.findId";
 		}
 		
-		if(! dto.getEmail().matches(email)) {
+		if(! dto.getEmail().matches(email) || ! dto.getUserName().matches(userName)) {
 			model.addAttribute("message", "등록된 정보가 다릅니다.");
 			return ".member.findId";
 		}
