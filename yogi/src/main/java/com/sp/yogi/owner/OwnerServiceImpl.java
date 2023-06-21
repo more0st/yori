@@ -52,9 +52,6 @@ public class OwnerServiceImpl implements OwnerService {
 			// 회원정보 저장
 			dao.insertData("owner.insertOwner", dto);
 
-			// dao.insertData("owner.insertOwner1", dto);
-			// dao.insertData("owner.insertOwner2", dto);
-			// dao.updateData("owner.insertOwner12", dto); // owner1, owner2 테이블 동시에
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -149,8 +146,7 @@ public class OwnerServiceImpl implements OwnerService {
 				dto.setTel(dto.getTel1() + "-" + dto.getTel2() + "-" + dto.getTel3());
 			}
 
-			dao.updateData("owner.updateOwner1", dto);
-			dao.updateData("owner.updateOwner2", dto);
+			dao.updateData("owner.updateOwner", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

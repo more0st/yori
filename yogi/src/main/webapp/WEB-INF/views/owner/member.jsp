@@ -59,7 +59,7 @@
 							</div>
 							<div class="col-3 ps-1">
 								
-									<button type="button" class="btn btn-light" onclick="userIdCheck();">아이디중복검사</button>
+									<button type="button" class="btn btn-light" onclick="userIdCheck();" ${mode=="update" ? "disabled='disabled' ":""}>아이디중복검사</button>
 								
 							</div>
 						</div>
@@ -81,7 +81,6 @@
 			        <label class="col-sm-2 col-form-label" for="userName">이름</label>
 			        <div class="col-sm-7">
 			            <input type="text" name="userName" id="userName" class="form-control" value="${dto.userName}" 
-			            		${mode=="update" ? "readonly='readonly' ":""}
 			            		placeholder="이름">
 			        </div>
 			    </div>
@@ -147,7 +146,7 @@
 			     
 			    <div class="row mb-3">
 			        <div class="text-center">
-			            <button type="button" name="sendButton" class="btn btn-danger" onclick="memberOk();"> 회원가입 <i class="bi bi-check2"></i></button>
+			            <button type="button" name="sendButton" class="btn btn-danger" onclick="memberOk();"> ${mode=="update" ? "수정하기":"회원가입"} <i class="bi bi-check2"></i></button>
 			            
 						<input type="hidden" name="userIdValid" id="userIdValid" value="false">
 			        </div>

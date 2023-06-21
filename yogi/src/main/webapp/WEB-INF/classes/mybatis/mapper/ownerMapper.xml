@@ -25,8 +25,16 @@
    
    <!-- 아이디 있는지 체크 -->
 	<select id="readOwner" parameterType="String" resultType="com.sp.yogi.owner.Owner">
-		SELECT userId, userPwd FROM restaurantId WHERE userId=#{userId}
+		SELECT restaurantNum, userId, userPwd, userName, enabled, reg_date, modify_date, last_login, failure_cnt, status, reject_cnt, email, tel  
+		FROM restaurantId WHERE userId=#{userId}
 	</select>   
+	
+	<!-- 사장님 정보 수정 -->
+	<update id="updateOwner" parameterType="com.sp.yogi.owner.Owner">
+		UPDATE restaurantId SET userPwd=#{userPwd},userName=#{userName},email=#{email}, 
+		tel=#{tel}, modify_date=SYSDATE WHERE userId=#{userId}
+	</update>
+	
 	
 	<!-- 가게 정보 -->
 	<select id="readRestaurant" parameterType="String" resultType="com.sp.yogi.owner.Owner">
