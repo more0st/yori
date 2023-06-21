@@ -178,7 +178,12 @@
 						</c:if>
 			  		</div>
 		  		</div>
-				<button type="button" class="search-btn" onclick="location.href='${pageContext.request.contextPath}/mypage/addrList';"><i class="bi bi-plus-lg"></i></button>		 
+		  		<c:if test="${empty sessionScope.member}">
+					<button type="button" class="search-btn" disabled="disabled" onclick="location.href='${pageContext.request.contextPath}/mypage/addrList';"><i class="bi bi-plus-lg"></i></button>		 
+		  		</c:if>
+		  		<c:if test="${not empty sessionScope.member}">
+					<button type="button" class="search-btn" onclick="location.href='${pageContext.request.contextPath}/mypage/addrList';"><i class="bi bi-plus-lg"></i></button>		 
+		  		</c:if>
 			</div>
 		</div>
 	</div>
