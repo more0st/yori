@@ -115,42 +115,40 @@ public class OwnerController {
 		
 		int status = service.readStatus(userId);
 		
-		if(owner == null) {
-			session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
-			
-			session.setAttribute("member", info);
-			
-			if(status == 0) {
-				String message = "입점 거절";
-				
-				model.addAttribute("status", 0);
-				model.addAttribute("message", message);
-				
-				return ".owner.info.afterRegister";
-			} else if (status == 1) {
-				
-				String message = "입점 신청 전";
-				
-				model.addAttribute("status", 1);
-				model.addAttribute("message", message);
-				
-				return ".owner.info.afterRegister";
-				
-			} else if (status == 2) {
-
-				String message = "입점 대기";
-				
-				model.addAttribute("status", 2);
-				model.addAttribute("message", message);
-				
-				return ".owner.info.afterRegister";
-				
-			}
-		}
-		info.setRestaurantName(owner.getRestaurantName());
-
 		session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
 		
+		if(status == 0) {
+			String message = "입점 거절";
+			
+			model.addAttribute("status", 0);
+			model.addAttribute("message", message);
+			session.setAttribute("member", info);
+			
+			return ".owner.info.afterRegister";
+		} else if (status == 1) {
+			
+			String message = "입점 신청 전";
+			
+			model.addAttribute("status", 1);
+			model.addAttribute("message", message);
+			session.setAttribute("member", info);
+			
+			return ".owner.info.afterRegister";
+			
+		} else if (status == 2) {
+
+			String message = "입점 대기";
+			
+			model.addAttribute("status", 2);
+			model.addAttribute("message", message);
+			session.setAttribute("member", info);
+			
+			return ".owner.info.afterRegister";
+			
+		}
+		
+		info.setRestaurantName(owner.getRestaurantName());
+
 		session.setAttribute("member", info);
 		
 		// 로그인 이전 URI로 이동
