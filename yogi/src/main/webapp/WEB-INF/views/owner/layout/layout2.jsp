@@ -49,10 +49,16 @@
 </head>
 
 <style type="text/css">
-	body {
-		background: #fafafa;
-	}
-	
+body {
+	background: #fafafa;
+}
+
+@font-face {
+    font-family: 'Jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 	
 </style>
 
