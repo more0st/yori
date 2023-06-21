@@ -27,7 +27,13 @@ public class OwnerController {
 	private OwnerService service;
 	
 	@GetMapping("home")
-	public String home() {
+	public String home(HttpSession session) {
+		
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		if(info == null) {
+			return ".owner.login";
+		}
 		
 		return ".ownerLayout";
 	}
@@ -115,14 +121,30 @@ public class OwnerController {
 			session.setAttribute("member", info);
 			
 			if(status == 0) {
+				String message = "입점 거절";
+				
 				model.addAttribute("status", 0);
+				model.addAttribute("message", message);
+				
 				return ".owner.info.afterRegister";
 			} else if (status == 1) {
+				
+				String message = "입점 신청 전";
+				
 				model.addAttribute("status", 1);
+				model.addAttribute("message", message);
+				
 				return ".owner.info.afterRegister";
+				
 			} else if (status == 2) {
+
+				String message = "입점 대기";
+				
 				model.addAttribute("status", 2);
+				model.addAttribute("message", message);
+				
 				return ".owner.info.afterRegister";
+				
 			}
 		}
 		info.setRestaurantName(owner.getRestaurantName());
