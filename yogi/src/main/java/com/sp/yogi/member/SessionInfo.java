@@ -8,8 +8,15 @@ public class SessionInfo {
 	private int membership;
 	private String addr1;
 	private long restaurantNum;
+	private String restaurantName;
 
 	
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
+	}
 	public long getRestaurantNum() {
 		return restaurantNum;
 	}

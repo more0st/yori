@@ -103,11 +103,14 @@ public class OwnerController {
 		info.setRestaurantNum(dto.getRestaurantNum());
 		info.setUserId(dto.getUserId());
 		info.setUserName(dto.getUserName());
+		info.setRestaurantName(dto.getRestaurantName());
+		
+		System.out.println(dto.getUserName() + dto.getRestaurantName() + " 검색결과");
 
 		session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
-
+		
 		session.setAttribute("member", info);
-
+		
 		// 로그인 이전 URI로 이동
 		/*
 		String uri = (String) session.getAttribute("preLoginURI");
@@ -131,7 +134,7 @@ public class OwnerController {
 		// 세션에 저장된 모든 정보 지우고, 세션초기화
 		session.invalidate();
 
-		return ".home.home";
+		return ".owner.login";
 	}
 
 	@RequestMapping(value = "check", method = RequestMethod.GET)

@@ -6,6 +6,7 @@ package com.sp.yogi.owner;
  */
 public class Owner {
 	private long restaurantNum;
+	private String restaurantName;
 	private String userId;
 	private String userPwd;
 	private String userName;
@@ -28,7 +29,12 @@ public class Owner {
 	private int reject_cnt;
 	private int status;
 
-	
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
+	}
 	public long getRestaurantNum() {
 		return restaurantNum;
 	}

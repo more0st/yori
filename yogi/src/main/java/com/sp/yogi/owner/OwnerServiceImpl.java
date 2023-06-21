@@ -24,6 +24,10 @@ public class OwnerServiceImpl implements OwnerService {
 
 		try {
 			dto = dao.selectOne("owner.loginOwner", userId);
+			
+			if(dto != null) {
+				dao.updateData("owner.updateLastLogin", userId);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

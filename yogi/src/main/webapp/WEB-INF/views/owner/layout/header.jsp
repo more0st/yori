@@ -47,13 +47,13 @@ header .login-button {
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
-    <c:if test="${not empty sessionScope.owner}">
+    <c:if test="${not empty sessionScope.member}">
       <ul class="d-flex align-items-center">
 
         
         
         <li class="nav-item dropdown pe-3">
-            <span class="d-none d-md-block">${sessionScope.owner.userName} 사장님(${sessionScope.owner.restaurantName})</span>
+            <span class="d-none d-md-block">${sessionScope.member.userName} 사장님(${sessionScope.member.restaurantName})</span>
       
         
         </li><!-- End Profile Nav -->
@@ -114,7 +114,7 @@ header .login-button {
 
       </ul>
 	</c:if>
-	<c:if test="${empty sessionScope.owner}">
+	<c:if test="${empty sessionScope.member}">
 		<div class="login-button">
 			<div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/login'">로그인</div><span>&nbsp;|&nbsp;</span>
 			<div class="login-div" onclick="location.href='${pageContext.request.contextPath}/member/choice'">회원가입</div>
@@ -220,7 +220,7 @@ header .login-button {
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
+        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/owner/logout">
           <i class="bi bi-box-arrow-right"></i>
           <span>Log Out</span>
         </a>

@@ -3,8 +3,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="owner">
 	<select id="loginOwner" parameterType="String" resultType="com.sp.yogi.owner.Owner">
-		SELECT restaurantNum, userId, userName, userPwd, reg_date, modify_date, last_login
-		FROM restaurantId 
+		SELECT ri.restaurantNum, ri.userId, ri.userName, ri.userPwd, ri.reg_date, ri.modify_date, ri.last_login, restaurantName
+		FROM restaurantId ri
+        JOIN restaurant r ON ri.restaurantNum = r.restaurantNum
 		WHERE userId = #{userId} AND enabled != 0
 	</select>
 	
@@ -25,7 +26,11 @@
    
    <!-- 아이디 있는지 체크 -->
 	<select id="readOwner" parameterType="String" resultType="com.sp.yogi.owner.Owner">
-		SELECT userId FROM restaurantId WHERE userId=#{userId}
+		SELECT ri.restaurantNum, ri.userName, email, tel, r.businessNum, r.restaurantName, r.restaurantAddr1, r.restaurantAddr2, r.restaurantTel, r.reg_date, rc.categoryName
+		FROM restaurantId ri
+		JOIN restaurant r ON ri.restaurantNum = r.restaurantNum
+		JOIN res_category rc ON rc.categoryNum = r.categoryNum
+		WHERE userId = #{userId}
 	</select>   
 	
    
