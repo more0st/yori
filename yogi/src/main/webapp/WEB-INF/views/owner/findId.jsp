@@ -84,17 +84,45 @@
 
 </style>
 
+<script type="text/javascript">
+function sendOk() {
+	const f = document.idForm;
+
+	let str = f.userName.value.trim();
+	if(!str) {
+		alert("이름을 입력하세요. ");
+		f.userName.focus();
+		return;
+	}
+	
+	str = f.email.value.trim();
+	if(!str) {
+		alert("이메일 입력하세요. ");
+		f.email.focus();
+		return;
+	}
+
+	f.action = "${pageContext.request.contextPath}/owner/findId";
+	f.submit();
+}
+</script>
+
 <div class="whole-container">
-	<form action="" method="post" name="loginForm">
+	<form action="" method="post" name="idForm">
 		<div class="login-form">
 			<div class="login-ment">
 				<img src="${pageContext.request.contextPath}/resources/picture/logo.png">아이디찾기
 			</div>
 			<div class="login-input">
-				<input class="login-input name" type="text" name="name" placeholder="이름 입력(필수)">
+				<input class="login-input name" type="text" name="userName" placeholder="이름 입력(필수)">
 				<input class="login-input email" type="text" name="email" placeholder="이메일 주소 입력(필수)"><br>
 			</div>
-			<button class="login-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/owner/complete'">확인</button>
+			<button class="login-btn" type="button" onclick="sendOk();">확인</button>
+			
+			<div class="d-grid">
+					<p class="form-control-plaintext text-center py-3">${message}</p>
+            </div>
+			
 		</div>
 	</form>
 

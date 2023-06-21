@@ -114,6 +114,35 @@ public class OwnerServiceImpl implements OwnerService {
 
 		return dto;
 	}
+	
+	@Override
+	public Owner readOwnerEmail(String email) {
+		Owner dto = null;
+
+		try {
+			dto = dao.selectOne("owner.readOwner2", email);
+
+			if (dto != null) {
+				if (dto.getEmail() != null) {
+					String[] s = dto.getEmail().split("@");
+					dto.setEmail1(s[0]);
+					dto.setEmail2(s[1]);
+				}
+
+				if (dto.getTel() != null) {
+					String[] s = dto.getTel().split("-");
+					dto.setTel1(s[0]);
+					dto.setTel2(s[1]);
+					dto.setTel3(s[2]);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dto;
+	}
 
 	@Override
 	public void updateOwnership(Map<String, Object> map) throws Exception {
@@ -231,4 +260,37 @@ public class OwnerServiceImpl implements OwnerService {
 
 		return dto;
 	}
+	
+	
+	
+	
+	
+	@Override
+	public void sendIdInfo(Owner dto) throws Exception {
+
+		String result;
+		result = dto.getUserName() + "님의 아이디는 <b>"
+				+ dto.getUserId()
+				+ "</b> 입니다.<br>";
+
+		Mail mail = new Mail();
+		mail.setReceiverEmail(dto.getEmail());
+
+		mail.setSenderEmail("yoriad0514@gmail.com");
+		mail.setSenderName("관리자");
+		mail.setSubject("등록한 아이디 안내");
+		mail.setContent(result);
+
+		boolean b = mailSender.mailSend(mail);
+
+		if (b) {
+		} else {
+			throw new Exception("이메일 전송중 오류가 발생했습니다.");
+		}
+		
+	}
+	
+	
+	
+	
 }

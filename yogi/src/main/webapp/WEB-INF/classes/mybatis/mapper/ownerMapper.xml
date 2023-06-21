@@ -29,6 +29,13 @@
 		FROM restaurantId WHERE userId=#{userId}
 	</select>   
 	
+	<select id="readMember2" parameterType="String" resultType="com.sp.yogi.member.Member">
+		SELECT restaurantNum, userId, userName, userPwd, enabled, reg_date, modify_date, last_login,
+			email, tel
+		FROM restaurantId
+		WHERE email = #{email}
+	</select>
+	
 	<!-- 사장님 정보 수정 -->
 	<update id="updateOwner" parameterType="com.sp.yogi.owner.Owner">
 		UPDATE restaurantId SET userPwd=#{userPwd},userName=#{userName},email=#{email}, 
