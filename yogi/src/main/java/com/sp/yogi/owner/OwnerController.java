@@ -107,12 +107,23 @@ public class OwnerController {
 		Owner owner = new Owner();
 		owner = service.readRestaurant(userId);
 		
+		int status = service.readStatus(userId);
+		
 		if(owner == null) {
 			session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
 			
 			session.setAttribute("member", info);
 			
-			return ".owner.home";
+			if(status == 0) {
+				model.addAttribute("status", 0);
+				return ".owner.info.afterRegister";
+			} else if (status == 1) {
+				model.addAttribute("status", 1);
+				return ".owner.info.afterRegister";
+			} else if (status == 2) {
+				model.addAttribute("status", 2);
+				return ".owner.info.afterRegister";
+			}
 		}
 		info.setRestaurantName(owner.getRestaurantName());
 

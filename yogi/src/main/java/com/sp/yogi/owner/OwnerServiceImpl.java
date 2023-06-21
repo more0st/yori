@@ -289,6 +289,20 @@ public class OwnerServiceImpl implements OwnerService {
 		}
 		
 	}
+
+	@Override
+	public int readStatus(String userId) {
+		
+		int status = 0;
+		
+		try {
+			status = dao.selectOne("owner.readStatus", userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return status;
+	}
 	
 	
 	

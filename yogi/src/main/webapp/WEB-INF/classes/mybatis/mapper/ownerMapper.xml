@@ -63,6 +63,11 @@
 		DELETE FROM restaurantNum WHERE userId=#{userId}
     </delete>
     
+    <!-- owner status 확인 -->
+    <select id="readStatus" parameterType="String" resultType="Integer">
+    	SELECT status FROM restaurantid WHERE userId = #{userId}
+    </select>
+    
 
 	
 </mapper>

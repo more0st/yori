@@ -23,5 +23,7 @@ public interface OwnerService {
 	public void generatePwd(Owner dto) throws Exception;
 	
 	public void sendIdInfo(Owner dto) throws Exception;
+	
+	public int readStatus(String userId);
 
 }

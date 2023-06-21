@@ -79,12 +79,12 @@
 				입점 재신청</button>
 	</div>
 </c:if>		
+
 <c:if test="${status == 1}">	
 <div class="notify-paragraph">
 	입점 신청 요청이 <br>
 	<div class="messagediv"><div class="message">${message}</div> &nbsp;상태 입니다.</div>
 	
-	<!-- 승인 거절 시 사유 보임 -->
 	<br><br>
 	
 </div>
@@ -95,13 +95,13 @@
 				입점 신청</button>
 	</div>
 </c:if>	
+
 <c:if test="${status == 2}">	
 <div class="notify-paragraph">
 	입점 신청 요청이 <br>
 	<div class="messagediv"><div class="message">${message}</div> &nbsp;상태 입니다.</div>
-	
-	<!-- 승인 거절 시 사유 보임 -->
 	<br><br>
+	<button type="button" onclick="location.href='https://tetris.com/play-tetris'">테트리스 하면서 기다리기</button>
 	
 </div>
 </c:if>	

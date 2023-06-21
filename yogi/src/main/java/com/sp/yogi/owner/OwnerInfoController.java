@@ -59,7 +59,7 @@ public class OwnerInfoController {
 		// 리다이렉트된 페이지에 값 넘기기
 		// reAttr.addFlashAttribute("message", sb.toString());
 		reAttr.addFlashAttribute("message", "승인 대기중");
-		reAttr.addFlashAttribute("status", "2");
+		reAttr.addFlashAttribute("status", 2);
 				
 		return "redirect:/owner/info/afterRegister";
 	}
