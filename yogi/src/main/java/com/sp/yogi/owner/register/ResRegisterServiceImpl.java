@@ -7,7 +7,7 @@ import com.sp.yogi.common.dao.CommonDAO;
 
 
 // 입점문의 - 입점 정보 등록
-@Service("resRegister.resRegisterService")
+@Service("owner.register.resRegisterService")
 public class ResRegisterServiceImpl implements ResRegisterService{
 	@Autowired
 	private CommonDAO dao;
