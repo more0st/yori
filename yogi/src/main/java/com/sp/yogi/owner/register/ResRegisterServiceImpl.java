@@ -24,10 +24,23 @@ public class ResRegisterServiceImpl implements ResRegisterService{
 				dto.setRestaurantTel(dto.getRestaurantTel1() + "-" + dto.getRestaurantTel2() + "-" + dto.getRestaurantTel3());
 			}
 			
-			// 사장님 로그인 할 경우 체크.
-			
 			// 입점 문의정보 저장
 			dao.insertData("register.insertResRegister", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	/**
+	 * [ 입점문의 신청 후 > 업제 입점상태 : 입점대기(2) ]
+	 */
+	@Override
+	public void updateStatus(String userId) throws Exception {
+		try {
+			// 입점 문의정보 저장
+			dao.updateData("register.updateStatus", userId);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

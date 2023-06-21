@@ -10,4 +10,8 @@ public interface ResRegisterService {
 	public void insertResRegister(ResRegister resRegister) throws Exception;
 	
 	
+	/**
+	 * [ 입점문의 신청 후 > 업제 입점상태 : 입점대기(2) ]
+	 */
+	public void updateStatus(String userId) throws Exception;
 }

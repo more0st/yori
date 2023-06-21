@@ -5,7 +5,11 @@
 
 	<insert id="insertResRegister" parameterType="com.sp.yogi.owner.register.ResRegister">
 		INSERT INTO restaurant(restaurantNum, businessNum, restaurantName, restaurantAddr1, restaurantAddr2, restaurantTel, categoryNum)
-		VALUES (2, #{businessNum}, #{restaurantName}, #{restaurantAddr1},#{restaurantAddr2}, #{restaurantTel}, #{categoryNum}) 
+		VALUES (#{restaurantNum}, #{businessNum}, #{restaurantName}, #{restaurantAddr1},#{restaurantAddr2}, #{restaurantTel}, #{categoryNum}) 
     </insert>
+    
+    <update id="updateStatus" parameterType="String">
+    	update restaurantId set status = 2 where userId=#{userId}
+    </update>
 
 </mapper>

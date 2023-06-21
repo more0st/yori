@@ -1,5 +1,7 @@
 package com.sp.yogi.owner;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -7,8 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sp.yogi.member.SessionInfo;
 import com.sp.yogi.owner.register.ResRegister;
 import com.sp.yogi.owner.register.ResRegisterService;
 
@@ -17,6 +21,9 @@ import com.sp.yogi.owner.register.ResRegisterService;
 public class OwnerInfoController {
 	@Autowired
 	private ResRegisterService service;
+	
+	@Autowired
+	private OwnerService service2;
 	
 	@RequestMapping(value = "check", method = RequestMethod.GET)
 	public String check() {
@@ -39,10 +46,22 @@ public class OwnerInfoController {
 	
 	// 입점 업체 등록
 	@RequestMapping(value = "register", method = RequestMethod.POST)
-	public String registerSubmit(ResRegister dto, final RedirectAttributes reAttr, Model model) {
+	public String registerSubmit(ResRegister dto, final RedirectAttributes reAttr, Model model, HttpSession session) {
 		
 		try {
+			// 세션에 로그인 정보 저장
+			SessionInfo info = (SessionInfo) session.getAttribute("member");
+			
+			Owner owner = service2.readOwner(info.getUserId());
+			dto.setRestaurantNum(owner.getRestaurantNum());
+			
 			service.insertResRegister(dto);
+			
+			// 업체 입점 상태 : 입점대기(2)로 변경
+			service.updateStatus(info.getUserId());
+			
+			//int status = service2.readStatus(info.getUserId());
+			// reAttr.addFlashAttribute("status", status);
 		} catch (DuplicateKeyException e) {
 			model.addAttribute("mode", "member");
 			model.addAttribute("message", "이미 존재하는 업체 번호입니다.");
@@ -53,11 +72,7 @@ public class OwnerInfoController {
 			return ".owner.login";
 		}
 		
-		// StringBuilder sb = new StringBuilder();
-		// sb.append(dto.getRestaurantName() + " 매장의 입점 신청이 정상적으로 처리되었습니다.<br>");
-		
 		// 리다이렉트된 페이지에 값 넘기기
-		// reAttr.addFlashAttribute("message", sb.toString());
 		reAttr.addFlashAttribute("message", "승인 대기중");
 		reAttr.addFlashAttribute("status", 2);
 				
