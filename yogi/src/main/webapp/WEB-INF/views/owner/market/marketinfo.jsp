@@ -227,6 +227,57 @@
 	border: 1px solid #d9d9d9;
 }
 
+.info-picture {
+	margin-bottom: 20px;
+}
+
+.info-picture-img {
+	width: 30%;
+	border: 1px solid #d9d9d9;
+	min-height: 200px;
+	border-radius: 10px;
+	padding: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.res-img {
+	width: 170px;
+	height: 170px;
+	border: 1px solid #d9d9d9;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+}
+
+.info-picture-btn {
+	font-color: #333;
+	border: 1px solid #d9d9d9;
+	width: 100%;
+	height: 170px;
+	border-radius: 10px;
+	background: #f6f9ff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.fileModal {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+.fileInput {
+	border: 1px solid #d9d9d9;
+	width: 100%;
+}
+
+.info-picture-detail {
+	padding-top: 10px;
+	gap: 10px;
+}
+
 </style>
 
 <main id="main" class="main">
@@ -235,6 +286,18 @@
 	<div class="info-container">
 		<div class="list-title" style="margin-bottom: 20px; width: 220px;">
 			가게정보
+		</div>
+		<div class="info-picture">
+			<div class="info-picture-img">
+				<div class="list-title">
+					가게 사진
+				</div>
+				<div class="flex-center info-picture-detail">
+					<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
+					<div class="info-picture-btn" id="submenu-modal5">가게 로고<br>사진 추가</div>
+					<!-- c:if로 추가/변경 바꿔주기 -->
+				</div>
+			</div>
 		</div>
 		<div class="info-container-top">
 			<div class="info-detail">
@@ -474,6 +537,27 @@
 	</div>
 </div>
 
+<!-- 사진 추가 모달 -->
+<div class="modal" id="menu-modal5" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+	   		<div class="modal-header">
+	    		<h5 class="modal-title">가게 사진</h5>
+	    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	   		</div>
+	    	<div class="modal-body">
+	    		<div class="fileModal">
+	    			<input type="file" class="fileInput form-control">
+	    		</div>
+	    	</div>
+	  		<div class="modal-footer">
+	    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
+	    		<button type="button" class="modal-button toOrder">등록하기</button>
+	  		</div>
+		</div>
+	</div>
+</div>
+
 
 </div>
 </main>
@@ -503,6 +587,12 @@ document.getElementById("submenu-modal3").addEventListener("click", function() {
 document.getElementById("submenu-modal4").addEventListener("click", function() {
 // 모달 창 띄우기
 	$('#menu-modal4').modal('show');
+});
+
+<%-- 사진 모달 --%>
+document.getElementById("submenu-modal5").addEventListener("click", function() {
+// 모달 창 띄우기
+	$('#menu-modal5').modal('show');
 });
 
 </script>
