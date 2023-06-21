@@ -152,7 +152,7 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 						<tr> 
 							<td>제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
 							<td> 
-								<input type="text" name="noticeSubject" maxlength="100" class="form-control" value="${dto.noticeSubject}">
+								<input type="text" name="subject" maxlength="100" class="form-control" value="${dto.subject}">
 							</td>
 						</tr>
 						
@@ -161,7 +161,7 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 						<tr> 
 							<td valign="top">내&nbsp;&nbsp;&nbsp;&nbsp;용</td>
 							<td> 
-								<textarea name="noticeContent" class="form-control">${dto.noticeContent}</textarea>
+								<textarea name="content" class="form-control">${dto.content}</textarea>
 							</td>
 						</tr>
 						
@@ -190,7 +190,7 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 					<table class="table2">
 						<tr> 
 							<td align="center">
-								<button type="button" class="btn btn-primary" onclick="sendOk();">${mode=="update"?"수정완료":"등록완료"}</button>
+								<button type="button" class="btn btn-primary" onclick="sendOk(this.form);">${mode=="update"?"수정완료":"등록완료"}</button>
 								<button type="reset" class="btn btn-primary">다시입력</button>
 								<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/notice/list';">${mode=="update"?"수정취소":"등록취소"}</button>
 								<c:if test="${mode=='update' }">
@@ -210,30 +210,30 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 
 
 <script type="text/javascript">
-function sendOk() {
-    const f = document.noticeForm;
-	let str;
+function sendOk(elClickedObj) {
+//     const f = document.noticeForm;
+// 	let str;
 	
-    str = f.noticeSubject.value.trim();
-    if(!str) {
-        alert("제목을 입력하세요. ");
-        f.noticeSubject.focus();
-        return;
-    }
+//     str = f.noticeSubject.value.trim();
+//     if(!str) {
+//         alert("제목을 입력하세요. ");
+//         f.noticeSubject.focus();
+//         return;
+//     }
 
-    str = f.noticeContent.value.trim();
-    if(!str) {
-        alert("내용을 입력하세요. ");
-        f.noticeContent.focus();
-        return;
-    }
+//     str = f.noticeContent.value.trim();
+//     if(!str) {
+//         alert("내용을 입력하세요. ");
+//         f.noticeContent.focus();
+//         return;
+//     }
     
-    let mode = "${mode}";
+//     let mode = "${mode}";
     
 
-    //f.action = "${pageContext.request.contextPath}/notice/${mode}_ok.do";
-    f.action = "#";
-    f.submit();
+//     //f.action = "${pageContext.request.contextPath}/notice/${mode}_ok.do";
+//     f.action = "#";
+    elClickedObj.submit();
 }
 
 <c:if test="${mode == 'update'}">

@@ -38,19 +38,7 @@
 								</div>
 							</td>
 						</tr>	
-						<tr>
-						<td colspan="2" style="border-bottom: none;">
-							<div class="row row-cols-6 img-box">
-								<c:forEach var="vo" items="${listFile}">
-									<div class="col p-1">
-										<img src="${pageContext.request.contextPath}/uploads/album/${vo.imageFilename}"
-											class="img-thumbnail w-100 h-100" style="max-height: 130px;"
-											onclick="imageViewer('${pageContext.request.contextPath}/uploads/album/${vo.imageFilename}');">
-									</div>
-								</c:forEach>
-							</div>
-						</td>
-					</tr>
+						
 									
 					
 						<tr>
@@ -58,7 +46,7 @@
 								카테고리 : ${dto.category}
 							</td>
 							<td align="right">
-								작성자 : ${dto.userName}
+								작성자 : ${sessionScope.member.userName}
 							</td>
 						</tr>
 	
@@ -67,15 +55,31 @@
 								문의일자 : ${dto.reg_date}
 							</td>
 							<td align="right">
-								처리결과 : ${(empty dto.answer_date)?"답변대기":"답변완료"}
+								처리결과 : ${(empty dto.answer)?"답변대기":"답변완료"}
 							</td>
 						</tr>
+						
+						<tr>
+						<td colspan="2" style="border-bottom: none;">
+							<div class="row row-cols-6 img-box">
+								<c:forEach var="vo" items="${listFile}">
+									<div class="col p-1">
+										<img src="${pageContext.request.contextPath}/uploads/faq/${vo.imgFileName}"
+											class="img-thumbnail w-100 h-100" style="max-height: 130px;"
+											onclick="imageViewer('${pageContext.request.contextPath}/uploads/faq/${vo.imgFileName}');">
+									</div>
+								</c:forEach>
+							</div>
+						</td>
+					</tr>
 						
 						<tr>
 							<td colspan="2" valign="top" height="200">
 								${dto.content}
 							</td>
 						</tr>
+						
+						
 					</tbody>
 				</table>
 				
@@ -116,7 +120,7 @@
 				<table class="table table-borderless mb-2">
 					<tr>
 						<td width="50%">
-							<button type="button" class="btn btn-light" onclick="deleteInquiry('${dto.num}');">질문삭제</button>
+							<button type="button" class="btn btn-light" onclick="deleteFaq('${dto.qnum}');">질문삭제</button>
 						</td>
 						<td class="text-end">
 							<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/faq/home?${query}';">리스트</button>
@@ -129,3 +133,44 @@
 	</div>
 
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myDialogModal" tabindex="-1" aria-labelledby="myDialogModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myDialogModalLabel">이미지 뷰어</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+        
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+function deleteFaq(num) {
+	if(confirm("문의를 삭제 하시겠습니까 ?")) {
+		let query = "num="+num+"&${query}";
+		let url = "${pageContext.request.contextPath}/faq/delete?"+query;
+		location.href = url;
+	}
+}
+
+
+
+function imageViewer(src) {
+	const $model = $("#myDialogModal .modal-body");
+	let s = "<img src='"+src+"' class='img-thumbnail w-100 h-100'>";
+	$model.html(s);
+	
+	$("#myDialogModal").modal("show");
+}
+</script>
+
+
+
