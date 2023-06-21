@@ -81,7 +81,7 @@
 			        <label class="col-sm-2 col-form-label" for="userName">이름</label>
 			        <div class="col-sm-7">
 			            <input type="text" name="userName" id="userName" class="form-control" value="${dto.userName}" 
-			            		placeholder="이름">
+			            		placeholder="이름" ${mode=="update" ? "readonly='readonly' ":""}>
 			        </div>
 			    </div>
 			 
