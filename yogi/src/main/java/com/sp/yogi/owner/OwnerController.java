@@ -103,14 +103,19 @@ public class OwnerController {
 		info.setRestaurantNum(dto.getRestaurantNum());
 		info.setUserId(dto.getUserId());
 		info.setUserName(dto.getUserName());
-		info.setRestaurantName(dto.getRestaurantName());
 		
-		Owner owner = service.readRestaurant(userId);
-		System.out.println(owner.getRestaurantName() + " : 검색결과");
+		Owner owner = new Owner();
+		owner = service.readRestaurant(userId);
 		
-		if(owner != null) {
-			info.setRestaurantName(owner.getRestaurantName());
+		if(owner == null) {
+			session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
+			
+			session.setAttribute("member", info);
+			
+			return ".owner.home";
 		}
+		info.setRestaurantName(owner.getRestaurantName());
+		System.out.println(owner.getRestaurantName() + " : 검색결과");
 
 		session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
 		

@@ -211,7 +211,8 @@ public class OwnerServiceImpl implements OwnerService {
 		Owner dto = null;
 
 		try {
-			dto = dao.selectOne("owner.readRestaurnat", userId);
+			
+			dto = dao.selectOne("owner.readRestaurant", userId);
 
 			if (dto != null) {
 				if (dto.getEmail() != null) {
