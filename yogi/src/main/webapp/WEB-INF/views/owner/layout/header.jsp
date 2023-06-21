@@ -53,7 +53,15 @@ header .login-button {
         
         
         <li class="nav-item dropdown pe-3">
-            <span class="d-none d-md-block">${sessionScope.member.userName} 사장님(${sessionScope.member.restaurantName})</span>
+            <span class="d-none d-md-block">${sessionScope.member.userName} 사장님(
+            <c:if test="${not empty sessionScope.member.restaurantName}">
+	            ${sessionScope.member.restaurantName}
+            </c:if>
+            <c:if test="${empty sessionScope.member.restaurantName}">
+            	입점 전
+            </c:if>
+            
+            )</span>
       
         
         </li><!-- End Profile Nav -->

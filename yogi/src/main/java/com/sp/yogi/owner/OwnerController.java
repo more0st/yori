@@ -105,7 +105,11 @@ public class OwnerController {
 		info.setUserName(dto.getUserName());
 		info.setRestaurantName(dto.getRestaurantName());
 		
-		System.out.println(dto.getUserName() + dto.getRestaurantName() + " 검색결과");
+		Owner owner = service.readOwner(userId);
+		
+		if(owner != null) {
+			info.setRestaurantName(owner.getRestaurantName());
+		}
 
 		session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
 		
