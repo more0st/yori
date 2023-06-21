@@ -25,7 +25,7 @@
    
    <!-- 아이디 있는지 체크 -->
 	<select id="readOwner" parameterType="String" resultType="com.sp.yogi.owner.Owner">
-		SELECT ri.restaurantNum, ri.userName, email, tel, r.businessNum, r.restaurantName, r.restaurantAddr1, r.restaurantAddr2, r.restaurantTel, r.reg_date, rc.categoryName
+		SELECT ri.restaurantNum, ri.userPwd, ri.userName, email, tel, r.businessNum, r.restaurantName, r.restaurantAddr1, r.restaurantAddr2, r.restaurantTel, r.reg_date, rc.categoryName
 		FROM restaurantId ri
 		JOIN restaurant r ON ri.restaurantNum = r.restaurantNum
 		JOIN res_category rc ON rc.categoryNum = r.categoryNum
