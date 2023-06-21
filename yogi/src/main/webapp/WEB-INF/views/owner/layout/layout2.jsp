@@ -63,10 +63,6 @@
  
 <tiles:insertAttribute name="body" />
 
-<!-- 
-<tiles:insertAttribute name="body" ignore="true"/>
- -->
-
 <tiles:insertAttribute name="footer"/>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

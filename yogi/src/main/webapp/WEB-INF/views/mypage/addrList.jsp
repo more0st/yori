@@ -121,6 +121,9 @@ table tr:first-child td:nth-child(4) {
 					<td class="addrTd">주소 2</td>
 					<td class="addrTd td1">삭제</td>
 				</tr>
+				<c:if test="${empty addr}">
+					<tr><td colspan="5" style="height: 44.8px; text-align: center; vertical-align: center;">등록된 주소지가 없습니다.</td></tr>
+				</c:if>
 				<c:forEach var="addr" items="${addr}" varStatus="status">
 					<tr>
 						<td class="addrTd td1"><c:out value="${status.count}"/></td>
