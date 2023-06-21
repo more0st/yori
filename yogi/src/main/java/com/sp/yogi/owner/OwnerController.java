@@ -105,7 +105,7 @@ public class OwnerController {
 		info.setUserName(dto.getUserName());
 		info.setRestaurantName(dto.getRestaurantName());
 		
-		Owner owner = service.readOwner(userId);
+		Owner owner = service.readRestaurant(userId);
 		
 		if(owner != null) {
 			info.setRestaurantName(owner.getRestaurantName());

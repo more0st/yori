@@ -14,6 +14,8 @@ public interface OwnerService {
 	public Owner readOwner(String userId);
 	public Owner readOwner(long OwnerNum);
 	
+	public Owner readRestaurant(String userId);
+	
 	public void deleteOwner(Map<String, Object> map) throws Exception;
 	
 	public void generatePwd(Owner dto) throws Exception;
