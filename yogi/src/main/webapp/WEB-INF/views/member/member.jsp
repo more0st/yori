@@ -81,20 +81,28 @@
 			 	
 			 	<div class="row mb-3">
 			        <label class="col-sm-2 col-form-label" for="nickName">닉네임</label>
-			        <div class="col-sm-7  nickName-box">
-			            <input type="text" name="nickName" id="nickName" class="form-control" value="${dto.nickName}" 
-			            		
-			            		placeholder="닉네임">
-			        </div>
-			        	<div class="col-3 ps-1">
-							<c:if test="${mode=='member'}">
-								<button type="button" class="btn btn-light" onclick="userNickCheck();">닉네임중복검사</button>
-							</c:if>
+			        <div class="col-sm-10 nickName-box">
+						<div class="row">
+							<div class="col-5 pe-1 ">
+								<input type="text" name="nickName" id="nickName" class="form-control" value="${dto.nickName}" 
+										${mode=="update" ? "readonly='readonly' ":""}
+										placeholder="닉네임">
+							</div>
+							<div class="col-3 ps-1">
+								<c:if test="${mode=='member'}">
+									<button type="button" class="btn btn-light" onclick="userNickCheck();">닉네임중복검사</button>
+								</c:if>
+							</div>
 						</div>
 						<c:if test="${mode=='member'}">
-							<small class="form-control-plaintext help-block"></small>
+							<small class="form-control-plaintext help-block">닉네임은 2~10자 이내이며, 특수문자는 입력할 수 없습니다.</small>
 						</c:if>
+					</div>
+					
+					
+			        
 			    </div>
+			 	
 			 	
 			    <div class="row mb-3">
 			        <label class="col-sm-2 col-form-label" for="userName">이름</label>
@@ -396,6 +404,8 @@ function userIdCheck() {
 function userNickCheck() {
 	let nickName = $("#nickName").val();
 	
+	
+	
 	let url = "${pageContext.request.contextPath}/member/userNickCheck";
 	let query = "nickName=" + nickName;
 	$.ajax({
@@ -419,5 +429,7 @@ function userNickCheck() {
 			}
 		}
 	});
+	
+	$("#nickName").focus();
 }
 </script>
