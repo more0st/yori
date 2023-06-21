@@ -62,6 +62,7 @@
 <tiles:insertAttribute name="header"/>
  
 <tiles:insertAttribute name="body" />
+<!-- ignore="ignore" -->
 
 <tiles:insertAttribute name="footer"/>
 
