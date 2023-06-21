@@ -80,36 +80,36 @@
                         <th scope="row"><a href="#">1</a></th>
                         <td>test123</td>
                         <td>서울시 마포구 서교동 쌍용</td>
-                        <td><a href="${pageContext.request.contextPath}/owner/order/orderDetail" class="text-primary">국밥 1개 외 3건 ...</a></td>
+                        <td>국밥 1개 외 3건 ...</td>
                         <td>55,000원</td>
                         <td>010-1234-2345</td>
                         <td class="overflow-ellipsis">고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요</td>
                         <td>
-							<button type="button" class="btn btn-secondary" disabled>접수대기</button>
+							<button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">접수대기</button>
                         </td>
                       </tr><!-- forEach -->
                       <tr>
                         <th scope="row"><a href="#">2</a></th>
                         <td>test000</td>
                         <td>서울시 구로구 구로동</td>
-                        <td><a href="${pageContext.request.contextPath}/owner/order/orderDetail" class="text-primary">국밥 3개  외 3건 ...</a></td>
+                        <td>국밥 3개  외 3건 ...</td>
                         <td>30,000원</td>
                         <td>010-1234-2345</td>
                         <td class="overflow-ellipsis">국물많이주세요국물많이주세요국물많이주세요국물많이주세요국물많이주세요</td>
                         <td>
-                        	<button type="button" class="btn btn-secondary" disabled>접수대기</button>
+                        	<button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">접수대기</button>
                         </td>
                       </tr>
                       <tr>
                         <th scope="row"><a href="#">3</a></th>
                         <td>id1212</td>
                         <td>서울시 마포구 서교동 쌍용</td>
-                        <td><a href="${pageContext.request.contextPath}/owner/order/orderDetail" class="text-primary">국밥 2개  외 3건 ...</a></td>
+                        <td>국밥 2개  외 3건 ...</td>
                         <td>32,000원</td>
                         <td>010-1234-2345</td>
                         <td id="myElement" class="overflow-ellipsis">요청사항 x</td>
                         <td>
-                        	<button type="button" class="btn btn-secondary" disabled>접수대기</button>
+                        	<button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">접수대기</button>
                         </td>
                       </tr>
                     </tbody>

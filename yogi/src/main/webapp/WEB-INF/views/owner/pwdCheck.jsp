@@ -63,7 +63,7 @@ function sendOk() {
 		f.userPwd.focus();
 		return;
 	}
-	f.action = "${pageContext.request.contextPath}/owner/member";
+	f.action = "${pageContext.request.contextPath}/owner/check";
 	f.submit();
 }
 </script>

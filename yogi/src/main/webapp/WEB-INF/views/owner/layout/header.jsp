@@ -221,7 +221,7 @@ header .login-button {
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/owner/info/check"> <!-- 정보수정이니까 update로 -->
+        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/owner/check"> <!-- 정보수정이니까 update로 -->
           <i class="bi bi-person"></i>
           <span>정보수정</span>
         </a>

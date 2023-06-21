@@ -106,6 +106,7 @@ public class OwnerController {
 		info.setRestaurantName(dto.getRestaurantName());
 		
 		Owner owner = service.readRestaurant(userId);
+		System.out.println(owner.getRestaurantName() + " : 검색결과");
 		
 		if(owner != null) {
 			info.setRestaurantName(owner.getRestaurantName());

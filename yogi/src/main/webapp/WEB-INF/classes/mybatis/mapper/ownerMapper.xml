@@ -25,7 +25,7 @@
    
    <!-- 아이디 있는지 체크 -->
 	<select id="readOwner" parameterType="String" resultType="com.sp.yogi.owner.Owner">
-		SELECT userId FROM restaurantId WHERE userId=#{userId}
+		SELECT userId, userPwd FROM restaurantId WHERE userId=#{userId}
 	</select>   
 	
 	<!-- 가게 정보 -->
