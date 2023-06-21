@@ -89,14 +89,10 @@
 										placeholder="닉네임">
 							</div>
 							<div class="col-3 ps-1">
-								<c:if test="${mode=='member'}">
 									<button type="button" class="btn btn-light" onclick="userNickCheck();">닉네임중복검사</button>
-								</c:if>
 							</div>
 						</div>
-						<c:if test="${mode=='member'}">
 							<small class="form-control-plaintext help-block">닉네임은 2~10자 이내이며, 특수문자는 입력할 수 없습니다.</small>
-						</c:if>
 					</div>
 					
 					
