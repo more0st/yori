@@ -211,7 +211,7 @@ header .login-button {
         </ul>
       </li><!-- End Icons Nav -->
 
-      <li class="nav-heading">Open/Close</li>
+      <li class="nav-heading">Member</li>
 
       <li class="nav-item" style="cursor: pointer;">
         <a class="nav-link collapsed" onclick="">
