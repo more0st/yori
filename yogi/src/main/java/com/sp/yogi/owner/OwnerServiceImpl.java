@@ -88,11 +88,11 @@ public class OwnerServiceImpl implements OwnerService {
 	}
 
 	@Override
-	public Owner readOwner(long ownerNum) {
+	public Owner readOwner(long restaurantNum) {
 		Owner dto = null;
 
 		try {
-			dto = dao.selectOne("owner.readOwner2", ownerNum);
+			dto = dao.selectOne("owner.readOwner2", restaurantNum);
 
 			if (dto != null) {
 				if (dto.getEmail() != null) {
@@ -120,7 +120,7 @@ public class OwnerServiceImpl implements OwnerService {
 		Owner dto = null;
 
 		try {
-			dto = dao.selectOne("owner.readOwner2", email);
+			dto = dao.selectOne("owner.readOwnerEmail", email);
 
 			if (dto != null) {
 				if (dto.getEmail() != null) {

@@ -29,9 +29,14 @@
 		FROM restaurantId WHERE userId=#{userId}
 	</select>   
 	
-	<select id="readMember2" parameterType="String" resultType="com.sp.yogi.member.Member">
-		SELECT restaurantNum, userId, userName, userPwd, enabled, reg_date, modify_date, last_login,
-			email, tel
+	<select id="readOwner2" parameterType="String" resultType="com.sp.yogi.owner.Owner">
+		SELECT restaurantNum, userId, userPwd, userName, enabled, reg_date, modify_date, last_login, failure_cnt, status, reject_cnt, email, tel  
+		FROM restaurantId 
+		WHERE restaurantNum=#{restaurantNum}
+	</select>   
+	
+	<select id="readOwnerEmail" parameterType="String" resultType="com.sp.yogi.owner.Owner">
+		SELECT restaurantNum, userId, userPwd, userName, enabled, reg_date, modify_date, last_login, failure_cnt, status, reject_cnt, email, tel  
 		FROM restaurantId
 		WHERE email = #{email}
 	</select>

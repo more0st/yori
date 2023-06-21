@@ -339,6 +339,7 @@ public class OwnerController {
 	
 	@RequestMapping(value = "findPwd", method = RequestMethod.POST)
 	public String pwdFindSubmit(@RequestParam String userId,
+			@RequestParam String email,
 			RedirectAttributes reAttr,
 			Model model) throws Exception {
 		
@@ -346,6 +347,10 @@ public class OwnerController {
 		if(dto == null || dto.getEmail() == null || dto.getEnabled() == 0) {
 			model.addAttribute("message", "등록된 아이디가 아닙니다.");
 			return ".owner.findPwd";
+		}
+		if(! dto.getEmail().matches(email)) {
+			model.addAttribute("message", "등록된 정보가 다릅니다.");
+			return ".member.findPwd";
 		}
 		
 		try {
@@ -365,7 +370,17 @@ public class OwnerController {
 		return "redirect:/owner/findPwdComplete";
 	}
 	
+	@RequestMapping(value = "findPwdComplete")
+	public String findPwdComplete(@ModelAttribute("message") String message) throws Exception {
 
+		// 컴플릿 페이지(complete.jsp)의 출력되는 message와 title는 RedirectAttributes 값이다.
+		// F5를 눌러 새로 고침을 하면 null이 된다.
+		
+		if (message == null || message.length() == 0) // F5를 누른 경우
+			return "redirect:/";
+		
+		return ".owner.findPwdComplete";
+	}
 
 
 
