@@ -62,7 +62,7 @@
                 <div class="card-body">
                   <h5 class="card-title">접수대기<span> | 승현이네 국밥집</span></h5>
 
-                  <table class="table table-borderless datatable">
+                  <table class="table table-borderless">
                     <thead>
                       <tr>
                         <th scope="col">주문번호</th>
@@ -137,7 +137,7 @@
                 <div class="card-body">
                   <h5 class="card-title">완료<span> | 승현이네 국밥집</span></h5>
 
-                  <table class="table table-borderless datatable">
+                  <table class="table table-borderless">
                     <thead>
                       <tr>
                         <th scope="col">주문번호</th>
