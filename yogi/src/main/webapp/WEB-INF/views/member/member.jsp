@@ -81,11 +81,19 @@
 			 	
 			 	<div class="row mb-3">
 			        <label class="col-sm-2 col-form-label" for="nickName">닉네임</label>
-			        <div class="col-sm-7">
+			        <div class="col-sm-7  nickName-box">
 			            <input type="text" name="nickName" id="nickName" class="form-control" value="${dto.nickName}" 
 			            		
 			            		placeholder="닉네임">
 			        </div>
+			        	<div class="col-3 ps-1">
+							<c:if test="${mode=='member'}">
+								<button type="button" class="btn btn-light" onclick="userNickCheck();">닉네임중복검사</button>
+							</c:if>
+						</div>
+						<c:if test="${mode=='member'}">
+							<small class="form-control-plaintext help-block"></small>
+						</c:if>
 			    </div>
 			 	
 			    <div class="row mb-3">
@@ -190,6 +198,7 @@
 			            <button type="button" name="sendButton" class="btn btn-danger" onclick="memberOk();"> ${mode=='update'?'수정완료':'회원가입'} <i class="bi bi-check2"></i></button>
 			            
 						<input type="hidden" name="userIdValid" id="userIdValid" value="false">
+						<input type="hidden" name="userNickValid" id="userNickValid" value="false">
 			        </div>
 			    </div>
 			
@@ -264,6 +273,12 @@ function memberOk() {
 		str = "아이디 중복 검사가 실행되지 않았습니다.";
 		$("#userId").parent().find(".help-block").html(str);
 		f.userId.focus();
+		return;
+	}
+	if(mode === "member" && f.userNickValid.value === "false") {
+		str = "닉네임 중복 검사가 실행되지 않았습니다.";
+		$("#nickName").parent().find(".help-block").html(str);
+		f.nickName.focus();
 		return;
 	}
 	
@@ -374,6 +389,33 @@ function userIdCheck() {
 				$("#userId").val("");
 				$("#userIdValid").val("false");
 				$("#userId").focus();
+			}
+		}
+	});
+}
+function userNickCheck() {
+	let nickName = $("#nickName").val();
+	
+	let url = "${pageContext.request.contextPath}/member/userNickCheck";
+	let query = "nickName=" + nickName;
+	$.ajax({
+		type:"POST"
+		,url:url
+		,data:query
+		,dataType:"json"
+		,success:function(data) {
+			let passed = data.passed;
+
+			if(passed === "true") {
+				let str = "<span style='color:blue; font-weight: bold;'>" + nickName + "</span> 닉네임은 사용가능 합니다.";
+				$(".nickName-box").find(".help-block").html(str);
+				$("#userNickValid").val("true");
+			} else {
+				let str = "<span style='color:red; font-weight: bold;'>" + nickName + "</span> 닉네임은 사용할 수 없습니다.";
+				$(".nickName-box").find(".help-block").html(str);
+				$("#nickName").val("");
+				$("#userNickValid").val("false");
+				$("#nickName").focus();
 			}
 		}
 	});

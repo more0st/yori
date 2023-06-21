@@ -142,6 +142,34 @@ public class MemberServiceImpl implements MemberService {
 
 		return dto;
 	}
+	
+	@Override
+	public Member readMemberNickName(String nickName) {
+		Member dto = null;
+
+		try {
+			dto = dao.selectOne("member.readMember4", nickName);
+
+			if (dto != null) {
+				if (dto.getEmail() != null) {
+					String[] s = dto.getEmail().split("@");
+					dto.setEmail1(s[0]);
+					dto.setEmail2(s[1]);
+				}
+
+				if (dto.getTel() != null) {
+					String[] s = dto.getTel().split("-");
+					dto.setTel1(s[0]);
+					dto.setTel2(s[1]);
+					dto.setTel3(s[2]);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dto;
+	}
 
 	@Override
 	public void updateMembership(Map<String, Object> map) throws Exception {
@@ -255,9 +283,5 @@ public class MemberServiceImpl implements MemberService {
 		}
 		
 	}
-	
-	
-	
-	
-	
+
 }

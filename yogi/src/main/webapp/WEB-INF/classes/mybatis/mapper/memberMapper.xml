@@ -79,6 +79,17 @@
 		LEFT OUTER JOIN member2 m2 ON m1.userId = m2.userId
 		WHERE m2.email = #{email}
 	</select>
+
+	<select id="readMember4" parameterType="String" resultType="com.sp.yogi.member.Member">
+		SELECT m.memberNum, membership, m1.userId, userName, nickName, userPwd, enabled,
+			reg_date, modify_date, last_login,
+			TO_CHAR(birth, 'YYYY-MM-DD') birth, email, tel, 
+			zip, addr1, addr2
+		FROM member m 
+		JOIN member1 m1 ON m.memberNum = m1.memberNum 
+		LEFT OUTER JOIN member2 m2 ON m1.userId = m2.userId
+		WHERE m1.nickName = #{nickName}
+	</select>
 	
     <!-- 회원정보 수정  --> 
     <update id="updateMembership" parameterType="map">

@@ -14,6 +14,7 @@ public interface MemberService {
 	public Member readMember(String userId);
 	public Member readMember(long memberNum);
 	public Member readMemberEmail(String email);
+	public Member readMemberNickName(String nickName);
 
 	public void deleteMember(Map<String, Object> map) throws Exception;
 	

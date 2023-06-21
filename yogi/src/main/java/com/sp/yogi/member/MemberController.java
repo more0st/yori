@@ -232,6 +232,21 @@ public class MemberController {
 		model.put("passed", p);
 		return model;
 	}
+
+	@RequestMapping(value = "userNickCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> nickNameCheck(@RequestParam String nickName) throws Exception {
+		
+		String p = "true";
+		Member dto = service.readMemberNickName(nickName);
+		if (dto != null) {
+			p = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("passed", p);
+		return model;
+	}
 	
 	// 아이디 찾기
 	@RequestMapping(value="findId", method=RequestMethod.GET)
