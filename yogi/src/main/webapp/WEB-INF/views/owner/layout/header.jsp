@@ -36,6 +36,8 @@ header .login-button {
 }
 
 </style>
+
+
 <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -133,6 +135,7 @@ header .login-button {
   
   
   <!-- ======= Sidebar ======= -->
+  
   <aside id="sidebar" class="sidebar sidebar-hidden">
 
     <ul class="sidebar-nav" id="sidebar-nav">
@@ -238,3 +241,4 @@ header .login-button {
     </ul>
 
   </aside><!-- End Sidebar-->
+  

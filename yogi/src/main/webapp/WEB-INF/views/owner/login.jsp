@@ -139,7 +139,7 @@ function sendLogin() {
 	<form action="post" name="loginForm" method="post">
 		<div class="login-form">
 			<div class="login-ment">
-				<img src="${pageContext.request.contextPath}/resources/picture/logo.png"><span>사장님</span>
+				<img src="${pageContext.request.contextPath}/resources/logoImg/owner.png" style="margin-bottom: 30px;">
 			</div>
 			<div class="login-box">
 				<table class="login-table">
@@ -154,7 +154,7 @@ function sendLogin() {
 					</tr>
 					<tr>
 						<td colspan="3" class="center"><a class="login-table rink" href="${pageContext.request.contextPath}/owner/member">회원가입</a>&nbsp;<span class="rink">|</span>&nbsp;
-						<a class="login-table rink" href="${pageContext.request.contextPath}/owner/findId">아이디</a>/
+						<a class="login-table rink" href="${pageContext.request.contextPath}/owner/findId">아이디</a> <span style="color: #fa0050;">/</span>
 						<a class="login-table rink" href="${pageContext.request.contextPath}/owner/findPwd"> 비밀번호 찾기</a></td>
 					</tr>
 				</table>

@@ -27,12 +27,44 @@ public class OwnerController {
 	private OwnerService service;
 	
 	@GetMapping("home")
-	public String home(HttpSession session) {
+	public String home(HttpSession session, Model model) {
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
 		if(info == null) {
 			return ".owner.login";
+		}
+		
+		int status = service.readStatus(info.getUserId());
+		
+		if(status == 0) {
+			String message = "입점 거절";
+			
+			model.addAttribute("status", 0);
+			model.addAttribute("message", message);
+			session.setAttribute("member", info);
+			
+			return ".owner.info.afterRegister";
+		} else if (status == 1) {
+			
+			String message = "입점 신청 전";
+			
+			model.addAttribute("status", 1);
+			model.addAttribute("message", message);
+			session.setAttribute("member", info);
+			
+			return ".owner.info.afterRegister";
+			
+		} else if (status == 2) {
+
+			String message = "입점 대기";
+			
+			model.addAttribute("status", 2);
+			model.addAttribute("message", message);
+			session.setAttribute("member", info);
+			
+			return ".owner.info.afterRegister";
+			
 		}
 		
 		return ".ownerLayout";
