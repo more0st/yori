@@ -155,12 +155,12 @@
                         <th scope="row"><a href="#">1</a></th>
                         <td>test123</td>
                         <td>서울시 마포구 서교동 쌍용</td>
-                        <td><a href="${pageContext.request.contextPath}/owner/order/orderDetail" class="text-primary">국밥 1개 외 3건 ...</a></td>
+                        <td>국밥 1개 외 3건 ...</td>
                         <td>15,000원</td>
                         <td>010-1234-2345</td>
                         <td class="overflow-ellipsis">고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘</td>
                         <td>
-                        	<button type="button" class="btn btn-success" disabled>배달완료</button>
+                        	<button type="button" class="btn btn-success" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">배달완료</button>
                         </td>
                       </tr>
                     </tbody>
