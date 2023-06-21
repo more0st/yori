@@ -84,6 +84,8 @@
 				</table>
 				
 				<!-- 답변 없을 때는	c:if test="${not empty dto.answer}" 로 가리기	-->
+				<c:if test="${not empty dto.answer}">
+				
 					<table class="table mb-0">
 						<tbody>
 							<tr>
@@ -115,6 +117,7 @@
 							</tr>
 						</tbody>
 					</table>
+				</c:if>
 				<!-- /c:if> -->
 				
 				<table class="table table-borderless mb-2">
