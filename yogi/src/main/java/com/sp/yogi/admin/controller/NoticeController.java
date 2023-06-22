@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sp.yogi.admin.domain.Notice;
 import com.sp.yogi.admin.service.NoticeService;
@@ -32,7 +33,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "write", method=RequestMethod.POST)
-	public String write(Notice dto, HttpSession session) throws Exception{
+	public String write(Notice dto, HttpSession session) throws Exception {
 
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 
@@ -49,13 +50,33 @@ public class NoticeController {
 		return "redirect:/admin/notice/list";
 	}
 	
+	
+	
 	@RequestMapping(value = "article", method=RequestMethod.GET)
-	public String article() throws Exception{
+	public String article(@RequestParam long num,
+			HttpSession session, Model model) throws Exception {
+		
+		service.updateHitCount(num);
+		
+		Notice dto = service.readNotice(num);
+		if (dto == null) {
+			return "redirect:/admin/notice/list?";
+		}
+		
+		// 이미지 파일
+		List<Notice> listFile = service.listFile(num);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("listFile", listFile);
+
+		
 		return ".admin.notice.article";
 	}
 	
+	
+	
 	@RequestMapping(value = "list", method=RequestMethod.GET)
-	public String list(HttpServletRequest req, HttpSession session, Model model) throws Exception{
+	public String list(HttpServletRequest req, HttpSession session, Model model) throws Exception {
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		

@@ -63,9 +63,9 @@
 				
 				<a class="btn btn-outline-secondary btn-list" href="${pageContext.request.contextPath}/admin/notice/list"><i class="bi bi-caret-left-fill"></i> 목록으로</a>
 				<div class="notice-list">
-				[공지] 개인정보처리방침 일부 변경 안내
+				${dto.subject}
 					<div class="n-date">
-					2023년 5월 30일 ~ 2025년 5월 30일
+					${dto.reg_date}
 					</div>
 				</div>
 				
@@ -73,10 +73,7 @@
 				<div class="n-body">
 					<div class="n-content">
 					<br>
-					*** <br><br>
-					안녕하세요. 요기요 입니다.<br><br>
-					항상 요기요를 이용해주시는 고객 여러분께 감사 드립니다.<br><br>
-					2023년 6월 6일부터 요기요 개인정보 처리방침이 일부 변경됩니다.
+					${dto.content}
 					</div>
 				</div>
 				<div class="writebtn"><button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/notice/write'">수정하기</button></div>

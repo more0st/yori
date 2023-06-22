@@ -16,9 +16,9 @@ import com.sp.yogi.common.dao.CommonDAO;
 public class NoticeServiceImpl implements NoticeService {
 	@Autowired
 	private CommonDAO dao;
-	
 	@Autowired
 	private FileManager fileManager;
+	
 	
 	@Override
 	public void insertNotice(Notice dto, String pathname) throws Exception {
@@ -84,6 +84,42 @@ public class NoticeServiceImpl implements NoticeService {
 		}
 
 		return listFile;
+	}
+
+	@Override
+	public Notice readNotice(long num) {
+		Notice dto = null;
+		
+		try {
+			dto = dao.selectOne("noticeManage.readNotice", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public Notice readFile(long imgNum) {
+		Notice dto = null;
+		
+		try {
+			dto = dao.selectOne("noticeManage.readFile", imgNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public void updateHitCount(long num) throws Exception {
+		try {
+			dao.updateData("noticeManage.updateHitCount", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 	
 	

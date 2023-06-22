@@ -28,7 +28,13 @@
 		) f ON n.noticeNum=f.noticeNum
 		
 		ORDER BY n.noticeNum DESC
-		
+	</select>
+	
+	<select id="readNotice" parameterType="Long" resultType="com.sp.yogi.admin.domain.Notice">
+		SELECT n.noticeNum, n.userId, m.userName, n.subject, n.content, n.reg_date
+		FROM notice n
+		JOIN member1 m ON n.userId = m.userId
+		WHERE noticeNum = #{noticeNum}
 	</select>
 	
 	<!-- 파일 -->
