@@ -196,55 +196,51 @@
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/event.png">
 			<span class="category-info-title">이벤트</span>
 		</a>
-		<a class="category-info" href="${pageContext.request.contextPath}/restaurant/list">
+		<a class="category-info" onclick="checkAddress(0)">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-01.png">
 			<span class="category-info-title">전체보기</span>
 		</a>
-		<a class="category-info">
-			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-onedish.png">
-			<span class="category-info-title">1인분 주문</span>
-		</a>
-		<a class="category-info">
+		<a class="category-info" onclick="checkAddress(1)">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-10.png">
 			<span class="category-info-title">프랜차이즈</span>
 		</a>
-		<a class="category-info">
+		<a class="category-info" onclick="checkAddress(2)">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-02.png">
 			<span class="category-info-title">치킨</span>
 		</a>
-		<a class="category-info">
+		<a class="category-info" onclick="checkAddress(3)">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-03.png">
 			<span class="category-info-title">피자/양식</span>
 		</a>
-		<a class="category-info">
+		<a class="category-info" onclick="checkAddress(4)">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-04.png">
 			<span class="category-info-title">중국집</span>
 		</a>
-		<a class="category-info">
+		<a class="category-info" onclick="checkAddress(5)">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-05.png">
 			<span class="category-info-title">한식</span>
 		</a>
-		<a class="category-info">
+		<a class="category-info" onclick="checkAddress(6)">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-06.png">
 			<span class="category-info-title">일식/돈까스</span>
 		</a>
-		<a class="category-info">
+		<a class="category-info" onclick="checkAddress(7)">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-07.png">
 			<span class="category-info-title">족발/보쌈</span>
 		</a>
-		<a class="category-info">
+		<a class="category-info" onclick="checkAddress(8)">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-08.png">
 			<span class="category-info-title">야식</span>
 		</a>
-		<a class="category-info">
+		<a class="category-info" onclick="checkAddress(9)">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-09.png">
 			<span class="category-info-title">분식</span>
 		</a>
-		<a class="category-info">
+		<a class="category-info" onclick="checkAddress(10)">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-11.png">
 			<span class="category-info-title">카페/디저트</span>
 		</a>
-		<a class="category-info">
+		<a class="category-info" onclick="checkAddress(11)">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/category-convenience-store.png">
 			<span class="category-info-title">편의점/마트</span>
 		</a>
@@ -271,4 +267,14 @@ function sendParameter(param) {
   });
 }
 
+function checkAddress(param) {
+    var address = "${sessionScope.member.addr1}";
+
+    if (!address || address.trim() === "") {
+      alert("주소를 설정해 주세요.");
+    } else {
+      // 주소가 비어있지 않을 경우의 처리 (예: 링크 이동)
+      window.location.href = "${pageContext.request.contextPath}/restaurant/list?categoryNum="+param;
+    }
+  }
 </script>
