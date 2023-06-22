@@ -164,7 +164,7 @@
 			<div class="inputbox">
 				<div class="dropdown address-search">
 				 	<button class="btn address-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				    	<div class="dropdiv">배달지 선택</div>
+				    	<div class="dropdiv">${empty sessionScope.member.addr1? "배달지 선택" : sessionScope.member.addr1 }</div>
 					</button>
 					<div class="dropdown-menu">
 						<c:if test="${not empty sessionScope.member}">
@@ -254,20 +254,21 @@
 
 <script type="text/javascript">
 function sendParameter(param) {
-	  // Ajax 또는 다른 방법을 사용하여 파라미터를 @Controller로 전달하는 로직 작성
-	  // 예시: jQuery를 사용한 Ajax 요청
-	  $.ajax({
-	    url: '${pageContext.request.contextPath}/restaurant/list',
-	    method: 'GET',
-	    data: { addr1 : param },
-	    success: function(response) {
-	      // 요청이 성공한 경우의 처리
-	      window.location.href='${pageContext.request.contextPath}/restaurant/list';
-	    },
-	    error: function(error) {
-	      // 요청이 실패한 경우의 처리
-	      alert("실패");
-	    }
-	  });
-	}
+  // Ajax 또는 다른 방법을 사용하여 파라미터를 @Controller로 전달하는 로직 작성
+  // 예시: jQuery를 사용한 Ajax 요청
+  $.ajax({
+    url: '${pageContext.request.contextPath}/restaurant/list',
+    method: 'GET',
+    data: { addr1 : param },
+    success: function(response) {
+      // 요청이 성공한 경우의 처리
+      window.location.href='${pageContext.request.contextPath}/restaurant/list';
+    },
+    error: function(error) {
+      // 요청이 실패한 경우의 처리
+      alert("실패");
+    }
+  });
+}
+
 </script>

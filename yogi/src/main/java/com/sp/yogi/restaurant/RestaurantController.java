@@ -43,7 +43,7 @@ public class RestaurantController {
 			System.out.println(addr1);					// >> addr1 : 강남구 신사동
 			System.out.println(info.getDeliveryAddr());	// >> deliveryAddr : 서울 강남구 가로수길 5 (신사동)
 		}
-		
+		System.out.println(info.getAddr1());
 		model.addAttribute("member", info);
 		
 		return ".restaurant.restaurant-list";
