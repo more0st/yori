@@ -7,6 +7,11 @@
 		INSERT INTO restaurant(restaurantNum, businessNum, restaurantName, restaurantAddr1, restaurantAddr2, restaurantTel, categoryNum)
 		VALUES (#{restaurantNum}, #{businessNum}, #{restaurantName}, #{restaurantAddr1},#{restaurantAddr2}, #{restaurantTel}, #{categoryNum}) 
     </insert>
+
+	<insert id="insertRestaurantInfo" parameterType="com.sp.yogi.owner.register.ResRegister">
+		INSERT INTO restaurantInfo(restaurantNum, basePrice, state, openingHour, closingHour, foodInfo)
+		VALUES (#{restaurantNum},0,0,'00:00','00:00','입력하세요') 
+    </insert>
     
     <update id="updateStatus" parameterType="String">
     	update restaurantId set status = 2 where userId=#{userId}

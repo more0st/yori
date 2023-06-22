@@ -26,6 +26,7 @@ public class ResRegisterServiceImpl implements ResRegisterService{
 			
 			// 입점 문의정보 저장
 			dao.insertData("register.insertResRegister", dto);
+			dao.insertData("register.insertRestaurantInfo", dto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

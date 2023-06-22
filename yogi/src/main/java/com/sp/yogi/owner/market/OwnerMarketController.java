@@ -13,6 +13,18 @@ public class OwnerMarketController {
 		
 		return ".owner.market.marketinfo";
 	}
+
+	@RequestMapping(value = "marketinfo", method = RequestMethod.POST)
+	public String marketSubmit() {
+		
+		try {
+			
+		} catch (Exception e) {
+		}
+		
+		
+		return ".owner.market.marketinfo";
+	}
 	
 	@RequestMapping(value = "review", method = RequestMethod.GET)
 	public String review() {
