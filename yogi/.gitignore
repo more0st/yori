@@ -1,2 +1,4 @@
 /target/
 /spring/
+/WEB-INF/classes/mybatis.jdbc.propeties
+/WEB-INF/views/order/order.jsp
