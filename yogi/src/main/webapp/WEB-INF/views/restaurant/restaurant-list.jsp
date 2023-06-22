@@ -182,7 +182,7 @@
 			<span>
 				<span class="res-title">버거킹 홍대점</span><br>
 				<span class="res-info res-rank">★ 4.7</span><span class="res-division">|</span><span class="res-info">리뷰 18</span><br>
-				<span class="res-info res-80">6,000원 이상 배달</span><span class="res-division">
+				<span class="res-info res-80">6,000원 이상 배달</span><span class="res-division"></span>
 			</span>
 		</a>
 		<a class="restaurant-info">
@@ -190,7 +190,7 @@
 			<span>
 				<span class="res-title">어메이징 농카이</span><br>
 				<span class="res-info res-rank">★ 4.8</span><span class="res-division">|</span><span class="res-info">리뷰 245</span><br>
-				<span class="res-info res-80">8,000원 이상 배달</span><span class="res-division">
+				<span class="res-info res-80">8,000원 이상 배달</span><span class="res-division"></span>
 			</span>
 		</a>
 		<a class="restaurant-info">
@@ -198,7 +198,7 @@
 			<span>
 				<span class="res-title">다운타우너 연남점</span><br>
 				<span class="res-info res-rank">★ 5.0</span><span class="res-division">|</span><span class="res-info">리뷰 154</span><br>
-				<span class="res-info res-80">10,000원 이상 배달</span><span class="res-division">
+				<span class="res-info res-80">10,000원 이상 배달</span><span class="res-division"></span>
 			</span>
 		</a>
 	</div>

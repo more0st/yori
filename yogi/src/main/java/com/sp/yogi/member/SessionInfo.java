@@ -9,8 +9,18 @@ public class SessionInfo {
 	private String addr1;
 	private long restaurantNum;
 	private String restaurantName;
-
 	
+	// 주문시 받아올 주소
+	private String deliveryAddr;
+	
+	
+	
+	public String getDeliveryAddr() {
+		return deliveryAddr;
+	}
+	public void setDeliveryAddr(String deliveryAddr) {
+		this.deliveryAddr = deliveryAddr;
+	}
 	public String getRestaurantName() {
 		return restaurantName;
 	}

@@ -2,6 +2,8 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+
+
 <style type="text/css">
 	.whole-container {
 		min-height: 1000px;
@@ -167,7 +169,7 @@
 					<div class="dropdown-menu">
 						<c:if test="${not empty sessionScope.member}">
 					    	<c:forEach var="addr" items="${addr}">
-					    		<div class="dropdown-content" onclick="location.href='${pageContext.request.contextPath}/restaurant/list';">${addr.addr1}</div>
+					    		<div class="dropdown-content" onclick="sendParameter('${addr.addr1}')">${addr.addr1}</div>
 					    	</c:forEach>
 							<c:if test="${empty addr}">
 								<div class="dropdown-content">주소록을 추가하세요.</div>
@@ -188,7 +190,7 @@
 		</div>
 	</div>
 	</form>
-		
+	
 	<div class="category-box">
 		<a class="category-info" href="${pageContext.request.contextPath}/event/eventList">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/event.png">
@@ -249,3 +251,23 @@
 	</div>
 
 </div>
+
+<script type="text/javascript">
+function sendParameter(param) {
+	  // Ajax 또는 다른 방법을 사용하여 파라미터를 @Controller로 전달하는 로직 작성
+	  // 예시: jQuery를 사용한 Ajax 요청
+	  $.ajax({
+	    url: '${pageContext.request.contextPath}/restaurant/list',
+	    method: 'GET',
+	    data: { addr1 : param },
+	    success: function(response) {
+	      // 요청이 성공한 경우의 처리
+	      window.location.href='${pageContext.request.contextPath}/restaurant/list';
+	    },
+	    error: function(error) {
+	      // 요청이 실패한 경우의 처리
+	      alert("실패");
+	    }
+	  });
+	}
+</script>
