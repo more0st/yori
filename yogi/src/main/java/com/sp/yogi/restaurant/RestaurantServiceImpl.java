@@ -10,23 +10,25 @@ public class RestaurantServiceImpl implements RestaurantService{
 	// 주소 추출
 	@Override
 	public String extractAddress(String address) {
-		// 지역명 추출
-        String regionRegex = "\\s(서울|부산|인천|대전|대구|광주|[^\\s]+시)\\s";
-        Pattern regionPattern = Pattern.compile(regionRegex);
-        Matcher regionMatcher = regionPattern.matcher(address);
-        if (regionMatcher.find()) {
-            return ""; // 해당 지역명이 있는 경우 빈 문자열 반환
+        // 구 추출
+        String districtRegex = "(\\S+구)\\s";
+        Pattern districtPattern = Pattern.compile(districtRegex);
+        Matcher districtMatcher = districtPattern.matcher(address);
+        String district = "";
+        if (districtMatcher.find()) {
+            district = districtMatcher.group(1);
         }
 
-        // 동/리 추출
-        String neighborhoodRegex = "\\(([^\\)]+)\\)";
+        // 동 추출
+        String neighborhoodRegex = "\\((\\S+동)\\)";
         Pattern neighborhoodPattern = Pattern.compile(neighborhoodRegex);
         Matcher neighborhoodMatcher = neighborhoodPattern.matcher(address);
+        String neighborhood = "";
         if (neighborhoodMatcher.find()) {
-            return neighborhoodMatcher.group(1); // 동/리 반환
+            neighborhood = neighborhoodMatcher.group(1);
         }
 
-        return ""; // 동/리가 없는 경우 빈 문자열 반환
+        return district + " " + neighborhood;
 
     }
 
