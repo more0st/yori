@@ -1,12 +1,20 @@
 package com.sp.yogi.restaurant;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sp.yogi.common.dao.CommonDAO;
+
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service("restaurant.restaurantService")
 public class RestaurantServiceImpl implements RestaurantService{
-
+	@Autowired
+	private CommonDAO dao;
+	
 	// 주소 추출
 	@Override
 	public String extractAddress(String address) {
@@ -31,5 +39,20 @@ public class RestaurantServiceImpl implements RestaurantService{
         return district + " " + neighborhood;
 
     }
+
+	
+	// 가게 리스트
+	@Override
+	public List<Restaurant> listRestaurant(Map<String, Object> map) throws Exception {
+		List<Restaurant> list = null;
+		
+		try {
+			list = dao.selectList("restaurant.listRestaurant", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 
 }

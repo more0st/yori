@@ -176,15 +176,17 @@
 	
 	<div class="location"><i class="fa-solid fa-store"></i>&nbsp;<span>${sessionScope.member.userName}</span>님 근처의 음식점</div>
 	<div class="restaurant-list">
+	<c:forEach var="restaurant" items="${list}">
 		<a class="restaurant-info" href="${pageContext.request.contextPath}/restaurant/info">
 			<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
 			<span>
-				<span class="res-title">버거킹 홍대점</span><br>
-				<span class="res-info res-rank">★ 4.7</span><span class="res-division">|</span><span class="res-info">리뷰 18</span><br>
-				<span class="res-info res-80">6,000원 이상 배달</span><span class="res-division"></span>
+				<span class="res-title">${restaurant.restaurantName}</span><br>
+				<span class="res-info res-rank">★ ${restaurant.rating} </span><span class="res-division">|</span><span class="res-info">리뷰 18</span><br>
+				<span class="res-info res-80">${restaurant.basePrice} 이상 배달</span><span class="res-division"></span>
 			</span>
 		</a>
-		<a class="restaurant-info">
+	</c:forEach>
+	<a class="restaurant-info">
 			<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/amazing.png">
 			<span>
 				<span class="res-title">어메이징 농카이</span><br>
