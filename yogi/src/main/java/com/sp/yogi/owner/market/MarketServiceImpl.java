@@ -95,6 +95,19 @@ public class MarketServiceImpl implements MarketService{
 		
 		return dto;
 	}
+	
+	@Override
+	public Market readRestaurant2(String userId) {
+		Market dto=null;
+		
+		try {
+			dto=dao.selectOne("marketinfo.readRestaurant2",userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
 
 	@Override
 	public Market readResImg(long restaurantNum) {

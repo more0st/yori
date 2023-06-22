@@ -314,7 +314,7 @@
 							OPEN
 						</div>
 						<div class="time-bottom-right shadow-sm">
-							10:00
+							${dto.openingHour}
 						</div>
 					</div>
 					<div>&nbsp;&nbsp;~&nbsp;&nbsp;</div>
@@ -323,7 +323,7 @@
 							CLOSE
 						</div>
 						<div class="time-bottom-right shadow-sm">
-							24:00
+							${dto.closingHour}
 						</div>
 					</div>
 				</div>
@@ -342,7 +342,7 @@
 							최소주문 금액
 						</div>
 						<div class="price-bottom-right shadow-sm">
-							7,000원
+							${dto.basePrice}원
 						</div>
 					</div>
 				</div>
@@ -367,38 +367,6 @@
 					</div>
 					<button class="info-button">삭제</button>
 				</div>
-				
-				<div class="tipdetail flex-between">
-					<div style="width: 80%;">
-						<div class="tipDetail-info"><div class="tipDetail-title">배달지역 : </div><div>경기도 고양시 일산동구 마두1동</div></div>
-						<div class="tipDetail-info"><div class="tipDetail-title">배&nbsp;&nbsp;달&nbsp;&nbsp;팁 : </div><div>4,000원</div></div>
-					</div>
-					<button class="info-button">삭제</button>
-				</div>
-				
-				<div class="tipdetail flex-between">
-					<div style="width: 80%;">
-						<div class="tipDetail-info"><div class="tipDetail-title">배달지역 : </div><div>경기도 고양시 일산동구 마두1동</div></div>
-						<div class="tipDetail-info"><div class="tipDetail-title">배&nbsp;&nbsp;달&nbsp;&nbsp;팁 : </div><div>4,000원</div></div>
-					</div>
-					<button class="info-button">삭제</button>
-				</div>
-				
-				<div class="tipdetail flex-between">
-					<div style="width: 80%;">
-						<div class="tipDetail-info"><div class="tipDetail-title">배달지역 : </div><div>경기도 고양시 일산동구 마두1동경기도 고양시 일산동구 마두1동경기도 고양시 일산동구 마두1동</div></div>
-						<div class="tipDetail-info"><div class="tipDetail-title">배&nbsp;&nbsp;달&nbsp;&nbsp;팁 : </div><div>4,000원</div></div>
-					</div>
-					<button class="info-button">삭제</button>
-				</div>
-				
-				<div class="tipdetail flex-between">
-					<div style="width: 80%;">
-						<div class="tipDetail-info"><div class="tipDetail-title">배달지역 : </div><div>경기도 고양시 일산동구 마두1동</div></div>
-						<div class="tipDetail-info"><div class="tipDetail-title">배&nbsp;&nbsp;달&nbsp;&nbsp;팁 : </div><div>4,000원</div></div>
-					</div>
-					<button class="info-button">삭제</button>
-				</div>
 				<!-- foreach 끝 -->
 				
 			</div>
@@ -412,18 +380,7 @@
 				<button class="info-button" id="submenu-modal4">수정</button>
 			</div>
 			<div class="foodInfo-detail">
-				쇠고기<br>
-				와퍼,버거패티-뉴질랜드산과 호주산 섞음<br>
-				와퍼패티 - 호주산 : 사용 매장 확인 https://burgerk.page.link/nutrition<br>
-				스테이크패티-호주산과 뉴질랜드산 섞음 : 몬스터X<br>
-				<br>
-				돼지고기<br>
-				베이컨-미국산<br>
-				<br>
-				닭고기<br>
-				국내산-너겟킹,롱치킨버거,몬스터와퍼,몬스터X,(바비큐)치킨버거<br>
-				외국산(덴마크산,스웨덴산,태국산 등)-바삭킹<br>
-				외국산(브라질산,태국산,미국산 등)-치킨킹,치킨킹BLT
+			${dto.foodInfo}
 			</div>
 		</div>
 		
@@ -444,7 +401,7 @@
 							OPEN
 						</div>
 						<div class="time-bottom-right shadow-sm">
-							<input class="modal-input" type="text">
+							<input class="modal-input" type="text" value="${dto.openingHour}">
 						</div>
 					</div>
 					<div>&nbsp;&nbsp;~&nbsp;&nbsp;</div>
@@ -453,7 +410,7 @@
 							CLOSE
 						</div>
 						<div class="time-bottom-right shadow-sm">
-							<input class="modal-input" type="text">
+							<input class="modal-input" type="text" value="${dto.closingHour}">
 						</div>
 					</div>
 				</div>
@@ -481,7 +438,7 @@
 							최소주문 금액
 						</div>
 						<div class="price-bottom-right shadow-sm">
-							<input class="modal-input" type="text">
+							<input class="modal-input" type="text"  value="${dto.basePrice}">
 						</div>
 					</div>
 				</div>
@@ -527,7 +484,7 @@
 	    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	   		</div>
 	    	<div class="modal-body">
-    			<textarea class="modal-text"></textarea>
+    			<textarea class="modal-text">${dto.foodInfo}</textarea>
 	    	</div>
 	  		<div class="modal-footer">
 	    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
