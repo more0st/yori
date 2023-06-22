@@ -258,7 +258,7 @@ function sendParameter(param) {
     data: { addr1 : param },
     success: function(response) {
       // 요청이 성공한 경우의 처리
-      window.location.href='${pageContext.request.contextPath}/restaurant/list';
+      window.location.href='${pageContext.request.contextPath}/restaurant/list?categoryNum=0';
     },
     error: function(error) {
       // 요청이 실패한 경우의 처리
