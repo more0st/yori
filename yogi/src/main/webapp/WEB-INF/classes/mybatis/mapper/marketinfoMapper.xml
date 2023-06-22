@@ -3,69 +3,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="marketinfo">
 
-	<!-- restaurantInfo 가져오기 -->
-	<select id="readRestaurant" parameterType="Long" resultType="com.sp.yogi.market.marketinfo">
-		SELECT restaurantNum, basePrice, state, openingHour, closingHour, foodInfo
-		FROM restaurantInfo
-		WHERE restaurantNum = #{restaurantNum}
-	</select>
 	
-    <!-- 가게이미지 등록-->
-    <insert id="insertResImg" parameterType="com.sp.yogi.market.marketinfo">
-    INSERT INTO restaurantImg(fileNum, imageFilename, restaurantNum) VALUES (restaurantImg_seq,#{imageFilename},#{restaurantNum})
-    </insert>
-
-	<!-- 가게이미지 삭제 -->
-    <delete id="deleteResImg" parameterType="Long">
-    </delete>
-    
-	<!-- 가게 이미지 가져오기 -->
-	<select id="readResImg" parameterType="Long" resultType="com.sp.yogi.market.marketinfo">
-		SELECT fileNum, imageFilename
-		FROM restaurantImg
-		WHERE restaurantNum = #{restaurantNum}
-	</select>
-	
-	<!-- 시작/종료시간 수정 -->
-    <update id="updateHour" parameterType="map">
-		UPDATE restaurantInfo SET openingHour=#{openingHour} AND closingHour=#{closingHour}
-		WHERE restaurantNum = #{restaurantNum}
-    </update>
-    
-	<!-- 최소주문금액 수정 -->
-    <update id="updateBasePrice" parameterType="map">
-		UPDATE restaurantInfo SET basePrice=#{basePrice}
-		WHERE restaurantNum = #{restaurantNum}
-    </update>
-
-	<!-- 원산지정보 수정 -->
-    <update id="updateFoodInfo" parameterType="map">
-		UPDATE restaurantInfo SET foodInfo=#{foodInfo}
-		WHERE restaurantNum = #{restaurantNum}
-    </update>
-    
-    <!-- 배달팁 추가 -->
-    <insert id="insertTip" parameterType="com.sp.yogi.market.marketinfo">
-    	INSERT INTO deliveryMap(num, addr, deliveryFee, restaurantNum) VALUES (deliveryMap_seq,#{addr},#{deliveryFee},#{restaurantNum}) 
-    </insert>
-    
-    <!-- 배달팁 삭제 -->
-    <delete id="deleteTip" parameterType="Long">
-    	DELETE FROM deliveryMap WHERE num=#{num}
-    </delete>
-    
-    <!-- deliveryMap 가져오기 : 가게번호로 가져오기 -->
-    <select id="readTip1"  parameterType="Long" resultType="com.sp.yogi.market.marketinfo">
-    	SELECT num, addr, deliveryFee, restaurantNum
-		FROM deliveryMap
-		WHERE restaurantNum = #{restaurantNum}
-    </select>
-
-    <!-- deliveryMap 가져오기 : 등록번호로 가져오기 -->
-    <select id="readTip2"  parameterType="Long" resultType="com.sp.yogi.market.marketinfo">
-    	SELECT num, addr, deliveryFee, restaurantNum
-		FROM deliveryMap
-		WHERE num = #{num}
-    </select>
     
 </mapper>
