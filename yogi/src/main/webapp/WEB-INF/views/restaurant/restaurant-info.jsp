@@ -742,16 +742,6 @@ body {
 					<div class="res-information">
 						<div  class="information-category">
 							<div class="information-category-head">
-								<i class="fa-solid fa-bullhorn"></i>&nbsp;사장님알림
-							</div>
-							<div class="information-category-body">
-								<!-- img 하는가 없으면 안넣어도 되고 해도 안하면 if로 없애도 되공 -->
-								<img src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
-								딜리버리 서비스 메뉴의 가격은 매장 가격과 상이할 수 있습니다.
-							</div>
-						</div>
-						<div  class="information-category">
-							<div class="information-category-head">
 								<i class="fa-solid fa-store"></i>&nbsp;업체정보
 							</div>
 							<div class="information-category-body">
