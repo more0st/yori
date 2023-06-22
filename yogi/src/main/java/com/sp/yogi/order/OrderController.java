@@ -2,6 +2,7 @@ package com.sp.yogi.order;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller("order.orderController")
@@ -16,6 +17,12 @@ public class OrderController {
 	
 	@GetMapping("complete")
 	public String complete() {
+		
+		return ".order.orderComplete";
+	}
+	
+	@PostMapping("complete")
+	public String completeSubmit() {
 		
 		return ".order.orderComplete";
 	}

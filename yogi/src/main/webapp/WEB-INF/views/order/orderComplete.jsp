@@ -130,7 +130,7 @@
 					</tr>	
 					<tr>
 						<td class="keyword bold">배달주소</td> 
-						<td><span>서울 강남구 역삼동</span>&nbsp;<span>11-2 1203호</span></td> 
+						<td><span>${sessionScope.member.addr1}</span>&nbsp;<span>11-2 1203호</span></td> 
 					</tr>	
 				</table>
 			</div>
