@@ -337,7 +337,7 @@ $(function () {
                 pay_method: 'card',
                 merchant_uid: 'merchant_' + new Date().getTime(),
                 name: '요리조리요 결제',
-                amount: '1380000000',
+                amount: '138000000',
                 buyer_name: '${sessionScope.member.userName}',
                 buyer_tel: '${tel}',
             }, function (rsp) {
