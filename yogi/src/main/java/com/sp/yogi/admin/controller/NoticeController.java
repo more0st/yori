@@ -1,7 +1,11 @@
 package com.sp.yogi.admin.controller;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +55,18 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "list", method=RequestMethod.GET)
-	public String list() throws Exception{
+	public String list(HttpServletRequest req, HttpSession session, Model model) throws Exception{
+		
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", info.getUserId());
+		
+		
+		List<Notice> list = service.listNotice(map);
+		
+		model.addAttribute("list", list);
+		
 		return ".admin.notice.list";
 	}
 }

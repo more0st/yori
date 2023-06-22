@@ -72,16 +72,18 @@ public class NoticeServiceImpl implements NoticeService {
 		return list;
 	}
 
-	@Override
-	public List<Notice> listNoticeTop() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Notice> listFile(long num) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Notice> listFile = null;
+		
+		try {
+			listFile = dao.selectList("noticeManage.listFile", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return listFile;
 	}
 	
 	

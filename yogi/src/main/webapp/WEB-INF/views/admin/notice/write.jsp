@@ -178,8 +178,8 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 								<td>
 									<div class="img-box">
 										<c:forEach var="vo" items="${listFile}">
-											<img src="${pageContext.request.contextPath}/uploads/notice/${vo.noticePhotoName}"
-												onclick="deleteFile('${vo.noticePhotoNum}');">
+											<img src="${pageContext.request.contextPath}/uploads/notice/${dto.imgFileName}"
+												onclick="deleteFile('${dto.imgFileNum}');">
 										</c:forEach>
 									</div>
 								</td>
@@ -211,28 +211,28 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 
 <script type="text/javascript">
 function sendOk(elClickedObj) {
-//     const f = document.noticeForm;
-// 	let str;
+    const f = document.noticeForm;
+	let str;
 	
-//     str = f.noticeSubject.value.trim();
-//     if(!str) {
-//         alert("제목을 입력하세요. ");
-//         f.noticeSubject.focus();
-//         return;
-//     }
+    str = f.subject.value.trim();
+    if(!str) {
+        alert("제목을 입력하세요. ");
+        f.subject.focus();
+        return;
+    }
 
-//     str = f.noticeContent.value.trim();
-//     if(!str) {
-//         alert("내용을 입력하세요. ");
-//         f.noticeContent.focus();
-//         return;
-//     }
+    str = f.content.value.trim();
+    if(!str) {
+        alert("내용을 입력하세요. ");
+        f.content.focus();
+        return;
+    }
     
-//     let mode = "${mode}";
+    let mode = "${mode}";
     
 
-//     //f.action = "${pageContext.request.contextPath}/notice/${mode}_ok.do";
-//     f.action = "#";
+    f.action = "${pageContext.request.contextPath}/notice/${mode}_ok.do";
+    f.action = "#";
     elClickedObj.submit();
 }
 

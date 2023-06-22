@@ -9,7 +9,6 @@ public interface NoticeService {
 	public void insertNotice(Notice dto, String pathname) throws Exception;
 	
 	public List<Notice> listNotice(Map<String, Object> map);
-	public List<Notice> listNoticeTop();
 	
 	public void insertFile(Notice dto) throws Exception;
 	public List<Notice> listFile(long num);

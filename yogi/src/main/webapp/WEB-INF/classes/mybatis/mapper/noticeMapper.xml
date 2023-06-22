@@ -13,11 +13,35 @@
 	</insert>
 	
 	
+	<!-- 리스트 -->
+	<select id="listNotice" parameterType="map" resultType="com.sp.yogi.admin.domain.Notice">
+		SELECT n.noticeNum, n.userId, m.userName, n.subject, n.hitCount, 
+			   n.reg_date
+		FROM notice n
+		JOIN member1 m ON n.userId=m.userId
+		LEFT OUTER JOIN (
+			SELECT imgNum, noticeNum, imgFileName FROM (
+				SELECT imgNum, noticeNum, imgFileName, 
+					ROW_NUMBER() OVER(PARTITION BY noticeNum ORDER BY imgNum ASC) rank
+				 FROM noticeImg
+			) WHERE rank = 1
+		) f ON n.noticeNum=f.noticeNum
+		
+		ORDER BY n.noticeNum DESC
+		
+	</select>
+	
 	<!-- 파일 -->
 	<insert id="insertFile" parameterType="com.sp.yogi.admin.domain.Notice">
 		INSERT INTO noticeImg(imgNum, noticeNum, imgFileName)
 		VALUES (noticeImg_seq.NEXTVAL, #{noticeNum}, #{imgFileName})
 	</insert>
+	
+	<select id="listFile" parameterType="Long" resultType="com.sp.yogi.admin.domain.Notice">
+		SELECT imgNum, noticeNum, imgFileName
+		FROM noticeImg
+		WHERE noticeNum=#{noticeNum}    
+	</select>
 	
 	
 </mapper>
