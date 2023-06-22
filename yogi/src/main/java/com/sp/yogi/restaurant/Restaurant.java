@@ -10,6 +10,7 @@ public class Restaurant {
 	private String basePrice;
 	private int state;
 	
+	
 	// 주소, 카테고리
 	private String addr1;
 	private Long categoryNum;
