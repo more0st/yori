@@ -142,19 +142,18 @@
 <div class="whole-container">
 	
 	<div class="category-box">
-		<div class="category-info">전체보기</div>
-		<div class="category-info">1인분 주문</div>
-		<div class="category-info">프랜차이즈</div>
-		<div class="category-info">치킨</div>
-		<div class="category-info">피자/양식</div>
-		<div class="category-info">중국집</div>
-		<div class="category-info">한식</div>
-		<div class="category-info">일식/돈까스</div>
-		<div class="category-info">족발/보쌈</div>
-		<div class="category-info">야식</div>
-		<div class="category-info">분식</div>
-		<div class="category-info">카페/디저트</div>
-		<div class="category-info">편의점/마트</div>
+		<div class="category-info" onclick="checkAddress(0)">전체보기</div>
+		<div class="category-info" onclick="checkAddress(1)">프랜차이즈</div>
+		<div class="category-info" onclick="checkAddress(2)">치킨</div>
+		<div class="category-info" onclick="checkAddress(3)">피자/양식</div>
+		<div class="category-info" onclick="checkAddress(4)">중국집</div>
+		<div class="category-info" onclick="checkAddress(5)">한식</div>
+		<div class="category-info" onclick="checkAddress(6)">일식/돈까스</div>
+		<div class="category-info" onclick="checkAddress(7)">족발/보쌈</div>
+		<div class="category-info" onclick="checkAddress(8)">야식</div>
+		<div class="category-info" onclick="checkAddress(9)">분식</div>
+		<div class="category-info" onclick="checkAddress(10)">카페/디저트</div>
+		<div class="category-info" onclick="checkAddress(11)">편의점/마트</div>
 	</div>
 	
 	<form name="searchForm">
@@ -204,3 +203,18 @@
 	</div>
 
 </div>
+
+
+<script type="text/javascript">
+function checkAddress(param) {
+    var address = "${sessionScope.member.addr1}";
+
+    if (!address || address.trim() === "") {
+      alert("주소를 설정해 주세요.");
+    } else {
+      // 주소가 비어있지 않을 경우의 처리 (예: 링크 이동)
+      window.location.href = "${pageContext.request.contextPath}/restaurant/list?categoryNum="+param;
+    }
+  }
+  
+</script>
