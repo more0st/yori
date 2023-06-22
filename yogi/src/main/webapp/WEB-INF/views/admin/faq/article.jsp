@@ -62,7 +62,7 @@
 									문의일자 : ${dto.reg_date}
 								</td>
 								<td align="right">
-									처리결과 : ${(empty dto.answer_date)?"답변대기":"답변완료"}
+									처리결과 : ${(empty dto.answer)?"답변대기":"답변완료"}
 								</td>
 							</tr>
 							
@@ -75,7 +75,7 @@
 					</table>
 					
 					<!-- 답변 없을 때는	c:if test="${not empty dto.answer}" 로 가리기	-->
-					
+					<c:if test="${not empty dto.answer}">
 						<table class="table mb-0">
 							<tbody>
 								<tr>
@@ -85,6 +85,7 @@
 												<p class="form-control-plaintext text-white">A</p>
 											</div>
 											<div class="col bg-success">
+					
 												<p class="form-control-plaintext text-white">[답변] ${dto.subject}</p>
 											</div>
 										</div>
@@ -107,13 +108,14 @@
 								</tr>
 							</tbody>
 						</table>
+					</c:if>
 					<!-- /c:if> -->
 					
 					<table class="table table-borderless mb-2">
 						<tr>
 							<td width="50%">
-								<button type="button" class="btn btn-light bordergray" onclick="deleteInquiry('${dto.num}');">질문삭제</button>
-								<button type="button" class="btn btn-light bordergray" onclick="">답변삭제</button>
+								<button type="button" class="btn btn-light bordergray" onclick="deleteFaq('${dto.qnum}');">질문삭제</button>
+								<button type="button" class="btn btn-light bordergray" onclick="deleteAnswer('${dto.qnum}');">답변삭제</button>
 							</td>
 							<td class="text-end">
 								<button type="button" class="btn btn-light bordergray" onclick="location.href='${pageContext.request.contextPath}/admin/faq/list?${query}';">리스트</button>
@@ -134,7 +136,7 @@
 							
 							<div align='right'>
 						        <button type='button' class='btn btn-outline-secondary' onclick="sendAnswerOk()">답변 등록</button>
-						        <input type="hidden" name="num" value="${dto.num}">
+						        <input type="hidden" name="qnum" value="${dto.qnum}">
 						        <input type="hidden" name="page" value="${page}">
 						        <input type="hidden" name="condition" value="${condition}">
 						        <input type="hidden" name="keyword" value="${keyword}">
@@ -148,3 +150,43 @@
 		</div>
 	</div>
 </main>
+
+<script type="text/javascript">
+
+function sendAnswerOk() {
+    const f = document.answerForm;
+	let str;
+	
+    str = f.answer.value.trim();
+    if(!str) {
+        alert("내용을 입력하세요. ");
+        f.answer.focus();
+        return;
+    }
+    
+    
+    f.action = "${pageContext.request.contextPath}/admin/faq/answer";
+    f.submit();
+}
+
+function deleteFaq(num) {
+	if(confirm("문의를 삭제 하시겠습니까 ?")) {
+		let query = "num="+num+"&${query}";
+		let url = "${pageContext.request.contextPath}/admin/faq/delete?"+query;
+		location.href = url;
+	}
+}
+
+function deleteAnswer(num) {
+	if(confirm("답글을 삭제 하시겠습니까 ?")) {
+		let query = "num="+num+"&${query}";
+		let url = "${pageContext.request.contextPath}/admin/faq/deleteAnswer?"+query;
+		location.href = url;
+	}
+}
+
+
+
+
+</script>
+
