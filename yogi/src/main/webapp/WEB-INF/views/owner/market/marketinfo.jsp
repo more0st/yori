@@ -279,6 +279,97 @@
 }
 
 </style>
+<script type="text/javascript">
+
+function ajaxFun(url, method, query, dataType, fn) {
+	$.ajax({
+		type:method,
+		url:url,
+		data:query,
+		dataType:dataType,
+		success:function(data) {
+			fn(data);
+		},
+		beforeSend:function(jqXHR) {
+			jqXHR.setRequestHeader("AJAX", true);
+		},
+		error:function(jqXHR) {
+			if(jqXHR.status === 403) {
+				login();
+				return false;
+			} else if(jqXHR.status === 400) {
+				alert("요청 처리가 실패 했습니다.");
+				return false;
+			}
+	    	
+			console.log(jqXHR.responseText);
+		}
+	});
+}
+
+function ajaxFileFun(url, method, query, dataType, fn) {
+	$.ajax({
+		type:method,
+		url:url,
+		processData: false, // file 전송시 필수, 서버로전송하는 데이터를 쿼리문자열로변환여부
+		contentType: false, // file 전송시 필수, 서버에전송할 데이터의 Content-Type. 기본은 application/x-www-urlencoded
+		data:query,
+		dataType:dataType,
+		success:function(data) {
+			fn(data);
+		},
+		beforeSend:function(jqXHR) {
+			jqXHR.setRequestHeader("AJAX", true);
+		},
+		error:function(jqXHR) {
+			if(jqXHR.status === 403) {
+				login();
+				return false;
+			} else if(jqXHR.status === 400) {
+				alert("요청 처리가 실패 했습니다.");
+				return false;
+			}
+	    	
+			console.log(jqXHR.responseText);
+		}
+	});
+}
+
+$(function(){
+	$('.btnInsertImgOk').click(function(){
+		// 사진인서트
+		const f=document.insertImgForm;
+		let str;
+		
+		str=f.selectFile.value;
+		
+		if(! str){
+			alert("이미지를 선택해주세요.");
+			f.selectFile.focus();
+			return;
+		}
+		
+		let url="${pageContext.request.contextPath}/owner/market/insertimg";
+		let query=new FormData(f);
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("로고를 등록하지 못했습니다.");
+				return false;
+			}
+			
+		};
+		
+		ajaxFileFun(url,"post",query,"json",fn);
+
+	});
+});
+
+
+
+
+
+</script>
 
 <main id="main" class="main">
 <div class="whole-container">
@@ -293,7 +384,11 @@
 					가게 사진
 				</div>
 				<div class="flex-center info-picture-detail">
-					<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
+					<c:if test="${empty img}">
+					<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/add_photo.png">
+					</c:if>
+					<c:if test="${not empty img}">
+					</c:if>
 					<div class="info-picture-btn" id="submenu-modal5">가게 로고<br>사진 추가</div>
 					<!-- c:if로 추가/변경 바꿔주기 -->
 				</div>
@@ -358,16 +453,24 @@
 			</div>
 			
 			<div class="flexgrid">
-			
-				<!-- foreach 돌릴 부분 -->
-				<div class="tipdetail flex-between">
-					<div style="width: 80%;">
-						<div class="tipDetail-info"><div class="tipDetail-title">배달지역 : </div><div>경기도 고양시 일산동구 마두1동</div></div>
-						<div class="tipDetail-info"><div class="tipDetail-title">배&nbsp;&nbsp;달&nbsp;&nbsp;팁 : </div><div>4,000원</div></div>
+				<c:if test="${empty tipList}">
+					<div class="tipdetail flex-between">
+						<div style="width: 80%;">
+							등록된 배달팁 정보가 없습니다.
+						</div>
 					</div>
-					<button class="info-button">삭제</button>
-				</div>
-				<!-- foreach 끝 -->
+				</c:if>
+				<c:if test="${not empty tipList}">
+				<c:forEach var="tip" items="${tipList}" varStatus="status">
+					<div class="tipdetail flex-between">
+						<div style="width: 80%;">
+							<div class="tipDetail-info"><div class="tipDetail-title">배달지역 : </div><div>${tip.addr}</div></div>
+							<div class="tipDetail-info"><div class="tipDetail-title">배&nbsp;&nbsp;달&nbsp;&nbsp;팁 : </div><div>${tip.deliveryFee}원</div></div>
+						</div>
+						<button class="info-button">삭제</button>
+					</div>
+				</c:forEach>
+				</c:if>
 				
 			</div>
 		</div>
@@ -502,15 +605,18 @@
 	    		<h5 class="modal-title">가게 사진</h5>
 	    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	   		</div>
-	    	<div class="modal-body">
-	    		<div class="fileModal">
-	    			<input type="file" class="fileInput form-control">
-	    		</div>
-	    	</div>
-	  		<div class="modal-footer">
-	    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
-	    		<button type="button" class="modal-button toOrder">등록하기</button>
-	  		</div>
+	   		
+	    	<form name="insertImgForm" method="post" enctype="multipart/form-data">
+		    	<div class="modal-body">
+		    		<div class="fileModal">
+		    			<input type="file" name="selectFile" accept="image/*" class="fileInput form-control">
+		    		</div>
+		    	</div>
+		  		<div class="modal-footer">
+		    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
+		    		<button type="button" class="modal-button toOrder btnInsertImgOk">등록하기</button>
+		  		</div>
+	    	</form>
 		</div>
 	</div>
 </div>

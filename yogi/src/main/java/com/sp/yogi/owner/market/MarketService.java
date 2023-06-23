@@ -1,10 +1,11 @@
 package com.sp.yogi.owner.market;
 
+import java.util.List;
 import java.util.Map;
 
 public interface MarketService {
 	//insertResImg : 가게이미지등록
-	public void insertResImg(Market dto) throws Exception;
+	public void insertResImg(Market dto, String pathname) throws Exception;
 	//insertTip : 배달팁 추가
 	public void insertTip(Market dto) throws Exception;
 	
@@ -16,7 +17,7 @@ public interface MarketService {
 	public void updateFoodInfo(Map<String, Object> map) throws Exception;
 	
 	//deleteResImg : 가게이미지삭제
-	public void deleteResImg(long fileNum) throws Exception;
+	public void deleteResImg(long fileNum, String pathname) throws Exception;
 	//deleteTip : 배달팁 삭제
 	public void deleteTip(long num) throws Exception;
 	
@@ -24,9 +25,10 @@ public interface MarketService {
 	public Market readRestaurant(long restaurantNum);
 	public Market readRestaurant2(String userId);
 	//readResImg : 가게이미지가져오기
-	public Market readResImg(long restaurantNum);
+	public Market readResImg(long restaurantNum, String pathname);
 	//readTip : 배달팁 가져오기
 	public Market readTip1(long restaurantNum);//가게번호
 	public Market readTip2(long num);//배달팁등록번호
+	public List<Market> listTip(String userId);//배달팁리스트
 	
 }

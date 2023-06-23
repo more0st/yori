@@ -3,22 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="marketinfo">
 
-   <select id="deliveryMap_seq" resultType="Long">
-      SELECT deliveryMap_seq.NEXTVAL FROM dual
-   </select>
-
-   <select id="restaurantImg_seq" resultType="Long">
-      SELECT restaurantImg_seq.NEXTVAL FROM dual
-   </select>
-
+	 
    <!-- restaurantInfo 가져오기 -->
-   <!-- 
-    SELECT i.restaurantNum, userId, basePrice, state, openingHour, closingHour, foodInfo
-	FROM restaurantinfo i
-	JOIN restaurantId r ON i.restaurantNum=r.restaurantNum
-	WHERE userId=#{userid};
-   
-    -->
    <select id="readRestaurant" parameterType="Long" resultType="com.sp.yogi.owner.market.Market">
       SELECT restaurantNum, basePrice, state, openingHour, closingHour, foodInfo
       FROM restaurantInfo
@@ -34,11 +20,12 @@
    
     <!-- 가게이미지 등록-->
     <insert id="insertResImg" parameterType="com.sp.yogi.owner.market.Market">
-    INSERT INTO restaurantImg(fileNum, imageFilename, restaurantNum) VALUES (#{fileNum},#{imageFilename},#{restaurantNum})
+    INSERT INTO restaurantImg(fileNum, imageFilename, restaurantNum) VALUES (restaurantImg_seq.NEXTVAL,#{imageFilename, jdbcType = VARCHAR},#{restaurantNum})
     </insert>
 
    <!-- 가게이미지 삭제 -->
     <delete id="deleteResImg" parameterType="Long">
+    DELETE FROM restaurantImg WHERE fileNum=#{fileNum}
     </delete>
     
    <!-- 가게 이미지 가져오기 -->
@@ -66,9 +53,17 @@
       WHERE restaurantNum = #{restaurantNum}
     </update>
     
+    <!-- 배달팁리스트 -->
+    <select id="listTip"  parameterType="String" resultType="com.sp.yogi.owner.market.Market">
+	SELECT d.restaurantNum, num, userId, addr, deliveryFee
+	FROM deliveryMap d
+	JOIN restaurantId r ON d.restaurantNum=r.restaurantNum
+	WHERE userId=#{userId}
+    </select>
+    
     <!-- 배달팁 추가 -->
     <insert id="insertTip" parameterType="com.sp.yogi.owner.market.Market">
-       INSERT INTO deliveryMap(num, addr, deliveryFee, restaurantNum) VALUES (#{num},#{addr},#{deliveryFee},#{restaurantNum}) 
+       INSERT INTO deliveryMap(num, addr, deliveryFee, restaurantNum) VALUES (deliveryMap_seq.NEXTVAL,#{addr},#{deliveryFee},#{restaurantNum}) 
     </insert>
     
     <!-- 배달팁 삭제 -->
@@ -89,5 +84,5 @@
       FROM deliveryMap
       WHERE num = #{num}
     </select>
-    
+
 </mapper>

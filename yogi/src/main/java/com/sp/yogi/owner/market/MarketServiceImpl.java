@@ -1,10 +1,13 @@
 package com.sp.yogi.owner.market;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.sp.yogi.common.FileManager;
 import com.sp.yogi.common.dao.CommonDAO;
 
 @Service("owner.market.marketService")
@@ -13,10 +16,26 @@ public class MarketServiceImpl implements MarketService{
 	@Autowired
 	private CommonDAO dao;
 	
+	@Autowired
+	private FileManager fileManager;
+	
+	
 	@Override
-	public void insertResImg(Market dto) throws Exception {
+	public void insertResImg(Market dto, String pathname) throws Exception {
 		try {
-			dao.insertData("marketinfo.insertResImg", dto);
+			
+			if(!dto.getSelectFile().isEmpty()) {
+				for (MultipartFile mf : dto.getSelectFile()) {
+					String saveFilename = fileManager.doFileUpload(mf, pathname);
+					if (saveFilename == null) {
+						continue;
+					}
+
+					dto.setImageFilename(saveFilename);
+
+					dao.insertData("marketinfo.insertResImg", dto);
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -64,7 +83,7 @@ public class MarketServiceImpl implements MarketService{
 	}
 
 	@Override
-	public void deleteResImg(long fileNum) throws Exception {
+	public void deleteResImg(long fileNum, String pathname) throws Exception {
 		try {
 			dao.deleteData("marketinfo.deleteResImg", fileNum);
 		} catch (Exception e) {
@@ -110,7 +129,7 @@ public class MarketServiceImpl implements MarketService{
 	}
 
 	@Override
-	public Market readResImg(long restaurantNum) {
+	public Market readResImg(long restaurantNum, String pathname) {
 		Market dto=null;
 		
 		try {
@@ -147,6 +166,18 @@ public class MarketServiceImpl implements MarketService{
 		}
 		
 		return dto;
+	}
+
+	@Override
+	public List<Market> listTip(String userId) {
+		List<Market> list=null;
+		
+		try {
+			list=dao.selectList("marketinfo.listTip",userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }
