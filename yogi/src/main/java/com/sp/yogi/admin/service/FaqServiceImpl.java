@@ -55,9 +55,15 @@ public class FaqServiceImpl implements FaqService {
 	}
 
 	@Override
-	public void deleteAnswer(long num) throws Exception {
-		// TODO Auto-generated method stub
-
+	public void deleteAnswer(Faq dto) throws Exception {
+		try {
+			dao.updateData("faqManage.deleteAnswer",dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+		
 	}
 
 	@Override
@@ -100,21 +106,38 @@ public class FaqServiceImpl implements FaqService {
 
 	@Override
 	public List<Faq> listFile(long num) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Faq> listFile = null;
+
+		try {
+			listFile = dao.selectList("faqManage.listFile", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return listFile;
 	}
 
 	@Override
 	public Faq readFile(long fileNum) {
-		// TODO Auto-generated method stub
-		return null;
+		Faq dto = null;
+
+		try {
+			dto = dao.selectOne("faqManage.readFile", fileNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dto;
 	}
 
 	public void deleteFile(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-
+		try {
+			dao.deleteData("faqManage.deleteFile", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
-
 
 
 }
