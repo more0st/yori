@@ -255,10 +255,10 @@ function sendParameter(param) {
   $.ajax({
     url: '${pageContext.request.contextPath}/restaurant/list',
     method: 'GET',
-    data: { addr1 : param },
+    data: { addr1 : param, categoryNum : 0 },
     success: function(response) {
       // 요청이 성공한 경우의 처리
-      window.location.href='${pageContext.request.contextPath}/restaurant/list';
+      window.location.href='${pageContext.request.contextPath}/restaurant/list?categoryNum='+0;
     },
     error: function(error) {
       // 요청이 실패한 경우의 처리

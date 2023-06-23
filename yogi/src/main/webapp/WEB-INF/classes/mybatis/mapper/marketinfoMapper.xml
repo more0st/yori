@@ -3,6 +3,91 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="marketinfo">
 
-	
+   <select id="deliveryMap_seq" resultType="Long">
+      SELECT deliveryMap_seq.NEXTVAL FROM dual
+   </select>
+
+   <select id="restaurantImg_seq" resultType="Long">
+      SELECT restaurantImg_seq.NEXTVAL FROM dual
+   </select>
+
+   <!-- restaurantInfo 가져오기 -->
+   <!-- 
+    SELECT i.restaurantNum, userId, basePrice, state, openingHour, closingHour, foodInfo
+	FROM restaurantinfo i
+	JOIN restaurantId r ON i.restaurantNum=r.restaurantNum
+	WHERE userId=#{userid};
+   
+    -->
+   <select id="readRestaurant" parameterType="Long" resultType="com.sp.yogi.owner.market.Market">
+      SELECT restaurantNum, basePrice, state, openingHour, closingHour, foodInfo
+      FROM restaurantInfo
+      WHERE restaurantNum = #{restaurantNum}
+   </select>
+
+   <select id="readRestaurant2" parameterType="String" resultType="com.sp.yogi.owner.market.Market">
+      SELECT i.restaurantNum, userId, basePrice, state, openingHour, closingHour, foodInfo
+	  FROM restaurantInfo i
+	  JOIN restaurantId r ON i.restaurantNum=r.restaurantNum
+	  WHERE userId=#{userId}
+   </select>
+   
+    <!-- 가게이미지 등록-->
+    <insert id="insertResImg" parameterType="com.sp.yogi.owner.market.Market">
+    INSERT INTO restaurantImg(fileNum, imageFilename, restaurantNum) VALUES (#{fileNum},#{imageFilename},#{restaurantNum})
+    </insert>
+
+   <!-- 가게이미지 삭제 -->
+    <delete id="deleteResImg" parameterType="Long">
+    </delete>
+    
+   <!-- 가게 이미지 가져오기 -->
+   <select id="readResImg" parameterType="Long" resultType="com.sp.yogi.owner.market.Market">
+      SELECT fileNum, imageFilename
+      FROM restaurantImg
+      WHERE restaurantNum = #{restaurantNum}
+   </select>
+   
+   <!-- 시작/종료시간 수정 -->
+    <update id="updateHour" parameterType="map">
+      UPDATE restaurantInfo SET openingHour=#{openingHour}, closingHour=#{closingHour}
+      WHERE restaurantNum = #{restaurantNum}
+    </update>
+    
+   <!-- 최소주문금액 수정 -->
+    <update id="updateBasePrice" parameterType="map">
+      UPDATE restaurantInfo SET basePrice=#{basePrice}
+      WHERE restaurantNum = #{restaurantNum}
+    </update>
+
+   <!-- 원산지정보 수정 -->
+    <update id="updateFoodInfo" parameterType="map">
+      UPDATE restaurantInfo SET foodInfo=#{foodInfo}
+      WHERE restaurantNum = #{restaurantNum}
+    </update>
+    
+    <!-- 배달팁 추가 -->
+    <insert id="insertTip" parameterType="com.sp.yogi.owner.market.Market">
+       INSERT INTO deliveryMap(num, addr, deliveryFee, restaurantNum) VALUES (#{num},#{addr},#{deliveryFee},#{restaurantNum}) 
+    </insert>
+    
+    <!-- 배달팁 삭제 -->
+    <delete id="deleteTip" parameterType="Long">
+       DELETE FROM deliveryMap WHERE num=#{num}
+    </delete>
+    
+    <!-- deliveryMap 가져오기 : 가게번호로 가져오기 -->
+    <select id="readTip1"  parameterType="Long" resultType="com.sp.yogi.owner.market.Market">
+       SELECT num, addr, deliveryFee, restaurantNum
+      FROM deliveryMap
+      WHERE restaurantNum = #{restaurantNum}
+    </select>
+
+    <!-- deliveryMap 가져오기 : 등록번호로 가져오기 -->
+    <select id="readTip2"  parameterType="Long" resultType="com.sp.yogi.owner.market.Market">
+       SELECT num, addr, deliveryFee, restaurantNum
+      FROM deliveryMap
+      WHERE num = #{num}
+    </select>
     
 </mapper>

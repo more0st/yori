@@ -22,6 +22,7 @@ public interface MarketService {
 	
 	//readRestaurant : 가게정보가져오기
 	public Market readRestaurant(long restaurantNum);
+	public Market readRestaurant2(String userId);
 	//readResImg : 가게이미지가져오기
 	public Market readResImg(long restaurantNum);
 	//readTip : 배달팁 가져오기

@@ -118,19 +118,23 @@
 				<table style="border-spacing: 0 10px;">
 					<tr>
 						<td class="keyword bold">주문번호</td> 
-						<td>202306150101</td> 
+						<td>${orderNum}</td> 
 					</tr>
 					<tr>
 						<td class="keyword bold">주문식당</td> 
-						<td>상훈이네 족발</td> 
+						<td>${restaurantName}</td> 
 					</tr>	
 					<tr>
 						<td class="keyword bold">결제수단</td> 
-						<td>현금 결제</td> 
+						<td>${dto.payMethod}</td> 
 					</tr>	
 					<tr>
 						<td class="keyword bold">배달주소</td> 
-						<td><span>서울 강남구 역삼동</span>&nbsp;<span>11-2 1203호</span></td> 
+						<td><span>${sessionScope.member.deliveryAddr}</span>&nbsp;<span>${dto.addr2}</span></td> 
+					</tr>
+					<tr>
+						<td class="keyword bold">요청사항</td> 
+						<td>${dto.memo}</td> 
 					</tr>	
 				</table>
 			</div>

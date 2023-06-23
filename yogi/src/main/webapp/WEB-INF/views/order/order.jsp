@@ -91,6 +91,7 @@ td{
 .inputtext {
  	width : 300px;
  	height: 30px;
+ 	outline: none;
 }
 
 .lightgray{
@@ -198,7 +199,7 @@ input[type=radio] {
 <div class="whole-container">
 	<div class="order">
 		<!-- onclick으로 유효성 검사와 action 버튼 submit 수정하기 input태그 name 속성 주기 -->
-		<form name="orderForm" action="${pageContext.request.contextPath}/order/complete">
+		<form name="orderForm" method="post" action="${pageContext.request.contextPath}/order/complete">
 			<div class="orderInfo">
 				<div>
 					<div class="title1">결제하기</div>
@@ -210,16 +211,16 @@ input[type=radio] {
 						<table class="contenttable">
 						<tr>
 							<td class="tdcenter bold">주소</td>
-							<td><input class="inputtext" type="text" value="배송지 주소 불러오기" readonly="readonly"></td>
+							<td><input class="inputtext" type="text" value="${sessionScope.member.deliveryAddr}" readonly="readonly" name="addr1"></td>
 						</tr>	
 						<tr>
 							<td></td>
-							<td> <input class="inputtext" type="text" value=""></td>
+							<td> <input class="inputtext" type="text" value="" name="addr2"></td>
 						</tr>
 						
 						<tr>
 							<td class="tdcenter bold">휴대전화번호</td>
-							<td><input class="inputtext" type="text" value=""> </td>
+							<td><input class="inputtext" type="text" value="${dto.tel}" name="tel"> </td>
 						</tr>
 						</table>
 					</div>
@@ -228,7 +229,7 @@ input[type=radio] {
 				<div>
 					<p class="titlehead">주문시 요청사항</p>
 					<div class="content">
-						<textarea class="requestText"></textarea>
+						<textarea class="requestText" name="memo"></textarea>
 					</div>
 				</div>
 				
@@ -237,10 +238,10 @@ input[type=radio] {
 					<div class="content">
 						<div class="radio">
 							<div class="radioinput" onclick="selectPaymentMethod(this)">
-								<input type="radio" name="payment" value="card"><div><i class="fa-solid fa-credit-card"></i>&nbsp;카드결제</div>
+								<input type="radio" name="payment" value="card"><div><i class="fa-solid fa-credit-card"></i>&nbsp;카드 결제</div>
 							</div>
 							<div class="radioinput" onclick="selectPaymentMethod(this)">
-								<input type="radio" name="payment" value="cash"><div><i class="fa-solid fa-coins"></i>&nbsp;현금결제</div>
+								<input type="radio" name="payment" value="cash"><div><i class="fa-solid fa-coins"></i>&nbsp;만나서 결제</div>
 							</div>
 						</div>
 					</div>
@@ -265,12 +266,13 @@ input[type=radio] {
 				
 				<div class="access lightgray">이용약관, 개인정보 수집 및 이용, 개인정보 제3자 제공 , 전자금융거래 이용약관, 만 14세 이상 이용자 내용 확인하였으며 결제에 동의합니다.</div>
 				
-				<button type="submit" class="btnPay">결제하기</button>
+				<button type="button" class="btnPay" id="btnPay">결제하기</button>
 			</div>
 		</form>
 	</div>
 </div>
 
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 
 let selectedElement = null;
@@ -290,4 +292,95 @@ function selectPaymentMethod(element) {
     // 선택된 요소 저장
     selectedElement = element;
 }
+
+$(function () {
+    $("#btnPay").click(function () {
+        const f = document.orderForm;
+
+        // 배송지 체크
+        let str = f.addr1.value;
+        if (!str) {
+            alert("배송지를 입력하세요.");
+            f.addr1.focus();
+            return;
+        }
+
+        // 전화번호 체크
+        str = f.addr2.value;
+        if (!str) {
+            alert("상세주소를 입력하세요.");
+            f.addr2.focus();
+            return;
+        }
+
+        str = f.tel.value;
+        if (!/^\d{3}-\d{4}-\d{4}$/.test(str)) {
+            alert("전화번호는 000-0000-0000 형식으로 입력해주세요.");
+            f.tel.focus();
+            return;
+        }
+
+        // 결제 방법 체크
+        const paymentMethod = f.payment.value;
+        if (paymentMethod !== 'card') {
+            f.action = "${pageContext.request.contextPath}/order/complete";
+            f.submit();
+            return;
+        }
+
+        if (confirm("결제 하시겠습니까?")) {
+            var IMP = window.IMP; // 생략 가능
+            IMP.init('imp00258645'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+
+            IMP.request_pay({
+                pg: 'kakaopay',
+                pay_method: 'card',
+                merchant_uid: 'merchant_' + new Date().getTime(),
+                name: '요리조리요 결제',
+                amount: '138000000',
+                buyer_name: '${sessionScope.member.userName}',
+                buyer_tel: '${tel}',
+            }, function (rsp) {
+                if (rsp.success) {
+                    //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+                    jQuery.ajax({
+                        url: "/order/complete", // cross-domain error가 발생하지 않도록 주의해주세요
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            imp_uid: rsp.imp_uid
+                            // 기타 필요한 데이터가 있으면 추가 전달
+                        }
+                    }).done(function (data) {
+                        //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                        if (everythings_fine) {
+                            let msg = '결제가 완료되었습니다.';
+                            msg += '\n고유ID: ' + rsp.imp_uid;
+                            msg += '\n상점 거래ID: ' + rsp.merchant_uid;
+                            msg += '\n결제 금액: ' + rsp.paid_amount;
+                            msg += '카드 승인번호: ' + rsp.apply_num;
+
+                            alert(msg);
+                        } else {
+                            //[3] 아직 제대로 결제가 되지 않았습니다.
+                            //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+                        }
+                    });
+
+                    // 성공시 이동할 페이지
+                    f.action = "${pageContext.request.contextPath}/order/complete";
+                    f.submit();
+                } else {
+                    let msg = '결제에 실패하였습니다.';
+                    msg += '에러내용: ' + rsp.error_msg;
+                    // 실패시 이동할 페이지
+                    location.href = "${pageContext.request.contextPath}/order/order";
+                    alert(msg);
+                }
+            });
+        }
+    });
+});
+
+
 </script>
