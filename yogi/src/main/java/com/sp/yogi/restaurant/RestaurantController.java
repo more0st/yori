@@ -57,7 +57,6 @@ public class RestaurantController {
 			// System.out.println(addr1);					// >> addr1 : 강남구 신사동
 			// System.out.println(info.getDeliveryAddr());	// >> deliveryAddr : 서울 강남구 가로수길 5 (신사동)
 		}
-		
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("condition", condition);
@@ -73,7 +72,8 @@ public class RestaurantController {
 		}
 		
 		
-		model.addAttribute("list", list);
+		model. addAttribute("categoryNum", categoryNum);
+		model. addAttribute("list", list);
 		model.addAttribute("member", info);
 		
 		model.addAttribute("condition", condition);
