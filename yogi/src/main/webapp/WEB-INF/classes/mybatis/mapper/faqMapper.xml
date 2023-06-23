@@ -20,8 +20,8 @@
 		<if test="condition=='subject' ">
 			INSTR(subject, #{keyword}) &gt; 0
 		</if>
-		<if test="condition=='content' ">
-			INSTR(content, #{keyword}) &gt; 0 
+		<if test="condition=='userName' ">
+			INSTR(userName, #{keyword}) &gt; 0 
 		</if>
 		<if test="condition=='reg_date' ">
 			( TO_CHAR(reg_date, 'YYYY-MM-DD') = #{keyword}
@@ -33,8 +33,8 @@
 	<insert id="insertFaq" parameterType="com.sp.yogi.faq.Faq">
 		INSERT INTO questions(qnum,
 		subject, userId, content, reg_date, category, answerId, answer, answer_date)
-		VALUES(#{qnum}, #{subject},	#{userId}, #{content}, TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{category}, 'admin',
-		#{answer, jdbcType=VARCHAR}, TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+		VALUES(#{qnum}, #{subject},	#{userId}, #{content}, SYSDATE, #{category}, 'admin',
+		#{answer, jdbcType=VARCHAR}, SYSDATE)
 	</insert>
 	<!-- 파일 추가 -->
 	<insert id="insertFile" parameterType="com.sp.yogi.faq.Faq">
@@ -45,9 +45,10 @@
 	<!-- 데이터개수  -->
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
-		FROM questions
+		FROM questions q
+		JOIN member1 m ON q.userId=m.userId
 		<where>
-			userId = #{userId}
+			q.userId = #{userId}
 			<if test="keyword != null and keyword!=''  ">
 				AND <include refid="where-list"/>
 			</if>
@@ -56,27 +57,32 @@
 	
 	<!-- 리스트 -->
 	<select id="listFaq" parameterType="map" resultType="com.sp.yogi.faq.Faq">
-		SELECT q.qnum, userId, subject, imgFileName, category, reg_date
+    SELECT q.qnum, q.userId, m.userName, q.subject, i.imgFileName,
+		q.category, q.reg_date,
+		q.answer, q.answer_date, q.answerId
 		FROM questions q
+		LEFT OUTER JOIN member1 m ON q.userId = m.userId
 		LEFT OUTER JOIN (
-			SELECT fileNum, qnum, imgFileName FROM (
-				SELECT fileNum, qnum, imgFileName, 
-					ROW_NUMBER() OVER(PARTITION BY qnum ORDER BY fileNum ASC) rank
-				 FROM questionsImg
-			) WHERE rank = 1
+		SELECT fileNum, qnum, imgFileName FROM (
+		SELECT fileNum, qnum, imgFileName,
+		ROW_NUMBER() OVER(PARTITION BY qnum ORDER BY fileNum ASC) rank
+		FROM questionsImg
+		) WHERE rank = 1
 		) i ON q.qnum = i.qnum
 		<where>
-			userId = #{userId}
-			<if test="keyword != null and keyword!='' ">
-				AND <include refid="where-list"/>
+			q.userId = #{userId}
+			<if test="keyword != null and keyword != ''">
+				AND
+				<include refid="where-list" />
 			</if>
 		</where>
-		ORDER BY q.qnum DESC
+		ORDER BY CASE WHEN answer IS NULL THEN 0 ELSE 1 END ASC, qNum DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
-	 </select>
+	</select>
 
 	<select id="readFaq" parameterType="Long" resultType="com.sp.yogi.faq.Faq">
-		SELECT q.qnum, q.userId, m.userName, q.subject, q.content, q.reg_date, q.category
+		SELECT q.qnum, q.userId, m.userName, q.subject, q.content,
+		q.reg_date, q.category, q.answer, q.answer_date, q.answerId 	
 		FROM questions q
 		JOIN member1 m ON q.userId = m.userId
 		WHERE qnum = #{num}
@@ -101,9 +107,9 @@
 		DELETE FROM questions WHERE qnum = #{num}
 	</delete>
 	
-<!-- 	<delete id="deleteFile" parameterType="map"> -->
-<!-- 		DELETE FROM questionsImg WHERE ${field} = #{num} -->
-<!-- 	</delete> -->
+	<delete id="deleteFile" parameterType="map">
+		DELETE FROM questionsImg WHERE fileNum = #{num}
+	</delete>
 	
 
 

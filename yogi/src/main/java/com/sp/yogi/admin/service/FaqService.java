@@ -13,9 +13,9 @@ public interface FaqService {
 	public Faq readFaq(long num);
 	
 	public void answerFaq(Faq dto) throws Exception;
+	public void deleteAnswer(Faq dto) throws Exception;
 	
 	
-	public void deleteAnswer(long num) throws Exception;
 	void deleteFaq(long num, String pathname) throws Exception;
 	
 	public List<Faq> listFile(long num);

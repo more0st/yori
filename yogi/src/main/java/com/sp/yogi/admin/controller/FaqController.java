@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.yogi.admin.domain.Faq;
 import com.sp.yogi.admin.service.FaqService;
@@ -174,7 +175,7 @@ public class FaqController {
 		return "redirect:/admin/faq/list?" + query;
 	}
 	
-	@RequestMapping(value = "deleteAnswer", method = RequestMethod.GET)
+	@RequestMapping(value = "deleteAnswer", method = RequestMethod.POST)
 	public String deleteAnswer(Faq dto, 
 			@RequestParam String page,
 			@RequestParam(defaultValue = "all") String condition,
@@ -191,7 +192,7 @@ public class FaqController {
 		
 		try {
 			dto.setAnswerId(info.getUserId());
-			service.answerFaq(dto);
+			service.deleteAnswer(dto);
 		} catch (Exception e) {
 		}
 
@@ -215,15 +216,15 @@ public class FaqController {
 		String root = session.getServletContext().getRealPath("/");
 		String pathname = root + "uploads" + File.separator + "faq";
 
-//		SessionInfo info = (SessionInfo) session.getAttribute("member");
-//		Faq dto = service.readFaq(num);
-//		if (dto == null) {
-//			return "redirect:/admin/faq/list?page=" + page;
-//		}
-//
-//		// 바꿔야함
-//		if (!info.getUserId().equals("admin"))
-//			return "redirect:/";
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		Faq dto = service.readFaq(num);
+		if (dto == null) {
+			return "redirect:/admin/faq/list?page=" + page;
+		}
+
+		// 바꿔야함
+		if (!info.getUserId().equals("admin"))
+			return "redirect:/";
 
 		try {
 			service.deleteFaq(num, pathname);
@@ -233,6 +234,27 @@ public class FaqController {
 		return "redirect:/admin/faq/list?" + query;
 	}
 	
-	
+	@RequestMapping(value = "deleteFile", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteFile(@RequestParam long fileNum, HttpSession session) throws Exception {
+
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "faq";
+
+		Faq dto = service.readFile(fileNum);
+		if (dto != null) {
+			fileManager.doFileDelete(dto.getImgFileName(), pathname);
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("field", "fileNum");
+		map.put("num", fileNum);
+		service.deleteFile(map);
+
+		// 작업 결과를 json으로 전송
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", "true");
+		return model;
+	}
 	
 }

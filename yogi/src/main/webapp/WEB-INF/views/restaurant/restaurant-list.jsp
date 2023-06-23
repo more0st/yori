@@ -160,7 +160,7 @@
 	<div class="search-box">
 	<div class="search-box2">
 		<div class="search-info">
-			<input type="text" name="keyword" id="keywordval" placeholder="음식점이나 메뉴를 검색하세요."> 
+			<input type="text" name="keyword" id="searchInput" placeholder="음식점이나 메뉴를 검색하세요."> 
 		</div>
 		<div class="search-info">
 			<select name="condition" id="conditionval">
@@ -175,35 +175,21 @@
 	</form>
 	
 	<div class="location"><i class="fa-solid fa-store"></i>&nbsp;<span>${sessionScope.member.userName}</span>님 근처의 음식점</div>
-	<div class="restaurant-list">
-	<c:forEach var="restaurant" items="${list}">
-		<a class="restaurant-info" href="${pageContext.request.contextPath}/restaurant/info">
-			<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
-			<span>
-				<span class="res-title">${restaurant.restaurantName}</span><br>
-				<span class="res-info res-rank">★ ${restaurant.rating} </span><span class="res-division">|</span><span class="res-info">리뷰 18</span><br>
-				<span class="res-info res-80">${restaurant.basePrice}원 이상 배달</span><span class="res-division"></span>
-			</span>
-		</a>
-	</c:forEach>
-	<a class="restaurant-info">
-			<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/amazing.png">
-			<span>
-				<span class="res-title">어메이징 농카이</span><br>
-				<span class="res-info res-rank">★ 4.8</span><span class="res-division">|</span><span class="res-info">리뷰 245</span><br>
-				<span class="res-info res-80">8,000원 이상 배달</span><span class="res-division"></span>
-			</span>
-		</a>
-		<a class="restaurant-info">
-			<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/downtowner.png">
-			<span>
-				<span class="res-title">다운타우너 연남점</span><br>
-				<span class="res-info res-rank">★ 5.0</span><span class="res-division">|</span><span class="res-info">리뷰 154</span><br>
-				<span class="res-info res-80">10,000원 이상 배달</span><span class="res-division"></span>
-			</span>
-		</a>
+	
+	<div class="restaurant-list" id="restaurantList">
+	<!-- 
+		<c:forEach var="restaurant" items="${list}">
+			<a class="restaurant-info" href="${pageContext.request.contextPath}/restaurant/info">
+				<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
+				<span>
+					<span class="res-title">${restaurant.restaurantName}</span><br>
+					<span class="res-info res-rank">★ ${restaurant.rating} </span><span class="res-division">|</span><span class="res-info">리뷰 18</span><br>
+					<span class="res-info res-80">${restaurant.basePrice}원 이상 배달</span><span class="res-division"></span>
+				</span>
+			</a>
+		</c:forEach>
+	 -->
 	</div>
-
 </div>
 
 
@@ -217,6 +203,62 @@ function checkAddress(param) {
       // 주소가 비어있지 않을 경우의 처리 (예: 링크 이동)
       window.location.href = "${pageContext.request.contextPath}/restaurant/list?categoryNum="+param;
     }
-  }
+}
   
+
+ $(document).ready(function() {
+     $("#searchInput").on("input", function() {
+         getList();
+     });
+ });
+
+
+// 카테고리(프랜차이즈.치킨), 키워드(검색어), 정렬순, 배달주소
+ function getList() {
+	 let categoryNum = ${categoryNum};
+	 let addr = "${sessionScope.member.addr1}"; // addr은 사용자의 주소로 초기화합니다.
+     let keyword = $('#searchInput').val();
+     let condition = document.getElementById('conditionval').value;
+     
+     $.ajax({
+         url: "${pageContext.request.contextPath}/restaurant/list",
+         type: "GET",
+         dataType: "json",
+         data: { keyword: keyword, categoryNum: categoryNum, addr1:addr, condition: condition },      
+             // 조회된 회원 정보 출력
+         success: function(data) {
+             console.log(data.list);
+             alert('성공');
+
+             let restaurantList = $('#restaurantList');
+             restaurantList.empty();
+
+             $.each(data, function(i, list) {
+               let resultTemplate = `<a class="restaurant-info" href="${pageContext.request.contextPath}/restaurant/info?restaurantNum=`+ list.restaurantNum +`">`
+				
+	          	// 사진 있을 경우 , 없을 경우
+	            if (list.picture == null) {
+				    resultTemplate += `<img class="product-img" src="${pageContext.request.contextPath}/resource/picture/default.png"/>`
+				} else {
+				    resultTemplate += `<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/`+ list.imageFilename +`"/>`
+				}
+				
+	            resultTemplate += `<span>
+					<span class="res-title">`+ list.restaurantName + `</span><br>
+					<span class="res-info res-rank">★` + list.rating +`</span><span class="res-division">|</span><span class="res-info">리뷰 ` + list.reviewCount  +`</span><br>
+					<span class="res-info res-80">`+ list.basePrice +`원 이상 배달</span><span class="res-division"></span>
+				</span>
+				</a>`;
+            
+				restaurantList.append(resultTemplate);
+				
+		});
+	},
+	error: function(xhr, status, error) {
+		console.error(error);alert('요청 실패. 관리자에게 문의바랍니다.');
+	}
+ });
+     
+}
+
 </script>

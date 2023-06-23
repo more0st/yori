@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.yogi.common.FileManager;
 import com.sp.yogi.common.MyUtil;
@@ -188,5 +189,29 @@ public class FaqController {
 
 		return "redirect:/faq/home?" + query;
 	}
+	
+	@RequestMapping(value = "deleteFile", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteFile(@RequestParam long fileNum, HttpSession session) throws Exception {
+
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "faq";
+
+		Faq dto = service.readFile(fileNum);
+		if (dto != null) {
+			fileManager.doFileDelete(dto.getImgFileName(), pathname);
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("field", "fileNum");
+		map.put("num", fileNum);
+		service.deleteFile(map);
+
+		// 작업 결과를 json으로 전송
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", "true");
+		return model;
+	}
+	
 
 }

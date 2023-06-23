@@ -15,8 +15,8 @@
 		<if test="condition=='subject' ">
 			INSTR(subject, #{keyword}) &gt; 0
 		</if>
-		<if test="condition=='content' ">
-			INSTR(content, #{keyword}) &gt; 0
+		<if test="condition=='userName' ">
+			INSTR(userName, #{keyword}) &gt; 0 
 		</if>
 		<if test="condition=='reg_date' ">
 			( TO_CHAR(reg_date, 'YYYY-MM-DD') = #{keyword}
@@ -28,7 +28,8 @@
 	<!-- 데이터개수 -->
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
-		FROM questions
+		FROM questions q 
+		JOIN member1 m ON q.userId=m.userId
 		<where>
 			<if test="keyword != null and keyword!=''  ">
 				AND
@@ -58,7 +59,7 @@
 				<include refid="where-list" />
 			</if>
 		</where>
-		ORDER BY q.qnum DESC
+		ORDER BY CASE WHEN answer IS NULL THEN 0 ELSE 1 END ASC, qNum DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 
@@ -95,9 +96,6 @@
 		qnum = #{num}
 	</delete>
 
-	<!-- <delete id="deleteFile" parameterType="map"> -->
-	<!-- DELETE FROM questionsImg WHERE ${field} = #{num} -->
-	<!-- </delete> -->
 
 
 	<!-- 답변 달기 -->
@@ -109,11 +107,15 @@
 
 
 	<!-- 답변 삭제 -->
-<!-- 	<update id="deleteAnswer" parameterType="com.sp.yogi.admin.domain.Faq"> -->
-<!-- 		UPDATE questions SET answer = #{answer, jdbcType=VARCHAR} -->
-<!-- 		WHERE qnum = #{qnum} -->
-<!-- 	</update> -->
+	<update id="deleteAnswer" parameterType="com.sp.yogi.admin.domain.Faq">
+		UPDATE questions SET answer = #{answer, jdbcType=VARCHAR}
+		WHERE qnum = #{qnum}
+	</update>
 
+	<delete id="deleteFile" parameterType="map">
+		DELETE FROM questionsImg WHERE fileNum = #{num}
+	</delete>
+	
 
 	<!-- 템플릿 -->
 
