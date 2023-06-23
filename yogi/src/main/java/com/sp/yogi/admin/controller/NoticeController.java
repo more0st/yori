@@ -79,6 +79,7 @@ public class NoticeController {
 	public String list(HttpServletRequest req, HttpSession session, Model model) throws Exception {
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		String cp = req.getContextPath();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", info.getUserId());
@@ -86,7 +87,11 @@ public class NoticeController {
 		
 		List<Notice> list = service.listNotice(map);
 		
+//		String listUrl = "/notice/list";
+		String articleUrl = cp + "/admin/notice/article?";
+		
 		model.addAttribute("list", list);
+		model.addAttribute("articleUrl", articleUrl);
 		
 		return ".admin.notice.list";
 	}

@@ -55,6 +55,13 @@
 .writebtn{
 	float:right;
 }
+
+.n-hitCount{
+	float: right;
+	font-size: 14px;
+	padding-top: 10px;
+}
+
 </style>
 <main id="main" class="main">
 	<div class="whole-container">
@@ -71,14 +78,41 @@
 				
 				
 				<div class="n-body">
+					
+					<div class="n-hitCount">
+					조회수 : ${dto.hitCount}
+					</div>
+					
 					<div class="n-content">
 					<br>
 					${dto.content}
 					</div>
 				</div>
-				<div class="writebtn"><button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/notice/write'">수정하기</button></div>
+				<div class="writebtn"><button type="button" class="btn btn-danger" onclick="deleteNotice('${dto.noticeNum}');">삭제하기</button></div>
+				<div class="writebtn"><button type="button" class="btn btn-primary" style="margin-right: 10px;" onclick="location.href='${pageContext.request.contextPath}/admin/notice/write'">수정하기</button></div>
 			</div>
 		</div>	<!-- class="notice-wrap" -->
 		
 	</div> <!-- class="whole-container" -->
 </main>
+
+
+<script type="text/javascript">
+
+function deleteNotice(num) {
+	if(confirm("공지를 삭제 하시겠습니까 ?")) {
+		let query = "num="+num+"&${query}";
+		let url = "${pageContext.request.contextPath}/notice/delete?"+query;
+		location.href = url;
+	}
+}
+
+
+function imageViewer(src) {
+	const $model = $("#myDialogModal .modal-body");
+	let s = "<img src='"+src+"' class='img-thumbnail w-100 h-100'>";
+	$model.html(s);
+	
+	$("#myDialogModal").modal("show");
+}
+</script>

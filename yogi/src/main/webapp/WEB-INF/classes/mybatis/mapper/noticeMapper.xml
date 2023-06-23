@@ -31,7 +31,7 @@
 	</select>
 	
 	<select id="readNotice" parameterType="Long" resultType="com.sp.yogi.admin.domain.Notice">
-		SELECT n.noticeNum, n.userId, m.userName, n.subject, n.content, n.reg_date
+		SELECT n.noticeNum, n.userId, m.userName, n.subject, n.content, n.hitCount, n.reg_date
 		FROM notice n
 		JOIN member1 m ON n.userId = m.userId
 		WHERE noticeNum = #{noticeNum}
@@ -49,5 +49,9 @@
 		WHERE noticeNum=#{noticeNum}    
 	</select>
 	
+	<!-- 조회수 증가 -->
+	<update id="updateHitCount" parameterType="Long">
+		UPDATE notice SET hitCount=hitCount+1 WHERE noticeNum = #{noticeNum}
+	</update>
 	
 </mapper>

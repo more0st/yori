@@ -69,7 +69,7 @@
 		<!-- c:for each로 div 태그 돌리기.. -->
 			<c:forEach var="dto" items="${list}">
 				<div class="notice-list">
-					<a class="n-article" href="${articleUrl}&num=${dto.noticeNum}">
+					<a class="n-article" href="${articleUrl}num=${dto.noticeNum}">
 					${dto.subject}
 						<span class="n-date">
 						${dto.reg_date}
