@@ -67,6 +67,11 @@ public class RestaurantController {
 		
 		List<Restaurant> list = service.listRestaurant(map);
 		
+		for(Restaurant i : list) {
+			System.out.println(i.getRestaurantName() + " : 이름");
+			System.out.println(i.getCategoryNum() + " : 카테고리2");
+		}
+		
 		
 		model.addAttribute("list", list);
 		model.addAttribute("member", info);
