@@ -182,7 +182,7 @@
 			<span>
 				<span class="res-title">${restaurant.restaurantName}</span><br>
 				<span class="res-info res-rank">★ ${restaurant.rating} </span><span class="res-division">|</span><span class="res-info">리뷰 18</span><br>
-				<span class="res-info res-80">${restaurant.basePrice} 이상 배달</span><span class="res-division"></span>
+				<span class="res-info res-80">${restaurant.basePrice}원 이상 배달</span><span class="res-division"></span>
 			</span>
 		</a>
 	</c:forEach>
