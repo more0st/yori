@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.yogi.member.SessionInfo;
 
@@ -64,6 +65,7 @@ public class RestaurantController {
 		map.put("addr1", info.getAddr1());
 		map.put("categoryNum", categoryNum);
 		
+		
 		List<Restaurant> list = service.listRestaurant(map);
 		
 		for(Restaurant i : list) {
@@ -80,6 +82,69 @@ public class RestaurantController {
 		model.addAttribute("keyword", keyword);
 		
 		return ".restaurant.restaurant-list";
+	}
+	
+	@GetMapping("search")
+	@ResponseBody
+	public Map<String, Object> search(HttpSession session, 
+			@RequestParam(value= "addr1", required = false) String addr1,
+			@RequestParam(defaultValue = "all") String condition,
+			@RequestParam(defaultValue = "") String keyword,
+			HttpServletRequest req,
+			Model model
+			) throws Exception {
+		Map<String, Object> resultMap = new HashMap<>();
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		if (req.getMethod().equalsIgnoreCase("GET")) {
+			keyword = URLDecoder.decode(keyword, "UTF-8");
+		}
+		
+		String categoryNum = req.getParameter("categoryNum");
+		System.out.println("카테고리 : " + categoryNum);
+		
+		// 로그인 안되어있는 상태면 로그인 창으로 이동
+		if(info == null) {
+			resultMap.put("error", "로그인이 필요합니다.");
+			return resultMap;
+		}
+		
+		// 배달지 선택 안했을 경우.
+		
+		if(addr1 != null) {
+			info.setDeliveryAddr(addr1);
+			
+			addr1 = service.extractAddress(addr1);
+			
+			info.setAddr1(addr1);
+			// System.out.println(addr1);					// >> addr1 : 강남구 신사동
+			// System.out.println(info.getDeliveryAddr());	// >> deliveryAddr : 서울 강남구 가로수길 5 (신사동)
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("condition", condition);
+		map.put("keyword", keyword.trim());
+		map.put("addr1", info.getAddr1());
+		map.put("categoryNum", categoryNum);
+		
+		System.out.println("컨디션 : " + condition);
+		System.out.println("키워드 : " + keyword);
+		System.out.println("주소 : " + info.getAddr1());
+		System.out.println("카테고리숫자 : " + categoryNum);
+		
+		
+		List<Restaurant> list = service.listRestaurant(map);
+		System.out.println("리스트 존재 ? " + list);
+		
+		resultMap.put("categoryNum", categoryNum);
+		resultMap.put("list", list);
+		resultMap.put("member", info);
+		resultMap.put("condition", condition);
+		resultMap.put("keyword", keyword);
+		
+		System.out.println("리조트값값ㅂ값 : " + resultMap);
+		
+		return resultMap;
 	}
 	
 	@GetMapping("info")

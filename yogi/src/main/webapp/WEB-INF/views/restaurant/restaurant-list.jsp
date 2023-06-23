@@ -177,7 +177,6 @@
 	<div class="location"><i class="fa-solid fa-store"></i>&nbsp;<span>${sessionScope.member.userName}</span>님 근처의 음식점</div>
 	
 	<div class="restaurant-list" id="restaurantList">
-	<!-- 
 		<c:forEach var="restaurant" items="${list}">
 			<a class="restaurant-info" href="${pageContext.request.contextPath}/restaurant/info">
 				<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
@@ -188,7 +187,6 @@
 				</span>
 			</a>
 		</c:forEach>
-	 -->
 	</div>
 </div>
 
@@ -204,43 +202,43 @@ function checkAddress(param) {
       window.location.href = "${pageContext.request.contextPath}/restaurant/list?categoryNum="+param;
     }
 }
-  
-
- $(document).ready(function() {
-     $("#searchInput").on("input", function() {
-         getList();
-     });
- });
 
 
-// 카테고리(프랜차이즈.치킨), 키워드(검색어), 정렬순, 배달주소
- function getList() {
+
+$(document).ready(function() {
+    $("#searchInput").on("input", function() {
+        getList();
+    });
+});
+
+
+//카테고리(프랜차이즈.치킨), 키워드(검색어), 정렬순, 배달주소
+function getList() {
 	 let categoryNum = ${categoryNum};
 	 let addr = "${sessionScope.member.addr1}"; // addr은 사용자의 주소로 초기화합니다.
-     let keyword = $('#searchInput').val();
-     let condition = document.getElementById('conditionval').value;
-     
-     $.ajax({
-         url: "${pageContext.request.contextPath}/restaurant/list",
-         type: "GET",
-         dataType: "json",
-         data: { keyword: keyword, categoryNum: categoryNum, addr1:addr, condition: condition },      
-             // 조회된 회원 정보 출력
-         success: function(data) {
-             console.log(data.list);
-             alert('성공');
+    let keyword = $('#searchInput').val();
+    let condition = document.getElementById('conditionval').value;
+    
+    $.ajax({
+        url: "${pageContext.request.contextPath}/restaurant/search",
+        type: "GET",
+        dataType: "json",
+        data: { keyword: keyword, categoryNum: categoryNum, addr1:addr, condition: condition },      
+            // 조회된 회원 정보 출력
+        success: function(data) {
+            console.log(data.list);
 
-             let restaurantList = $('#restaurantList');
-             restaurantList.empty();
+            let restaurantList = $('#restaurantList');
+            restaurantList.empty();
 
-             $.each(data, function(i, list) {
-               let resultTemplate = `<a class="restaurant-info" href="${pageContext.request.contextPath}/restaurant/info?restaurantNum=`+ list.restaurantNum +`">`
+            $.each(data, function(i, list) {
+              let resultTemplate = `<a class="restaurant-info" href="${pageContext.request.contextPath}/restaurant/info?restaurantNum=`+ list.restaurantNum +`">`
 				
 	          	// 사진 있을 경우 , 없을 경우
 	            if (list.picture == null) {
-				    resultTemplate += `<img class="product-img" src="${pageContext.request.contextPath}/resource/picture/default.png"/>`
+				    resultTemplate += `<img class="product-img" src="${pageContext.request.contextPath}/resources/images/default.png"/>`
 				} else {
-				    resultTemplate += `<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/`+ list.imageFilename +`"/>`
+				    resultTemplate += `<img class="res-img" src="${pageContext.request.contextPath}/resources/images/`+ list.imageFilename +`"/>`
 				}
 				
 	            resultTemplate += `<span>
@@ -249,7 +247,7 @@ function checkAddress(param) {
 					<span class="res-info res-80">`+ list.basePrice +`원 이상 배달</span><span class="res-division"></span>
 				</span>
 				</a>`;
-            
+           
 				restaurantList.append(resultTemplate);
 				
 		});
@@ -257,8 +255,7 @@ function checkAddress(param) {
 	error: function(xhr, status, error) {
 		console.error(error);alert('요청 실패. 관리자에게 문의바랍니다.');
 	}
- });
-     
+});
+    
 }
-
 </script>

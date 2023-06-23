@@ -15,7 +15,16 @@ public class Restaurant {
 	private String addr1;
 	private Long categoryNum;
 	
+	// 이미지
+	private String imageFilename;
 	
+	
+	public String getImageFilename() {
+		return imageFilename;
+	}
+	public void setImageFilename(String imageFilename) {
+		this.imageFilename = imageFilename;
+	}
 	public String getAddr1() {
 		return addr1;
 	}
