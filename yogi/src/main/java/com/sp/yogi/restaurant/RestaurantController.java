@@ -29,7 +29,6 @@ public class RestaurantController {
 	public String list(HttpSession session, 
 			@RequestParam(value= "addr1", required = false) String addr1,
 			@RequestParam(defaultValue = "all") String condition,
-			@RequestParam(defaultValue = "") String keyword,
 			HttpServletRequest req,
 			Model model
 			) throws Exception {
@@ -54,7 +53,6 @@ public class RestaurantController {
 		model.addAttribute("member", info);
 		
 		model.addAttribute("condition", condition);
-		model.addAttribute("keyword", keyword);
 		
 		return ".restaurant.restaurant-list";
 	}
@@ -71,6 +69,8 @@ public class RestaurantController {
 		Map<String, Object> resultMap = new HashMap<>();
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
+		
+		
 		if (req.getMethod().equalsIgnoreCase("GET")) {
 			keyword = URLDecoder.decode(keyword, "UTF-8");
 		}
@@ -82,26 +82,21 @@ public class RestaurantController {
 			resultMap.put("error", "로그인이 필요합니다.");
 			return resultMap;
 		}
-		
-		// 배달지 선택 안했을 경우.
-		
-		if(addr1 != null) {
-			info.setDeliveryAddr(addr1);
-			
-			addr1 = service.extractAddress(addr1);
-			
-			info.setAddr1(addr1);
-			// addr1 : 강남구 신사동
-			// deliveryAddr : 서울 강남구 가로수길 5 (신사동)
-		}
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("condition", condition);
-		map.put("keyword", keyword==null?"":keyword);
+		map.put("keyword", keyword);
 		map.put("addr1", info.getAddr1());
 		map.put("categoryNum", categoryNum);
 		
 		List<Restaurant> list = service.listRestaurant(map);
+		System.out.println("====================");
+		for(Restaurant r : list) {
+			System.out.println("식당 이름 : " + r.getRestaurantName());
+			System.out.println("최소 주문 금액 : " + r.getBasePrice());
+			System.out.println("-------------");
+		}
+		
 		
 		for(Restaurant i : list) {
 			if(i.getRating() == null) {

@@ -10,15 +10,15 @@
 		</if>
 		<if test="condition=='rank' ">
 			AND INSTR(restaurantName, #{keyword, jdbcType=VARCHAR}) &gt; 0 
-			ORDER BY rating ASC
+			ORDER BY rating DESC
 		</if>
 		<if test="condition=='review' ">
 			AND INSTR(restaurantName, #{keyword, jdbcType=VARCHAR}) &gt; 0 
-			ORDER BY reviewCount ASC
+			ORDER BY reviewCount DESC
 		</if>
 		<if test="condition=='minPrice' ">
 			AND INSTR(restaurantName, #{keyword, jdbcType=VARCHAR}) &gt; 0 
-			ORDER BY basePrice DESC
+			ORDER BY basePrice ASC
 		</if>
 	</sql>
 	
@@ -26,17 +26,17 @@
 		<if test="condition=='all' ">
 		</if>
 		<if test="condition=='rank' ">
-			ORDER BY rating ASC
+			ORDER BY rating DESC
 		</if>
 		<if test="condition=='review' ">
-			ORDER BY reviewCount ASC
+			ORDER BY reviewCount DESC
 		</if>
 		<if test="condition=='minPrice' ">
-			ORDER BY basePrice DESC
+			ORDER BY basePrice ASC
 		</if>
 	</sql>	
 	
-	
+	<!-- 가게 리스트 / 검색 / 정렬 -->
 	<select id="listRestaurant" parameterType="map" resultType="com.sp.yogi.restaurant.Restaurant">
 		SELECT ri.restaurantNum, categoryNum ,restaurantName, basePrice, NVL(reviewCount,0) reviewCount, rating, addr addr1, imageFilename
 		FROM restaurantId ri 
@@ -49,14 +49,23 @@
 		) rv ON rv.restaurantNum = ri.restaurantNum 
 		WHERE info.state = 1 AND ri.status = 3
 			  AND INSTR(d.addr,  #{addr1}) &gt; 0
-			  AND categoryNum = #{categoryNum}
+			  AND categoryNum = #{categoryNum} 
 		<if test="keyword!=null and keyword != '' ">
 			<include refid="where-list"/>
 		</if>
-		<if test="keyword==null">
+		<if test="keyword==null or keyword == ''">
 			<include refid="where-list2"/>
 		</if>
 	</select>
+	
+	<!-- 가게 상세 정보 불러오기 -->
+	<select id="readRestaurantInfo" parameterType="Long" resultType="com.sp.yogi.restaurant.Restaurant">
+      SELECT businessNum, restaurantName, restaurantAddr1, restaurantAddr2, restaurantTel, basePrice, openingHour, closingHour, foodInfo
+      FROM restaurant r
+      JOIN restaurantId ri ON r.restaurantNum = ri.restaurantNum
+      JOIN restaurantInfo rf ON ri.restaurantNum = rf.restaurantNum
+      WHERE r.restaurantNum = ${restaurantNum}
+   </select>
 	
 	
 

@@ -205,12 +205,17 @@ function checkAddress(param) {
     }
 }
 
+
 window.onload = function(){
 	getList();
 }
 
 $(document).ready(function() {
     $("#searchInput").on("input", function() {
+        getList();
+    });
+    
+    $("#conditionval").on("change", function() {
         getList();
     });
 });
