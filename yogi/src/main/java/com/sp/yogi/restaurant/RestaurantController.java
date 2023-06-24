@@ -119,7 +119,12 @@ public class RestaurantController {
 	}
 	
 	@GetMapping("info")
-	public String info() {
+	public String info(
+			@RequestParam("restaurantNum") String restaurantNum,
+			Model model
+			) {
+		
+		model.addAttribute("restaurantNum", restaurantNum);
 		
 		return ".restaurant.restaurant-info";
 	}

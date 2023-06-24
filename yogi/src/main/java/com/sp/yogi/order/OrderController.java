@@ -24,13 +24,19 @@ public class OrderController {
 	private MemberService memberservice;
 	
 	@GetMapping("order")
-	public String order(HttpSession session, Model model) {
+	public String order(HttpSession session, Model model,
+			@RequestParam("restaurantNum") Long restaurantNum
+			) {
 		
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
 		String userId = info.getUserId();
 		
 		Member dto = memberservice.readMember(userId);
+		
+		Order order = new Order();
+		
+		order.setRestaurantNum(restaurantNum);
 		
 		model.addAttribute("dto", dto);
 		
