@@ -60,7 +60,7 @@
 	
 	<!-- 가게 상세 정보 불러오기 -->
 	<select id="readRestaurantInfo" parameterType="Long" resultType="com.sp.yogi.restaurant.Restaurant">
-      SELECT businessNum, restaurantName, restaurantAddr1, restaurantAddr2, restaurantTel, basePrice, openingHour, closingHour, foodInfo
+      SELECT r.restaurantNum, businessNum, restaurantName, restaurantAddr1, restaurantAddr2, restaurantTel, basePrice, openingHour, closingHour, foodInfo
       FROM restaurant r
       JOIN restaurantId ri ON r.restaurantNum = ri.restaurantNum
       JOIN restaurantInfo rf ON ri.restaurantNum = rf.restaurantNum
