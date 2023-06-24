@@ -73,9 +73,9 @@ public class MarketServiceImpl implements MarketService{
 	}
 
 	@Override
-	public void updateFoodInfo(Map<String, Object> map) throws Exception {
+	public void updateFoodInfo(Market dto) throws Exception {
 		try {
-			dao.updateData("marketinfo.updateFoodInfo",map);
+			dao.updateData("marketinfo.updateFoodInfo",dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

@@ -334,7 +334,7 @@ function ajaxFileFun(url, method, query, dataType, fn) {
 		}
 	});
 }
-
+/*
 $(function(){
 	$('.btnInsertImgOk').click(function(){
 		// 사진인서트
@@ -364,10 +364,34 @@ $(function(){
 
 	});
 });
-
-
-
-
+*/
+$(function(){
+	$('.btnFoodInfoOk').click(function(){
+		
+		const f=document.foodInfoForm;
+		const info=f.info.value;
+		
+		if(info==null){
+			alert("원산지 정보를 입력하세요.");
+			f.info.focus();
+			return;
+		}
+		
+		let url="${pageContext.request.contextPath}/owner/market/updateInfo";
+		let query=new FormData(f);
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("원산지 정보를 등록하지 못했습니다.");
+				return false;
+			}
+			
+		};
+		
+		ajaxFun(url,"post",query,"json",fn);
+		
+	});
+});
 
 </script>
 
@@ -586,13 +610,15 @@ $(function(){
 	    		<h5 class="modal-title">원산지 정보 작성</h5>
 	    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	   		</div>
+	   		<form name="foodInfoForm" method="post">
 	    	<div class="modal-body">
-    			<textarea class="modal-text">${dto.foodInfo}</textarea>
+    			<textarea name="info" class="modal-text">${dto.foodInfo}</textarea>
 	    	</div>
 	  		<div class="modal-footer">
 	    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
-	    		<button type="button" class="modal-button toOrder">등록하기</button>
+	    		<button type="button" class="modal-button toOrder btnFoodInfoOk">등록하기</button>
 	  		</div>
+	  		</form>
 		</div>
 	</div>
 </div>

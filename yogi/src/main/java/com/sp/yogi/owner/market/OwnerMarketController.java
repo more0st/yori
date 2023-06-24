@@ -68,6 +68,24 @@ public class OwnerMarketController {
 		}
 		return "rediect:/owner/market/marketinfo";
 	}
+
+	@RequestMapping(value = "updateInfo", method = RequestMethod.POST)
+	public String updateInfo(Market dto, HttpSession session) throws Exception{
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		try {
+			Market res= service.readRestaurant2(info.getUserId());
+			dto.setRestaurantNum(res.getRestaurantNum());
+			service.updateFoodInfo(dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();//오류확인하고지우기
+		}
+		
+		
+		return "rediect:/owner/market/marketinfo";
+	}
 	
 	@RequestMapping(value = "review", method = RequestMethod.GET)
 	public String review() {
