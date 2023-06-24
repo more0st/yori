@@ -240,7 +240,7 @@ function getList() {
 				
 	          	// 사진 있을 경우 , 없을 경우
 	            if (list.picture == null) {
-				    resultTemplate += `<img class="product-img" src="${pageContext.request.contextPath}/resources/images/default.png"/>`
+				    resultTemplate += `<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/default.png"/>`
 				} else {
 				    resultTemplate += `<img class="res-img" src="${pageContext.request.contextPath}/resources/images/`+ list.imageFilename +`"/>`
 				}

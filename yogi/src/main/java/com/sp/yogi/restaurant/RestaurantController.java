@@ -34,13 +34,8 @@ public class RestaurantController {
 			Model model
 			) throws Exception {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		
-		if (req.getMethod().equalsIgnoreCase("GET")) {
-			keyword = URLDecoder.decode(keyword, "UTF-8");
-		}
-		
+	
 		String categoryNum = req.getParameter("categoryNum");
-		System.out.println("카테고리 : " + categoryNum);
 		
 		// 로그인 안되어있는 상태면 로그인 창으로 이동
 		if(info == null) {
@@ -51,30 +46,11 @@ public class RestaurantController {
 			info.setDeliveryAddr(addr1);
 			
 			addr1 = service.extractAddress(addr1);
-			
-			//  addr1 : 강남구 신사동
-			//  deliveryAddr : 서울 강남구 가로수길 5 (신사동)
+
 			info.setAddr1(addr1);
 		}
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("condition", condition);
-		map.put("keyword", keyword);
-		map.put("addr1", info.getAddr1());
-		map.put("categoryNum", categoryNum);
-		
-		
-		List<Restaurant> list = service.listRestaurant(map);
-		
-		for(Restaurant i : list) {
-			System.out.println("list에 정보있냐");
-			System.out.println(" 이름 : " + i.getRestaurantName());
-			System.out.println(" 카테고리2 : " + i.getCategoryNum());
-		}
-		
 		
 		model. addAttribute("categoryNum", categoryNum);
-		model. addAttribute("list", list);
 		model.addAttribute("member", info);
 		
 		model.addAttribute("condition", condition);
@@ -100,7 +76,6 @@ public class RestaurantController {
 		}
 		
 		String categoryNum = req.getParameter("categoryNum");
-		System.out.println("카테고리 : " + categoryNum);
 		
 		// 로그인 안되어있는 상태면 로그인 창으로 이동
 		if(info == null) {
@@ -116,8 +91,8 @@ public class RestaurantController {
 			addr1 = service.extractAddress(addr1);
 			
 			info.setAddr1(addr1);
-			// System.out.println(addr1);					// >> addr1 : 강남구 신사동
-			// System.out.println(info.getDeliveryAddr());	// >> deliveryAddr : 서울 강남구 가로수길 5 (신사동)
+			// addr1 : 강남구 신사동
+			// deliveryAddr : 서울 강남구 가로수길 5 (신사동)
 		}
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -126,14 +101,7 @@ public class RestaurantController {
 		map.put("addr1", info.getAddr1());
 		map.put("categoryNum", categoryNum);
 		
-		System.out.println("컨디션 : " + condition);
-		System.out.println("키워드 : " + keyword);
-		System.out.println("주소 : " + info.getAddr1());
-		System.out.println("카테고리숫자 : " + categoryNum);
-		
-		
 		List<Restaurant> list = service.listRestaurant(map);
-		System.out.println("리스트 존재 ? " + list); 
 		
 		for(Restaurant i : list) {
 			if(i.getRating() == null) {
@@ -146,8 +114,6 @@ public class RestaurantController {
 		resultMap.put("member", info);
 		resultMap.put("condition", condition);
 		resultMap.put("keyword", keyword);
-		
-		System.out.println("리조트값값ㅂ값 : " + resultMap);
 		
 		return resultMap;
 	}
