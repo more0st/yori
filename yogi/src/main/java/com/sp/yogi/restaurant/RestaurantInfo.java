@@ -1,5 +1,7 @@
 package com.sp.yogi.restaurant;
 
+import java.util.List;
+
 public class RestaurantInfo {
 	private Long restaurantNum;
 	private String businessNum;
@@ -12,7 +14,14 @@ public class RestaurantInfo {
 	private String closingHour;
 	private String foodInfo;
 	
+	private List<Category> categoryList;
 	
+	public List<Category> getCategoryList() {
+		return categoryList;
+	}
+	public void setCategoryList(List<Category> categoryList) {
+		this.categoryList = categoryList;
+	}
 	public Long getRestaurantNum() {
 		return restaurantNum;
 	}

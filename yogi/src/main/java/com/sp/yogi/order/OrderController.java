@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sp.yogi.member.Member;
 import com.sp.yogi.member.MemberService;
 import com.sp.yogi.member.SessionInfo;
-import com.sp.yogi.restaurant.Restaurant;
+import com.sp.yogi.restaurant.RestaurantInfo;
 import com.sp.yogi.restaurant.RestaurantService;
 
 @Controller("order.orderController")
@@ -40,7 +40,7 @@ public class OrderController {
 		
 		Member dto = memberservice.readMember(userId);
 		
-		Restaurant restaurant = restaurantService.readRestaurantInfo(restaurantNum);
+		RestaurantInfo restaurant = restaurantService.readRestaurantInfo(restaurantNum);
 		
 		model.addAttribute("restaurant", restaurant);
 		model.addAttribute("dto", dto);
@@ -83,7 +83,7 @@ public class OrderController {
 		dto.setTel(tel);
 		
 		System.out.println("레스토랑 : " + restaurantNum);
-		Restaurant restaurant = restaurantService.readRestaurantInfo(restaurantNum);
+		RestaurantInfo restaurant = restaurantService.readRestaurantInfo(restaurantNum);
 		
 		Member orderUser = memberservice.readMember(info.getUserId());
 		

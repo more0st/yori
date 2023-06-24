@@ -59,10 +59,15 @@ public class RestaurantServiceImpl implements RestaurantService{
 	@Override
 	public RestaurantInfo readRestaurantInfo(Long restaurantNum) {
 		RestaurantInfo restaurantInfo = null;
+		List<Category> categoryList = null;
 		
 		try {
 			restaurantInfo = dao.selectOne("restaurant.readRestaurantInfo", restaurantNum);
 			restaurantInfo.setFoodInfo(restaurantInfo.getFoodInfo().replaceAll("\n", "<br>"));
+			
+			categoryList = readCategory(restaurantNum);
+			
+			restaurantInfo.setCategoryList(categoryList);;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,47 +79,50 @@ public class RestaurantServiceImpl implements RestaurantService{
 
 	// 가게 카테고리 
 	@Override
-	public Category readCategory(Long restaurantNum) {
-		Category category = null;
+	public List<Category> readCategory(Long restaurantNum) {
+		List<Category> categoryList = null;
 		
 		try {
-			category = dao.selectOne("restaurant.readCategory", restaurantNum);
+			categoryList = dao.selectList("restaurant.readCategory", restaurantNum);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return category;
+		return categoryList;
 	}
+	
+
 
 	// 가게 메뉴 
 	@Override
-	public Menu readMenu(Long num) {
-		Menu menu = null;
+	public List<Menu> readMenu(Long num) {
+		List<Menu> menuList = null;
 		
 		try {
-			menu = dao.selectOne("restaurant.readMenu", num);
+			menuList = dao.selectList("restaurant.readMenu", num);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return menu;
+		return menuList;
 	}
-
 
 	// 가게 옵션
 	@Override
-	public Option readOption(Long menuNum) {
-		Option option = null;
+	public List<Option> readOption(Long menuNum) {
+		List<Option> optionList = null;
 
 		try {
-			option = dao.selectOne("restaurant.readOption", menuNum);
+			optionList = dao.selectList("restaurant.readOption", menuNum);
 		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return option;
+		return optionList;
 	}
+
+
 }
