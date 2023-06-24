@@ -43,7 +43,7 @@
 		JOIN restaurant r ON ri.restaurantNum = r.restaurantNum
 		JOIN restaurantInfo info ON info.restaurantNum = ri.restaurantNum
 		JOIN deliveryMap d ON d.restaurantNum = ri.restaurantNum
-		JOIN restaurantImg img ON img.restaurantNum = ri.restaurantNum
+		LEFT OUTER JOIN restaurantImg img ON img.restaurantNum = ri.restaurantNum
 		LEFT OUTER JOIN (
 		    SELECT COUNT(*) reviewCount, AVG(rating) rating, restaurantNum FROM review GROUP BY restaurantNum
 		) rv ON rv.restaurantNum = ri.restaurantNum 
