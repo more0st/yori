@@ -472,6 +472,16 @@ body {
 	margin-bottom: 10px;
 }
 
+.valueinput{
+	background: none;
+	border: none; 
+	outline: none;
+	color:#fa0050;
+	width:70px;
+	font-weight: bold;
+	text-align: right;
+}
+
 </style>
 <div class="whole-container">
 	<div class="info-form">
@@ -862,7 +872,7 @@ body {
 			
 			<!-- 장바구니에 메뉴가 담길 시 출력 -->
 			<div class="cart-total">
-				합계 : 11,000원			
+				합계 : <input type="text" value="10000" class="valueinput" readonly="readonly">원			
 			</div>
 			
 			<div class="cart-bottom">
