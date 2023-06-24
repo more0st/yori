@@ -280,7 +280,9 @@
 
 </style>
 <script type="text/javascript">
-
+function login() {
+	location.href="${pageContext.request.contextPath}/owner/home";
+}
 function ajaxFun(url, method, query, dataType, fn) {
 	$.ajax({
 		type:method,
@@ -369,26 +371,29 @@ $(function(){
 	$('.btnFoodInfoOk').click(function(){
 		
 		const f=document.foodInfoForm;
-		const info=f.info.value;
+		const ff=f.foodInfo.value;
 		
-		if(info==null){
+		if(ff.trim() === ""){
 			alert("원산지 정보를 입력하세요.");
-			f.info.focus();
+			f.foodInfo.focus();
 			return;
 		}
-		
 		let url="${pageContext.request.contextPath}/owner/market/updateInfo";
-		let query=new FormData(f);
+		let query = $('form[name=foodInfoForm]').serialize();
 		
 		const fn=function(data){
 			if(data.state=="false"){
 				alert("원산지 정보를 등록하지 못했습니다.");
 				return false;
-			}
+			} else {
+                // 리다이렉트 처리 후 모달 종료
+                window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
+                $('#menu-modal4').modal('hide');
+            }
 			
 		};
 		
-		ajaxFun(url,"post",query,"json",fn);
+		ajaxFun(url,"post",query,"html",fn);
 		
 	});
 });
@@ -612,7 +617,7 @@ $(function(){
 	   		</div>
 	   		<form name="foodInfoForm" method="post">
 	    	<div class="modal-body">
-    			<textarea name="info" class="modal-text">${dto.foodInfo}</textarea>
+    			<textarea name="foodInfo" class="modal-text">${dto.foodInfo}</textarea>
 	    	</div>
 	  		<div class="modal-footer">
 	    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>

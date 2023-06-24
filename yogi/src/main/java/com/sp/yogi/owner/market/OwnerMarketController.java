@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sp.yogi.member.SessionInfo;
 
@@ -66,25 +67,26 @@ public class OwnerMarketController {
 		} catch (Exception e) {
 			e.printStackTrace();//오류확인하고지우기
 		}
-		return "rediect:/owner/market/marketinfo";
+		return ".owner.market.marketinfo";
 	}
 
 	@RequestMapping(value = "updateInfo", method = RequestMethod.POST)
-	public String updateInfo(Market dto, HttpSession session) throws Exception{
+	public String updateInfo(@RequestParam("foodInfo")String ff, Market dto, HttpSession session, Model model) throws Exception{
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		
 		try {
 			Market res= service.readRestaurant2(info.getUserId());
 			dto.setRestaurantNum(res.getRestaurantNum());
+			dto.setFoodInfo(ff);
 			service.updateFoodInfo(dto);
+			
+			model.addAttribute("dto", dto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();//오류확인하고지우기
 		}
 		
-		
-		return "rediect:/owner/market/marketinfo";
+		return "redirect:/owner/market/marketinfo";//리다이렉트가 안됨
 	}
 	
 	@RequestMapping(value = "review", method = RequestMethod.GET)
