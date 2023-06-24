@@ -6,18 +6,18 @@
 	<!-- 키워드 -->
 	<sql id="where-list">
 		<if test="condition=='all' ">
-			AND INSTR(restaurantName, #{keyword, jdbcType=VARCHAR}) &gt; 0 
+			AND INSTR(restaurantName, #{keyword, jdbcType=VARCHAR}) &gt; 0
 		</if>
 		<if test="condition=='rank' ">
 			AND INSTR(restaurantName, #{keyword, jdbcType=VARCHAR}) &gt; 0 
 			ORDER BY rating ASC
 		</if>
 		<if test="condition=='review' ">
-			AND INSTR(restaurantName, #{keyword, jdbcType=VARCHAR}) &gt; 0
+			AND INSTR(restaurantName, #{keyword, jdbcType=VARCHAR}) &gt; 0 
 			ORDER BY reviewCount ASC
 		</if>
 		<if test="condition=='minPrice' ">
-			AND INSTR(restaurantName, #{keyword, jdbcType=VARCHAR}) &gt; 0
+			AND INSTR(restaurantName, #{keyword, jdbcType=VARCHAR}) &gt; 0 
 			ORDER BY basePrice DESC
 		</if>
 	</sql>
@@ -38,7 +38,7 @@
 	
 	
 	<select id="listRestaurant" parameterType="map" resultType="com.sp.yogi.restaurant.Restaurant">
-		SELECT ri.restaurantNum, categoryNum ,restaurantName, basePrice, NVL(reviewCount,0) reviewCount, rating, addr, imageFilename
+		SELECT ri.restaurantNum, categoryNum ,restaurantName, basePrice, NVL(reviewCount,0) reviewCount, rating, addr addr1, imageFilename
 		FROM restaurantId ri 
 		JOIN restaurant r ON ri.restaurantNum = r.restaurantNum
 		JOIN restaurantInfo info ON info.restaurantNum = ri.restaurantNum

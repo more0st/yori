@@ -5,11 +5,10 @@ public class Restaurant {
 	private Long reviewCount;
 	
 	private Long restaurantNum;
-	private Long rating;
+	private Double rating;
 	private String restaurantName;
 	private String basePrice;
 	private int state;
-	
 	
 	// 주소, 카테고리
 	private String addr1;
@@ -17,7 +16,6 @@ public class Restaurant {
 	
 	// 이미지
 	private String imageFilename;
-	
 	
 	public String getImageFilename() {
 		return imageFilename;
@@ -49,10 +47,10 @@ public class Restaurant {
 	public void setRestaurantNum(Long restaurantNum) {
 		this.restaurantNum = restaurantNum;
 	}
-	public Long getRating() {
+	public Double getRating() {
 		return rating;
 	}
-	public void setRating(Long rating) {
+	public void setRating(Double rating) {
 		this.rating = rating;
 	}
 	public String getRestaurantName() {

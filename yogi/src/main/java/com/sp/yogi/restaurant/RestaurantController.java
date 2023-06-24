@@ -47,16 +47,14 @@ public class RestaurantController {
 			return ".member.login";
 		}
 		
-		// 배달지 선택 안했을 경우.
-		
 		if(addr1 != null) {
 			info.setDeliveryAddr(addr1);
 			
 			addr1 = service.extractAddress(addr1);
 			
+			//  addr1 : 강남구 신사동
+			//  deliveryAddr : 서울 강남구 가로수길 5 (신사동)
 			info.setAddr1(addr1);
-			// System.out.println(addr1);					// >> addr1 : 강남구 신사동
-			// System.out.println(info.getDeliveryAddr());	// >> deliveryAddr : 서울 강남구 가로수길 5 (신사동)
 		}
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -69,8 +67,9 @@ public class RestaurantController {
 		List<Restaurant> list = service.listRestaurant(map);
 		
 		for(Restaurant i : list) {
-			System.out.println(i.getRestaurantName() + " : 이름");
-			System.out.println(i.getCategoryNum() + " : 카테고리2");
+			System.out.println("list에 정보있냐");
+			System.out.println(" 이름 : " + i.getRestaurantName());
+			System.out.println(" 카테고리2 : " + i.getCategoryNum());
 		}
 		
 		
@@ -89,7 +88,7 @@ public class RestaurantController {
 	public Map<String, Object> search(HttpSession session, 
 			@RequestParam(value= "addr1", required = false) String addr1,
 			@RequestParam(defaultValue = "all") String condition,
-			@RequestParam(defaultValue = "") String keyword,
+			@RequestParam String keyword,
 			HttpServletRequest req,
 			Model model
 			) throws Exception {
@@ -123,7 +122,7 @@ public class RestaurantController {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("condition", condition);
-		map.put("keyword", keyword.trim());
+		map.put("keyword", keyword==null?"":keyword);
 		map.put("addr1", info.getAddr1());
 		map.put("categoryNum", categoryNum);
 		
@@ -134,7 +133,13 @@ public class RestaurantController {
 		
 		
 		List<Restaurant> list = service.listRestaurant(map);
-		System.out.println("리스트 존재 ? " + list);
+		System.out.println("리스트 존재 ? " + list); 
+		
+		for(Restaurant i : list) {
+			if(i.getRating() == null) {
+				i.setRating(0.0);
+			}
+		}
 		
 		resultMap.put("categoryNum", categoryNum);
 		resultMap.put("list", list);
