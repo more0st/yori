@@ -106,7 +106,7 @@
 				<div class="content1">
 					<div><p class="orderDone"> 주문 감사합니다🙏 </div>	
 					<hr class="hstyle">
-					<div><p class="paddingTB"> 고객님의 주문 요청이 완료되었습니다.</p> </div>	
+					<div><p class="paddingTB"> ${sessionScope.member.userName}님의 주문 요청이 완료되었습니다.</p> </div>	
 				</div>
 			</div>
 		</div>

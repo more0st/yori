@@ -1,11 +1,17 @@
 package com.sp.yogi.order;
 
 public interface OrderService {
+
 	/**
 	 * 
-	 * @param userId 검색할 아이디
-	 * @return
+	 * @return				주문 번호
 	 */
-	public Order readMember(String userId);
+	public String productOrderNumber();
 	
+	/**
+	 * 
+	 * @param dto			결제 정보
+	 * @throws Exception
+	 */
+	public void insertOrder(Order dto) throws Exception;
 }

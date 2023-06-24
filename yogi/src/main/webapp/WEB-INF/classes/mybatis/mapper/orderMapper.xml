@@ -3,13 +3,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="order">
 
-<select id="readMember" parameterType="String" resultType="com.sp.yogi.order.Order">
-
-	SELECT m1.userName, m2.tel
-	FROM member2 m2
-	JOIN member1 m1 ON m1.userId = m2.userId
-	WHERE m1.userId = #{userId}
-
-</select>
+	<select id="readMaxOrderNumber" resultType="String">
+		SELECT orderNum
+		FROM order_bundle
+		ORDER BY order_date DESC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
 
 </mapper>

@@ -10,13 +10,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sp.yogi.member.Member;
+import com.sp.yogi.member.MemberService;
 import com.sp.yogi.member.SessionInfo;
 
 @Controller("order.orderController")
 @RequestMapping("/order/*")
 public class OrderController {
 	@Autowired
-	private OrderService service;
+	private OrderService orderservice;
+	
+	@Autowired
+	private MemberService memberservice;
 	
 	@GetMapping("order")
 	public String order(HttpSession session, Model model) {
@@ -25,7 +30,7 @@ public class OrderController {
 		
 		String userId = info.getUserId();
 		
-		Order dto = service.readMember(userId);
+		Member dto = memberservice.readMember(userId);
 		
 		model.addAttribute("dto", dto);
 		
@@ -64,6 +69,15 @@ public class OrderController {
 		dto.setAddr1(info.getAddr1());
 		dto.setAddr2(addr2);
 		dto.setTel(tel);
+		
+		Member orderUser = memberservice.readMember(info.getUserId());
+		
+		String productOrderNumber = null; // 주문번호
+		int total_price = 0; // 전체 금액
+		
+		productOrderNumber = orderservice.productOrderNumber();
+		
+		System.out.println("주문번호 : " + productOrderNumber);
 		
 		model.addAttribute("dto", dto);
 		
