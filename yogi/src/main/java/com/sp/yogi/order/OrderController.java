@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sp.yogi.member.Member;
 import com.sp.yogi.member.MemberService;
 import com.sp.yogi.member.SessionInfo;
+import com.sp.yogi.restaurant.Restaurant;
+import com.sp.yogi.restaurant.RestaurantService;
 
 @Controller("order.orderController")
 @RequestMapping("/order/*")
@@ -22,6 +24,9 @@ public class OrderController {
 	
 	@Autowired
 	private MemberService memberservice;
+	
+	@Autowired
+	private RestaurantService restaurantService;
 	
 	@GetMapping("order")
 	public String order(HttpSession session, 
@@ -35,10 +40,9 @@ public class OrderController {
 		
 		Member dto = memberservice.readMember(userId);
 		
-		Order order = new Order();
+		Restaurant restaurant = restaurantService.readRestaurantInfo(restaurantNum);
 		
-		order.setRestaurantNum(restaurantNum);
-		
+		model.addAttribute("restaurant", restaurant);
 		model.addAttribute("dto", dto);
 		
 		return ".order.order";
@@ -58,7 +62,8 @@ public class OrderController {
 			@RequestParam String tel,
 			@RequestParam String memo,
 			@RequestParam String payment,
-			@RequestParam String addr2
+			@RequestParam String addr2,
+			@RequestParam("restaurantNum") Long restaurantNum
 			) {
 		System.out.println("POST방식");
 		
@@ -77,6 +82,9 @@ public class OrderController {
 		dto.setAddr2(addr2);
 		dto.setTel(tel);
 		
+		System.out.println("레스토랑 : " + restaurantNum);
+		Restaurant restaurant = restaurantService.readRestaurantInfo(restaurantNum);
+		
 		Member orderUser = memberservice.readMember(info.getUserId());
 		
 		String productOrderNumber = null; // 주문번호
@@ -84,9 +92,17 @@ public class OrderController {
 		
 		productOrderNumber = orderservice.productOrderNumber();
 		
+		Long orderNum = Long.parseLong(productOrderNumber);
+		
+		Order order = new Order();
+		
+		order.setOrderNum(orderNum);
+		
 		System.out.println("주문번호 : " + productOrderNumber);
 		
+		model.addAttribute("order", order);
 		model.addAttribute("dto", dto);
+		model.addAttribute("restaurant", restaurant);
 		
 		return ".order.orderComplete";
 	}

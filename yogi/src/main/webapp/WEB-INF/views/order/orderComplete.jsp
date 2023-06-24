@@ -118,11 +118,11 @@
 				<table style="border-spacing: 0 10px;">
 					<tr>
 						<td class="keyword bold">주문번호</td> 
-						<td>${orderNum}</td> 
+						<td>${order.orderNum}</td> 
 					</tr>
 					<tr>
 						<td class="keyword bold">주문식당</td> 
-						<td>${restaurantName}</td> 
+						<td>${restaurant.restaurantName}</td> 
 					</tr>	
 					<tr>
 						<td class="keyword bold">결제수단</td> 
