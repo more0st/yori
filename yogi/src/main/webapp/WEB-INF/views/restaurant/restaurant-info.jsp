@@ -866,7 +866,8 @@ body {
 			</div>
 			
 			<div class="cart-bottom">
-				<button class="cart-button" type="button" onclick="location.href='${pageContext.request.contextPath}/order/order'">주문하기</button>
+				<button class="cart-button" type="button" onclick="location.href='${pageContext.request.contextPath}/order/order?restaurantNum=${restaurantNum}'">주문하기</button>
+				<input type="hidden" value="${restaurantNum}">
 			</div>
 		</div>
 	</div>

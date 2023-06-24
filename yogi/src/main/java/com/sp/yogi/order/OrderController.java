@@ -24,7 +24,8 @@ public class OrderController {
 	private MemberService memberservice;
 	
 	@GetMapping("order")
-	public String order(HttpSession session, Model model,
+	public String order(HttpSession session, 
+			Model model,
 			@RequestParam("restaurantNum") Long restaurantNum
 			) {
 		
