@@ -49,9 +49,22 @@
 		WHERE noticeNum=#{noticeNum}    
 	</select>
 	
+	<select id="readFile" parameterType="Long" resultType="com.sp.yogi.admin.domain.Notice">
+		SELECT imgNum, noticeNum, imgFileName
+		FROM noticeImg
+	    WHERE imgNum=#{imgNum}
+	</select>
+	
 	<!-- 조회수 증가 -->
 	<update id="updateHitCount" parameterType="Long">
 		UPDATE notice SET hitCount=hitCount+1 WHERE noticeNum = #{noticeNum}
+	</update>
+	
+	<!-- 수정 -->
+	<update id="updateNotice" parameterType="com.sp.yogi.admin.domain.Notice">
+		UPDATE notice SET subject=#{subject},
+			content=#{content}, notice=#{notice}
+		WHERE noticeNum=#{noticeNum}
 	</update>
 	
 </mapper>

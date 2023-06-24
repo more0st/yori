@@ -1,5 +1,6 @@
 package com.sp.yogi.admin.serviceImpl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -116,6 +117,69 @@ public class NoticeServiceImpl implements NoticeService {
 	public void updateHitCount(long num) throws Exception {
 		try {
 			dao.updateData("noticeManage.updateHitCount", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public void updateNotice(Notice dto, String pathname) throws Exception {
+		try {
+			dao.updateData("noticeManage.updateNotice", dto);
+
+			if (! dto.getSelectFile().isEmpty()) {
+				for (MultipartFile mf : dto.getSelectFile()) {
+					String saveFilename = fileManager.doFileUpload(mf, pathname);
+					if (saveFilename == null) {
+						continue;
+					}
+
+//					long fileSize = mf.getSize();
+
+					dto.setImgFileName(saveFilename);
+//					dto.setFileSize(fileSize);
+
+					// insertFile(dto);
+					dao.insertData("noticeManage.insertFile", dto);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public void deleteNotice(long imgNum, String pathname) throws Exception {
+		try {
+			// 파일 지우기
+			List<Notice> listFile = listFile(imgNum);
+			if (listFile != null) {
+				for (Notice dto : listFile) {
+					fileManager.doFileDelete(dto.getImgFileName(), pathname);
+				}
+			}
+
+			// 파일 테이블 내용 지우기
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("field", "num");
+			map.put("num", imgNum);
+			deleteFile(map);
+
+			dao.deleteData("noticeManage.deleteFile", imgNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void deleteFile(Map<String, Object> map) throws Exception {
+		try {
+			dao.deleteData("noticeManage.deleteFile", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

@@ -237,11 +237,11 @@ function sendOk(elClickedObj) {
 }
 
 <c:if test="${mode == 'update'}">
-function deleteFile(noticePhotoNum) {
+function deleteFile(imgNum) {
 	let cnt = $(".img-box").find("img").length;
 	
 	if(confirm('이미지를 삭제하시겠습니까 ?')){
-		let query = "noticeNum=${dto.noticeNum}&noticePhotoNum=" + noticePhotoNum + "&page=${page}";
+		let query = "noticeNum=${dto.noticeNum}&imgNum=" + imgNum + "&page=${page}";
 		let url = "${pageContext.request.contextPath}/notice/deleteFile.do";
 		location.href = url + "?" + query;
 	}

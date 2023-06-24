@@ -51,7 +51,6 @@ public class NoticeController {
 	}
 	
 	
-	
 	@RequestMapping(value = "article", method=RequestMethod.GET)
 	public String article(@RequestParam long num,
 			HttpSession session, Model model) throws Exception {
@@ -74,7 +73,6 @@ public class NoticeController {
 	}
 	
 	
-	
 	@RequestMapping(value = "list", method=RequestMethod.GET)
 	public String list(HttpServletRequest req, HttpSession session, Model model) throws Exception {
 		
@@ -95,4 +93,43 @@ public class NoticeController {
 		
 		return ".admin.notice.list";
 	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public String updateForm(@RequestParam long num,
+			HttpSession session,
+			Model model) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+
+		Notice dto = service.readNotice(num);
+		if (dto == null || ! info.getUserId().equals(dto.getUserId())) {
+			return "redirect:/admin/noticeManage/list?page=";
+		}
+
+		List<Notice> listFile = service.listFile(num);
+
+		model.addAttribute("mode", "update");
+		model.addAttribute("dto", dto);
+		model.addAttribute("listFile", listFile);
+
+		return ".admin.noticeManage.write";
+	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String delete(@RequestParam long num,
+			HttpSession session) throws Exception {
+
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "notice";
+
+//		SessionInfo info = (SessionInfo) session.getAttribute("member");
+//		Notice dto = service.readNotice(num);
+
+		try {
+			service.deleteNotice(num, pathname);
+		} catch (Exception e) {
+		}
+
+		return "redirect:/notice/list?";
+	}
+	
 }

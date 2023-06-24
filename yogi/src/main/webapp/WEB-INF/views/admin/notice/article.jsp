@@ -83,19 +83,44 @@
 					조회수 : ${dto.hitCount}
 					</div>
 					
+					<div class="row row-cols-6 img-box" style="padding-top: 20px;">
+						<c:forEach var="vo" items="${listFile}">
+									<div class="col p-1">
+										<img src="${pageContext.request.contextPath}/uploads/notice/${vo.imgFileName}"
+											class="img-thumbnail w-100 h-100" style="max-height: 130px;"
+											onclick="imageViewer('${pageContext.request.contextPath}/uploads/notice/${vo.imgFileName}');">
+									</div>
+								</c:forEach>
+					</div>
+					
 					<div class="n-content">
 					<br>
 					${dto.content}
 					</div>
 				</div>
 				<div class="writebtn"><button type="button" class="btn btn-danger" onclick="deleteNotice('${dto.noticeNum}');">삭제하기</button></div>
-				<div class="writebtn"><button type="button" class="btn btn-primary" style="margin-right: 10px;" onclick="location.href='${pageContext.request.contextPath}/admin/notice/write'">수정하기</button></div>
+				<div class="writebtn"><button type="button" class="btn btn-primary" style="margin-right: 10px;" onclick="location.href='${pageContext.request.contextPath}/admin/notice/update?num=${dto.noticeNum}';">수정하기</button></div>
 			</div>
 		</div>	<!-- class="notice-wrap" -->
 		
 	</div> <!-- class="whole-container" -->
 </main>
 
+
+<!-- Modal -->
+<div class="modal fade" id="myDialogModal" tabindex="-1" aria-labelledby="myDialogModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myDialogModalLabel">이미지 뷰어</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+        
+			</div>
+		</div>
+	</div>
+</div>
 
 <script type="text/javascript">
 
