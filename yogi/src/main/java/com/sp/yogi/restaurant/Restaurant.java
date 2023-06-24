@@ -7,7 +7,7 @@ public class Restaurant {
 	private Long restaurantNum;
 	private Double rating;
 	private String restaurantName;
-	private String basePrice;
+	private Long basePrice;
 	private int state;
 	
 	// 주소, 카테고리
@@ -59,10 +59,10 @@ public class Restaurant {
 	public void setRestaurantName(String restaurantName) {
 		this.restaurantName = restaurantName;
 	}
-	public String getBasePrice() {
+	public Long getBasePrice() {
 		return basePrice;
 	}
-	public void setBasePrice(String basePrice) {
+	public void setBasePrice(Long basePrice) {
 		this.basePrice = basePrice;
 	}
 	public int getState() {

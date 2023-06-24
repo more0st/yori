@@ -49,7 +49,9 @@
 		) rv ON rv.restaurantNum = ri.restaurantNum 
 		WHERE info.state = 1 AND ri.status = 3
 			  AND INSTR(d.addr,  #{addr1}) &gt; 0
-			  AND categoryNum = #{categoryNum} 
+			 <if test="categoryNum > 0">
+			 	 AND categoryNum = #{categoryNum} 
+			  </if>
 		<if test="keyword!=null and keyword != '' ">
 			<include refid="where-list"/>
 		</if>
