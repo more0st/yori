@@ -123,6 +123,29 @@ public class RestaurantServiceImpl implements RestaurantService{
 		
 		return optionList;
 	}
+	
+	// 좋아요
+	@Override
+	public Boolean isLike(Map<String, Object> map) {
+		Boolean like = false;
+		/*int result = 0;
+		
+		try {
+			// Long userId, Long restaurantNum
+			result = dao.selectOne("restaurant.isLike", map);
+			
+			if(result == 1) {
+					
+			} else {
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		*/
+		return like;
+	}
 
 
 }

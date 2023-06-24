@@ -21,4 +21,7 @@ public interface RestaurantService {
 	
 	// 가게 옵션
 	public List<Option> readOption(Long menuNum);
+	
+	// 좋아요
+	Boolean isLike(Map<String,Object> map);
 }

@@ -496,7 +496,14 @@ body {
 		<div class="res-info">
 			<div class="res-title">
 				<div class="res-name">
-					<div class="res-name-left">${restaurantInfo.restaurantName}</div><div class="res-name-right"><i class="bi bi-heart-fill"></i></div>
+					<div class="res-name-left">${restaurantInfo.restaurantName}</div>
+					<div class="res-name-right">
+						<button type="button" class="btn btnSendRecipeLike" title="좋아요" style="border: none; padding-left: 0"
+                              disabled="disabled">
+                              <i class="fa-solid fa-heart" id="likeBtn"></i> 
+                              <span id="recipeLikeCount">${dto.recipeLikeCount}</span>
+                        </button>
+                    </div>
 				</div>
 				<div class="res-main">
 					<div>
@@ -934,4 +941,80 @@ body {
 		$('#menu-modal').modal('show');
 	});
 	
+	
+	
+	
+    function ajaxFun(url, method, query, dataType, fn) {
+        $.ajax({
+            type: method,
+            url: url,
+            data: query,
+            dataType: dataType,
+            success: function (data) {
+                fn(data);
+            }
+        });
+    }
+
+    // 게시물 좋아요----------------------------------------------------------------------------
+/*	
+    let likeStatus = ${likeStatus};
+    let likeBtn = document.getElementById('likeBtn');
+
+    $(document).ready(function () {
+        if (!likeStatus) $('#likeBtn').css("color", likeColor)
+    });
+
+    let likeColor = '#dc6c6a';
+    let defaultColor = "#000000"
+
+    function changeLikeStatus() {
+        if (likeStatus) {
+            // 좋아요 취소
+            // 1. 상태변경
+            likeStatus = !likeStatus
+            // 2. 색 변경
+            $('#likeBtn').css("color", likeColor)
+            console.log(likeStatus + " 좋아요 취소")
+
+        } else {
+            // 좋아요 요청
+            // 1. 상태변경
+            likeStatus = !likeStatus
+            // 2. 색 변경
+            $('#likeBtn').css("color", defaultColor)
+            console.log(likeStatus + " 좋아요 요청")
+        }
+    }
+
+
+    $(function () {
+        $(".btnSendRecipeLike").click(function () {
+            let msg = likeStatus ? "게시글에 공감하십니까 ?" : "게시글 공감을 취소하시겠습니까 ?";
+
+            if (!confirm(msg)) {
+                return false;
+            }
+
+            let url = "${pageContext.request.contextPath}/restaurant/like";
+            let id = "${restaurantNum}";
+            let qs = "restaurantNum=" + restaurantNum;
+
+
+            const fn = function (data) {
+                let state = data.state;
+                if (state === true) {
+                    console.log(likeStatus)
+
+                    changeLikeStatus();
+
+                } else if (state === "liked") {
+                    alert("좋아요는 한번만 가능합니다.");
+                }
+            };
+
+            ajaxFun(url, "post", qs, "json", fn);
+        });
+    });
+ */   
 </script>

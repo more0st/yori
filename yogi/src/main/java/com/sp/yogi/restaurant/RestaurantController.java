@@ -125,4 +125,28 @@ public class RestaurantController {
 		
 		return ".restaurant.restaurant-info";
 	}
+	
+/*	@GetMapping("like")
+	@ResponseBody
+	public Map<String, Object> like(
+			HttpSession session, 
+			HttpServletRequest req,
+			Model model
+			) throws Exception {
+		Map<String, Object> resultMap = new HashMap<>();
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		String userId = info.getUserId();
+		Long restaurantNum = Long.parseLong(req.getParameter("restaurantNum"));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("restaurantNum", restaurantNum);
+		
+		
+		// resultMap.put("state", state);
+		
+		return resultMap;
+	}
+	*/
 }
