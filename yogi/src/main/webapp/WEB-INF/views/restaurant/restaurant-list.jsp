@@ -176,20 +176,7 @@
 	
 	<div class="location"><i class="fa-solid fa-store"></i>&nbsp;<span>${sessionScope.member.userName}</span>님 근처의 음식점</div>
 	
-	<div class="restaurant-list" id="restaurantList">
-	<!--  
-		<c:forEach var="restaurant" items="${list}">
-			<a class="restaurant-info" href="${pageContext.request.contextPath}/restaurant/info">
-				<img class="res-img" src="${pageContext.request.contextPath}/resources/${restaurant.imageFilename}">
-				<span>
-					<span class="res-title">${restaurant.restaurantName}</span><br>
-					<span class="res-info res-rank">★ ${restaurant.rating==null? 0.0 :restaurant.rating} </span><span class="res-division">|</span><span class="res-info">리뷰 ${restaurant.reviewCount}</span><br>
-					<span class="res-info res-80">${restaurant.basePrice}원 이상 배달</span><span class="res-division"></span>
-				</span>
-			</a>
-		</c:forEach>
-	-->	
-	</div>
+	<div class="restaurant-list" id="restaurantList"></div>
 </div>
 
 

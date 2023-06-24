@@ -70,7 +70,6 @@ public class RestaurantController {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
 		
-		
 		if (req.getMethod().equalsIgnoreCase("GET")) {
 			keyword = URLDecoder.decode(keyword, "UTF-8");
 		}
@@ -90,13 +89,6 @@ public class RestaurantController {
 		map.put("categoryNum", categoryNum);
 		
 		List<Restaurant> list = service.listRestaurant(map);
-		System.out.println("====================");
-		for(Restaurant r : list) {
-			System.out.println("식당 이름 : " + r.getRestaurantName());
-			System.out.println("최소 주문 금액 : " + r.getBasePrice());
-			System.out.println("-------------");
-		}
-		
 		
 		for(Restaurant i : list) {
 			if(i.getRating() == null) {
