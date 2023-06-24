@@ -114,8 +114,14 @@ public class RestaurantController {
 			) {
 		RestaurantInfo restaurantInfo = service.readRestaurantInfo(restaurantNum);
 		
+		//Category category = service.readCategory(restaurantNum);
+		//Menu menu = service.readMenu(category.getNum());
+		//Option option = service.readOption(menu.getMenuNum());
+		
 		model.addAttribute("restaurantNum", restaurantNum);
 		model.addAttribute("restaurantInfo", restaurantInfo);
+		
+		
 		
 		return ".restaurant.restaurant-info";
 	}

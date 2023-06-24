@@ -70,4 +70,51 @@ public class RestaurantServiceImpl implements RestaurantService{
 		
 		return restaurantInfo;
 	}
+
+
+	// 가게 카테고리 
+	@Override
+	public Category readCategory(Long restaurantNum) {
+		Category category = null;
+		
+		try {
+			category = dao.selectOne("restaurant.readCategory", restaurantNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return category;
+	}
+
+	// 가게 메뉴 
+	@Override
+	public Menu readMenu(Long num) {
+		Menu menu = null;
+		
+		try {
+			menu = dao.selectOne("restaurant.readMenu", num);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return menu;
+	}
+
+
+	// 가게 옵션
+	@Override
+	public Option readOption(Long menuNum) {
+		Option option = null;
+
+		try {
+			option = dao.selectOne("restaurant.readOption", menuNum);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return option;
+	}
 }

@@ -81,7 +81,7 @@
 	
 	<!-- 가게 옵션 불러오기 -->
 	<select id="readOption" parameterType="Long" resultType="com.sp.yogi.restaurant.Option">
-		SELECT optionNum, menuNum, option_group optionGroup, option_name optionName, price FROM menuOption WHERE optionNum=#{optionNum} ;
+		SELECT optionNum, menuNum, option_group optionGroup, option_name optionName, price FROM menuOption WHERE menuNum=#{menuNum} ;
 	</select>
 	
 
