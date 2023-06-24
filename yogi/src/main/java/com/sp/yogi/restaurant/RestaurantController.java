@@ -108,10 +108,14 @@ public class RestaurantController {
 	@GetMapping("info")
 	public String info(
 			@RequestParam("restaurantNum") Long restaurantNum,
+			HttpSession session, 
+			HttpServletRequest req,
 			Model model
 			) {
+		RestaurantInfo restaurantInfo = service.readRestaurantInfo(restaurantNum);
 		
 		model.addAttribute("restaurantNum", restaurantNum);
+		model.addAttribute("restaurantInfo", restaurantInfo);
 		
 		return ".restaurant.restaurant-info";
 	}

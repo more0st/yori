@@ -17,6 +17,7 @@ public class Restaurant {
 	// 이미지
 	private String imageFilename;
 	
+	
 	public String getImageFilename() {
 		return imageFilename;
 	}

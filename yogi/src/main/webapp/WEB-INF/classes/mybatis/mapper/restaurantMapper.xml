@@ -61,7 +61,7 @@
 	</select>
 	
 	<!-- 가게 상세 정보 불러오기 -->
-	<select id="readRestaurantInfo" parameterType="Long" resultType="com.sp.yogi.restaurant.Restaurant">
+	<select id="readRestaurantInfo" parameterType="Long" resultType="com.sp.yogi.restaurant.RestaurantInfo">
       SELECT r.restaurantNum, businessNum, restaurantName, restaurantAddr1, restaurantAddr2, restaurantTel, basePrice, openingHour, closingHour, foodInfo
       FROM restaurant r
       JOIN restaurantId ri ON r.restaurantNum = ri.restaurantNum
@@ -69,6 +69,20 @@
       WHERE r.restaurantNum = ${restaurantNum}
    </select>
 	
+	<!-- 가게 카테고리 불러오기 -->
+	<select id="readCategory" parameterType="Long" resultType="com.sp.yogi.restaurant.Category">
+		SELECT num, restaurantNum, menuCategory FROM menu WHERE restaurantNum=#{restaurantNum}
+	</select>
+	
+	<!-- 가게 메뉴 불러오기 -->
+	<select id="readMenu" parameterType="Long" resultType="com.sp.yogi.restaurant.Menu">
+		SELECT menuNum,num,menu,price,imageFilename, stock FROM menu1 WHERE num=#{num}
+	</select>
+	
+	<!-- 가게 옵션 불러오기 -->
+	<select id="readOption" parameterType="Long" resultType="com.sp.yogi.restaurant.Option">
+		SELECT optionNum, menuNum, option_group optionGroup, option_name optionName, price FROM menuOption WHERE optionNum=#{optionNum} ;
+	</select>
 	
 
 </mapper>
