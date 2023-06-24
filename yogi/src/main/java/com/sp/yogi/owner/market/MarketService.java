@@ -14,7 +14,7 @@ public interface MarketService {
 	//updateBasePrice : 최소주문금액 수정
 	public void updateBasePrice(Map<String, Object> map) throws Exception;
 	//updateFoodInfo : 원산지정보 수정
-	public void updateFoodInfo(Map<String, Object> map) throws Exception;
+	public void updateFoodInfo(Market dto) throws Exception;
 	
 	//deleteResImg : 가게이미지삭제
 	public void deleteResImg(long fileNum, String pathname) throws Exception;

@@ -57,15 +57,64 @@ public class RestaurantServiceImpl implements RestaurantService{
 
 	// 가게 상세정보
 	@Override
-	public Restaurant readRestaurantInfo(Long restaurantNum) {
-		Restaurant restaurant = null;
+	public RestaurantInfo readRestaurantInfo(Long restaurantNum) {
+		RestaurantInfo restaurantInfo = null;
 		
 		try {
-			restaurant = dao.selectOne("restaurant.readRestaurantInfo", restaurantNum);
+			restaurantInfo = dao.selectOne("restaurant.readRestaurantInfo", restaurantNum);
+			restaurantInfo.setFoodInfo(restaurantInfo.getFoodInfo().replaceAll("\n", "<br>"));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return restaurant;
+		return restaurantInfo;
+	}
+
+
+	// 가게 카테고리 
+	@Override
+	public Category readCategory(Long restaurantNum) {
+		Category category = null;
+		
+		try {
+			category = dao.selectOne("restaurant.readCategory", restaurantNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return category;
+	}
+
+	// 가게 메뉴 
+	@Override
+	public Menu readMenu(Long num) {
+		Menu menu = null;
+		
+		try {
+			menu = dao.selectOne("restaurant.readMenu", num);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return menu;
+	}
+
+
+	// 가게 옵션
+	@Override
+	public Option readOption(Long menuNum) {
+		Option option = null;
+
+		try {
+			option = dao.selectOne("restaurant.readOption", menuNum);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return option;
 	}
 }

@@ -11,5 +11,14 @@ public interface RestaurantService {
 	public List<Restaurant> listRestaurant(Map<String, Object> map) throws Exception;
 
 	// 가게 상세 정보
-	public Restaurant readRestaurantInfo(Long restaurantNum);
+	public RestaurantInfo readRestaurantInfo(Long restaurantNum);
+	
+	// 가게 카테고리
+	public Category readCategory(Long restaurantNum);
+	
+	// 가게 메뉴
+	public Menu readMenu(Long num);
+	
+	// 가게 옵션
+	public Option readOption(Long menuNum);
 }

@@ -48,7 +48,7 @@
     </update>
 
    <!-- 원산지정보 수정 -->
-    <update id="updateFoodInfo" parameterType="map">
+    <update id="updateFoodInfo" parameterType="com.sp.yogi.owner.market.Market">
       UPDATE restaurantInfo SET foodInfo=#{foodInfo}
       WHERE restaurantNum = #{restaurantNum}
     </update>
