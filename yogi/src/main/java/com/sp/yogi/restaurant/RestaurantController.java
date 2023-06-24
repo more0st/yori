@@ -120,7 +120,7 @@ public class RestaurantController {
 	
 	@GetMapping("info")
 	public String info(
-			@RequestParam("restaurantNum") String restaurantNum,
+			@RequestParam("restaurantNum") Long restaurantNum,
 			Model model
 			) {
 		
