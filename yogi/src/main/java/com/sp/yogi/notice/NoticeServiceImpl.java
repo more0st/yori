@@ -39,18 +39,6 @@ public class NoticeServiceImpl implements NoticeService {
 		return list;
 	}
 
-	@Override
-	public List<Notice> listNoticeTop() {
-		List<Notice> list = null;
-
-		try {
-			list = dao.selectList("notice.listNoticeTop");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return list;
-	}
 
 	@Override
 	public void updateHitCount(long num) throws Exception {

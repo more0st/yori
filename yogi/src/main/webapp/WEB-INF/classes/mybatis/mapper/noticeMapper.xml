@@ -67,4 +67,13 @@
 		WHERE noticeNum=#{noticeNum}
 	</update>
 	
+	<!-- 삭제 -->
+	<delete id="deleteNotice" parameterType="Long">
+		DELETE FROM notice WHERE noticeNum = #{noticeNum}
+	</delete>
+	
+	<delete id="deleteFile" parameterType="map">
+		DELETE FROM noticeImg WHERE imgNum = #{imgNum}
+	</delete>	
+	
 </mapper>
