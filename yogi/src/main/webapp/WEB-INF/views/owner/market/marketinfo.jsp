@@ -336,14 +336,15 @@ function ajaxFileFun(url, method, query, dataType, fn) {
 		}
 	});
 }
-/*
+
+//로고이미지 등록
 $(function(){
 	$('.btnInsertImgOk').click(function(){
 		// 사진인서트
 		const f=document.insertImgForm;
 		let str;
-		
 		str=f.selectFile.value;
+		alert("str 값 : "+str);
 		
 		if(! str){
 			alert("이미지를 선택해주세요.");
@@ -352,7 +353,7 @@ $(function(){
 		}
 		
 		let url="${pageContext.request.contextPath}/owner/market/insertimg";
-		let query=new FormData(f);
+		let query = $('form[name=insertImgForm]').serialize();
 		
 		const fn=function(data){
 			if(data.state=="false"){
@@ -366,7 +367,82 @@ $(function(){
 
 	});
 });
-*/
+
+
+//영업시간 수정
+$(function(){
+	$('.btnHourOk').click(function(){
+		
+		const f=document.hourForm;
+		const op=f.openingHour.value;
+		const cl=f.closingHour.value;
+		
+		if(op.trim() === ""){
+			alert("오픈시간을 입력하세요.");
+			f.openingHour.focus();
+			return;
+		}
+
+		if(cl.trim() === ""){
+			alert("마감시간을 입력하세요.");
+			f.closingHour.focus();
+			return;
+		}
+		
+		let url="${pageContext.request.contextPath}/owner/market/updateHour";
+		let query = $('form[name=hourForm]').serialize();
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("영업시간을 수정하지 못했습니다.");
+				return false;
+			} else {
+                // 리다이렉트 처리 후 모달 종료
+                window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
+                $('#menu-modal1').modal('hide');
+            }
+			
+		};
+		
+		ajaxFun(url,"post",query,"html",fn);
+		
+	});
+});
+
+//최소주문금액수정
+$(function(){
+	$('.btnPriceOk').click(function(){
+		
+		const f=document.basePriceForm;
+		const bp=f.basePrice.value;
+		
+		if(bp.trim() === ""){
+			alert("최소주문금액을 입력하세요.");
+			f.basePrice.focus();
+			return;
+		}
+		let url="${pageContext.request.contextPath}/owner/market/updatePrice";
+		let query = $('form[name=basePriceForm]').serialize();
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("최소주문금액을 수정하지 못했습니다.");
+				return false;
+			} else {
+                // 리다이렉트 처리 후 모달 종료
+                window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
+                $('#menu-modal2').modal('hide');
+            }
+			
+		};
+		
+		ajaxFun(url,"post",query,"html",fn);
+		
+	});
+});
+
+
+//원산지정보수정
 $(function(){
 	$('.btnFoodInfoOk').click(function(){
 		
@@ -388,6 +464,44 @@ $(function(){
 			} else {
                 // 리다이렉트 처리 후 모달 종료
                 window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
+                $('#menu-modal3').modal('hide');
+            }
+			
+		};
+		
+		ajaxFun(url,"post",query,"html",fn);
+		
+	});
+});
+
+//배달팁등록
+$(function(){
+	$('.btnTipOk').click(function(){
+		
+		const f=document.tipForm;
+		const ad=f.addr.value;
+		const df=f.deliveryFee.value;
+		
+		if(ad.trim() === ""){
+			alert("주소를 입력하세요.");
+			f.addr.focus();
+			return;
+		}
+		if(df.trim() === ""){
+			alert("배달팁을 입력하세요.");
+			f.deliveryFee.focus();
+			return;
+		}
+		let url="${pageContext.request.contextPath}/owner/market/insertTip";
+		let query = $('form[name=tipForm]').serialize();
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("배달팁 정보를 등록하지 못했습니다.");
+				return false;
+			} else {
+                // 리다이렉트 처리 후 모달 종료
+                window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
                 $('#menu-modal4').modal('hide');
             }
 			
@@ -397,6 +511,16 @@ $(function(){
 		
 	});
 });
+
+//배달팁삭제
+function deleteTipOk(num){
+	
+	if(confirm("배달팁 정보를 삭제하시겠습니까 ? ")){
+		let query="num="+num;
+	    let url = "${pageContext.request.contextPath}/owner/market/deleteTip?" + query;
+    	location.href = url;
+	}
+}
 
 </script>
 
@@ -419,7 +543,6 @@ $(function(){
 					<c:if test="${not empty img}">
 					</c:if>
 					<div class="info-picture-btn" id="submenu-modal5">가게 로고<br>사진 추가</div>
-					<!-- c:if로 추가/변경 바꿔주기 -->
 				</div>
 			</div>
 		</div>
@@ -480,28 +603,27 @@ $(function(){
 				</div>
 				<button class="info-button" id="submenu-modal3">추가</button>
 			</div>
-			
-			<div class="flexgrid">
-				<c:if test="${empty tipList}">
-					<div class="tipdetail flex-between">
-						<div style="width: 80%;">
-							등록된 배달팁 정보가 없습니다.
+				<div class="flexgrid">
+					<c:if test="${empty tipList}">
+						<div class="tipdetail flex-between">
+							<div style="width: 80%;">
+								등록된 배달팁 정보가 없습니다.
+							</div>
 						</div>
-					</div>
-				</c:if>
-				<c:if test="${not empty tipList}">
-				<c:forEach var="tip" items="${tipList}" varStatus="status">
-					<div class="tipdetail flex-between">
-						<div style="width: 80%;">
-							<div class="tipDetail-info"><div class="tipDetail-title">배달지역 : </div><div>${tip.addr}</div></div>
-							<div class="tipDetail-info"><div class="tipDetail-title">배&nbsp;&nbsp;달&nbsp;&nbsp;팁 : </div><div>${tip.deliveryFee}원</div></div>
+					</c:if>
+					<c:if test="${not empty tipList}">
+					<c:forEach var="tip" items="${tipList}" varStatus="status">
+						<div class="tipdetail flex-between">
+							<div style="width: 80%;">
+								<div class="tipDetail-info"><div class="tipDetail-title">배달지역 : </div><div>${tip.addr}</div></div>
+								<div class="tipDetail-info"><div class="tipDetail-title">배&nbsp;&nbsp;달&nbsp;&nbsp;팁 : </div><div>${tip.deliveryFee}원</div></div>
+							</div>
+							<button class="info-button" onclick=" deleteTipOk(${tip.num});">삭제</button>
+							<input type="hidden" name="tipNum" value="${tip.num}">
 						</div>
-						<button class="info-button">삭제</button>
-					</div>
-				</c:forEach>
-				</c:if>
-				
-			</div>
+					</c:forEach>
+					</c:if>
+				</div>
 		</div>
 		
 		<div class="foodInfo">
@@ -526,31 +648,34 @@ $(function(){
 	    		<h5 class="modal-title">영업 시간 설정</h5>
 	    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	   		</div>
-	    	<div class="modal-body">
-    			<div class="flex-center">
-					<div class="time-bottom">
-						<div class="time-bottom-left shadow-sm">
-							OPEN
+	   		<form name="hourForm" method="post">
+		    	<div class="modal-body">
+	    			<div class="flex-center">
+						<div class="time-bottom">
+							<div class="time-bottom-left shadow-sm">
+								OPEN
+							</div>
+							<div class="time-bottom-right shadow-sm">
+								<input class="modal-input" name="openingHour" type="text" value="${dto.openingHour}">
+							</div>
 						</div>
-						<div class="time-bottom-right shadow-sm">
-							<input class="modal-input" type="text" value="${dto.openingHour}">
+						<div>&nbsp;&nbsp;~&nbsp;&nbsp;</div>
+						<div class="time-bottom">
+							<div class="time-bottom-left shadow-sm">
+								CLOSE
+							</div>
+							<div class="time-bottom-right shadow-sm">
+								<input class="modal-input" name="closingHour" type="text" value="${dto.closingHour}">
+							</div>
 						</div>
 					</div>
-					<div>&nbsp;&nbsp;~&nbsp;&nbsp;</div>
-					<div class="time-bottom">
-						<div class="time-bottom-left shadow-sm">
-							CLOSE
-						</div>
-						<div class="time-bottom-right shadow-sm">
-							<input class="modal-input" type="text" value="${dto.closingHour}">
-						</div>
-					</div>
-				</div>
-	    	</div>
-	  		<div class="modal-footer">
-	    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
-	    		<button type="button" class="modal-button toOrder">등록하기</button>
-	  		</div>
+		    	</div>
+		  		<div class="modal-footer">
+		    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
+		    		<button type="button" class="modal-button toOrder btnHourOk">등록하기</button>
+		    		<input type="hidden" name="restaurantNum" value="${dto.restaurantNum}">
+		  		</div>
+	  		</form>
 		</div>
 	</div>
 </div>
@@ -563,6 +688,7 @@ $(function(){
 	    		<h5 class="modal-title">최소주문 금액 설정</h5>
 	    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	   		</div>
+	   		<form name="basePriceForm" method="post">
 	    	<div class="modal-body">
 	    		<div class="flex-center">
 	    			<div class="time-bottom">
@@ -570,15 +696,17 @@ $(function(){
 							최소주문 금액
 						</div>
 						<div class="price-bottom-right shadow-sm">
-							<input class="modal-input" type="text"  value="${dto.basePrice}">
+							<input class="modal-input" name="basePrice" type="text"  value="${dto.basePrice}">
 						</div>
 					</div>
 				</div>
 	    	</div>
 	  		<div class="modal-footer">
 	    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
-	    		<button type="button" class="modal-button toOrder">등록하기</button>
+	    		<button type="button" class="modal-button toOrder btnPriceOk">등록하기</button>
+	    		<input type="hidden" name="restaurantNum" value="${dto.restaurantNum}">
 	  		</div>
+	  		</form>
 		</div>
 	</div>
 </div>
@@ -591,18 +719,21 @@ $(function(){
 	    		<h5 class="modal-title">배달팁 설정</h5>
 	    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	   		</div>
-	    	<div class="modal-body">
-    				<div class="flex-center2">
-    					<div class="tipDetail-title">배달지역 : &nbsp;&nbsp;</div><input class="modal-input2" type="text">
-    				</div>
-    				<div class="flex-center2">
-    					<div class="tipDetail-title">배&nbsp;&nbsp;달&nbsp;&nbsp;팁 : &nbsp;&nbsp;</div><input class="modal-input2" type="text">
-    				</div>
-	    	</div>
-	  		<div class="modal-footer">
-	    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
-	    		<button type="button" class="modal-button toOrder">등록하기</button>
-	  		</div>
+	   		<form name="tipForm" method="post">
+		    	<div class="modal-body">
+	    				<div class="flex-center2">
+	    					<div class="tipDetail-title">배달지역 : &nbsp;&nbsp;</div><input name="addr" class="modal-input2" type="text">
+	    				</div>
+	    				<div class="flex-center2">
+	    					<div class="tipDetail-title">배&nbsp;&nbsp;달&nbsp;&nbsp;팁 : &nbsp;&nbsp;</div><input name="deliveryFee" class="modal-input2" type="text">
+	    				</div>
+		    	</div>
+		  		<div class="modal-footer">
+		    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
+		    		<button type="button" class="modal-button toOrder btnTipOk">등록하기</button>
+		    		<input type="hidden" name="restaurantNum" value="${dto.restaurantNum}">
+		  		</div>
+	  		</form>
 		</div>
 	</div>
 </div>
@@ -622,6 +753,7 @@ $(function(){
 	  		<div class="modal-footer">
 	    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
 	    		<button type="button" class="modal-button toOrder btnFoodInfoOk">등록하기</button>
+	    		<input type="hidden" name="restaurantNum" value="${dto.restaurantNum}">
 	  		</div>
 	  		</form>
 		</div>
@@ -646,6 +778,7 @@ $(function(){
 		  		<div class="modal-footer">
 		    		<button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
 		    		<button type="button" class="modal-button toOrder btnInsertImgOk">등록하기</button>
+		    		<input type="hidden" name="restaurantNum" value="${dto.restaurantNum}">
 		  		</div>
 	    	</form>
 		</div>

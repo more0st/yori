@@ -36,13 +36,13 @@
    </select>
    
    <!-- 시작/종료시간 수정 -->
-    <update id="updateHour" parameterType="map">
+    <update id="updateHour" parameterType="com.sp.yogi.owner.market.Market">
       UPDATE restaurantInfo SET openingHour=#{openingHour}, closingHour=#{closingHour}
       WHERE restaurantNum = #{restaurantNum}
     </update>
     
    <!-- 최소주문금액 수정 -->
-    <update id="updateBasePrice" parameterType="map">
+    <update id="updateBasePrice"  parameterType="com.sp.yogi.owner.market.Market">
       UPDATE restaurantInfo SET basePrice=#{basePrice}
       WHERE restaurantNum = #{restaurantNum}
     </update>

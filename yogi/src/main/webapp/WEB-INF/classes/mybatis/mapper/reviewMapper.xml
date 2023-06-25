@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reviewinfo">
+
+	<!-- 리뷰 리스트 select(답글리스트로도 사용) : 업체별 리뷰내역-->
+	<select id="reviewList"  parameterType="Long" resultType="com.sp.yogi.owner.market.Review">
+		SELECT orderNum, userId, rating, content, imgFileName, reg_date, enabled, reply, reply_date, restaurantNum 
+		FROM review
+		WHERE restaurantNum=#{restaurantNum}
+    </select>
+	
+	<!-- 신고 내역 select : 해당 주문번호에 대한 신고 내역이 있는지 select -->
+	<select id="reviewReportList"  parameterType="Long" resultType="com.sp.yogi.owner.market.Review">
+		SELECT reportNum, content, reg_date, orderNum 
+		FROM review_report
+		WHERE orderNum=#{orderNum}
+    </select>	
+	
+	<!-- 리뷰 신고 insert -->
+	<insert id="insertReviewReport" parameterType="com.sp.yogi.owner.market.Review">
+       INSERT INTO review_report(reportNum, content, reg_date, orderNum) VALUES (report_seq.NEXTVAL,#{content},SYSDATE,#{orderNum}) 
+    </insert>
+	
+	<!-- 답글 수정 update : 답글 달기/답글수정/답글삭제(삭제일때는 null값으로 update할 수 있게 설정하기) -->
+	<update id="updateReply"  parameterType="com.sp.yogi.owner.market.Review">
+      UPDATE review SET reply=#{reply}, reply_date=#{reply_date}
+      WHERE orderNum = #{orderNum}
+    </update>
+
+	<!-- 별점 평균 select -->
+	
+
+</mapper>

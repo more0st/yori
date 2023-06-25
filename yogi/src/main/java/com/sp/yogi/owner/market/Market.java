@@ -1,7 +1,5 @@
 package com.sp.yogi.owner.market;
 
-import java.util.List;
-
 import org.springframework.web.multipart.MultipartFile;
 
 public class Market {
@@ -18,16 +16,16 @@ public class Market {
 	private String addr;//배달지역(동단위)
 	private String deliveryFee;//동별 배달요금
 	
-	private List<MultipartFile> selectFile;
-	
-	private Long fileNum;//업체이미지
+	private Long fileNum;//업체이미지번호
 	private String imageFilename;//이미지파일이름
+	private MultipartFile selectFile;
 	
 	
-	public List<MultipartFile> getSelectFile() {
+
+	public MultipartFile getSelectFile() {
 		return selectFile;
 	}
-	public void setSelectFile(List<MultipartFile> selectFile) {
+	public void setSelectFile(MultipartFile selectFile) {
 		this.selectFile = selectFile;
 	}
 	public String getUserId() {

@@ -1,11 +1,9 @@
 package com.sp.yogi.owner.market;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.sp.yogi.common.FileManager;
 import com.sp.yogi.common.dao.CommonDAO;
@@ -22,24 +20,7 @@ public class MarketServiceImpl implements MarketService{
 	
 	@Override
 	public void insertResImg(Market dto, String pathname) throws Exception {
-		try {
-			
-			if(!dto.getSelectFile().isEmpty()) {
-				for (MultipartFile mf : dto.getSelectFile()) {
-					String saveFilename = fileManager.doFileUpload(mf, pathname);
-					if (saveFilename == null) {
-						continue;
-					}
 
-					dto.setImageFilename(saveFilename);
-
-					dao.insertData("marketinfo.insertResImg", dto);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
 	}
 
 	@Override
@@ -53,9 +34,9 @@ public class MarketServiceImpl implements MarketService{
 	}
 
 	@Override
-	public void updateHour(Map<String, Object> map) throws Exception {
+	public void updateHour(Market dto) throws Exception {
 		try {
-			dao.updateData("marketinfo.updateHour",map);
+			dao.updateData("marketinfo.updateHour",dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -63,9 +44,9 @@ public class MarketServiceImpl implements MarketService{
 	}
 
 	@Override
-	public void updateBasePrice(Map<String, Object> map) throws Exception {
+	public void updateBasePrice(Market dto) throws Exception {
 		try {
-			dao.updateData("marketinfo.updateBasePrice",map);
+			dao.updateData("marketinfo.updateBasePrice",dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

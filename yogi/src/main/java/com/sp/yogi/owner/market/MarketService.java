@@ -1,7 +1,6 @@
 package com.sp.yogi.owner.market;
 
 import java.util.List;
-import java.util.Map;
 
 public interface MarketService {
 	//insertResImg : 가게이미지등록
@@ -10,9 +9,9 @@ public interface MarketService {
 	public void insertTip(Market dto) throws Exception;
 	
 	//updateHour : 시작/종료시간 수정
-	public void updateHour(Map<String, Object> map) throws Exception;
+	public void updateHour(Market dto) throws Exception;
 	//updateBasePrice : 최소주문금액 수정
-	public void updateBasePrice(Map<String, Object> map) throws Exception;
+	public void updateBasePrice(Market dto) throws Exception;
 	//updateFoodInfo : 원산지정보 수정
 	public void updateFoodInfo(Market dto) throws Exception;
 	

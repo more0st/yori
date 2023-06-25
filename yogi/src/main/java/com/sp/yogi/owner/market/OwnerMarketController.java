@@ -52,7 +52,7 @@ public class OwnerMarketController {
 	
 	//로고이미지 넣기 
 	@RequestMapping(value = "insertimg", method = RequestMethod.POST)
-	public String insertimg(Market dto, HttpSession session) throws Exception{
+	public String insertimg(@RequestParam("selectFile")String saveFilename, @RequestParam("restaurantNum")long restaurantNum, Market dto, HttpSession session) throws Exception{
 		
 		String root=session.getServletContext().getRealPath("/");
 		String path=root+"uploads"+File.separator+"owner"+File.separator+"market";
@@ -62,6 +62,8 @@ public class OwnerMarketController {
 		try {
 			dto.setUserId(info.getUserId());
 			//saveFilename이랑 restaurantNum 불러와서 넘겨줘야함
+			dto.setImageFilename(saveFilename);
+			dto.setRestaurantNum(restaurantNum);
 			System.out.println("이미지 파일 : " + dto.getImageFilename() + " : " + dto.getRestaurantNum());
 			service.insertResImg(dto, path);
 		} catch (Exception e) {
@@ -69,14 +71,83 @@ public class OwnerMarketController {
 		}
 		return ".owner.market.marketinfo";
 	}
-
-	@RequestMapping(value = "updateInfo", method = RequestMethod.POST)
-	public String updateInfo(@RequestParam("foodInfo")String ff, Market dto, HttpSession session, Model model) throws Exception{
+	
+	//배달팁 등록
+	@RequestMapping(value = "insertTip", method = RequestMethod.POST)
+	public String insertTip(@RequestParam("addr")String ad, @RequestParam("deliveryFee")String df, @RequestParam("restaurantNum")long restaurantNum, Market dto, Model model) throws Exception{
 		
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		try {
-			Market res= service.readRestaurant2(info.getUserId());
-			dto.setRestaurantNum(res.getRestaurantNum());
+			dto.setAddr(ad);
+			dto.setDeliveryFee(df);
+			dto.setRestaurantNum(restaurantNum);
+			service.insertTip(dto);
+			
+			model.addAttribute("dto", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/owner/market/marketinfo";
+	}
+
+	//배달팁 삭제
+	@RequestMapping(value = "deleteTip")
+	public String deleteTip(@RequestParam long num) throws Exception{
+		
+		try {
+			service.deleteTip(num);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/owner/market/marketinfo";
+	}
+	
+	//영업시간 수정
+	@RequestMapping(value = "updateHour", method = RequestMethod.POST)
+	public String updatePrice(@RequestParam("openingHour")String op, @RequestParam("closingHour")String cl, @RequestParam("restaurantNum")long restaurantNum, Market dto, Model model) throws Exception{
+		
+		try {
+			dto.setOpeningHour(op);
+			dto.setClosingHour(cl);
+			dto.setRestaurantNum(restaurantNum);
+			service.updateHour(dto);
+			
+			model.addAttribute("dto", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/owner/market/marketinfo";
+	}
+
+	//최소주문금액수정
+	@RequestMapping(value = "updatePrice", method = RequestMethod.POST)
+	public String updatePrice(@RequestParam("basePrice")String bp, @RequestParam("restaurantNum")long restaurantNum, Market dto, Model model) throws Exception{
+		
+		try {
+			dto.setRestaurantNum(restaurantNum);
+			dto.setBasePrice(bp);
+			service.updateBasePrice(dto);
+			
+			model.addAttribute("dto", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/owner/market/marketinfo";
+	}
+	
+	//원산지정보수정
+	@RequestMapping(value = "updateInfo", method = RequestMethod.POST)
+	public String updateInfo(@RequestParam("foodInfo")String ff, @RequestParam("restaurantNum")long restaurantNum, Market dto, Model model) throws Exception{
+		
+		try {
+			dto.setRestaurantNum(restaurantNum);
 			dto.setFoodInfo(ff);
 			service.updateFoodInfo(dto);
 			
@@ -86,8 +157,9 @@ public class OwnerMarketController {
 			e.printStackTrace();//오류확인하고지우기
 		}
 		
-		return "redirect:/owner/market/marketinfo";//리다이렉트가 안됨
+		return "redirect:/owner/market/marketinfo";
 	}
+
 	
 	@RequestMapping(value = "review", method = RequestMethod.GET)
 	public String review() {
