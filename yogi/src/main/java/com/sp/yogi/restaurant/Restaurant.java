@@ -1,10 +1,14 @@
 package com.sp.yogi.restaurant;
 
 public class Restaurant {
-	// 리뷰 개수
+	// 리뷰 개수, 배달비, 메뉴개수, 주소
 	private Long reviewCount;
+	private int deliveryFee;
+	private Long menuCount;
+	private String addr;
 	
-	private Long restaurantNum;
+	
+	private Long restaurantNum;		// 업체 번호
 	private Double rating;
 	private String restaurantName;
 	private Long basePrice;
@@ -17,7 +21,28 @@ public class Restaurant {
 	// 이미지
 	private String imageFilename;
 	
+	//
 	
+	
+	
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	public int getDeliveryFee() {
+		return deliveryFee;
+	}
+	public void setDeliveryFee(int deliveryFee) {
+		this.deliveryFee = deliveryFee;
+	}
+	public Long getMenuCount() {
+		return menuCount;
+	}
+	public void setMenuCount(Long menuCount) {
+		this.menuCount = menuCount;
+	}
 	public String getImageFilename() {
 		return imageFilename;
 	}

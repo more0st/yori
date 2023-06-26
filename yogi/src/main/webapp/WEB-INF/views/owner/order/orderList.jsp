@@ -60,8 +60,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">접수대기<span> | 승현이네 국밥집</span></h5>
-
+                  <h5 class="card-title">접수대기<span> | ${res.restaurantName}</span></h5>
                   <table class="table table-borderless">
                     <thead>
                       <tr>
@@ -76,42 +75,22 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr><!-- forEach -->
-                        <th scope="row"><a href="#">1</a></th>
-                        <td>test123</td>
-                        <td>서울시 마포구 서교동 쌍용</td>
-                        <td>국밥 1개 외 3건 ...</td>
-                        <td>55,000원</td>
-                        <td>010-1234-2345</td>
-                        <td class="overflow-ellipsis">고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요고기많이주세요</td>
-                        <td>
-							<button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">접수대기</button>
-                        </td>
-                      </tr><!-- forEach -->
-                      <tr>
-                        <th scope="row"><a href="#">2</a></th>
-                        <td>test000</td>
-                        <td>서울시 구로구 구로동</td>
-                        <td>국밥 3개  외 3건 ...</td>
-                        <td>30,000원</td>
-                        <td>010-1234-2345</td>
-                        <td class="overflow-ellipsis">국물많이주세요국물많이주세요국물많이주세요국물많이주세요국물많이주세요</td>
-                        <td>
-                        	<button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">접수대기</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">3</a></th>
-                        <td>id1212</td>
-                        <td>서울시 마포구 서교동 쌍용</td>
-                        <td>국밥 2개  외 3건 ...</td>
-                        <td>32,000원</td>
-                        <td>010-1234-2345</td>
-                        <td id="myElement" class="overflow-ellipsis">요청사항 x</td>
-                        <td>
-                        	<button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">접수대기</button>
-                        </td>
-                      </tr>
+                    <c:forEach var="order" items="${orderList}" varStatus="status">
+                   		 <c:if test="${order.statusName==1}"><!-- 접수대기인 목록 -->
+	                      <tr><!-- forEach -->
+	                        <th scope="row"><a href="#">${order.orderNum}</a></th>
+	                        <td>${order.userId}</td>
+	                        <td>${order.addr1} ${order.addr2}</td>
+	                        <td>국밥 1개 외 3건 ...</td>
+	                        <td>${order.total_price}원</td>
+	                        <td>${order.tel}</td>
+	                        <td class="overflow-ellipsis">${order.memo}</td>
+	                        <td>
+								<button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">접수대기</button>
+	                        </td>
+	                      </tr><!-- forEach -->
+	                      </c:if>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div>
@@ -135,7 +114,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">완료<span> | 승현이네 국밥집</span></h5>
+                  <h5 class="card-title">완료<span> | ${res.restaurantName}</span></h5>
 
                   <table class="table table-borderless">
                     <thead>
@@ -151,18 +130,22 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row"><a href="#">1</a></th>
-                        <td>test123</td>
-                        <td>서울시 마포구 서교동 쌍용</td>
-                        <td>국밥 1개 외 3건 ...</td>
-                        <td>15,000원</td>
-                        <td>010-1234-2345</td>
-                        <td class="overflow-ellipsis">고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘고기짱많이줘</td>
-                        <td>
-                        	<button type="button" class="btn btn-success" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">배달완료</button>
-                        </td>
-                      </tr>
+                    <c:forEach var="order" items="${orderList}" varStatus="status">
+                   		 <c:if test="${order.statusName!=1}"><!-- 접수완료인 목록(수정하기) -->
+	                      <tr><!-- forEach -->
+	                        <th scope="row"><a href="#">${order.orderNum}</a></th>
+	                        <td>${order.userId}</td>
+	                        <td>${order.addr1} ${order.addr2}</td>
+	                        <td>국밥 1개 외 3건 ...</td>
+	                        <td>${order.total_price}원</td>
+	                        <td>${order.tel}</td>
+	                        <td class="overflow-ellipsis">${order.memo}</td>
+	                        <td>
+	                        	<button type="button" class="btn btn-success" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">배달완료</button>
+	                        </td>
+	                      </tr><!-- forEach -->
+	                      </c:if>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div>

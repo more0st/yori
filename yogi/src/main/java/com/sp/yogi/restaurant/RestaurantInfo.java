@@ -14,7 +14,7 @@ public class RestaurantInfo {
 	private String closingHour;
 	private String foodInfo;
 	
-	private List<Category> categoryList;
+	private List<Category> categoryList;	// 카테고리
 	
 	public List<Category> getCategoryList() {
 		return categoryList;

@@ -63,7 +63,7 @@
 	<!-- 수정 -->
 	<update id="updateNotice" parameterType="com.sp.yogi.admin.domain.Notice">
 		UPDATE notice SET subject=#{subject},
-			content=#{content}, notice=#{notice}
+			content=#{content}, imgFileName=#{imgFileName}
 		WHERE noticeNum=#{noticeNum}
 	</update>
 	

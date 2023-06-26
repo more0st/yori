@@ -8,6 +8,8 @@ public class Category {
 	private String menuCategory;	// 메뉴 카테고리
 	private Long restaurantNum;	// 업체번호
 	
+	
+	
 	public List<Menu> getMenuList() {
 		return menuList;
 	}

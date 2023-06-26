@@ -130,14 +130,14 @@ public class NoticeServiceImpl implements NoticeService {
 
 			if (! dto.getSelectFile().isEmpty()) {
 				for (MultipartFile mf : dto.getSelectFile()) {
-					String saveFilename = fileManager.doFileUpload(mf, pathname);
-					if (saveFilename == null) {
+					String imgFileName = fileManager.doFileUpload(mf, pathname);
+					if (imgFileName == null) {
 						continue;
 					}
 
 //					long fileSize = mf.getSize();
 
-					dto.setImgFileName(saveFilename);
+					dto.setImgFileName(imgFileName);
 //					dto.setFileSize(fileSize);
 
 					// insertFile(dto);

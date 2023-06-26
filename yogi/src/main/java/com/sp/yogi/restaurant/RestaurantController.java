@@ -116,19 +116,40 @@ public class RestaurantController {
 		RestaurantInfo restaurantInfo = service.readRestaurantInfo(restaurantNum);
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
-		//Category category = service.readCategory(restaurantNum);
-		//Menu menu = service.readMenu(category.getNum());
-		//Option option = service.readOption(menu.getMenuNum());
-		
+		// 찜
 		Map<String, Object> map = new HashMap<String, Object>();
 		String userId = info.getUserId();
 		map.put("userId", userId);
 		map.put("restaurantNum", restaurantNum);
 		boolean likeStatus = service.isLike(map);
 		
+		// 배달팁, 메뉴개수, 리뷰개수
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		map2.put("restaurantNum", restaurantNum);
+		map2.put("addr", info.getAddr1());
+		Restaurant restaurantInfo2 = service.readRestaurantInfo2(map2);
+		
+		// 리뷰 리스트
+		List<Review> reviewList = service.readReivew(restaurantNum);
+		
+		// 별점
+		double rating = service.readRating(restaurantNum);
+		restaurantInfo2.setRating(rating);
+		
+		
+		/* 메뉴 카테고리 */
+		List<Category> categoryList = service.readCategory(restaurantNum);
+		for(Category c : categoryList) {
+			c.setMenuList(service.readMenu(restaurantNum));
+		}
+		
+		
 		model.addAttribute("restaurantNum", restaurantNum);
 		model.addAttribute("restaurantInfo", restaurantInfo);
+		model.addAttribute("restaurantInfo2", restaurantInfo2);
 		model.addAttribute("likeStatus", likeStatus);
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("categoryList", categoryList);
 		
 		return ".restaurant.restaurant-info";
 	}

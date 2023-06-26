@@ -170,4 +170,46 @@ public class RestaurantServiceImpl implements RestaurantService{
 		return state;
 	}
 
+
+	// 가게 상세 정보2 ( 배달팁, 메뉴개수, 리뷰개수 )
+	@Override
+	public Restaurant readRestaurantInfo2(Map<String, Object> map) {
+		Restaurant restaurant = new Restaurant();
+		
+		try {
+			restaurant = dao.selectOne("restaurant.readRestaurantInfo2", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return restaurant;
+	}
+
+	// 리뷰 리스트
+	@Override
+	public List<Review> readReivew(Long restaurantNum) {
+		List<Review> reviewList = null;
+		
+		try {
+			reviewList = dao.selectList("restaurant.readReivew", restaurantNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return reviewList;
+	}
+
+	// 별점 구하기
+	@Override
+	public double readRating(Long restaurantNum) {
+		double rating = 0;
+		
+		try {
+			rating = dao.selectOne("restaurant.readRating",restaurantNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rating;
+	}
+
 }
