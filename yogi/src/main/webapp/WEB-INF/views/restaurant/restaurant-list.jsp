@@ -138,22 +138,27 @@
 	font-size: 10px;
 }
 
+.category-select {
+	background: black;
+	color: white;
+}
+
 </style>
 <div class="whole-container">
 	
 	<div class="category-box">
-		<div class="category-info" onclick="checkAddress(0)">전체보기</div>
-		<div class="category-info" onclick="checkAddress(1)">프랜차이즈</div>
-		<div class="category-info" onclick="checkAddress(2)">치킨</div>
-		<div class="category-info" onclick="checkAddress(3)">피자/양식</div>
-		<div class="category-info" onclick="checkAddress(4)">중국집</div>
-		<div class="category-info" onclick="checkAddress(5)">한식</div>
-		<div class="category-info" onclick="checkAddress(6)">일식/돈까스</div>
-		<div class="category-info" onclick="checkAddress(7)">족발/보쌈</div>
-		<div class="category-info" onclick="checkAddress(8)">야식</div>
-		<div class="category-info" onclick="checkAddress(9)">분식</div>
-		<div class="category-info" onclick="checkAddress(10)">카페/디저트</div>
-		<div class="category-info" onclick="checkAddress(11)">편의점/마트</div>
+		<div class="category-info ${categoryNum == 0 ? 'category-select' : ''}" onclick="checkAddress(0)">전체보기</div>
+		<div class="category-info ${categoryNum == 1 ? 'category-select' : ''}" onclick="checkAddress(1)">프랜차이즈</div>
+		<div class="category-info ${categoryNum == 2 ? 'category-select' : ''}" onclick="checkAddress(2)">치킨</div>
+		<div class="category-info ${categoryNum == 3 ? 'category-select' : ''}" onclick="checkAddress(3)">피자/양식</div>
+		<div class="category-info ${categoryNum == 4 ? 'category-select' : ''}" onclick="checkAddress(4)">중국집</div>
+		<div class="category-info ${categoryNum == 5 ? 'category-select' : ''}" onclick="checkAddress(5)">한식</div>
+		<div class="category-info ${categoryNum == 6 ? 'category-select' : ''}" onclick="checkAddress(6)">일식/돈까스</div>
+		<div class="category-info ${categoryNum == 7 ? 'category-select' : ''}" onclick="checkAddress(7)">족발/보쌈</div>
+		<div class="category-info ${categoryNum == 8 ? 'category-select' : ''}" onclick="checkAddress(8)">야식</div>
+		<div class="category-info ${categoryNum == 9 ? 'category-select' : ''}" onclick="checkAddress(9)">분식</div>
+		<div class="category-info ${categoryNum == 10 ? 'category-select' : ''}" onclick="checkAddress(10)">카페/디저트</div>
+		<div class="category-info ${categoryNum == 11 ? 'category-select' : ''}" onclick="checkAddress(11)">편의점/마트</div>
 	</div>
 	
 	<form name="searchForm">

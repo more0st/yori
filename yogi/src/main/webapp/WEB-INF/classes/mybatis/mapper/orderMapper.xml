@@ -9,5 +9,25 @@
 		ORDER BY order_date DESC
 		FETCH FIRST 1 ROWS ONLY
 	</select>
+	
+	<insert id="insertOrderBundle" parameterType="map">
+		INSERT INTO order_bundle (orderNum, userId, order_date, addr1, addr2, tel, memo, total_price, restaurantNum)
+		VALUES (#{orderNum}, #{userId}, SYSDATE, #{addr1}, #{addr2}, #{tel}, #{memo}, #{total_price}, #{restaurantNum})
+	</insert>
+	
+	<insert id="insertOrderItem" parameterType="map">
+		INSERT INTO order_item (orderitemNum, orderNum, menuNum, orderCount, menuPrice)
+		VALUES (order_item_seq.NEXTVAL, #{orderNum}, #{menuNum}, #{orderCount}, #{menuPrice})
+	</insert>
+	
+	<insert id="insertOrderStatus" parameterType="map">
+		INSERT INTO order_status (statusNum, orderNum, statusName, field, memo)
+		VALUES (order_status_seq.NEXTVAL, #{orderNum}, 1, SYSDATE, null)
+	</insert>
+	
+	<insert id="insertPayment" parameterType="map">
+		INSERT INTO payment (payNum, orderNum, pay_date, payMethod, price, couponNum, state)
+		VALUES (payment_seq.NEXTVAL, #{orderNum}, SYSDATE, #{payMethod}, #{price}, #{couponNum}, 1)
+	</insert>
 
 </mapper>
