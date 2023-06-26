@@ -129,7 +129,7 @@ public class NoticeController {
 		} catch (Exception e) {
 		}
 
-		return "redirect:/notice/list?";
+		return "redirect:/admin/notice/list?";
 	}
 	
 }

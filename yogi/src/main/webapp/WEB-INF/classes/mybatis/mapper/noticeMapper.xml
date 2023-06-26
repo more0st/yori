@@ -73,7 +73,7 @@
 	</delete>
 	
 	<delete id="deleteFile" parameterType="map">
-		DELETE FROM noticeImg WHERE imgNum = #{imgNum}
+		DELETE FROM noticeImg WHERE imgNum = #{num}
 	</delete>	
 	
 </mapper>

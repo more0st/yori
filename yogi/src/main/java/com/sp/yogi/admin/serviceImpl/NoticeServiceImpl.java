@@ -152,10 +152,10 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public void deleteNotice(long imgNum, String pathname) throws Exception {
+	public void deleteNotice(long num, String pathname) throws Exception {
 		try {
 			// 파일 지우기
-			List<Notice> listFile = listFile(imgNum);
+			List<Notice> listFile = listFile(num);
 			if (listFile != null) {
 				for (Notice dto : listFile) {
 					fileManager.doFileDelete(dto.getImgFileName(), pathname);
@@ -165,10 +165,10 @@ public class NoticeServiceImpl implements NoticeService {
 			// 파일 테이블 내용 지우기
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("field", "num");
-			map.put("num", imgNum);
+			map.put("num", num);
 			deleteFile(map);
 
-			dao.deleteData("noticeManage.deleteFile", imgNum);
+			dao.deleteData("noticeManage.deleteNotice", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
