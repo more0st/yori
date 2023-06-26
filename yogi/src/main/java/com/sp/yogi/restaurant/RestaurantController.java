@@ -106,6 +106,8 @@ public class RestaurantController {
 		return resultMap;
 	}
 	
+	
+	// 상세 페이지
 	@GetMapping("info")
 	public String info(
 			@RequestParam("restaurantNum") Long restaurantNum,
@@ -140,7 +142,10 @@ public class RestaurantController {
 		/* 메뉴 카테고리 */
 		List<Category> categoryList = service.readCategory(restaurantNum);
 		for(Category c : categoryList) {
-			c.setMenuList(service.readMenu(restaurantNum));
+			c.setMenuList(service.readMenu(c.getNum()));
+			for(Menu m : c.getMenuList()) {
+				m.setOptionList(service.readOption(m.getMenuNum()));
+			}
 		}
 		
 		

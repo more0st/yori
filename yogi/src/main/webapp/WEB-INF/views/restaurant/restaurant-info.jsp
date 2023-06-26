@@ -533,186 +533,112 @@ body {
 					
 					
 					<div class="accordion" id="accordionExample">
-					
 					  <div class="accordion-item">
-					    <h2 class="accordion-header" id="1">
-					      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#wapper" aria-expanded="true" aria-controls="wapper">
-					        와퍼
+						<c:forEach var="category" items="${categoryList}" varStatus="status">
+					    <h2 class="accordion-header" id="${status.count}">
+					      <button class="accordion-button ${status.count==1?'':'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#${category.menuCategory}" 
+					      aria-expanded="${status.count==1?true:false}" aria-controls="${category.menuCategory}">
+					        ${category.menuCategory}
 					      </button>
 					    </h2>
-					    <div id="wapper" class="accordion-collapse collapse show" aria-labelledby="1" data-bs-parent="#accordionExample">
-					      <div class="accordion-body" id="submenu-modal">
-					      	<div>
-								<div style="font-weight: bold; margin-bottom: 5px;">기네스 머쉬룸 와퍼</div>
-								<div>7,000원</div>					      	
-					      	</div>
-					      	<div>
-					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/mushroom.png">
-					      	</div>
-					      </div>
-					      <div class="accordion-body">
-					      	<div>
-								<div style="font-weight: bold; margin-bottom: 5px;">치킨 와퍼</div>
-								<div>6,000원</div>					      	
-					      	</div>
-					      	<div>
-					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/chicken.png">
-					      	</div>
-					      </div>
-					      <div class="accordion-body">
-					      	<div>
-								<div style="font-weight: bold; margin-bottom: 5px;">와퍼</div>
-								<div>5,500원</div>					      	
-					      	</div>
-					      	<div>
-					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/wapper.png">
-					      	</div>
-					      </div>
+					    <div id="${category.menuCategory}" class="accordion-collapse collapse ${status.count==1?'show':''}" aria-labelledby="${status.count}" data-bs-parent="#accordionExample">
+					      <c:forEach var="menu" items="${category.menuList}">
+						      <div class="accordion-body" id="submenu-modal">
+						      	<div>
+									<div style="font-weight: bold; margin-bottom: 5px;">${menu.menu}</div>
+									<div>${menu.price}원</div>					      	
+						      	</div>
+						      	<c:if test="${not empty menu.imageFilename}">
+							      	<div>
+							      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/${menu.imageFilename}.png">
+							      	</div>
+						      	</c:if>
+						      </div>
+					   	  </c:forEach>
 					    </div>
+					  </c:forEach>
 					  </div>
-					  
-					  <div class="accordion-item">
-					    <h2 class="accordion-header" id="2">
-					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#potato" aria-expanded="false" aria-controls="potato">
-					        감자튀김
-					      </button>
-					    </h2>
-					    <div id="potato" class="accordion-collapse collapse" aria-labelledby="2" data-bs-parent="#accordionExample">
-					      <div class="accordion-body">
-					      	<div>
-								<div style="font-weight: bold; margin-bottom: 5px;">감자튀김 s</div>
-								<div>1,800원</div>					      	
-					      	</div>
-					      	<div>
-					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/potato.png">
-					      	</div>
-					      </div>
-					      <div class="accordion-body">
-					      	<div>
-								<div style="font-weight: bold; margin-bottom: 5px;">감자튀김 L</div>
-								<div>2,500원</div>					      	
-					      	</div>
-					      	<div>
-					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/potato.png">
-					      	</div>
-					      </div>
-					    </div>
-					  </div>
-					  
-					  <div class="accordion-item">
-					    <h2 class="accordion-header" id="3">
-					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#drink" aria-expanded="false" aria-controls="drink">
-					       	음료
-					      </button>
-					    </h2>
-					    <div id="drink" class="accordion-collapse collapse" aria-labelledby="3" data-bs-parent="#accordionExample">
-					      <div class="accordion-body">
-					      	<div>
-								<div style="font-weight: bold; margin-bottom: 5px;">콜라</div>
-								<div>2,000원</div>					      	
-					      	</div>
-					      	<div>
-					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/coke.png">
-					      	</div>
-					      </div>
-					      <div class="accordion-body">
-					      	<div>
-								<div style="font-weight: bold; margin-bottom: 5px;">스프라이트</div>
-								<div>2,000원</div>					      	
-					      	</div>
-					      	<div>
-					      		<img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/cider.png">
-					      	</div>
-					      </div>
-					    </div>
-					  </div>
-				
 					</div> <!-- 아코디언 끝 -->
-					
-					<!-- 모달 -->
-					<div class="modal" id="menu-modal" tabindex="-1">
-						<div class="modal-dialog modal-dialog-centered">
-							<div class="modal-content">
-						   		<div class="modal-header">
-						    		<h5 class="modal-title">기네스 머쉬룸 와퍼</h5>
-						    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						   		</div>
-						    	<div class="modal-body">
-						    		<div class="modal-top">
-						    			<img class="modal-img" src="${pageContext.request.contextPath}/resources/picture/mushroom.png">
-					    			</div>
-					    			<div class="modal-menu">
-					    				기네스 머쉬룸 와퍼
-					    			</div>
-					    			<hr>
-					    			<div class="modal-price">
-					    				<div>
-											가격					    				
-					    				</div>
-					    				<div>
-					    					7,000원
-					    				</div>
-					    			</div>
-					    			<hr>
-					    			<div class="modal-price">
-					    				옵션추가
-					    			</div>
-					    			
-					    			<!-- foreach 돌릴 부분 -->
-					    			<div class="modal-option">
-					    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-					    					<input class="modal-radio" type="checkbox"><div>추가 없음</div>
-					    				</div>
-					    				<div>
-					    					추가비용없음
-					    				</div>
-					    			</div>
-					    			<div class="modal-option">
-					    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-					    					<input class="modal-radio" type="checkbox"><div>감자튀김 S</div>
-					    				</div>
-					    				<div>
-					    					1,800원
-					    				</div>
-					    			</div>
-					    			<div class="modal-option">
-					    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-					    					<input class="modal-radio" type="checkbox"><div>감자튀김 L</div>
-					    				</div>
-					    				<div>
-					    					2,500원
-					    				</div>
-					    			</div>
-					    			<!-- foreach 끝 -->
-					    			
-					    			<div class="modal-total">
-					    				<div style="font-weight: bold;">
-					    					총 주문금액
-					    				</div>
-					    				<div>
-					    					<div style="font-size: 24px; color: #fa0050; text-align: right; font-weight: bold;">
+									   <!-- 모달 -->
+						<div class="modal" id="menu-modal" tabindex="-1">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+							   		<div class="modal-header">
+							    		<h5 class="modal-title">기네스 머쉬룸 와퍼</h5>
+							    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							   		</div>
+							    	<div class="modal-body">
+							    		<div class="modal-top">
+							    			<img class="modal-img" src="${pageContext.request.contextPath}/resources/picture/mushroom.png">
+						    			</div>
+						    			<div class="modal-menu">
+						    				기네스 머쉬룸 와퍼
+						    			</div>
+						    			<hr>
+						    			<div class="modal-price">
+						    				<div>
+												가격					    				
+						    				</div>
+						    				<div>
 						    					7,000원
-					    					</div>
-					    					<div style="font-size: 12px; text-align: right">
-					    						(최소주문금액 6,000원)
-					    					</div>
-					    				</div>
-					    			</div>
-					    			
-						    	</div>
-						  		<div class="modal-footer">
-						    		<button type="button" class="modal-button addCart">주문표에 추가</button>
-						    		<button type="button" class="modal-button toOrder">주문하기</button>
-						  		</div>
+						    				</div>
+						    			</div>
+						    			<hr>
+						    			<div class="modal-price">
+						    				옵션추가
+						    			</div>
+						    			
+						    			<!-- foreach 돌릴 부분 -->
+						    			<div class="modal-option">
+						    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
+						    					<input class="modal-radio" type="checkbox"><div>추가 없음</div>
+						    				</div>
+						    				<div>
+						    					추가비용없음
+						    				</div>
+						    			</div>
+						    			<div class="modal-option">
+						    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
+						    					<input class="modal-radio" type="checkbox"><div>감자튀김 S</div>
+						    				</div>
+						    				<div>
+						    					1,800원
+						    				</div>
+						    			</div>
+						    			<div class="modal-option">
+						    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
+						    					<input class="modal-radio" type="checkbox"><div>감자튀김 L</div>
+						    				</div>
+						    				<div>
+						    					2,500원
+						    				</div>
+						    			</div>
+						    			<!-- foreach 끝 -->
+						    			
+						    			<div class="modal-total">
+						    				<div style="font-weight: bold;">
+						    					총 주문금액
+						    				</div>
+						    				<div>
+						    					<div style="font-size: 24px; color: #fa0050; text-align: right; font-weight: bold;">
+							    					7,000원
+						    					</div>
+						    					<div style="font-size: 12px; text-align: right">
+						    						(최소주문금액 6,000원)
+						    					</div>
+						    				</div>
+						    			</div>
+						    			
+							    	</div>
+							  		<div class="modal-footer">
+							    		<button type="button" class="modal-button addCart">주문표에 추가</button>
+							    		<button type="button" class="modal-button toOrder">주문하기</button>
+							  		</div>
+								</div>
 							</div>
 						</div>
-					</div>
-					
-					
-					
-					
 				</div>
-				
+
 				<!-- 리뷰 -->
 				<div class="res-show2" style="display: none;">
 					<div class="review-rank">
@@ -750,7 +676,7 @@ body {
 							<c:if test="${not empty review.reply}">
 								<div class="ownerReview">
 									<div class="ownerReview-top">
-										<i class="bi bi-arrow-return-right"></i>&nbsp;<div class="res-333" style="font-weight: bold;">사장님</div>&nbsp;<div class="review-date">2023-06-17</div>
+										<i class="bi bi-arrow-return-right"></i>&nbsp;<div class="res-333" style="font-weight: bold;">사장님</div>&nbsp;<div class="review-date">${review.replyDate}</div>
 									</div>
 									<div class="ownerReview-content">
 										${review.reply}

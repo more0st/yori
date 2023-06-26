@@ -7,10 +7,17 @@ public class Menu {
 	private Long menuNum;	// 메뉴 번호
 	private String num;		// 카테고리 번호
 	private String menu;	// 메뉴 이름
+	private Long price;		// 메뉴 가격
 	private String imageFilename;
 	private int stock;		// 메뉴 품절 여부 (0:품절 / 1:판매중)
 	
 	
+	public Long getPrice() {
+		return price;
+	}
+	public void setPrice(Long price) {
+		this.price = price;
+	}
 	public List<Option> getOptionList() {
 		return optionList;
 	}

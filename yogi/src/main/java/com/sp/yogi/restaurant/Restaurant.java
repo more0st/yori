@@ -7,7 +7,6 @@ public class Restaurant {
 	private Long menuCount;
 	private String addr;
 	
-	
 	private Long restaurantNum;		// 업체 번호
 	private Double rating;
 	private String restaurantName;
@@ -20,8 +19,6 @@ public class Restaurant {
 	
 	// 이미지
 	private String imageFilename;
-	
-	//
 	
 	
 	
