@@ -231,8 +231,8 @@ function sendOk(elClickedObj) {
     let mode = "${mode}";
     
 
-    f.action = "${pageContext.request.contextPath}/notice/${mode}_ok.do";
-    f.action = "#";
+    f.action = "${pageContext.request.contextPath}/admin/notice/${mode}_ok.do";
+   
     elClickedObj.submit();
 }
 
@@ -242,7 +242,7 @@ function deleteFile(imgNum) {
 	
 	if(confirm('이미지를 삭제하시겠습니까 ?')){
 		let query = "noticeNum=${dto.noticeNum}&imgNum=" + imgNum + "&page=${page}";
-		let url = "${pageContext.request.contextPath}/notice/deleteFile.do";
+		let url = "${pageContext.request.contextPath}/admin/notice/deleteFile.do";
 		location.href = url + "?" + query;
 	}
 	

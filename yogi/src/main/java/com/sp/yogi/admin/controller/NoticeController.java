@@ -102,7 +102,7 @@ public class NoticeController {
 
 		Notice dto = service.readNotice(num);
 		if (dto == null || ! info.getUserId().equals(dto.getUserId())) {
-			return "redirect:/admin/noticeManage/list?page=";
+			return "redirect:/admin/noticeManage/list?";
 		}
 
 		List<Notice> listFile = service.listFile(num);
@@ -111,8 +111,27 @@ public class NoticeController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("listFile", listFile);
 
-		return ".admin.noticeManage.write";
+		return ".admin.notice.write";
 	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String updateSubmit(Notice dto,
+			@RequestParam String page,
+			HttpSession session) throws Exception {
+
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+
+		try {
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + File.separator + "uploads" + File.separator + "notice";
+
+			dto.setUserId(info.getUserId());
+			service.updateNotice(dto, pathname);
+		} catch (Exception e) {
+		}
+
+		return "redirect:/admin/noticeManage/list?";
+	}	
 	
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
 	public String delete(@RequestParam long num,
