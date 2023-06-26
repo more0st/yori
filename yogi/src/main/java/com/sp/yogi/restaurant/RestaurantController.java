@@ -124,7 +124,7 @@ public class RestaurantController {
 		String userId = info.getUserId();
 		map.put("userId", userId);
 		map.put("restaurantNum", restaurantNum);
-		boolean likeStatus = service.insertLike(map);
+		boolean likeStatus = service.isLike(map);
 		
 		model.addAttribute("restaurantNum", restaurantNum);
 		model.addAttribute("restaurantInfo", restaurantInfo);

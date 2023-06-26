@@ -43,6 +43,7 @@ body {
 
 .res-name {
 	background: #d9d9d9;
+	height: 44px;
 	padding: 10px;
 	color: #333;
 	font-weight: bold;
@@ -61,6 +62,9 @@ body {
 	color: #fa0050;
 	text-align: right;
 	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: right;
 }
 
 .res-main {
@@ -498,7 +502,7 @@ body {
 				<div class="res-name">
 					<div class="res-name-left">${restaurantInfo.restaurantName}</div>
 					<div class="res-name-right">
-						<button type="button" class="btn btnSendRecipeLike" title="좋아요" style="border: none; padding-left: 0">
+						<button type="button" class="btn btnSendRecipeLike" title="좋아요" style="border: none; padding-left: 0; height: 30px; display: flex; align-items: center;">
                               <i class="fa-solid fa-heart" id="likeBtn"></i> 
                               <span id="recipeLikeCount">${dto.recipeLikeCount}</span>
                         </button>
@@ -970,7 +974,7 @@ body {
     function changeLikeStatus() {
     	console.log(likeStatus);
         if (likeStatus) {
-            // 좋아요 취소
+            // 좋아요 
             // 1. 상태변경
             likeStatus = !likeStatus
             // 2. 색 변경
@@ -978,7 +982,7 @@ body {
             console.log(likeStatus + " 좋아요 취소")
 
         } else {
-            // 좋아요 요청
+            // 좋아요 취소
             // 1. 상태변경
             likeStatus = !likeStatus
             // 2. 색 변경
@@ -1003,10 +1007,8 @@ body {
 
             const fn = function (data) {
                let state = data.state;
-               console.log(state)
-               if(state === true) {
-                    changeLikeStatus();
-               }
+               changeLikeStatus();
+               
             };
 
             ajaxFun(url, "post", qs, "json", fn);

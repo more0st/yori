@@ -135,9 +135,9 @@ public class RestaurantServiceImpl implements RestaurantService{
 			count = dao.selectOne("restaurant.isLike", map);
 			
 			if(count == 1) {
-				like = true;
-			} else {
 				like = false;
+			} else {
+				like = true;
 			}
 			
 		} catch (Exception e) {
@@ -155,12 +155,12 @@ public class RestaurantServiceImpl implements RestaurantService{
 		try {
 			boolean isLike = isLike(map);
 			
-			if(isLike) {
-				dao.selectOne("restaurant.deleteLike", map);
-				state = false;
-			} else {
-				dao.selectOne("restaurant.insertLike", map);
+			if(! isLike) {
+				dao.deleteData("restaurant.deleteLike", map);
 				state = true;
+			} else {
+				dao.insertData("restaurant.insertLike", map);
+				state = false;
 			}
 			
 		} catch (Exception e) {
