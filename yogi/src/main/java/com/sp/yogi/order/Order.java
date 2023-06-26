@@ -24,6 +24,16 @@ public class Order {
 	private String state;
 	
 	private String menu;
+	
+	private int deliveryFee;
+
+	public int getDeliveryFee() {
+		return deliveryFee;
+	}
+
+	public void setDeliveryFee(int deliveryFee) {
+		this.deliveryFee = deliveryFee;
+	}
 
 	public Long getOrderNum() {
 		return orderNum;

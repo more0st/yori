@@ -543,7 +543,7 @@ body {
 					    </h2>
 					    <div id="${category.menuCategory}" class="accordion-collapse collapse ${status.count==1?'show':''}" aria-labelledby="${status.count}" data-bs-parent="#accordionExample">
 					      <c:forEach var="menu" items="${category.menuList}">
-						      <div class="accordion-body" id="submenu-modal">
+						      <div class="accordion-body" onclick="openModal(${menu.menuNum})">
 						      	<div>
 									<div style="font-weight: bold; margin-bottom: 5px;">${menu.menu}</div>
 									<div>${menu.price}원</div>					      	
@@ -554,89 +554,95 @@ body {
 							      	</div>
 						      	</c:if>
 						      </div>
+						      
+						         <!-- 모달 -->
+								<div class="modal" id="modal-${menu.menuNum}" tabindex="-1">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+									   		<div class="modal-header">
+									    		<h5 class="modal-title">${menu.menu}</h5>
+									    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									   		</div>
+									    	<div class="modal-body">
+									    		<div class="modal-top">
+									    			<img class="modal-img" src="${pageContext.request.contextPath}/resources/picture/mushroom.png">
+								    			</div>
+								    			<div class="modal-menu">
+								    				${menu.menu}
+								    			</div>
+								    			<hr>
+								    			<div class="modal-price">
+								    				<div>
+														가격					    				
+								    				</div>
+								    				<div>
+								    					7,000원
+								    				</div>
+								    			</div>
+								    			<hr>
+								    			<div class="modal-price">
+								    				옵션추가
+								    			</div>
+								    			
+								    			<!-- foreach 돌릴 부분 -->
+								    			<div class="modal-option">
+								    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
+								    					<input class="modal-radio" type="checkbox"><div>추가 없음</div>
+								    				</div>
+								    				<div>
+								    					추가비용없음
+								    				</div>
+								    			</div>
+								    			<div class="modal-option">
+								    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
+								    					<input class="modal-radio" type="checkbox"><div>감자튀김 S</div>
+								    				</div>
+								    				<div>
+								    					1,800원
+								    				</div>
+								    			</div>
+								    			<div class="modal-option">
+								    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
+								    					<input class="modal-radio" type="checkbox"><div>감자튀김 L</div>
+								    				</div>
+								    				<div>
+								    					2,500원
+								    				</div>
+								    			</div>
+								    			<!-- foreach 끝 -->
+								    			
+								    			<div class="modal-total">
+								    				<div style="font-weight: bold;">
+								    					총 주문금액
+								    				</div>
+								    				<div>
+								    					<div style="font-size: 24px; color: #fa0050; text-align: right; font-weight: bold;">
+									    					7,000원
+								    					</div>
+								    					<div style="font-size: 12px; text-align: right">
+								    						(최소주문금액 6,000원)
+								    					</div>
+								    				</div>
+								    			</div>
+								    			
+									    	</div>
+									  		<div class="modal-footer">
+									    		<button type="button" class="modal-button addCart">주문표에 추가</button>
+									    		<button type="button" class="modal-button toOrder">주문하기</button>
+									  		</div>
+										</div>
+									</div>
+								</div>
+						
 					   	  </c:forEach>
 					    </div>
 					  </c:forEach>
 					  </div>
 					</div> <!-- 아코디언 끝 -->
-									   <!-- 모달 -->
-						<div class="modal" id="menu-modal" tabindex="-1">
-							<div class="modal-dialog modal-dialog-centered">
-								<div class="modal-content">
-							   		<div class="modal-header">
-							    		<h5 class="modal-title">기네스 머쉬룸 와퍼</h5>
-							    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							   		</div>
-							    	<div class="modal-body">
-							    		<div class="modal-top">
-							    			<img class="modal-img" src="${pageContext.request.contextPath}/resources/picture/mushroom.png">
-						    			</div>
-						    			<div class="modal-menu">
-						    				기네스 머쉬룸 와퍼
-						    			</div>
-						    			<hr>
-						    			<div class="modal-price">
-						    				<div>
-												가격					    				
-						    				</div>
-						    				<div>
-						    					7,000원
-						    				</div>
-						    			</div>
-						    			<hr>
-						    			<div class="modal-price">
-						    				옵션추가
-						    			</div>
-						    			
-						    			<!-- foreach 돌릴 부분 -->
-						    			<div class="modal-option">
-						    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-						    					<input class="modal-radio" type="checkbox"><div>추가 없음</div>
-						    				</div>
-						    				<div>
-						    					추가비용없음
-						    				</div>
-						    			</div>
-						    			<div class="modal-option">
-						    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-						    					<input class="modal-radio" type="checkbox"><div>감자튀김 S</div>
-						    				</div>
-						    				<div>
-						    					1,800원
-						    				</div>
-						    			</div>
-						    			<div class="modal-option">
-						    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-						    					<input class="modal-radio" type="checkbox"><div>감자튀김 L</div>
-						    				</div>
-						    				<div>
-						    					2,500원
-						    				</div>
-						    			</div>
-						    			<!-- foreach 끝 -->
-						    			
-						    			<div class="modal-total">
-						    				<div style="font-weight: bold;">
-						    					총 주문금액
-						    				</div>
-						    				<div>
-						    					<div style="font-size: 24px; color: #fa0050; text-align: right; font-weight: bold;">
-							    					7,000원
-						    					</div>
-						    					<div style="font-size: 12px; text-align: right">
-						    						(최소주문금액 6,000원)
-						    					</div>
-						    				</div>
-						    			</div>
-						    			
-							    	</div>
-							  		<div class="modal-footer">
-							    		<button type="button" class="modal-button addCart">주문표에 추가</button>
-							    		<button type="button" class="modal-button toOrder">주문하기</button>
-							  		</div>
-								</div>
-							</div>
-						</div>
+					
+					
+						
+						
 				</div>
 
 				<!-- 리뷰 -->
@@ -880,14 +886,10 @@ body {
 	
 	
 	<%-- 모달 --%>
-	// div 클릭 이벤트 핸들러
-	document.getElementById("submenu-modal").addEventListener("click", function() {
-	// 모달 창 띄우기
-		
-	});
+	
 	
 	function openModal(menuNum){
-		$('#menuNum').modal('show');
+		$('#modal-' + menuNum).modal('show');
 	}
 	
 	
