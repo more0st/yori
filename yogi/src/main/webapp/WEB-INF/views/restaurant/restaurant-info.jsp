@@ -878,13 +878,17 @@ body {
 	
 	choiceMenu.classList.add('active');
 	
+	
 	<%-- 모달 --%>
 	// div 클릭 이벤트 핸들러
 	document.getElementById("submenu-modal").addEventListener("click", function() {
 	// 모달 창 띄우기
-		$('#menu-modal').modal('show');
+		
 	});
 	
+	function openModal(menuNum){
+		$('#menuNum').modal('show');
+	}
 	
 	
 	
