@@ -77,8 +77,8 @@ public class OwnerController {
 		
 		int todayOrder = service.todayOrderCount(map);
 		int todayOrderSum = service.todayOrderSum(map);
-		int reviewRatingSum = service.reviewRating(info.getRestaurantNum());
-		int reviewRatingCount = service.reviewRatingCount(info.getRestaurantNum());
+		double reviewRatingSum = service.reviewRating(info.getRestaurantNum());
+		double reviewRatingCount = service.reviewRatingCount(info.getRestaurantNum());
 		
 		String reviewAvg = "0";
 		
@@ -230,8 +230,8 @@ public class OwnerController {
 		
 		int todayOrder = service.todayOrderCount(map);
 		int todayOrderSum = service.todayOrderSum(map);
-		int reviewRatingSum = service.reviewRating(info.getRestaurantNum());
-		int reviewRatingCount = service.reviewRatingCount(info.getRestaurantNum());
+		double reviewRatingSum = service.reviewRating(info.getRestaurantNum());
+		double reviewRatingCount = service.reviewRatingCount(info.getRestaurantNum());
 		
 		String reviewAvg = "0";
 		
