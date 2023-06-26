@@ -36,4 +36,5 @@ public interface RestaurantService {
 	
 	// 별점 구하기
 	public double readRating(Long restaurantNum);
+	
 }

@@ -724,39 +724,50 @@ body {
 					<c:if test="${empty reviewList}">
 						<div class="review" style="color: #333; font-weight: bold; text-align: center;">등록된 리뷰가 없습니다.</div>
 					</c:if>
-					<!-- image가 없는 리뷰라면 if로 생략하기 -->
-					<div class="review">
-						<div class="review-top">
-							<div class="review-name">
-								<div class="res-333" style="font-weight: bold;">박상훈님</div><div class="review-date">2023-06-13</div>
+					<c:if test="${not empty reviewList}">
+						<c:forEach var="review" items="${reviewList}" varStatus="status">
+						<div class="review">
+							<div class="review-top">
+								<div class="review-name">
+									<!-- 닉네임 -->
+									<div class="res-333" style="font-weight: bold;">${review.userName}님</div><div class="review-date">${review.regDate}</div>
+								</div>
+								<!-- 자신의 리뷰라면 삭제 / 신고 -->
+								<!-- <div><button class="report-btn">신고</button></div>  -->
 							</div>
-							<!-- 자신의 리뷰라면 삭제 -->
-							<div><button class="report-btn">신고</button></div>
-						</div>
-						<div class="review-rating">★★★★★</div>
-						<img class="review-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
-						<div class="review-content">
-							맛있는 버거킹
-						</div>
-						
-						<!-- 사장님 답글 -->
-						<div class="ownerReview">
-							<div class="ownerReview-top">
-								<i class="bi bi-arrow-return-right"></i>&nbsp;<div class="res-333" style="font-weight: bold;">사장님</div>&nbsp;<div class="review-date">2023-06-17</div>
+							<div class="review-rating">
+							<c:forEach var="i" begin="1" end="${review.star}">★</c:forEach>
 							</div>
-							<div class="ownerReview-content">
-								맛잇게 먹어서 감사해요
+							<!-- image가 없는 리뷰라면 if로 생략하기 -->
+							<c:if test="${not empty review.imgFileName}">
+								<img class="review-img" src="${pageContext.request.contextPath}/resources/picture/${review.imgFileName}">
+							</c:if>
+							<div class="review-content">
+								${review.content}
 							</div>
+							
+							<!-- 사장님 답글 -->
+							<c:if test="${not empty review.reply}">
+								<div class="ownerReview">
+									<div class="ownerReview-top">
+										<i class="bi bi-arrow-return-right"></i>&nbsp;<div class="res-333" style="font-weight: bold;">사장님</div>&nbsp;<div class="review-date">2023-06-17</div>
+									</div>
+									<div class="ownerReview-content">
+										${review.reply}
+									</div>
+								</div>
+							</c:if>
+							
 						</div>
-						
-					</div>
+						</c:forEach>
+					</c:if>
 					
+					<!--  
 					<div class="review">
 						<div class="review-top">
 							<div class="review-name">
 								<div class="res-333" style="font-weight: bold;">박상훈님</div><div class="review-date">2023-06-13</div>
 							</div>
-							<!-- 자신의 리뷰라면 삭제 -->
 							<div><button type="button" class="report-btn">신고</button></div>
 						</div>
 						<div class="review-rating">★★★★★</div>
@@ -765,6 +776,7 @@ body {
 							맛있는 버거킹
 						</div>
 					</div>
+					-->
 					
 				</div>
 				

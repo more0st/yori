@@ -136,11 +136,20 @@ public class RestaurantController {
 		double rating = service.readRating(restaurantNum);
 		restaurantInfo2.setRating(rating);
 		
+		
+		/* 메뉴 카테고리 */
+		List<Category> categoryList = service.readCategory(restaurantNum);
+		for(Category c : categoryList) {
+			c.setMenuList(service.readMenu(restaurantNum));
+		}
+		
+		
 		model.addAttribute("restaurantNum", restaurantNum);
 		model.addAttribute("restaurantInfo", restaurantInfo);
 		model.addAttribute("restaurantInfo2", restaurantInfo2);
 		model.addAttribute("likeStatus", likeStatus);
 		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("categoryList", categoryList);
 		
 		return ".restaurant.restaurant-info";
 	}
