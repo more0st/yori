@@ -1,5 +1,6 @@
 package com.sp.yogi.owner;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,7 +68,32 @@ public class OwnerController {
 			
 		}
 		
-		return ".ownerLayout";
+		LocalDate now = LocalDate.now();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("restaurantNum", info.getRestaurantNum());
+		map.put("order_date", now);
+		
+		int todayOrder = service.todayOrderCount(map);
+		int todayOrderSum = service.todayOrderSum(map);
+		int reviewRatingSum = service.reviewRating(info.getRestaurantNum());
+		int reviewRatingCount = service.reviewRatingCount(info.getRestaurantNum());
+		
+		String reviewAvg = "0";
+		
+		if(reviewRatingCount != 0) {
+			reviewAvg = String.format("%.1f", reviewRatingSum / reviewRatingCount);
+		} else if(reviewRatingCount == 0) {
+			reviewAvg = "0";
+		}
+		
+				
+		model.addAttribute("todayOrder",todayOrder);
+		model.addAttribute("todayOrderSum" ,todayOrderSum);
+		model.addAttribute("reviewAvg", reviewAvg);
+		
+		return ".owner.layout.main";
 	}
 	
 	@RequestMapping(value = "member", method = RequestMethod.GET)
@@ -195,7 +221,32 @@ public class OwnerController {
 		}
 		*/
 		
-		return ".owner.home";
+		LocalDate now = LocalDate.now();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("restaurantNum", info.getRestaurantNum());
+		map.put("order_date", now);
+		
+		int todayOrder = service.todayOrderCount(map);
+		int todayOrderSum = service.todayOrderSum(map);
+		int reviewRatingSum = service.reviewRating(info.getRestaurantNum());
+		int reviewRatingCount = service.reviewRatingCount(info.getRestaurantNum());
+		
+		String reviewAvg = "0";
+		
+		if(reviewRatingCount != 0) {
+			reviewAvg = String.format("%.1f", reviewRatingSum / reviewRatingCount);
+		} else if(reviewRatingCount == 0) {
+			reviewAvg = "0";
+		}
+		
+				
+		model.addAttribute("todayOrder",todayOrder);
+		model.addAttribute("todayOrderSum" ,todayOrderSum);
+		model.addAttribute("reviewAvg", reviewAvg);
+		
+		return ".owner.layout.main";
 	}
 
 	@RequestMapping(value = "logout")

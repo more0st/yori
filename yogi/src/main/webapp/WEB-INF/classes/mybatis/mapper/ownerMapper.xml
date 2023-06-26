@@ -23,6 +23,38 @@
 		VALUES (#{restaurantNum}, #{userId}, #{userName}, #{userPwd}, 1, SYSDATE, SYSDATE, 0, 1, 0, #{email}, #{tel}) 
     </insert>
    
+   <select id="todayOrderCount" parameterType="map" resultType="Integer">
+       	SELECT count(*)
+		FROM order_bundle
+		<where>
+			restaurantNum = #{restaurantNum} AND order_date = #{order_date};
+		</where>
+    </select>
+    
+    <select id="todayOrderSum" parameterType="map" resultType="Integer">
+       	SELECT sum(total_price) today_sum
+		FROM order_bundle
+		<where>
+			restaurantNum = #{restaurantNum} AND order_date = #{order_date};
+		</where>
+    </select>
+    
+    <select id="reviewRating" parameterType="Long" resultType="Integer">
+       	SELECT NVL(SUM(rating),0) sum_rating
+		FROM review
+		<where>
+			restaurantNum = #{restaurantNum}
+		</where>
+    </select>
+    
+    <select id="reviewRatingCount" parameterType="Long" resultType="Integer">
+       	SELECT NVL(COUNT(*),0) 
+		FROM review
+		<where>
+			restaurantNum = #{restaurantNum}
+		</where>
+    </select>
+   
    <!-- 아이디 있는지 체크 -->
 	<select id="readOwner" parameterType="String" resultType="com.sp.yogi.owner.Owner">
 		SELECT restaurantNum, userId, userPwd, userName, enabled, reg_date, modify_date, last_login, failure_cnt, status, reject_cnt, email, tel  

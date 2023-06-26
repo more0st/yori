@@ -63,17 +63,17 @@
 		<div class="flexdiv">
 			<div class="saleCnt">
 				<div>오늘의 주문건수</div>
-				<div><span class="saleCount">5</span>&nbsp;회</div>
+				<div><span class="saleCount">${todayOrder}</span>&nbsp;회</div>
 			</div>
 			<div class="saleCnt">
 				<div>오늘의 매출</div>
-				<div><span class="saleCount">50,000</span>&nbsp;원</div>
+				<div><span class="saleCount">${todayOrderSum}</span>&nbsp;원</div>
 			</div>
 			<div class="saleCnt">
 				<div>
 					리뷰 평점
 				</div>
-				<div class="saleCount">5.0</div>
+				<div class="saleCount">${reviewAvg}</div>
 			</div>
 		</div>
 	</div>

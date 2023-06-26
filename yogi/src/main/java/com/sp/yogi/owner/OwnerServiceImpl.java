@@ -305,6 +305,57 @@ public class OwnerServiceImpl implements OwnerService {
 	}
 	
 	
+	@Override
+	public int todayOrderCount(Map<String, Object> map) {
+		int result = 0;
+
+		try {
+			result = dao.selectOne("owner.todayOrderCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
+	@Override
+	public int todayOrderSum(Map<String, Object> map) {
+		int result = 0;
+
+		try {
+			result = dao.selectOne("owner.todayOrderSum", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
+	@Override
+	public int reviewRating(Long restaurantNum) {
+		int result = 0;
+
+		try {
+			result = dao.selectOne("owner.reviewRating", restaurantNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
+	@Override
+	public int reviewRatingCount(Long restaurantNum) {
+		int result = 0;
+
+		try {
+			result = dao.selectOne("owner.reviewRatingCount", restaurantNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 	
 	
 }

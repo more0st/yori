@@ -25,5 +25,12 @@ public interface OwnerService {
 	public void sendIdInfo(Owner dto) throws Exception;
 	
 	public int readStatus(String userId);
+	
+	
+	public int todayOrderCount(Map<String, Object> map);
+	public int todayOrderSum(Map<String, Object> map);
+	public int reviewRating(Long restaurantNum);
+	public int reviewRatingCount(Long restaurantNum);
+
 
 }
