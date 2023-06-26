@@ -129,7 +129,52 @@
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.periodSet {
+	display: flex;
+}
+
 </style>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/paginate-boot.js"></script>
+
+<c:url var="listUrl" value="/owner/sale/saleTime">
+	<c:if test="${not empty date1 || not empty date1}">
+		<c:param name="date1" value="${date1}"/>
+		<c:param name="date2" value="${date2}"/>
+	</c:if>
+</c:url>
+
+<script type="text/javascript">
+window.addEventListener("load", function(){
+	let page = ${page};
+	let pageSize = ${size};
+	let dataCount = ${dataCount};
+	let url = "${listUrl}"; 
+	
+	let total_page = pageCount(dataCount, pageSize);
+	let paging = pagingUrl(page, total_page, url);
+	
+	document.querySelector(".dataCount").innerHTML = dataCount+"개 ("
+			+page+"/"+total_page+"페이지)";
+
+	document.querySelector(".page-navigation").innerHTML = 
+		dataCount === 0 ? "등록된 게시물이 없습니다." : paging;
+});
+</script>
+
+<script type="text/javascript">
+function searchList() {
+	const f = document.searchForm;
+	
+	if(f.date1.value > f.date2.value) {
+		alert('시작날짜가 종료날짜보다 늦을 수 없습니다.');
+		f.date1.focus;
+		return;
+	}
+	
+	f.submit();
+}
+</script>
 
 <main id="main" class="main">
 <div class="whole-container">
@@ -140,13 +185,21 @@
 				메뉴별 매출 관리
 			</div>
 			
-			<div class="btn-group" role="group" aria-label="Basic">
-				<button type="button" class="btn btn-primary">1일</button>
-				<button type="button" class="btn btn-primary">1주일</button>
-				<button type="button" class="btn btn-primary">1달</button>
-				<button type="button" class="btn btn-primary">1년</button>
-				<button type="button" class="btn btn-dark">전체</button>
-			</div>
+			<form action="${pageContext.request.contextPath}/owner/sale/saleMenu" method="post" name="searchForm" class="periodSet">
+					<div class="periodSet" style="margin-right: 8px;">
+						<div>
+							<input type="date" name="date1" id="date1" class="form-control"
+								value="${date1}">
+						</div>
+						<span class="col-form-label">&nbsp; ~ &nbsp;</span>
+						<div>
+							<input type="date" name="date2" id="date2" class="form-control"
+								value="${date2}">
+						</div>
+					</div>
+					<button type="button" class="btn btn-primary"
+						onclick="searchList();">검색</button>
+			</form>
 		</div>
 		
 			
@@ -157,26 +210,26 @@
 				<th class="center">메뉴</th>
 				<th class="center">가격</th>
 				<th class="center">판매수량</th>
-				<th class="center">총합</th>
+				
 			</tr>
 			</thead>
 			<tbody>
-			<tr>
-				<td class="center">2</td>
-				<td class="center">기네스 머쉬룸 와퍼</td>
-				<td class="center">7,000원</td>
-				<td class="center">2</td>
-				<td class="center">14,000원</td>
-			</tr>
-			<tr>
-				<td class="center">1</td>
-				<td class="center">와퍼 세트</td>
-				<td class="center">6,000원</td>
-				<td class="center">3</td>
-				<td class="center">18,000원</td>
-			</tr>
+					<c:forEach var="dto" items="${list}" varStatus="status">
+						<tr>
+							<td class="center">${dataCount - (page-1) * size - status.index}</td>
+							<td class="center">${dto.menu}</td>
+							<td class="center">${dto.menuPrice}</td>
+							<td class="center">${dto.orderCount}</td>
+						</tr>
+					</c:forEach>
+
+			
 			</tbody>
 		</table>
+		
+		<div class="page-navigation"></div>
+		
+		
 		<div class="list-table-bottom">
 			<div class="search-box">
 				<div class="search-input">
@@ -184,13 +237,15 @@
 				</div>
 				<button type="button" class="search-button shadow-sm"><i class="bi bi-search"></i></button>
 			</div>
-		
+			
+			<!-- 
 			<div class="list-table-bottom-left shadow-sm">
 				총계
 			</div>
 			<div class="list-table-bottom-right shadow-sm">
 				32,000원
 			</div>
+			 -->
 		</div>
 	</div>
 

@@ -1,16 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
-
 .whole-container {
 	min-height: 800px;
 	background: #fafafa;
 }
 
-.list-table { 
+.list-table {
 	width: 100%;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	margin-bottom: 20px;
@@ -97,66 +96,148 @@
 	text-align: right;
 }
 
+.periodSet {
+	display: flex;
+}
 </style>
 
-<main id="main" class="main">
-<div class="whole-container">
-	
-	<div class="table-container">
-		<div class="list-table-top">
-			<div class="list-title">
-				기간별 매출 관리
-			</div>
-			<div class="btn-group" role="group" aria-label="Basic">
-				<button type="button" class="btn btn-primary">1일</button>
-				<button type="button" class="btn btn-primary">1주일</button>
-				<button type="button" class="btn btn-primary">1달</button>
-				<button type="button" class="btn btn-primary">1년</button>
-				<button type="button" class="btn btn-dark">전체</button>
-			</div>
-		</div>
-		<table class="list-table">
-			<thead>
-			<tr>
-				<th class="center">번호</th>
-				<th class="center">주문번호</th>
-				<th class="center">유저아이디</th>
-				<th class="center">메뉴</th>
-				<th class="center">배달지</th>
-				<th class="center">전화번호</th>
-				<th class="center">가격</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-				<td class="center">2</td>
-				<td>2023061619150101</td>
-				<td>wldbsqkqh</td>
-				<td>기네스 머쉬룸 와퍼</td>
-				<td>서울시 마포구 월드컵북로 21 풍성빌딩 201호</td>
-				<td>010-1111-1111</td>
-				<td class="right">7,000원</td>
-			</tr>
-			<tr>
-				<td class="center">1</td>
-				<td>2023061619120431</td>
-				<td>Tkddyd</td>
-				<td>와퍼 세트</td>
-				<td>서울시 마포구 월드컵북로 21 풍성빌딩 202호</td>
-				<td>010-1111-2222</td>
-				<td class="right">6,000원</td>
-			</tr>
-			</tbody>
-		</table>
-		<div class="list-table-bottom">
-			<div class="list-table-bottom-left shadow-sm">
-				총계
-			</div>
-			<div class="list-table-bottom-right shadow-sm">
-				13,000원
-			</div>
-		</div>
-	</div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/paginate-boot.js"></script>
 
-</div>
+<c:url var="listUrl" value="/owner/sale/saleTime">
+	<c:if test="${not empty date1 || not empty date1}">
+		<c:param name="date1" value="${date1}"/>
+		<c:param name="date2" value="${date2}"/>
+	</c:if>
+</c:url>
+
+<script type="text/javascript">
+window.addEventListener("load", function(){
+	let page = ${page};
+	let pageSize = ${size};
+	let dataCount = ${dataCount};
+	let url = "${listUrl}"; 
+	
+	let total_page = pageCount(dataCount, pageSize);
+	let paging = pagingUrl(page, total_page, url);
+	
+	document.querySelector(".dataCount").innerHTML = dataCount+"개 ("
+			+page+"/"+total_page+"페이지)";
+
+	document.querySelector(".page-navigation").innerHTML = 
+		dataCount === 0 ? "등록된 게시물이 없습니다." : paging;
+});
+</script>
+
+<script type="text/javascript">
+function searchList() {
+	const f = document.searchForm;
+	
+	if(f.date1.value > f.date2.value) {
+		alert('시작날짜가 종료날짜보다 늦을 수 없습니다.');
+		f.date1.focus;
+		return;
+	}
+	
+	f.submit();
+}
+</script>
+
+<main id="main" class="main">
+	<div class="whole-container">
+
+		<div class="table-container">
+			<div class="list-table-top">
+				<div class="list-title">기간별 매출 관리</div>
+
+				<form action="${pageContext.request.contextPath}/owner/sale/saleTime" method="post" name="searchForm" class="periodSet">
+					<div class="periodSet" style="margin-right: 8px;">
+						<div>
+							<input type="date" name="date1" id="date1" class="form-control"
+								value="${date1}">
+						</div>
+						<span class="col-form-label">&nbsp; ~ &nbsp;</span>
+						<div>
+							<input type="date" name="date2" id="date2" class="form-control"
+								value="${date2}">
+						</div>
+					</div>
+					<button type="button" class="btn btn-primary"
+						onclick="searchList();">검색</button>
+				</form>
+
+			</div>
+			
+			<div class="row board-list-header">
+	            <div class="col-auto me-auto dataCount">
+	            </div>
+	            <div class="col-auto">&nbsp;</div>
+	        </div>	
+			
+
+			<table class="list-table">
+				<thead>
+					<tr>
+						<th class="center">번호</th>
+						<th class="center">주문번호</th>
+						<th class="center">유저닉네임</th>
+						<th class="center">메뉴</th>
+						<th class="center">배달지</th>
+						<th class="center">전화번호</th>
+						<th class="center">주문가격</th>
+					</tr>
+				</thead>
+
+				<tbody>
+				
+				<c:forEach var="dto" items="${list}" varStatus="status">
+						<tr>
+							<td class="center">${dataCount - (page-1) * size - status.index}</td>
+							<td>${dto.orderNum}</td>
+							<td>${dto.userName}</td>
+							<td>
+							<c:forEach var="menuDto" items="${dto.ownerSaleMenu}" >
+								<span> ${menuDto.menu} &nbsp; ${menuDto.orderCount} </span>
+							</c:forEach>
+							</td>
+							<td>${dto.addr1}</td>
+							<td>${dto.tel}</td>
+							<td class="right">${dto.order_price}</td>
+						</tr>
+				</c:forEach>
+				
+				
+				<!-- 
+					<tr>
+						<td class="center">2</td>
+						<td>2023061619150101</td>
+						<td>wldbsqkqh</td>
+						<td>기네스 머쉬룸 와퍼</td>
+						<td>서울시 마포구 월드컵북로 21 풍성빌딩 201호</td>
+						<td>010-1111-1111</td>
+						<td class="right">7,000원</td>
+					</tr>
+					<tr>
+						<td class="center">1</td>
+						<td>2023061619120431</td>
+						<td>Tkddyd</td>
+						<td>와퍼 세트</td>
+						<td>서울시 마포구 월드컵북로 21 풍성빌딩 202호</td>
+						<td>010-1111-2222</td>
+						<td class="right">6,000원</td>
+					</tr>
+					 -->
+				</tbody>
+
+			</table>
+			
+			<div class="page-navigation"></div>
+
+			<div class="list-table-bottom">
+				<div class="list-table-bottom-left shadow-sm">총계</div>
+				<div class="list-table-bottom-right shadow-sm">${total_price}</div>
+			</div>
+
+		</div>
+
+	</div>
 </main>

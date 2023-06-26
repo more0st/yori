@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ownerSale">
+
+
+	<sql id="where-list">
+			(TO_CHAR(order_date, 'YYYY-MM-DD') &gt;= #{date1}
+				AND TO_CHAR(order_date, 'YYYY-MM-DD') &lt;= #{date2} )
+	</sql>
+
+	<!-- 기간별 매출 데이터개수  -->
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM order_bundle
+		<where>
+			restaurantNum = #{restaurantNum}
+			<if test="date1 != null and date2 != null">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 메뉴별 매출 데이터개수  -->
+	<select id="menuDataCount" parameterType="map" resultType="Integer">
+		SELECT COUNT(DISTINCT oi.menuNum)
+		FROM order_item oi
+		JOIN order_bundle ob ON oi.orderNum = ob.orderNum
+		JOIN menu1 m1 ON oi.menuNum = m1.menuNum
+		JOIN menu m ON m1.num = m.num
+		<where>
+			m.restaurantNum = #{restaurantNum}
+			<if test="date1 != null and date2 != null">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 총액  -->
+	<select id="total_price" parameterType="map" resultType="Integer">
+		SELECT SUM(total_price) total_price
+		FROM order_bundle
+		<where>
+			restaurantNum = #{restaurantNum}
+			<if test="date1 != null and date2 != null  ">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 기간별 매출 리스트 -->
+	<select id="listOwnerSale" parameterType="map" resultType="com.sp.yogi.owner.sale.OwnerSale">
+		SELECT ob.orderNum, m.userName, TO_CHAR(ob.order_date, 'YYYY-MM-DD') order_date,
+			   ob.addr1, ob.addr2, ob.tel, total_price order_price
+		FROM order_bundle ob
+		JOIN member1 m ON ob.userId=m.userId
+		<where>
+			<if test="date1 != null and date2 != null">
+				<include refid="where-list"/>
+			</if>
+		</where>
+		ORDER BY order_date DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<!-- 기간별 매출 리스트에 필요한 메뉴 리스트 -->
+	<select id="listOwnerSaleMenu" parameterType="Long" resultType="com.sp.yogi.owner.sale.OwnerSaleMenu">
+		SELECT m.menu, oi.orderCount, orderNum
+		FROM order_item oi
+		JOIN menu1 m ON oi.menuNum = m.menuNum 
+		<where>
+			orderNum = #{orderNum} 
+		</where>
+	</select>
+	
+	<!-- 메뉴별 매출 리스트 -->
+	<select id="menuList" parameterType="map" resultType="com.sp.yogi.owner.sale.OwnerSale">
+		SELECT menu, price menuPrice, SUM(oi.orderCount) orderCount
+		FROM menu1 m1
+		JOIN menu m ON m1.num = m.num
+		JOIN order_item oi ON m1.menuNum = oi.menuNum 
+		JOIN order_bundle ob ON oi.orderNum = ob.orderNum
+		<where>
+			m.restaurantNum = #{restaurantNum}
+			<if test="date1 != null and date2 != null">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+		GROUP BY menu,price
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+
+
+</mapper>
