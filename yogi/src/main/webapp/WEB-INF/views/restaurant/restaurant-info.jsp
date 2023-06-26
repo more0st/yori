@@ -721,6 +721,9 @@ body {
 					</div>
 					
 					<!-- foreach로 돌리기 -->
+					<c:if test="${empty reviewList}">
+						<div class="review" style="color: #333; font-weight: bold; text-align: center;">등록된 리뷰가 없습니다.</div>
+					</c:if>
 					<!-- image가 없는 리뷰라면 if로 생략하기 -->
 					<div class="review">
 						<div class="review-top">

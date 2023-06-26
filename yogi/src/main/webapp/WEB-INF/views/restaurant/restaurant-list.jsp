@@ -248,11 +248,12 @@ function getList() {
 					<span class="res-info res-80">`+ list.basePrice +`원 이상 배달</span><span class="res-division"></span>
 				</span>
 				</a>`;
-           
+				
 				restaurantList.append(resultTemplate);
 				
 		});
 	},
+        
 	error: function(xhr, status, error) {
 		console.error(error);alert('요청 실패. 관리자에게 문의바랍니다.');
 	}
