@@ -124,28 +124,50 @@ public class RestaurantServiceImpl implements RestaurantService{
 		return optionList;
 	}
 	
-	// 좋아요
+	// 좋아요 여부 확인
 	@Override
-	public Boolean isLike(Map<String, Object> map) {
+	public boolean isLike(Map<String, Object> map) {
 		Boolean like = false;
-		/*int result = 0;
+		int count = 0;
 		
 		try {
-			// Long userId, Long restaurantNum
-			result = dao.selectOne("restaurant.isLike", map);
+			// 리뷰 달았는지 ( 0: 리뷰 x, 1: 리뷰 o )
+			count = dao.selectOne("restaurant.isLike", map);
 			
-			if(result == 1) {
-					
+			if(count == 1) {
+				like = true;
 			} else {
-				
+				like = false;
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		*/
+		
 		return like;
 	}
-
+	
+	
+	// 좋아요 
+	@Override
+	public boolean insertLike(Map<String, Object> map) throws Exception {
+		boolean state = false;
+		try {
+			boolean isLike = isLike(map);
+			
+			if(isLike) {
+				dao.selectOne("restaurant.deleteLike", map);
+				state = false;
+			} else {
+				dao.selectOne("restaurant.insertLike", map);
+				state = true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return state;
+	}
 
 }

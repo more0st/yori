@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -111,22 +112,28 @@ public class RestaurantController {
 			HttpSession session, 
 			HttpServletRequest req,
 			Model model
-			) {
+			) throws Exception  {
 		RestaurantInfo restaurantInfo = service.readRestaurantInfo(restaurantNum);
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
 		//Category category = service.readCategory(restaurantNum);
 		//Menu menu = service.readMenu(category.getNum());
 		//Option option = service.readOption(menu.getMenuNum());
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		String userId = info.getUserId();
+		map.put("userId", userId);
+		map.put("restaurantNum", restaurantNum);
+		boolean likeStatus = service.insertLike(map);
+		
 		model.addAttribute("restaurantNum", restaurantNum);
 		model.addAttribute("restaurantInfo", restaurantInfo);
-		
-		
+		model.addAttribute("likeStatus", likeStatus);
 		
 		return ".restaurant.restaurant-info";
 	}
 	
-/*	@GetMapping("like")
+	@PostMapping("like")
 	@ResponseBody
 	public Map<String, Object> like(
 			HttpSession session, 
@@ -143,10 +150,11 @@ public class RestaurantController {
 		map.put("userId", userId);
 		map.put("restaurantNum", restaurantNum);
 		
+		boolean state = service.insertLike(map);
 		
-		// resultMap.put("state", state);
 		
+		resultMap.put("state", state);
 		return resultMap;
 	}
-	*/
+	
 }

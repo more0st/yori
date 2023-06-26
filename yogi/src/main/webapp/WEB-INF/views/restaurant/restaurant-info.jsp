@@ -498,8 +498,7 @@ body {
 				<div class="res-name">
 					<div class="res-name-left">${restaurantInfo.restaurantName}</div>
 					<div class="res-name-right">
-						<button type="button" class="btn btnSendRecipeLike" title="좋아요" style="border: none; padding-left: 0"
-                              disabled="disabled">
+						<button type="button" class="btn btnSendRecipeLike" title="좋아요" style="border: none; padding-left: 0">
                               <i class="fa-solid fa-heart" id="likeBtn"></i> 
                               <span id="recipeLikeCount">${dto.recipeLikeCount}</span>
                         </button>
@@ -957,7 +956,7 @@ body {
     }
 
     // 게시물 좋아요----------------------------------------------------------------------------
-/*	
+
     let likeStatus = ${likeStatus};
     let likeBtn = document.getElementById('likeBtn');
 
@@ -965,10 +964,11 @@ body {
         if (!likeStatus) $('#likeBtn').css("color", likeColor)
     });
 
-    let likeColor = '#dc6c6a';
+    let likeColor = '#fa0050';
     let defaultColor = "#000000"
 
     function changeLikeStatus() {
+    	console.log(likeStatus);
         if (likeStatus) {
             // 좋아요 취소
             // 1. 상태변경
@@ -990,31 +990,27 @@ body {
 
     $(function () {
         $(".btnSendRecipeLike").click(function () {
-            let msg = likeStatus ? "게시글에 공감하십니까 ?" : "게시글 공감을 취소하시겠습니까 ?";
+            let msg = likeStatus ? "가게 찜 하시겠습니까 ?" : "찜을 취소하시겠습니까??";
 
             if (!confirm(msg)) {
                 return false;
             }
 
             let url = "${pageContext.request.contextPath}/restaurant/like";
-            let id = "${restaurantNum}";
+            let restaurantNum = "${restaurantNum}";
             let qs = "restaurantNum=" + restaurantNum;
 
 
             const fn = function (data) {
-                let state = data.state;
-                if (state === true) {
-                    console.log(likeStatus)
-
+               let state = data.state;
+               console.log(state)
+               if(state === true) {
                     changeLikeStatus();
-
-                } else if (state === "liked") {
-                    alert("좋아요는 한번만 가능합니다.");
-                }
+               }
             };
 
             ajaxFun(url, "post", qs, "json", fn);
         });
     });
- */   
+
 </script>

@@ -22,6 +22,9 @@ public interface RestaurantService {
 	// 가게 옵션
 	public List<Option> readOption(Long menuNum);
 	
+	// 좋아요 여부 확인
+	public boolean isLike(Map<String,Object> map);
+	
 	// 좋아요
-	Boolean isLike(Map<String,Object> map);
+	public boolean insertLike(Map<String, Object> map) throws Exception;
 }
