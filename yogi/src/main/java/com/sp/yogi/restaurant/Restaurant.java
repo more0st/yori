@@ -17,7 +17,29 @@ public class Restaurant {
 	// 이미지
 	private String imageFilename;
 	
+	private int deliveryFee;
+	private Long menuCount;
+	private String addr;
 	
+	
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	public int getDeliveryFee() {
+		return deliveryFee;
+	}
+	public void setDeliveryFee(int deliveryFee) {
+		this.deliveryFee = deliveryFee;
+	}
+	public Long getMenuCount() {
+		return menuCount;
+	}
+	public void setMenuCount(Long menuCount) {
+		this.menuCount = menuCount;
+	}
 	public String getImageFilename() {
 		return imageFilename;
 	}

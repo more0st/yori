@@ -99,5 +99,35 @@
 	 	DELETE FROM restaurantLike WHERE userId=#{userId} AND restaurantNum=#{restaurantNum}
 	</delete>
 	
+	
+	<!-- 배달팁, 메뉴개수, 리뷰개수 -->
+	<select id="readRestaurantInfo2" parameterType="map" resultType="com.sp.yogi.restaurant.Restaurant">
+		 SELECT
+		    (SELECT deliveryFee
+		        FROM deliveryMap
+		        WHERE restaurantNum = #{restaurantNum} AND addr = #{addr}) AS deliveryFee,
+		    (SELECT COUNT(*)
+		        FROM menu1
+		        JOIN menu ON menu.num = menu1.num
+		        WHERE restaurantNum = #{restaurantNum}) AS menuCount,
+		    (SELECT COUNT(*)
+		        FROM review
+		        WHERE restaurantNum = #{restaurantNum}  AND enabled = 1) AS reviewCount
+		FROM dual
+	</select>
+	
+	<!-- 리뷰 리스트 -->
+	<select id="readReivew" parameterType="Long" resultType="com.sp.yogi.restaurant.Review">
+		SELECT userName, rating star, content, imgFileName, r.reg_date regDate, reply, reply_date replyDate
+		FROM review r
+		JOIN member1 m ON r.userId = m.userId
+		WHERE restaurantNum = #{restaurantNum} AND r.enabled = 1
+	</select>
+	
+	<!-- 별점 -->
+	<select id="readRating" parameterType="Long" resultType="double">
+		SELECT NVL(AVG(rating), 0) rating FROM review 
+		where restaurantNum = #{restaurantNum}
+	</select>
 
 </mapper>

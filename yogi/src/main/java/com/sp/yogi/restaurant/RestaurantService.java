@@ -27,4 +27,13 @@ public interface RestaurantService {
 	
 	// 좋아요
 	public boolean insertLike(Map<String, Object> map) throws Exception;
+
+	// 가게 상세 정보2 ( 배달팁, 메뉴개수, 리뷰개수 )
+	public Restaurant readRestaurantInfo2(Map<String,Object> map);
+	
+	// 리뷰 리스트
+	public List<Review> readReivew(Long restaurantNum);
+	
+	// 별점 구하기
+	public double readRating(Long restaurantNum);
 }

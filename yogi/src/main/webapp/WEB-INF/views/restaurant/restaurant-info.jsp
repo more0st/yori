@@ -514,7 +514,7 @@ body {
 					</div>
 					<div class="res-center">
 						<div>
-							<span class="res-rank">★ 5.0</span><br>
+							<span class="res-rank">★ ${restaurantInfo2.rating}</span><br>
 							<span class="res-999">최소주문금액</span>&nbsp;&nbsp;<span class="res-333"><input type="text" value="${restaurantInfo.basePrice}" class="infoinput">원</span>
 						</div>
 					</div>
@@ -523,8 +523,8 @@ body {
 			
 			<div class="res-detail">
 				<div class="choice-form">
-					<div class="choice-detail choice-menu">메뉴 80</div>
-					<div class="choice-detail choice-review">클린리뷰 18</div>
+					<div class="choice-detail choice-menu">메뉴 ${restaurantInfo2.menuCount}</div>
+					<div class="choice-detail choice-review">클린리뷰 ${restaurantInfo2.reviewCount}</div>
 					<div class="choice-detail choice-info">정보</div>
 				</div>
 				
@@ -717,7 +717,7 @@ body {
 				<div class="res-show2" style="display: none;">
 					<div class="review-rank">
 						<div class="res-rank" style="font-size: 40px;">★</div>
-						<div style="font-size: 48px;">5.0</div>
+						<div style="font-size: 48px;">${restaurantInfo2.rating}</div>
 					</div>
 					
 					<!-- foreach로 돌리기 -->
@@ -874,7 +874,7 @@ body {
 			
 			
 			<div class="cart-tip">
-				배달요금 1,000원 별도
+				배달요금 ${restaurantInfo2.deliveryFee}원 별도
 			</div>
 			
 			<!-- 장바구니에 메뉴가 담길 시 출력 -->
