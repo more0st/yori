@@ -1,5 +1,7 @@
 package com.sp.yogi.owner.order;
 
+import java.util.List;
+
 public class Order {
 	private long orderNum;
 	private String userId;
@@ -28,7 +30,21 @@ public class Order {
 	private long couponNum;
 	private long state;
 	
+	private List<Order> menuList;
+	private String menu;
 	
+	public String getMenu() {
+		return menu;
+	}
+	public void setMenu(String menu) {
+		this.menu = menu;
+	}
+	public List<Order> getMenuList() {
+		return menuList;
+	}
+	public void setMenuList(List<Order> menuList) {
+		this.menuList = menuList;
+	}
 	public String getRestaurantName() {
 		return restaurantName;
 	}

@@ -179,65 +179,53 @@
 		<div class="res-show2">
 			<div class="review-rank">
 				<div class="res-rank" style="font-size: 40px;">★</div>
-				<div style="font-size: 48px;">5.0</div>
+				<div style="font-size: 48px;">${avgRating}</div>
 			</div>
 			
 			<div class="review-cnt">
-					클린리뷰 : 2개				
+					클린리뷰 : ${reviewCount}개				
 			</div>
 			
 			<!-- foreach로 돌리기 -->
 			<!-- image가 없는 리뷰라면 if로 생략하기 -->
+			<c:forEach var="rev" items="${reviewList}" varStatus="status">
 			<div class="review">
 				<div class="review-top">
 					<div class="review-name">
-						<div class="res-333" style="font-weight: bold;">박상훈님</div><div class="review-date">2023-06-13</div>
+						<div class="res-333" style="font-weight: bold;">${rev.nickName}님</div><div class="review-date">${rev.reg_date}</div>
 					</div>
 					<div><button class="report-btn">신고</button></div>
 				</div>
-				<div class="review-rating">★★★★★</div>
+				<div class="review-rating">★★★★★${rev.rating}</div>
+				<!-- ${rev.imgFileName} 사용 -->
 				<img class="review-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
 				<div class="review-content">
-					맛있는 버거킹
+					${rev.content}
 				</div>
-				
+				<c:if test="${rev.reply!=null}">
 				<!-- 사장님 답글 -->
 				<div class="ownerReview">
 					<div style="display: flex; justify-content: space-between;">
 						<div class="ownerReview-top">
-							<i class="bi bi-arrow-return-right"></i>&nbsp;<div class="res-333" style="font-weight: bold;">사장님</div>&nbsp;<div class="review-date">2023-06-17</div>
+							<i class="bi bi-arrow-return-right"></i>&nbsp;<div class="res-333" style="font-weight: bold;">사장님</div>&nbsp;<div class="review-date">${rev.reply_date}</div>
 						</div>
 						<div>
 							<div><button class="report-btn">수정</button><span class="divider">|</span><button class="report-btn">삭제</button></div>
 						</div>
 					</div>	
 					<div class="ownerReview-content">
-						맛잇게 먹어서 감사해요
+						${rev.reply}
 					</div>
 				</div>
-				
-			</div>
-			
-			<div class="review">
-				<div class="review-top">
-					<div class="review-name">
-						<div class="res-333" style="font-weight: bold;">박상훈님</div><div class="review-date">2023-06-13</div>
-					</div>
-					<div><button type="button" class="report-btn">신고</button></div>
-				</div>
-				<div class="review-rating">★★★★★</div>
-				<img class="review-img" src="${pageContext.request.contextPath}/resources/picture/amazing.png">
-				<div class="review-content">
-					맛있는 버거킹
-				</div>
-				
-				<!-- 답글이 있다면 숨기기 -->
+				</c:if>
+				<c:if test="${rev.reply==null}"><!-- 답글이 있다면 숨기기 -->
 				<div class="review-button-div">
 					<button class="review-button" id="submenu-modal">답글 달기</button>
 				</div>
+				</c:if>
 			</div>
-			
-		</div>
+		</c:forEach>
+	</div>
 	</div>
 
 

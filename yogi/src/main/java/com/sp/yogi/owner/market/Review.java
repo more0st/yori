@@ -4,7 +4,7 @@ public class Review {
 	
 	private Long orderNum;
 	private String userId;
-	private Long rating;
+	private double rating;
 	private String content;
 	private String imgFileName;
 	private String reg_date;
@@ -13,7 +13,15 @@ public class Review {
 	private String reply_date;
 	private Long restaurantNum;
 	private Long reportNum;
+	private String nickName;
 	
+	
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 	public Long getOrderNum() {
 		return orderNum;
 	}
@@ -26,10 +34,10 @@ public class Review {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Long getRating() {
+	public double getRating() {
 		return rating;
 	}
-	public void setRating(Long rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
 	public String getContent() {

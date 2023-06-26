@@ -5,10 +5,17 @@
 
 	<!-- 리뷰 리스트 select(답글리스트로도 사용) : 업체별 리뷰내역-->
 	<select id="reviewList"  parameterType="Long" resultType="com.sp.yogi.owner.market.Review">
-		SELECT orderNum, userId, rating, content, imgFileName, reg_date, enabled, reply, reply_date, restaurantNum 
-		FROM review
+		SELECT orderNum, r.userId, nickName, rating, content, imgFileName, r.reg_date, r.enabled, reply, reply_date, restaurantNum 
+		FROM review r
+        JOIN member1 m ON r.userId=m.userId
 		WHERE restaurantNum=#{restaurantNum}
     </select>
+	
+	<!-- 업체별 리뷰 개수 -->
+	<select id="reviewCount" parameterType="Long" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM review
+		WHERE restaurantNum=#{restaurantNum}
+	</select>
 	
 	<!-- 신고 내역 select : 해당 주문번호에 대한 신고 내역이 있는지 select -->
 	<select id="reviewReportList"  parameterType="Long" resultType="com.sp.yogi.owner.market.Review">
@@ -29,6 +36,11 @@
     </update>
 
 	<!-- 별점 평균 select -->
+	<select id="avgRating" parameterType="Long" resultType="double">
+	SELECT AVG(rating)
+	FROM review
+	WHERE restaurantNum=#{restaurantNum}
+	</select>
 	
 
 </mapper>

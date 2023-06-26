@@ -77,18 +77,18 @@
                     <tbody>
                     <c:forEach var="order" items="${orderList}" varStatus="status">
                    		 <c:if test="${order.statusName==1}"><!-- 접수대기인 목록 -->
-	                      <tr><!-- forEach -->
-	                        <th scope="row"><a href="#">${order.orderNum}</a></th>
-	                        <td>${order.userId}</td>
-	                        <td>${order.addr1} ${order.addr2}</td>
-	                        <td>국밥 1개 외 3건 ...</td>
-	                        <td>${order.total_price}원</td>
-	                        <td>${order.tel}</td>
-	                        <td class="overflow-ellipsis">${order.memo}</td>
-	                        <td>
-								<button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">접수대기</button>
-	                        </td>
-	                      </tr><!-- forEach -->
+	                   		 <tr><!-- forEach -->
+		                        <th scope="row"><a href="#">${order.orderNum}</a></th>
+		                        <td>${order.userId}</td>
+		                        <td>${order.addr1} ${order.addr2}</td>
+		                        <td>국밥 1개 외 3건 ...</td>
+		                        <td>${order.total_price}원</td>
+		                        <td>${order.tel}</td>
+		                        <td class="overflow-ellipsis">${order.memo}</td>
+		                        <td>
+									<button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">접수대기</button>
+		                        </td>
+		                      </tr><!-- forEach -->
 	                      </c:if>
                       </c:forEach>
                     </tbody>
@@ -141,7 +141,7 @@
 	                        <td>${order.tel}</td>
 	                        <td class="overflow-ellipsis">${order.memo}</td>
 	                        <td>
-	                        	<button type="button" class="btn btn-success" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">배달완료</button>
+	                        	<button type="button" class="btn btn-success" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail'">접수완료</button>
 	                        </td>
 	                      </tr><!-- forEach -->
 	                      </c:if>

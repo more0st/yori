@@ -30,12 +30,15 @@ public class OwnerOrderController {
 		
 		Order res=service.readResNum(info.getUserId());
 		List<Order> orderList=service.orderList(res.getRestaurantNum());
-		//List<Order> menuList=service.orderMenuList();
-		System.out.println("로그인아이디 : "+info.getUserId()+"가게번호 : "+res.getRestaurantNum());
+		/*
+		for(Order order : orderList) {
+			Long orderNum=order.getOrderNum();
+			order.setMenuList(service.orderMenuList(orderNum));
+		}
+		*/
 		
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("res",res);
-		//model.addAttribute("menuList",menuList);
 		model.addAttribute("userId",info.getUserId());
 		
 		return ".owner.order.orderList";

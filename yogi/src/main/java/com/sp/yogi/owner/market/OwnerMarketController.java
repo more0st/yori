@@ -20,6 +20,9 @@ public class OwnerMarketController {
 	
 	@Autowired
 	private MarketService service;
+	
+	@Autowired
+	private ReviewService rService;
 
 	@RequestMapping(value = "marketinfo", method = RequestMethod.GET)
 	public String marketSubmit(HttpSession session, Model model) throws Exception{
@@ -162,7 +165,29 @@ public class OwnerMarketController {
 
 	
 	@RequestMapping(value = "review", method = RequestMethod.GET)
-	public String review() {
+	public String review(HttpSession session, Model model) throws Exception{
+		SessionInfo info=(SessionInfo) session.getAttribute("member");
+		
+		if(info==null) {
+			return "redirect:/owner/home";
+		}
+		
+		String userId=info.getUserId();
+		
+		Market dto=service.readRestaurant2(userId);
+		if(dto==null) {
+			return "redirect:/owner/home";
+		}
+		long restaurantNum=dto.getRestaurantNum();
+		
+		List<Review> reviewList=rService.reviewList(restaurantNum);
+		int reviewCount=rService.reviewCount(restaurantNum);
+		double avgRating=rService.avgRating(restaurantNum);
+		
+		
+		model.addAttribute("reviewList",reviewList);
+		model.addAttribute("reviewCount",reviewCount);
+		model.addAttribute("avgRating",avgRating);
 		
 		return ".owner.market.review";
 	}
