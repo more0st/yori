@@ -37,7 +37,7 @@
 
 	<!-- 별점 평균 select -->
 	<select id="avgRating" parameterType="Long" resultType="double">
-	SELECT AVG(rating)
+	SELECT NVL(TRUNC(AVG(rating),1), 0) rating
 	FROM review
 	WHERE restaurantNum=#{restaurantNum}
 	</select>

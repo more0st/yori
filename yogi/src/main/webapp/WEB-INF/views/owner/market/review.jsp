@@ -196,7 +196,9 @@
 					</div>
 					<div><button class="report-btn">신고</button></div>
 				</div>
-				<div class="review-rating">★★★★★${rev.rating}</div>
+				<div class="review-rating">
+				<c:forEach var="i" begin="1" end="${rev.rating}">★</c:forEach>&nbsp;
+				${rev.rating}</div>
 				<!-- ${rev.imgFileName} 사용 -->
 				<img class="review-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
 				<div class="review-content">
