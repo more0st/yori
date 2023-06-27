@@ -127,11 +127,12 @@
 		FROM review r
 		JOIN member1 m ON r.userId = m.userId
 		WHERE restaurantNum = #{restaurantNum} AND r.enabled = 1
+		ORDER BY r.reg_date DESC
 	</select>
 	
 	<!-- 별점 -->
 	<select id="readRating" parameterType="Long" resultType="double">
-		SELECT NVL(AVG(rating), 0) rating FROM review 
+		SELECT NVL(TRUNC(AVG(rating),1), 0) rating FROM review 
 		where restaurantNum = #{restaurantNum}
 	</select>
 
