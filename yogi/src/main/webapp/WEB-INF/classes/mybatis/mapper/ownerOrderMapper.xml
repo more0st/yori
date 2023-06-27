@@ -52,7 +52,7 @@
 
 	<!-- 주문번호별 주문상세내역 -->
 	<select id="orderInfoList" parameterType="Long" resultType="com.sp.yogi.owner.order.Order">
-	SELECT orderNum, ob.restaurantNum, restaurantName, ob.userId, userName, order_date, addr1, addr2, tel, memo 
+	SELECT orderNum, ob.restaurantNum, restaurantName, ob.userId, userName, nickName, order_date, addr1, addr2, tel, memo 
 	FROM order_bundle ob
 	JOIN member1 m ON ob.userId=m.userId
 	JOIN restaurant r ON ob.restaurantNum=r.restaurantNum
@@ -68,25 +68,25 @@
 	
 	<!-- 주문상태변경(2:접수) -->
 	<update id="updateStatus2" parameterType="Long">
-	UPDATE order_status SET orderName=2 
+	UPDATE order_status SET statusName=2 
 	WHERE orderNum=#{orderNum}
 	</update>
 
 	<!-- 주문상태변경(3:배달시작) -->
 	<update id="updateStatus3" parameterType="Long">
-	UPDATE order_status SET orderName=3 
+	UPDATE order_status SET statusName=3 
 	WHERE orderNum=#{orderNum}
 	</update>
 
 	<!-- 주문상태변경(4:배달완료) -->
 	<update id="updateStatus4" parameterType="Long">
-	UPDATE order_status SET orderName=4 
+	UPDATE order_status SET statusName=4 
 	WHERE orderNum=#{orderNum}
 	</update>
 
 	<!-- 주문취소(5:취소/memo:취소사유) -->
-	<update id="updateStatus5" parameterType="Long">
-	UPDATE order_status SET orderName=5, memo=#{memo} 
+	<update id="updateStatus5" parameterType="com.sp.yogi.owner.order.Order">
+	UPDATE order_status SET statusName=5, memo=#{memo} 
 	WHERE orderNum=#{orderNum}
 	</update>
 	

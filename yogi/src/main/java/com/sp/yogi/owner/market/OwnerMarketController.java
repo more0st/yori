@@ -45,6 +45,7 @@ public class OwnerMarketController {
 		String path = root + "uploads" + File.separator + "owner"+ File.separator +"market";
 		Market img=service.readResImg(dto.getRestaurantNum(),path);
 		
+		model.addAttribute("openState", info.getOpenState());
 		model.addAttribute("dto",dto);//가게정보
 		model.addAttribute("userId",info.getUserId());//로그인한 회원의 아이디
 		model.addAttribute("tipList",tipList);//로그인한 회원가게의 팁리스트
