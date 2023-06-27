@@ -576,40 +576,27 @@ body {
 														가격					    				
 								    				</div>
 								    				<div>
-								    					7,000원
+								    					${menu.price}원
 								    				</div>
+								    				<input type="hidden" name="price" id="price" value="${menu.price}">
 								    			</div>
 								    			<hr>
-								    			<div class="modal-price">
-								    				옵션추가
-								    			</div>
 								    			
-								    			<!-- foreach 돌릴 부분 -->
-								    			<div class="modal-option">
-								    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-								    					<input class="modal-radio" type="checkbox"><div>추가 없음</div>
-								    				</div>
-								    				<div>
-								    					추가비용없음
-								    				</div>
-								    			</div>
-								    			<div class="modal-option">
-								    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-								    					<input class="modal-radio" type="checkbox"><div>감자튀김 S</div>
-								    				</div>
-								    				<div>
-								    					1,800원
-								    				</div>
-								    			</div>
-								    			<div class="modal-option">
-								    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-								    					<input class="modal-radio" type="checkbox"><div>감자튀김 L</div>
-								    				</div>
-								    				<div>
-								    					2,500원
-								    				</div>
-								    			</div>
-								    			<!-- foreach 끝 -->
+								    			<c:forEach var="option" items="${menu.optionList}" varStatus="status">
+									    			<div class="modal-price">
+									    				${option.optionGroup}
+									    			</div>
+									    			<c:forEach var="optionDetail" items="${option.nameList}" varStatus="status">
+										    			<div class="modal-option">
+										    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
+										    					<input class="modal-radio" type="checkbox"><div>${optionDetail.optionName}</div>
+										    				</div>
+										    				<div>
+										    					${optionDetail.price} 원
+										    				</div>
+										    			</div>
+									    			</c:forEach>
+								    			</c:forEach>
 								    			
 								    			<div class="modal-total">
 								    				<div style="font-weight: bold;">
@@ -620,7 +607,7 @@ body {
 									    					7,000원
 								    					</div>
 								    					<div style="font-size: 12px; text-align: right">
-								    						(최소주문금액 6,000원)
+								    						(최소주문금액 ${restaurantInfo.basePrice}원)
 								    					</div>
 								    				</div>
 								    			</div>
@@ -886,8 +873,6 @@ body {
 	
 	
 	<%-- 모달 --%>
-	
-	
 	function openModal(menuNum){
 		$('#modal-' + menuNum).modal('show');
 	}

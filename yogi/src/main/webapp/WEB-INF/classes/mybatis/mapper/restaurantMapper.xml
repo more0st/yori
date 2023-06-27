@@ -79,9 +79,14 @@
 		SELECT menuNum,num,menu,price,imageFilename, stock FROM menu1 WHERE num=#{num}
 	</select>
 	
-	<!-- 가게 옵션 불러오기 -->
-	<select id="readOption" parameterType="Long" resultType="com.sp.yogi.restaurant.Option">
-		SELECT optionNum, menuNum, option_group optionGroup, option_name optionName, price FROM menuOption WHERE menuNum=#{menuNum} 
+	<!-- 가게 옵션 분류 불러오기 -->
+	<select id="readOptionGroup" parameterType="Long" resultType="com.sp.yogi.restaurant.Option">
+		SELECT distinct option_group optionGroup, menuNum FROM menuOption WHERE menuNum=#{menuNum}
+	</select>
+	
+	<!-- 가게 옵션 분류당 - 옵션 상세 -->
+	<select id="readOptionName" parameterType="com.sp.yogi.restaurant.Option" resultType="com.sp.yogi.restaurant.Option">
+		SELECT option_name optionName, price from menuOption WHERE menuNum=#{menuNum} AND option_group = #{optionGroup}
 	</select>
 	
 	<!-- 가게 찜 했는지 여부 -->

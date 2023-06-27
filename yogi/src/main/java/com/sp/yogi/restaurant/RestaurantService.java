@@ -19,8 +19,11 @@ public interface RestaurantService {
 	// 가게 메뉴
 	public List<Menu> readMenu(Long num);
 	
-	// 가게 옵션
-	public List<Option> readOption(Long menuNum);
+	// 가게 옵션 분류 불러오기
+	public List<Option> readOptionGroup(Long menuNum);
+	
+	// 가게 옵션 분류당 - 옵션 상세
+	public List<Option> readOptionName(Option option);
 	
 	// 좋아요 여부 확인
 	public boolean isLike(Map<String,Object> map);

@@ -1,5 +1,7 @@
 package com.sp.yogi.restaurant;
 
+import java.util.List;
+
 public class Option {
 	private Long optionNum;		// 옵션번호
 	private Long menuNum;		// 메뉴번호
@@ -7,6 +9,15 @@ public class Option {
 	private String optionName;	// 옵션상세 - ex) 소,중,대
 	private String price;		// 추가가격
 	
+	private List<Option> nameList;
+	
+	
+	public List<Option> getNameList() {
+		return nameList;
+	}
+	public void setNameList(List<Option> nameList) {
+		this.nameList = nameList;
+	}
 	public Long getOptionNum() {
 		return optionNum;
 	}

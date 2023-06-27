@@ -93,7 +93,6 @@ public class RestaurantServiceImpl implements RestaurantService{
 	}
 	
 
-
 	// 가게 메뉴 
 	@Override
 	public List<Menu> readMenu(Long num) {
@@ -109,20 +108,36 @@ public class RestaurantServiceImpl implements RestaurantService{
 		return menuList;
 	}
 
-	// 가게 옵션
+	
+	// 가게 옵션 분류 불러오기 
 	@Override
-	public List<Option> readOption(Long menuNum) {
+	public List<Option> readOptionGroup(Long menuNum) {
 		List<Option> optionList = null;
-
-		try {
-			optionList = dao.selectList("restaurant.readOption", menuNum);
 		
+		try {
+			optionList = dao.selectList("restaurant.readOptionGroup", menuNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return optionList;
 	}
+	
+	
+	
+	// 가게 옵션 분류당 - 옵션 상세
+	@Override
+	public List<Option> readOptionName(Option option) {
+		List<Option> optionList = null;
+		
+		try {
+			optionList = dao.selectList("restaurant.readOptionName", option);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return optionList;
+	}
+	
+	
 	
 	// 좋아요 여부 확인
 	@Override
@@ -200,7 +215,7 @@ public class RestaurantServiceImpl implements RestaurantService{
 	}
 
 	// 별점 구하기
-	@Override
+	@Override  
 	public double readRating(Long restaurantNum) {
 		double rating = 0;
 		
@@ -211,5 +226,6 @@ public class RestaurantServiceImpl implements RestaurantService{
 		}
 		return rating;
 	}
+
 
 }

@@ -144,10 +144,13 @@ public class RestaurantController {
 		for(Category c : categoryList) {
 			c.setMenuList(service.readMenu(c.getNum()));
 			for(Menu m : c.getMenuList()) {
-				m.setOptionList(service.readOption(m.getMenuNum()));
+				m.setOptionList(service.readOptionGroup(m.getMenuNum()));
+				for(Option o : m.getOptionList()) {
+					o.setNameList(service.readOptionName(o));
+				}
 			}
 		}
-		
+
 		
 		model.addAttribute("restaurantNum", restaurantNum);
 		model.addAttribute("restaurantInfo", restaurantInfo);
