@@ -494,6 +494,15 @@ body {
 	width: 40px;
 	color: #333;
 }
+
+.totalOption{
+	background: none;
+	border: none; 
+	outline: none;
+	text-align: right;
+	color:#fa0050;
+	font-weight: bold;
+}
 </style>
 <div class="whole-container">
 	<div class="info-form">
@@ -577,8 +586,8 @@ body {
 								    				</div>
 								    				<div>
 								    					${menu.price}원
+								    					<input type="hidden" name="menuPrice" id="menuPrice" value="${menu.price}">
 								    				</div>
-								    				<input type="hidden" name="price" id="price" value="${menu.price}">
 								    			</div>
 								    			<hr>
 								    			
@@ -593,6 +602,7 @@ body {
 										    				</div>
 										    				<div>
 										    					${optionDetail.price} 원
+										    					<input type="hidden" id="optionPrice" name="optionPrice" value="${optionDetail.price}">
 										    				</div>
 										    			</div>
 									    			</c:forEach>
@@ -604,7 +614,7 @@ body {
 								    				</div>
 								    				<div>
 								    					<div style="font-size: 24px; color: #fa0050; text-align: right; font-weight: bold;">
-									    					7,000원
+									    					<input type="text" value="7,000" name="totalOption" class="totalOption"> 원
 								    					</div>
 								    					<div style="font-size: 12px; text-align: right">
 								    						(최소주문금액 ${restaurantInfo.basePrice}원)
