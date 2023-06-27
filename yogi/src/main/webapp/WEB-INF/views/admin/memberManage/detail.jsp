@@ -49,7 +49,7 @@
                     <tbody>
                       <tr>
                         <td scope="row">1</td>
-                        <td>sangh***</td>
+                        <td>${dto.userId}</td>
                         <td>박상훈</td>
                         <td><span>땅후니</span></td>
                         <td>999999</td>
