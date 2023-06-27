@@ -11,7 +11,7 @@
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin">admin</a></li>
-					<li class="breadcrumb-item active">RestaurantList</li>
+					<li class="breadcrumb-item active">MemberList</li>
 				</ol>
 			</nav>
 		</div>
@@ -23,7 +23,7 @@
 			<div class="card">
 				<div class="card-body">
 
-					<h3 class="card-title">1000 건</h3>
+					<h3 class="card-title">총 회원 수 : ${dataCount} 명</h3>
 
 					<table class="table table-hover admin-restaurantList-table">
 						<thead>
@@ -39,6 +39,25 @@
 							</tr>
 						</thead>
 						<tbody>
+							
+						<c:forEach var="dto" items="${list}" varStatus="status">
+							<tr class="hover" onclick="profile('${dto.userId}');"> 
+								<td>${dto.memberNum}</td>
+								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail" class="text-primary">${dto.userName}</a></td>
+								<td>${dto.userId}</td>
+								<td>${dto.nickName}</td>
+								<td>${dto.reg_date}</td>
+								<td>${dto.last_login}</td>
+								<td>${dto.enabled==1?"정상":"정지"}</td>
+								<td>
+									<div class="d-grid gap-2 d-md-block">
+										<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">정지</button>
+										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
+									</div>
+								</td>
+							</tr>
+						</c:forEach>
+							
 							<tr>
 								<th scope="row" style="text-align: center;">1</th>
 								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail" class="text-primary">박상훈</a></td>
@@ -54,37 +73,7 @@
 									</div>
 								</td>
 							</tr>
-							<tr>
-								<th scope="row" style="text-align: center;">2</th>
-								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail" class="text-primary">박상훈</a></td>
-								<td>sang*****</td>
-								<td>땅후니</td>
-								<td>2016-05-25</td>
-								<td>1일전</td>
-								<td>정상</td>
-								<td>
-									<div class="d-grid gap-2 d-md-block">
-										<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">정지</button>
-										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th scope="row" style="text-align: center;">3</th>
-								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail" class="text-primary">박상훈</a></td>
-								<td>sang*****</td>
-								<td>땅후니</td>
-								<td>2016-05-25</td>
-								<td>1일전</td>
-								<td>정상</td>
-								<td>
-									<div class="d-grid gap-2 d-md-block">
-										<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">정지</button>
-										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
-									</div>
-								</td>
-							</tr>
-						
+							
 						</tbody>
 					</table>
 				</div>

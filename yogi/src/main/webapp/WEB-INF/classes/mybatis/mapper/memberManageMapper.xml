@@ -31,7 +31,7 @@
     </select>
     
 	<select id="listMember" parameterType="map" resultType="com.sp.yogi.admin.domain.Member">
-		SELECT m1.memberNum, membership, m1.userId, userName, nickName
+		SELECT m1.memberNum, membership, m1.userId, userName, nickName,
 			m1.reg_date, m1.modify_date, last_login,
 			enabled, email, tel, 
 			TO_CHAR(birth, 'YYYY-MM-DD') birth
