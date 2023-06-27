@@ -279,250 +279,6 @@
 }
 
 </style>
-<script type="text/javascript">
-function login() {
-	location.href="${pageContext.request.contextPath}/owner/home";
-}
-function ajaxFun(url, method, query, dataType, fn) {
-	$.ajax({
-		type:method,
-		url:url,
-		data:query,
-		dataType:dataType,
-		success:function(data) {
-			fn(data);
-		},
-		beforeSend:function(jqXHR) {
-			jqXHR.setRequestHeader("AJAX", true);
-		},
-		error:function(jqXHR) {
-			if(jqXHR.status === 403) {
-				login();
-				return false;
-			} else if(jqXHR.status === 400) {
-				alert("요청 처리가 실패 했습니다.");
-				return false;
-			}
-	    	
-			console.log(jqXHR.responseText);
-		}
-	});
-}
-
-function ajaxFileFun(url, method, query, dataType, fn) {
-	$.ajax({
-		type:method,
-		url:url,
-		processData: false, // file 전송시 필수, 서버로전송하는 데이터를 쿼리문자열로변환여부
-		contentType: false, // file 전송시 필수, 서버에전송할 데이터의 Content-Type. 기본은 application/x-www-urlencoded
-		data:query,
-		dataType:dataType,
-		success:function(data) {
-			fn(data);
-		},
-		beforeSend:function(jqXHR) {
-			jqXHR.setRequestHeader("AJAX", true);
-		},
-		error:function(jqXHR) {
-			if(jqXHR.status === 403) {
-				login();
-				return false;
-			} else if(jqXHR.status === 400) {
-				alert("요청 처리가 실패 했습니다.");
-				return false;
-			}
-	    	
-			console.log(jqXHR.responseText);
-		}
-	});
-}
-
-//로고이미지 등록
-$(function(){
-	$('.btnInsertImgOk').click(function(){
-		// 사진인서트
-		const f=document.insertImgForm;
-		let str;
-		str=f.selectFile.value;
-		alert("str 값 : "+str);
-		
-		if(! str){
-			alert("이미지를 선택해주세요.");
-			f.selectFile.focus();
-			return;
-		}
-		
-		let url="${pageContext.request.contextPath}/owner/market/insertimg";
-		let query = $('form[name=insertImgForm]').serialize();
-		
-		const fn=function(data){
-			if(data.state=="false"){
-				alert("로고를 등록하지 못했습니다.");
-				return false;
-			}
-			
-		};
-		
-		ajaxFileFun(url,"post",query,"json",fn);
-
-	});
-});
-
-
-//영업시간 수정
-$(function(){
-	$('.btnHourOk').click(function(){
-		
-		const f=document.hourForm;
-		const op=f.openingHour.value;
-		const cl=f.closingHour.value;
-		
-		if(op.trim() === ""){
-			alert("오픈시간을 입력하세요.");
-			f.openingHour.focus();
-			return;
-		}
-
-		if(cl.trim() === ""){
-			alert("마감시간을 입력하세요.");
-			f.closingHour.focus();
-			return;
-		}
-		
-		let url="${pageContext.request.contextPath}/owner/market/updateHour";
-		let query = $('form[name=hourForm]').serialize();
-		
-		const fn=function(data){
-			if(data.state=="false"){
-				alert("영업시간을 수정하지 못했습니다.");
-				return false;
-			} else {
-                // 리다이렉트 처리 후 모달 종료
-                window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
-                $('#menu-modal1').modal('hide');
-            }
-			
-		};
-		
-		ajaxFun(url,"post",query,"html",fn);
-		
-	});
-});
-
-//최소주문금액수정
-$(function(){
-	$('.btnPriceOk').click(function(){
-		
-		const f=document.basePriceForm;
-		const bp=f.basePrice.value;
-		
-		if(bp.trim() === ""){
-			alert("최소주문금액을 입력하세요.");
-			f.basePrice.focus();
-			return;
-		}
-		let url="${pageContext.request.contextPath}/owner/market/updatePrice";
-		let query = $('form[name=basePriceForm]').serialize();
-		
-		const fn=function(data){
-			if(data.state=="false"){
-				alert("최소주문금액을 수정하지 못했습니다.");
-				return false;
-			} else {
-                // 리다이렉트 처리 후 모달 종료
-                window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
-                $('#menu-modal2').modal('hide');
-            }
-			
-		};
-		
-		ajaxFun(url,"post",query,"html",fn);
-		
-	});
-});
-
-
-//원산지정보수정
-$(function(){
-	$('.btnFoodInfoOk').click(function(){
-		
-		const f=document.foodInfoForm;
-		const ff=f.foodInfo.value;
-		
-		if(ff.trim() === ""){
-			alert("원산지 정보를 입력하세요.");
-			f.foodInfo.focus();
-			return;
-		}
-		let url="${pageContext.request.contextPath}/owner/market/updateInfo";
-		let query = $('form[name=foodInfoForm]').serialize();
-		
-		const fn=function(data){
-			if(data.state=="false"){
-				alert("원산지 정보를 등록하지 못했습니다.");
-				return false;
-			} else {
-                // 리다이렉트 처리 후 모달 종료
-                window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
-                $('#menu-modal3').modal('hide');
-            }
-			
-		};
-		
-		ajaxFun(url,"post",query,"html",fn);
-		
-	});
-});
-
-//배달팁등록
-$(function(){
-	$('.btnTipOk').click(function(){
-		
-		const f=document.tipForm;
-		const ad=f.addr.value;
-		const df=f.deliveryFee.value;
-		
-		if(ad.trim() === ""){
-			alert("주소를 입력하세요.");
-			f.addr.focus();
-			return;
-		}
-		if(df.trim() === ""){
-			alert("배달팁을 입력하세요.");
-			f.deliveryFee.focus();
-			return;
-		}
-		let url="${pageContext.request.contextPath}/owner/market/insertTip";
-		let query = $('form[name=tipForm]').serialize();
-		
-		const fn=function(data){
-			if(data.state=="false"){
-				alert("배달팁 정보를 등록하지 못했습니다.");
-				return false;
-			} else {
-                // 리다이렉트 처리 후 모달 종료
-                window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
-                $('#menu-modal4').modal('hide');
-            }
-			
-		};
-		
-		ajaxFun(url,"post",query,"html",fn);
-		
-	});
-});
-
-//배달팁삭제
-function deleteTipOk(num){
-	
-	if(confirm("배달팁 정보를 삭제하시겠습니까 ? ")){
-		let query="num="+num;
-	    let url = "${pageContext.request.contextPath}/owner/market/deleteTip?" + query;
-    	location.href = url;
-	}
-}
-
-</script>
 
 <main id="main" class="main">
 <div class="whole-container">
@@ -788,6 +544,251 @@ function deleteTipOk(num){
 
 </div>
 </main>
+
+<script type="text/javascript">
+function login() {
+	location.href="${pageContext.request.contextPath}/owner/home";
+}
+function ajaxFun(url, method, query, dataType, fn) {
+	$.ajax({
+		type:method,
+		url:url,
+		data:query,
+		dataType:dataType,
+		success:function(data) {
+			fn(data);
+		},
+		beforeSend:function(jqXHR) {
+			jqXHR.setRequestHeader("AJAX", true);
+		},
+		error:function(jqXHR) {
+			if(jqXHR.status === 403) {
+				login();
+				return false;
+			} else if(jqXHR.status === 400) {
+				alert("요청 처리가 실패 했습니다.");
+				return false;
+			}
+	    	
+			console.log(jqXHR.responseText);
+		}
+	});
+}
+
+function ajaxFileFun(url, method, query, dataType, fn) {
+	$.ajax({
+		type:method,
+		url:url,
+		processData: false, // file 전송시 필수, 서버로전송하는 데이터를 쿼리문자열로변환여부
+		contentType: false, // file 전송시 필수, 서버에전송할 데이터의 Content-Type. 기본은 application/x-www-urlencoded
+		data:query,
+		dataType:dataType,
+		success:function(data) {
+			fn(data);
+		},
+		beforeSend:function(jqXHR) {
+			jqXHR.setRequestHeader("AJAX", true);
+		},
+		error:function(jqXHR) {
+			if(jqXHR.status === 403) {
+				login();
+				return false;
+			} else if(jqXHR.status === 400) {
+				alert("요청 처리가 실패 했습니다.");
+				return false;
+			}
+	    	
+			console.log(jqXHR.responseText);
+		}
+	});
+}
+
+//로고이미지 등록
+$(function(){
+	$('.btnInsertImgOk').click(function(){
+		// 사진인서트
+		const f=document.insertImgForm;
+		let str;
+		str=f.selectFile.value;
+		alert("str 값 : "+str);
+		
+		if(! str){
+			alert("이미지를 선택해주세요.");
+			f.selectFile.focus();
+			return;
+		}
+		
+		let url="${pageContext.request.contextPath}/owner/market/insertimg";
+		let query = $('form[name=insertImgForm]').serialize();
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("로고를 등록하지 못했습니다.");
+				return false;
+			}
+			
+		};
+		
+		ajaxFileFun(url,"post",query,"json",fn);
+
+	});
+});
+
+
+//영업시간 수정
+$(function(){
+	$('.btnHourOk').click(function(){
+		
+		const f=document.hourForm;
+		const op=f.openingHour.value;
+		const cl=f.closingHour.value;
+		
+		if(op.trim() === ""){
+			alert("오픈시간을 입력하세요.");
+			f.openingHour.focus();
+			return;
+		}
+
+		if(cl.trim() === ""){
+			alert("마감시간을 입력하세요.");
+			f.closingHour.focus();
+			return;
+		}
+		
+		let url="${pageContext.request.contextPath}/owner/market/updateHour";
+		let query = $('form[name=hourForm]').serialize();
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("영업시간을 수정하지 못했습니다.");
+				return false;
+			} else {
+                // 리다이렉트 처리 후 모달 종료
+                window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
+                $('#menu-modal1').modal('hide');
+            }
+			
+		};
+		
+		ajaxFun(url,"post",query,"html",fn);
+		
+	});
+});
+
+//최소주문금액수정
+$(function(){
+	$('.btnPriceOk').click(function(){
+		
+		const f=document.basePriceForm;
+		const bp=f.basePrice.value;
+		
+		if(bp.trim() === ""){
+			alert("최소주문금액을 입력하세요.");
+			f.basePrice.focus();
+			return;
+		}
+		let url="${pageContext.request.contextPath}/owner/market/updatePrice";
+		let query = $('form[name=basePriceForm]').serialize();
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("최소주문금액을 수정하지 못했습니다.");
+				return false;
+			} else {
+                // 리다이렉트 처리 후 모달 종료
+                window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
+                $('#menu-modal2').modal('hide');
+            }
+			
+		};
+		
+		ajaxFun(url,"post",query,"html",fn);
+		
+	});
+});
+
+
+//원산지정보수정
+$(function(){
+	$('.btnFoodInfoOk').click(function(){
+		
+		const f=document.foodInfoForm;
+		const ff=f.foodInfo.value;
+		
+		if(ff.trim() === ""){
+			alert("원산지 정보를 입력하세요.");
+			f.foodInfo.focus();
+			return;
+		}
+		let url="${pageContext.request.contextPath}/owner/market/updateInfo";
+		let query = $('form[name=foodInfoForm]').serialize();
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("원산지 정보를 등록하지 못했습니다.");
+				return false;
+			} else {
+                // 리다이렉트 처리 후 모달 종료
+                window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
+                $('#menu-modal3').modal('hide');
+            }
+			
+		};
+		
+		ajaxFun(url,"post",query,"html",fn);
+		
+	});
+});
+
+//배달팁등록
+$(function(){
+	$('.btnTipOk').click(function(){
+		
+		const f=document.tipForm;
+		const ad=f.addr.value;
+		const df=f.deliveryFee.value;
+		
+		if(ad.trim() === ""){
+			alert("주소를 입력하세요.");
+			f.addr.focus();
+			return;
+		}
+		if(df.trim() === ""){
+			alert("배달팁을 입력하세요.");
+			f.deliveryFee.focus();
+			return;
+		}
+		let url="${pageContext.request.contextPath}/owner/market/insertTip";
+		let query = $('form[name=tipForm]').serialize();
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("배달팁 정보를 등록하지 못했습니다.");
+				return false;
+			} else {
+                // 리다이렉트 처리 후 모달 종료
+                window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
+                $('#menu-modal4').modal('hide');
+            }
+			
+		};
+		
+		ajaxFun(url,"post",query,"html",fn);
+		
+	});
+});
+
+//배달팁삭제
+function deleteTipOk(num){
+	
+	if(confirm("배달팁 정보를 삭제하시겠습니까 ? ")){
+		let query="num="+num;
+	    let url = "${pageContext.request.contextPath}/owner/market/deleteTip?" + query;
+    	location.href = url;
+	}
+}
+
+</script>
 
 <script type="text/javascript">
 

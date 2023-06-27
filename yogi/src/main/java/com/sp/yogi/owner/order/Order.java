@@ -13,6 +13,7 @@ public class Order {
 	private String total_price;
 	private long restaurantNum;
 	private String restaurantName;
+	private String nickName;
 	
 	private long orderItemNum;
 	private long menuNum;
@@ -33,6 +34,13 @@ public class Order {
 	private List<Order> menuList;
 	private String menu;
 	
+	
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 	public String getMenu() {
 		return menu;
 	}

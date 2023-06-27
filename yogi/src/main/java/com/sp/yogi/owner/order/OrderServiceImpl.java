@@ -105,9 +105,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public void updateStatus2(Order dto) throws Exception {
+	public void updateStatus2(long orderNum) throws Exception {
 		try {
-			dao.updateData("ownerOrder.updateStatus2",dto);
+			dao.updateData("ownerOrder.updateStatus2",orderNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -115,9 +115,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public void updateStatus3(Order dto) throws Exception {
+	public void updateStatus3(long orderNum) throws Exception {
 		try {
-			dao.updateData("ownerOrder.updateStatus3",dto);
+			dao.updateData("ownerOrder.updateStatus3",orderNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -125,9 +125,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public void updateStatus4(Order dto) throws Exception {
+	public void updateStatus4(long orderNum) throws Exception {
 		try {
-			dao.updateData("ownerOrder.updateStatus4",dto);
+			dao.updateData("ownerOrder.updateStatus4",orderNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

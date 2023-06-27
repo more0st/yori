@@ -21,11 +21,11 @@ public interface OrderService {
 	public Order paymentInfo(long orderNum);
 	
 	//updateStatus2 : 주문상태변경(2:접수)
-	public void updateStatus2(Order dto) throws Exception;
+	public void updateStatus2(long orderNum) throws Exception;
 	//updateStatus3 : 주문상태변경(3:배달시작)
-	public void updateStatus3(Order dto) throws Exception;
+	public void updateStatus3(long orderNum) throws Exception;
 	//updateStatus4 : 주문상태변경(4:배달완료)
-	public void updateStatus4(Order dto) throws Exception;
+	public void updateStatus4(long orderNum) throws Exception;
 	//updateStatus5 :  주문취소(5:취소/memo:취소사유)
 	public void updateStatus5(Order dto) throws Exception;
 	//insertRefund : 환불

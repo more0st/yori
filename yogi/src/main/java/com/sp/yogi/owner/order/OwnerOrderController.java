@@ -61,9 +61,51 @@ public class OwnerOrderController {
 		return ".owner.order.orderDetail";
 	}
 	
+	//주문 접수
+	@RequestMapping(value = "updateStatus2", method = RequestMethod.POST)
+	public String updateStatus2(@RequestParam("orderNum") long orderNum, 
+			Model model) throws Exception{
+		
+		try {
+			service.updateStatus2(orderNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ".owner.order.orderList";
+	}
+	//배달시작
+	@RequestMapping(value = "updateStatus3", method = RequestMethod.POST)
+	public String updateStatus3(@RequestParam("orderNum") long orderNum, 
+			Model model) throws Exception{
+		
+		try {
+			service.updateStatus3(orderNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ".owner.order.orderList";
+	}
+	//배달완료
+	@RequestMapping(value = "updateStatus4", method = RequestMethod.POST)
+	public String updateStatus4(@RequestParam("orderNum") long orderNum, 
+			Model model) throws Exception{
+		
+		try {
+			service.updateStatus4(orderNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ".owner.order.orderList";
+	}
 	//주문 취소
 	@RequestMapping(value = "cancelOrder", method = RequestMethod.POST)
-	public String cancelOrder(@RequestParam("orderNum") long orderNum, 
+	public String cancelOrder(@RequestParam("orderNum") long orderNum,
 			@RequestParam("memo") String memo,
 			Order dto, 
 			Model model) throws Exception{
@@ -71,7 +113,12 @@ public class OwnerOrderController {
 		try {
 			dto.setOrderNum(orderNum);
 			dto.setMemo(memo);
-			service.updateStatus5(dto);
+			
+			Order paymentInfo=service.paymentInfo(orderNum);
+			
+			dto.setPayNum(paymentInfo.getPayNum());
+			service.updateStatus5(dto);//상태:취소로 변경
+			service.insertRefund(dto);//환불처리
 			
 		} catch (Exception e) {
 			e.printStackTrace();

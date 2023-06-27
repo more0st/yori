@@ -56,7 +56,7 @@
 	FROM order_bundle ob
 	JOIN member1 m ON ob.userId=m.userId
 	JOIN restaurant r ON ob.restaurantNum=r.restaurantNum
-	WHERE ob.restaurantNum=#{restaurantNum}
+	WHERE orderNum=#{orderNum}
 	</select>
 
 	<!-- 주문번호별 결제정보 -->
@@ -92,7 +92,7 @@
 	
 	<!-- 환불 -->
 	<insert id="insertRefund" parameterType="com.sp.yogi.owner.order.Order">
-	INSERT refund(payNum, memo) VALUES(#{payNum},#{memo})
+	INSERT INTO refund(payNum, memo) VALUES(#{payNum},#{memo})
 	</insert>
 
 </mapper>

@@ -89,7 +89,7 @@ width: 10%;
                   </table>
                   <div style="text-align: right;">
                       <span>총 금액 | </span><span  style=" font-weight: 800; font-size: 25px;">${paymentInfo.price}원</span>
-                  </div><!-- 확인 : 금액이 안떠,,, -->
+                  </div>
                   
                   
                   <h5 class="card-title">결제정보</h5>
@@ -115,19 +115,22 @@ width: 10%;
                         <td>${paymentInfo.state==1?'결제완료':paymentInfo.state==0?'환불':'결제정보가 없습니다.'}</td>
                       </tr>
                   </table>
-                  <div style="display: flex; justify-content: center; gap : 5px;">
-                  <c:if test="${statusNum==1}">
-	                  <button type="button" class="btn btn-primary">접수</button>
-	                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">취소</button>
-                  </c:if>
-                  <c:if test="${statusNum==2}">
-	                  <button type="button" class="btn btn-success">배달시작</button>
-                  </c:if>
-                  <c:if test="${statusNum==3}">
-	                  <button type="button" class="btn btn-warning">배달완료</button>
-                  </c:if>
-		              <button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderList'">목록</button>
-                  </div>
+                  <form name="updateStatusForm" method="post">
+	                  <div style="display: flex; justify-content: center; gap : 5px;">
+	                  <c:if test="${statusNum==1}">
+		                  <button type="button" class="btn btn-primary btnOk1">접수</button>
+		                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">취소</button>
+	                  </c:if>
+	                  <c:if test="${statusNum==2}">
+		                  <button type="button" class="btn btn-success btnOk2">배달시작</button>
+	                  </c:if>
+	                  <c:if test="${statusNum==3}">
+		                  <button type="button" class="btn btn-warning btnOk3">배달완료</button>
+	                  </c:if>
+			              <button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderList'">목록</button>
+	                  </div>
+	                  <input type="hidden" name="orderNum" value="${orderNum}">
+                  </form>
                   <c:if test="${statusNum==4}">
                   <div style="text-align: center; margin-top: 10px; font-weight: 700;">
                   <h5>배달이 완료된 주문입니다.</h5>
@@ -212,15 +215,78 @@ function ajaxFun(url, method, query, dataType, fn) {
 		}
 	});
 }
+//접수
+$(function(){
+	$('.btnOk1').click(function(){
+		
+		let url="${pageContext.request.contextPath}/owner/order/updateStatus2";
+		let query = $('form[name=updateStatusForm]').serialize();
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("접수를 실패하였습니다.");
+				return false;
+			} else {
+                window.location.href = "${pageContext.request.contextPath}/owner/order/orderList";
+            }
+			
+		};
+		
+		ajaxFun(url,"post",query,"html",fn);
+		
+	});
+});
+
+//배달시작
+$(function(){
+	$('.btnOk2').click(function(){
+		
+		let url="${pageContext.request.contextPath}/owner/order/updateStatus3";
+		let query = $('form[name=updateStatusForm]').serialize();
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("배달시작처리를 실패하였습니다.");
+				return false;
+			} else {
+                window.location.href = "${pageContext.request.contextPath}/owner/order/orderList";
+            }
+			
+		};
+		
+		ajaxFun(url,"post",query,"html",fn);
+		
+	});
+});
+
+//배달완료
+$(function(){
+	$('.btnOk3').click(function(){
+		
+		let url="${pageContext.request.contextPath}/owner/order/updateStatus4";
+		let query = $('form[name=updateStatusForm]').serialize();
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("배달완료처리를 실패하였습니다.");
+				return false;
+			} else {
+                window.location.href = "${pageContext.request.contextPath}/owner/order/orderList";
+            }
+			
+		};
+		
+		ajaxFun(url,"post",query,"html",fn);
+		
+	});
+});
+
 //주문 취소
 $(function(){
 	$('.btnCancelOk').click(function(){
 		
 		const f=document.cancelForm;
 		const m=f.memo.value;
-		
-		console.log(m);
-		console.log(f.orderNum.value);
 		
 		if(m.trim() === ""){
 			alert("취소사유를 입력하세요.");
