@@ -10,7 +10,7 @@
 		</if>
 		<if test="condition=='rank' ">
 			AND INSTR(restaurantName, #{keyword, jdbcType=VARCHAR}) &gt; 0 
-			ORDER BY rating DESC
+			ORDER BY rating ASC
 		</if>
 		<if test="condition=='review' ">
 			AND INSTR(restaurantName, #{keyword, jdbcType=VARCHAR}) &gt; 0 
@@ -26,7 +26,7 @@
 		<if test="condition=='all' ">
 		</if>
 		<if test="condition=='rank' ">
-			ORDER BY rating DESC
+			ORDER BY rating ASC
 		</if>
 		<if test="condition=='review' ">
 			ORDER BY reviewCount DESC
