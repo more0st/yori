@@ -213,6 +213,7 @@ $(document).ready(function() {
 });
 
 
+
 //카테고리(프랜차이즈.치킨), 키워드(검색어), 정렬순, 배달주소
 function getList() {
 	 let categoryNum = ${categoryNum};

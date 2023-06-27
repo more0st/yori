@@ -614,7 +614,7 @@ body {
 								    				</div>
 								    				<div>
 								    					<div style="font-size: 24px; color: #fa0050; text-align: right; font-weight: bold;">
-									    					<input type="text" value="7,000" name="totalOption" class="totalOption"> 원
+									    					<input type="text" value="0" name="totalOption" class="totalOption"> 원
 								    					</div>
 								    					<div style="font-size: 12px; text-align: right">
 								    						(최소주문금액 ${restaurantInfo.basePrice}원)
@@ -886,6 +886,8 @@ body {
 	function openModal(menuNum){
 		$('#modal-' + menuNum).modal('show');
 	}
+	
+	
 	
 	
 	
