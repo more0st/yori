@@ -118,7 +118,7 @@
 				<table style="border-spacing: 0 10px;">
 					<tr>
 						<td class="keyword bold">주문번호</td> 
-						<td>${order.orderNum}</td> 
+						<td>${dto.orderNum}</td> 
 					</tr>
 					<tr>
 						<td class="keyword bold">주문식당</td> 

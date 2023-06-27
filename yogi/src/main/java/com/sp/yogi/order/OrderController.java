@@ -1,5 +1,8 @@
 package com.sp.yogi.order;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,7 @@ public class OrderController {
 	public String order(HttpSession session, 
 			Model model,
 			@RequestParam("restaurantNum") Long restaurantNum
+//			, @RequestParam("deliveryFee") int deliveryFee
 			) {
 		
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
@@ -44,6 +48,7 @@ public class OrderController {
 		
 		model.addAttribute("restaurant", restaurant);
 		model.addAttribute("dto", dto);
+//		model.addAttribute("deliveryFee", deliveryFee);
 		
 		return ".order.order";
 	}
@@ -67,10 +72,40 @@ public class OrderController {
 			) {
 		System.out.println("POST방식");
 		
+		Map<String, Object> map = new HashMap<String, Object>();
 		Order dto = new Order();
 		
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
+		// 어트리뷰트로 띄어주기 위한 레스토랑 객체
+		System.out.println("레스토랑 : " + restaurantNum);
+		RestaurantInfo restaurant = restaurantService.readRestaurantInfo(restaurantNum);
+		
+		Member orderUser = memberservice.readMember(info.getUserId());
+		
+		int total_price = 0; // 전체 금액
+		
+		// 주문번호 생성
+		String productOrderNumber = null; // 주문번호
+		productOrderNumber = orderservice.productOrderNumber();
+		Long orderNum = Long.parseLong(productOrderNumber);
+		System.out.println("주문번호 : " + productOrderNumber);
+		
+		// insert할 정보 map에 넣어주기
+		map.put("memo", memo);
+		map.put("addr1", info.getAddr1());
+		map.put("addr2", addr2);
+		map.put("tel", tel);
+		map.put("userId", info.getUserId());
+		map.put("restaurantNum", restaurantNum);
+		if(payment.equals("cash")) {
+			map.put("payMethod", "만나서 결제");
+		} else {
+			map.put("payMethod", "카드 결제");
+		}
+		map.put("orderNum", orderNum);
+		
+		// 어트리뷰트로 띄어줄 객체
 		dto.setUserId(info.getUserId());
 		if(payment.equals("cash")) {
 			dto.setPayMethod("만나서 결제");
@@ -81,26 +116,9 @@ public class OrderController {
 		dto.setAddr1(info.getAddr1());
 		dto.setAddr2(addr2);
 		dto.setTel(tel);
+		dto.setOrderNum(orderNum);
 		
-		System.out.println("레스토랑 : " + restaurantNum);
-		RestaurantInfo restaurant = restaurantService.readRestaurantInfo(restaurantNum);
-		
-		Member orderUser = memberservice.readMember(info.getUserId());
-		
-		String productOrderNumber = null; // 주문번호
-		int total_price = 0; // 전체 금액
-		
-		productOrderNumber = orderservice.productOrderNumber();
-		
-		Long orderNum = Long.parseLong(productOrderNumber);
-		
-		Order order = new Order();
-		
-		order.setOrderNum(orderNum);
-		
-		System.out.println("주문번호 : " + productOrderNumber);
-		
-		model.addAttribute("order", order);
+		// jsp에 어트리뷰트 저장 
 		model.addAttribute("dto", dto);
 		model.addAttribute("restaurant", restaurant);
 		

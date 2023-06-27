@@ -15,7 +15,7 @@
 		VALUES (#{orderNum}, #{userId}, SYSDATE, #{addr1}, #{addr2}, #{tel}, #{memo}, #{total_price}, #{restaurantNum})
 	</insert>
 	
-	<insert id="insertOrderItem" parameterType="map">
+	<insert id="insertOrderItem" parameterType="com.sp.yogi.order.Order">
 		INSERT INTO order_item (orderitemNum, orderNum, menuNum, orderCount, menuPrice, optionName)
 		VALUES (order_item_seq.NEXTVAL, #{orderNum}, #{menuNum}, #{orderCount}, #{menuPrice}, #{optionName})
 	</insert>

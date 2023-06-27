@@ -73,6 +73,7 @@ public class OrderServiceImpl implements OrderService {
 			
 			// payment
 			dao.insertData("order.insertPayment", map);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
