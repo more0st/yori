@@ -323,7 +323,11 @@ public class OwnerServiceImpl implements OwnerService {
 		int result = 0;
 
 		try {
-			result = dao.selectOne("owner.todayOrderSum", map);
+			if(dao.selectOne("owner.todayOrderSum", map) == null) {
+				result = 0;
+			} else {
+				result = dao.selectOne("owner.todayOrderSum", map);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

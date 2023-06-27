@@ -241,10 +241,11 @@ public class OwnerController {
 			reviewAvg = "0";
 		}
 		
-				
+		model.addAttribute("restaurantNum", info.getRestaurantNum());
 		model.addAttribute("todayOrder",todayOrder);
 		model.addAttribute("todayOrderSum" ,todayOrderSum);
 		model.addAttribute("reviewAvg", reviewAvg);
+		
 		
 		return ".owner.layout.main";
 	}
@@ -494,6 +495,32 @@ public class OwnerController {
 			return "redirect:/";
 		
 		return ".owner.findPwdComplete";
+	}
+	
+	@RequestMapping(value="openControl")
+	@ResponseBody
+	public Map<String, Object> openControl(HttpSession session,
+			@RequestParam boolean isClose) throws Exception {
+		
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		String state = "close";
+		
+		try {
+			if(isClose) {
+				state = "open";
+			} else if(! isClose) {
+				state = "close";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		Map<String, Object> model=new HashMap<>();
+		model.put("state", state);
+		
+		
+		return model;
 	}
 
 

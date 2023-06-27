@@ -62,6 +62,68 @@ body {
 	
 </style>
 
+<script type="text/javascript">
+function ajaxFun(url, method, query, dataType, fn) {
+	$.ajax({
+		type:method,	// 메소드(get, post, put, delete)
+		url:url,		// 요청받을 서버주소 
+		data:query,		// 서버에 전송할 파라미터 
+		dataType:dataType,	// 서버에서 응답할 형식(json, xml, text)
+		success:function(data){
+			fn(data);
+		},
+		beforeSend:function(jqXHR){
+			jqXHR.setRequestHeader("AJAX", true);	// 사용자 정의 헤더
+		},
+		error:function(jqXHR){
+			if(jqXHR.status === 403) {
+				login();
+				return false;
+			} else if(jqXHR.status === 400) {
+				alert("요청 처리가 실패했습니다.");
+				return false;
+			}
+			console.log(jqXHR.responseText);
+		}
+	});
+}
+
+$(function() {
+	$(".openControl").click(function() {
+		const $i = $(this).find('i');
+		console.log($i.hasClass('bi-toggle-off'));
+		console.log(window.location.pathname);
+		
+		let isClose = $i.hasClass('bi-toggle-off');
+		let msg = isClose ? "오픈하시겠습니까 ?" : "마감하시겠습니까 ?"; 
+		
+		if(! confirm(msg)) {
+			return false; 
+		}
+		
+		let url = "${pageContext.request.contextPath}/owner/openControl";
+		let query = "isClose=" + isClose;
+		
+		const fn = function(data) {
+			let state = data.state;
+			if(state === "open") {
+				$i.removeClass("bi-toggle-off");
+				$i.addClass("bi-toggle-on");
+				$i.css("color", "#e05c87");
+				
+			} else if (state === "close") {
+				$i.removeClass("bi-toggle-on");
+				$i.addClass("bi-toggle-off");
+				$i.css("color", "#899bbd");
+			}
+		};
+		
+		ajaxFun(url, "get", query, "json", fn);
+		
+	});
+});
+
+</script>
 
 <body>
 

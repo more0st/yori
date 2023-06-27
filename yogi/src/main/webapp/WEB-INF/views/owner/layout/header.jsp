@@ -217,8 +217,8 @@ header .login-button {
       <li class="nav-heading">Member</li>
 
       <li class="nav-item" style="cursor: pointer;">
-        <a class="nav-link collapsed" onclick="">
-          <i class="bi bi-toggle-on"></i>
+        <a class="nav-link collapsed openControl" onclick="">
+          <i class="bi bi-toggle-off"></i>
           <span>Open/Close</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
