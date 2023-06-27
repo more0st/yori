@@ -13,8 +13,15 @@ public class SessionInfo {
 	// 주문시 받아올 주소
 	private String deliveryAddr;
 	
+	// 사장님 open/close 상태관리
+	private int openState;
 	
-	
+	public int getOpenState() {
+		return openState;
+	}
+	public void setOpenState(int openState) {
+		this.openState = openState;
+	}
 	public String getDeliveryAddr() {
 		return deliveryAddr;
 	}

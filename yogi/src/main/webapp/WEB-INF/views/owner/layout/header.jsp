@@ -218,7 +218,14 @@ header .login-button {
 
       <li class="nav-item" style="cursor: pointer;">
         <a class="nav-link collapsed openControl" onclick="">
-          <i class="bi bi-toggle-off"></i>
+        	<c:choose>
+        		<c:when test="${openState eq 1}">
+        			<i class="bi bi-toggle-on" style="color: #e05c87"></i>
+        		</c:when>
+        		<c:otherwise>
+        		 	<i class="bi bi-toggle-off" style="color: #899bbd"></i>
+        		</c:otherwise>
+        	</c:choose>
           <span>Open/Close</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->

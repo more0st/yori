@@ -88,7 +88,8 @@ public class OwnerController {
 			reviewAvg = "0";
 		}
 		
-				
+		model.addAttribute("openState", info.getOpenState());
+		model.addAttribute("restaurantNum", info.getRestaurantNum());
 		model.addAttribute("todayOrder",todayOrder);
 		model.addAttribute("todayOrderSum" ,todayOrderSum);
 		model.addAttribute("reviewAvg", reviewAvg);
@@ -167,6 +168,8 @@ public class OwnerController {
 		info.setRestaurantNum(dto.getRestaurantNum());
 		info.setUserId(dto.getUserId());
 		info.setUserName(dto.getUserName());
+		info.setOpenState(dto.getOpenState());
+		
 		
 		Owner owner = new Owner();
 		owner = service.readRestaurant(userId);
@@ -241,6 +244,7 @@ public class OwnerController {
 			reviewAvg = "0";
 		}
 		
+		model.addAttribute("openState", dto.getOpenState());
 		model.addAttribute("restaurantNum", info.getRestaurantNum());
 		model.addAttribute("todayOrder",todayOrder);
 		model.addAttribute("todayOrderSum" ,todayOrderSum);
@@ -506,11 +510,18 @@ public class OwnerController {
 		
 		String state = "close";
 		
+		Map<String, Object> updateOpen =new HashMap<>();
+		updateOpen.put("restaurantNum", info.getRestaurantNum());
+		
 		try {
 			if(isClose) {
 				state = "open";
+				updateOpen.put("state", 1);
+				service.openControl(updateOpen);
 			} else if(! isClose) {
 				state = "close";
+				updateOpen.put("state", 0);
+				service.openControl(updateOpen);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -28,7 +28,16 @@ public class Owner {
 	private int failure_cnt;
 	private int reject_cnt;
 	private int status;
+	private int openState;
 
+	
+	
+	public int getOpenState() {
+		return openState;
+	}
+	public void setOpenState(int openState) {
+		this.openState = openState;
+	}
 	public String getRestaurantName() {
 		return restaurantName;
 	}

@@ -3,9 +3,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="owner">
 	<select id="loginOwner" parameterType="String" resultType="com.sp.yogi.owner.Owner">
-		SELECT restaurantNum, userId, userName, userPwd, reg_date, modify_date, last_login
-		FROM restaurantId 
-		WHERE userId = #{userId} AND enabled != 0
+		SELECT r.restaurantNum, userId, userName, userPwd, reg_date, modify_date, last_login, ri.state openState
+		FROM restaurantId r 
+		JOIN restaurantInfo ri ON r.restaurantNum = ri.restaurantNum
+ 		WHERE userId = #{userId} AND enabled != 0
 	</select>
 	
 	<update id="updateLastLogin" parameterType="String">
@@ -98,6 +99,19 @@
     <!-- owner status 확인 -->
     <select id="readStatus" parameterType="String" resultType="Integer">
     	SELECT status FROM restaurantid WHERE userId = #{userId}
+    </select>
+    
+    <!-- open/close 설정 -->
+    <update id="openControl" parameterType="map" >
+    	UPDATE restaurantInfo SET state = #{state} 
+    	<where>
+    		restaurantNum = #{restaurantNum}
+    	</where>
+    </update>
+    
+    <!-- open state 확인 -->
+    <select id="openState" parameterType="Long" resultType="Integer">
+    	SELECT state FROM restaurantInfo WHERE restaurantNum = #{restaurantNum}
     </select>
     
 

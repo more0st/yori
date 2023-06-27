@@ -304,6 +304,20 @@ public class OwnerServiceImpl implements OwnerService {
 		return status;
 	}
 	
+	@Override
+	public int openState(Long restaurantNum) {
+		
+		int status = 0;
+		
+		try {
+			status = dao.selectOne("owner.openState", restaurantNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return status;
+	}
+	
 	
 	@Override
 	public int todayOrderCount(Map<String, Object> map) {
@@ -361,5 +375,15 @@ public class OwnerServiceImpl implements OwnerService {
 		return result;
 	}
 	
+	@Override
+	public void openControl(Map<String, Object> map) {
+
+		try {
+			dao.updateData("owner.openControl", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 	
 }

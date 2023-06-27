@@ -81,7 +81,7 @@ public class OwnerSaleController {
 			item.setOwnerSaleMenu(service.listOwnerSaleMenu(item.getOrderNum()));
         }
         
-		
+		model.addAttribute("openState", info.getOpenState());
 		model.addAttribute("list", list);
 		model.addAttribute("page", current_page);
 		model.addAttribute("dataCount", dataCount);
@@ -146,7 +146,7 @@ public class OwnerSaleController {
 		// 글 리스트
 		List<OwnerSale> list = service.menuList(map);
 		
-		
+		model.addAttribute("openState", info.getOpenState());
 		model.addAttribute("list", list);
 		model.addAttribute("page", current_page);
 		model.addAttribute("dataCount", dataCount);
