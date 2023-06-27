@@ -570,7 +570,7 @@ body {
 										<div class="modal-content">
 									   		<div class="modal-header">
 									    		<h5 class="modal-title">${menu.menu}</h5>
-									    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal();"></button>
 									   		</div>
 									    	<div class="modal-body">
 									    		<div class="modal-top">
@@ -598,7 +598,7 @@ body {
 									    			<c:forEach var="optionDetail" items="${option.nameList}" varStatus="status">
 										    			<div class="modal-option">
 										    				<div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-										    					<input class="modal-radio" type="checkbox" name="check${optionDetail.optionNum}"><div>${optionDetail.optionName}</div>
+										    					<input class="modal-radio" type="checkbox" name="check${optionDetail.optionNum}" onchange="updateTotalOption(${menu.menuNum}, ${menu.price}, ${optionDetail.price}, this.checked, '${optionDetail.optionName}')"><div>${optionDetail.optionName}</div>
 										    				</div>
 										    				<div>
 										    					${optionDetail.price} 원
@@ -614,7 +614,7 @@ body {
 								    				</div>
 								    				<div>
 								    					<div style="font-size: 24px; color: #fa0050; text-align: right; font-weight: bold;">
-									    					<input type="text" value="0" name="totalOption" class="totalOption"> 원
+									    					<input type="text" value="${menu.price}" name="totalOption-${menu.menuNum}" class="totalOption totalOption-${menu.menuNum}" readonly="readonly"> 원
 								    					</div>
 								    					<div style="font-size: 12px; text-align: right">
 								    						(최소주문금액 ${restaurantInfo.basePrice}원)
@@ -624,7 +624,7 @@ body {
 								    			
 									    	</div>
 									  		<div class="modal-footer">
-									    		<button type="button" class="modal-button addCart">주문표에 추가</button>
+									    		<button type="button" class="modal-button addCart" onclick="addToCart(${menu.menuNum});closeModal();">주문표에 추가</button>
 									    		<button type="button" class="modal-button toOrder">주문하기</button>
 									  		</div>
 										</div>
@@ -887,10 +887,6 @@ body {
 		$('#modal-' + menuNum).modal('show');
 	}
 	
-	
-	
-	
-	
     function ajaxFun(url, method, query, dataType, fn) {
         $.ajax({
             type: method,
@@ -958,5 +954,55 @@ body {
             ajaxFun(url, "post", qs, "json", fn);
         });
     });
+    
+    let optionarr = [];
+    // 모달 내부 가격 ------------------------------------------
+   	function updateTotalOption(menuNum, firstPrice, price, checked, optionName) {
+	    const totalOptionField = document.querySelector('.totalOption-'+menuNum);
+	    const currentTotal = parseInt(totalOptionField.value);
+	    const updatedTotal = checked ? currentTotal + price : currentTotal - price;
+	    
+	    const optionIndex = optionarr.findIndex(option => option.optionName === optionName);
+	    
+	    if (checked == true) {
+	        if (optionIndex === -1) {
+	            optionarr.push({ optionName: optionName });
+	        }
+	    } else {
+	        if (optionIndex !== -1) {
+	            optionarr.splice(optionIndex, 1);
+	        }
+	    }
+	    
+	    console.log(optionarr);
+	    
+	    const optionarrString = JSON.stringify(optionarr);
+	    
+	    console.log('원래가격 : ' + firstPrice + ', 옵션포함 가격 : ' + updatedTotal + ', 옵션 : ' + optionarrString);
+	    
+	    totalOptionField.value = updatedTotal;
+ 	}
+    
+ 	// 모달 창이 닫힐 때 호출되는 함수
+   	function closeModal() {
+   	    // 배열 초기화
+   	    optionarr = [];
+
+   	    // 체크 박스 요소들을 찾아서 해제
+   	    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+   	    checkboxes.forEach((checkbox) => {
+   	        checkbox.checked = false;
+   	    });
+   	}
+    
+    // 주문표에 담기 ---------------------------------------------
+    function addToCart(menuNum) {
+    	const totalOptionField = document.querySelector('.totalOption-'+menuNum);
+    	const currentTotal = parseInt(totalOptionField.value);
+    	
+    	const optionarrString = JSON.stringify(optionarr);
+    	
+    	console.log('메뉴 번호 : '+ menuNum + ', 넘길 가격 : ' + currentTotal + ', 옵션 : ' + optionarrString);
+	}
 
 </script>
