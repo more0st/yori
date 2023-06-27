@@ -104,6 +104,7 @@ public class OrderController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("restaurant", restaurant);
 		
+		// 리다이렉트
 		return ".order.orderComplete";
 	}
 }

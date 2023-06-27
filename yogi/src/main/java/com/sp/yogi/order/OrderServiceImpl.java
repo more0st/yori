@@ -1,6 +1,8 @@
 package com.sp.yogi.order;
 
 import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,15 +60,24 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public void insertOrder(Order dto) throws Exception {
+	public void insertOrder(Map<String, Object> map, List<Order> list) throws Exception {
 		try {
+			// order_bundle
+			dao.insertData("order.insertOrderBundle", map);
 			
+			// order_items
+			dao.insertData("order.insertOrderItem", list);
+			
+			// order_status
+			dao.insertData("order.insertOrderStatus", map);
+			
+			// payment
+			dao.insertData("order.insertPayment", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
 		
 	}
-
 
 }

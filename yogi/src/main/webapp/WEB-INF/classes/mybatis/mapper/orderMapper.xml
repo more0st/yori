@@ -16,8 +16,8 @@
 	</insert>
 	
 	<insert id="insertOrderItem" parameterType="map">
-		INSERT INTO order_item (orderitemNum, orderNum, menuNum, orderCount, menuPrice)
-		VALUES (order_item_seq.NEXTVAL, #{orderNum}, #{menuNum}, #{orderCount}, #{menuPrice})
+		INSERT INTO order_item (orderitemNum, orderNum, menuNum, orderCount, menuPrice, optionName)
+		VALUES (order_item_seq.NEXTVAL, #{orderNum}, #{menuNum}, #{orderCount}, #{menuPrice}, #{optionName})
 	</insert>
 	
 	<insert id="insertOrderStatus" parameterType="map">
@@ -29,5 +29,6 @@
 		INSERT INTO payment (payNum, orderNum, pay_date, payMethod, price, couponNum, state)
 		VALUES (payment_seq.NEXTVAL, #{orderNum}, SYSDATE, #{payMethod}, #{price}, #{couponNum}, 1)
 	</insert>
+	
 
 </mapper>

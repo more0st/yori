@@ -26,6 +26,17 @@ public class Order {
 	private String menu;
 	
 	private int deliveryFee;
+	private String optionName;
+	
+	
+
+	public String getOptionName() {
+		return optionName;
+	}
+
+	public void setOptionName(String optionName) {
+		this.optionName = optionName;
+	}
 
 	public int getDeliveryFee() {
 		return deliveryFee;
