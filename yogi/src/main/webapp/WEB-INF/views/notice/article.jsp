@@ -63,6 +63,13 @@
 .notice-list:hover {
     color: black;
 }
+
+.n-hitCount{
+	float: right;
+	font-size: 14px;
+	padding-top: 10px;
+}
+
 </style>
 
 <div class="whole-container">
@@ -72,20 +79,32 @@
 			<a class="btn-list" href="${pageContext.request.contextPath}/notice/home" ><i class="bi bi-caret-left-fill"></i> 목록으로
 			</a>
 			<div class="notice-list">
-			[공지] 개인정보처리방침 일부 변경 안내
+			${dto.subject}
 				<div class="n-date">
-				2023년 5월 30일 ~ 2025년 5월 30일
+				${dto.reg_date}
 				</div>
 			</div>
 			
 			
 			<div class="n-body">
+			
+				<div class="n-hitCount">
+				조회수 : ${dto.hitCount}
+				</div>
+			
+				<div class="row row-cols-6 img-box" style="padding-top: 20px;">
+					<c:forEach var="vo" items="${listFile}">
+						<div class="col p-1">
+							<img src="${pageContext.request.contextPath}/uploads/notice/${vo.imgFileName}"
+								class="img-thumbnail w-100 h-100" style="max-height: 130px;"
+								onclick="imageViewer('${pageContext.request.contextPath}/uploads/notice/${vo.imgFileName}');">
+						</div>
+					</c:forEach>
+				</div>
+			
 				<div class="n-content">
 				<br>
-				*** <br><br>
-				안녕하세요. 요기요 입니다.<br><br>
-				항상 요기요를 이용해주시는 고객 여러분께 감사 드립니다.<br><br>
-				2023년 6월 6일부터 요기요 개인정보 처리방침이 일부 변경됩니다.
+					${dto.content}
 				</div>
 			</div>
 			
@@ -95,3 +114,28 @@
 	
 </div> <!-- class="whole-container" -->
 
+<!-- Modal -->
+<div class="modal fade" id="myDialogModal" tabindex="-1" aria-labelledby="myDialogModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myDialogModalLabel">이미지 뷰어</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+        
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+function imageViewer(src) {
+	const $model = $("#myDialogModal .modal-body");
+	let s = "<img src='"+src+"' class='img-thumbnail w-100 h-100'>";
+	$model.html(s);
+	
+	$("#myDialogModal").modal("show");
+}
+</script>

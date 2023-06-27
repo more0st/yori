@@ -18,7 +18,7 @@ public class NoticeServiceImpl implements NoticeService {
 		int result = 0;
 
 		try {
-			result = dao.selectOne("notice.dataCount", map);
+			result = dao.selectOne("noticeManage.dataCount", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -31,7 +31,7 @@ public class NoticeServiceImpl implements NoticeService {
 		List<Notice> list = null;
 
 		try {
-			list = dao.selectList("notice.listNotice", map);
+			list = dao.selectList("noticeManage.listNotice", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -43,7 +43,7 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public void updateHitCount(long num) throws Exception {
 		try {
-			dao.updateData("notice.updateHitCount", num);
+			dao.updateData("noticeManage.updateHitCount", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

@@ -231,7 +231,7 @@ function sendOk(elClickedObj) {
     let mode = "${mode}";
     
 
-    f.action = "${pageContext.request.contextPath}/admin/notice/${mode}_ok.do";
+    f.action = "${pageContext.request.contextPath}/admin/notice/${mode}";
    
     elClickedObj.submit();
 }

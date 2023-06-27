@@ -78,34 +78,10 @@
 				</div>
 			</c:forEach>
 			
-			<c:forEach var="subject" items="noticeList">
-				<div class="notice-list">
-					<a class="n-article" href="${pageContext.request.contextPath}/admin/notice/article">
-					[공지] 개인정보처리방침 일부 변경 안내
-						<span class="n-date">
-						2023년 5월 30일
-						</span>
-					</a>	
-				</div>
-			</c:forEach>
-			
-			<div class="notice-list">
-			5/24 하루 동안 2번 주문 시 쏟아지는 혜택 포인트 당첨자 안내
-				<div class="n-date">
-				2023년 5월 30일
-				</div>
-			</div>
-			
-			
 			<div class="writebtn">
 				<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/notice/write'">글쓰기</button>
 			</div>
-			
 		</div>
-		
-		
 	</div>	<!-- class="notice-wrap" -->
-	
-	
 </div> <!-- class="whole-container" -->
 </main>

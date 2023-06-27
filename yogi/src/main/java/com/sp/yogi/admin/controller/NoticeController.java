@@ -102,7 +102,7 @@ public class NoticeController {
 
 		Notice dto = service.readNotice(num);
 		if (dto == null || ! info.getUserId().equals(dto.getUserId())) {
-			return "redirect:/admin/noticeManage/list?";
+			return "redirect:/admin/notice/list?";
 		}
 
 		List<Notice> listFile = service.listFile(num);
@@ -130,7 +130,7 @@ public class NoticeController {
 		} catch (Exception e) {
 		}
 
-		return "redirect:/admin/noticeManage/list?";
+		return "redirect:/admin/notice/list?";
 	}	
 	
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
