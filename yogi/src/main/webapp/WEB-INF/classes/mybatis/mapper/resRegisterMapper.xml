@@ -4,8 +4,8 @@
 <mapper namespace="register">
 
 	<insert id="insertResRegister" parameterType="com.sp.yogi.owner.register.ResRegister">
-		INSERT INTO restaurant(restaurantNum, businessNum, restaurantName, restaurantAddr1, restaurantAddr2, restaurantTel, categoryNum)
-		VALUES (#{restaurantNum}, #{businessNum}, #{restaurantName}, #{restaurantAddr1},#{restaurantAddr2}, #{restaurantTel}, #{categoryNum}) 
+		INSERT INTO restaurant(restaurantNum, businessNum, restaurantName, restaurantAddr1, restaurantAddr2, restaurantTel, categoryNum, reg_date)
+		VALUES (#{restaurantNum}, #{businessNum}, #{restaurantName}, #{restaurantAddr1},#{restaurantAddr2}, #{restaurantTel}, #{categoryNum}, SYSDATE) 
     </insert>
 
 	<insert id="insertRestaurantInfo" parameterType="com.sp.yogi.owner.register.ResRegister">
