@@ -169,6 +169,17 @@
 	border-radius: 10px;
 }
 
+.replyText {
+
+	border: none;
+	width: 100%;
+	background: none;
+	outline: none;
+	resize: none;
+	padding-top: 5px;
+
+}
+
 </style>
 
 <main id="main" class="main">
@@ -206,19 +217,21 @@
 				</div>
 				<c:if test="${rev.reply!=null}">
 				<!-- 사장님 답글 -->
-				<div class="ownerReview">
-					<div style="display: flex; justify-content: space-between;">
-						<div class="ownerReview-top">
-							<i class="bi bi-arrow-return-right"></i>&nbsp;<div class="res-333" style="font-weight: bold;">사장님</div>&nbsp;<div class="review-date">${rev.reply_date}</div>
+				<form name="replyForm" method="post">
+					<div class="ownerReview">
+						<div style="display: flex; justify-content: space-between;">
+							<div class="ownerReview-top">
+								<i class="bi bi-arrow-return-right"></i>&nbsp;<div class="res-333" style="font-weight: bold;">사장님</div>&nbsp;<div class="review-date">${rev.reply_date}</div>
+							</div>
+							<div>
+								<div><button type="button" class="report-btn" id="updateBtn-${rev.orderNum}" onclick="replyUpdateOk(${rev.orderNum});">수정</button><span class="divider">|</span><button type="button" class="report-btn">삭제</button></div>
+							</div>
+						</div>	
+						<div class="ownerReview-content">
+						<textarea name="reply" id="reply-${rev.orderNum}" class="replyText" readOnly>${rev.reply}</textarea>
 						</div>
-						<div>
-							<div><button class="report-btn">수정</button><span class="divider">|</span><button class="report-btn">삭제</button></div>
-						</div>
-					</div>	
-					<div class="ownerReview-content">
-						${rev.reply}
 					</div>
-				</div>
+				</form>
 				</c:if>
 				<c:if test="${rev.reply==null}"><!-- 답글이 있다면 숨기기 -->
 				<div class="review-button-div">
@@ -262,5 +275,23 @@ document.getElementById("submenu-modal").addEventListener("click", function() {
 // 모달 창 띄우기
 	$('#menu-modal').modal('show');
 });
+
+
+
+
+function replyUpdateOk(orderNum){
+	
+	const textReply=document.getElementById('reply-'+orderNum);
+
+	const updateButton=document.getElementById('updateBtn-'+orderNum);
+
+	updateButton.addEventListener("click", function(){
+		
+		textReply.readOnly=false;
+		
+	});
+};
+
+
 
 </script>
