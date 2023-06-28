@@ -152,15 +152,20 @@ function sendLogin() {
 						<td class="login-input left">비밀번호</td>
 						<td style="width: 60%"><input class="login-table input" type="password" name="userPwd"></td>
 					</tr>
+					
+					
 					<tr>
 						<td colspan="3" class="center"><a class="login-table rink" href="${pageContext.request.contextPath}/owner/member">회원가입</a>&nbsp;<span class="rink">|</span>&nbsp;
 						<a class="login-table rink" href="${pageContext.request.contextPath}/owner/findId">아이디</a> <span style="color: #fa0050;">/</span>
 						<a class="login-table rink" href="${pageContext.request.contextPath}/owner/findPwd"> 비밀번호 찾기</a></td>
 					</tr>
 				</table>
+				
+					
 			</div>
 		</div>
 	</form>
+	<div>${message}</div>
 
 </div>
 </main>

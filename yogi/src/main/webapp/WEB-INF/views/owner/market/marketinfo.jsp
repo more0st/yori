@@ -525,6 +525,7 @@
 	    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	   		</div>
 	   		
+	   		
 	    	<form name="insertImgForm" method="post" enctype="multipart/form-data">
 		    	<div class="modal-body">
 		    		<div class="fileModal">
@@ -537,6 +538,8 @@
 		    		<input type="hidden" name="restaurantNum" value="${dto.restaurantNum}">
 		  		</div>
 	    	</form>
+	    	
+	    	
 		</div>
 	</div>
 </div>
@@ -612,6 +615,8 @@ $(function(){
 		str=f.selectFile.value;
 		alert("str 값 : "+str);
 		
+		let formData = new FormData($("#insertImgForm")); 
+		
 		if(! str){
 			alert("이미지를 선택해주세요.");
 			f.selectFile.focus();
@@ -629,7 +634,7 @@ $(function(){
 			
 		};
 		
-		ajaxFileFun(url,"post",query,"json",fn);
+		ajaxFileFun(url,"post",formData,"json",fn);
 
 	});
 });

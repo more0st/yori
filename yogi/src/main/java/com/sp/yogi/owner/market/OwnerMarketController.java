@@ -1,7 +1,9 @@
 package com.sp.yogi.owner.market;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.yogi.member.SessionInfo;
 
@@ -56,7 +59,11 @@ public class OwnerMarketController {
 	
 	//로고이미지 넣기 
 	@RequestMapping(value = "insertimg", method = RequestMethod.POST)
-	public String insertimg(@RequestParam("selectFile")String saveFilename, @RequestParam("restaurantNum")long restaurantNum, Market dto, HttpSession session) throws Exception{
+	@ResponseBody
+	public Map<String, Object> insertimg(@RequestParam("selectFile")String saveFilename, 
+			@RequestParam("restaurantNum")long restaurantNum, 
+			Market dto, 
+			HttpSession session) throws Exception{
 		
 		String root=session.getServletContext().getRealPath("/");
 		String path=root+"uploads"+File.separator+"owner"+File.separator+"market";
@@ -64,16 +71,21 @@ public class OwnerMarketController {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
 		try {
+			
 			dto.setUserId(info.getUserId());
 			//saveFilename이랑 restaurantNum 불러와서 넘겨줘야함
 			dto.setImageFilename(saveFilename);
 			dto.setRestaurantNum(restaurantNum);
 			System.out.println("이미지 파일 : " + dto.getImageFilename() + " : " + dto.getRestaurantNum());
 			service.insertResImg(dto, path);
+			
 		} catch (Exception e) {
 			e.printStackTrace();//오류확인하고지우기
 		}
-		return ".owner.market.marketinfo";
+		
+		Map<String, Object> model=new HashMap<>();
+		
+		return model;
 	}
 	
 	//배달팁 등록

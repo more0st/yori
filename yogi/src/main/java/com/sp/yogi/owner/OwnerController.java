@@ -168,13 +168,12 @@ public class OwnerController {
 		info.setRestaurantNum(dto.getRestaurantNum());
 		info.setUserId(dto.getUserId());
 		info.setUserName(dto.getUserName());
-		info.setOpenState(dto.getOpenState());
 		
+		int status = service.readStatus(userId);
 		
 		Owner owner = new Owner();
 		owner = service.readRestaurant(userId);
 		
-		int status = service.readStatus(userId);
 		
 		session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
 		
@@ -209,7 +208,8 @@ public class OwnerController {
 		}
 		
 		info.setRestaurantName(owner.getRestaurantName());
-
+		info.setOpenState(dto.getOpenState());
+		
 		session.setAttribute("member", info);
 		
 		// 로그인 이전 URI로 이동

@@ -5,8 +5,9 @@
 	<select id="loginOwner" parameterType="String" resultType="com.sp.yogi.owner.Owner">
 		SELECT r.restaurantNum, userId, userName, userPwd, reg_date, modify_date, last_login, ri.state openState
 		FROM restaurantId r 
-		JOIN restaurantInfo ri ON r.restaurantNum = ri.restaurantNum
- 		WHERE userId = #{userId} AND enabled != 0
+		LEFT OUTER JOIN restaurantInfo ri ON r.restaurantNum = ri.restaurantNum
+ 		WHERE userId = #{userId} AND enabled != 0 
+
 	</select>
 	
 	<update id="updateLastLogin" parameterType="String">
