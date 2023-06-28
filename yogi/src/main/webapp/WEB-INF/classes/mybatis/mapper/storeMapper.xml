@@ -1,8 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="temp">
+<mapper namespace="store">
 
-<!-- 템플릿 -->
+	<!-- 입점대기 중인 가게 수 -->
+	<select id="countWait" resultType="int">
+		SELECT COUNT(*)
+		FROM restaurantId
+		WHERE status = 2
+	</select>
+	
+	<!-- 입점 승인 대기 중인 가게 리스트 -->
+	<select id="listWait" resultType="com.sp.yogi.admin.domain.Store">
+		SELECT r.restaurantNum, businessNum, restaurantName, userName, r.reg_date
+		FROM restaurant r
+		JOIN restaurantId ri ON r.restaurantNum = ri.restaurantNum
+		WHERE status = 2
+		ORDER BY r.reg_date DESC
+	</select>
+	
+	<!-- 입점 승인 -->
+	<update id="permitWait" parameterType="long">
+		UPDATE restaurantId SET status = 3 WHERE restaurantNum = #{restaurantNum}
+	</update>
+	
+	<update id="permitWait2" parameterType="long">
+		UPDATE restaurant SET reg_date = SYSDATE WHERE restaurantNum = #{restaurantNum}
+	</update>
+	
+	<!-- 입점 승인 상세 -->
+	<select id="waitInfo" parameterType="long" resultType="com.sp.yogi.admin.domain.Store">
+		SELECT r.restaurantNum, businessNum, restaurantName, userName, email, r.reg_date, restaurantTel, tel, categoryName
+		FROM restaurant r
+		JOIN restaurantId ri ON r.restaurantNum = ri.restaurantNum
+		JOIN res_category c ON c.categoryNum = r.categoryNum
+		WHERE r.restaurantNum = #{restaurantNum}
+	</select>
+	
+	<!-- 입점 거절 -->
+	<update id="rejectWait" parameterType="long">
+		UPDATE restaurantId SET status = 0, reject_cnt = reject_cnt + 1 WHERE restaurantNum = #{restaurantNum}
+	</update>
+	
+	<!-- 입점 거절 횟수 -->
+	<select id="cntReject" parameterType="long" resultType="int">
+		SELECT reject_cnt
+		FROM restaurantid
+		WHERE restaurantNum = #{restaurantNum}
+	</select>
+	
+	<!-- 거절 횟수가 5이면 차단 -->
+	<update id="rejectRestaurant" parameterType="long">
+		UPDATE restaurantId SET enabled = 0 WHERE restaurantNum = #{restaurantNum}
+	</update>
 
 </mapper>
