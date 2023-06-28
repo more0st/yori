@@ -755,10 +755,7 @@ body {
 				</div>
 			</div>
 			
-			<!-- 장바구니에 아무 항목도 없을 때 -->
-			<div class="cart-order">
-				주문표에 담긴 메뉴가 없습니다.
-			</div>
+			<div class="cart-order"></div>
 			
 			<!-- 장바구니에 주문이 들어갔을 때 -->
 			
