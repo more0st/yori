@@ -3,17 +3,78 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mypage">
 
-<!-- 템플릿 -->
+	<!-- 템플릿 -->
 
-<!-- 주소록 저장 -->
-<insert id="insertAddr" parameterType="com.sp.yogi.mypage.MyPage">
-	INSERT INTO addressBook (addressNum, userId, zip, addr1, addr2) 
+	<!-- 주소록 저장 -->
+	<insert id="insertAddr"
+		parameterType="com.sp.yogi.mypage.MyPage">
+		INSERT INTO addressBook (addressNum, userId, zip, addr1,
+		addr2)
 		VALUES (addr_seq.nextval, #{userId}, #{zip}, #{addr1}, #{addr2})
-</insert>
+	</insert>
 
-<!-- 주소록 삭제 -->
-<delete id="deleteAddr" parameterType="com.sp.yogi.home.Home">
-	DELETE FROM addressBook WHERE addressNum = #{addressNum} and userId = #{userId}
-</delete>
+	<!-- 주소록 삭제 -->
+	<delete id="deleteAddr" parameterType="com.sp.yogi.home.Home">
+		DELETE FROM addressBook
+		WHERE addressNum = #{addressNum} and userId =
+		#{userId}
+	</delete>
+
+	<select id="listMyPage" parameterType="String"
+		resultType="com.sp.yogi.mypage.MyPage">
+		SELECT ob.orderNum, r.restaurantName, p.price total_price,
+		os.statusName, ob.userId
+		FROM order_bundle ob
+		JOIN restaurant r ON
+		ob.restaurantNum = r.restaurantNum
+		JOIN payment p ON ob.orderNum =
+		p.orderNum
+		JOIN order_status os ON ob.orderNum = os.orderNum
+		WHERE
+		ob.userId = #{userId}
+	</select>
+
+	<select id="orderDetail" parameterType="long"
+		resultType="com.sp.yogi.mypage.MyPage">
+	SELECT oi.orderItemNum,
+		oi.orderNum, 
+		oi.menuNum,
+		oi.optionName, 
+		oi.orderCount, 
+		oi.menuPrice option_price,
+		m.menu, 
+		m.price menu_price
+	FROM 
+		order_item oi
+		INNER JOIN menu1 m ON oi.menuNum = m.menuNum
+	WHERE
+		oi.orderNum = #{orderNum}
+	</select>
+
+	<select id="orderDetail2" parameterType="long"
+		resultType="com.sp.yogi.mypage.MyPage">
+		SELECT
+		ob.orderNum,
+		r.restaurantName,
+		p.price pay_price,
+		p.payMethod,
+		ob.addr1,
+		ob.addr2,
+		ob.tel,
+		ob.memo,
+		ob.order_date,
+		ob.total_price
+		FROM
+		order_bundle ob
+		INNER
+		JOIN restaurant r ON ob.restaurantNum = r.restaurantNum
+		INNER JOIN
+		payment p ON ob.orderNum = p.orderNum
+		WHERE
+		ob.orderNum = #{orderNum}
+	</select>
+
+
+
 
 </mapper>

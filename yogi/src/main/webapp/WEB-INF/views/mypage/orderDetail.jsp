@@ -37,28 +37,25 @@
          <button type="button" class="btn btn-secondary left" onclick="location.href='${pageContext.request.contextPath}/mypage/orderList';">목록으로</button>
       </div>
       <br>
-      
+    
       <table class="table">
          <tr class="table-secondary border">
-            <th>주문번호 : 12341234</th>
-            <td class="right">2023년 06월 14일 (수) 16:00</td>
+            <th>주문번호 : ${detailList2.orderNum} </th>
+            <td class="right">${detailList2.order_date}</td>
          </tr>
          
          <tr class="border">
-            <th >상훈이네 족발집</th>
+            <th >${detailList2.restaurantName}</th>
          </tr>
-         
-         <!-- forEach -->
+         <c:forEach var="vo" items="${detailList}">
          <tr class="border" >
-	         <td>족발(대)</td>
-	         <td class="right">50,000원</td>
+	         <td>${vo.menu}, ${vo.optionName} </td>
+	         <td class="right">${vo.option_price}</td>
          </tr>
+         </c:forEach>
+      
 
-         <tr class="border" >
-            <!-- forEach -->
-            <td>- 옵션1 : 고기추가 (+30,000원) <br></td>
-            <!-- /forEach -->   
-         </tr>
+        
 	</table>
 	
     <table class="table">    
@@ -69,15 +66,14 @@
          <!-- /forEach -->
          <tr class="border">
             <td>전체금액</td>
-            <td class="right">150,000원</td>
+            <td class="right">${detailList2.pay_price}</td>
          </tr>
 
          <tr class="border">
             <th>결제방법</th>
-            <td class="right">카카오페이</td>
+            <td class="right">${detailList2.payMethod}</td>
          </tr>
       </table>
-      
     <table class="table">    
          <tr class="table-secondary border">
             <th colspan="2">배달정보</th>
@@ -86,20 +82,20 @@
          <!-- /forEach -->
          <tr class="border">
             <td>배달주소</td>
-            <td class="right">서울 강남구 역삼동 11-2 1203호</td>
+            <td class="right">${detailList2.addr1}, ${detailList2.addr2}</td>
          </tr>
 
          <tr class="border">
             <td>전화번호</td>
-            <td class="right">010-1111-1111</td>
+            <td class="right">${detailList2.tel}</td>
          </tr>
          
           <tr class="border">
             <td>요청사항</td>
-            <td class="right">단무지 빼주세요.</td>
+            <td class="right">${detailList2.memo}</td>
          </tr>
          
-      </table>      
+      </table>
    </div>   
    
 </div>

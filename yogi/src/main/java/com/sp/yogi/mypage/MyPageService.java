@@ -1,5 +1,8 @@
 package com.sp.yogi.mypage;
 
+import java.util.List;
+import java.util.Map;
+
 public interface MyPageService {
 	
 	/**
@@ -16,4 +19,15 @@ public interface MyPageService {
 	 * @throws Exception
 	 */
 	public void deleteAddr(Long addressNum, String userId) throws Exception;
+	
+	public List<MyPage> listMyPage(String userId);
+	
+	public List<MyPage> listOrderDetail (long num);
+	
+	public int dataCount(Map<String, Object> map);
+	public MyPage readOrderDetail(long num);
+
+	
 }
+
+

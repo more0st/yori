@@ -127,8 +127,9 @@ public class FaqController {
 		}
 		
 		// 바꿔야함
-		if (!info.getUserId().equals("admin"))
-			return "redirect:/";
+		if (!info.getUserId().equals("admin")) {
+			return "redirect:/";		
+		}
 		
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		

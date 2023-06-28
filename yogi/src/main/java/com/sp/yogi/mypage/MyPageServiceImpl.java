@@ -1,5 +1,8 @@
 package com.sp.yogi.mypage;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +39,51 @@ public class MyPageServiceImpl implements MyPageService {
 			throw e;
 		}
 		
+	}
+
+	@Override
+	public List<MyPage> listMyPage(String userId) {
+		List<MyPage> list = null;
+		
+		try {
+			
+			list = dao.selectList("mypage.listMyPage",userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int dataCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public MyPage readOrderDetail(long num) {
+		MyPage dto = null;
+		
+		try {
+			dto = dao.selectOne("mypage.orderDetail2", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override
+	public List<MyPage> listOrderDetail(long num) {
+		List<MyPage> list = null;
+		try {
+			
+			list = dao.selectList("mypage.orderDetail", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 }

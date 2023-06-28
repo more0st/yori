@@ -82,12 +82,36 @@
 			</tr>
 			
 			<!-- forEach -->
+			<!-- forEach -->
+			<c:forEach var="dto" items="${list}">
 			<tr class="border" >
-				<td>1111</td>
-				<td>상훈이네 족발집</td>
-				<td>36,000원</td>
-				<td>주문완료</td>
+				<td>${dto.orderNum}</td>
+				<td>${dto.restaurantName}</td>
+				<td><fmt:formatNumber value="${dto.total_price}" pattern="#,###원"/></td>
+				
+				<c:choose>
+				  <c:when test="${dto.statusName == 1}">
+				    <td>결제완료</td>
+				  </c:when>
+				  <c:when test="${dto.statusName == 2}">
+				    <td>접수완료</td>
+				  </c:when>
+				  <c:when test="${dto.statusName == 3}">
+				    <td>배달중</td>
+				  </c:when>
+				  <c:when test="${dto.statusName == 4}">
+				    <td>배달완료</td>
+				  </c:when>
+				  <c:when test="${dto.statusName == 5}">
+				    <td>주문취소</td>
+				  </c:when>
+				</c:choose>
+				<td><button type="button" class="reviewbtn reviewUpdate" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" onclick="reviewSubmit()">리뷰수정</button></td>
+				<!-- 해당 주문번호 맞춰서 이동하도록. -->
+				<td><button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/mypage/orderDetail';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
 			</tr>
+			</c:forEach>
+			<!-- /forEach -->
 			<!-- /forEach -->
 			
 			<!-- 아래 tr은 지우기 -->
