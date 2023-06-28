@@ -1053,5 +1053,56 @@ body {
 		// 배열 초기화
 		menuarr=[];
     }
+    
+    // [-] 버튼 클릭 시
+	$(document).on("click", ".minus", function() {
+		let div = $(this).closest("div");
+		let quantityInput = div.find('.cart-quantity');
+		let value = parseInt(quantityInput.val());
+		
+		
+		if (value > 1) {
+		    value--;
+		    quantityInput.val(value);
+		
+			const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
+		    updateProductQuantity(menuNum.toString(), value.toString());
+		}
+		
+	});
+    
+	// [-] 버튼 클릭 시
+    $(document).on("click", ".plus", function() {
+        let div = $(this).closest("div");
+        let quantityInput = div.find('.cart-quantity');
+        let value = parseInt(quantityInput.val());
+
+        if (value < 10) {
+            value++;
+            quantityInput.val(value);
+
+            const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
+            updateProductQuantity(menuNum.toString(), value.toString());
+        }
+
+    });
+    
+    function updateProductQuantity(menuNum, quantity) {
+        let menuItem = menuarr.find(menuItem => menuItem.menuNum == menuNum);
+		
+        if (menuItem) {
+        	menuItem.quantity = quantity;
+        } else {
+        	menuarr.push({ menuNum, quantity});
+        }
+        
+        let totalPrice = 0;
+        menuarr.forEach((item) => {
+            totalPrice += item.quantity * item.price;
+        });
+        
+		const total = document.querySelector('.valueinput');
+		total.value = totalPrice;
+    }
 
 </script>
