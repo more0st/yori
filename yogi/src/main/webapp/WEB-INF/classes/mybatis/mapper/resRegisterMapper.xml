@@ -16,5 +16,10 @@
     <update id="updateStatus" parameterType="String">
     	update restaurantId set status = 2 where userId=#{userId}
     </update>
+    
+    <update id="updateResRegister" parameterType="com.sp.yogi.owner.register.ResRegister">
+		UPDATE restaurant SET restaurantName = #{restaurantName}, restaurantAddr1 = #{restaurantAddr1}, restaurantAddr2 = #{restaurantAddr1}, restaurantTel = #{restaurantTel}, categoryNum = #{categoryNum}, reg_date = SYSDATE
+		WHERE restaurantNum = #{restaurantNum}
+    </update>
 
 </mapper>

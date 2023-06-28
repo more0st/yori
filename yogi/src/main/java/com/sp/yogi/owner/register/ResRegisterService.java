@@ -14,4 +14,6 @@ public interface ResRegisterService {
 	 * [ 입점문의 신청 후 > 업제 입점상태 : 입점대기(2) ]
 	 */
 	public void updateStatus(String userId) throws Exception;
+	
+	public void updateResRegister(ResRegister resRegister) throws Exception;
 }

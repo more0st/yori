@@ -49,6 +49,22 @@ public class ResRegisterServiceImpl implements ResRegisterService{
 		}
 	}
 
+	@Override
+	public void updateResRegister(ResRegister dto) throws Exception {
+		try {
+			if (dto.getRestaurantTel1().length() != 0 && dto.getRestaurantTel2().length() != 0 && dto.getRestaurantTel3().length() != 0) {
+				dto.setRestaurantTel(dto.getRestaurantTel1() + "-" + dto.getRestaurantTel2() + "-" + dto.getRestaurantTel3());
+			}
+			
+			// 입점 문의정보 저장
+			dao.insertData("register.updateResRegister", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
 	
 
 }

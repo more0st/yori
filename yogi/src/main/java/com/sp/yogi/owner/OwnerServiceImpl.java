@@ -252,6 +252,13 @@ public class OwnerServiceImpl implements OwnerService {
 					dto.setTel2(s[1]);
 					dto.setTel3(s[2]);
 				}
+				
+				if (dto.getRestaurantTel() != null) {
+					String[] s = dto.getRestaurantTel().split("-");
+					dto.setRestaurantTel1(s[0]);
+					dto.setRestaurantTel2(s[1]);
+					dto.setRestaurantTel3(s[2]);
+				}
 			}
 
 		} catch (Exception e) {

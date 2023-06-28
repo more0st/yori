@@ -125,10 +125,10 @@
 				        <label class="col-sm-2 col-form-label" for="restaurantAddr1">사업장 주소</label>
 				        <div class="col-sm-10">
 				       		<div>
-				           		<input type="text" name="restaurantAddr1" id="restaurantAddr1" class="form-control" placeholder="기본 주소" value="${dto.restaurantAddr1}" readonly="readonly">
+				           		<input type="text" name="restaurantAddr1" id="restaurantAddr1" class="form-control" placeholder="기본 주소" value="" readonly="readonly">
 				           	</div>
 				       		<div style="margin-top: 5px;">
-				       			<input type="text" name="restaurantAddr2" id="restaurantAddr2" class="form-control" placeholder="상세 주소" value="${dto.restaurantAddr2}">
+				       			<input type="text" name="restaurantAddr2" id="restaurantAddr2" class="form-control" placeholder="상세 주소" value="">
 							</div>
 						</div>
 				    </div>
@@ -149,7 +149,12 @@
 				     
 				    <div class="row mb-3">
 				        <div class="text-center">
-				            <button type="button" name="sendButton" class="btn btn-danger" onclick="memberOk();"> 회원가입/수정하기 <i class="bi bi-check2"></i></button>
+				            <c:if test="${mode == 'update'}">
+					            <button type="button" name="sendButton" class="btn btn-danger" onclick="updateOk();"> 수정하기 <i class="bi bi-check2"></i></button>
+				            </c:if>
+				            <c:if test="${mode == 'member' }">
+					            <button type="button" name="sendButton" class="btn btn-danger" onclick="memberOk();"> 등록하기 <i class="bi bi-check2"></i></button>
+				            </c:if>
 				            
 							<input type="hidden" name="userIdValid" id="userIdValid" value="false">
 				        </div>
@@ -265,9 +270,65 @@ function memberOk() {
         return;
     }
     
-   
-
    	f.action = "${pageContext.request.contextPath}/owner/info/register";
+    f.submit();
+}
+
+function updateOk() {
+	const f = document.memberForm;
+	let str;
+	
+    str = f.businessNum.value;
+    if( !/^\d{10}$/.test(str) ) {
+        alert("사업자등록번호를 다시 입력하세요. ");
+        f.businessNum.focus();
+        return;
+    }
+    
+    str = f.restaurantName.value;
+    if( !str ) {
+        alert("상호명을 입력하세요. ");
+        f.restaurantName.focus();
+        return;
+    }
+    
+    // 카테고리
+    str = f.categoryNum.value;
+    if( !str ) {
+        alert("카테고리를 선택하세요. ");
+        f.categoryNum.focus();
+        return;
+    }
+    
+    str = f.restaurantTel1.value;
+    if( !str ) {
+        alert("사업장 전화번호를 입력하세요. ");
+        f.restaurantTel1.focus();
+        return;
+    }
+
+    str = f.restaurantTel2.value;
+    if( !/^\d{3,4}$/.test(str) ) {
+        alert("숫자만 가능합니다. ");
+        f.restaurantTel2.focus();
+        return;
+    }
+
+    str = f.restaurantTel3.value;
+    if( !/^\d{4}$/.test(str) ) {
+    	alert("숫자만 가능합니다. ");
+        f.restaurantTel3.focus();
+        return;
+    }
+    
+    str = f.restaurantAddr1.value;
+    if( !str ) {
+        alert("사업장 주소를 입력하세요. ");
+        f.restaurantAddr1.focus();
+        return;
+    }
+    
+   	f.action = "${pageContext.request.contextPath}/owner/info/update";
     f.submit();
 }
 

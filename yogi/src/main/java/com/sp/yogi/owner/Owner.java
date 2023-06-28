@@ -29,9 +29,63 @@ public class Owner {
 	private int reject_cnt;
 	private int status;
 	private int openState;
-
+	private Long businessNum;
+	private int categoryNum;
+	private String restaurantTel;
+	private String restaurantTel1;
+	private String restaurantTel2;
+	private String restaurantTel3;
+	private String restaurantAddr1;
+	private String restaurantAddr2;
 	
-	
+	public String getRestaurantAddr1() {
+		return restaurantAddr1;
+	}
+	public void setRestaurantAddr1(String restaurantAddr1) {
+		this.restaurantAddr1 = restaurantAddr1;
+	}
+	public String getRestaurantAddr2() {
+		return restaurantAddr2;
+	}
+	public void setRestaurantAddr2(String restaurantAddr2) {
+		this.restaurantAddr2 = restaurantAddr2;
+	}
+	public int getCategoryNum() {
+		return categoryNum;
+	}
+	public String getRestaurantTel() {
+		return restaurantTel;
+	}
+	public void setRestaurantTel(String restaurantTel) {
+		this.restaurantTel = restaurantTel;
+	}
+	public String getRestaurantTel1() {
+		return restaurantTel1;
+	}
+	public void setRestaurantTel1(String restaurantTel1) {
+		this.restaurantTel1 = restaurantTel1;
+	}
+	public String getRestaurantTel2() {
+		return restaurantTel2;
+	}
+	public void setRestaurantTel2(String restaurantTel2) {
+		this.restaurantTel2 = restaurantTel2;
+	}
+	public String getRestaurantTel3() {
+		return restaurantTel3;
+	}
+	public void setRestaurantTel3(String restaurantTel3) {
+		this.restaurantTel3 = restaurantTel3;
+	}
+	public void setCategoryNum(int categoryNum) {
+		this.categoryNum = categoryNum;
+	}
+	public Long getBusinessNum() {
+		return businessNum;
+	}
+	public void setBusinessNum(Long businessNum) {
+		this.businessNum = businessNum;
+	}
 	public int getOpenState() {
 		return openState;
 	}

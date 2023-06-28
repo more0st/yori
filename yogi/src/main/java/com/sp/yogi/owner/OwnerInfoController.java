@@ -38,7 +38,22 @@ public class OwnerInfoController {
 	}
 	
 	@RequestMapping(value = "register", method = RequestMethod.GET)
-	public String register() {
+	public String register(
+			@RequestParam("status") int status,
+			Model model,
+			HttpSession session
+			) {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		System.out.println("스테이터스 :" + status);
+		
+		if(status == 0) {
+			// 정보를 불러오고 update로 해주기
+			Owner dto = service2.readRestaurant(info.getUserId());
+			
+			model.addAttribute("dto", dto);
+			model.addAttribute("mode", "update");
+		}
 		
 		return ".owner.info.register";
 	}
@@ -84,4 +99,42 @@ public class OwnerInfoController {
       
       return ".owner.info.afterRegister";
    }
+   
+   
+// 입점 업체 수정
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String updateSubmit(ResRegister dto, final RedirectAttributes reAttr, Model model, HttpSession session) {
+		
+		try {
+			// 세션에 로그인 정보 저장
+			SessionInfo info = (SessionInfo) session.getAttribute("member");
+			
+			System.out.println("업데이트");
+			
+			Owner owner = service2.readOwner(info.getUserId());
+			dto.setRestaurantNum(owner.getRestaurantNum());
+			
+			service.updateResRegister(dto);
+			
+			// 업체 입점 상태 : 입점대기(2)로 변경
+			service.updateStatus(info.getUserId());
+			
+			//int status = service2.readStatus(info.getUserId());
+			// reAttr.addFlashAttribute("status", status);
+		} catch (DuplicateKeyException e) {
+			model.addAttribute("mode", "member");
+			model.addAttribute("message", "이미 존재하는 업체 번호입니다.");
+			return ".owner.login";
+		} catch (Exception e) {
+			model.addAttribute("mode", "member");
+			model.addAttribute("message", "입점문의가 실패했습니다.");
+			return ".owner.login";
+		}
+		
+		// 리다이렉트된 페이지에 값 넘기기
+		reAttr.addFlashAttribute("message", "승인 대기중");
+		reAttr.addFlashAttribute("status", 2);
+				
+		return "redirect:/owner/info/afterRegister";
+	}
 }
