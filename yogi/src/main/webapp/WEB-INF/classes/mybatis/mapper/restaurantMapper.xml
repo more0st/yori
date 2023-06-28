@@ -43,10 +43,15 @@
 		JOIN restaurant r ON ri.restaurantNum = r.restaurantNum
 		JOIN restaurantInfo info ON info.restaurantNum = ri.restaurantNum
 		JOIN deliveryMap d ON d.restaurantNum = ri.restaurantNum
-		LEFT OUTER JOIN restaurantImg img ON img.restaurantNum = ri.restaurantNum
+		LEFT OUTER JOIN (
+            SELECT imageFilename, restaurantNum
+              FROM restaurantImg
+              ORDER BY restaurantNum DESC
+              FETCH FIRST 1 ROWS ONLY
+        ) img ON img.restaurantNum = ri.restaurantNum
 		LEFT OUTER JOIN (
 		    SELECT COUNT(*) reviewCount, AVG(rating) rating, restaurantNum FROM review GROUP BY restaurantNum
-		) rv ON rv.restaurantNum = ri.restaurantNum 
+		) rv ON rv.restaurantNum = ri.restaurantNum
 		WHERE info.state = 1 AND ri.status = 3
 			  AND INSTR(d.addr,  #{addr1}) &gt; 0
 			 <if test="categoryNum > 0">

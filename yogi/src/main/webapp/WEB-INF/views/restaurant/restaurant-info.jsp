@@ -624,7 +624,7 @@ body {
 								    			
 									    	</div>
 									  		<div class="modal-footer">
-									    		<button type="button" class="modal-button addCart" onclick="addToCart(${menu.menuNum});closeModal(${menu.price},${menu.menuNum});">주문표에 추가</button>
+									    		<button type="button" class="modal-button addCart" onclick="addToCart(${menu.menuNum},'${menu.menu}');closeModal(${menu.price},${menu.menuNum});">주문표에 추가</button>
 									    		<button type="button" class="modal-button toOrder">주문하기</button>
 									  		</div>
 										</div>
@@ -690,23 +690,6 @@ body {
 						</div>
 						</c:forEach>
 					</c:if>
-					
-					<!--  
-					<div class="review">
-						<div class="review-top">
-							<div class="review-name">
-								<div class="res-333" style="font-weight: bold;">박상훈님</div><div class="review-date">2023-06-13</div>
-							</div>
-							<div><button type="button" class="report-btn">신고</button></div>
-						</div>
-						<div class="review-rating">★★★★★</div>
-						<img class="review-img" src="${pageContext.request.contextPath}/resources/picture/amazing.png">
-						<div class="review-content">
-							맛있는 버거킹
-						</div>
-					</div>
-					-->
-					
 				</div>
 				
 				<!-- 정보 -->
@@ -773,11 +756,13 @@ body {
 			</div>
 			
 			<!-- 장바구니에 아무 항목도 없을 때 -->
-			<div class="no-cart">
+			<div class="cart-order">
 				주문표에 담긴 메뉴가 없습니다.
 			</div>
 			
 			<!-- 장바구니에 주문이 들어갔을 때 -->
+			
+			<!-- 
 			<div class="yes-cart">
 				<div class="yes-cart-top">
 					<div style="font-weight: bold;">
@@ -795,8 +780,11 @@ body {
 						<button type='button' class='quantity-btn plus' data-product-id='" + productId + "'><i class='fa-solid fa-plus'></i></button>
 					</div>
 				</div>
-			</div>
+			</div>	
+				 -->
 			
+			
+			<!-- 
 			<div class="yes-cart">
 				<div class="yes-cart-top">
 					<div style="font-weight: bold;">
@@ -815,7 +803,7 @@ body {
 					</div>
 				</div>
 			</div>
-			
+			 -->
 			
 			<div class="cart-tip">
 				배달요금 ${restaurantInfo2.deliveryFee}원 별도
@@ -963,6 +951,7 @@ body {
         });
     });
     
+    let menuarr = [];
     let optionarr = [];
     // 모달 내부 가격 ------------------------------------------
    	function updateTotalOption(menuNum, firstPrice, price, checked, optionName) {
@@ -1006,14 +995,59 @@ body {
    	    });
    	}
     
-    // 주문표에 담기 ---------------------------------------------
-    function addToCart(menuNum) {
+ 	
+ 	// String으로 바꿔주기
+ 	var options;
+ 	
+ 	function makeString() {
+    	options = optionarr.map(function(option) {
+	        return option.optionName;
+	    }).join(',');
+
+	    console.log(options);
+	}
+ 	
+ 	
+    // [주문표에 추가] ---------------------------------------------
+    function addToCart(menuNum, menuName) {
     	const totalOptionField = document.querySelector('.totalOption-'+menuNum);
-    	const currentTotal = parseInt(totalOptionField.value);
+    	const price = parseInt(totalOptionField.value);
     	
     	const optionarrString = JSON.stringify(optionarr);
     	
-    	console.log('메뉴 번호 : '+ menuNum + ', 넘길 가격 : ' + currentTotal + ', 옵션 : ' + optionarrString);
-	}
+    	makeString();
+    	
+    	var menuItem = {
+    		menuNum : menuNum,
+    		menuName: menuName,
+    		quantity:1,
+    		price : price,
+    		optionarrString : options
+    	}
+    	
+    	var isAlreadyAdded = menuarr.some(function(menuItem){
+ 			menuItem.menuNum == menuNum;
+ 		});
+    	
+    	menuarr.push(menuItem);
+    	
+    	if(isAlreadyAdded){
+ 			menuItem.quantity++;
+ 		}
+    	
+    	let out = "";
+    	
+		out += "<div class='yes-cart'><div class='yes-cart-top'><div style='font-weight: bold;'>"+ menuName +" : "+ options +"</div>";
+		out +=	"<button type='button'><i class='fa-regular fa-circle-xmark'></i></button></div>"
+		out +=	"<div class='yes-cart-bottom'><div><input class='cart-price' value='"+ price +"' readonly='readonly'></div>"
+		out +=	"<div style='display:flex;'><button type='button' class='quantity-btn minus' data-product-id='" + menuNum + "'><i class='fa-solid fa-minus'></i></button>"
+		out +=	"<input name='cart-quantity' class='cart-quantity' value='"+ menuItem.quantity +"' readonly='readonly'>"
+		out +=	"<button type='button' class='quantity-btn plus' data-product-id='" + menuNum + "'><i class='fa-solid fa-plus'></i></button>"
+		out += "</div></div></div>";
+	
+		$('.cart-order').append(out);
+    	
+    	$(".modal").modal("hide");
+    }
 
 </script>
