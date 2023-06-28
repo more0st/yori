@@ -17,21 +17,8 @@
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
                 <div class="card-body">
-                  <h5 class="card-title">입점신청상세내역 <span>상훈이네 족발집</span></h5>
+                  <h5 class="card-title">입점신청상세내역 <span>${dto.restaurantName}</span></h5>
 
                   <table class="table table-bordered datatable">
                     <thead>
@@ -45,38 +32,34 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row"><a href="#">1</a></th>
-                        <td>1245-0000</td>
-                        <td><a href="${pageContext.request.contextPath}/admin/store/storeDetail" class="text-primary">상훈이네 족발집</a></td>
-                        <td>박상훈</td>
-                        <td><span>2023-06-15</span></td>
+                        <th scope="row">1</th>
+                        <td>${dto.businessNum}</td>
+                        <td>${dto.restaurantName}</td>
+                        <td>${dto.userName}</td>
+                        <td><span>${dto.reg_date}</span></td>
                       </tr>
                     </tbody>
                   </table>
                   <table class="table table-bordered">
                       <tr>
                         <th scope="col">사업자전화번호</th>
-                        <td>010-1234-1234</td>
+                        <td>${dto.restaurantTel}</td>
                       </tr>
                       <tr>
                         <th scope="col">대표 전화번호</th>
-                        <td>02-1234-0000</td>
+                        <td>${dto.tel}</td>
                       </tr>
                       <tr>
                         <th scope="col">대표이메일</th>
-                        <td>restaurant@naver.com</td>
+                        <td>${dto.email}</td>
                       </tr>
                       <tr>
                         <th scope="col">카테고리</th>
-                        <td>족발</td>
-                      </tr>
-                      <tr>
-                        <th scope="col">첨부파일</th>
-                        <td>사업자등록증.jpg</td>
+                        <td>${dto.categoryName}</td>
                       </tr>
                   </table>
                   <div style="display: flex; justify-content: center; gap : 5px;">
-	                  <button type="button" class="btn btn-primary">승인</button>
+	                  <button type="button" class="btn btn-primary" onclick="permitWait();">승인</button>
 	                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">거절</button>
 		              <button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/admin/store/storeList'">목록</button>
 	                  <!-- 거절사유 입력하는 모달 띄우기 -->
@@ -95,10 +78,10 @@
 	        <h5 class="modal-title" id="exampleModalLabel">거절 사유</h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	      <form> 
+	      <form name="rejectForm" method="post"> 
 		      <div class="modal-body">
 				<div>
-					<textarea rows="5" cols="52" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
+					<textarea name="content" rows="5" cols="52" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
 				</div>
 				<div>
 					
@@ -106,7 +89,7 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-		        <button type="button" class="btn btn-primary">보내기</button>
+		        <button type="button" class="btn btn-primary" onclick="reject();">보내기</button>
 		      </div>
 	      </form>
 	    </div>
@@ -114,3 +97,36 @@
 	</div>
 	
   </main><!-- End #main -->
+  
+<script>
+
+function permitWait() {
+	if (! confirm('입점을 승인하시겠습니까 ? ')) {
+		return;
+	}
+	
+	let url = "${pageContext.request.contextPath}/admin/store/permit";
+	let qs = "restaurantNum=${dto.restaurantNum}";
+	
+	location.href = url + "?" + qs;
+}
+
+function reject() {
+	const f = document.rejectForm;
+	
+	let str = f.content.value;
+	if(!str) {
+		alert("거절 사유를 입력하세요.");
+		f.content.focus();
+		return;
+	}
+	
+	if(! confirm('입점을 거절하시겠습니까 ? ')) {
+		return;
+	}
+	
+	f.action = "${pageContext.request.contextPath}/admin/store/reject?restaurantNum=${dto.restaurantNum}";
+	f.submit();
+}
+
+</script>
