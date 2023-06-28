@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ownerMenu">
+
+<!-- 카테고리 list -->
+<select id="categoryList" parameterType="long" resultType="com.sp.yogi.owner.menu.Menu">
+   SELECT num, menuCategory, restaurantNum
+   FROM menu
+   WHERE restaurantNum=#{restaurantNum}
+</select>
+   
+<!-- 카테고리 개수 -->
+<select id="categoryCount" parameterType="long" resultType="Integer">
+   SELECT NVL(COUNT(*),0)
+   FROM menu
+   WHERE restaurantNum=#{restaurantNum}
+</select>
+
+<!-- 카테고리 추가 insert -->
+<insert id="insertCategory" parameterType="com.sp.yogi.owner.menu.Menu">
+   INSERT INTO menu(num, menuCategory, restaurantNum) 
+   VALUES(menu_seq.NEXTVAL,#{menuCategory},#{restaurantNum})
+</insert>
+
+<!-- 카테고리 수정 update -->
+<update id="updateCategory" parameterType="com.sp.yogi.owner.menu.Menu">
+   UPDATE menu SET menuCategory=#{menuCategory}
+   WHERE restaurantNum=#{restaurantNum}
+</update>
+
+<!-- 카테고리 삭제 delete -->
+<delete id="deleteCategory" parameterType="long">
+   DELETE FROM menu WHERE num=#{num}
+</delete>
+
+<!-- 카테고리번호별 메뉴리스트 -->
+<select id="menuList" parameterType="long" resultType="com.sp.yogi.owner.menu.Menu">
+   SELECT m.num, menuCategory, menuNum, menu, price, imageFilename, stock
+   FROM menu1 m
+   JOIN menu n ON m.num=n.num
+   WHERE m.num=#{num}
+</select>
+
+<!-- 카테고리번호별 메뉴개수 -->
+<select id="menuCount" parameterType="long" resultType="Integer">
+   SELECT NVL(COUNT(*),0)
+   FROM menu1
+   WHERE num=#{num}
+</select>
+
+<!-- 카테고리번호별 메뉴번호별 메뉴정보불러오기 -->
+<select id="readMenu" parameterType="long" resultType="com.sp.yogi.owner.menu.Menu">
+   SELECT menuNum, num, menu, price, imageFilename, stock
+   FROM menu1
+   WHERE menuNum=#{menuNum}
+</select>
+<!-- 메뉴등록 -->
+<select id="insertMenu" parameterType="com.sp.yogi.owner.menu.Menu">
+	INSERT INTO menu1(menuNum, num, menu, price, imageFilename, stock) 
+	    VALUES(menu1_seq.NEXTVAL,#{num},#{menu},#{price},#{imageFilename},1)
+</select>
+
+<!-- 메뉴수정 -->
+<update id="updateMenu" parameterType="com.sp.yogi.owner.menu.Menu">
+   UPDATE menu1 SET num=#{num}, menu=#{menu}, price=#{price}, 
+       imageFilename=#{imageFilename}
+   WHERE menuNum=#{menuNum}
+</update>
+
+<!-- 카테고리번호별 메뉴별 삭제 -->
+<delete id="deleteMenu" parameterType="long">
+   DELETE FROM menu1 WHERE menuNum=#{menuNum}
+</delete>
+
+<!-- 옵션추가 -->
+<insert id="insertOption" parameterType="com.sp.yogi.owner.menu.Menu">
+	  INSERT INTO menuOption(optionNum, menuNum, option_group, option_name, price) 
+	VALUES(menuOption_seq.NEXVAL,#{menuNum},#{option_group},#{option_name},#{price})
+</insert>
+
+<!-- 옵션 리스트 -->
+<select id="optionList" parameterType="long" resultType="com.sp.yogi.owner.menu.Menu">
+	SELECT optionNum, menuNum, option_group, option_name, price
+	FROM menuOption
+	WHERE menuNum=#{menuNum}
+</select>
+
+<!-- 옵션 삭제 -->
+<delete id="deleteOption" parameterType="long">
+	DELETE FROM menuOption
+	WHERE menuNum=#{menuNum}
+</delete>
+
+
+</mapper>
