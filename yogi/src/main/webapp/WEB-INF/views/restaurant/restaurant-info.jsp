@@ -1035,16 +1035,33 @@ body {
     	let out = "";
     	
 		out += "<div class='yes-cart'><div class='yes-cart-top'><div style='font-weight: bold;'>"+ menuName +" : "+ options +"</div>";
-		out +=	"<button type='button'><i class='fa-regular fa-circle-xmark'></i></button></div>"
+		out +=	"<button type='button' class='delete-btn'><i class='fa-regular fa-circle-xmark'></i></button></div>"
 		out +=	"<div class='yes-cart-bottom'><div><input class='cart-price' value='"+ price +"' readonly='readonly'></div>"
 		out +=	"<div style='display:flex;'><button type='button' class='quantity-btn minus' data-product-id='" + menuNum + "'><i class='fa-solid fa-minus'></i></button>"
 		out +=	"<input name='cart-quantity' class='cart-quantity' value='"+ menuItem.quantity +"' readonly='readonly'>"
 		out +=	"<button type='button' class='quantity-btn plus' data-product-id='" + menuNum + "'><i class='fa-solid fa-plus'></i></button>"
-		out += "</div></div></div>";
+		out += "</div></div><input type='hidden' class='menuNum' value='"+ menuNum +"'></div>";
 	
 		$('.cart-order').append(out);
     	
     	$(".modal").modal("hide");
     }
+    
+    // [주문표 부분 삭제]
+        // 레시피 상품 삭제
+    $(document).on("click", ".delete-btn", function() {
+		$(this).closest(".yes-cart").remove();
+		
+		// const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
+		const index = menuarr.findIndex(menuItem => menuItem.menuNum === menuNum);
+		
+		if (index !== -1) {
+			menuarr.splice(index, 1);
+		}
+		
+		const menuarrString = JSON.stringify(menuarr);
+		
+		console.log(menuarrString);
+	});
 
 </script>
