@@ -565,12 +565,12 @@ body {
 						      </div>
 						      
 						         <!-- 모달 -->
-								<div class="modal" id="modal-${menu.menuNum}" tabindex="-1">
+								<div class="modal" id="modal-${menu.menuNum}" tabindex="-1" aria-labelledby="staticBackdropLabel">
 									<div class="modal-dialog modal-dialog-centered">
 										<div class="modal-content">
 									   		<div class="modal-header">
 									    		<h5 class="modal-title">${menu.menu}</h5>
-									    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal();"></button>
+									    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal(${menu.price},${menu.menuNum});"></button>
 									   		</div>
 									    	<div class="modal-body">
 									    		<div class="modal-top">
@@ -624,7 +624,7 @@ body {
 								    			
 									    	</div>
 									  		<div class="modal-footer">
-									    		<button type="button" class="modal-button addCart" onclick="addToCart(${menu.menuNum});closeModal();">주문표에 추가</button>
+									    		<button type="button" class="modal-button addCart" onclick="addToCart(${menu.menuNum});closeModal(${menu.price},${menu.menuNum});">주문표에 추가</button>
 									    		<button type="button" class="modal-button toOrder">주문하기</button>
 									  		</div>
 										</div>
@@ -887,6 +887,14 @@ body {
 		$('#modal-' + menuNum).modal('show');
 	}
 	
+	$(document).ready(function(){
+		  $(".modal").modal({
+		    backdrop: "static",
+		    keyboard: false
+		});
+	});
+	
+	
     function ajaxFun(url, method, query, dataType, fn) {
         $.ajax({
             type: method,
@@ -984,7 +992,10 @@ body {
  	}
     
  	// 모달 창이 닫힐 때 호출되는 함수
-   	function closeModal() {
+   	function closeModal(price, menuNum) {
+   		const totalOptionField = document.querySelector('.totalOption-'+menuNum);
+   		totalOptionField.value = price;
+   		
    	    // 배열 초기화
    	    optionarr = [];
 
