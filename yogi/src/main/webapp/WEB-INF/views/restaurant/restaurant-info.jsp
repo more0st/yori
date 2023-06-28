@@ -755,52 +755,9 @@ body {
 				</div>
 			</div>
 			
+			<!-- 주문 내역 -->
 			<div class="cart-order"></div>
 			
-			<!-- 장바구니에 주문이 들어갔을 때 -->
-			
-			<!-- 
-			<div class="yes-cart">
-				<div class="yes-cart-top">
-					<div style="font-weight: bold;">
-						기네스 머쉬룸 와퍼 세트	
-					</div>
-					<button type="button" onclick=""><i class="fa-regular fa-circle-xmark"></i></button>
-				</div>
-				<div class="yes-cart-bottom">
-					<div>
-						<input class="cart-price" value="7,000원" readonly="readonly">
-					</div>
-					<div style="display: flex;">
-						<button type='button' class='quantity-btn minus' data-product-id='" + productId + "'><i class='fa-solid fa-minus'></i></button>
-						<input name='cart-quantity' class='cart-quantity' value='1' readonly='readonly'>
-						<button type='button' class='quantity-btn plus' data-product-id='" + productId + "'><i class='fa-solid fa-plus'></i></button>
-					</div>
-				</div>
-			</div>	
-				 -->
-			
-			
-			<!-- 
-			<div class="yes-cart">
-				<div class="yes-cart-top">
-					<div style="font-weight: bold;">
-						너켓킹 8개
-					</div>
-					<button type="button" onclick=""><i class="fa-regular fa-circle-xmark"></i></button>
-				</div>
-				<div class="yes-cart-bottom">
-					<div>
-						<input class="cart-price" value="3,000원" readonly="readonly">
-					</div>
-					<div style="display: flex;">
-						<button type='button' class='quantity-btn minus' data-product-id='" + productId + "'><i class='fa-solid fa-minus'></i></button>
-						<input name='cart-quantity' class='cart-quantity' value='1' readonly='readonly'>
-						<button type='button' class='quantity-btn plus' data-product-id='" + productId + "'><i class='fa-solid fa-plus'></i></button>
-					</div>
-				</div>
-			</div>
-			 -->
 			
 			<div class="cart-tip">
 				배달요금 ${restaurantInfo2.deliveryFee}원 별도
@@ -808,7 +765,7 @@ body {
 			
 			<!-- 장바구니에 메뉴가 담길 시 출력 -->
 			<div class="cart-total">
-				합계 : <input type="text" value="10000" class="valueinput" readonly="readonly">원			
+				합계 : <input type="text" value="0" class="valueinput">원			
 			</div>
 			
 			<div class="cart-bottom">
@@ -948,6 +905,7 @@ body {
         });
     });
     
+   
     let menuarr = [];
     let optionarr = [];
     // 모달 내부 가격 ------------------------------------------
@@ -968,16 +926,15 @@ body {
 	        }
 	    }
 	    
-	    console.log(optionarr);
-	    
 	    const optionarrString = JSON.stringify(optionarr);
 	    
-	    console.log('원래가격 : ' + firstPrice + ', 옵션포함 가격 : ' + updatedTotal + ', 옵션 : ' + optionarrString);
+	    // console.log(optionarr);
+	    // console.log('원래가격 : ' + firstPrice + ', 옵션포함 가격 : ' + updatedTotal + ', 옵션 : ' + optionarrString);
 	    
 	    totalOptionField.value = updatedTotal;
  	}
     
- 	// 모달 창이 닫힐 때 호출되는 함수
+ 	// [ 모달 창이 닫힐 때 호출되는 함수 ]
    	function closeModal(price, menuNum) {
    		const totalOptionField = document.querySelector('.totalOption-'+menuNum);
    		totalOptionField.value = price;
@@ -993,7 +950,7 @@ body {
    	}
     
  	
- 	// String으로 바꿔주기
+ 	// [ String으로 바꿔주기 ]
  	var options;
  	
  	function makeString() {
@@ -1003,7 +960,6 @@ body {
 
 	    console.log(options);
 	}
- 	
  	
     // [주문표에 추가] ---------------------------------------------
     function addToCart(menuNum, menuName) {
@@ -1022,15 +978,25 @@ body {
     		optionarrString : options
     	}
     	
+    	// 이미 있는지 검사하기
+    	/*
     	var isAlreadyAdded = menuarr.some(function(menuItem){
  			menuItem.menuNum == menuNum;
  		});
     	
-    	menuarr.push(menuItem);
-    	
     	if(isAlreadyAdded){
  			menuItem.quantity++;
- 		}
+ 		}*/
+    	
+		menuarr.push(menuItem);
+    	
+    	let totalPrice = 0;
+    	menuarr.forEach((item) => {
+            totalPrice += item.quantity * item.price;
+        });
+    	
+    	const total = document.querySelector('.valueinput');
+    	total.value = parseInt(totalPrice);
     	
     	let out = "";
     	
@@ -1043,7 +1009,7 @@ body {
 		out += "</div></div><input type='hidden' class='menuNum' value='"+ menuNum +"'></div>";
 	
 		$('.cart-order').append(out);
-    	
+		
     	$(".modal").modal("hide");
     }
     
@@ -1059,9 +1025,18 @@ body {
 			menuarr.splice(index, 1);
 		}
 		
+		
+		let totalPrice = 0;
+        menuarr.forEach((item) => {
+            totalPrice += item.quantity * item.price;
+        });
+        
+		const total = document.querySelector('.valueinput');
+		total.value = totalPrice;
+    	
 		const menuarrString = JSON.stringify(menuarr);
 		
-		console.log(menuarrString);
+		
 	});
     
     // [주문표 전체 삭제]
@@ -1071,7 +1046,11 @@ body {
 		Array.from(cartItems).forEach((cartItem) => {
 			cartItem.remove();
 		});
-    	  
+    	
+		const total = document.querySelector('.valueinput');
+		total.value = 0;
+		
+		// 배열 초기화
 		menuarr=[];
     }
 
