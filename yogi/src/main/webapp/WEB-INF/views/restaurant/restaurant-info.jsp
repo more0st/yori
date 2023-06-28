@@ -751,7 +751,7 @@ body {
 					주문표
 				</div>
 				<div>
-					<button class="cart-top-icon" type="button" onclick=""><i class="fa-solid fa-trash-can"></i></button>
+					<button class="cart-top-icon" type="button" onclick="deleteAll();"><i class="fa-solid fa-trash-can"></i></button>
 				</div>
 			</div>
 			
@@ -1052,8 +1052,8 @@ body {
     $(document).on("click", ".delete-btn", function() {
 		$(this).closest(".yes-cart").remove();
 		
-		// const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
-		const index = menuarr.findIndex(menuItem => menuItem.menuNum === menuNum);
+		const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
+		const index = menuarr.findIndex(menuItem => menuItem.menuNum == menuNum);
 		
 		if (index !== -1) {
 			menuarr.splice(index, 1);
@@ -1063,5 +1063,16 @@ body {
 		
 		console.log(menuarrString);
 	});
+    
+    // [주문표 전체 삭제]
+	function deleteAll(){
+		const cartItems = document.getElementsByClassName("yes-cart");
+
+		Array.from(cartItems).forEach((cartItem) => {
+			cartItem.remove();
+		});
+    	  
+		menuarr=[];
+    }
 
 </script>

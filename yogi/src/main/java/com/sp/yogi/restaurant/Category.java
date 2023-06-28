@@ -9,7 +9,6 @@ public class Category {
 	private Long restaurantNum;	// 업체번호
 	
 	
-	
 	public List<Menu> getMenuList() {
 		return menuList;
 	}
