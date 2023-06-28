@@ -20,7 +20,8 @@
    
     <!-- 가게이미지 등록-->
     <insert id="insertResImg" parameterType="com.sp.yogi.owner.market.Market">
-    INSERT INTO restaurantImg(fileNum, imageFilename, restaurantNum) VALUES (restaurantImg_seq.NEXTVAL,#{imageFilename, jdbcType = VARCHAR},#{restaurantNum})
+    	INSERT INTO restaurantImg(fileNum, imageFilename, restaurantNum) 
+    	VALUES (restaurantImg_seq.NEXTVAL, #{imageFilename, jdbcType = VARCHAR}, #{restaurantNum})
     </insert>
 
    <!-- 가게이미지 삭제 -->
@@ -29,10 +30,12 @@
     </delete>
     
    <!-- 가게 이미지 가져오기 -->
-   <select id="readResImg" parameterType="Long" resultType="com.sp.yogi.owner.market.Market">
-      SELECT fileNum, imageFilename
+   <select id="readResImg" parameterType="Long" resultType="String">
+      SELECT imageFilename
       FROM restaurantImg
       WHERE restaurantNum = #{restaurantNum}
+      ORDER BY restaurantNum DESC
+      FETCH FIRST 1 ROWS ONLY
    </select>
    
    <!-- 시작/종료시간 수정 -->

@@ -1,6 +1,8 @@
 package com.sp.yogi.owner.market;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,18 @@ public class MarketServiceImpl implements MarketService{
 	@Override
 	public void insertResImg(Market dto, String pathname) throws Exception {
 		
+		try {
+			String saveFilename = fileManager.doFileUpload(dto.getSelectFile(), pathname);
+			
+			if (saveFilename != null) {
+				dto.setImageFilename(saveFilename);
+			
+				dao.insertData("marketinfo.insertResImg", dto);
+			}
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	@Override
@@ -110,16 +124,16 @@ public class MarketServiceImpl implements MarketService{
 	}
 
 	@Override
-	public Market readResImg(long restaurantNum, String pathname) {
-		Market dto=null;
+	public String readResImg(long restaurantNum) {
+		String result= "";
 		
 		try {
-			dto=dao.selectOne("marketinfo.readResImg",restaurantNum);
+			result = dao.selectOne("marketinfo.readResImg",restaurantNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return dto;
+		return result;
 	}
 
 

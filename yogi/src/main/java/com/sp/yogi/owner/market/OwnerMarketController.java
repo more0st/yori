@@ -44,46 +44,47 @@ public class OwnerMarketController {
 		
 		List<Market> tipList=service.listTip(userId);
 		
-		String root = session.getServletContext().getRealPath("/");
-		String path = root + "uploads" + File.separator + "owner"+ File.separator +"market";
-		Market img=service.readResImg(dto.getRestaurantNum(),path);
+		//String root = session.getServletContext().getRealPath("/");
+		//String path = root + "uploads" + File.separator + "owner"+ File.separator +"market";
+		
+		String imageFilename = service.readResImg(info.getRestaurantNum());
+		
 		
 		model.addAttribute("openState", info.getOpenState());
 		model.addAttribute("dto",dto);//가게정보
 		model.addAttribute("userId",info.getUserId());//로그인한 회원의 아이디
 		model.addAttribute("tipList",tipList);//로그인한 회원가게의 팁리스트
-		model.addAttribute("img",img);//로그인한 회원가게의 이미지 정보
+		model.addAttribute("imageFilename",imageFilename);//로그인한 회원가게의 이미지 정보
 		
 		return ".owner.market.marketinfo";
 	}
 	
 	//로고이미지 넣기 
-	@RequestMapping(value = "insertimg", method = RequestMethod.POST)
+	@RequestMapping(value = "insertImg", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> insertimg(@RequestParam("selectFile")String saveFilename, 
-			@RequestParam("restaurantNum")long restaurantNum, 
+	public Map<String, Object> insertimg(
+			@RequestParam("restaurantNum") long restaurantNum, 
 			Market dto, 
 			HttpSession session) throws Exception{
 		
 		String root=session.getServletContext().getRealPath("/");
 		String path=root+"uploads"+File.separator+"owner"+File.separator+"market";
 		
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Map<String, Object> model=new HashMap<>();
 		
 		try {
 			
 			dto.setUserId(info.getUserId());
 			//saveFilename이랑 restaurantNum 불러와서 넘겨줘야함
-			dto.setImageFilename(saveFilename);
 			dto.setRestaurantNum(restaurantNum);
-			System.out.println("이미지 파일 : " + dto.getImageFilename() + " : " + dto.getRestaurantNum());
+			
 			service.insertResImg(dto, path);
 			
+			model.put("imageFilename", dto.getImageFilename());
 		} catch (Exception e) {
 			e.printStackTrace();//오류확인하고지우기
 		}
-		
-		Map<String, Object> model=new HashMap<>();
 		
 		return model;
 	}

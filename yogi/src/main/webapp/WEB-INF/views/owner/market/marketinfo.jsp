@@ -293,10 +293,11 @@
 					가게 사진
 				</div>
 				<div class="flex-center info-picture-detail">
-					<c:if test="${empty img}">
-					<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/add_photo.png">
+					<c:if test="${empty imageFilename}">
+						<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/add_photo.png">
 					</c:if>
-					<c:if test="${not empty img}">
+					<c:if test="${not empty imageFilename}">
+						<img class="res-img" src="${pageContext.request.contextPath}/uploads/owner/market/${imageFilename}">
 					</c:if>
 					<div class="info-picture-btn" id="submenu-modal5">가게 로고<br>사진 추가</div>
 				</div>
@@ -615,7 +616,7 @@ $(function(){
 		str=f.selectFile.value;
 		alert("str 값 : "+str);
 		
-		let formData = new FormData($("#insertImgForm")); 
+		let formData = new FormData($('form[name=insertImgForm]')[0]); 
 		
 		if(! str){
 			alert("이미지를 선택해주세요.");
@@ -623,7 +624,7 @@ $(function(){
 			return;
 		}
 		
-		let url="${pageContext.request.contextPath}/owner/market/insertimg";
+		let url="${pageContext.request.contextPath}/owner/market/insertImg";
 		let query = $('form[name=insertImgForm]').serialize();
 		
 		const fn=function(data){
@@ -634,8 +635,11 @@ $(function(){
 			
 		};
 		
+		$('#menu-modal5').modal('hide');
 		ajaxFileFun(url,"post",formData,"json",fn);
-
+		
+		location.reload(true);
+		
 	});
 });
 
