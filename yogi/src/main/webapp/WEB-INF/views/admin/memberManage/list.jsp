@@ -42,7 +42,7 @@
 							
 						<c:forEach var="dto" items="${list}" varStatus="status">
 							<tr class="hover" onclick="profile('${dto.userId}');"> 
-								<td>${dto.memberNum}</td>
+								<th scope="row" style="text-align: center;">${dto.memberNum}</th>
 								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail" class="text-primary">${dto.userName}</a></td>
 								<td>${dto.userId}</td>
 								<td>${dto.nickName}</td>
@@ -57,22 +57,6 @@
 								</td>
 							</tr>
 						</c:forEach>
-							
-							<tr>
-								<th scope="row" style="text-align: center;">1</th>
-								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail" class="text-primary">박상훈</a></td>
-								<td>sang*****</td>
-								<td>땅후니</td>
-								<td>2016-05-25</td>
-								<td>1일전</td>
-								<td>정상</td>
-								<td>
-									<div class="d-grid gap-2 d-md-block">
-										<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">정지</button>
-										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
-									</div>
-								</td>
-							</tr>
 							
 						</tbody>
 					</table>

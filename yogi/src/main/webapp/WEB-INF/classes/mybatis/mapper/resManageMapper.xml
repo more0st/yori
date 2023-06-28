@@ -41,49 +41,32 @@
 				AND enabled = #{enabled}
 			</if>
 		</where> 
-		ORDER BY reg_date DESC
+		ORDER BY restaurantNum DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 
 
-
-	<select id="readMember" parameterType="String" resultType="com.sp.yogi.admin.domain.Member">
-		SELECT membership, m1.memberNum, m1.userId, userName, nickName, userPwd, enabled,
-			reg_date, modify_date, last_login,
-			TO_CHAR(birth, 'YYYY-MM-DD') birth, email, tel, 
-			zip, addr1, addr2
-		FROM member m
-		JOIN member1 m1 ON m.memberNum = m1.memberNum
-		LEFT OUTER JOIN member2 m2 ON m1.userId = m2.userId
-		WHERE m1.userId = #{userId}
-	</select>
-
-	<update id="updateFailureCountReset" parameterType="String">
-		UPDATE member1 SET failure_cnt = 0
-		WHERE userId = #{userId}
-	</update>
-
-    <update id="updateMemberEnabled" parameterType="map">
-		UPDATE member1 SET enabled=#{enabled} WHERE userId=#{userId}
+    <update id="updateOwnerEnabled" parameterType="map">
+		UPDATE restaurantID SET enabled=#{enabled} WHERE restaurantNum=#{restaurantNum}
     </update>
     
-	<insert id="insertMemberState" parameterType="com.sp.yogi.admin.domain.Member">
-		INSERT INTO memberState(num, userId, stateCode, memo, registerId, reg_date)
-		VALUES (memberState_seq.NEXTVAL, #{userId}, #{stateCode}, #{memo}, #{registerId}, SYSDATE)
+	<insert id="insertOwnerState" parameterType="com.sp.yogi.owner.Owner">
+		INSERT INTO restaurantState(reportNum, restaurantNum, stateCode, memo, registerId, reg_date)
+		VALUES (restaurantState_seq.NEXTVAL, #{restaurantNum}, #{stateCode}, #{memo}, #{registerId}, SYSDATE)
 	</insert>
 	
-	<select id="listMemberState" parameterType="String" resultType="com.sp.yogi.admin.domain.Member">
-		SELECT num, userId, stateCode, memo, registerId, reg_date
-		FROM memberState
-		WHERE userId = #{userId}
-		ORDER BY num DESC
+	<select id="listOwnerState" parameterType="String" resultType="com.sp.yogi.owner.Owner">
+		SELECT reportNum, restaurantNum, stateCode, memo, registerId, reg_date
+		FROM restaurantState
+		WHERE restaurantNum = #{restaurantNum}
+		ORDER BY reportNum DESC
 	</select>
 
-	<select id="readMemberState" parameterType="String" resultType="com.sp.yogi.admin.domain.Member">
-		SELECT num, userId, stateCode, memo, registerId, reg_date
-		FROM memberState
-		WHERE userId = #{userId}
-		ORDER BY num DESC
+	<select id="readOwnerState" parameterType="String" resultType="com.sp.yogi.owner.Owner">
+		SELECT reportNum, userId, stateCode, memo, registerId, reg_date
+		FROM restaurantState
+		WHERE restaurantNum = #{restaurantNum}
+		ORDER BY reportNum DESC
 		FETCH FIRST 1 ROWS ONLY
 	</select>
 

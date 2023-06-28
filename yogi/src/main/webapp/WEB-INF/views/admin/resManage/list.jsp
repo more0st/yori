@@ -23,7 +23,7 @@
 			<div class="card">
 				<div class="card-body">
 
-					<h3 class="card-title">1000 건</h3>
+					<h3 class="card-title">총 ${dataCount} 건</h3>
 
 					<table class="table table-hover admin-restaurantList-table">
 						<thead>
@@ -42,59 +42,53 @@
 						
 						<c:forEach var="dto" items="${list}" varStatus="status">
 							<tr>
-								<th scope="row">${dto.restaurantNum}</th>
+								<th scope="row" style="text-align: center;">${dto.restaurantNum}</th>
 								<td>${dto.restaurantName}</td>
 								<td>${dto.userName}</td>
 								<td>${dto.restaurantTel}</td>
 								<td>${dto.reg_date}</td>
 								<td><a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/admin/resManage/orderList"
 									role="button">주문내역</a></td>
-								<td>${dto.enabled}</td>
+								<td>${dto.enabled==1?"정상":"정지"}</td>
 								<td>
 									<div class="d-grid gap-2 d-md-block">
-										<button type="button" class="btn btn-outline-secondary btn-sm">정지</button>
+										<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">정지</button>
 										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
 									</div>
 								</td>
 							</tr>
 						</c:forEach>	
 						
-							<!-- foreach 돌려야하는 tr 태그 -->
-							<tr>
-								<th scope="row">1</th>
-								<td>Brandon Jacob</td>
-								<td>Designer</td>
-								<td>02-935-8989</td>
-								<td>2016-05-25</td>
-								<td><a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/admin/resManage/orderList"
-									role="button">주문내역</a></td>
-								<td>정상</td>
-								<td>
-									<div class="d-grid gap-2 d-md-block">
-										<button type="button" class="btn btn-outline-secondary btn-sm">정지</button>
-										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
-									</div>
-								</td>
-							</tr>
-							
-							<tr>
-								<th scope="row">2</th>
-								<td>Ashleigh Langosh</td>
-								<td>Finance</td>
-								<td>45</td>
-								<td>2011-08-12</td>
-								<td>28</td>
-								<td>탈퇴</td>
-								<td>2016-05-25</td>
-							</tr>
-							
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</section>
 
-
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">정지 사유</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <form> 
+		      <div class="modal-body">
+				<div>
+					<textarea rows="5" cols="52" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
+				</div>
+				<div>
+					
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		        <button type="button" class="btn btn-primary">보내기</button>
+		      </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
 
 
 
