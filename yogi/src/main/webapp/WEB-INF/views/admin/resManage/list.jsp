@@ -28,7 +28,7 @@
 					<table class="table table-hover admin-restaurantList-table">
 						<thead>
 							<tr>
-								<th scope="col">#</th>
+								<th scope="col">업체번호</th>
 								<th scope="col">상호명</th>
 								<th scope="col">대표</th>
 								<th scope="col">전화번호</th>
@@ -39,6 +39,25 @@
 							</tr>
 						</thead>
 						<tbody>
+						
+						<c:forEach var="dto" items="${list}" varStatus="status">
+							<tr>
+								<th scope="row">${dto.restaurantNum}</th>
+								<td>${dto.restaurantName}</td>
+								<td>${dto.userName}</td>
+								<td>${dto.restaurantTel}</td>
+								<td>${dto.reg_date}</td>
+								<td><a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/admin/resManage/orderList"
+									role="button">주문내역</a></td>
+								<td>${dto.enabled}</td>
+								<td>
+									<div class="d-grid gap-2 d-md-block">
+										<button type="button" class="btn btn-outline-secondary btn-sm">정지</button>
+										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
+									</div>
+								</td>
+							</tr>
+						</c:forEach>	
 						
 							<!-- foreach 돌려야하는 tr 태그 -->
 							<tr>
@@ -58,20 +77,8 @@
 								</td>
 							</tr>
 							
-							
-							
 							<tr>
 								<th scope="row">2</th>
-								<td>Bridie Kessler</td>
-								<td>Developer</td>
-								<td>35</td>
-								<td>2014-12-05</td>
-								<td>28</td>
-								<td>정지</td>
-								<td>2016-05-25</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
 								<td>Ashleigh Langosh</td>
 								<td>Finance</td>
 								<td>45</td>
@@ -80,26 +87,7 @@
 								<td>탈퇴</td>
 								<td>2016-05-25</td>
 							</tr>
-							<tr>
-								<th scope="row">4</th>
-								<td>Angus Grady</td>
-								<td>HR</td>
-								<td>34</td>
-								<td>2012-06-11</td>
-								<td>28</td>
-								<td>28</td>
-								<td>2016-05-25</td>
-							</tr>
-							<tr>
-								<th scope="row">5</th>
-								<td>Raheem Lehner</td>
-								<td>Dynamic Division Officer</td>
-								<td>47</td>
-								<td>2011-04-19</td>
-								<td>28</td>
-								<td>28</td>
-								<td>2016-05-25</td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>

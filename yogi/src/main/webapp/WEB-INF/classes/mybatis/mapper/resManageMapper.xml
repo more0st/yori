@@ -2,11 +2,11 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="resManage">
-    <!-- 회원 리스트 -->
+    <!-- 업체 리스트 -->
 	<sql id="where-list">
 		<choose>
-			<when test="condition=='userId'">
-				INSTR(m1.userId, #{keyword}) &gt;= 1
+			<when test="condition=='restaurantName'">
+				INSTR(i.restaurantName, #{keyword}) &gt;= 1
 			</when>
 			<otherwise>
 				INSTR(${condition}, #{keyword}) &gt;= 1
@@ -16,9 +16,8 @@
 	
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT COUNT(*)
-		FROM member m
-		JOIN member1 m1 ON m.memberNum = m1.memberNum
-		LEFT OUTER JOIN member2 m2 ON m1.userId = m2.userId
+		FROM restaurantID i
+		JOIN restaurant r ON i.restaurantNum = r.restaurantNum
 		<where>
 			<if test="keyword!=null and keyword!='' ">
 				<include refid="where-list"/>
@@ -26,18 +25,14 @@
 			<if test="enabled!=''">
 				AND enabled = #{enabled}
 			</if>
-			AND m.membership &lt; 50
 		</where> 
     </select>
     
-	<select id="listMember" parameterType="map" resultType="com.sp.yogi.admin.domain.Member">
-		SELECT m1.memberNum, membership, m1.userId, userName, nickName,
-			m1.reg_date, m1.modify_date, last_login,
-			enabled, email, tel, 
-			TO_CHAR(birth, 'YYYY-MM-DD') birth
-		FROM member m
-		JOIN member1 m1 ON m.memberNum = m1.memberNum
-		LEFT OUTER JOIN member2 m2 ON m1.userId = m2.userId
+	<select id="listOwner" parameterType="map" resultType="com.sp.yogi.owner.Owner">
+		SELECT r.restaurantNum, r.restaurantName, i.userName,
+			r.restaurantTel, r.reg_date, i.enabled
+		FROM restaurantID i
+		JOIN restaurant r ON i.restaurantNum = r.restaurantNum
 		<where>
 			<if test="keyword!=null and keyword!='' ">
 				<include refid="where-list"/>
@@ -45,11 +40,12 @@
 			<if test="enabled!=''">
 				AND enabled = #{enabled}
 			</if>
-			AND m.membership &lt; 50
 		</where> 
 		ORDER BY reg_date DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
+
+
 
 	<select id="readMember" parameterType="String" resultType="com.sp.yogi.admin.domain.Member">
 		SELECT membership, m1.memberNum, m1.userId, userName, nickName, userPwd, enabled,
