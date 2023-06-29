@@ -75,8 +75,8 @@
    </select>
 	
 	<!-- 가게 카테고리 불러오기 -->
-	<select id="readCategory" parameterType="Long" resultType="com.sp.yogi.restaurant.Category">
-		SELECT num, restaurantNum, menuCategory FROM menu WHERE restaurantNum=#{restaurantNum}
+	<select id="readCategory" parameterType="long" resultType="com.sp.yogi.restaurant.Category">
+		SELECT num, restaurantNum, menuCategory FROM menu WHERE restaurantNum=#{restaurantNum} and enabled=1
 	</select>
 	
 	<!-- 가게 메뉴 불러오기 -->
@@ -119,7 +119,7 @@
 		    (SELECT COUNT(*)
 		        FROM menu1
 		        JOIN menu ON menu.num = menu1.num
-		        WHERE restaurantNum = #{restaurantNum}) AS menuCount,
+		        WHERE restaurantNum = #{restaurantNum} and enabled=1) AS menuCount,
 		    (SELECT COUNT(*)
 		        FROM review
 		        WHERE restaurantNum = #{restaurantNum}  AND enabled = 1) AS reviewCount

@@ -1077,7 +1077,7 @@ body {
         let quantityInput = div.find('.cart-quantity');
         let value = parseInt(quantityInput.val());
 
-        if (value < 10) {
+        if (value < 50) {
             value++;
             quantityInput.val(value);
 
