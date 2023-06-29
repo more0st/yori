@@ -34,7 +34,7 @@
       SELECT imageFilename
       FROM restaurantImg
       WHERE restaurantNum = #{restaurantNum}
-      ORDER BY restaurantNum DESC
+      ORDER BY fileNum DESC
       FETCH FIRST 1 ROWS ONLY
    </select>
    
