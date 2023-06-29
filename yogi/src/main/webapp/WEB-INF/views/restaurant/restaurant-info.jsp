@@ -769,7 +769,7 @@ body {
 			</div>
 			
 			<div class="cart-bottom">
-				<button class="cart-button" type="button" onclick="location.href='${pageContext.request.contextPath}/order/order?restaurantNum=${restaurantNum}'">주문하기</button>
+				<button class="cart-button" type="button" onclick="addToOrder(${restaurantNum},${restaurantInfo2.deliveryFee});">주문하기</button>
 				<input type="hidden" value="${restaurantNum}">
 			</div>
 		</div>
@@ -1117,5 +1117,54 @@ body {
 		const total = document.querySelector('.valueinput');
 		total.value = totalPrice;
     }
+    
+    
+    // [string으로 바꿔주기2]
+    var menuNums;
+    var menuOptions;
+    var menuQuantities;
+    var menuPrices;
+    
+    function makeString2() {
+    	menuNums = menuarr.map(function(menuItem) {
+	        return menuItem.menuNum
+	    }).join(',');
 
+    	menuOptions = menuarr.map(function(menuItem) {
+	        return menuItem.options
+	    }).join('-');
+    	
+    	menuQuantities = menuarr.map(function(menuItem) {
+	        return menuItem.quantity
+	    }).join(',');
+    	
+    	menuPrices = menuarr.map(function(menuItem) {
+	        return menuItem.price
+	    }).join(',');
+    	
+	}
+    
+    // 주문시 필요한 정보를 담아 order로
+    function addToOrder(restaurantNum, deliveryFee){
+    	let totalPrice = 0;
+        menuarr.forEach((item) => {
+            totalPrice += item.quantity * item.price;
+        });
+        
+        makeString2();
+        
+        // restaurantNum : 가게 번호
+        // deliveryFee : 배달비
+        // totalPrice : 전체 금액(배달비 미포함)
+        // menuNums : 메뉴
+        // menuOptions : 각 메뉴 옵션 
+        // menuQuantities : 각 메뉴 개수
+        // menuPrices : 각 메뉴 가격 (옵션 포함한 메뉴 가격 * 개수)
+    	location.href='${pageContext.request.contextPath}/order/order?restaurantNum='+restaurantNum
+    				+'&deliveryFee='+deliveryFee+"&totalPrice=" + totalPrice
+    				+"&menuNums="+menuNums+"&menuOptions="+menuOptions+"&menuQuantities="+menuQuantities
+    				+"&menuPrices="+menuPrices;
+    }
+
+    
 </script>

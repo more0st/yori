@@ -9,7 +9,7 @@ public class Menu {
 	private String menu;//메뉴명
 	private long price;//메뉴가격
 	private String imageFilename;//메뉴이미지이름
-	private int stock;//품절여부 (0: 품절 / 1: 판매중)
+	private int stock;//품절여부 (0: 품절 / 1: 판매중 / 2:숨김)
 	
 	private long optionNum;//옵션번호
 	private String option_group;//옵션대분류
