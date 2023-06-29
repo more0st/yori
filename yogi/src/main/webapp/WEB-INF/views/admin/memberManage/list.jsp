@@ -43,7 +43,7 @@
 						<c:forEach var="dto" items="${list}" varStatus="status">
 							<tr class="hover" onclick="profile('${dto.userId}');"> 
 								<th scope="row" style="text-align: center;">${dto.memberNum}</th>
-								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail" class="text-primary">${dto.userName}</a></td>
+								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail?userId=${dto.userId}" class="text-primary">${dto.userName}</a></td>
 								<td>${dto.userId}</td>
 								<td>${dto.nickName}</td>
 								<td>${dto.reg_date}</td>

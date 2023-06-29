@@ -109,7 +109,8 @@ public class MemberManageController {
 	}
 	
 	@RequestMapping(value = "detail", method=RequestMethod.GET)
-	public String detail() throws Exception{
+	public String detail(@RequestParam(value = "userId") String userId, Model model) throws Exception{
+		model.addAttribute("dto", service.readMemberWithCount(userId));
 		return ".admin.memberManage.detail";
 	}
 	

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sp.yogi.admin.domain.Member;
+import com.sp.yogi.admin.domain.MemberWithCount;
 import com.sp.yogi.common.dao.CommonDAO;
 
 @Service("admin.memberManageService")
@@ -52,6 +53,20 @@ public class MemberManageServiceImpl implements MemberManageService {
 		}
 
 		return dto;
+	}
+	
+	
+
+	@Override
+	public MemberWithCount readMemberWithCount(String userId) {
+		try {
+			return dao.selectOne("memberManage.readMemberWithCount", userId);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	@Override

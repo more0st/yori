@@ -61,6 +61,22 @@
 		LEFT OUTER JOIN member2 m2 ON m1.userId = m2.userId
 		WHERE m1.userId = #{userId}
 	</select>
+	
+	
+	<select id="readMemberWithCount" parameterType="String" resultType="com.sp.yogi.admin.domain.MemberWithCount">
+		SELECT membership, m1.memberNum, m1.userId, userName, nickName, userPwd, enabled,
+			reg_date, modify_date, last_login,
+			TO_CHAR(birth, 'YYYY-MM-DD') birth, email, tel, 
+			zip, addr1, addr2
+			, (select count(*) from review where m1.userId = review.userId) reviewCount
+			, (select count(*) from review_report inner join review on m1.userId = review.userId and review_report.orderNum = review.orderNum ) reviewReportCount
+			, (select count(*) from order_bundle where m1.userId = order_bundle.userId) buyCount
+		FROM member m
+		JOIN member1 m1 ON m.memberNum = m1.memberNum
+		LEFT OUTER JOIN member2 m2 ON m1.userId = m2.userId
+		WHERE m1.userId = #{userId}
+	</select>
+	
 
 	<update id="updateFailureCountReset" parameterType="String">
 		UPDATE member1 SET failure_cnt = 0

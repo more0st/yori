@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sp.yogi.admin.domain.Member;
+import com.sp.yogi.admin.domain.MemberWithCount;
 
 public interface MemberManageService {
 	public int dataCount(Map<String, Object> map);
@@ -16,4 +17,7 @@ public interface MemberManageService {
 	public void insertMemberState(Member dto) throws Exception;
 	public List<Member> listMemberState(String userId);
 	public Member readMemberState(String userId);
+	
+	public MemberWithCount readMemberWithCount(String userId);
+	
 }

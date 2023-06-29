@@ -50,12 +50,12 @@
                       <tr>
                         <td scope="row">1</td>
                         <td>${dto.userId}</td>
-                        <td>박상훈</td>
-                        <td><span>땅후니</span></td>
-                        <td>999999</td>
-                        <td>sang**@naver.com</td>
-                        <td>010-****-****</td>
-                        <td><span>경기도 일산동구 좋은 아파트 좋은동 좋은호</span></td>
+                        <td>${dto.userName}</td>
+                        <td><span>${dto.nickName}</span></td>
+                        <td>${dto.birth}</td>
+                        <td>${dto.email}</td>
+                        <td>${dto.tel}</td>
+                        <td><span>(${dto.zip}) ${dto.addr1} ${dto.addr2}</span></td>
                         
                         
                       </tr>
@@ -64,23 +64,23 @@
                   <table class="table table-bordered">
                       <tr>
                         <th scope="col" style="width: 480px;">리뷰 수</th>
-                        <td style="width: 402px;">3개</td>
+                        <td style="width: 402px;">${dto.reviewCount}개</td>
                       </tr>
                       <tr>
                         <th scope="col">주문횟수</th>
-                        <td>11회</td>
+                        <td>${dto.buyCount}회</td>
                       </tr>
                       <tr>
                         <th scope="col">신고당한횟수</th>
-                        <td>1회</td>
+                        <td>${dto.reviewReportCount}회</td>
                       </tr>
                       <tr>
                         <th scope="col">등록일자</th>
-                       <td>2023-06-16</td>
+                       <td>${dto.reg_date}</td>
                       </tr>
                       <tr>
                         <th scope="col">마지막접속</th>
-                       <td><span>2023-06-15</span></td>
+                       <td><span>${dto.last_login}</span></td>
                       </tr>
                   </table>
                   <div style="display: flex; justify-content: center; gap : 5px;">
