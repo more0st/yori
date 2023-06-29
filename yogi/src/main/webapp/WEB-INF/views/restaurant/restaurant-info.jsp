@@ -559,6 +559,7 @@ body {
 					      <c:forEach var="menu" items="${category.menuList}">
 						      <div class="accordion-body" onclick="openModal(${menu.menuNum})">
 						      <input type="hidden" id="menuNum" value="${menu.menuNum}"> 
+						      <input type="hidden" id="menuName" value="${menu.menu}"> 
 						      	<div>
 									<div style="font-weight: bold; margin-bottom: 5px;">${menu.menu}</div>
 									<div>${menu.price}원</div>
@@ -914,6 +915,7 @@ body {
    
     let menuarr = [];
     let optionarr = [];
+    let optionOne = [];
     // 모달 내부 가격 ------------------------------------------
    	function updateTotalOption(menuNum, firstPrice, price, checked, optionName) {
 	    const totalOptionField = document.querySelector('.totalOption-'+menuNum);
@@ -925,16 +927,18 @@ body {
 	    if (checked == true) {
 	        if (optionIndex === -1) {
 	            optionarr.push({ optionName: optionName });
+	            optionOne.push({ optionName: optionName });
 	        }
 	    } else {
 	        if (optionIndex !== -1) {
 	            optionarr.splice(optionIndex, 1);
+	            optionOne.splice(optionIndex, 1);
 	        }
 	    }
 	    
 	    const optionarrString = JSON.stringify(optionarr);
+	    const optionarrString2 = JSON.stringify(optionOne);
 	    
-	    // console.log(optionarr);
 	    // console.log('원래가격 : ' + firstPrice + ', 옵션포함 가격 : ' + updatedTotal + ', 옵션 : ' + optionarrString);
 	    
 	    totalOptionField.value = updatedTotal;
@@ -958,7 +962,7 @@ body {
  	
  	// [ String으로 바꿔주기 ]
  	var options;
- 	
+ 
  	function makeString() {
     	options = optionarr.map(function(option) {
 	        return option.optionName;
@@ -966,7 +970,7 @@ body {
 
 	    console.log(options);
 	}
- 	
+
  	var quantity = 1;
     // [주문표에 추가] ---------------------------------------------
     function addToCart(menuNum, menuName) {
@@ -1042,7 +1046,6 @@ body {
 			menuarr.splice(index, 1);
 		}
 		
-		
 		let totalPrice = 0;
         menuarr.forEach((item) => {
             totalPrice += item.quantity * item.price;
@@ -1052,9 +1055,8 @@ body {
 		total.value = totalPrice;
     	
 		const menuarrString = JSON.stringify(menuarr);
-		
-		
 	});
+    
     
     // [주문표 전체 삭제]
 	function deleteAll(){
@@ -1170,7 +1172,7 @@ body {
             totalPrice += item.quantity * item.price;
         });
         
-        if(totalPrice < minimum){
+        if(parseInt(totalPrice) < parseInt(minimum)){
         	alert('최소 주문 금액을 채워주세요.')
         	return;
         }
@@ -1192,23 +1194,34 @@ body {
     }
     
     
+	var options2;
+ 	function makeString3() {
+    	options2 = optionOne.map(function(option) {
+	        return option.optionName;
+	    }).join(',');
+	}
+    
     // [주문버튼] 개별 주문
     function addToOrder2(restaurantNum, deliveryFee){
     	// 배열 초기화
     	
     	let minimum = document.querySelector('.infoinput').value;
     	let totalPrice = document.querySelector('.totalOption').value;
-        
-        if(totalPrice < minimum){
+    	
+        if(parseInt(totalPrice) < parseInt(minimum)){
         	alert('최소 주문 금액을 채워주세요.')
         	return;
         }
-        
         let menuNum = document.querySelector('#menuNum').value;
         // let menuOption = 1;
         let menuPrice = document.querySelector('#menuPrice').value;
-        
-        makeString2();
+        let menuName = document.querySelector('#menuName').value;
+       
+        // const optionarrString = JSON.stringify(optionOne);
+        makeString3();
+        if(options2 == ''){
+        	options2 = '옵션없음';
+        }
         
         // restaurantNum : 가게 번호
         // deliveryFee : 배달비
@@ -1220,7 +1233,7 @@ body {
         // menuPrices : 각 메뉴 가격 (옵션 포함한 메뉴 가격 * 개수)
     	location.href='${pageContext.request.contextPath}/order/order?restaurantNum='+restaurantNum
     				+'&deliveryFee='+deliveryFee+"&totalPrice=" + totalPrice
-    				+"&menuNums="+menuNum+"&menuNames="+menuNames+"&menuOptions="+options+"&menuQuantities=1"
+    				+"&menuNums="+menuNum+"&menuNames="+menuName+"&menuOptions="+options2+"&menuQuantities=1"
     				+"&menuPrices="+menuPrice;
     }
     
