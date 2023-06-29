@@ -519,7 +519,12 @@ body {
 				</div>
 				<div class="res-main">
 					<div>
-						<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
+						<c:if test="${empty restaurantInfo.imageFilename}">
+							<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/default.png">
+						</c:if>
+						<c:if test="${not empty restaurantInfo.imageFilename}">
+							<img class="res-img" src="${pageContext.request.contextPath}/uploads/owner/market/${restaurantInfo.imageFilename}">
+						</c:if>
 					</div>
 					<div class="res-center">
 						<div>

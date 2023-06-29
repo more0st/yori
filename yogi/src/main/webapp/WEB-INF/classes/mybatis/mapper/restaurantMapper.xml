@@ -67,11 +67,18 @@
 	
 	<!-- 가게 상세 정보 불러오기 -->
 	<select id="readRestaurantInfo" parameterType="Long" resultType="com.sp.yogi.restaurant.RestaurantInfo">
-      SELECT r.restaurantNum, businessNum, restaurantName, restaurantAddr1, restaurantAddr2, restaurantTel, basePrice, openingHour, closingHour, foodInfo
+      SELECT r.restaurantNum, businessNum, restaurantName, restaurantAddr1, restaurantAddr2, 
+     		 restaurantTel, basePrice, openingHour, closingHour, foodInfo, imageFilename
       FROM restaurant r
       JOIN restaurantId ri ON r.restaurantNum = ri.restaurantNum
       JOIN restaurantInfo rf ON ri.restaurantNum = rf.restaurantNum
-      WHERE r.restaurantNum = ${restaurantNum}
+      LEFT OUTER JOIN (
+            SELECT imageFilename, restaurantNum
+              FROM restaurantImg
+              ORDER BY restaurantNum DESC
+              FETCH FIRST 1 ROWS ONLY
+        ) img ON img.restaurantNum = ri.restaurantNum
+      WHERE r.restaurantNum = #{restaurantNum}
    </select>
 	
 	<!-- 가게 카테고리 불러오기 -->

@@ -9,7 +9,7 @@ public class Menu {
 	private String menu;	// 메뉴 이름
 	private Long price;		// 메뉴 가격
 	private String imageFilename;
-	private int stock;		// 메뉴 품절 여부 (0:품절 / 1:판매중)
+	private int stock;		// 메뉴 품절 여부 (0:품절 / 1:판매중 / 2:숨김)
 	
 	
 	public Long getPrice() {

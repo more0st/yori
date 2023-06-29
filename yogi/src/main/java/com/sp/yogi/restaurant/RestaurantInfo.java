@@ -13,11 +13,19 @@ public class RestaurantInfo {
 	private String openingHour;
 	private String closingHour;
 	private String foodInfo;
+	private String imageFilename;
+	
 	
 	private List<Category> categoryList;	// 카테고리
 	
 	public List<Category> getCategoryList() {
 		return categoryList;
+	}
+	public String getImageFilename() {
+		return imageFilename;
+	}
+	public void setImageFilename(String imageFilename) {
+		this.imageFilename = imageFilename;
 	}
 	public void setCategoryList(List<Category> categoryList) {
 		this.categoryList = categoryList;

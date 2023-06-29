@@ -207,7 +207,8 @@ public class OwnerMarketController {
 		
 		return ".owner.market.review";
 	}
-	
+	 
+	// 답글 등록 및 수정
 	@PostMapping("insertReply")
 	public String insertReply(
 			@RequestParam(value = "reply1", required = false) String reply1,
@@ -237,6 +238,7 @@ public class OwnerMarketController {
 		return "redirect:/owner/market/review";
 	}
 	
+	// 답글 삭제
 	@GetMapping("deleteReply")
 	public String deleteReply(
 			@RequestParam("orderNum") Long orderNum,

@@ -237,12 +237,12 @@ function getList() {
               let resultTemplate = `<a class="restaurant-info" href="${pageContext.request.contextPath}/restaurant/info?restaurantNum=`+ list.restaurantNum +`">`
 				
 	          	// 사진 있을 경우 , 없을 경우
-	            if (list.picture == null) {
+	            if (list.imageFilename == null) {
 				    resultTemplate += `<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/default.png"/>`
 				} else {
-				    resultTemplate += `<img class="res-img" src="${pageContext.request.contextPath}/resources/images/`+ list.imageFilename +`"/>`
+				    resultTemplate += `<img class="res-img" src="${pageContext.request.contextPath}/uploads/owner/market/`+ list.imageFilename +`"/>`
 				}
-				
+              
 	            resultTemplate += `<span>
 					<span class="res-title">`+ list.restaurantName + `</span><br>
 					<span class="res-info res-rank">★`  + list.rating.toFixed(1) + ` </span><span class="res-division">|</span><span class="res-info">리뷰 ` + list.reviewCount +`</span><br>
