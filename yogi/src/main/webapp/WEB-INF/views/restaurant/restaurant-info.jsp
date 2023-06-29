@@ -1149,12 +1149,20 @@ body {
     	
 	}
     
-    // 주문시 필요한 정보를 담아 order로
+    // [주문버튼] 주문시 필요한 정보를 담아 order로
     function addToOrder(restaurantNum, deliveryFee){
+    	
+    	let minimum = document.querySelector('.infoinput').value;
+
     	let totalPrice = 0;
         menuarr.forEach((item) => {
             totalPrice += item.quantity * item.price;
         });
+        
+        if(totalPrice < minimum){
+        	alert('최소 주문 금액을 채워주세요.')
+        	return;
+        }
         
         makeString2();
         

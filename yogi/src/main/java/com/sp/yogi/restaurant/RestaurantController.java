@@ -133,6 +133,9 @@ public class RestaurantController {
 		
 		// 리뷰 리스트
 		List<Review> reviewList = service.readReivew(restaurantNum);
+		for(Review r : reviewList) {
+			r.setReply(r.getReply().replaceAll("\n", "<br>"));
+		}
 		
 		// 별점
 		double rating = service.readRating(restaurantNum);
@@ -162,6 +165,7 @@ public class RestaurantController {
 		return ".restaurant.restaurant-info";
 	}
 	
+	// 좋아요
 	@PostMapping("like")
 	@ResponseBody
 	public Map<String, Object> like(
