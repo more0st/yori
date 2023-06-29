@@ -197,6 +197,7 @@ public class OwnerMarketController {
 		long restaurantNum=dto.getRestaurantNum();
 		
 		List<Review> reviewList=rService.reviewList(restaurantNum);
+		
 		int reviewCount=rService.reviewCount(restaurantNum);
 		double avgRating=rService.avgRating(restaurantNum);
 		

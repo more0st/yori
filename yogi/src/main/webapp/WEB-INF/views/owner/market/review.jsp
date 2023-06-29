@@ -211,7 +211,7 @@
             <c:forEach var="i" begin="1" end="${rev.rating}">★</c:forEach>&nbsp;
             ${rev.rating}</div>
             <!-- ${rev.imgFileName} 사용 -->
-            <c:if test="${not empty rev.imgFileName}">
+            <c:if test="${rev.imgFileName != null}">
                <img class="review-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
             </c:if>
             <div class="review-content">
@@ -229,11 +229,14 @@
                         <div><button type="button" class="report-btn" id="updateBtn-${rev.orderNum}" onclick="replyUpdateOk(${rev.orderNum});">수정</button><span class="divider">|</span><button type="button" class="report-btn" onclick="location.href='${pageContext.request.contextPath}/owner/market/deleteReply?orderNum=${rev.orderNum}';">삭제</button></div>
                      </div>
                      <div class="toggle-menu2-${rev.orderNum}" style="display: none;">
-                        <div><button type="button" class="report-btn" id="updateBtn-${rev.orderNum}" onclick="sendOk2(${rev.orderNum});">수정완료</button><span class="divider">|</span><button type="button" class="report-btn" onclick="updateCancle(${rev.orderNum});">수정취소</button></div>
+                        <div>
+                        	<button type="button" class="report-btn" id="updateBtn-${rev.orderNum}" onclick="sendOk2(${rev.orderNum});">수정완료</button><span class="divider">|</span><button type="button" class="report-btn btnUpdateCancel" data-orderNum="${rev.orderNum}">수정취소</button>
+                        	<label style="display: none;">${rev.reply}</label>
+                        </div>
                      </div>
                   </div>   
                   <div class="ownerReview-content">
-                  <textarea name="reply2" id="reply2-${rev.orderNum}" class="replyText" readOnly>${rev.reply}</textarea>
+                  	<textarea name="reply2" id="reply2-${rev.orderNum}" class="replyText" readOnly>${rev.reply}</textarea>
                   </div>
                </div>
             </form>
@@ -341,11 +344,12 @@ function replyUpdateOk(orderNum){
    togglemenu2.style.display = "block";
 };
 
-function updateCancle(orderNum) {
+function updateCancle(orderNum, reply) {
    const textReply = document.getElementById('reply2-' + orderNum);
    textReply.readOnly = true;
    textReply.style.border = 'none';
    textReply.style.background = 'none';
+   textReply.value = reply;
    
    const togglemenu = document.querySelector('.toggle-menu-'+ orderNum);
    const togglemenu2 = document.querySelector('.toggle-menu2-'+ orderNum);
@@ -354,7 +358,24 @@ function updateCancle(orderNum) {
    togglemenu2.style.display = "none";
 }
 
-
+$(function(){
+	$("body").on("click", ".btnUpdateCancel", function(){
+		let orderNum = $(this).attr("data-orderNum");
+		let reply = $(this).closest("div").find("label").text();
+		
+		   const textReply = document.getElementById('reply2-' + orderNum);
+		   textReply.readOnly = true;
+		   textReply.style.border = 'none';
+		   textReply.style.background = 'none';
+		   textReply.value = reply;
+		   
+		   const togglemenu = document.querySelector('.toggle-menu-'+ orderNum);
+		   const togglemenu2 = document.querySelector('.toggle-menu2-'+ orderNum);
+		   
+		   togglemenu.style.display = "block";
+		   togglemenu2.style.display = "none";		
+	});
+});
 
 
 </script>
