@@ -1213,8 +1213,6 @@ body {
         	return;
         }
         let menuNum = document.querySelector('#menuNum').value;
-        // let menuOption = 1;
-        let menuPrice = document.querySelector('#menuPrice').value;
         let menuName = document.querySelector('#menuName').value;
        
         // const optionarrString = JSON.stringify(optionOne);
@@ -1234,7 +1232,7 @@ body {
     	location.href='${pageContext.request.contextPath}/order/order?restaurantNum='+restaurantNum
     				+'&deliveryFee='+deliveryFee+"&totalPrice=" + totalPrice
     				+"&menuNums="+menuNum+"&menuNames="+menuName+"&menuOptions="+options2+"&menuQuantities=1"
-    				+"&menuPrices="+menuPrice;
+    				+"&menuPrices="+totalPrice;
     }
     
 </script>
