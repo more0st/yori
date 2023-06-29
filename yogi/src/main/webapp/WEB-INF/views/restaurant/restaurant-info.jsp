@@ -976,16 +976,16 @@ body {
     		menuName: menuName,
     		quantity: quantity,
     		price : price,
-    		optionarrString : options
+    		options: options
     	}
     	
     	// 이미 있는지 검사하기
     	var isAlreadyAdded = menuarr.some(function(menuItem){
- 			return menuItem.menuNum == menuNum  ;
+ 			return menuItem.menuNum == menuNum && menuItem.options == options;
  			
  		});
     	
-   		const index = menuarr.findIndex(menuItem => menuItem.menuNum == menuNum);
+   		const index = menuarr.findIndex(menuItem => menuItem.menuNum == menuNum && menuItem.options == options);
    		
     	console.log('-------------------');
     	console.log(index);
@@ -997,7 +997,6 @@ body {
     			$('.cart-order .yes-cart').eq(index).remove();
     		}
  		}
-    	console.log(menuarr);
     	
 		menuarr.push(menuItem);
     	
