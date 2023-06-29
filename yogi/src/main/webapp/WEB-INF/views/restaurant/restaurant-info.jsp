@@ -1144,7 +1144,9 @@ body {
     		}
 	    }).join('-');
     	
-    	
+    	menuNames = menuarr.map(function(menuItem) {
+	        return menuItem.menuName
+	    }).join(',');
     	
     	menuQuantities = menuarr.map(function(menuItem) {
 	        return menuItem.quantity
@@ -1177,12 +1179,13 @@ body {
         // deliveryFee : 배달비
         // totalPrice : 전체 금액(배달비 미포함)
         // menuNums : 메뉴
+        // menuNames : 메뉴 이름
         // menuOptions : 각 메뉴 옵션 
         // menuQuantities : 각 메뉴 개수
         // menuPrices : 각 메뉴 가격 (옵션 포함한 메뉴 가격 * 개수)
     	location.href='${pageContext.request.contextPath}/order/order?restaurantNum='+restaurantNum
     				+'&deliveryFee='+deliveryFee+"&totalPrice=" + totalPrice
-    				+"&menuNums="+menuNums+"&menuOptions="+menuOptions+"&menuQuantities="+menuQuantities
+    				+"&menuNums="+menuNums+"&menuNames="+menuNames+"&menuOptions="+menuOptions+"&menuQuantities="+menuQuantities
     				+"&menuPrices="+menuPrices;
     }
     
@@ -1198,8 +1201,8 @@ body {
         }
         
         let menuNum = document.querySelector('#menuNum').value;
-        //let menuOption = 1;
-        //let menuPrice = 1 ;
+        // let menuOption = 1;
+        // let menuPrice = 1 ;
         
         makeString2();
         
@@ -1207,12 +1210,13 @@ body {
         // deliveryFee : 배달비
         // totalPrice : 전체 금액(배달비 미포함)
         // menuNums : 메뉴
+        // menuNames : 메뉴 이름
         // menuOptions : 각 메뉴 옵션 
         // menuQuantities : 각 메뉴 개수
         // menuPrices : 각 메뉴 가격 (옵션 포함한 메뉴 가격 * 개수)
     	location.href='${pageContext.request.contextPath}/order/order?restaurantNum='+restaurantNum
     				+'&deliveryFee='+deliveryFee+"&totalPrice=" + totalPrice
-    				+"&menuNums="+menuNum+"&menuOptions="+menuOption+"&menuQuantities=1"
+    				+"&menuNums="+menuNum+"&menuNames="+menuNames+"&menuOptions="+menuOption+"&menuQuantities=1"
     				+"&menuPrices="+menuPrice;
     }
     
