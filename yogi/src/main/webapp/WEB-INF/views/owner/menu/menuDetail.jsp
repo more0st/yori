@@ -85,7 +85,7 @@
 					</div>
 					<div>	
 						<div style="display:flex;">
-							<button type="button" class="btn graybtn" data-bs-toggle="modal" data-bs-target="#soldOutModal" data-stock="${dto.stock}">${dto.stock==0?"품절":dto.stock==1?"판매중":dto.stock==2?"숨김":""}</button>
+							<button type="button" class="btn graybtn btnSoldeOutOk"  data-stock="${dto.stock}" data-menuNum="${dto.menuNum}">${dto.stock==0?"품절":dto.stock==1?"판매중":dto.stock==2?"숨김":""}</button>
 							&nbsp;
 							<div class="dropdown">
 							  	<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -219,12 +219,11 @@
 			   <div>
 			      	<div class="title">상태 선택</div>
 			      	<select class="form-select">
-					  <option value="value1" selected="selected">품절</option>
-					  <option value="value2">판매중</option>
-					  <option value="value3">숨김</option>
+					  <option value="0" selected="selected">품절</option>
+					  <option value="1" >판매중</option>
+					  <option value="2">숨김</option>
 					</select>
-			      </div>
-	      
+			   </div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-primary">저장</button>
@@ -235,5 +234,41 @@
 </div>
 
 <script type="text/javascript">
+
+$(function(){
+	$('.btnSoldeOutOk').click(function(){
+		
+		$('#soldOutModal').modal('show');
+		//모달에서 menuNum과 stock을 넘겨야 품절여부 수정 가능.
+	});
+});
+
+
+/*
+//stock 변경
+$(function(){
+	$('.btnSoldeOutOk').click(function(){
+		let menuNum=$(this).attr("data-menuNum");
+		let stock=$(this).attr("data-stock");
+		
+		let url="${pageContext.request.contextPath}/owner/menu/updateStock";
+		let query = "menuNum=="+menuNum+"&stock="+stock;
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("메뉴상태를 수정하지 못했습니다.");
+				return false;
+			} else {
+            }
+		};
+               location.href = "${pageContext.request.contextPath}/owner/menu/menuDetail";
+               $('#categoryUpdateModal').modal('hide');
+		
+		ajaxFun(url,"post",query,"json",fn);
+		
+	});
+});
+*/
+
 
 </script>
