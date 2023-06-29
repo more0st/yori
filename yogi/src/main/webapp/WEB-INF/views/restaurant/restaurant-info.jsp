@@ -558,6 +558,7 @@ body {
 					    <div id="${category.menuCategory}" class="accordion-collapse collapse ${status.count==1?'show':''}" aria-labelledby="${status.count}" data-bs-parent="#accordionExample">
 					      <c:forEach var="menu" items="${category.menuList}">
 						      <div class="accordion-body" onclick="openModal(${menu.menuNum})">
+						      <input type="hidden" id="menuNum" value="${menu.menuNum}"> 
 						      	<div>
 									<div style="font-weight: bold; margin-bottom: 5px;">${menu.menu}</div>
 									<div>${menu.price}원</div>					      	
@@ -630,7 +631,7 @@ body {
 									    	</div>
 									  		<div class="modal-footer">
 									    		<button type="button" class="modal-button addCart" onclick="addToCart(${menu.menuNum},'${menu.menu}');closeModal(${menu.price},${menu.menuNum});">주문표에 추가</button>
-									    		<button type="button" class="modal-button toOrder">주문하기</button>
+									    		<button type="button" class="modal-button toOrder" onclick="addToOrder2(${restaurantNum},${restaurantInfo2.deliveryFee});">주문하기</button>
 									  		</div>
 										</div>
 									</div>
@@ -1136,8 +1137,14 @@ body {
 	    }).join(',');
 
     	menuOptions = menuarr.map(function(menuItem) {
-	        return menuItem.options
+    		if(menuItem.options == ''){
+    			return '옵션없음'
+    		}else{
+    			return menuItem.options
+    		}
 	    }).join('-');
+    	
+    	
     	
     	menuQuantities = menuarr.map(function(menuItem) {
 	        return menuItem.quantity
@@ -1178,6 +1185,35 @@ body {
     				+"&menuNums="+menuNums+"&menuOptions="+menuOptions+"&menuQuantities="+menuQuantities
     				+"&menuPrices="+menuPrices;
     }
-
+    
+    
+    // [주문버튼] 개별 주문
+    function addToOrder2(restaurantNum, deliveryFee){
+    	let minimum = document.querySelector('.infoinput').value;
+    	let totalPrice = document.querySelector('.totalOption').value;
+        
+        if(totalPrice < minimum){
+        	alert('최소 주문 금액을 채워주세요.')
+        	return;
+        }
+        
+        let menuNum = document.querySelector('#menuNum').value;
+        //let menuOption = 1;
+        //let menuPrice = 1 ;
+        
+        makeString2();
+        
+        // restaurantNum : 가게 번호
+        // deliveryFee : 배달비
+        // totalPrice : 전체 금액(배달비 미포함)
+        // menuNums : 메뉴
+        // menuOptions : 각 메뉴 옵션 
+        // menuQuantities : 각 메뉴 개수
+        // menuPrices : 각 메뉴 가격 (옵션 포함한 메뉴 가격 * 개수)
+    	location.href='${pageContext.request.contextPath}/order/order?restaurantNum='+restaurantNum
+    				+'&deliveryFee='+deliveryFee+"&totalPrice=" + totalPrice
+    				+"&menuNums="+menuNum+"&menuOptions="+menuOption+"&menuQuantities=1"
+    				+"&menuPrices="+menuPrice;
+    }
     
 </script>
