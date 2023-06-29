@@ -57,9 +57,9 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public void deleteCategory(long num) throws Exception {
+	public void updateEnabled(Menu dto) throws Exception {
 		try {
-			dao.deleteData("ownerMenu.deleteCategory",num);
+			dao.updateData("ownerMenu.updateEnabled",dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -151,4 +151,18 @@ public class MenuServiceImpl implements MenuService{
 			e.printStackTrace();
 		}		
 	}
+
+	@Override
+	public String categoryName(long num) {
+		String result="";
+		
+		try {
+			result=dao.selectOne("ownerMenu.categoryName",num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 }

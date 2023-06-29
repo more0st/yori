@@ -6,14 +6,16 @@ public interface MenuService {
 
 	//categoryList : 카테고리 list
 	public List<Menu> categoryList(long restaurantNum);
+	//categoryName : 카테고리명 가져오기
+	public String categoryName(long num);
 	//categoryCount : 카테고리 개수
 	public int categoryCount(long restaurantNum);
 	//insertCategory : 카테고리 추가
 	public void insertCategory(Menu dto) throws Exception;
 	//updateCategory : 카테고리 수정 update
 	public void updateCategory(Menu dto) throws Exception;
-	//deleteCategory : 카테고리 삭제 delete
-	public void deleteCategory(long num) throws Exception;
+	//updateEnabled : 카테고리 enabled 변경
+	public void updateEnabled(Menu dto) throws Exception;
 	//menuList : 카테고리번호별 메뉴리스트
 	public List<Menu> menuList(long num);
 	//menuCount : 카테고리번호별 메뉴개수

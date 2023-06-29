@@ -55,7 +55,7 @@
 	
 	<div class="d-flex align-items-center justify-content-center">
 		<div class="category shadow menu">
-			<div><i class="bi bi-menu-button-wide" style="font-size:30px;"></i> &nbsp;메뉴&nbsp;(n개)&nbsp;</div>
+			<div><i class="bi bi-menu-button-wide" style="font-size:30px;"></i> &nbsp;메뉴&nbsp;(${menuCount}개)&nbsp;</div>
 			<div>
 				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#menuInsertModal">메뉴 추가</button>
 			</div>	
@@ -68,65 +68,39 @@
 	<hr>
 		<div class="category shadow">
 			<div>
-				<h5>메인 메뉴</h5>
-				전체(n개) | 판매중(n개) | 하루품절(n개) | 숨김(n개)
+				<h5 style="font-weight: 800; margin: 20px;">${categoryName}</h5>
 				<hr>
 			</div>
 			
 			<!-- forEach -->
-			<div class="menu">	
-				<div style="display:flex;">
-					<div>
-						<img class="res-img imgsize" src="${pageContext.request.contextPath}/resources/picture/cider.png">
-					</div>
-					<div class="menuDetail">
-						<div><h5>사이다</h5>2,500원</div>
-					</div>
-				</div>
-				<div>	
+			<c:forEach var="dto" items="${menuList}" varStatus="status">
+				<div class="menu">	
 					<div style="display:flex;">
-						<button type="button" class="btn graybtn" data-bs-toggle="modal" data-bs-target="#soldOutModal">판매중</button>
-						&nbsp;
-						<div class="dropdown">
-						  	<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-						  	</button>
-						  	<ul class="dropdown-menu">
-						    	<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#menuUpdateModal">메뉴 수정</a></li>
-						    	<li><a class="dropdown-item" href="#">메뉴 삭제</a></li>
-						 	 </ul>
+						<div>
+							<img class="res-img imgsize" src="${pageContext.request.contextPath}/resources/picture/cider.png">
+						</div>
+						<div class="menuDetail">
+							<div><h5>${dto.menu}</h5>${dto.price}원</div>
 						</div>
 					</div>
-				</div>
-			</div>	
-			<hr>
-			<!-- /forEach -->
-			
-			<div class="menu">	
-				<div style="display:flex;">
-					<div>
-						<img class="res-img imgsize" src="${pageContext.request.contextPath}/resources/picture/cider.png">
-					</div>
-					<div class="menuDetail">
-						<div><h5>사이다</h5>1,500원</div>
-					</div>
-				</div>
-				<div>	
-					<div style="display:flex;">
-					<button type="button" class="btn graybtn" data-bs-toggle="modal" data-bs-target="#soldOutModal">품절</button>
-						&nbsp;
-						<div class="dropdown">
-						  	<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-						  	</button>
-						  	<ul class="dropdown-menu">
-						    	<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#menuUpdateModal">메뉴 수정</a></li>
-						    	<li><a class="dropdown-item" href="#">메뉴 삭제</a></li>
-						 	 </ul>
+					<div>	
+						<div style="display:flex;">
+							<button type="button" class="btn graybtn" data-bs-toggle="modal" data-bs-target="#soldOutModal" data-stock="${dto.stock}">${dto.stock==0?"품절":dto.stock==1?"판매중":dto.stock==2?"숨김":""}</button>
+							&nbsp;
+							<div class="dropdown">
+							  	<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							  	</button>
+							  	<ul class="dropdown-menu">
+							    	<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#menuUpdateModal">메뉴 수정</a></li>
+							    	<li><a class="dropdown-item" href="#">메뉴 삭제</a></li>
+							 	 </ul>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>	
-			
-						
+				</div>	
+				<hr>
+			</c:forEach>
+			<!-- /forEach -->		
 		</div>
 	</div>
 </div>
@@ -150,9 +124,9 @@
 	      <div>
 	      	<div class="title">카테고리 선택</div>
 	      	<select class="form-select">
-			  <option value="value1">메뉴카테고리1</option>
-			  <option value="value2">메뉴카테고리2</option>
-			  <option value="value3">메뉴카테고리3</option>
+	      	<c:forEach var="cate" items="${categoryList}">
+			  <option value="${cate.num}" ${categoryNum==cate.num?"selected='selected'":""}>${cate.menuCategory}</option>
+			  </c:forEach>
 			</select>
 	      </div>
 	      
@@ -198,9 +172,9 @@
 	      <div>
 	      	<div class="title">카테고리 선택</div>
 	      	<select class="form-select">
-			  <option value="value1" selected="selected">메뉴카테고리1</option>
-			  <option value="value2">메뉴카테고리2</option>
-			  <option value="value3">메뉴카테고리3</option>
+	      	<c:forEach var="cate" items="${categoryList}">
+			  <option value="${cate.num}" ${categoryNum==cate.num?"selected='selected'":""}>${cate.menuCategory}</option>
+			  </c:forEach>
 			</select>
 	      </div>
 	      
@@ -261,8 +235,5 @@
 </div>
 
 <script type="text/javascript">
-var myInsertModal = new bootstrap.Modal(document.getElementById('menuInsertModal'));
-var myUpdateModal = new bootstrap.Modal(document.getElementById('menuUpdateModal'));
-var soldOutModal = new bootstrap.Modal(document.getElementById('soldOutModal'));
 
 </script>

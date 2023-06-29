@@ -62,7 +62,9 @@
 			<div class="container text-center">
 				<div class="row row-cols-3 g-2">
 				<c:forEach var="cat" items="${categoryList}" varStatus="status">
+				<c:if test="${cat.enabled==1}">
 					<div class="col"><button type="button" class="btn btn-light graybtn bigbtn" onclick="location.href='${pageContext.request.contextPath}/owner/menu/menuDetail?num=${cat.num}'">${cat.menuCategory}</button></div>
+				</c:if>
 				</c:forEach>
 				</div>
 			</div>
@@ -109,29 +111,31 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form name="categoryUpdateForm" method="post"> 
-	      <div class="modal-body">
+	      <div class="modal-body" style="padding: 25px;">
 	      <table class="table">
 	      		<tr>
 	      			<th>&nbsp;&nbsp;카테고리명</th>
-	      			<th class="text-center">수정</th>
-	      			<th class="text-center">삭제</th>
+	      			<th>수정</th>
+	      			<th>활성화</th>
 	      		</tr>
 	      		
 	      		<c:forEach var="cat" items="${categoryList}" varStatus="status">
 	      		<tr>
-	      			<td class="align-middle"><input type="text" value="${cat.menuCategory}" class="form-control border-0" readonly="readonly"></td>
-	      			<td class="align-middle"><button type="button" class="btn btn-outline-secondary">수정</button></td>
+	      			<td class="align-middle"><input name="menuCategory" type="text" value="${cat.menuCategory}" class="form-control border-0" style="width: 80%;"></td>
 	      			<td class="align-middle">
-	      			<button type="button" class="btn btn-outline-secondary">삭제</button>
+	      			<button type="button" class="btn btn-outline-secondary btn-sm btnUpdateOk" data-categoryNum="${cat.num}" >수정</button>
+	      			</td>
+	      			<td class="align-middle">
+						<div class="form-check form-switch">
+						  <input class="form-check-input btnEnabledOk" type="checkbox" data-categoryNum="${cat.num}" data-enabled="${cat.enabled}" role="switch" id="flexSwitchCheckChecked" ${cat.enabled==1?"checked":""}>
+						</div>
 	      			</td>
 	      		</tr>
 	      		</c:forEach>
 	      </table>
 	      
 	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary">저장</button>
-	      </div>
+
       </form>
     </div>
   </div>
@@ -169,7 +173,7 @@ function ajaxFun(url, method, query, dataType, fn) {
 		}
 	});
 }
-
+//카테고리 등록
 $(function(){
 	$('.btnCategoryOk').click(function(){
 		const f=document.categoryInsertForm;
@@ -198,5 +202,68 @@ $(function(){
 		
 	});
 });
+
+//카테고리 수정
+$(function(){
+	$('.btnUpdateOk').click(function(){
+		let num=$(this).attr("data-categoryNum");
+		const menuCategory = $(this).closest("tr").find("input[name=menuCategory]").val().trim();
+		
+		if(menuCategory === ""){
+			alert("카테고리를 입력하세요.");
+			menuCategory.focus();
+			return;
+		}
+		
+		let url="${pageContext.request.contextPath}/owner/menu/updateCategory";
+		let query = "num="+num+"&menuCategory="+menuCategory;
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("카테고리를 수정하지 못했습니다.");
+				return false;
+			} else {
+            }
+		};
+               location.href = "${pageContext.request.contextPath}/owner/menu/menuCategory";
+               $('#categoryUpdateModal').modal('hide');
+		
+		ajaxFun(url,"post",query,"json",fn);
+		
+	});
+});
+
+//카테고리 활성화
+$(function(){
+	$('.btnEnabledOk').click(function(){
+		let num=$(this).attr("data-categoryNum");
+		let enabled=$(this).attr("data-enabled");
+		
+		let result=0;
+		
+		if(enabled==1){
+			result=0;
+		} else if(enabled==0){
+			result=1;
+		}
+		
+		let url="${pageContext.request.contextPath}/owner/menu/updateEnabled";
+		let query = "num="+num+"&enabled="+result;
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("카테고리 상태 변경을 하지 못했습니다.");
+				return false;
+			} else {
+            }
+		};
+               location.href = "${pageContext.request.contextPath}/owner/menu/menuCategory";
+               $('#categoryUpdateModal').modal('hide');
+		
+		ajaxFun(url,"post",query,"json",fn);
+		
+	});
+});
+
 
 </script>

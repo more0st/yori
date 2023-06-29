@@ -4,6 +4,7 @@ public class Menu {
 	private long num;//카테고리번호
 	private String menuCategory;//카테고리명
 	private long restaurantNum;//업체번호
+	private int enabled;//카테고리 활성화
 	
 	private long menuNum;//메뉴번호
 	private String menu;//메뉴명
@@ -16,6 +17,13 @@ public class Menu {
 	private String option_name;//옵션소분류
 	private long option_price;//옵션추가금액
 	
+	
+	public int getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
 	public long getNum() {
 		return num;
 	}

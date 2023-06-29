@@ -5,34 +5,42 @@
 
 <!-- 카테고리 list -->
 <select id="categoryList" parameterType="long" resultType="com.sp.yogi.owner.menu.Menu">
-   SELECT num, menuCategory, restaurantNum
+   SELECT num, menuCategory, restaurantNum, enabled
    FROM menu
    WHERE restaurantNum=#{restaurantNum}
+</select>
+
+<!-- 카테고리번호로 카테고리명 가져오기 -->
+<select id="categoryName" parameterType="long" resultType="String">
+	SELECT menuCategory
+	FROM menu
+	WHERE num=#{num}
 </select>
    
 <!-- 카테고리 개수 -->
 <select id="categoryCount" parameterType="long" resultType="Integer">
    SELECT NVL(COUNT(*),0)
    FROM menu
-   WHERE restaurantNum=#{restaurantNum}
+   WHERE restaurantNum=#{restaurantNum} AND enabled=1
 </select>
 
 <!-- 카테고리 추가 insert -->
 <insert id="insertCategory" parameterType="com.sp.yogi.owner.menu.Menu">
-   INSERT INTO menu(num, menuCategory, restaurantNum) 
-   VALUES(menu_seq.NEXTVAL,#{menuCategory},#{restaurantNum})
+   INSERT INTO menu(num, menuCategory, restaurantNum, enabled) 
+   VALUES(menu_seq.NEXTVAL,#{menuCategory},#{restaurantNum},1)
 </insert>
 
 <!-- 카테고리 수정 update -->
 <update id="updateCategory" parameterType="com.sp.yogi.owner.menu.Menu">
    UPDATE menu SET menuCategory=#{menuCategory}
-   WHERE restaurantNum=#{restaurantNum}
+   WHERE num=#{num}
 </update>
 
-<!-- 카테고리 삭제 delete -->
-<delete id="deleteCategory" parameterType="long">
-   DELETE FROM menu WHERE num=#{num}
-</delete>
+<!-- 카테고리 enabled변경 -->
+<update id="updateEnabled" parameterType="com.sp.yogi.owner.menu.Menu">
+   UPDATE menu SET enabled=#{enabled}
+   WHERE num=#{num}
+</update>
 
 <!-- 카테고리번호별 메뉴리스트 -->
 <select id="menuList" parameterType="long" resultType="com.sp.yogi.owner.menu.Menu">
