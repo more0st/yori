@@ -961,6 +961,7 @@ body {
 	    console.log(options);
 	}
  	
+ 	var quantity = 1;
     // [주문표에 추가] ---------------------------------------------
     function addToCart(menuNum, menuName) {
     	const totalOptionField = document.querySelector('.totalOption-'+menuNum);
@@ -973,20 +974,30 @@ body {
     	var menuItem = {
     		menuNum : menuNum,
     		menuName: menuName,
-    		quantity:1,
+    		quantity: quantity,
     		price : price,
     		optionarrString : options
     	}
     	
     	// 이미 있는지 검사하기
-    	/*
     	var isAlreadyAdded = menuarr.some(function(menuItem){
- 			menuItem.menuNum == menuNum;
+ 			return menuItem.menuNum == menuNum  ;
+ 			
  		});
     	
+   		const index = menuarr.findIndex(menuItem => menuItem.menuNum == menuNum);
+   		
+    	console.log('-------------------');
+    	console.log(index);
+    	
     	if(isAlreadyAdded){
- 			menuItem.quantity++;
- 		}*/
+    		if (index !== -1) {
+    			menuItem.quantity = parseInt(menuarr[index].quantity) + 1;
+    			menuarr.splice(index, 1);
+    			$('.cart-order .yes-cart').eq(index).remove();
+    		}
+ 		}
+    	console.log(menuarr);
     	
 		menuarr.push(menuItem);
     	
@@ -1008,6 +1019,7 @@ body {
 		out +=	"<button type='button' class='quantity-btn plus' data-product-id='" + menuNum + "'><i class='fa-solid fa-plus'></i></button>"
 		out += "</div></div><input type='hidden' class='menuNum' value='"+ menuNum +"'></div>";
 	
+		
 		$('.cart-order').append(out);
 		
     	$(".modal").modal("hide");
@@ -1071,7 +1083,7 @@ body {
 		
 	});
     
-	// [-] 버튼 클릭 시
+	// [+] 버튼 클릭 시
     $(document).on("click", ".plus", function() {
         let div = $(this).closest("div");
         let quantityInput = div.find('.cart-quantity');
@@ -1083,6 +1095,8 @@ body {
 
             const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
             updateProductQuantity(menuNum.toString(), value.toString());
+            
+			console.log()
         }
 
     });
@@ -1093,7 +1107,7 @@ body {
         if (menuItem) {
         	menuItem.quantity = quantity;
         } else {
-        	menuarr.push({ menuNum, quantity});
+        	menuarr.push({ menuNum, quantity });
         }
         
         let totalPrice = 0;
