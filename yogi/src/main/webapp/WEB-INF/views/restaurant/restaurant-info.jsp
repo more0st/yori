@@ -561,7 +561,7 @@ body {
 						      <input type="hidden" id="menuNum" value="${menu.menuNum}"> 
 						      	<div>
 									<div style="font-weight: bold; margin-bottom: 5px;">${menu.menu}</div>
-									<div>${menu.price}원</div>					      	
+									<div>${menu.price}원</div>
 						      	</div>
 						      	<c:if test="${not empty menu.imageFilename}">
 							      	<div>
@@ -1153,7 +1153,7 @@ body {
 	    }).join(',');
     	
     	menuPrices = menuarr.map(function(menuItem) {
-	        return menuItem.price
+	        return menuItem.price*menuItem.quantity
 	    }).join(',');
     	
 	}
@@ -1192,6 +1192,8 @@ body {
     
     // [주문버튼] 개별 주문
     function addToOrder2(restaurantNum, deliveryFee){
+    	// 배열 초기화
+    	
     	let minimum = document.querySelector('.infoinput').value;
     	let totalPrice = document.querySelector('.totalOption').value;
         
@@ -1202,7 +1204,7 @@ body {
         
         let menuNum = document.querySelector('#menuNum').value;
         // let menuOption = 1;
-        // let menuPrice = 1 ;
+        let menuPrice = document.querySelector('#menuPrice').value;
         
         makeString2();
         
@@ -1216,7 +1218,7 @@ body {
         // menuPrices : 각 메뉴 가격 (옵션 포함한 메뉴 가격 * 개수)
     	location.href='${pageContext.request.contextPath}/order/order?restaurantNum='+restaurantNum
     				+'&deliveryFee='+deliveryFee+"&totalPrice=" + totalPrice
-    				+"&menuNums="+menuNum+"&menuNames="+menuNames+"&menuOptions="+menuOption+"&menuQuantities=1"
+    				+"&menuNums="+menuNum+"&menuNames="+menuNames+"&menuOptions="+options+"&menuQuantities=1"
     				+"&menuPrices="+menuPrice;
     }
     
