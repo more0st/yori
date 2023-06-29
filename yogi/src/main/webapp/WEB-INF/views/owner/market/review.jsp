@@ -219,7 +219,7 @@
             </div>
             <c:if test="${rev.reply!=null}">
             <!-- 사장님 답글 -->
-            <form name="reviewForm2" id="reviewForm2" method="post">
+            <form name="reviewForm2" id="reviewForm2-${rev.orderNum}" method="post">
                <div class="ownerReview">
                   <div style="display: flex; justify-content: space-between;">
                      <div class="ownerReview-top">
@@ -240,13 +240,18 @@
             </c:if>
             <c:if test="${rev.reply==null}"><!-- 답글이 있다면 숨기기 -->
             <div class="review-button-div">
-               <button type="button" class="review-button" onclick="openModal(${rev.orderNum});">답글 달기</button>
+               <button type="button" class="review-button btnAnswerModal" data-orderNum="${rev.orderNum}">답글 달기</button>
             </div>
             </c:if>
-         </div>
-         
-         <!-- 모달 -->
-         <div class="modal" id="modal-${rev.orderNum}" tabindex="-1">
+         </div>         
+      </c:forEach>
+   </div>
+   </div>
+
+
+
+        <!-- 모달 -->
+         <div class="modal" id="modal-answer" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                <div class="modal-content">
                      <div class="modal-header">
@@ -255,29 +260,45 @@
                      </div>
                      <form name="reviewForm" id="reviewForm" method="post">
                    <div class="modal-body">
-                      <textarea class="modal-text" name="reply1" id="reply1-${rev.orderNum}"></textarea>
+                      <textarea class="modal-text" name="reply1"></textarea>
                    </div>
                     <div class="modal-footer">
+                      <input type="hidden" name="orderNum">
                       <button type="button" class="modal-button addCart " data-bs-dismiss="modal" aria-label="Close">취소하기</button>
-                      <button type="button" class="modal-button toOrder" onclick="sendOk(${rev.orderNum});">등록하기</button>
+                      <button type="button" class="modal-button toOrder btnSendAnswer" onclick="sendOk();">등록하기</button>
                     </div>
                     </form>
                </div>
             </div>
-         </div>
-         
-      </c:forEach>
-   </div>
-   </div>
-
-
-
-   
+         </div>  
    
 </div>
 </main>
 
 <script type="text/javascript">
+
+$(function() {
+	$("body").on("click", ".btnAnswerModal", function(){
+		
+		let orderNum = $(this).attr("data-orderNum");
+		document.reviewForm.orderNum.value = orderNum;
+		
+		$('#modal-answer').show();
+
+	});
+});
+
+function sendOk() {
+   const str = document.reviewForm.reply1.value;
+    if (!str) {
+       alert("답글을 입력하세요.");
+       return;
+   }
+    
+    const f = document.reviewForm;
+    f.action = "${pageContext.request.contextPath}/owner/market/insertReply";
+    f.submit();
+}
 
 <%-- 모달 --%>
 function openModal(orderNum) {
@@ -292,19 +313,7 @@ $('.btn-close').click(function() {
     $('.modal').hide();
 });
 
-function sendOk(orderNum) {
-   const str = document.getElementById('reply1-' + orderNum).value;
-    if (!str) {
-       alert("답글을 입력하세요." + orderNum);
-       return;
-   }
-    
-    alert(str + " : " + orderNum);
-   
-    const f = document.getElementById('reviewForm');
-    f.action = "${pageContext.request.contextPath}/owner/market/insertReply?orderNum=" + orderNum;
-    f.submit();
-}
+
 
 function sendOk2(orderNum) {
    const str = document.getElementById('reply2-' + orderNum).value;
@@ -313,7 +322,7 @@ function sendOk2(orderNum) {
        return;
     }
    
-    const d = document.getElementById('reviewForm2');
+    const d = document.getElementById('reviewForm2-' + orderNum);
     d.action = "${pageContext.request.contextPath}/owner/market/insertReply?orderNum=" + orderNum;
     d.submit();
 }
