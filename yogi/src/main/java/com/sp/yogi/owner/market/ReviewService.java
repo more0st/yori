@@ -1,6 +1,7 @@
 package com.sp.yogi.owner.market;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ReviewService {
 
@@ -16,5 +17,10 @@ public interface ReviewService {
 	public void updateReply(Review dto) throws Exception;
 	//avgRating : 별점 평균 select 
 	public double avgRating(long restaurantNum);
+	
+	//insertReply : 사장님 답급 등록
+	public void insertReply(Map<String, Object> map) throws Exception;
+	// deleteReply : 사장님 답글 삭제
+	public void deleteReply(Long orderNum) throws Exception;
 	
 }

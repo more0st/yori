@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
 				}
 			}
 			
-			result = preNumber + String.format("%09d", lastNumber);
+			result = preNumber + String.format("%07d", lastNumber);
 			
 		} catch (Exception e) {
 		}

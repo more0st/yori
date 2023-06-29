@@ -1,6 +1,7 @@
 package com.sp.yogi.owner.market;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,5 +82,26 @@ public class ReviewServiceImpl implements ReviewService{
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	@Override
+	public void insertReply(Map<String, Object> map) throws Exception {
+		try {
+			dao.updateData("reviewinfo.insertReply", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void deleteReply(Long orderNum) throws Exception {
+		try {
+			dao.updateData("reviewinfo.deleteReply", orderNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -204,5 +206,45 @@ public class OwnerMarketController {
 		model.addAttribute("avgRating",avgRating);
 		
 		return ".owner.market.review";
+	}
+	
+	@PostMapping("insertReply")
+	public String insertReply(
+			@RequestParam(value = "reply1", required = false) String reply1,
+			@RequestParam(value = "reply2", required = false) String reply2,
+			@RequestParam("orderNum") Long orderNum,
+			Model model
+			) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String reply = "";
+		
+		System.out.println("reply1은 : " + reply1 + " reply2는 : " + reply2);
+		System.out.println(orderNum);
+		
+		if(reply1 == null) {
+			reply = reply2;
+		} else {
+			reply = reply1;
+		}
+		
+		map.put("reply", reply);
+		map.put("orderNum", orderNum);
+		
+		rService.insertReply(map);
+	
+		return "redirect:/owner/market/review";
+	}
+	
+	@GetMapping("deleteReply")
+	public String deleteReply(
+			@RequestParam("orderNum") Long orderNum,
+			Model model
+			) throws Exception {
+		
+		rService.deleteReply(orderNum);
+	
+		return "redirect:/owner/market/review";
 	}
 }

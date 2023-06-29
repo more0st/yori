@@ -9,6 +9,7 @@
 		FROM review r
         JOIN member1 m ON r.userId=m.userId
 		WHERE restaurantNum=#{restaurantNum}
+		ORDER BY r.reg_date DESC
     </select>
 	
 	<!-- 업체별 리뷰 개수 -->
@@ -41,6 +42,18 @@
 	FROM review
 	WHERE restaurantNum=#{restaurantNum}
 	</select>
+	
+	<!-- 답글 작성 -->
+	<update id="insertReply" parameterType="map">
+		UPDATE review SET reply = #{reply}, reply_date = SYSDATE 
+		WHERE orderNum = #{orderNum}
+	</update>
+	
+	<!-- 답글 삭제 -->
+	<update id="deleteReply" parameterType="long">
+		UPDATE review SET reply = null, reply_date = null
+		WHERE orderNum = #{orderNum}
+	</update>
 	
 
 </mapper>
