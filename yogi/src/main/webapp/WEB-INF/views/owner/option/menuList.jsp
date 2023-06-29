@@ -52,68 +52,40 @@
 <main id="main" class="main">
 <div class="whole-container">
 
-	<!-- forEach -->
+	<c:forEach var="category" items="${categoryList}">
+	<c:if test="${category.enabled==1}">
 	<div class="d-flex align-items-center justify-content-center">
 	<hr>
 		<div class="category shadow">
 			<div>
-				<h6><i class="bi bi-pin-angle-fill"></i>&nbsp;카테고리1</h6>
+				<h6><i class="bi bi-pin-angle-fill"></i>&nbsp;${category.menuCategory}</h6>
 				<hr>
 			</div>
 			
-			<!-- forEach -->
+			<c:forEach var="menu" items="${category.menuList}">
 			<div class="menu">	
 				<div style="display:flex;">
 					<div>
 						<img class="res-img imgsize" src="${pageContext.request.contextPath}/resources/picture/cider.png">
 					</div>
 					<div class="menuDetail">
-						<div><h5>사이다</h5>2,500원</div>
+						<div><h5>${menu.menu}</h5>${menu.price}원</div>
 					</div>
 				</div>
 				<div>	
 					<div style="display:flex;">
-						<button type="button" class="btn graybtn" onclick="location.href='${pageContext.request.contextPath}/owner/option/optionReg'">옵션관리</button>
+						<button type="button" class="btn graybtn" onclick="location.href='${pageContext.request.contextPath}/owner/option/optionReg?menuNum=${menu.menuNum}'">옵션관리</button>
 					</div>
 				</div>
 			</div>	
 			<hr>
-			<!-- /forEach -->
+			</c:forEach>
 		</div>
 	</div>
 	<br>
-	<!-- /forEach -->
+	</c:if>
+	</c:forEach>
 	
-	<!-- 삭제 -->
-	<div class="d-flex align-items-center justify-content-center">
-	<hr>
-		<div class="category shadow">
-			<div>
-				<h6><i class="bi bi-pin-angle-fill"></i>&nbsp;카테고리2</h6>
-				<hr>
-			</div>
-			
-			<!-- forEach -->
-			<div class="menu">	
-				<div style="display:flex;">
-					<div>
-						<img class="res-img imgsize" src="${pageContext.request.contextPath}/resources/picture/cider.png">
-					</div>
-					<div class="menuDetail">
-						<div><h5>사이다</h5>2,500원</div>
-					</div>
-				</div>
-				<div>	
-					<div style="display:flex;">
-						<button type="button" class="btn graybtn" onclick="location.href='${pageContext.request.contextPath}/owner/option/option'">옵션관리</button>
-					</div>
-				</div>
-			</div>	
-			<hr>
-			<!-- /forEach -->
-		</div>
-	</div>
-	<!-- 삭제 -->
 </div>
 </main>
 

@@ -1,10 +1,13 @@
 package com.sp.yogi.owner.menu;
 
+import java.util.List;
+
 public class Menu {
 	private long num;//카테고리번호
 	private String menuCategory;//카테고리명
 	private long restaurantNum;//업체번호
 	private int enabled;//카테고리 활성화
+	private List<Menu> menuList;//카테고리별 메뉴리스트
 	
 	private long menuNum;//메뉴번호
 	private String menu;//메뉴명
@@ -18,6 +21,12 @@ public class Menu {
 	private long option_price;//옵션추가금액
 	
 	
+	public List<Menu> getMenuList() {
+		return menuList;
+	}
+	public void setMenuList(List<Menu> menuList) {
+		this.menuList = menuList;
+	}
 	public int getEnabled() {
 		return enabled;
 	}
