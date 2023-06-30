@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sp.yogi.member.Member;
 import com.sp.yogi.member.MemberService;
@@ -91,12 +93,26 @@ public class OrderController {
 		return ".order.order";
 	}
 	
-//	@GetMapping("complete")
-//	public String complete() {
-//		System.out.println("GET방식");
-//		
-//		return "redirect:/order/orderComplete";
-//	}
+	@GetMapping("complete")
+	public String complete(
+			Model model,
+			@ModelAttribute("dto") Order dto,
+			@ModelAttribute("orderList") List<Order> orderList,
+			@ModelAttribute("orderUser") Member orderUser,
+			@ModelAttribute("restaurant") RestaurantInfo restaurant,
+			@ModelAttribute("deliveryFee") int deliveryFee
+			) {
+		System.out.println("GET방식");
+		
+		// jsp에 어트리뷰트 저장 
+		model.addAttribute("orderList", orderList);
+		model.addAttribute("orderUser", orderUser);
+		model.addAttribute("dto", dto);
+		model.addAttribute("restaurant", restaurant);
+		model.addAttribute("deliveryFee", deliveryFee);
+		
+		return ".order.orderComplete";
+	}
 	
 	@PostMapping("complete")
 	public String completeSubmit( 
@@ -113,7 +129,8 @@ public class OrderController {
 			@RequestParam("menuOptions") String menuOptions,
 			@RequestParam("menuQuantities") String menuQuantities,
 			@RequestParam("menuPrices") String menuPrices,
-			@RequestParam("menuNames") String menuNames
+			@RequestParam("menuNames") String menuNames,
+			RedirectAttributes reAttr
 			) throws Exception {
 		System.out.println("POST방식");
 		
@@ -198,13 +215,13 @@ public class OrderController {
 		dto.setOrderNum(orderNum);
 		dto.setTotal_price(String.valueOf(total_price));
 		
-		// jsp에 어트리뷰트 저장 
-		model.addAttribute("orderList", orderList);
-		model.addAttribute("orderUser", orderUser);
-		model.addAttribute("dto", dto);
-		model.addAttribute("restaurant", restaurant);
+		reAttr.addFlashAttribute("orderList", orderList);
+		reAttr.addFlashAttribute("orderUser", orderUser);
+		reAttr.addFlashAttribute("dto", dto);
+		reAttr.addFlashAttribute("restaurant", restaurant);
+		reAttr.addFlashAttribute("deliveryFee", deliveryFee);
 		
 		// 리다이렉트
-		return "redirect:/order/orderComplete";
+		return "redirect:/order/complete";
 	}
 }

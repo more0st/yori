@@ -52,8 +52,13 @@
 	padding: 10px;
 }
 
-.keyword{
+.keyword {
 	width: 150px;
+}
+
+.keyword2 {
+	width: 650px;
+	min-height: 20px;
 }
 
 
@@ -148,10 +153,14 @@
 				<!-- forEach 문 사용해서 메뉴/가격 -->
 				<c:forEach var="menu" items="${orderList}">
 					<div class="menu">
-						<p class="keyword">${menu.menu}${menu.optionName == '옵션없음' ? '' : ' : '}${menu.optionName == '옵션없음' ? '' : menu.optionName} X ${menu.orderCount}</p>
+						<p class="keyword2">${menu.menu}${menu.optionName == '옵션없음' ? '' : ' : '}${menu.optionName == '옵션없음' ? '' : menu.optionName} X ${menu.orderCount}</p>
 						<p class="detail">${menu.menuPrice}원</p>
 					</div>
 				</c:forEach>	
+					<div class="menu">
+						<p class="keyword2">배달 요금</p>
+						<p class="detail">${deliveryFee}원</p>
+					</div>
 				<!-- /forEach -->
 					<hr class="hstyle">
 					<div class="menu">
