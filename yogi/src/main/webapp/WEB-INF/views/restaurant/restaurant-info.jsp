@@ -971,6 +971,7 @@ body {
        console.log(options);
    }
 
+    let cartCount = 1;
     var quantity = 1;
     // [주문표에 추가] ---------------------------------------------
     function addToCart(menuNum, menuName) {
@@ -986,16 +987,16 @@ body {
           menuName: menuName,
           quantity: quantity,
           price : price,
-          options: options
+          options: options,
+          cartCount: cartCount
        }
        
        // 이미 있는지 검사하기
        var isAlreadyAdded = menuarr.some(function(menuItem){
           return menuItem.menuNum == menuNum && menuItem.options == options;
-          
        });
        
-       const index = menuarr.findIndex(menuItem => menuItem.menuNum == menuNum && menuItem.options == options);
+         const index = menuarr.findIndex(menuItem => menuItem.menuNum == menuNum && menuItem.options == options);
          
        console.log('-------------------');
        console.log(index);
@@ -1020,21 +1021,25 @@ body {
        
        let out = "";
        
+       
       out += "<div class='yes-cart'><div class='yes-cart-top'><div style='font-weight: bold;'>"+ menuName +" : "+ options +"</div>";
       out +=   "<button type='button' class='delete-btn'><i class='fa-regular fa-circle-xmark'></i></button></div>"
-      out +=   "<div class='yes-cart-bottom'><div><input class='cart-price cartPrice-"+ menuNum +"-"+ options +"' value='"+ price +"' readonly='readonly'></div>"
-      out +=   "<div style='display:flex;'><button type='button' class='quantity-btn minus' data-product-id='" + menuNum + "'><i class='fa-solid fa-minus'></i></button>"
+      out +=   "<div class='yes-cart-bottom'><div><input class='cart-price cartPrice-"+ cartCount +"' value='"+ price +"' readonly='readonly'></div>"
+      out +=   "<div style='display:flex;'><button type='button' class='quantity-btn minus' data-count='"+ cartCount +"' data-product-id='" + menuNum + "'><i class='fa-solid fa-minus'></i></button>"
       out +=   "<input name='cart-quantity' class='cart-quantity' value='"+ menuItem.quantity +"' readonly='readonly'>"
-      out +=   "<button type='button' class='quantity-btn plus' data-product-id='" + menuNum + "'><i class='fa-solid fa-plus'></i></button>"
-      out += "</div></div><input type='hidden' class='menuNum' value='"+ menuNum +"'><input type='hidden' class='options' value='"+ options +"'></div>";
+      out +=   "<button type='button' class='quantity-btn plus' data-count='"+ cartCount +"' data-product-id='" + menuNum + "'><i class='fa-solid fa-plus'></i></button>"
+      out += "</div></div><input type='hidden' class='menuNum' value='"+ menuNum +"'><input type='hidden' class='cartCount' value='"+ cartCount +"'></div>";
    
       
       $('.cart-order').append(out);
+      cartCount++;
+      console.log(menuarr);
       
        $(".modal").modal("hide");
     }
     
     // [주문표 부분 삭제]
+        // 레시피 상품 삭제
     $(document).on("click", ".delete-btn", function() {
       $(this).closest(".yes-cart").remove();
       
@@ -1052,7 +1057,7 @@ body {
         
       const total = document.querySelector('.valueinput');
       total.value = totalPrice;
-      
+       
       const menuarrString = JSON.stringify(menuarr);
    });
     
@@ -1073,53 +1078,51 @@ body {
     }
     
     // [-] 버튼 클릭 시
-   $(document).on("click", ".minus", function() {
-      let div = $(this).closest("div");
-      let quantityInput = div.find('.cart-quantity');
-      let value = parseInt(quantityInput.val());
-      
-      
-      if (value > 1) {
-          value--;
-          quantityInput.val(value);
-      
-         const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
-         const menuOption = $(this).closest(".yes-cart").find(".options").val();
-         
-         updateProductQuantity(menuNum.toString(), value.toString(), menuOption.toString());
-      }
-      
-   });
+    $(function() {
+		$("body").on("click", ".minus", function() {
+			let cartCount = $(this).attr("data-count");
+			let div = $(this).closest("div");
+			let quantityInput = div.find('.cart-quantity');
+		    let value = parseInt(quantityInput.val());
+		    
+		    if (value > 1) {
+	             value--;
+	             quantityInput.val(value);
+
+	             const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
+	             updateProductQuantity(menuNum.toString(), value.toString(), cartCount);
+	         }
+		});
+	});
     
-   // [+] 버튼 클릭 시
-    $(document).on("click", ".plus", function() {
-        let div = $(this).closest("div");
-        let quantityInput = div.find('.cart-quantity');
-        let value = parseInt(quantityInput.val());
+	// [+] 버튼 클릭 시
+    $(function() {
+		$("body").on("click", ".plus", function() {
+			let cartCount = $(this).attr("data-count");
+			let div = $(this).closest("div");
+			let quantityInput = div.find('.cart-quantity');
+		    let value = parseInt(quantityInput.val());
+		    
+		    if (value < 50) {
+	             value++;
+	             quantityInput.val(value);
 
-        if (value < 50) {
-            value++;
-            quantityInput.val(value);
-
-            const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
-            const menuOption = $(this).closest(".yes-cart").find(".options").val();
-            
-            updateProductQuantity(menuNum.toString(), value.toString(), menuOption.toString());
-        }
-
-    });
+	             const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
+	             updateProductQuantity(menuNum.toString(), value.toString(), cartCount);
+	         }
+		});
+	});
     
-    function updateProductQuantity(menuNum, quantity, menuOption) {
-        let menuItem = menuarr.find(menuItem => menuItem.menuNum == menuNum && menuItem.options == menuOption);
+   
+    
+    function updateProductQuantity(menuNum, quantity, cartCount) {
+        let menuItem = menuarr.find(menuItem => menuItem.cartCount == cartCount);
       
-        let options = menuOption
         if (menuItem) {
            menuItem.quantity = quantity;
         } else {
-           menuarr.push({ menuNum, quantity, options});
+           menuarr.push({ cartCount, quantity, menuNum });
         }
-        
-        alert(menuItem.options)
         
         let totalPrice = 0;
         menuarr.forEach((item) => {
@@ -1129,7 +1132,7 @@ body {
       const total = document.querySelector('.valueinput');
       total.value = totalPrice;
       
-      const cartPrice = document.querySelector('.cartPrice-'+menuNum + '-' + options);
+      const cartPrice = document.querySelector('.cartPrice-'+cartCount);
       cartPrice.value = menuItem.price*menuItem.quantity;
       
     }
