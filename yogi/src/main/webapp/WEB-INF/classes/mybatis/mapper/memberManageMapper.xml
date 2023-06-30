@@ -33,11 +33,12 @@
 	<select id="listMember" parameterType="map" resultType="com.sp.yogi.admin.domain.Member">
 		SELECT m1.memberNum, membership, m1.userId, userName, nickName,
 			m1.reg_date, m1.modify_date, last_login,
-			enabled, email, tel, 
+			enabled, email, tel, m3.statecode as stateCode,  m3.memo as memo,
 			TO_CHAR(birth, 'YYYY-MM-DD') birth
 		FROM member m
 		JOIN member1 m1 ON m.memberNum = m1.memberNum
 		LEFT OUTER JOIN member2 m2 ON m1.userId = m2.userId
+        LEFT OUTER JOIN memberstate m3 ON m1.userId = m3.userId
 		<where>
 			<if test="keyword!=null and keyword!='' ">
 				<include refid="where-list"/>
@@ -106,6 +107,14 @@
 		ORDER BY num DESC
 		FETCH FIRST 1 ROWS ONLY
 	</select>
+	
+	<update id="updateMemberState" parameterType="map">
+		UPDATE memberState
+		SET stateCode = 0,
+		    registerId = #{registerId},
+		    memo = #{reason}
+		WHERE userId = #{userId}
+	</update>	
 
 	<!-- 챠트 쿼리 -->
 	<select id="listAgeSection" resultType="com.sp.yogi.admin.domain.Analysis">

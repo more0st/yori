@@ -125,4 +125,14 @@ public class MemberManageServiceImpl implements MemberManageService {
 		return dto;
 	}
 
+	@Override
+	public void updateMemberState(Map<String, Object> map) throws Exception {
+		try {
+			dao.updateData("memberManage.updateMemberState", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
 }

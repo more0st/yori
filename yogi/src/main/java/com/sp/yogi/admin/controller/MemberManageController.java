@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.yogi.admin.domain.Member;
 import com.sp.yogi.admin.service.MemberManageService;
@@ -113,5 +114,63 @@ public class MemberManageController {
 		model.addAttribute("dto", service.readMemberWithCount(userId));
 		return ".admin.memberManage.detail";
 	}
+	
+	@RequestMapping(value = "updateMemberState", method = RequestMethod.POST)
+	@ResponseBody
+	public void updateMemberState(
+			@RequestParam(defaultValue = "") String userId,
+			@RequestParam(defaultValue = "") String registerId,
+			@RequestParam(defaultValue = "") String reason,
+			HttpServletRequest req
+			) throws Exception {
+
+		
+		try {
+			System.out.println(userId);
+			System.out.println(registerId);
+			System.out.println(reason);
+//			// 회원 활성/비활성 변경
+			Map<String, Object> map = new HashMap<>();
+			
+			map.put("userId", userId);
+			map.put("registerId", registerId);
+			map.put("reason", reason);
+			service.updateMemberState(map);
+
+		} catch (Exception e) {
+			System.out.println(e);
+//			state = "false";
+		}
+
+//		Map<String, Object> model = new HashMap<>();
+//		model.put("state", state);
+	
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
