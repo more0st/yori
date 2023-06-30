@@ -52,8 +52,15 @@
 								<td>${dto.stateCode==1?"정상":"정지"}</td>
 								<td>
 									<div class="d-grid gap-2 d-md-block">
-										<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal${status.index}">정지</button>
-										<input id="suspendId" type="hidden" value="${dto.userId}">
+										<c:choose>
+											<c:when test="${dto.stateCode==1}">
+												<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal${status.index}">정지</button>
+												<input id="suspendId" type="hidden" value="${dto.userId}">
+											</c:when>
+											<c:otherwise>
+												<button type="button" class="btn btn-outline-primary btn-sm" onclick="release">해제</button>
+											</c:otherwise>
+										</c:choose>
 										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
 									</div>
 								</td>
@@ -94,6 +101,12 @@
 			
 		</section>
 <script type="text/javascript">
+
+function release {
+	if(confirm("정지를 해제 하시겠습니까 ?")) {
+		
+	}
+}
 
 function sendSuspension(clickUserId, sIndex) {
 	// 정지 사유 입력란에서 값을 가져옴

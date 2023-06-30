@@ -146,31 +146,6 @@ public class MemberManageController {
 //		model.put("state", state);
 	
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

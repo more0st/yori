@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">멤버상세내역 <span>김상훈</span></h5>
+                  <h5 class="card-title">회원상세내역 <span>${dto.userName}</span></h5>
 
                   <table class="table table-bordered">
                     <thead>
@@ -84,10 +84,8 @@
                       </tr>
                   </table>
                   <div style="display: flex; justify-content: center; gap : 5px;">
-	                  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">정지</button>
-	                  <button type="button" class="btn btn-danger" onclick="" >탈퇴</button>
+	                  
 		              <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/memberManage/list'">목록</button>
-	                  <!-- 정지사유 입력하는 모달 띄우기 -->
                   </div>
                 </div>
               </div>
@@ -95,30 +93,5 @@
           </div>
     </section>
 	
-	<!-- 모달 -->
-	<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">정지 사유</h5>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <form> 
-		      <div class="modal-body">
-				<div>
-					<textarea rows="5" cols="52" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
-				</div>
-				<div>
-					
-				</div>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-		        <button type="button" class="btn btn-primary">보내기</button>
-		      </div>
-	      </form>
-	    </div>
-	  </div>
-	</div>
 	
   </main><!-- End #main -->
