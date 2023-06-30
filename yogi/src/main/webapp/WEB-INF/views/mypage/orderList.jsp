@@ -95,10 +95,13 @@
 	<jsp:include page="/WEB-INF/views/mypage/mymenu.jsp"/>
 	
 	<div class="tablediv">
+	<form  name="searchForm" action="${pageContext.request.contextPath}/mypage/orderList" method="post">
 		<div class="search">
+			<span> ${dataCount}개(${page}/${total_page} 페이지)</span>
 			<input type="text" name="keyword" class="keyword">
-			<button type="button" class="btn btn-secondary">검색</button>
+			<button type="submit" class="btn btn-secondary" onclick="serchList()">검색</button>
 		</div>
+	</form>
 		<br>
 		
 		<table class="table">
@@ -115,6 +118,7 @@
 			<c:forEach var="dto" items="${list}">
 			<tr class="border" >
 				<td>${dto.orderNum}</td>
+				
 				<td>${dto.restaurantName}</td>
 				<td><fmt:formatNumber value="${dto.total_price}" pattern="#,###원"/></td>
 				
@@ -135,45 +139,24 @@
 				    <td>주문취소</td>
 				  </c:when>
 				</c:choose>
-				<td><button type="button" class="reviewbtn reviewUpdate" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" onclick="reviewSubmit()">리뷰수정</button></td>
+				
+			 	<c:choose>
+	<c:when test="${dto.content == null}">
+		<td>
+			<button type="button" class="reviewbtn reviewModal" data-bs-toggle="modal" data-bs-target="#reviewModal" data-orderNum="${dto.orderNum}" data-restaurantNum="${dto.restaurantNum}">리뷰쓰기</button>
+		</td>
+	</c:when>
+	<c:otherwise>
+		<td>
+			<button type="button" class="reviewbtn reviewUpdate" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" data-orderNum="${dto.orderNum}" data-restaurantNum="${dto.restaurantNum}">리뷰수정</button>
+		</td>
+	</c:otherwise>
+</c:choose>
 				<!-- 해당 주문번호 맞춰서 이동하도록. -->
 				<td><button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/mypage/orderDetail?num=${dto.orderNum}&page=${page}';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
 			</tr>
 			</c:forEach>
 			<!-- /forEach -->
-			
-			<!-- 아래 tr은 지우기 -->
-			<tr class="border" >
-				<td>2222</td>
-				<td>선영이네 피자집</td>
-				<td>15,000원</td>
-				<td>주문완료</td>
-				<td>
-				<button type="button" class="reviewbtn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰작성</button>
-				<!-- 해당 주문번호 맞춰서 이동하도록. -->
-				<td><button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/mypage/orderDetail';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
-			</tr>
-			
-			<tr class="border" >
-				<td>3333</td>
-				<td>승현이네 국밥집</td>
-				<td>12,000원</td>
-				<td>주문완료</td>
-				<td><button type="button" class="reviewbtn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰작성</button></td>
-				<!-- 해당 주문번호 맞춰서 이동하도록. -->
-				<td><button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/mypage/orderDetail';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
-			</tr>
-			
-			
-			<tr class="border" >
-				<td>4444</td>
-				<td>재혁이네 치킨집</td>
-				<td>18,000원</td>
-				<td>주문완료</td>
-				<td><button type="button" class="reviewbtn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰작성</button></td>
-				<!-- 해당 주문번호 맞춰서 이동하도록. -->
-				<td><button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/mypage/orderDetail';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
-			</tr>
 		</table>
 		
 		<div class="paging">
@@ -185,14 +168,15 @@
 <!-- 모달 -->
 
 <!-- 리뷰 작성 모달 -->
-<div class="modal" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="reviewModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form> 
+      <form name="reviewForm" method="post" enctype="multipart/form-data">
+     
 	      <div class="modal-body">
 	      	<i class="fa-solid fa-chart-simple" style="color: #a8c4f5;"></i>&nbsp;리뷰 별점 <br>
 	        <div class="rating">
@@ -205,7 +189,7 @@
 			
 			<div>
 				<br><i class="fa-regular fa-comment-dots" style="color: #a8c4f5;"></i>&nbsp;리뷰 내용<br><br>
-				<textarea rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
+				<textarea name="content" id="content" rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
 				
 				<input type="file" name="selectFile" accept="image/*" class="form-control">
 			</div>
@@ -214,8 +198,10 @@
 			</div>
 	      </div>
 	      <div class="modal-footer">
+	        <input type="hidden" name="orderNum" value="">
+	        <input type="hidden" name="restaurantNum" value="">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-	        <button type="button" class="btn btn-primary">저장</button>
+	        <button type="button" class="btn btn-primary" onclick="reviewCheck();">저장</button>
 	      </div>
       </form>
     </div>
@@ -230,7 +216,7 @@
         <h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form> 
+      <form name="reviewUpdateForm" method="post" enctype="multipart/form-data"> 
 	      <div class="modal-body">
 	      	<i class="fa-solid fa-chart-simple" style="color: #a8c4f5;"></i>&nbsp;리뷰 별점 <br>
 	        <div class="rating">
@@ -243,7 +229,7 @@
 			
 			<div>
 				<br><i class="fa-regular fa-comment-dots" style="color: #a8c4f5;"></i>&nbsp;리뷰 내용<br><br>
-				<textarea rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;">작성한 내용 불러오기</textarea>
+				<textarea name="content2" id="content2" rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;">${rev.content}</textarea>
 				
 				<input type="file" name="selectFile" accept="image/*" class="form-control">
 			</div>
@@ -252,8 +238,10 @@
 			</div>
 	      </div>
 	      <div class="modal-footer">
+	      	<input type="hidden" name="orderNum" value="">
+	        <input type="hidden" name="restaurantNum" value="">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-	        <button type="button" class="btn btn-primary">저장</button>
+	        <button type="button" class="btn btn-primary"  onclick="reviewCheck2();">저장</button>
 	      </div>
       </form>
     </div>
@@ -270,4 +258,82 @@ var rating = 3;
 function reviewSubmit(){
 	
 }
+$(function() {
+	$("body").on("click", ".reviewUpdate", function(){
+		
+		let orderNum = $(this).attr("data-orderNum");
+		let restaurantNum = $(this).attr("data-restaurantNum");
+		document.reviewUpdateForm.orderNum.value = orderNum;
+		document.reviewUpdateForm.restaurantNum.value = restaurantNum;
+		
+		console.log(orderNum);
+		console.log(document.reviewUpdateForm.orderNum.value);
+		
+	
+		$('#reviewUpdateModal').show();
+
+	});
+});
+
+$(function() {
+	$("body").on("click", ".reviewModal", function(){
+		
+		let orderNum = $(this).attr("data-orderNum");
+		let restaurantNum = $(this).attr("data-restaurantNum");
+		document.reviewForm.orderNum.value = orderNum;
+		document.reviewForm.restaurantNum.value = restaurantNum;
+	
+		console.log(orderNum);
+		console.log(document.reviewForm.orderNum.value);
+		
+		
+		$('#reviewModal').show();
+
+	});
+});
+
+
+
+function reviewCheck(){
+	    const f = document.reviewForm;
+		let str;
+		
+	   
+	    str = f.content.value.trim();
+	    if(!str) {
+	        alert("내용을 입력하세요. ");
+	        f.content.focus();
+	        return;
+	    }
+	    
+
+	    f.action = "${pageContext.request.contextPath}/mypage/reviewSubmit";
+	    f.submit();
+	}
+	
+/*
+  
+function reviewCheck2(){
+	    const f = document.reviewUpdateForm;
+		let str;
+		
+	   
+	    str = f.content.value.trim();
+	    if(!str) {
+	        alert("내용을 입력하세요. ");
+	        f.content.focus();
+	        return;
+	    }
+	    
+
+	    f.action = "${pageContext.request.contextPath}/mypage/reviewSubmit";
+	    f.submit();
+	}
+	
+ */
+	
+	
+	
+
 </script>
+

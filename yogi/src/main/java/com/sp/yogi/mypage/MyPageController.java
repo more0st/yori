@@ -1,5 +1,7 @@
 package com.sp.yogi.mypage;
 
+import java.io.File;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,11 +43,6 @@ public class MyPageController {
 	// {orderNum} : 템플릿 변수
 	// @GetMapping("{orderNum}/orderDetail")
 	
-	@GetMapping("myReview")
-	public String myReview() {
-		
-		return ".mypage.myReview";
-	}
 	
 	@GetMapping("likeList")
 	public String likeList() {
@@ -103,21 +100,26 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value = "orderList")
-	public String orderList(@RequestParam(value = "page", defaultValue = "1") int current_page,			
+	public String orderList(@RequestParam(value = "page", defaultValue = "1") int current_page,
+			@RequestParam(defaultValue = "all") String condition, @RequestParam(defaultValue = "") String keyword,
 			HttpServletRequest req, HttpSession session, Model model) throws Exception {
 
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		String cp = req.getContextPath();
 
-		int size = 10;
+		int size = 5;
 		int total_page;
 		int dataCount;
-
+		
+		if (req.getMethod().equalsIgnoreCase("GET")) {
+			keyword = URLDecoder.decode(keyword, "utf-8");
+		}
 		
 		// 전체 페이지 수
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", info.getUserId());
-	
+		map.put("condition", condition);
+		map.put("keyword", keyword);
 
 		dataCount = service.dataCount(map);
 		total_page = myUtil.pageCount(dataCount, size);
@@ -129,11 +131,11 @@ public class MyPageController {
 		int offset = (current_page - 1) * size;
 		if (offset < 0)
 			offset = 0;
-
 		map.put("offset", offset);
 		map.put("size", size);
+		
 
-		List<MyPage> list = service.listMyPage(info.getUserId());
+		List<MyPage> list = service.listMyPage(map);
 		
 
 		String query = "";
@@ -142,40 +144,26 @@ public class MyPageController {
 	
 		if (query.length() != 0) {
 			listUrl = cp + "/mypage/orderList?" + query;
-			articleUrl = cp + "/mypage/orderList/article?page=" + current_page + "&" + query;
+			articleUrl = cp + "/mypage/orderList/orderDetail?page=" + current_page + "&" + query;
 		}
 
 		String paging = myUtil.paging(current_page, total_page, listUrl);
 
 		model.addAttribute("list", list);
+		
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("articleUrl", articleUrl);
 		model.addAttribute("page", current_page);
 		model.addAttribute("paging", paging);
+		
+		model.addAttribute("condition", condition);
+		model.addAttribute("keyword", keyword);
 
+		
 		return ".mypage.orderList";
 	}
 	
-//	@RequestMapping(value = "orderDetail", method =RequestMethod.GET)
-//	public String orderDetail(@RequestParam long num,  @RequestParam String page,
-//			HttpSession session, Model model) throws Exception {
-//		SessionInfo info = (SessionInfo) session.getAttribute("member");
-//		
-//		String query = "page=" + page;
-//		MyPage dto = service.readOrderDetail(num);
-//		
-//		if (dto == null) {
-//			return "redirect:/mypage/orderList?" + query;
-//		}
-//		model.addAttribute("detailList2", dto);
-//		model.addAttribute("page", page);
-//		model.addAttribute("query", query);
-//		
-//		
-//		return ".mypage.orderDetail";
-//		
-//	}
 	@RequestMapping(value = "orderDetail")
 	public String orderDetail(@RequestParam long num,  @RequestParam String page,
 			HttpServletRequest req,
@@ -190,19 +178,44 @@ public class MyPageController {
 		model.addAttribute("detailList", list);
 		model.addAttribute("detailList2", dto);
 		
-		System.out.println(dto.getRestaurantName());
-		System.out.println(dto.getOrderNum());
-		System.out.println(dto.getMemo());
-		System.out.println(dto.getOrder_date());
-		System.out.println(dto.getAddr1());
-		System.out.println(dto.getAddr2());
-		System.out.println(dto.getPayMethod());
-		System.out.println(dto.getPay_price());
-		System.out.println(dto.getOptionName());
-		System.out.println(dto.getOption_price());
-		
-		
 		return ".mypage.orderDetail";
+	}
+	
+	@RequestMapping(value="reviewSubmit", method = RequestMethod.POST)
+	public String reviewSubmit(@RequestParam("orderNum") long orderNum,
+			@RequestParam("restaurantNum") long restaurantNum,
+			MyPage dto, HttpSession session, Model model) throws Exception{
+		
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "review";
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		try {
+			dto.setUserId(info.getUserId());
+			service.insertReview(dto, pathname);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+		return "redirect:/mypage/orderList";
+		
+	}
+	
+	@RequestMapping(value = "reviewList")
+	public String reviewList(HttpServletRequest req, HttpSession session, Model model) throws Exception {
+		
+
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", info.getUserId());
+		
+		List<MyPage> list = service.listReview(map);
+		
+		model.addAttribute("rev", list);
+		
+		return ".mypage.orderList";
 	}
 	
 }

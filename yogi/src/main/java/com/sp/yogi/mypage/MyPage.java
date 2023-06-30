@@ -1,5 +1,7 @@
 package com.sp.yogi.mypage;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MyPage {
 	// 주소록에 필요한 dto 나중에 더 추가하셔요
 	private Long memberNum;
@@ -26,6 +28,17 @@ public class MyPage {
 	private String menu_price;
 	private String optionName;
 	private String option_price;
+
+	// 리뷰에 필요한 DTO
+	private double rating;
+	private String content;
+	private String imgFileName;
+	private String review_reg_date;
+	private Long enabled;
+	private String reply;
+	private String reply_date;
+	private Long restaurantNum;
+	private MultipartFile selectFile; // <input type='file' name='selectFile' ..
 
 	public Long getMemberNum() {
 		return memberNum;
@@ -186,5 +199,78 @@ public class MyPage {
 	public void setOption_price(String option_price) {
 		this.option_price = option_price;
 	}
+
+	public double getRating() {
+		return rating;
+	}
+
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getImgFileName() {
+		return imgFileName;
+	}
+
+	public void setImgFileName(String imgFileName) {
+		this.imgFileName = imgFileName;
+	}
+
+	public String getReview_reg_date() {
+		return review_reg_date;
+	}
+
+	public void setReview_reg_date(String review_reg_date) {
+		this.review_reg_date = review_reg_date;
+	}
+
+	public Long getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Long enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getReply() {
+		return reply;
+	}
+
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
+
+	public String getReply_date() {
+		return reply_date;
+	}
+
+	public void setReply_date(String reply_date) {
+		this.reply_date = reply_date;
+	}
+
+	public Long getRestaurantNum() {
+		return restaurantNum;
+	}
+
+	public void setRestaurantNum(Long restaurantNum) {
+		this.restaurantNum = restaurantNum;
+	}
+
+	public MultipartFile getSelectFile() {
+		return selectFile;
+	}
+
+	public void setSelectFile(MultipartFile selectFile) {
+		this.selectFile = selectFile;
+	}
+	
 
 }

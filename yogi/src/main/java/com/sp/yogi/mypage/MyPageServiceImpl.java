@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sp.yogi.common.FileManager;
 import com.sp.yogi.common.dao.CommonDAO;
 import com.sp.yogi.home.Home;
 
@@ -13,6 +14,9 @@ import com.sp.yogi.home.Home;
 public class MyPageServiceImpl implements MyPageService {
 	@Autowired
 	private CommonDAO dao;
+	@Autowired
+	private FileManager fileManager;
+
 	
 	@Override
 	public void insertAddr(MyPage dto) throws Exception {
@@ -42,12 +46,12 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public List<MyPage> listMyPage(String userId) {
+	public List<MyPage> listMyPage(Map<String, Object> map) {
 		List<MyPage> list = null;
 		
 		try {
 			
-			list = dao.selectList("mypage.listMyPage",userId);
+			list = dao.selectList("mypage.listMyPage",map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -57,10 +61,16 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Override
 	public int dataCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		int result = 0;
 
+		try {
+			result = dao.selectOne("mypage.dataCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 	@Override
 	public MyPage readOrderDetail(long num) {
 		MyPage dto = null;
@@ -85,5 +95,54 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		return list;
 	}
+
+	@Override
+	public void insertReview(MyPage dto, String pathname) throws Exception {
+		try {
+			String imgFileName = fileManager.doFileUpload(dto.getSelectFile(), pathname);
+			if (imgFileName != null) {
+				dto.setImgFileName(imgFileName);
+			}
+			
+			dao.insertData("mypage.insertReview", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public void updateReview(MyPage dto, String pathname) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public MyPage readData(long num) {
+		MyPage dto = null;
+		
+		try {
+			dao.selectOne("mypage.readData, dao", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+		
+	}
+
+	@Override
+	public List<MyPage> listReview(Map<String, Object> map) {
+		List<MyPage> list = null;
+		try {
+			
+			list = dao.selectList("mypage.listReview", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+		
+		
 	
 }

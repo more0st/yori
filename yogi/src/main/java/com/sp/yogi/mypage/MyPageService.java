@@ -20,13 +20,21 @@ public interface MyPageService {
 	 */
 	public void deleteAddr(Long addressNum, String userId) throws Exception;
 	
-	public List<MyPage> listMyPage(String userId);
+	public List<MyPage> listMyPage(Map<String, Object> map);
+
+	public List<MyPage> listReview(Map<String, Object> map);
 	
 	public List<MyPage> listOrderDetail (long num);
 	
 	public int dataCount(Map<String, Object> map);
+	
 	public MyPage readOrderDetail(long num);
+	
+	public void insertReview(MyPage dto, String pathname) throws Exception;
+	
+	public void updateReview(MyPage dto, String pathname) throws Exception;
 
+	public MyPage readData(long num);
 	
 }
 

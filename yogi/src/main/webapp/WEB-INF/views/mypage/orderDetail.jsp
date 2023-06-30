@@ -50,7 +50,7 @@
          <c:forEach var="vo" items="${detailList}">
          <tr class="border" >
 	         <td>${vo.menu}, ${vo.optionName} </td>
-	         <td class="right">${vo.option_price}</td>
+	         <td class="right"><fmt:formatNumber value="${vo.option_price}" pattern="#,###원"/></td>
          </tr>
          </c:forEach>
       
@@ -66,7 +66,7 @@
          <!-- /forEach -->
          <tr class="border">
             <td>전체금액</td>
-            <td class="right">${detailList2.pay_price}</td>
+             <td class="right"><fmt:formatNumber value="${detailList2.pay_price}" pattern="#,###원"/></td>
          </tr>
 
          <tr class="border">

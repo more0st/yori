@@ -13,6 +13,7 @@
 		VALUES (addr_seq.nextval, #{userId}, #{zip}, #{addr1}, #{addr2})
 	</insert>
 
+
 	<!-- 주소록 삭제 -->
 	<delete id="deleteAddr" parameterType="com.sp.yogi.home.Home">
 		DELETE FROM addressBook
@@ -20,37 +21,73 @@
 		#{userId}
 	</delete>
 
-	<select id="listMyPage" parameterType="String"
-		resultType="com.sp.yogi.mypage.MyPage">
-		SELECT ob.orderNum, r.restaurantName, p.price total_price,
-		os.statusName, ob.userId
+
+	<sql id="where-list">
+		( INSTR(r.restaurantName, #{keyword}) &gt; 0
+		OR INSTR(ob.orderNum, #{keyword}) &gt; 0 )
+	</sql>
+
+	<!-- 데이터개수 -->
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
 		FROM order_bundle ob
-		JOIN restaurant r ON
-		ob.restaurantNum = r.restaurantNum
-		JOIN payment p ON ob.orderNum =
-		p.orderNum
-		JOIN order_status os ON ob.orderNum = os.orderNum
-		WHERE
-		ob.userId = #{userId}
+		JOIN member1 m ON ob.userId
+		= m.userId
+		JOIN restaurant r ON ob.restaurantNum = r.restaurantNum
+		<where>
+			<if test="keyword != null and keyword!=''  ">
+				<include refid="where-list" />
+			</if>
+			AND ob.userId = #{userId}
+		</where>
 	</select>
 
+	<!-- 주문 내역 리스트 -->
+	<select id="listMyPage" parameterType="map"
+		resultType="com.sp.yogi.mypage.MyPage">
+		SELECT ob.orderNum, r.restaurantName, p.price total_price,
+		os.statusName, ob.userId, ob.order_date, ob.restaurantNum, rv.content
+		FROM order_bundle ob
+		JOIN
+		restaurant r ON
+		ob.restaurantNum = r.restaurantNum
+		JOIN payment p ON
+		ob.orderNum =
+		p.orderNum
+		JOIN order_status os ON ob.orderNum =
+		os.orderNum
+		LEFT OUTER JOIN review rv ON ob.orderNum =
+		rv.orderNum  
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<include refid="where-list" />
+			</if>
+			AND ob.userId = #{userId}
+		</where>
+		ORDER BY ob.order_date DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size}
+		ROWS ONLY
+	</select>
+
+	<!-- 주문 내역 상세1 -->
 	<select id="orderDetail" parameterType="long"
 		resultType="com.sp.yogi.mypage.MyPage">
-	SELECT oi.orderItemNum,
-		oi.orderNum, 
+		SELECT oi.orderItemNum,
+		oi.orderNum,
 		oi.menuNum,
-		oi.optionName, 
-		oi.orderCount, 
+		oi.optionName,
+		oi.orderCount,
 		oi.menuPrice option_price,
-		m.menu, 
+		m.menu,
 		m.price menu_price
-	FROM 
+		FROM
 		order_item oi
 		INNER JOIN menu1 m ON oi.menuNum = m.menuNum
-	WHERE
+		WHERE
 		oi.orderNum = #{orderNum}
 	</select>
 
+	<!-- 주문 내역 상세2 -->
 	<select id="orderDetail2" parameterType="long"
 		resultType="com.sp.yogi.mypage.MyPage">
 		SELECT
@@ -67,14 +104,47 @@
 		FROM
 		order_bundle ob
 		INNER
-		JOIN restaurant r ON ob.restaurantNum = r.restaurantNum
+		JOIN restaurant r ON
+		ob.restaurantNum = r.restaurantNum
 		INNER JOIN
-		payment p ON ob.orderNum = p.orderNum
+		payment p ON ob.orderNum =
+		p.orderNum
 		WHERE
 		ob.orderNum = #{orderNum}
 	</select>
 
-
+	<!-- 리뷰작성 -->
+	<insert id="insertReview"
+		parameterType="com.sp.yogi.mypage.MyPage">
+		INSERT INTO review(orderNum, userId, rating, content,
+		imgFileName,
+		reg_date, enabled, reply, reply_date, restaurantNum)
+		VALUES(#{orderNum}, #{userId}, #{rating}, #{content}, #{imgFileName, jdbcType=VARCHAR},
+		SYSDATE, 1, #{reply, jdbcType=VARCHAR}, SYSDATE, #{restaurantNum})
+	</insert>
+	
+	<!-- 리뷰 리스트 -->
+	<select id="listReview" parameterType="map"
+		resultType="com.sp.yogi.mypage.MyPage">
+		SELECT orderNum, userId, rating, content, imgFileName, reg_date, enabled
+		FROM review
+		WHERE
+		userId = #{userId}
+	</select>
+	
+	<select id="readData" parameterType="long"
+		resultType="com.sp.yogi.mypage.MyPage">
+		SELECT
+		ob.orderNum,
+		r.restaurantName,
+		r.restaurantNum
+		FROM
+		order_bundle ob
+		INNER
+		JOIN restaurant r ON ob.restaurantNum = r.restaurantNum
+		WHERE
+		ob.orderNum = #{orderNum};
+	</select>
 
 
 </mapper>
