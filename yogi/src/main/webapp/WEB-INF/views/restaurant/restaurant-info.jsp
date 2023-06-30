@@ -1026,7 +1026,7 @@ body {
       out +=   "<div style='display:flex;'><button type='button' class='quantity-btn minus' data-product-id='" + menuNum + "'><i class='fa-solid fa-minus'></i></button>"
       out +=   "<input name='cart-quantity' class='cart-quantity' value='"+ menuItem.quantity +"' readonly='readonly'>"
       out +=   "<button type='button' class='quantity-btn plus' data-product-id='" + menuNum + "'><i class='fa-solid fa-plus'></i></button>"
-      out += "</div></div><input type='hidden' class='menuNum' value='"+ menuNum +"'></div>";
+      out += "</div></div><input type='hidden' class='menuNum' value='"+ menuNum +"'><input type='hidden' class='options' value='"+ options +"'></div>";
    
       
       $('.cart-order').append(out);
@@ -1085,7 +1085,8 @@ body {
           quantityInput.val(value);
       
          const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
-          updateProductQuantity(menuNum.toString(), value.toString());
+         const options = $(this).closest(".yes-cart").find(".options").val();
+          updateProductQuantity(menuNum.toString(), value.toString(), options.toString());
       }
       
    });
@@ -1101,13 +1102,14 @@ body {
             quantityInput.val(value);
 
             const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
-            updateProductQuantity(menuNum.toString(), value.toString());
+            const options = $(this).closest(".yes-cart").find(".options").val();
+            updateProductQuantity(menuNum.toString(), value.toString(), options.toString());
         }
 
     });
     
-    function updateProductQuantity(menuNum, quantity) {
-        let menuItem = menuarr.find(menuItem => menuItem.menuNum == menuNum);
+    function updateProductQuantity(menuNum, quantity, options) {
+        let menuItem = menuarr.find(menuItem => menuItem.menuNum == menuNum, menuItem.options == options);
       
         if (menuItem) {
            menuItem.quantity = quantity;
