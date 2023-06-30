@@ -90,7 +90,7 @@
 </div>
 
 	<div style="display: flex; justify-content: center;">
-		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='${pageContext.request.contextPath}/owner/info/register';"
+		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='${pageContext.request.contextPath}/owner/info/register?status=' + 1;"
 				style="margin: 0 auto; width: 140px; height: 60px; font-size: 20px; text-align: center; vertical-align: center;">
 				입점 신청</button>
 	</div>
