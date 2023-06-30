@@ -218,6 +218,7 @@
 	      
 			   <div>
 			      	<div class="title">상태 선택</div>
+			      	
 			      	<select class="form-select">
 					  <option value="0" selected="selected">품절</option>
 					  <option value="1" >판매중</option>

@@ -100,5 +100,12 @@
 	WHERE menuNum=#{menuNum}
 </delete>
 
+<!-- 옵션그룹별 상세리스트 -->
+<select id="optionNameList" parameterType="map" resultType="com.sp.yogi.owner.menu.Menu">
+	SELECT optionNum, menuNum, option_group, option_name, price
+	FROM menuOption
+	WHERE option_group=#{option_group} AND menuNum=${menuNum}
+</select>
+
 
 </mapper>

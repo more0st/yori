@@ -19,8 +19,16 @@ public class Menu {
 	private String option_group;//옵션대분류
 	private String option_name;//옵션소분류
 	private long option_price;//옵션추가금액
+	private List<Menu> optionList;//옵션그룹별 옵션상세리스트
 	
 	
+	
+	public List<Menu> getOptionList() {
+		return optionList;
+	}
+	public void setOptionList(List<Menu> optionList) {
+		this.optionList = optionList;
+	}
 	public List<Menu> getMenuList() {
 		return menuList;
 	}

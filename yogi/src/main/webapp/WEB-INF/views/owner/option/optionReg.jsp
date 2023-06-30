@@ -112,64 +112,29 @@
 
 				<!-- foreach 돌려야 하는 div 태그 -->
 				<div class="accordion" id="accordionPanelsStayOpenExample">
+				<c:forEach var="option" items="${optionList}">
 					<div class="accordion-item">
 						<h2 class="accordion-header" id="panelsStayOpen-headingOne">
 							<button class="accordion-button" type="button"
 								data-bs-toggle="collapse"
 								data-bs-target="#panelsStayOpen-collapseOne"
 								aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-								옵션 #1</button>
+								${option.option_group}</button>
 						</h2>
 						<div id="panelsStayOpen-collapseOne"
 							class="accordion-collapse collapse show"
 							aria-labelledby="panelsStayOpen-headingOne">
 							<div class="accordion-body" style="display: inline-block;">
-								<span>대 - 5000원</span><br> <span>중 - 3000원</span><br>
-								<span>소 - 1000원</span><br>
+							<c:forEach var="dto" items="${option.optionList}">
+								<span>${dto.option_name} - ${dto.price}원</span><br>
+							</c:forEach>
 							</div>
 							<div style="display: inline-block; float: right; padding: 20px;">
 							<button type="button" class="btn btn-secondary btn-sm" >삭제</button>
 							</div>
 						</div>
 					</div>
-					
-					
-					
-					
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-							<button class="accordion-button collapsed" type="button"
-								data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseTwo"
-								aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-								옵션 #2</button>
-						</h2>
-						<div id="panelsStayOpen-collapseTwo"
-							class="accordion-collapse collapse"
-							aria-labelledby="panelsStayOpen-headingTwo">
-							<div class="accordion-body">
-								<span>대 - 5000원</span><br> <span>중 - 3000원</span><br>
-								<span>소 - 1000원</span><br>
-							</div>
-						</div>
-					</div>
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="panelsStayOpen-headingThree">
-							<button class="accordion-button collapsed" type="button"
-								data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseThree"
-								aria-expanded="false"
-								aria-controls="panelsStayOpen-collapseThree">옵션 #3</button>
-						</h2>
-						<div id="panelsStayOpen-collapseThree"
-							class="accordion-collapse collapse"
-							aria-labelledby="panelsStayOpen-headingThree">
-							<div class="accordion-body">
-								<span>대 - 5000원</span><br> <span>중 - 3000원</span><br>
-								<span>소 - 1000원</span><br>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
 
 

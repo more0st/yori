@@ -1,6 +1,7 @@
 package com.sp.yogi.owner.menu;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MenuService {
 
@@ -34,5 +35,6 @@ public interface MenuService {
 	public List<Menu> optionList(long menuNum);
 	//deleteOption : 옵션 삭제
 	public void deleteOption(long menuNum);
-	
+	//optionNameList : 옵션그룹별 옵션상세리스트
+	public List<Menu> optionNameList(Map<String,Object> map);
  }
