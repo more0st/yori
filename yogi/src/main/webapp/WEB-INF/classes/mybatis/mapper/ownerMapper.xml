@@ -29,7 +29,7 @@
        	SELECT count(*)
 		FROM order_bundle
 		<where>
-			restaurantNum = #{restaurantNum} AND order_date = #{order_date}
+			restaurantNum = #{restaurantNum} AND TRUNC(order_date) = TRUNC(SYSDATE)
 		</where>
     </select>
     
@@ -37,7 +37,7 @@
        	SELECT sum(total_price) today_sum
 		FROM order_bundle
 		<where>
-			restaurantNum = #{restaurantNum} AND order_date = #{order_date}
+			restaurantNum = #{restaurantNum} AND TRUNC(order_date) = TRUNC(SYSDATE)
 		</where>
     </select>
     
