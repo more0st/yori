@@ -273,7 +273,7 @@
       
       
       <li class="nav-item">
-        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/event/list">
+        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/eventManage/all/list">
           <i class="ri-cake-2-fill"></i>
           <span>이벤트</span>
         </a>

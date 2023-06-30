@@ -76,6 +76,10 @@
 
   <!-- Template Main JS File -->
   <script src="${pageContext.request.contextPath}/resources/template/js/main.js"></script>
+	
+	
+  <!-- 페이징처리 js -->
+  <script src="${pageContext.request.contextPath}/resources/js/paginate-boot.js"></script>
 
 </body>
 
