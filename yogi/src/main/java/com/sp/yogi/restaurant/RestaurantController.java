@@ -134,7 +134,9 @@ public class RestaurantController {
 		// 리뷰 리스트
 		List<Review> reviewList = service.readReivew(restaurantNum);
 		for(Review r : reviewList) {
-			r.setReply(r.getReply().replaceAll("\n", "<br>"));
+			if(r.getReply() != null) {
+				r.setReply(r.getReply().replaceAll("\n", "<br>"));
+			}
 		}
 		
 		// 별점
