@@ -76,6 +76,12 @@
    WHERE menuNum=#{menuNum}
 </update>
 
+<!-- 메뉴 stock 수정 -->
+<update id="updateStock" parameterType="map">
+   UPDATE menu1 SET stock=#{stock}
+   WHERE menuNum=#{menuNum}
+</update>
+
 <!-- 카테고리번호별 메뉴별 삭제 -->
 <delete id="deleteMenu" parameterType="long">
    DELETE FROM menu1 WHERE menuNum=#{menuNum}

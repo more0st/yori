@@ -122,7 +122,7 @@
 								${option.option_group}</button>
 						</h2>
 						<div id="panelsStayOpen-collapseOne"
-							class="accordion-collapse collapse show"
+							class="accordion-collapse collapse ${status.count==1?'show':''}"
 							aria-labelledby="panelsStayOpen-headingOne">
 							<div class="accordion-body" style="display: inline-block;">
 							<c:forEach var="dto" items="${option.optionList}">

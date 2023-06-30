@@ -2,6 +2,8 @@ package com.sp.yogi.owner.menu;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Menu {
 	private long num;//카테고리번호
 	private String menuCategory;//카테고리명
@@ -12,8 +14,9 @@ public class Menu {
 	private long menuNum;//메뉴번호
 	private String menu;//메뉴명
 	private long price;//메뉴가격
-	private String imageFilename;//메뉴이미지이름
 	private int stock;//품절여부 (0: 품절 / 1: 판매중 / 2:숨김)
+	private String imageFilename;//메뉴이미지이름
+	private MultipartFile selectFile;
 	
 	private long optionNum;//옵션번호
 	private String option_group;//옵션대분류
@@ -21,8 +24,12 @@ public class Menu {
 	private long option_price;//옵션추가금액
 	private List<Menu> optionList;//옵션그룹별 옵션상세리스트
 	
-	
-	
+	public MultipartFile getSelectFile() {
+		return selectFile;
+	}
+	public void setSelectFile(MultipartFile selectFile) {
+		this.selectFile = selectFile;
+	}
 	public List<Menu> getOptionList() {
 		return optionList;
 	}

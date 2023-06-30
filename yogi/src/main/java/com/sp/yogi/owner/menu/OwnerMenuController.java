@@ -1,6 +1,8 @@
 package com.sp.yogi.owner.menu;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -80,7 +82,7 @@ public class OwnerMenuController {
 			
 			service.updateCategory(dto);
 			model.addAttribute("dto", dto);
-			
+			model.addAttribute("categoryNum",num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -135,5 +137,27 @@ public class OwnerMenuController {
 		model.addAttribute("categoryName",categoryName);
 		
 		return ".owner.menu.menuDetail";
+	}
+	
+	//메뉴 stock 수정
+	@RequestMapping(value = "updateStock", method = RequestMethod.POST)
+	public String updateStock(
+			@RequestParam("stock") int stock, 
+			@RequestParam("menuNum") long menuNum, Model model) throws Exception{
+		
+		try {
+			
+			Map<String, Object> map=new HashMap<String, Object>();
+			map.put("stock", stock);
+			map.put("menuNum", menuNum);
+					
+			
+			service.updateStock(map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/owner/menu/menuCategory";
 	}
 }

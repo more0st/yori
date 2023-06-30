@@ -27,6 +27,8 @@ public interface MenuService {
 	public void insertMenu(Menu dto,String pathname) throws Exception;
 	//updateMenu : 메뉴수정
 	public void updateMenu(Menu dto) throws Exception;
+	//updateStock : 메뉴 stock 수정
+	public void updateStock(Map<String, Object> map);
 	//deleteMenu : 카테고리번호별 메뉴별 삭제
 	public void deleteMenu(Menu dto) throws Exception;
 	//insertOption : 옵션추가

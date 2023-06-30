@@ -101,7 +101,14 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public void insertMenu(Menu dto,String pathname) throws Exception {
 		try {
+			String saveFilename=fileManager.doFileUpload(dto.getSelectFile(), pathname);
+			
+			if(saveFilename!=null) {
+				dto.setImageFilename(saveFilename);
+			}
+			
 			dao.insertData("ownerMenu.insertMenu",dto);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -186,6 +193,16 @@ public class MenuServiceImpl implements MenuService{
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	@Override
+	public void updateStock(Map<String, Object> map) {
+		try {
+			dao.updateData("ownerMenu.updateStock",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }
