@@ -995,7 +995,7 @@ body {
           
        });
        
-         const index = menuarr.findIndex(menuItem => menuItem.menuNum == menuNum && menuItem.options == options);
+       const index = menuarr.findIndex(menuItem => menuItem.menuNum == menuNum && menuItem.options == options);
          
        console.log('-------------------');
        console.log(index);
@@ -1022,7 +1022,7 @@ body {
        
       out += "<div class='yes-cart'><div class='yes-cart-top'><div style='font-weight: bold;'>"+ menuName +" : "+ options +"</div>";
       out +=   "<button type='button' class='delete-btn'><i class='fa-regular fa-circle-xmark'></i></button></div>"
-      out +=   "<div class='yes-cart-bottom'><div><input class='cart-price cartPrice-"+ menuNum +"' value='"+ price +"' readonly='readonly'></div>"
+      out +=   "<div class='yes-cart-bottom'><div><input class='cart-price cartPrice-"+ menuNum +"-"+ options +"' value='"+ price +"' readonly='readonly'></div>"
       out +=   "<div style='display:flex;'><button type='button' class='quantity-btn minus' data-product-id='" + menuNum + "'><i class='fa-solid fa-minus'></i></button>"
       out +=   "<input name='cart-quantity' class='cart-quantity' value='"+ menuItem.quantity +"' readonly='readonly'>"
       out +=   "<button type='button' class='quantity-btn plus' data-product-id='" + menuNum + "'><i class='fa-solid fa-plus'></i></button>"
@@ -1035,7 +1035,6 @@ body {
     }
     
     // [주문표 부분 삭제]
-        // 레시피 상품 삭제
     $(document).on("click", ".delete-btn", function() {
       $(this).closest(".yes-cart").remove();
       
@@ -1053,7 +1052,7 @@ body {
         
       const total = document.querySelector('.valueinput');
       total.value = totalPrice;
-       
+      
       const menuarrString = JSON.stringify(menuarr);
    });
     
@@ -1085,8 +1084,9 @@ body {
           quantityInput.val(value);
       
          const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
-         const options = $(this).closest(".yes-cart").find(".options").val();
-          updateProductQuantity(menuNum.toString(), value.toString(), options.toString());
+         const menuOption = $(this).closest(".yes-cart").find(".options").val();
+         
+         updateProductQuantity(menuNum.toString(), value.toString(), menuOption.toString());
       }
       
    });
@@ -1102,20 +1102,24 @@ body {
             quantityInput.val(value);
 
             const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
-            const options = $(this).closest(".yes-cart").find(".options").val();
-            updateProductQuantity(menuNum.toString(), value.toString(), options.toString());
+            const menuOption = $(this).closest(".yes-cart").find(".options").val();
+            
+            updateProductQuantity(menuNum.toString(), value.toString(), menuOption.toString());
         }
 
     });
     
-    function updateProductQuantity(menuNum, quantity, options) {
-        let menuItem = menuarr.find(menuItem => menuItem.menuNum == menuNum, menuItem.options == options);
+    function updateProductQuantity(menuNum, quantity, menuOption) {
+        let menuItem = menuarr.find(menuItem => menuItem.menuNum == menuNum && menuItem.options == menuOption);
       
+        let options = menuOption
         if (menuItem) {
            menuItem.quantity = quantity;
         } else {
-           menuarr.push({ menuNum, quantity });
+           menuarr.push({ menuNum, quantity, options});
         }
+        
+        alert(menuItem.options)
         
         let totalPrice = 0;
         menuarr.forEach((item) => {
@@ -1125,7 +1129,7 @@ body {
       const total = document.querySelector('.valueinput');
       total.value = totalPrice;
       
-      const cartPrice = document.querySelector('.cartPrice-'+menuNum);
+      const cartPrice = document.querySelector('.cartPrice-'+menuNum + '-' + options);
       cartPrice.value = menuItem.price*menuItem.quantity;
       
     }
