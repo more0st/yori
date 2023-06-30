@@ -67,7 +67,7 @@
 			</div>
 			<div class="saleCnt">
 				<div>오늘의 매출</div>
-				<div><span class="saleCount">${todayOrderSum}</span>&nbsp;원</div>
+				<div style="color: #fa0050;"><fmt:formatNumber value="${todayOrderSum}" type="currency"/></div>
 			</div>
 			<div class="saleCnt">
 				<div>

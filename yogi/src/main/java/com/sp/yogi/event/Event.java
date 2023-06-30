@@ -11,6 +11,9 @@ public class Event {
 	private String end_date;
 	private String imgFileName;
 	private int enabled;
+	private int hitCount;
+
+	
 	
 	// 쿠폰 
 	private int couponNum;
@@ -21,6 +24,13 @@ public class Event {
 	private String expired_date;
 	private String used_date;	// 사용일자
 	private int status;	// 사용 상태 
+	
+	public int getHitCount() {
+		return hitCount;
+	}
+	public void setHitCount(int hitCount) {
+		this.hitCount = hitCount;
+	}
 	
 	public long getEventNum() {
 		return eventNum;

@@ -22,6 +22,8 @@ public interface EventService {
 	public List<Event> listEventTakers(long num);
 	public boolean userEventTakers(Map<String, Object> map);	
 	
+	
+	// 모두가 당첨이므로 사용하지 않음
 	// 이벤트 당첨자 등록 / 리스트
 	public void insertEventWinner(Event dto) throws Exception;
 	public List<Event> listEventWinner(long num);

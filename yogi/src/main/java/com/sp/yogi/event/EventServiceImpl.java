@@ -1,6 +1,5 @@
 package com.sp.yogi.event;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public void insertEvent(Event dto) throws Exception {
 		try {
-			
+			dao.insertData("event.insertEvent", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -37,7 +36,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public void deleteEvent(long num) throws Exception {
 		try {
-			dao.deleteData("event.deleteEvent", num);
+			//dao.deleteData("event.deleteEvent", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -49,7 +48,7 @@ public class EventServiceImpl implements EventService {
 		int result = 0;
 		
 		try {
-			result = dao.selectOne("event.dataCount", map);
+			//result = dao.selectOne("event.dataCount", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,7 +61,7 @@ public class EventServiceImpl implements EventService {
 		List<Event> list = null;
 		
 		try {
-			list = dao.selectList("event.listEvent", map);
+			//list = dao.selectList("event.listEvent", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,7 +72,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public void updateHitCount(long num) throws Exception {
 		try {
-			dao.updateData("event.updateHitCount", num);
+			//dao.updateData("event.updateHitCount", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -98,7 +97,7 @@ public class EventServiceImpl implements EventService {
 		Event dto = null;
 		
 		try {
-			dto = dao.selectOne("event.preReadEvent", map);
+			//dto = dao.selectOne("event.preReadEvent", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -111,7 +110,7 @@ public class EventServiceImpl implements EventService {
 		Event dto = null;
 		
 		try {
-			dto = dao.selectOne("event.nextReadEvent", map);
+			//dto = dao.selectOne("event.nextReadEvent", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -123,7 +122,7 @@ public class EventServiceImpl implements EventService {
 	public void insertEventTakers(Event dto) throws Exception {
 		try {
 			// 이벤트 응모자 등록
-			dao.insertData("event.insertEventTakers", dto);
+			//dao.insertData("event.insertEventTakers", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -136,7 +135,7 @@ public class EventServiceImpl implements EventService {
 		
 		try {
 			// 이벤트 응모자 목록
-			list = dao.selectList("event.listEventTakers", num);
+			//list = dao.selectList("event.listEventTakers", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -149,10 +148,10 @@ public class EventServiceImpl implements EventService {
 		boolean result = false;
 		try {
 			// 이벤트 응모 여부
-			Event dto = dao.selectOne("event.readEventTakers", map);
-			if(dto != null) {
-				result = true; 
-			}
+			//Event dto = dao.selectOne("event.readEventTakers", map);
+			//if(dto != null) {
+			//	result = true; 
+			//}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -168,7 +167,7 @@ public class EventServiceImpl implements EventService {
 		
 		try {
 			// 이벤트 당첨자 리스트
-			list = dao.selectList("event.listEventWinner", num);
+			//list = dao.selectList("event.listEventWinner", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -181,7 +180,7 @@ public class EventServiceImpl implements EventService {
 		Event dto = null;
 		// 이벤트 당첨 여부
 		try {
-			dto = dao.selectOne("event.readEventWinner", map);
+			//dto = dao.selectOne("event.readEventWinner", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

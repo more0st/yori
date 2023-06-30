@@ -149,6 +149,96 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 				<h2> 이벤트 </h2>
 		    </div>
 		    
+		    
+		    <div id="tab-content" style="padding: 15px 10px 5px; clear: both;">
+			<form name="eventForm" method="post">
+				<table class="table table-border border-top2 table-form">
+					<tr> 
+						<td>제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
+						<td> 
+							<input type="text" name="title" maxlength="100" class="form-control" value="${dto.title}">
+						</td>
+					</tr>
+	
+					<tr>
+						<td>시작일자</td>
+						<td> 
+							<input type="date" name="sday" class="form-control" value="${dto.sday}">
+							<input type="time" name="stime" class="form-control" value="${dto.stime}">
+						</td>
+					</tr>
+	
+					<tr>
+						<td>종료일자</td>
+						<td> 
+							<input type="date" name="eday" class="form-control" value="${dto.eday}">
+							<input type="time" name="etime" class="form-control" value="${dto.etime}">
+						</td>
+					</tr>
+	
+					<tr>
+						<td>당첨인원</td>
+						<td> 
+							<p> <input type="text" name="winnerNumber" class="form-control" value="${dto.winnerNumber}"> </p>
+							<p class="help-block">당첨 인원이 0이면 당첨자가 없습니다.</p>
+						</td>
+					</tr>
+					<tr>
+						<td>발표일자</td>
+						<td>
+							<p> 
+								<input type="date" name="wday" class="form-control" value="${dto.wday}">
+								<input type="time" name="wtime" class="form-control" value="${dto.wtime}">
+							</p>
+							<p class="help-block">당첨 인원이 0이면 발표일자는 저장되지 않습니다.</p>
+						</td>
+					</tr>
+					
+					<tr> 
+						<td>출력여부</td>
+						<td> 
+							<input type="checkbox" name="showEvent" id="showEvent" class="form-check-input" value="1" ${mode=="write" || dto.showEvent==1 ? "checked='checked' ":"" }>
+							<label for="showEvent" class="form-check-label">표시</label>
+						</td>
+					</tr>
+				
+					<tr> 
+						<td valign="top">내&nbsp;&nbsp;&nbsp;&nbsp;용</td>
+						<td valign="top"> 
+							<textarea name="content" id="ir1" class="form-control">${dto.content}</textarea>
+						</td>
+					</tr>
+				  
+				</table>
+					
+				<table class="table">
+					<tr> 
+						<td align="center">
+							<button type="button" class="btn btn-dark" onclick="submitContents(this.form);">${mode=='update'?'수정완료':'등록하기'}</button>
+							<button type="reset" class="btn">다시입력</button>
+							<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/eventManage/${category}/list';">${mode=='update'?'수정취소':'등록취소'}</button>
+							<c:if test="${mode=='update'}">
+								<input type="hidden" name="num" value="${dto.num}">
+								<input type="hidden" name="page" value="${page}">
+							</c:if>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>		
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
 		    <div class="body-main mx-auto">
 				<form name="eventForm" method="post" enctype="multipart/form-data">
 					<table class="table table-border table-form">

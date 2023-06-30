@@ -7,6 +7,23 @@
 
 </style>
 
+<script type="text/javascript">
+function searchList() {
+	const f = document.searchForm;
+	f.submit();
+}
+
+$(function(){
+	$('#tab-${category}').addClass('active');
+
+	$('ul.nav-tabs li').click(function() {
+		let category = $(this).attr('data-category');
+		
+		location.href = '${pageContext.request.contextPath}/admin/eventManage/'+category+'/list';
+	});
+});
+</script>
+
 
 <main id="main" class="main">
 
@@ -59,6 +76,7 @@
 								<th scope="col" style="text-align: center;">제목</th>
 								<th scope="col" style="width: 15%">이벤트 시작일</th>
 								<th scope="col" style="width: 15%">이벤트 종료일</th>
+								<th scope="col" style="width: 13%">조회수</th>
 								<th scope="col" style="width: 13%">응모자수</th>
 							</tr>
 						</thead>
@@ -69,6 +87,7 @@
 								<td>선착순 이벤트 3000명</td>
 								<td>2023-06-01</td>
 								<td>2023-06-10</td>
+								<td>4,500</td>
 								<td>2,000</td>
 							</tr>
 						</tbody>
@@ -86,10 +105,9 @@
 		                </div>
 		                <div class="col-md-2 text-center">
 		                  <select id="condition" class="form-select">
-		                    <option value="all" ${condition=="all"?"selected='selected'":""}>모두</option>
+		                    <option value="all" ${condition=="all"?"selected='selected'":""}>제목+내용</option>
 							<option value="startDate" ${condition=="startDate"?"selected='selected'":""}>시작일</option>
 							<option value="endDate" ${condition=="endDate"?"selected='selected'":""}>종료일</option>
-							<option value="winningDate" ${condition=="winningDate"?"selected='selected'":""}>발표일</option>
 		                  </select>
 		                </div>
 		                <div class="col-md-4 text-center">
