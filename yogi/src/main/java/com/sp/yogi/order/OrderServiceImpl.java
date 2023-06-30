@@ -66,7 +66,9 @@ public class OrderServiceImpl implements OrderService {
 			dao.insertData("order.insertOrderBundle", map);
 			
 			// order_items
-			dao.insertData("order.insertOrderItem", list);
+			for(Order order : list) {
+				dao.insertData("order.insertOrderItem", order);
+			}
 			
 			// order_status
 			dao.insertData("order.insertOrderStatus", map);

@@ -27,7 +27,7 @@
 	
 	<insert id="insertPayment" parameterType="map">
 		INSERT INTO payment (payNum, orderNum, pay_date, payMethod, price, couponNum, state)
-		VALUES (payment_seq.NEXTVAL, #{orderNum}, SYSDATE, #{payMethod}, #{price}, #{couponNum}, 1)
+		VALUES (payment_seq.NEXTVAL, #{orderNum}, SYSDATE, #{payMethod}, #{price}, #{couponNum, jdbcType=VARCHAR}, 1)
 	</insert>
 	
 

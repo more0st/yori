@@ -106,7 +106,7 @@
 				<div class="content1">
 					<div><p class="orderDone"> 주문 감사합니다🙏 </div>	
 					<hr class="hstyle">
-					<div><p class="paddingTB"> ${sessionScope.member.userName}님의 주문 요청이 완료되었습니다.</p> </div>	
+					<div><p class="paddingTB"> ${orderUser.nickName}님의 주문 요청이 완료되었습니다.</p> </div>	
 				</div>
 			</div>
 		</div>
@@ -146,16 +146,16 @@
 			<div class="content">
 				<div>
 				<!-- forEach 문 사용해서 메뉴/가격 -->
+				<c:forEach var="menu" items="${orderList}">
 					<div class="menu">
-						<p class="keyword">족발 大</p><p class="detail">36,000원</p> 
-					</div>	
-					<div class="menu">
-						<p class="keyword">막국수</p><p class="detail">17,000원</p> 
-					</div>	
+						<p class="keyword">${menu.menu}${menu.optionName == '옵션없음' ? '' : ' : '}${menu.optionName == '옵션없음' ? '' : menu.optionName} X ${menu.orderCount}</p>
+						<p class="detail">${menu.menuPrice}원</p>
+					</div>
+				</c:forEach>	
 				<!-- /forEach -->
 					<hr class="hstyle">
 					<div class="menu">
-						<p class="keyword bold">총 결제 금액</p><p class="detail">53,000원</p>					
+						<p class="keyword bold">총 결제 금액</p><p class="detail">${dto.total_price}원</p>					
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,8 @@
 package com.sp.yogi.order;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -34,8 +36,14 @@ public class OrderController {
 	@GetMapping("order")
 	public String order(HttpSession session, 
 			Model model,
-			@RequestParam("restaurantNum") Long restaurantNum
-//			, @RequestParam("deliveryFee") int deliveryFee
+			@RequestParam("restaurantNum") Long restaurantNum,
+			@RequestParam("deliveryFee") int deliveryFee,
+			@RequestParam("totalPrice") int total_price,
+			@RequestParam("menuNums") String menuNums,
+			@RequestParam("menuOptions") String menuOptions,
+			@RequestParam("menuQuantities") String menuQuantities,
+			@RequestParam("menuPrices") String menuPrices,
+			@RequestParam("menuNames") String menuNames
 			) {
 		
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
@@ -46,19 +54,49 @@ public class OrderController {
 		
 		RestaurantInfo restaurant = restaurantService.readRestaurantInfo(restaurantNum);
 		
+		total_price += deliveryFee;
+		
+		List<Order> orderList = new ArrayList<Order>();
+		
+		String [] menuNumsArr = menuNums.split(",");
+		String [] menuNamesArr = menuNames.split(",");
+		String [] menuOptionsArr = menuOptions.split("-");
+		String [] menuQuantitiesArr = menuQuantities.split(",");
+		String [] menuPricesArr = menuPrices.split(",");
+		
+		for(int i = 0; i < menuNumsArr.length; i++) {
+			Order order = new Order();
+			
+			order.setMenuNum(Long.parseLong(menuNumsArr[i]));
+			order.setMenu(menuNamesArr[i]);
+			order.setOptionName(menuOptionsArr[i]);
+			order.setMenuPrice(Integer.parseInt(menuPricesArr[i]));
+			order.setOrderCount(Integer.parseInt(menuQuantitiesArr[i]));
+			
+			orderList.add(order);
+		}
+		
+		model.addAttribute("menuNums", menuNums);
+		model.addAttribute("menuOptions", menuOptions);
+		model.addAttribute("menuQuantities", menuQuantities);
+		model.addAttribute("menuPrices", menuPrices);
+		model.addAttribute("menuNames", menuNames);
+		
+		model.addAttribute("orderList", orderList);
 		model.addAttribute("restaurant", restaurant);
 		model.addAttribute("dto", dto);
-//		model.addAttribute("deliveryFee", deliveryFee);
+		model.addAttribute("deliveryFee", deliveryFee);
+		model.addAttribute("total_price", total_price);
 		
 		return ".order.order";
 	}
 	
-	@GetMapping("complete")
-	public String complete() {
-		System.out.println("GET방식");
-		
-		return ".order.orderComplete";
-	}
+//	@GetMapping("complete")
+//	public String complete() {
+//		System.out.println("GET방식");
+//		
+//		return "redirect:/order/orderComplete";
+//	}
 	
 	@PostMapping("complete")
 	public String completeSubmit( 
@@ -68,8 +106,15 @@ public class OrderController {
 			@RequestParam String memo,
 			@RequestParam String payment,
 			@RequestParam String addr2,
-			@RequestParam("restaurantNum") Long restaurantNum
-			) {
+			@RequestParam("restaurantNum") Long restaurantNum,
+			@RequestParam("deliveryFee") int deliveryFee,
+			@RequestParam("total_price") int total_price,
+			@RequestParam("menuNums") String menuNums,
+			@RequestParam("menuOptions") String menuOptions,
+			@RequestParam("menuQuantities") String menuQuantities,
+			@RequestParam("menuPrices") String menuPrices,
+			@RequestParam("menuNames") String menuNames
+			) throws Exception {
 		System.out.println("POST방식");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -82,8 +127,6 @@ public class OrderController {
 		RestaurantInfo restaurant = restaurantService.readRestaurantInfo(restaurantNum);
 		
 		Member orderUser = memberservice.readMember(info.getUserId());
-		
-		int total_price = 0; // 전체 금액
 		
 		// 주문번호 생성
 		String productOrderNumber = null; // 주문번호
@@ -104,6 +147,42 @@ public class OrderController {
 			map.put("payMethod", "카드 결제");
 		}
 		map.put("orderNum", orderNum);
+		map.put("total_price", total_price);
+		map.put("price", total_price);
+		
+		List<Order> orderList = new ArrayList<Order>();
+		
+		String [] menuNumsArr = menuNums.split(",");
+		String [] menuNamesArr = menuNames.split(",");
+		String [] menuOptionsArr = menuOptions.split("-");
+		String [] menuQuantitiesArr = menuQuantities.split(",");
+		String [] menuPricesArr = menuPrices.split(",");
+		
+		for(int i = 0; i < menuNumsArr.length; i++) {
+			Order order = new Order();
+			
+			order.setOrderNum(orderNum);
+			order.setMenuNum(Long.parseLong(menuNumsArr[i]));
+			order.setMenu(menuNamesArr[i]);
+			order.setOptionName(menuOptionsArr[i]);
+			order.setMenuPrice(Integer.parseInt(menuPricesArr[i]));
+			order.setOrderCount(Integer.parseInt(menuQuantitiesArr[i]));
+			
+			orderList.add(order);
+		}
+
+//		Order order = new Order();
+//		order.setOptionName("배달 요금");
+//		order.setMenuPrice(deliveryFee);
+//		
+//		orderList.add(order);
+		
+		try {
+			orderservice.insertOrder(map, orderList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 		// 어트리뷰트로 띄어줄 객체
 		dto.setUserId(info.getUserId());
@@ -117,12 +196,15 @@ public class OrderController {
 		dto.setAddr2(addr2);
 		dto.setTel(tel);
 		dto.setOrderNum(orderNum);
+		dto.setTotal_price(String.valueOf(total_price));
 		
 		// jsp에 어트리뷰트 저장 
+		model.addAttribute("orderList", orderList);
+		model.addAttribute("orderUser", orderUser);
 		model.addAttribute("dto", dto);
 		model.addAttribute("restaurant", restaurant);
 		
 		// 리다이렉트
-		return ".order.orderComplete";
+		return "redirect:/order/orderComplete";
 	}
 }

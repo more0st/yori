@@ -13,7 +13,8 @@ public interface OrderService {
 	
 	/**
 	 * 
-	 * @param dto			결제 정보
+	 * @param map			결제 정보
+	 * @param list			메뉴 리스트
 	 * @throws Exception
 	 */
 	public void insertOrder(Map<String, Object> map, List<Order> list) throws Exception;
