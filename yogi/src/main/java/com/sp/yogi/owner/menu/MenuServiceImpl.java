@@ -177,4 +177,15 @@ public class MenuServiceImpl implements MenuService{
 		return list;
 	}
 
+	@Override
+	public List<Menu> optionGroup(long menuNum) {
+		List<Menu> list=null;
+		try {
+			list=dao.selectList("ownerMenu.optionGroupList",menuNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

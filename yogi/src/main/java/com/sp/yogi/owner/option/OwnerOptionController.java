@@ -55,15 +55,15 @@ public class OwnerOptionController {
 	public String optionReg(@RequestParam long menuNum, Model model) throws Exception {
 		Map<String, Object> map=new HashMap<String, Object>();
 		
-		List<Menu> optionList= service.optionList(menuNum);
-		for(Menu menu : optionList) {
+		List<Menu> optionGroup= service.optionGroup(menuNum);
+		for(Menu menu : optionGroup) {
 			map.put("menuNum", menu.getMenuNum());
 			map.put("option_group", menu.getOption_group());
 			menu.setOptionList(service.optionNameList(map));
 			map.clear();
 		}
 		
-		model.addAttribute("optionList",optionList);
+		model.addAttribute("optionList",optionGroup);
 		
 		return ".owner.option.optionReg";
 	}

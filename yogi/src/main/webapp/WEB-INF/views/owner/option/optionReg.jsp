@@ -112,7 +112,7 @@
 
 				<!-- foreach 돌려야 하는 div 태그 -->
 				<div class="accordion" id="accordionPanelsStayOpenExample">
-				<c:forEach var="option" items="${optionList}">
+				<c:forEach var="option" items="${optionList}" varStatus="status">
 					<div class="accordion-item">
 						<h2 class="accordion-header" id="panelsStayOpen-headingOne">
 							<button class="accordion-button" type="button"

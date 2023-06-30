@@ -94,6 +94,13 @@
 	WHERE menuNum=#{menuNum}
 </select>
 
+<!-- 옵션대분류 -->
+<select id="optionGroupList" parameterType="long" resultType="com.sp.yogi.owner.menu.Menu">
+	SELECT DISTINCT menuNum, option_group
+	FROM menuOption
+	WHERE menuNum=${menuNum}
+</select>
+
 <!-- 옵션 삭제 -->
 <delete id="deleteOption" parameterType="long">
 	DELETE FROM menuOption
