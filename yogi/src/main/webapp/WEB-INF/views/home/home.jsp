@@ -145,7 +145,7 @@
 		text-align: center;
 		cursor: pointer;
 		font-size: 15px;
-		margin-bottom: 10px;
+		margin: 5px 0;
 	}
 	
 	.dropdiv {

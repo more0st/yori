@@ -1053,6 +1053,12 @@ body {
     
     // [주문표 전체 삭제]
    function deleteAll(){
+     let msg = "삭제하시겠습니까?";
+     if(!confirm(msg)){
+    	 return;
+     }
+    	
+    	
       const cartItems = document.getElementsByClassName("yes-cart");
 
       Array.from(cartItems).forEach((cartItem) => {
