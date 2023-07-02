@@ -638,7 +638,7 @@ body {
                                   </div>
                                    <div class="modal-footer">
                                      <button type="button" class="modal-button addCart" onclick="addToCart(${menu.menuNum},'${menu.menu}');closeModal(${menu.price},${menu.menuNum});">주문표에 추가</button>
-                                     <button type="button" class="modal-button toOrder" onclick="addToOrder2(${restaurantNum},${restaurantInfo2.deliveryFee});">주문하기</button>
+                                     <button type="button" class="modal-button toOrder" onclick="addToOrder2(${menu.menuNum},'${menu.menu}',${restaurantNum},${restaurantInfo2.deliveryFee});">주문하기</button>
                                    </div>
                               </div>
                            </div>
@@ -1237,33 +1237,76 @@ body {
                 +"&menuPrices="+menuPrices;
     }
     
-    
-   var options2;
-    function makeString3() {
-       options2 = optionOne.map(function(option) {
-           return option.optionName;
-       }).join(',');
-   }
+    menuNums = 0;
+    menuOptions = 0;
+    menuQuantities = 0;
+    menuPrices = 0;
     
     // [주문버튼] 개별 주문
-    function addToOrder2(restaurantNum, deliveryFee){
-       // 배열 초기화
-       
-       let minimum = document.querySelector('.infoinput').value;
-       let totalPrice = document.querySelector('.totalOption').value;
-       
-        if(parseInt(totalPrice) < parseInt(minimum)){
+    //${menu.menuNum},'${menu.menu}',${restaurantNum},${restaurantInfo2.deliveryFee}
+    function addToOrder2(menuNum, menuName, restaurantNum, deliveryFee){
+        let minimum = document.querySelector('.infoinput').value;
+        
+        const totalOptionField = document.querySelector('.totalOption-'+menuNum);
+        const price = parseInt(totalOptionField.value);
+        const optionarrString = JSON.stringify(optionarr);
+        
+        makeString();
+        
+        alert(options)
+        
+        var menuItem = {
+           menuNum : menuNum,
+           menuName: menuName,
+           quantity: 1,
+           price : price,
+           options: options,
+           cartCount: cartCount
+        }
+        
+ 		// 이미 있는지 검사하기
+ 		var isAlreadyAdded = menuarr.some(function(menuItem){
+ 		   return menuItem.menuNum == menuNum && menuItem.options == options;
+ 		});
+        
+ 		const index = menuarr.findIndex(menuItem => menuItem.menuNum == menuNum && menuItem.options == options);
+          
+ 		if(isAlreadyAdded){
+ 		   if (index !== -1) {
+ 		      menuItem.quantity = parseInt(menuarr[index].quantity) + 1;
+ 		      menuarr.splice(index, 1);
+ 		      $('.cart-order .yes-cart').eq(index).remove();
+ 		   }
+ 		}
+ 		
+ 		menuarr.push(menuItem);
+ 		
+ 		let totalPrice = 0;
+		menuarr.forEach((item) => {
+		     totalPrice += item.quantity * item.price;
+		 });
+		
+		if(parseInt(totalPrice) < parseInt(minimum)){
            alert('최소 주문 금액을 채워주세요.')
+           let out = "";
+	   
+			out += "<div class='yes-cart'><div class='yes-cart-top'><div style='font-weight: bold;'>"+ menuName +" : "+ options +"</div>";
+			out +=   "<button type='button' class='delete-btn'><i class='fa-regular fa-circle-xmark'></i></button></div>"
+			out +=   "<div class='yes-cart-bottom'><div><input class='cart-price cartPrice-"+ cartCount +"' value='"+ price +"' readonly='readonly'></div>"
+			out +=   "<div style='display:flex;'><button type='button' class='quantity-btn minus' data-count='"+ cartCount +"' data-product-id='" + menuNum + "'><i class='fa-solid fa-minus'></i></button>"
+			out +=   "<input name='cart-quantity' class='cart-quantity' value='"+ menuItem.quantity +"' readonly='readonly'>"
+			out +=   "<button type='button' class='quantity-btn plus' data-count='"+ cartCount +"' data-product-id='" + menuNum + "'><i class='fa-solid fa-plus'></i></button>"
+			out += "</div></div><input type='hidden' class='menuNum' value='"+ menuNum +"'><input type='hidden' class='cartCount' value='"+ cartCount +"'></div>";
+	  
+			$('.cart-order').append(out);
+			cartCount++;
+			$(".modal").modal("hide");
+		
+			checkCondition();
            return;
         }
-        let menuNum = document.querySelector('#menuNum').value;
-        let menuName = document.querySelector('#menuName').value;
-       
-        // const optionarrString = JSON.stringify(optionOne);
-        makeString3();
-        if(options2 == ''){
-           options2 = '옵션없음';
-        }
+        
+        makeString2();
         
         // restaurantNum : 가게 번호
         // deliveryFee : 배달비
@@ -1275,8 +1318,10 @@ body {
         // menuPrices : 각 메뉴 가격 (옵션 포함한 메뉴 가격 * 개수)
        location.href='${pageContext.request.contextPath}/order/order?restaurantNum='+restaurantNum
                 +'&deliveryFee='+deliveryFee+"&totalPrice=" + totalPrice
-                +"&menuNums="+menuNum+"&menuNames="+menuName+"&menuOptions="+options2+"&menuQuantities=1"
-                +"&menuPrices="+totalPrice;
+                +"&menuNums="+menuNums+"&menuNames="+menuNames+"&menuOptions="+menuOptions+"&menuQuantities="+menuQuantities
+                +"&menuPrices="+menuPrices;
+       
+        
     }
     
 </script>
