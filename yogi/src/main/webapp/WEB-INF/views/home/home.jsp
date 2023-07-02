@@ -72,6 +72,7 @@
 		border-radius: 5px;
 		width: 400px;
 		background: white;
+		display : flex;
 	}
 	
 	.category-box {
@@ -128,14 +129,19 @@
 		align-items: center;
 		margin: 0 auto;
 		border: none;
+		justify-content: center;
 	}
 	
 	.address-button:focus {
 		border: none;
 	}
 	
+	.dropdown-menu{
+		width: 100%;
+	}
+	
 	.dropdown-content {
-		width: 400px;
+		width: 100%;
 		text-align: center;
 		cursor: pointer;
 		font-size: 15px;
