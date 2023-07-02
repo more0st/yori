@@ -39,7 +39,7 @@
 }
 
 .search-box2 {
-	width: 800px;
+	width: 1000px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -48,8 +48,8 @@
 	width: 50%;
 	height: 100%;
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	
 }
 
 .search-info > input {
@@ -65,8 +65,25 @@
 	padding: 0 15px;
 }
 
+.search-info1 {
+	justify-content: left;
+}
+
+.search-info2 {
+	justify-content: right;
+}
+
+#searchInput{
+	width:280px;
+	border: 1px solid #d9d9d9;
+}
+
+#conditionval {
+	border: 1px solid #d9d9d9;
+}
+
 .location {
-	width: 1100px;
+	width: 1050px;
 	margin: 10px auto;
 	color: #333;
 	padding-left: 10px;
@@ -83,7 +100,7 @@
 
 .restaurant-list {
 	margin: 10px auto;
-	width: 1100px;
+	width: 1000px;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-auto-rows: 100px;
@@ -164,10 +181,10 @@
 	<form name="searchForm">
 	<div class="search-box">
 	<div class="search-box2">
-		<div class="search-info">
+		<div class="search-info search-info1">
 			<input type="text" name="keyword" id="searchInput" placeholder="음식점이나 메뉴를 검색하세요."> 
 		</div>
-		<div class="search-info">
+		<div class="search-info search-info2">
 			<select name="condition" id="conditionval">
 				<option value="all" 			${condition=="all"?"selected='selected'":"" }>기본 정렬순</option>
 				<option value="rank"  			${condition=="rank"?"selected='selected'":"" }>별점순</option>
@@ -216,10 +233,10 @@ $(document).ready(function() {
 
 //카테고리(프랜차이즈.치킨), 키워드(검색어), 정렬순, 배달주소
 function getList() {
-	let categoryNum = ${categoryNum};
-	let addr = "${sessionScope.member.addr1}"; // addr은 사용자의 주소로 초기화합니다.
-	let keyword = $('#searchInput').val();
-	let condition = document.getElementById('conditionval').value;
+	 let categoryNum = ${categoryNum};
+	 let addr = "${sessionScope.member.addr1}"; // addr은 사용자의 주소로 초기화합니다.
+    let keyword = $('#searchInput').val();
+    let condition = document.getElementById('conditionval').value;
     
     $.ajax({
         url: "${pageContext.request.contextPath}/restaurant/search",
