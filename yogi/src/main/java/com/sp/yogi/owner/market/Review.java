@@ -14,8 +14,15 @@ public class Review {
 	private Long restaurantNum;
 	private Long reportNum;
 	private String nickName;
+	private Review reportList;
 	
-	
+
+	public Review getReportList() {
+		return reportList;
+	}
+	public void setReportList(Review reportList) {
+		this.reportList = reportList;
+	}
 	public String getNickName() {
 		return nickName;
 	}

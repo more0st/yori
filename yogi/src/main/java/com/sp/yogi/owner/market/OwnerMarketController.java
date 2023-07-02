@@ -196,7 +196,11 @@ public class OwnerMarketController {
 		}
 		long restaurantNum=dto.getRestaurantNum();
 		
+		
 		List<Review> reviewList=rService.reviewList(restaurantNum);
+		for(Review rev : reviewList) {
+			rev.setReportList(rService.reviewReportList(rev.getOrderNum()));
+		}
 		
 		int reviewCount=rService.reviewCount(restaurantNum);
 		double avgRating=rService.avgRating(restaurantNum);
@@ -209,6 +213,23 @@ public class OwnerMarketController {
 		return ".owner.market.review";
 	}
 	 
+	//신고하기
+	@RequestMapping(value = "insertReport", method = RequestMethod.POST)
+	public String insertReport(@RequestParam("content")String content, @RequestParam("orderNum")long orderNum, Review dto, Model model) throws Exception{
+		
+		try {
+			dto.setOrderNum(orderNum);
+			dto.setContent(content);
+			rService.insertReviewReport(dto);
+			
+			model.addAttribute("dto", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/owner/market/review";
+	}
 	// 답글 등록 및 수정
 	@PostMapping("insertReply")
 	public String insertReply(

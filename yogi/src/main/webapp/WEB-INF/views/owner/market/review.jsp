@@ -156,7 +156,7 @@
 
 .modal-body {
    overflow-y: auto;
-   height: 300px;
+   height: 200px;
 }
 
 .modal-text {
@@ -205,14 +205,21 @@
                <div class="review-name">
                   <div class="res-333" style="font-weight: bold;">${rev.nickName}님</div><div class="review-date">${rev.reg_date}</div>
                </div>
-               <div><button class="report-btn">신고</button></div>
+               <div>
+               <c:if test="${rev.reportList==null}">
+               <button class="report-btn btnReport" data-orderNum="${rev.orderNum}">신고</button>
+               </c:if>
+               <c:if test="${rev.reportList!=null}">
+               <button class="report-btn btnReport" disabled="disabled" style="color: tomato;">신고된 게시물입니다.</button>
+               </c:if>
+               </div>
             </div>
             <div class="review-rating">
             <c:forEach var="i" begin="1" end="${rev.rating}">★</c:forEach>&nbsp;
             ${rev.rating}</div>
             <!-- ${rev.imgFileName} 사용 -->
             <c:if test="${rev.imgFileName != null}">
-               <img class="review-img" src="${pageContext.request.contextPath}/resources/picture/burgerking.png">
+           	   <img class="review-img" src="${pageContext.request.contextPath}/uploads/review/${rev.imgFileName}">
             </c:if>
             <div class="review-content">
                ${rev.content}
@@ -252,8 +259,29 @@
    </div>
 
 
-
-        <!-- 모달 -->
+ 
+        <!-- 신고모달 -->
+         <div class="modal" id="reportModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+               <div class="modal-content">
+                     <div class="modal-header">
+                      <h5 class="modal-title">리뷰신고하기</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <form name="reportInsertForm" method="post">
+                   <div class="modal-body">
+                      <textarea class="modal-text" name="content" placeholder="신고사유를 입력하세요."></textarea>
+                   </div>
+                    <div class="modal-footer">
+                      <input type="hidden" name="orderNum">
+                      <button type="button" class="modal-button addCart" data-bs-dismiss="modal" aria-label="Close">취소하기</button>
+                      <button type="button" class="modal-button toOrder btnReportInsertOk">신고하기</button>
+                    </div>
+                    </form>
+               </div>
+            </div>
+         </div>  
+        <!-- 리뷰답글모달 -->
          <div class="modal" id="modal-answer" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                <div class="modal-content">
@@ -263,7 +291,7 @@
                      </div>
                      <form name="reviewForm" id="reviewForm" method="post">
                    <div class="modal-body">
-                      <textarea class="modal-text" name="reply1"></textarea>
+                      <textarea class="modal-text" name="reply1" placeholder="답글을 입력하세요."></textarea>
                    </div>
                     <div class="modal-footer">
                       <input type="hidden" name="orderNum">
@@ -280,6 +308,7 @@
 
 <script type="text/javascript">
 
+//답글모달show
 $(function() {
 	$("body").on("click", ".btnAnswerModal", function(){
 		
@@ -291,6 +320,8 @@ $(function() {
 	});
 });
 
+
+//답글등록
 function sendOk() {
    const str = document.reviewForm.reply1.value;
     if (!str) {
@@ -374,6 +405,52 @@ $(function(){
 		   
 		   togglemenu.style.display = "block";
 		   togglemenu2.style.display = "none";		
+	});
+});
+
+
+//신고모달show
+$(function(){
+	$('.btnReport').click(function(){
+		
+		let orderNum=$(this).attr("data-orderNum");
+		
+		document.reportInsertForm.orderNum.value=orderNum;
+		
+		$('#reportModal').modal('show');
+		
+	});
+});
+
+//신고하기
+$(function(){
+	$('.btnReportInsertOk').click(function(){
+		const f=document.reportInsertForm;
+		const content=f.content.value;
+		const orderNum=f.orderNum.value;
+		
+		if(content.trim()===""){
+			alert("신고사유를 입력하세요.");
+			f.content.focus();
+			return;
+		}
+		
+		let url="${pageContext.request.contextPath}/owner/market/insertReport";
+		let query = $('form[name=reportInsertForm]').serialize();
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("리뷰를 신고하지 못했습니다.");
+				return false;
+			} else {
+                window.location.href = "${pageContext.request.contextPath}/owner/market/review";
+                $('#reportModal').modal('hide');
+            }
+			
+		};
+		
+		ajaxFun(url,"post",query,"html",fn);
+		
 	});
 });
 
