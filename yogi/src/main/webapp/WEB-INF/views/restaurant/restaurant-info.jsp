@@ -643,8 +643,6 @@ body {
                  </c:forEach>
                  </div>
                </div> <!-- 아코디언 끝 -->
-               
-               
                   
                   
             </div>
@@ -656,7 +654,6 @@ body {
                   <div style="font-size: 48px;">${restaurantInfo2.rating}</div>
                </div>
                
-               <!-- foreach로 돌리기 -->
                <c:if test="${empty reviewList}">
                   <div class="review" style="color: #333; font-weight: bold; text-align: center;">등록된 리뷰가 없습니다.</div>
                </c:if>
@@ -668,13 +665,10 @@ body {
                            <!-- 닉네임 -->
                            <div class="res-333" style="font-weight: bold;">${review.userName}님</div><div class="review-date">${review.regDate}</div>
                         </div>
-                        <!-- 자신의 리뷰라면 삭제 / 신고 -->
-                        <!-- <div><button class="report-btn">신고</button></div>  -->
                      </div>
                      <div class="review-rating">
                      <c:forEach var="i" begin="1" end="${review.star}">★</c:forEach>
                      </div>
-                     <!-- image가 없는 리뷰라면 if로 생략하기 -->
                      <c:if test="${not empty review.imgFileName}">
                         <img class="review-img" src="${pageContext.request.contextPath}/uploads/review/${review.imgFileName}">
                      </c:if>
@@ -831,7 +825,7 @@ body {
    choiceMenu.classList.add('active');
    
    
-   <%-- 모달 --%>
+   // 모달 
    function openModal(menuNum){
       $('#modal-' + menuNum).modal('show');
    }
@@ -876,7 +870,6 @@ body {
             likeStatus = !likeStatus
             // 2. 색 변경
             $('#likeBtn').css("color", likeColor)
-            console.log(likeStatus + " 좋아요 취소")
 
         } else {
             // 좋아요 취소
@@ -884,7 +877,6 @@ body {
             likeStatus = !likeStatus
             // 2. 색 변경
             $('#likeBtn').css("color", defaultColor)
-            console.log(likeStatus + " 좋아요 요청")
         }
     }
 
@@ -916,8 +908,9 @@ body {
     let menuarr = [];
     let optionarr = [];
     let optionOne = [];
+    
     // 모달 내부 가격 ------------------------------------------
-      function updateTotalOption(menuNum, firstPrice, price, checked, optionName) {
+	function updateTotalOption(menuNum, firstPrice, price, checked, optionName) {
        const totalOptionField = document.querySelector('.totalOption-'+menuNum);
        const currentTotal = parseInt(totalOptionField.value);
        const updatedTotal = checked ? currentTotal + price : currentTotal - price;
@@ -945,19 +938,19 @@ body {
     }
     
     // [ 모달 창이 닫힐 때 호출되는 함수 ]
-      function closeModal(price, menuNum) {
-         const totalOptionField = document.querySelector('.totalOption-'+menuNum);
-         totalOptionField.value = price;
+	function closeModal(price, menuNum) {
+		const totalOptionField = document.querySelector('.totalOption-'+menuNum);
+		totalOptionField.value = price;
          
-          // 배열 초기화
-          optionarr = [];
+		// 배열 초기화
+		optionarr = [];
 
-          // 체크 박스 요소들을 찾아서 해제
-          const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-          checkboxes.forEach((checkbox) => {
-              checkbox.checked = false;
-          });
-      }
+		// 체크 박스 요소들을 찾아서 해제
+		const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+		checkboxes.forEach((checkbox) => {
+			checkbox.checked = false;
+		});
+	}
     
     
     // [ String으로 바꿔주기 ]
@@ -973,6 +966,7 @@ body {
 
     let cartCount = 1;
     var quantity = 1;
+    
     // [주문표에 추가] ---------------------------------------------
     function addToCart(menuNum, menuName) {
        const totalOptionField = document.querySelector('.totalOption-'+menuNum);
@@ -991,60 +985,55 @@ body {
           cartCount: cartCount
        }
        
-       // 이미 있는지 검사하기
-       var isAlreadyAdded = menuarr.some(function(menuItem){
-          return menuItem.menuNum == menuNum && menuItem.options == options;
-       });
+		// 이미 있는지 검사하기
+		var isAlreadyAdded = menuarr.some(function(menuItem){
+		   return menuItem.menuNum == menuNum && menuItem.options == options;
+		});
        
-         const index = menuarr.findIndex(menuItem => menuItem.menuNum == menuNum && menuItem.options == options);
+		const index = menuarr.findIndex(menuItem => menuItem.menuNum == menuNum && menuItem.options == options);
          
-       console.log('-------------------');
-       console.log(index);
-       
-       if(isAlreadyAdded){
-          if (index !== -1) {
-             menuItem.quantity = parseInt(menuarr[index].quantity) + 1;
-             menuarr.splice(index, 1);
-             $('.cart-order .yes-cart').eq(index).remove();
-          }
-       }
-       
-      menuarr.push(menuItem);
-       
-       let totalPrice = 0;
-       menuarr.forEach((item) => {
-            totalPrice += item.quantity * item.price;
-        });
-       
-       const total = document.querySelector('.valueinput');
-       total.value = parseInt(totalPrice);
-       
-       let out = "";
-       
-       
-      out += "<div class='yes-cart'><div class='yes-cart-top'><div style='font-weight: bold;'>"+ menuName +" : "+ options +"</div>";
-      out +=   "<button type='button' class='delete-btn'><i class='fa-regular fa-circle-xmark'></i></button></div>"
-      out +=   "<div class='yes-cart-bottom'><div><input class='cart-price cartPrice-"+ cartCount +"' value='"+ price +"' readonly='readonly'></div>"
-      out +=   "<div style='display:flex;'><button type='button' class='quantity-btn minus' data-count='"+ cartCount +"' data-product-id='" + menuNum + "'><i class='fa-solid fa-minus'></i></button>"
-      out +=   "<input name='cart-quantity' class='cart-quantity' value='"+ menuItem.quantity +"' readonly='readonly'>"
-      out +=   "<button type='button' class='quantity-btn plus' data-count='"+ cartCount +"' data-product-id='" + menuNum + "'><i class='fa-solid fa-plus'></i></button>"
-      out += "</div></div><input type='hidden' class='menuNum' value='"+ menuNum +"'><input type='hidden' class='cartCount' value='"+ cartCount +"'></div>";
-   
-      
-      $('.cart-order').append(out);
-      cartCount++;
-      console.log(menuarr);
-      
-       $(".modal").modal("hide");
-    }
+		if(isAlreadyAdded){
+		   if (index !== -1) {
+		      menuItem.quantity = parseInt(menuarr[index].quantity) + 1;
+		      menuarr.splice(index, 1);
+		      $('.cart-order .yes-cart').eq(index).remove();
+		   }
+		}
+		
+		menuarr.push(menuItem);
+		
+		let totalPrice = 0;
+		menuarr.forEach((item) => {
+		     totalPrice += item.quantity * item.price;
+		 });
+		
+		const total = document.querySelector('.valueinput');
+		total.value = parseInt(totalPrice);
+		
+		let out = "";
+	   
+		out += "<div class='yes-cart'><div class='yes-cart-top'><div style='font-weight: bold;'>"+ menuName +" : "+ options +"</div>";
+		out +=   "<button type='button' class='delete-btn'><i class='fa-regular fa-circle-xmark'></i></button></div>"
+		out +=   "<div class='yes-cart-bottom'><div><input class='cart-price cartPrice-"+ cartCount +"' value='"+ price +"' readonly='readonly'></div>"
+		out +=   "<div style='display:flex;'><button type='button' class='quantity-btn minus' data-count='"+ cartCount +"' data-product-id='" + menuNum + "'><i class='fa-solid fa-minus'></i></button>"
+		out +=   "<input name='cart-quantity' class='cart-quantity' value='"+ menuItem.quantity +"' readonly='readonly'>"
+		out +=   "<button type='button' class='quantity-btn plus' data-count='"+ cartCount +"' data-product-id='" + menuNum + "'><i class='fa-solid fa-plus'></i></button>"
+		out += "</div></div><input type='hidden' class='menuNum' value='"+ menuNum +"'><input type='hidden' class='cartCount' value='"+ cartCount +"'></div>";
+	  
+		$('.cart-order').append(out);
+		cartCount++;
+		
+		$(".modal").modal("hide");
+	}
     
     // [주문표 부분 삭제]
-        // 레시피 상품 삭제
     $(document).on("click", ".delete-btn", function() {
       $(this).closest(".yes-cart").remove();
+      let cartCount = $(this).closest(".yes-cart").find('.minus').attr("data-count");
+      console.log(cartCount);
       
       const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
-      const index = menuarr.findIndex(menuItem => menuItem.menuNum == menuNum);
+      const index = menuarr.findIndex(menuItem => menuItem.cartCount == cartCount );
       
       if (index !== -1) {
          menuarr.splice(index, 1);
@@ -1114,7 +1103,6 @@ body {
 	});
     
    
-    
     function updateProductQuantity(menuNum, quantity, cartCount) {
         let menuItem = menuarr.find(menuItem => menuItem.cartCount == cartCount);
       

@@ -67,13 +67,10 @@
 	}
 	
 	.address-search {
-		height: 40px;
 		outline: none;
 		border: none;
 		border-radius: 5px;
-		width: 280px;
-		padding-left: 15px;
-		padding-right: 15px;
+		width: 400px;
 		background: white;
 	}
 	
@@ -90,7 +87,7 @@
 	}
 	
 	.category-info {
-		border: 1px solid #818181;
+		border: 1px solid #d9d9d9;
 		background: white;
 		width: 250px;
 		position: relative;
@@ -138,9 +135,11 @@
 	}
 	
 	.dropdown-content {
-		width: 350px;
+		width: 400px;
 		text-align: center;
 		cursor: pointer;
+		font-size: 15px;
+		margin-bottom: 10px;
 	}
 	
 	.dropdiv {
