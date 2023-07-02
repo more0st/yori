@@ -614,7 +614,6 @@ $(function(){
 		const f=document.insertImgForm;
 		let str;
 		str=f.selectFile.value;
-		alert("str 값 : "+str);
 		
 		let formData = new FormData($('form[name=insertImgForm]')[0]); 
 		
