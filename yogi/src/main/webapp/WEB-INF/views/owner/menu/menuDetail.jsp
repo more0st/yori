@@ -93,9 +93,9 @@
 							  	</button>
 							  	<ul class="dropdown-menu">
 							    	<li><button type="button" class="dropdown-item btnUpdateMenu" 
-							    		data-menuName="${dto.menu}" data-menuNum="${dto.menuNum}" 
+							    		data-menu="${dto.menu}" data-menuNum="${dto.menuNum}" 
 							    		data-price="${dto.price}" data-imageFilename="${dto.imageFilename}">수정</button></li>
-							    	<li><button type="button" class="dropdown-item btnDeleteMenu">삭제</button></li>
+							    	<li><button type="button" class="dropdown-item" onclick="btnDeleteMenu(${dto.menuNum});">삭제</button></li>
 							 	 </ul>
 							</div>
 						</div>
@@ -185,7 +185,7 @@
 	      <!-- 메뉴이름 -->
 	      <div>
 	      	<div class="title"><br>메뉴이름</div>
-	      	<div><input name="menuName" type="text" class="form-control" value="사이다"></div>
+	      	<div><input name="menu" type="text" class="form-control" value="사이다"></div>
 	      </div>
 	      
 	      <!-- 가격 -->
@@ -203,7 +203,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-primary btnUpdateMenuOk">저장</button>
-	        <input>
+	        <input type="hidden" name="menuNum">
 	      </div>
       </form>
     </div>
@@ -323,13 +323,11 @@ $(function(){
 	$('.btnUpdateMenu').click(function(){
 		
 		let menuNum = $(this).attr("data-menuNum");
-		let menuName = $(this).attr("data-menuName");
+		let menu = $(this).attr("data-menu");
 		let price = $(this).attr("data-price");
-		let imageFilename = $(this).attr("data-imageFilename");
 		
-		document.menuUpdateForm.menuName.value = menuName;
+		document.menuUpdateForm.menu.value = menu;
 		document.menuUpdateForm.price.value = price;
-		document.menuUpdateForm.imageFilename.value = imageFilename;
 		document.menuUpdateForm.menuNum.value = menuNum;
 		
 		$('#menuUpdateModal').modal('show');
@@ -415,12 +413,69 @@ $(function(){
                $('#menuInsertModal').modal('hide');
                location.href = "${pageContext.request.contextPath}/owner/menu/menuDetail?num="+categoryNum;
 		
-               ajaxFileFun(url,"post",formData,"html",fn);
+               ajaxFileFun(url,"post",formData,"json",fn);
                
                location.reload(true);
 		
 	});
 });
 
+//메뉴 수정
+$(function(){
+	$('.btnUpdateMenuOk').click(function(){
+		
+		const f=document.menuUpdateForm;
+		const menu =f.menu.value;
+		const price =f.price.value;
+		const category =f.selectCategory.value;
+		
+		let str;
+		str=f.selectFile.value;
+		
+		let formData=new FormData($('form[name=menuUpdateForm]')[0]);
+		
+		if(menu===""){
+			alert("메뉴 이름을 입력해주세요.");
+			f.menuName.focus();
+			return;
+		}
+		if(price.trim()===""){
+			alert("메뉴 가격을 입력해주세요.");
+			f.price.focus();
+			return;
+		}
+		if(! str){
+			alert("메뉴 이미지를 선택해주세요.");
+			f.selectFile.focus();
+			return;
+		}
+		
+		let url="${pageContext.request.contextPath}/owner/menu/updateMenu";
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("메뉴를 수정하지 못했습니다.");
+				return false;
+			} else {
+            }
+		};
+               $('#menuUpdateModal').modal('hide');
+               location.href = "${pageContext.request.contextPath}/owner/menu/menuDetail?num="+category;
+		
+               ajaxFileFun(url,"post",formData,"json",fn);
+               
+               location.reload(true);
+		
+	});
+});
+
+//메뉴 삭제
+function btnDeleteMenu(menuNum){
+	if(confirm("메뉴를 삭제하시겠습니까 ? ")){
+		let query="menuNum="+menuNum;
+	    let url = "${pageContext.request.contextPath}/owner/menu/deleteMenu?num="+${categoryNum}+"&"+ query;
+    	location.href = url;
+	}
+}
 
 </script>

@@ -147,7 +147,6 @@ public class OwnerMenuController {
          @RequestParam("selectCategory") long selectCategory, 
          @RequestParam("menuName") String menuName, 
          @RequestParam("price") long price, 
-         @RequestParam("categoryNum") long categoryNum, 
          Menu dto, HttpSession session) throws Exception{
       
       String root=session.getServletContext().getRealPath("/");
@@ -171,6 +170,50 @@ public class OwnerMenuController {
       
       return model;
    }
+   //메뉴 수정
+   @RequestMapping(value = "updateMenu", method = RequestMethod.POST)
+   @ResponseBody
+   public Map<String, Object> updateMenu(
+		   @RequestParam("selectCategory") long selectCategory, 
+		   @RequestParam("menu") String menu, 
+		   @RequestParam("price") long price, 
+		   Menu dto, HttpSession session) throws Exception{
+	   
+	   String root=session.getServletContext().getRealPath("/");
+	   String path=root+"uploads"+File.separator+"owner"+File.separator+"menu";
+	   
+	   Map<String, Object> model=new HashMap<>();
+	   
+	   try {
+		   
+		   dto.setNum(selectCategory);
+		   dto.setMenu(menu);
+		   dto.setPrice(price);
+		   service.updateMenu(dto, path);
+		   
+		   model.put("imageFilename", dto.getImageFilename());
+		   
+		   
+	   } catch (Exception e) {
+		   e.printStackTrace();
+	   }
+	   
+	   return model;
+   }
+   
+	//메뉴 삭제
+	@RequestMapping(value = "deleteMenu")
+	public String deleteMenu(@RequestParam long menuNum, @RequestParam long num) throws Exception{
+		
+		try {
+			service.deleteMenu(menuNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/owner/menu/menuDetail?num="+num;
+	}
 	
 	//메뉴 stock 수정
 	@RequestMapping(value = "updateStock", method = RequestMethod.POST)
