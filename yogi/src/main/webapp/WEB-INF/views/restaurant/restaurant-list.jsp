@@ -216,10 +216,10 @@ $(document).ready(function() {
 
 //카테고리(프랜차이즈.치킨), 키워드(검색어), 정렬순, 배달주소
 function getList() {
-	 let categoryNum = ${categoryNum};
-	 let addr = "${sessionScope.member.addr1}"; // addr은 사용자의 주소로 초기화합니다.
-    let keyword = $('#searchInput').val();
-    let condition = document.getElementById('conditionval').value;
+	let categoryNum = ${categoryNum};
+	let addr = "${sessionScope.member.addr1}"; // addr은 사용자의 주소로 초기화합니다.
+	let keyword = $('#searchInput').val();
+	let condition = document.getElementById('conditionval').value;
     
     $.ajax({
         url: "${pageContext.request.contextPath}/restaurant/search",
