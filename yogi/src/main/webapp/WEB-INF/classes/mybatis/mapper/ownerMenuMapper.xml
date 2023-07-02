@@ -66,7 +66,7 @@
 <!-- 메뉴등록 -->
 <select id="insertMenu" parameterType="com.sp.yogi.owner.menu.Menu">
 	INSERT INTO menu1(menuNum, num, menu, price, imageFilename, stock) 
-	    VALUES(menu1_seq.NEXTVAL,#{num},#{menu},#{price},#{imageFilename},1)
+	    VALUES(menu1_seq.NEXTVAL,#{num},#{menu},#{price},#{imageFilename ,jdbcType = VARCHAR},1)
 </select>
 
 <!-- 메뉴수정 -->

@@ -25,7 +25,8 @@
 }
 
 .imgsize{
-	width: 200px;
+	width: 180px;
+	margin: 15px;
 }
 
 .iconsize{
@@ -77,7 +78,7 @@
 				<div class="menu">	
 					<div style="display:flex;">
 						<div>
-							<img class="res-img imgsize" src="${pageContext.request.contextPath}/resources/picture/cider.png">
+							<img class="res-img imgsize" src="${pageContext.request.contextPath}/uploads/owner/menu/${dto.imageFilename}">
 						</div>
 						<div class="menuDetail">
 							<div><h5>${dto.menu}</h5>${dto.price}원</div>
@@ -91,8 +92,10 @@
 							  	<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 							  	</button>
 							  	<ul class="dropdown-menu">
-							    	<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#menuUpdateModal">메뉴 수정</a></li>
-							    	<li><a class="dropdown-item" href="#">메뉴 삭제</a></li>
+							    	<li><button type="button" class="dropdown-item btnUpdateMenu" 
+							    		data-menuName="${dto.menu}" data-menuNum="${dto.menuNum}" 
+							    		data-price="${dto.price}" data-imageFilename="${dto.imageFilename}">수정</button></li>
+							    	<li><button type="button" class="dropdown-item btnDeleteMenu">삭제</button></li>
 							 	 </ul>
 							</div>
 						</div>
@@ -117,13 +120,13 @@
         <h5 class="modal-title" id="exampleModalLabel">메뉴 추가</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form> 
+      <form name="menuInsertForm"  method="post" enctype="multipart/form-data"> 
 	      <div class="modal-body">
 	      
 	      <!-- 카테고리 선택 -->
 	      <div>
 	      	<div class="title">카테고리 선택</div>
-	      	<select class="form-select">
+	      	<select class="form-select" name="selectCategory">
 	      	<c:forEach var="cate" items="${categoryList}">
 			  <option value="${cate.num}" ${categoryNum==cate.num?"selected='selected'":""}>${cate.menuCategory}</option>
 			  </c:forEach>
@@ -133,13 +136,13 @@
 	      <!-- 메뉴이름 -->
 	      <div>
 	      	<div class="title"><br>메뉴 이름</div>
-	      	<div><input type="text" class="form-control"></div>
+	      	<div><input name="menuName" type="text" class="form-control"></div>
 	      </div>
 	      
 	      <!-- 가격 -->
 	      <div>
 	      	<div class="title"><br>가격</div>
-	      	<div><input type="text" class="form-control"></div>
+	      	<div><input name="price" type="text" class="form-control"></div>
 	      </div>
 	      
 	      <!-- 이미지파일 -->
@@ -150,7 +153,8 @@
 	      
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary">저장</button>
+	        <button type="button" class="btn btn-primary btnMenuInsertOk">저장</button>
+	        <input type="hidden" name="categoryNum" value="${categoryNum}">
 	      </div>
       </form>
     </div>
@@ -165,13 +169,13 @@
         <h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-eraser-fill"></i>&nbsp;메뉴 수정</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form> 
+      <form name="menuUpdateForm" method="post"> 
 	      <div class="modal-body">
 	      
 	      <!-- 카테고리 선택 -->
 	      <div>
 	      	<div class="title">카테고리 선택</div>
-	      	<select class="form-select">
+	      	<select name="selectCategory" class="form-select">
 	      	<c:forEach var="cate" items="${categoryList}">
 			  <option value="${cate.num}" ${categoryNum==cate.num?"selected='selected'":""}>${cate.menuCategory}</option>
 			  </c:forEach>
@@ -181,13 +185,13 @@
 	      <!-- 메뉴이름 -->
 	      <div>
 	      	<div class="title"><br>메뉴이름</div>
-	      	<div><input type="text" class="form-control" value="사이다"></div>
+	      	<div><input name="menuName" type="text" class="form-control" value="사이다"></div>
 	      </div>
 	      
 	      <!-- 가격 -->
 	      <div>
 	      	<div class="title"><br>가격</div>
-	      	<div><input type="text" class="form-control" value="1,500원"></div>
+	      	<div><input name="price" type="text" class="form-control" value="1,500원"></div>
 	      </div>
 	      
 	      <!-- 이미지파일 -->
@@ -198,7 +202,8 @@
 	      
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary">저장</button>
+	        <button type="button" class="btn btn-primary btnUpdateMenuOk">저장</button>
+	        <input>
 	      </div>
       </form>
     </div>
@@ -239,6 +244,63 @@
 
 <script type="text/javascript">
 
+function login() {
+	location.href="${pageContext.request.contextPath}/owner/home";
+}
+function ajaxFun(url, method, query, dataType, fn) {
+	$.ajax({
+		type:method,
+		url:url,
+		data:query,
+		dataType:dataType,
+		success:function(data) {
+			fn(data);
+		},
+		beforeSend:function(jqXHR) {
+			jqXHR.setRequestHeader("AJAX", true);
+		},
+		error:function(jqXHR) {
+			if(jqXHR.status === 403) {
+				login();
+				return false;
+			} else if(jqXHR.status === 400) {
+				alert("요청 처리가 실패 했습니다.");
+				return false;
+			}
+	    	
+			console.log(jqXHR.responseText);
+		}
+	});
+}
+
+function ajaxFileFun(url, method, query, dataType, fn) {
+	$.ajax({
+		type:method,
+		url:url,
+		processData: false, // file 전송시 필수, 서버로전송하는 데이터를 쿼리문자열로변환여부
+		contentType: false, // file 전송시 필수, 서버에전송할 데이터의 Content-Type. 기본은 application/x-www-urlencoded
+		data:query,
+		dataType:dataType,
+		success:function(data) {
+			fn(data);
+		},
+		beforeSend:function(jqXHR) {
+			jqXHR.setRequestHeader("AJAX", true);
+		},
+		error:function(jqXHR) {
+			if(jqXHR.status === 403) {
+				login();
+				return false;
+			} else if(jqXHR.status === 400) {
+				alert("요청 처리가 실패 했습니다.");
+				return false;
+			}
+	    	
+			console.log(jqXHR.responseText);
+		}
+	});
+}
+
 //품절모달show
 $(function(){
 	$('.btnSoldeOutOk').click(function(){
@@ -253,6 +315,24 @@ $(function(){
 		document.soldOutForm.selectStock.value = stock;
 		
 		$('#soldOutModal').modal('show');
+	});
+});
+
+//메뉴수정show
+$(function(){
+	$('.btnUpdateMenu').click(function(){
+		
+		let menuNum = $(this).attr("data-menuNum");
+		let menuName = $(this).attr("data-menuName");
+		let price = $(this).attr("data-price");
+		let imageFilename = $(this).attr("data-imageFilename");
+		
+		document.menuUpdateForm.menuName.value = menuName;
+		document.menuUpdateForm.price.value = price;
+		document.menuUpdateForm.imageFilename.value = imageFilename;
+		document.menuUpdateForm.menuNum.value = menuNum;
+		
+		$('#menuUpdateModal').modal('show');
 	});
 });
 
@@ -288,6 +368,56 @@ $(function(){
                $('#soldOutModal').modal('hide');
 		
 		ajaxFun(url,"post",query,"html",fn);
+		
+	});
+});
+
+//메뉴 추가
+$(function(){
+	$('.btnMenuInsertOk').click(function(){
+		
+		const f=document.menuInsertForm;
+		const category =f.selectCategory.value;
+		const menuName =f.menuName.value;
+		const price =f.price.value;
+		const categoryNum =f.categoryNum.value;
+		
+		let str;
+		str=f.selectFile.value;
+		
+		let formData=new FormData($('form[name=menuInsertForm]')[0]);
+		
+		if(menuName===""){
+			alert("메뉴 이름을 입력해주세요.");
+			f.menuName.focus();
+			return;
+		}
+		if(price.trim()===""){
+			alert("메뉴 가격을 입력해주세요.");
+			f.price.focus();
+			return;
+		}
+		if(! str){
+			alert("메뉴 이미지를 선택해주세요.");
+			f.selectFile.focus();
+			return;
+		}
+		
+		let url="${pageContext.request.contextPath}/owner/menu/insertMenu";
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("메뉴를 등록하지 못했습니다.");
+				return false;
+			} else {
+            }
+		};
+               $('#menuInsertModal').modal('hide');
+               location.href = "${pageContext.request.contextPath}/owner/menu/menuDetail?num="+categoryNum;
+		
+               ajaxFileFun(url,"post",formData,"html",fn);
+               
+               location.reload(true);
 		
 	});
 });

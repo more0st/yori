@@ -1,5 +1,6 @@
 package com.sp.yogi.owner.menu;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.yogi.member.SessionInfo;
 import com.sp.yogi.owner.market.MarketService;
@@ -129,7 +131,6 @@ public class OwnerMenuController {
 		int menuCount=service.menuCount(num);
 		List<Menu> categoryList= service.categoryList(restaurantNum);
 		String categoryName=service.categoryName(num);
-		
 		model.addAttribute("categoryNum",num);
 		model.addAttribute("menuList",menuList);
 		model.addAttribute("menuCount",menuCount);
@@ -138,6 +139,38 @@ public class OwnerMenuController {
 		
 		return ".owner.menu.menuDetail";
 	}
+	
+   //메뉴 등록
+   @RequestMapping(value = "insertMenu", method = RequestMethod.POST)
+   @ResponseBody
+   public Map<String, Object> insertMenu(
+         @RequestParam("selectCategory") long selectCategory, 
+         @RequestParam("menuName") String menuName, 
+         @RequestParam("price") long price, 
+         @RequestParam("categoryNum") long categoryNum, 
+         Menu dto, HttpSession session) throws Exception{
+      
+      String root=session.getServletContext().getRealPath("/");
+      String path=root+"uploads"+File.separator+"owner"+File.separator+"menu";
+      
+      Map<String, Object> model=new HashMap<>();
+      
+      try {
+         
+         dto.setNum(selectCategory);
+         dto.setMenu(menuName);
+         dto.setPrice(price);
+         service.insertMenu(dto, path);
+         
+         model.put("imageFilename", dto.getImageFilename());
+         
+         
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      
+      return model;
+   }
 	
 	//메뉴 stock 수정
 	@RequestMapping(value = "updateStock", method = RequestMethod.POST)
