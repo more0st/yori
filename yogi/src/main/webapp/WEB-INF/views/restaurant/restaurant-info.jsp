@@ -267,6 +267,7 @@ body {
    padding: 10px;
 }
 
+
 .cart-bottom {
    margin-top: 20px;
    display: flex;
@@ -279,12 +280,17 @@ body {
 .cart-button {
    width: 100%;
    border: none;
-   background: #fa0050;
+   background: #eee;
    height: 50px;
    border-radius: 5px;
    color: white;
    font-weight: bold;
 }
+
+.cart-button:enabled{
+   background: #fa0050;
+}
+
 
 .yes-cart {
    border: 1px solid #d9d9d9;
@@ -770,7 +776,7 @@ body {
          </div>
          
          <div class="cart-bottom">
-            <button class="cart-button" type="button" onclick="addToOrder(${restaurantNum},${restaurantInfo2.deliveryFee});">주문하기</button>
+            <button class="cart-button" type="button" onclick="addToOrder(${restaurantNum},${restaurantInfo2.deliveryFee});" disabled="disabled">주문하기</button>
             <input type="hidden" value="${restaurantNum}">
          </div>
       </div>
@@ -904,7 +910,9 @@ body {
         });
     });
     
-   
+    
+    //--------------------------------------------------------
+
     let menuarr = [];
     let optionarr = [];
     let optionOne = [];
@@ -1022,11 +1030,40 @@ body {
 	  
 		$('.cart-order').append(out);
 		cartCount++;
-		
 		$(".modal").modal("hide");
+		
+		checkCondition();
 	}
     
-    // [주문표 부분 삭제]
+    // 최소 주문금액 확인 -------------------------------------------
+    let orderbtn = document.querySelector(".cart-button");	// 주문하기 버튼
+    let condition = false;	// 조건 만족하는지
+    
+    function checkCondition(){
+    	let minimum = document.querySelector('.infoinput').value;
+
+        let totalPrice = 0;
+         menuarr.forEach((item) => {
+             totalPrice += item.quantity * item.price;
+         });
+         
+         if(parseInt(totalPrice) >= parseInt(minimum)){
+            condition = true;
+         } else {
+        	 condition = false;
+         }
+         
+    	if(condition){
+    		orderbtn.disabled=false;
+    	} else{
+    		orderbtn.disabled=true;
+    	}
+    }
+    
+    checkCondition();
+   
+    
+    // [주문표 부분 삭제]-------------------------------------------------
     $(document).on("click", ".delete-btn", function() {
       $(this).closest(".yes-cart").remove();
       let cartCount = $(this).closest(".yes-cart").find('.minus').attr("data-count");
@@ -1048,8 +1085,8 @@ body {
       total.value = totalPrice;
        
       const menuarrString = JSON.stringify(menuarr);
+      checkCondition();
    });
-    
     
     // [주문표 전체 삭제]
    function deleteAll(){
@@ -1057,7 +1094,6 @@ body {
      if(!confirm(msg)){
     	 return;
      }
-    	
     	
       const cartItems = document.getElementsByClassName("yes-cart");
 
@@ -1070,6 +1106,8 @@ body {
       
       // 배열 초기화
       menuarr=[];
+      
+      checkCondition();
     }
     
     // [-] 버튼 클릭 시
@@ -1087,6 +1125,8 @@ body {
 	             const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
 	             updateProductQuantity(menuNum.toString(), value.toString(), cartCount);
 	         }
+		    
+		    checkCondition(); 
 		});
 	});
     
@@ -1105,6 +1145,7 @@ body {
 	             const menuNum = $(this).closest(".yes-cart").find(".menuNum").val();
 	             updateProductQuantity(menuNum.toString(), value.toString(), cartCount);
 	         }
+		    checkCondition(); 
 		});
 	});
     
