@@ -49,12 +49,12 @@
 								<td>${dto.reg_date}</td>
 								<td><a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/admin/resManage/orderList?restaurantNum=${dto.restaurantNum}"
 									role="button">주문내역</a></td>
-								<td>${dto.enabled==1?"사용 가능":"정지"}</td>
+								<td>${dto.enabled==1?"사용 가능":"정지"}</td> <%-- stateCode , enabled --%>
 								<td>
 									<div class="d-grid gap-2 d-md-block">
 										<c:choose>
 											<c:when test="${dto.enabled==1}">
-												<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal${status.index}">정지</button>
+												<button type="button" class="btn btn-outline-secondary btn-sm btnStop" data-restaurantNum="${dto.restaurantNum}">정지</button>
 												<input id="suspendId" type="hidden" value="${dto.restaurantNum}">
 											</c:when>
 											<c:otherwise>
@@ -62,10 +62,37 @@
 												<input id="suspendId" type="hidden" value="${dto.restaurantNum}">
 											</c:otherwise>
 										</c:choose>
-										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
+<!-- 										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button> -->
 									</div>
 								</td>
 							</tr>
+							
+							<div class="modal" id="myDialogModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								  <div class="modal-dialog">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" id="exampleModalLabel">정지 사유</h5>
+								        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								      </div>
+								      <form> 
+									      <div class="modal-body">
+											<div>
+												<textarea id="reason" rows="5" cols="52" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
+											</div>
+											<div>
+												
+											</div>
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+									        <button type="button" class="btn btn-primary btnStopSend" >보내기</button>
+									      </div>
+								      </form>
+								    </div>
+								  </div>
+							</div>
+							
+							
 						</c:forEach>	
 						
 						</tbody>
@@ -74,32 +101,28 @@
 			</div>
 		</section>
 
-<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">정지 사유</h5>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <form> 
-		      <div class="modal-body">
-				<div>
-					<textarea id="reason${status.index}" rows="5" cols="52" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
-				</div>
-				<div>
-					
-				</div>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-		        <button type="button" class="btn btn-primary">보내기</button>
-		      </div>
-	      </form>
-	    </div>
-	  </div>
-	</div>
 
 
+<script type="text/javascript">
+$(function(){
+	$(".btnStop").click(function(){
+		let restaurantNum = $(this).attr("data-restaurantNum");
+		
+		$(".btnStopSend").attr("data-restaurantNum", restaurantNum);
+		
+		$("#myDialogModal").modal("show");
+	});
+	
+	$(".btnStopSend").click(function(){
+		let restaurantNum = $(this).attr("data-restaurantNum");
+		let reason = $("#reason").val();
+		
+		alert("업체가 정지되었습니다.");
+	});
+	
+});
+
+</script>
 
 	</main>
 	<!-- End #main -->

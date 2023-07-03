@@ -71,7 +71,7 @@
 	</select>
 
 	<select id="readOwnerState" parameterType="String" resultType="com.sp.yogi.owner.Owner">
-		SELECT reportNum, userId, stateCode, memo, registerId, reg_date
+		SELECT reportNum, restaurantNum, stateCode, memo, registerId, reg_date
 		FROM restaurantState
 		WHERE restaurantNum = #{restaurantNum}
 		ORDER BY reportNum DESC

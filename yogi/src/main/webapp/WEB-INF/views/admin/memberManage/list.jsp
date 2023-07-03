@@ -62,7 +62,7 @@
 												<input id="suspendId" type="hidden" value="${dto.userId}">
 											</c:otherwise>
 										</c:choose>
-										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
+<!-- 										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button> -->
 									</div>
 								</td>
 							</tr>

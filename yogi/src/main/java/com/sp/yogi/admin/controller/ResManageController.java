@@ -119,7 +119,7 @@ public class ResManageController {
 	@RequestMapping(value = "updateOwnerState", method = RequestMethod.POST)
 	@ResponseBody
 	public void updateOwnerState(
-			@RequestParam(defaultValue = "") String userId,
+			@RequestParam(defaultValue = "") String restaurantNum,
 			@RequestParam(defaultValue = "") String registerId,
 			@RequestParam(defaultValue = "") String reason,
 			HttpServletRequest req
@@ -130,7 +130,7 @@ public class ResManageController {
 			// 회원 활성/비활성 변경
 			Map<String, Object> map = new HashMap<>();
 			
-			map.put("userId", userId);
+			map.put("restaurantNum", restaurantNum);
 			map.put("registerId", registerId);
 			map.put("reason", reason);
 			service.updateOwnerState(map);

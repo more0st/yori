@@ -79,6 +79,10 @@
 							
 						</tbody>
 					</table>
+					<div style="display: flex; justify-content: center; gap : 5px;">
+	                  
+		              <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/resManage/main'">목록</button>
+                  	</div>
 				</div>
 			</div>
 		</section>
