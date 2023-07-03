@@ -25,7 +25,8 @@
 }
 
 .imgsize{
-	width: 200px;
+	width: 170px;
+	margin: 15px;
 }
 
 .iconsize{
@@ -66,7 +67,7 @@
 			<div class="menu">	
 				<div style="display:flex;">
 					<div>
-						<img class="res-img imgsize" src="${pageContext.request.contextPath}/resources/picture/cider.png">
+						<img class="res-img imgsize" src="${pageContext.request.contextPath}/uploads/owner/menu/${menu.imageFilename}">
 					</div>
 					<div class="menuDetail">
 						<div><h5>${menu.menu}</h5>${menu.price}원</div>

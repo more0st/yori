@@ -19,65 +19,49 @@
 }
 </style>
 
-
-<div class="modal fade" id="exampleModal" tabindex="-1"
+<div class="modal fade" id="optionInsertModal" tabindex="-1"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-
 			<div class="modal-header">
 				<h1 class="modal-title fs-5" id="exampleModalLabel">옵션 그룹 추가</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
-
-
 			<div class="modal-body">
-				<form class="row g-3">
-
+				<form class="row g-3" name="optionInsertForm" method="post">
 					<div class="col-md-12">
-						<label class="col-form-label">옵션그룹명</label> <input type="text"
-							class="form-control" placeholder="GroupName">
+						<label class="col-form-label">옵션그룹명</label> <input name="option_group" type="text"
+							class="form-control" placeholder="ex)사이즈">
 					</div>
-
 					<div class="col-md-12">
 						<label class="col-form-label">옵션 추가</label>
 					</div>
-
 					<div class="option-box">
 						<div class="col-md-12">
 							<p>
-								<input type="text" class="form-control" placeholder="이름">
-								<input type="text" class="form-control" placeholder="가격"
+								<input type="text" name="option_names" class="form-control" placeholder="이름">
+								<input type="text" name="option_prices" class="form-control" placeholder="가격"
 									style="margin-left: 5px;"> 
 								<span class="optionRemoveBtn" style="display: inline-block; margin-left: 5px;"> 
 								<i class="bi bi-x-square"></i></span>
 							</p>
 						</div>
-
 						<div style="text-align: center; margin-top: 10px;">
 							<button type="button" class="btn optionAddBtn">추가</button>
+							<input type="hidden" name="menuNum" value="${menuNum}">
 						</div>
 					</div>
-
-
 				</form>
-
 			</div>
-
 			<div class="text-center modal-footer">
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" class="btn btn-primary optionInsertOk">옵션등록하기</button>
 				<button type="button" class="btn btn-secondary"
-					data-bs-dismiss="modal">Close</button>
+					data-bs-dismiss="modal">취소하기</button>
 			</div>
-
-
 		</div>
 	</div>
 </div>
-
-
-
 
 <main id="main" class="main">
 	<div onclick="location.href='${pageContext.request.contextPath}/owner/option/menuList'" class="iconsize"><i class="bi bi-arrow-left-circle iconPointer"></i></div>
@@ -85,14 +69,11 @@
 		<h1>옵션 메뉴 </h1>
 		<nav>
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a
-					href="${pageContext.request.contextPath}/admin">admin</a></li>
-				<li class="breadcrumb-item active">RestaurantList</li>
+				<li class="breadcrumb-item">치킨</li>
+				<li class="breadcrumb-item active">양념치킨</li>
 			</ol>
 		</nav>
 	</div>
-	<!-- End Page Title -->
-
 
 	<!-- list 조회 -->
 	<section class="section">
@@ -100,16 +81,12 @@
 			<div class="card-body" style="padding: 10px;">
 				<h2 class="card-title"
 					style="display: inline-block; margin-left: 20px;">옵션그룹 설정</h2>
-				<button type="button" class="btn btn-primary btn-sm"
-					style="margin-left: 10px;" data-bs-toggle="modal"
-					data-bs-target="#exampleModal">추가</button>
-
+				<button type="button" class="btn btn-primary btn-sm" id="optionInsert">추가</button>
 			</div>
 		</div>
 
 		<div class="card">
 			<div class="card-body">
-
 				<!-- foreach 돌려야 하는 div 태그 -->
 				<div class="accordion" id="accordionPanelsStayOpenExample">
 				<c:forEach var="option" items="${optionList}" varStatus="status">
@@ -136,8 +113,6 @@
 					</div>
 					</c:forEach>
 				</div>
-
-
 			</div>
 		</div>
 	</section>
@@ -148,6 +123,35 @@
 
 
 <script type="text/javascript">
+
+function login() {
+	location.href="${pageContext.request.contextPath}/owner/home";
+}
+function ajaxFun(url, method, query, dataType, fn) {
+	$.ajax({
+		type:method,
+		url:url,
+		data:query,
+		dataType:dataType,
+		success:function(data) {
+			fn(data);
+		},
+		beforeSend:function(jqXHR) {
+			jqXHR.setRequestHeader("AJAX", true);
+		},
+		error:function(jqXHR) {
+			if(jqXHR.status === 403) {
+				login();
+				return false;
+			} else if(jqXHR.status === 400) {
+				alert("요청 처리가 실패 했습니다.");
+				return false;
+			}
+	    	
+			console.log(jqXHR.responseText);
+		}
+	});
+}
 
 $(function(){
     $(".optionRemoveBtn").hide();
@@ -182,5 +186,118 @@ $(function(){
         }
     });
 });
+
+$(function(){
+	$('.optionInsertOk').click(function(){
+		const f=document.optionInsertForm;
+		const option_group=f.option_group.value;
+		const menuNum=f.menuNum.value;
+		let b;
+		
+		if(! option_group.trim()){
+			alert("옵션그룹명을 입력하세요.");
+			f.option_group.focus();
+			return false;
+		}
+		
+		b=true;
+		$("input[name=option_names]").each(function(){
+			if(! $(this).val().trim()) {
+				b= false;
+				return false;
+			}
+		});
+		
+		if(! b){
+			alert("옵션명을 입력하세요.");
+			return false;
+		}
+
+		b=true;
+		$("input[name=option_prices]").each(function(){
+			if(! $(this).val().trim()) {
+				b= false;
+				return false;
+			}
+		});
+		
+		if(! b){
+			alert("옵션추가금액을 입력하세요.");
+			return false;
+		}
+		
+		let url="${pageContext.request.contextPath}/owner/option/insertOption";
+		let query = $('form[name=optionInsertForm]').serialize();
+		alert(query);
+		const fn=function(data){
+			alert(data.state);
+			if(data.state=="false"){
+				alert("옵션을 등록하지 못했습니다.");
+				return false;
+			} else {
+                window.location.href = "${pageContext.request.contextPath}/owner/option/optionReg?menuNum="+menuNum;
+				$('#optionInsertModal').modal('hide');	
+			}
+		};
+		
+		ajaxFun(url,"post",query,"json",fn);
+		
+	});
+});
+
+
+
+$(function(){
+	$('.btnPriceOk').click(function(){
+		
+		const f=document.basePriceForm;
+		const bp=f.basePrice.value;
+		
+		if(bp.trim() === ""){
+			alert("최소주문금액을 입력하세요.");
+			f.basePrice.focus();
+			return;
+		}
+		let url="${pageContext.request.contextPath}/owner/market/updatePrice";
+		let query = $('form[name=basePriceForm]').serialize();
+		
+		const fn=function(data){
+			if(data.state=="false"){
+				alert("최소주문금액을 수정하지 못했습니다.");
+				return false;
+			} else {
+                // 리다이렉트 처리 후 모달 종료
+                window.location.href = "${pageContext.request.contextPath}/owner/market/marketinfo";
+                $('#menu-modal2').modal('hide');
+            }
+			
+		};
+		
+		ajaxFun(url,"post",query,"html",fn);
+		
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<script type="text/javascript">
+
+document.getElementById("optionInsert").addEventListener("click", function() {
+	// 모달 창 띄우기
+		$('#optionInsertModal').modal('show');
+	});
+
 </script>
 

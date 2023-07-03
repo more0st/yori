@@ -141,7 +141,13 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public void insertOption(Menu dto) throws Exception {
 		try {
-			dao.insertData("ownerMenu.insertOption",dto);
+			for(int i=0; i<dto.getOption_names().size(); i++) {
+				dto.setOption_name(dto.getOption_names().get(i));
+				dto.setPrice(dto.getOption_prices().get(i));
+				
+				dao.insertData("ownerMenu.insertOption",dto);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -45,7 +45,7 @@
 	
 	<!-- 주문번호별 주문메뉴내역(선택한 옵션은 어디서 확인 ? ) -->
 	<select id="orderMenuList" parameterType="Long" resultType="com.sp.yogi.owner.order.Order">
-	SELECT oi.menuNum, menu, orderCount, menuPrice 
+	SELECT oi.menuNum, menu, orderCount, menuPrice, optionName
 	FROM order_item oi
 	JOIN menu1 m ON oi.menuNum=m.menuNum
 	WHERE orderNum=#{orderNum}

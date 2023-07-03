@@ -70,21 +70,25 @@ width: 10%;
                   <table class="table table-bordered">
                     <thead>
                       <tr>
-                        <th scope="col">번호</th>
-                        <th scope="col">메뉴</th>
-                        <th scope="col">수량</th>
-                        <th scope="col">가격</th>
+                        <th scope="col" class="col-1">번호</th>
+                        <th scope="col" class="col-5">메뉴</th>
+                        <th scope="col"  class="col-3">수량</th>
+                        <th scope="col"  class="col-4">가격</th>
                       </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="dto" items="${orderMenu}" varStatus="status">
                       <tr>
                         <th scope="row">${status.count}</th>
-                        <td>${dto.menu}</td>
+                        <td>${dto.menu} | ${dto.optionName}</td>
                         <td>${dto.orderCount}개</td>
                         <td>${dto.menuPrice}원</td>
                       </tr>
                       </c:forEach>
+                      <tr>
+                        <td colspan="3" style="text-align: right;"></td>
+                        <td colspan="1" style="text-align: left;">배달팁 3000원</td>
+                      </tr>
                     </tbody>
                   </table>
                   <div style="text-align: right;">

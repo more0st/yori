@@ -30,11 +30,17 @@ public class Order {
 	private String price;
 	private long couponNum;
 	private long state;
+	private String optionName;
 	
 	private List<Order> menuList;
 	private String menu;
 	
-	
+	public String getOptionName() {
+		return optionName;
+	}
+	public void setOptionName(String optionName) {
+		this.optionName = optionName;
+	}
 	public String getNickName() {
 		return nickName;
 	}

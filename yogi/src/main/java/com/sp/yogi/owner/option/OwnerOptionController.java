@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.yogi.member.SessionInfo;
 import com.sp.yogi.owner.market.MarketService;
@@ -64,7 +65,27 @@ public class OwnerOptionController {
 		}
 		
 		model.addAttribute("optionList",optionGroup);
+		model.addAttribute("menuNum",menuNum);
 		
 		return ".owner.option.optionReg";
 	}
+	
+	//옵션추가
+	@RequestMapping(value = "insertOption", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> insertOption(Menu dto) throws Exception{
+		
+		String state = "true";
+		try {
+			service.insertOption(dto);
+		} catch (Exception e) {
+			state = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("state", state);
+		
+		return model;
+	}
+	
 }
