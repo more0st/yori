@@ -89,7 +89,7 @@
 		<!-- for문 돌릴거라 하나만 남겨두고 아래 삭제. 링크 다시 걸어주기. -->
 		<c:forEach var="likelist" items="${likelist}">
 		<a class="restaurant-info" href="${pageContext.request.contextPath}/restaurant/info?restaurantNum=${likelist.restaurantNum}">
-			<img class="res-img" src="${pageContext.request.contextPath}/resources/uploads/owner/market/${list.imgFilename}.png">
+			<img class="res-img" src="${pageContext.request.contextPath}/resources/uploads/owner/market/${list.imgFilename}">
 			<span>
 				<span class="res-title">${likelist.restaurantName}</span><br>
 				<span class="res-info res-rank">★ ${likelist.rating}</span><span class="res-division">|</span><span class="res-info">리뷰 ${likelist.reviewCount}</span><br>
