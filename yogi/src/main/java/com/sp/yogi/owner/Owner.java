@@ -38,6 +38,11 @@ public class Owner {
 	private String restaurantAddr1;
 	private String restaurantAddr2;
 	
+	private long reportNum;
+	private int stateCode;
+	private String memo;
+	private String registerId;
+	
 	public String getRestaurantAddr1() {
 		return restaurantAddr1;
 	}
@@ -230,4 +235,29 @@ public class Owner {
 	public void setEnabled(int enabled) {
 		this.enabled = enabled;
 	}
+	public long getReportNum() {
+		return reportNum;
+	}
+	public void setReportNum(long reportNum) {
+		this.reportNum = reportNum;
+	}
+	public int getStateCode() {
+		return stateCode;
+	}
+	public void setStateCode(int stateCode) {
+		this.stateCode = stateCode;
+	}
+	public String getMemo() {
+		return memo;
+	}
+	public void setMeo(String memo) {
+		this.memo = memo;
+	}
+	public String getRegisterId() {
+		return registerId;
+	}
+	public void setRegisterId(String registerId) {
+		this.registerId = registerId;
+	}
+	
 }
