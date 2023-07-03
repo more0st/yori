@@ -19,4 +19,18 @@ public interface OrderService {
 	 */
 	public void insertOrder(Map<String, Object> map, List<Order> list) throws Exception;
 	
+	/**
+	 * 
+	 * @param userId		회원 아이디
+	 * @return				쿠폰 리스트
+	 */
+	public List<Order> listCoupon(String userId);
+	
+	/**
+	 * 
+	 * @param couponNum 	쿠폰 번호
+	 * @throws Exception
+	 */
+	public void useCoupon(Long couponNum) throws Exception;
+	
 }

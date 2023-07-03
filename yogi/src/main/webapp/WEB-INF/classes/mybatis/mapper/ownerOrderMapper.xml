@@ -19,6 +19,7 @@
 	LEFT JOIN order_status os ON ob.orderNum=os.orderNum
 	LEFT JOIN restaurant r ON ob.restaurantNum=r.restaurantNum
 	WHERE r.restaurantNum=#{restaurantNum}
+	ORDER BY order_date;
 	</select>
 	
 	<!-- 가게별 주문 리스트(접수완료) 

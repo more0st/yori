@@ -78,12 +78,17 @@ public class OrderController {
 			orderList.add(order);
 		}
 		
+		List<Order> couponList = new ArrayList<Order>();
+		
+		couponList = orderservice.listCoupon(userId);
+		
 		model.addAttribute("menuNums", menuNums);
 		model.addAttribute("menuOptions", menuOptions);
 		model.addAttribute("menuQuantities", menuQuantities);
 		model.addAttribute("menuPrices", menuPrices);
 		model.addAttribute("menuNames", menuNames);
 		
+		model.addAttribute("couponList", couponList);
 		model.addAttribute("orderList", orderList);
 		model.addAttribute("restaurant", restaurant);
 		model.addAttribute("dto", dto);
@@ -100,11 +105,13 @@ public class OrderController {
 			@ModelAttribute("orderList") List<Order> orderList,
 			@ModelAttribute("orderUser") Member orderUser,
 			@ModelAttribute("restaurant") RestaurantInfo restaurant,
-			@ModelAttribute("deliveryFee") int deliveryFee
+			@ModelAttribute("deliveryFee") int deliveryFee,
+			@ModelAttribute(value = "discount") int discount
 			) {
 		System.out.println("GET방식");
 		
 		// jsp에 어트리뷰트 저장 
+		model.addAttribute("discount", discount);
 		model.addAttribute("orderList", orderList);
 		model.addAttribute("orderUser", orderUser);
 		model.addAttribute("dto", dto);
@@ -130,6 +137,8 @@ public class OrderController {
 			@RequestParam("menuQuantities") String menuQuantities,
 			@RequestParam("menuPrices") String menuPrices,
 			@RequestParam("menuNames") String menuNames,
+			@RequestParam(value = "discount", required = false, defaultValue = "0") int discount,
+			@RequestParam(value = "couponNum", required = false) Long couponNum,
 			RedirectAttributes reAttr
 			) throws Exception {
 		System.out.println("POST방식");
@@ -153,11 +162,14 @@ public class OrderController {
 		
 		// insert할 정보 map에 넣어주기
 		map.put("memo", memo);
-		map.put("addr1", info.getAddr1());
+		map.put("addr1", info.getDeliveryAddr());
 		map.put("addr2", addr2);
 		map.put("tel", tel);
 		map.put("userId", info.getUserId());
 		map.put("restaurantNum", restaurantNum);
+		
+		map.put("couponNum", couponNum);
+		
 		if(payment.equals("cash")) {
 			map.put("payMethod", "만나서 결제");
 		} else {
@@ -196,6 +208,7 @@ public class OrderController {
 		
 		try {
 			orderservice.insertOrder(map, orderList);
+			orderservice.useCoupon(couponNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -215,6 +228,7 @@ public class OrderController {
 		dto.setOrderNum(orderNum);
 		dto.setTotal_price(String.valueOf(total_price));
 		
+		reAttr.addFlashAttribute("discount", discount);
 		reAttr.addFlashAttribute("orderList", orderList);
 		reAttr.addFlashAttribute("orderUser", orderUser);
 		reAttr.addFlashAttribute("dto", dto);

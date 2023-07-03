@@ -23,12 +23,51 @@ public class Order {
 	private String couponNum;
 	private String state;
 	
+	private String content;
+	private int discount;
+	private int min_price;
+	private String expired_date;
+	
+	
 	private String menu;
 	
 	private int deliveryFee;
 	private String optionName;
 	
 	
+	
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public int getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+
+	public int getMin_price() {
+		return min_price;
+	}
+
+	public void setMin_price(int min_price) {
+		this.min_price = min_price;
+	}
+
+	public String getExpired_date() {
+		return expired_date;
+	}
+
+	public void setExpired_date(String expired_date) {
+		this.expired_date = expired_date;
+	}
 
 	public String getOptionName() {
 		return optionName;

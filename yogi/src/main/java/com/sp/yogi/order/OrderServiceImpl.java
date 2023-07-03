@@ -83,4 +83,28 @@ public class OrderServiceImpl implements OrderService {
 		
 	}
 
+	@Override
+	public List<Order> listCoupon(String userId) {
+		List<Order> list = null;
+		
+		try {
+			list = dao.selectList("order.listCoupon", userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public void useCoupon(Long couponNum) throws Exception {
+		try {
+			dao.updateData("order.useCoupon", couponNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
 }

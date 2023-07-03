@@ -156,7 +156,13 @@
 						<p class="keyword2">${menu.menu}${menu.optionName == '옵션없음' ? '' : ' : '}${menu.optionName == '옵션없음' ? '' : menu.optionName} X ${menu.orderCount}</p>
 						<p class="detail">${menu.menuPrice}원</p>
 					</div>
-				</c:forEach>	
+				</c:forEach>
+					<c:if test="${discount != '0'}">
+					<div class="menu">
+						<p class="keyword2">쿠폰 할인 금액</p>
+						<p class="detail">-${discount}원</p>
+					</div>
+					</c:if>	
 					<div class="menu">
 						<p class="keyword2">배달 요금</p>
 						<p class="detail">${deliveryFee}원</p>

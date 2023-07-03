@@ -30,5 +30,15 @@
 		VALUES (payment_seq.NEXTVAL, #{orderNum}, SYSDATE, #{payMethod}, #{price}, #{couponNum, jdbcType=VARCHAR}, 1)
 	</insert>
 	
+	<select id="listCoupon" parameterType="String" resultType="com.sp.yogi.order.Order">
+		SELECT couponNum, content, discount, TO_CHAR(expired_date, 'YYYY-MM-DD') expired_date, min_price
+		FROM coupon
+		WHERE userId = #{userId} and expired_date >= SYSDATE AND status = 1
+	</select>
+	
+	<update id="useCoupon" parameterType="long">
+		UPDATE coupon SET status = 2, used_date = SYSDATE WHERE couponNum = #{couponNum, jdbcType=VARCHAR}
+	</update>
+	
 
 </mapper>
