@@ -64,7 +64,7 @@
 		<div class="profile-detail">
 			<div class="icon"><i class="bi bi-person-circle"></i></div>
 			<div class="profile-info">
-				<div><h3>박상훈</h3>park123@naver.com</div>
+				<div><h3>${dto.userName}</h3>${dto.email}</div>
 			</div>
 		</div>
 	</div>
@@ -83,59 +83,34 @@
 			
 			<!-- forEach -->
 			<!-- forEach -->
-			<c:forEach var="dto" items="${list}">
+			<c:forEach var="list" items="${list}" end="4" >
 			<tr class="border" >
-				<td>${dto.orderNum}</td>
-				<td>${dto.restaurantName}</td>
-				<td><fmt:formatNumber value="${dto.total_price}" pattern="#,###원"/></td>
+				<td>${list.orderNum}</td>
+				<td>${list.restaurantName}</td>
+				<td><fmt:formatNumber value="${list.total_price}" pattern="#,###원"/></td>
 				
 				<c:choose>
-				  <c:when test="${dto.statusName == 1}">
+				  <c:when test="${list.statusName == 1}">
 				    <td>결제완료</td>
 				  </c:when>
-				  <c:when test="${dto.statusName == 2}">
+				  <c:when test="${list.statusName == 2}">
 				    <td>접수완료</td>
 				  </c:when>
-				  <c:when test="${dto.statusName == 3}">
+				  <c:when test="${list.statusName == 3}">
 				    <td>배달중</td>
 				  </c:when>
-				  <c:when test="${dto.statusName == 4}">
+				  <c:when test="${list.statusName == 4}">
 				    <td>배달완료</td>
 				  </c:when>
-				  <c:when test="${dto.statusName == 5}">
+				  <c:when test="${list.statusName == 5}">
 				    <td>주문취소</td>
 				  </c:when>
 				</c:choose>
-				<td><button type="button" class="reviewbtn reviewUpdate" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" onclick="reviewSubmit()">리뷰수정</button></td>
-				<!-- 해당 주문번호 맞춰서 이동하도록. -->
-				<td><button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/mypage/orderDetail';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
 			</tr>
 			</c:forEach>
 			<!-- /forEach -->
 			<!-- /forEach -->
 			
-			<!-- 아래 tr은 지우기 -->
-			<tr class="border" >
-				<td>2222</td>
-				<td>선영이네 피자집</td>
-				<td>15,000원</td>
-				<td>주문완료</td>
-			</tr>
-			
-			<tr class="border" >
-				<td>3333</td>
-				<td>승현이네 국밥집</td>
-				<td>12,000원</td>
-				<td>주문완료</td>
-			</tr>
-			
-			
-			<tr class="border" >
-				<td>4444</td>
-				<td>재혁이네 치킨집</td>
-				<td>18,000원</td>
-				<td>주문완료</td>
-			</tr>
 		</table>
 	</div>	
 </div>

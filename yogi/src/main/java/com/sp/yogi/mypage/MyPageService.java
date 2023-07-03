@@ -35,6 +35,14 @@ public interface MyPageService {
 	public void updateReview(MyPage dto, String pathname) throws Exception;
 
 	public MyPage readData(long num);
+
+	public MyPage reviewRead(long num);
+
+	public MyPage readMyhome(String userId);
+
+	public List<MyPage> listMyHome(Map<String, Object> map);
+	
+	
 	
 }
 

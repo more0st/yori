@@ -13,10 +13,12 @@ public class MyPage {
 
 	// 주문내역에 필요한 DTO
 	private Long orderNum;
+	private String userName;
 	private String restaurantName;
 	private String total_price;
 	private String order_date;
 	private String statusName;
+	private String email;
 
 	// 주문상세에 필요한 DTO
 	private String tel;
@@ -40,12 +42,24 @@ public class MyPage {
 	private Long restaurantNum;
 	private MultipartFile selectFile; // <input type='file' name='selectFile' ..
 
+	// 찜 목록에 필요한 DTO
+	private Long reviewCount;
+	private Long basePrice;
+
 	public Long getMemberNum() {
 		return memberNum;
 	}
 
 	public void setMemberNum(Long memberNum) {
 		this.memberNum = memberNum;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getZip() {
@@ -94,6 +108,14 @@ public class MyPage {
 
 	public void setOrderNum(Long orderNum) {
 		this.orderNum = orderNum;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getRestaurantName() {
@@ -271,6 +293,21 @@ public class MyPage {
 	public void setSelectFile(MultipartFile selectFile) {
 		this.selectFile = selectFile;
 	}
-	
+
+	public Long getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(Long reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	public Long getBasePrice() {
+		return basePrice;
+	}
+
+	public void setBasePrice(Long basePrice) {
+		this.basePrice = basePrice;
+	}
 
 }

@@ -113,8 +113,21 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Override
 	public void updateReview(MyPage dto, String pathname) throws Exception {
-		// TODO Auto-generated method stub
-		
+		try {
+			String imgFileName = fileManager.doFileUpload(dto.getSelectFile(), pathname);
+			if (imgFileName != null) {
+				if (dto.getImgFileName() != null && dto.getImgFileName().length() != 0) {
+					fileManager.doFileDelete(dto.getImgFileName(), pathname);
+				}
+
+				dto.setImgFileName(imgFileName);
+			}
+			dao.updateData("mypage.reviewUpdate", dto);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	@Override
@@ -122,7 +135,7 @@ public class MyPageServiceImpl implements MyPageService {
 		MyPage dto = null;
 		
 		try {
-			dao.selectOne("mypage.readData, dao", num);
+			dto = dao.selectOne("mypage.readData", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -144,5 +157,44 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 		
 		
+	@Override
+	public List<MyPage> listMyHome(Map<String, Object> map) {
+		List<MyPage> list = null;
+		try {
+			
+			list = dao.selectList("mypage.listMyHome", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public MyPage reviewRead(long num) {
+		MyPage dto = null;
+		try {
+			dto = dao.selectOne("mypage.reviewRead", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return dto;
+	}
+
+	@Override
+	public MyPage readMyhome(String userId) {
+		MyPage dto = new MyPage();
+		try {
+			dto.setUserId(userId);
+			dto = dao.selectOne("mypage.readMyhome", userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
 	
 }

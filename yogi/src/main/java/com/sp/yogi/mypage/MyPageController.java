@@ -30,24 +30,15 @@ public class MyPageController {
 	@Autowired
 	private MyPageService service;
 	@Autowired
+	private LikeService likeservice;
+	@Autowired
 	private MyUtil myUtil;
-	
-	@GetMapping("myhome")
-	public String myhome() {
-		return ".mypage.myhome";
-	}
-
 	
 	
 	// sp1의 블로그 참조할 것
 	// {orderNum} : 템플릿 변수
 	// @GetMapping("{orderNum}/orderDetail")
 	
-	
-	@GetMapping("likeList")
-	public String likeList() {
-		return ".mypage.likeList";
-	}
 	
 	@GetMapping("coupon")
 	public String coupon() {
@@ -164,6 +155,40 @@ public class MyPageController {
 		return ".mypage.orderList";
 	}
 	
+	
+	@GetMapping("myhome")
+	public String myhomeList(@RequestParam(value = "page", defaultValue = "1") int current_page,
+			HttpServletRequest req, HttpSession session, Model model) throws Exception {
+		
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		String cp = req.getContextPath();	
+		
+		int size = 5;
+		int total_page;
+		int dataCount;
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", info.getUserId());
+
+		dataCount = service.dataCount(map);
+		total_page = myUtil.pageCount(dataCount, size);
+		
+		
+		List<MyPage> list = service.listMyHome(map);
+		MyPage dto = service.readMyhome(info.getUserId());
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("dto", dto);
+		
+		
+		
+		return ".mypage.myhome";
+	
+	}
+
+	
 	@RequestMapping(value = "orderDetail")
 	public String orderDetail(@RequestParam long num,  @RequestParam String page,
 			HttpServletRequest req,
@@ -203,19 +228,62 @@ public class MyPageController {
 		
 	}
 	
+	@RequestMapping(value="reviewUpdate", method = RequestMethod.POST)
+	public String reviewUpdateSubmit(@RequestParam("orderNum") long orderNum,
+			@RequestParam("restaurantNum") long restaurantNum,
+			MyPage dto, HttpSession session, Model model) throws Exception{
+		
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "review";
+		
+		try {
+			service.updateReview(dto, pathname);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+		
+		return "redirect:/mypage/orderList";
+		
+	}
+	
+	
+	
 	@RequestMapping(value = "reviewList")
-	public String reviewList(HttpServletRequest req, HttpSession session, Model model) throws Exception {
+	public String reviewList(@RequestParam("orderNum") long orderNum,
+			HttpServletRequest req, HttpSession session, Model model) throws Exception {
 		
 
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", info.getUserId());
 		
-		List<MyPage> list = service.listReview(map);
 		
-		model.addAttribute("rev", list);
+		List<MyPage> revlist = service.listReview(map);
+		MyPage revdto = service.reviewRead(orderNum);
+		System.out.println("content"+revdto.getContent());
+		
+		
+		
+		model.addAttribute("revdto", revdto);
+		model.addAttribute("revlist", revlist);
 		
 		return ".mypage.orderList";
 	}
+	
+	@RequestMapping(value = "likeList")
+	public String likeList (HttpServletRequest req, HttpSession session, Model model) throws Exception{
+		
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		List<MyPage> likelist = likeservice.likeList(info.getUserId());
+		
+		model.addAttribute("likelist", likelist);
+		
+		return ".mypage.likeList";
+	}
+	
 	
 }

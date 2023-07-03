@@ -200,7 +200,7 @@
 	      <div class="modal-footer">
 	        <input type="hidden" name="orderNum" value="">
 	        <input type="hidden" name="restaurantNum" value="">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 	        <button type="button" class="btn btn-primary" onclick="reviewCheck();">저장</button>
 	      </div>
       </form>
@@ -220,16 +220,16 @@
 	      <div class="modal-body">
 	      	<i class="fa-solid fa-chart-simple" style="color: #a8c4f5;"></i>&nbsp;리뷰 별점 <br>
 	        <div class="rating">
-			  <input type="radio" id="star15" name="rating2" value="5" /><label for="star15"></label>
-			  <input type="radio" id="star14" name="rating2" value="4" /><label for="star14"></label>
-			  <input type="radio" id="star13" name="rating2" value="3" /><label for="star13"></label>
-			  <input type="radio" id="star12" name="rating2" value="2" /><label for="star12"></label>
-			  <input type="radio" id="star11" name="rating2" value="1" /><label for="star11"></label>
+			  <input type="radio" id="star15" name="rating" value="5" /><label for="star15"></label>
+			  <input type="radio" id="star14" name="rating" value="4" /><label for="star14"></label>
+			  <input type="radio" id="star13" name="rating" value="3" /><label for="star13"></label>
+			  <input type="radio" id="star12" name="rating" value="2" /><label for="star12"></label>
+			  <input type="radio" id="star11" name="rating" value="1" /><label for="star11"></label>
 			</div>
 			
 			<div>
 				<br><i class="fa-regular fa-comment-dots" style="color: #a8c4f5;"></i>&nbsp;리뷰 내용<br><br>
-				<textarea name="content2" id="content2" rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;">${rev.content}</textarea>
+				<textarea name="content" id="content2" rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;">${dto.content}</textarea>
 				
 				<input type="file" name="selectFile" accept="image/*" class="form-control">
 			</div>
@@ -240,7 +240,7 @@
 	      <div class="modal-footer">
 	      	<input type="hidden" name="orderNum" value="">
 	        <input type="hidden" name="restaurantNum" value="">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 	        <button type="button" class="btn btn-primary"  onclick="reviewCheck2();">저장</button>
 	      </div>
       </form>
@@ -259,23 +259,6 @@ function reviewSubmit(){
 	
 }
 $(function() {
-	$("body").on("click", ".reviewUpdate", function(){
-		
-		let orderNum = $(this).attr("data-orderNum");
-		let restaurantNum = $(this).attr("data-restaurantNum");
-		document.reviewUpdateForm.orderNum.value = orderNum;
-		document.reviewUpdateForm.restaurantNum.value = restaurantNum;
-		
-		console.log(orderNum);
-		console.log(document.reviewUpdateForm.orderNum.value);
-		
-	
-		$('#reviewUpdateModal').show();
-
-	});
-});
-
-$(function() {
 	$("body").on("click", ".reviewModal", function(){
 		
 		let orderNum = $(this).attr("data-orderNum");
@@ -291,6 +274,27 @@ $(function() {
 
 	});
 });
+
+$(function() {
+	$("body").on("click", ".reviewUpdate", function(){
+		
+		let orderNum = $(this).attr("data-orderNum");
+		let restaurantNum = $(this).attr("data-restaurantNum");
+		document.reviewUpdateForm.orderNum.value = orderNum;
+		document.reviewUpdateForm.restaurantNum.value = restaurantNum;
+		
+		//document.reviewUpdateForm.content2.value = ${revdto.content}123;
+		
+		//console.log(content2);
+		console.log(orderNum);
+		console.log(document.reviewUpdateForm.orderNum.value);
+		
+	
+		$('#reviewUpdateModal').show();
+
+	});
+});
+
 
 
 
@@ -311,28 +315,27 @@ function reviewCheck(){
 	    f.submit();
 	}
 	
-/*
+
   
 function reviewCheck2(){
 	    const f = document.reviewUpdateForm;
 		let str;
 		
+		str = f.content2.value;
+		console.log(content2);
+		
 	   
-	    str = f.content.value.trim();
+	    str = f.content2.value.trim();
 	    if(!str) {
 	        alert("내용을 입력하세요. ");
-	        f.content.focus();
+	        f.content2.focus();
 	        return;
 	    }
-	    
+	   	
 
-	    f.action = "${pageContext.request.contextPath}/mypage/reviewSubmit";
+	    f.action = "${pageContext.request.contextPath}/mypage/reviewUpdate";
 	    f.submit();
 	}
-	
- */
-	
-	
 	
 
 </script>
