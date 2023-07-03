@@ -135,4 +135,17 @@ public class MemberManageServiceImpl implements MemberManageService {
 		}
 	}
 
+	@Override
+	public void releaseMemberState(Map<String, Object> map) throws Exception {
+		try {
+			dao.updateData("memberManage.releaseMemberState", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	
+	
 }

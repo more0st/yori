@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sp.yogi.common.dao.CommonDAO;
+import com.sp.yogi.owner.order.Order;
 import com.sp.yogi.owner.Owner;
 
 @Service("admin.resManagerService")
@@ -97,6 +98,30 @@ public class ResManageServiceImpl implements ResManageService {
 		}
 
 		return dto;
+	}
+
+	@Override
+	public Order readRestaurantId(String restaurantNum) {
+		Order dto = null;
+		
+		try {
+			return dao.selectOne("resManage.readRestaurantId", restaurantNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public void updateOwnerState(Map<String, Object> map) throws Exception {
+		try {
+			dao.updateData("resManage.updateOwnerState", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 }

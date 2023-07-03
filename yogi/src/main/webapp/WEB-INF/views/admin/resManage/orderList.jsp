@@ -40,18 +40,29 @@
 						</thead>
 						<tbody>
 							
+							<c:forEach var="dto" items="${list}" varStatus="status">
+								<tr>
+									<th scope="row">${dto.orderNum}</th>
+									<td>${dto.userName}</td>
+									<td>${dto.tel}</td>
+									<td>${dto.addr}</td>
+									<td>${dto.memo}</td>
+									<td>${dto.order_date}</td>
+									<td>${dto.total_price}</td>
+								</tr>
+							</c:forEach>
+							
 							<!-- foreach 돌려야하는 tr 태그 -->
 							<tr>
 								<th scope="row">1</th>
-								<td>후라이드 3마리, 양념 5마리, 콜라 1.5리터 5개, 피자 두마리</td>
+								<td>후라이드 3마리, 콜라 1.5리터 5개, 피자 두마리</td>
 								<td>김선영</td>
 								<td>010-2222-3333</td>
-								<td>서울특별시 서대문구 홍홍홍 ㄴㅇ러ㅏㅇㄴ라 ㅇ나ㅣ러ㅣㄴㅇㄹㅇ</td>
-								<td>빨리 갖다주세요sdfsdfsdfsdfsdfdsf</td>
+								<td>서울특별시 서대문구 홍홍홍 ㄴㅇ</td>
+								<td>빨리 갖다주세요sdfsd</td>
 								<td>202306150531</td>
 								<td>156,000</td>
 							</tr>
-							
 							
 							
 							<tr>
@@ -64,36 +75,8 @@
 								<td>정지</td>
 								<td>2016-05-25</td>
 							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>Ashleigh Langosh</td>
-								<td>Finance</td>
-								<td>45</td>
-								<td>2011-08-12</td>
-								<td>28</td>
-								<td>탈퇴</td>
-								<td>2016-05-25</td>
-							</tr>
-							<tr>
-								<th scope="row">4</th>
-								<td>Angus Grady</td>
-								<td>HR</td>
-								<td>34</td>
-								<td>2012-06-11</td>
-								<td>28</td>
-								<td>28</td>
-								<td>2016-05-25</td>
-							</tr>
-							<tr>
-								<th scope="row">5</th>
-								<td>Raheem Lehner</td>
-								<td>Dynamic Division Officer</td>
-								<td>47</td>
-								<td>2011-04-19</td>
-								<td>28</td>
-								<td>28</td>
-								<td>2016-05-25</td>
-							</tr>
+							
+							
 						</tbody>
 					</table>
 				</div>

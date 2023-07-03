@@ -126,10 +126,7 @@ public class MemberManageController {
 
 		
 		try {
-			System.out.println(userId);
-			System.out.println(registerId);
-			System.out.println(reason);
-//			// 회원 활성/비활성 변경
+			// 회원 활성/비활성 변경
 			Map<String, Object> map = new HashMap<>();
 			
 			map.put("userId", userId);
@@ -145,6 +142,35 @@ public class MemberManageController {
 //		Map<String, Object> model = new HashMap<>();
 //		model.put("state", state);
 	
+	}
+	
+	@RequestMapping(value = "releaseMemberState", method = RequestMethod.POST)
+	@ResponseBody
+	public void releaseMemberState(
+			@RequestParam(defaultValue = "") String userId,
+			@RequestParam(defaultValue = "") String registerId,
+			@RequestParam(defaultValue = "") String reason,
+			HttpServletRequest req
+			) throws Exception {
+		
+		
+		try {
+			// 회원 활성/비활성 변경
+			Map<String, Object> map = new HashMap<>();
+			
+			map.put("userId", userId);
+			map.put("registerId", registerId);
+			map.put("reason", reason);
+			service.updateMemberState(map);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+//			state = "false";
+		}
+		
+//		Map<String, Object> model = new HashMap<>();
+//		model.put("state", state);
+		
 	}
 	
 	

@@ -49,7 +49,7 @@
 								<td>${dto.nickName}</td>
 								<td>${dto.reg_date}</td>
 								<td>${dto.last_login}</td>
-								<td>${dto.stateCode==1?"정상":"정지"}</td>
+								<td>${dto.stateCode==1?"사용 가능":"정지"}</td>
 								<td>
 									<div class="d-grid gap-2 d-md-block">
 										<c:choose>
@@ -58,7 +58,8 @@
 												<input id="suspendId" type="hidden" value="${dto.userId}">
 											</c:when>
 											<c:otherwise>
-												<button type="button" class="btn btn-outline-primary btn-sm" onclick="release">해제</button>
+												<button type="button" class="btn btn-outline-primary btn-sm" onclick="release" data-bs-target="${status.index}">해제</button>
+												<input id="suspendId" type="hidden" value="${dto.userId}">
 											</c:otherwise>
 										</c:choose>
 										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
@@ -102,10 +103,32 @@
 		</section>
 <script type="text/javascript">
 
-function release {
-	if(confirm("정지를 해제 하시겠습니까 ?")) {
-		
-	}
+function release(clickUserId, sIndex) {
+	
+	// 회원 상태를 변경하기 위한 AJAX 요청
+	$.ajax({
+		type: "POST", // 혹은 "PUT" 등 HTTP 요청 메소드 선택
+		url: "${pageContext.request.contextPath}/admin/memberManage/releaseMemberState", // 실제 서버 요청 주소
+		data: {
+			userId: clickUserId,
+			registerId : "admin",
+			reason: reason,
+			
+		},
+		success: function(data) {
+			// 서버 요청이 성공했을 때 실행할 코드
+			alert("정지가 해제되었습니다.");
+			location.href = '${pageContext.request.contextPath}/admin/memberManage/list'
+			
+			// 페이지 새로고침 등 필요한 동작 수행
+		},
+		error: function(jqXHR) {
+			// 서버 요청이 실패했을 때 실행할 코드
+			alert("정지 해제 실패");
+			console.log(jqXHR.responseText);
+		}
+	});
+	
 }
 
 function sendSuspension(clickUserId, sIndex) {

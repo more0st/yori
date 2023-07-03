@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.yogi.admin.service.ResManageService;
 import com.sp.yogi.common.MyUtil;
@@ -109,9 +110,39 @@ public class ResManageController {
 	}
 	
 	@RequestMapping(value = "orderList", method = RequestMethod.GET)
-	public String orderList() throws Exception {
-		
+	public String orderList(@RequestParam(value = "restaurantNum") String restaurantNum, Model model) throws Exception {
+		model.addAttribute("dto", service.readRestaurantId(restaurantNum));
 		return ".admin.resManage.orderList";
+	}
+	
+	// 업체 정지
+	@RequestMapping(value = "updateOwnerState", method = RequestMethod.POST)
+	@ResponseBody
+	public void updateOwnerState(
+			@RequestParam(defaultValue = "") String userId,
+			@RequestParam(defaultValue = "") String registerId,
+			@RequestParam(defaultValue = "") String reason,
+			HttpServletRequest req
+			) throws Exception {
+
+		
+		try {
+			// 회원 활성/비활성 변경
+			Map<String, Object> map = new HashMap<>();
+			
+			map.put("userId", userId);
+			map.put("registerId", registerId);
+			map.put("reason", reason);
+			service.updateOwnerState(map);
+
+		} catch (Exception e) {
+			System.out.println(e);
+//			state = "false";
+		}
+
+//		Map<String, Object> model = new HashMap<>();
+//		model.put("state", state);
+	
 	}
 	
 }

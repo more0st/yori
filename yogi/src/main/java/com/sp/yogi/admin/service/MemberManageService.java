@@ -21,5 +21,6 @@ public interface MemberManageService {
 	public MemberWithCount readMemberWithCount(String userId);
 	
 	public void updateMemberState(Map<String, Object> map) throws Exception;
+	public void releaseMemberState(Map<String, Object> map) throws Exception;
 	
 }

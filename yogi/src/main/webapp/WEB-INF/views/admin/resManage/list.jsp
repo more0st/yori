@@ -47,12 +47,21 @@
 								<td>${dto.userName}</td>
 								<td>${dto.restaurantTel}</td>
 								<td>${dto.reg_date}</td>
-								<td><a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/admin/resManage/orderList"
+								<td><a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/admin/resManage/orderList?restaurantNum=${dto.restaurantNum}"
 									role="button">주문내역</a></td>
-								<td>${dto.enabled==1?"정상":"정지"}</td>
+								<td>${dto.enabled==1?"사용 가능":"정지"}</td>
 								<td>
 									<div class="d-grid gap-2 d-md-block">
-										<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">정지</button>
+										<c:choose>
+											<c:when test="${dto.enabled==1}">
+												<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal${status.index}">정지</button>
+												<input id="suspendId" type="hidden" value="${dto.restaurantNum}">
+											</c:when>
+											<c:otherwise>
+												<button type="button" class="btn btn-outline-primary btn-sm" onclick="release" data-bs-target="${status.index}">해제</button>
+												<input id="suspendId" type="hidden" value="${dto.restaurantNum}">
+											</c:otherwise>
+										</c:choose>
 										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button>
 									</div>
 								</td>
@@ -75,7 +84,7 @@
 	      <form> 
 		      <div class="modal-body">
 				<div>
-					<textarea rows="5" cols="52" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
+					<textarea id="reason${status.index}" rows="5" cols="52" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
 				</div>
 				<div>
 					

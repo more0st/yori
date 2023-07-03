@@ -44,6 +44,14 @@
 		ORDER BY restaurantNum DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
+	
+	<select id="readRestaurantId" parameterType="long" resultType="com.sp.yogi.owner.order.Order">
+		SELECT o.orderNum, m.userId, m.userName, o.tel, CONCAT(o.addr1, ' ', o.addr2) AS addr, 
+			o.memo, o.order_date, o.total_price
+		FROM order_bundle o
+		JOIN member1 m ON o.userId = m.userId
+		WHERE o.orderNum = #{orderNum}
+	</select>
 
 
     <update id="updateOwnerEnabled" parameterType="map">
@@ -70,5 +78,12 @@
 		FETCH FIRST 1 ROWS ONLY
 	</select>
 
+	<update id="updateOwnerState" parameterType="map">
+		UPDATE restaurantState
+		SET stateCode = 0,
+		    registerId = #{registerId},
+		    memo = #{reason}
+		WHERE restaurantNum = #{restaurantNum}
+	</update>	
 
 </mapper>

@@ -115,6 +115,14 @@
 		    memo = #{reason}
 		WHERE userId = #{userId}
 	</update>	
+	
+	<update id="releaseMemberState" parameterType="map">
+		UPDATE memberState
+		SET stateCode = 1,
+		    registerId = #{registerId},
+		    memo = "해제"
+		WHERE userId = #{userId}
+	</update>	
 
 	<!-- 챠트 쿼리 -->
 	<select id="listAgeSection" resultType="com.sp.yogi.admin.domain.Analysis">
