@@ -563,19 +563,38 @@ body {
                    </h2>
                    <div id="${category.menuCategory}" class="accordion-collapse collapse ${status.count==1?'show':''}" aria-labelledby="${status.count}" data-bs-parent="#accordionExample">
                      <c:forEach var="menu" items="${category.menuList}">
-                        <div class="accordion-body" onclick="openModal(${menu.menuNum})">
-                        <input type="hidden" id="menuNum" value="${menu.menuNum}"> 
-                        <input type="hidden" id="menuName" value="${menu.menu}"> 
-                           <div>
-                           <div style="font-weight: bold; margin-bottom: 5px;">${menu.menu}</div>
-                           <div>${menu.price}원</div>
-                           </div>
-                           <c:if test="${not empty menu.imageFilename}">
-                              <div>
-                                 <img class="menu-img" src="${pageContext.request.contextPath}/resources/picture/${menu.imageFilename}.png">
-                              </div>
-                           </c:if>
-                        </div>
+                     <c:if test="${menu.stock==1}">
+	                        <div class="accordion-body" onclick="openModal(${menu.menuNum})">
+	                        <input type="hidden" id="menuNum" value="${menu.menuNum}"> 
+	                        <input type="hidden" id="menuName" value="${menu.menu}"> 
+	                           <div>
+	                           <div style="font-weight: bold; margin-bottom: 5px;">${menu.menu}</div>
+	                           <div>${menu.price}원</div>
+	                           </div>
+	                           <c:if test="${not empty menu.imageFilename}">
+	                              <div>
+	                                 <img class="menu-img" src="${pageContext.request.contextPath}/uploads/owner/menu/${menu.imageFilename}">
+	                              </div>
+	                           </c:if>
+	                        </div>
+                        </c:if>
+                        
+                        <!-- 품절상태 -->
+                        <c:if test="${menu.stock==0}">
+	                        <div class="accordion-body" style="background:#F8F7F7">
+	                        <input type="hidden" id="menuNum" value="${menu.menuNum}"> 
+	                        <input type="hidden" id="menuName" value="${menu.menu}"> 
+	                           <div>
+	                           <div style="font-weight: bold; margin-bottom: 5px;">${menu.menu} <span style="color:red"> (품절)</span></div>
+	                           <div>${menu.price}원</div>
+	                           </div>
+	                           <c:if test="${not empty menu.imageFilename}">
+	                              <div>
+	                                 <img class="menu-img" src="${pageContext.request.contextPath}/uploads/owner/menu/${menu.imageFilename}">
+	                              </div>
+	                           </c:if>
+	                        </div>
+                        </c:if>
                         
                            <!-- 모달 -->
                         <div class="modal" id="modal-${menu.menuNum}" tabindex="-1" aria-labelledby="staticBackdropLabel">
@@ -587,7 +606,7 @@ body {
                                     </div>
                                   <div class="modal-body">
                                      <div class="modal-top">
-                                        <img class="modal-img" src="${pageContext.request.contextPath}/resources/picture/mushroom.png">
+                                        <img class="modal-img" src="${pageContext.request.contextPath}/uploads/owner/menu/${menu.imageFilename}">
                                      </div>
                                      <div class="modal-menu">
                                         ${menu.menu}
@@ -1252,8 +1271,6 @@ body {
         const optionarrString = JSON.stringify(optionarr);
         
         makeString();
-        
-        alert(options)
         
         var menuItem = {
            menuNum : menuNum,
