@@ -135,7 +135,7 @@
 	
 	<!-- 리뷰 리스트 -->
 	<select id="readReivew" parameterType="Long" resultType="com.sp.yogi.restaurant.Review">
-		SELECT userName, rating star, content, imgFileName, TO_CHAR(r.reg_date,'YYYY-MM-DD') regDate, reply, TO_CHAR(reply_date,'YYYY-MM-DD') replyDate
+		SELECT nickName, userName, rating star, content, imgFileName, TO_CHAR(r.reg_date,'YYYY-MM-DD') regDate, reply, TO_CHAR(reply_date,'YYYY-MM-DD') replyDate
 		FROM review r
 		JOIN member1 m ON r.userId = m.userId
 		WHERE restaurantNum = #{restaurantNum} AND r.enabled = 1

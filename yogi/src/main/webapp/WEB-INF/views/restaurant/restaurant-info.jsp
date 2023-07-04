@@ -688,7 +688,7 @@ body {
                      <div class="review-top">
                         <div class="review-name">
                            <!-- 닉네임 -->
-                           <div class="res-333" style="font-weight: bold;">${review.userName}님</div><div class="review-date">${review.regDate}</div>
+                           <div class="res-333" style="font-weight: bold;">${review.nickName}님</div><div class="review-date">${review.regDate}</div>
                         </div>
                      </div>
                      <div class="review-rating">
