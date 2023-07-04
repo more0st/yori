@@ -77,6 +77,7 @@ width: 10%;
                       </tr>
                     </thead>
                     <tbody>
+                    <c:set var="totalMenuPrice" value="0" />
                     <c:forEach var="dto" items="${orderMenu}" varStatus="status">
                       <tr>
                         <th scope="row">${status.count}</th>
@@ -84,10 +85,11 @@ width: 10%;
                         <td>${dto.orderCount}개</td>
                         <td>${dto.menuPrice}원</td>
                       </tr>
+                      <c:set var="totalMenuPrice" value="${totalMenuPrice + dto.menuPrice}" />
                       </c:forEach>
                       <tr>
                         <td colspan="3" style="text-align: right;"></td>
-                        <td colspan="1" style="text-align: left;">배달팁 3000원</td>
+                        <td colspan="1" style="text-align: left;">배달팁 ${paymentInfo.price - totalMenuPrice}원</td>
                       </tr>
                     </tbody>
                   </table>
