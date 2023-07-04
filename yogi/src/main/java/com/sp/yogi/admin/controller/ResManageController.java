@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sp.yogi.admin.service.ResManageService;
 import com.sp.yogi.common.MyUtil;
 import com.sp.yogi.owner.Owner;
+import com.sp.yogi.owner.order.Order;
+import com.sp.yogi.owner.order.OrderService;
 
 
 @Controller("admin.resManageController")
@@ -27,6 +29,9 @@ import com.sp.yogi.owner.Owner;
 public class ResManageController {
 	@Autowired
 	private ResManageService service;
+	
+	@Autowired
+	private OrderService orderservice;
 	
 	@Autowired
 	@Qualifier("myUtilGeneral")
@@ -110,8 +115,20 @@ public class ResManageController {
 	}
 	
 	@RequestMapping(value = "orderList", method = RequestMethod.GET)
-	public String orderList(@RequestParam(value = "restaurantNum") String restaurantNum, Model model) throws Exception {
-		model.addAttribute("dto", service.readRestaurantId(restaurantNum));
+	public String orderList(@RequestParam(value = "restaurantNum") Long restaurantNum, Model model) throws Exception {
+		
+		List<Order> orderList = orderservice.orderList(restaurantNum);
+		
+		for(Order order : orderList) {
+			Long orderNum = order.getOrderNum();
+			order.setMenuList(orderservice.orderMenuList(orderNum));
+		}
+		
+		int orderListCount = service.orderListCount(restaurantNum);
+		
+		model.addAttribute("orderListCount", orderListCount);
+		model.addAttribute("orderList", orderList);
+		
 		return ".admin.resManage.orderList";
 	}
 	

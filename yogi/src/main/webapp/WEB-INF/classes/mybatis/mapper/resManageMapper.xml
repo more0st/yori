@@ -84,6 +84,10 @@
 		    registerId = #{registerId},
 		    memo = #{reason}
 		WHERE restaurantNum = #{restaurantNum}
-	</update>	
+	</update>
+	
+	<select id="orderListCount" parameterType="Long" resultType="Integer">
+		SELECT COUNT(*) FROM order_bundle WHERE restaurantNum = #{restaurantNum}
+	</select>	
 
 </mapper>

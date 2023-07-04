@@ -124,4 +124,17 @@ public class ResManageServiceImpl implements ResManageService {
 		}
 	}
 
+	@Override
+	public int orderListCount(Long restaurantNum) {
+		int orderListCount = 0;
+		
+		try {
+			orderListCount = dao.selectOne("resManage.orderListCount", restaurantNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return orderListCount;
+	}
+
 }

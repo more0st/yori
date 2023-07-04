@@ -20,4 +20,6 @@ public interface ResManageService {
 	public Order readRestaurantId(String restaurantNum); // 업체관리_주문내역
 	
 	public void updateOwnerState(Map<String, Object> map) throws Exception; // 업체 정지
+	
+	public int orderListCount(Long restaurantNum); // 주문 개수
 }
