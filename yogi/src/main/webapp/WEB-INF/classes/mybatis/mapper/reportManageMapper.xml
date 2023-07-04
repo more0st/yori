@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="resManage">
+    <!-- 신고 리스트 -->
+<!-- 	<sql id="where-list"> -->
+<!-- 		<choose> -->
+<!-- 			<when test="condition=='reportNum'"> -->
+<!-- 				INSTR(p.reportNum, #{keyword}) &gt;= 1 -->
+<!-- 			</when> -->
+<!-- 			<otherwise> -->
+<!-- 				INSTR(${condition}, #{keyword}) &gt;= 1 -->
+<!-- 			</otherwise> -->
+<!-- 		</choose> -->
+<!-- 	</sql> -->
+    
+<!-- 	<select id="listReport" parameterType="map" resultType="com.sp.yogi.admin.domain.Report"> -->
+<!-- 		SELECT p.reportNum, p.content, p.reg_date, r.orderNum -->
+<!-- 		FROM restaurantID i -->
+<!-- 		JOIN restaurant r ON i.restaurantNum = r.restaurantNum -->
+<!-- 		<where> -->
+<!-- 			<if test="keyword!=null and keyword!='' "> -->
+<!-- 				<include refid="where-list"/> -->
+<!-- 			</if> -->
+<!-- 			<if test="enabled!=''"> -->
+<!-- 				AND enabled = #{enabled} -->
+<!-- 			</if> -->
+<!-- 		</where>  -->
+<!-- 		ORDER BY restaurantNum DESC -->
+<!-- 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="readRestaurantId" parameterType="long" resultType="com.sp.yogi.owner.order.Order"> -->
+<!-- 		SELECT o.orderNum, m.userId, m.userName, o.tel, CONCAT(o.addr1, ' ', o.addr2) AS addr,  -->
+<!-- 			o.memo, o.order_date, o.total_price -->
+<!-- 		FROM order_bundle o -->
+<!-- 		JOIN member1 m ON o.userId = m.userId -->
+<!-- 		WHERE o.orderNum = #{orderNum} -->
+<!-- 	</select> -->
+
+
+
+</mapper>
