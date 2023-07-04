@@ -32,6 +32,8 @@ public class MyPageController {
 	@Autowired
 	private LikeService likeservice;
 	@Autowired
+	private CouponService couponService;
+	@Autowired
 	private MyUtil myUtil;
 	
 	
@@ -39,11 +41,6 @@ public class MyPageController {
 	// {orderNum} : 템플릿 변수
 	// @GetMapping("{orderNum}/orderDetail")
 	
-	
-	@GetMapping("coupon")
-	public String coupon() {
-		return ".mypage.coupon";
-	}
 	
 	@GetMapping("addrList")
 	public String addrList(
@@ -283,6 +280,18 @@ public class MyPageController {
 		model.addAttribute("likelist", likelist);
 		
 		return ".mypage.likeList";
+	}
+
+	@RequestMapping(value = "coupon")
+	public String couponList (HttpServletRequest req, HttpSession session, Model model) throws Exception{
+		
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		List<MyPage> couponlist = couponService.couponList(info.getUserId());
+		
+		model.addAttribute("couponlist", couponlist);
+		
+		return ".mypage.coupon";
 	}
 	
 	
