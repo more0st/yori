@@ -28,7 +28,7 @@ public class RestaurantServiceImpl implements RestaurantService{
         }
 
         // 동 추출
-        String neighborhoodRegex = "\\((\\S+동)\\)";
+        String neighborhoodRegex = "\\((\\S+동)+(,||\\))";
         Pattern neighborhoodPattern = Pattern.compile(neighborhoodRegex);
         Matcher neighborhoodMatcher = neighborhoodPattern.matcher(address);
         String neighborhood = "";
@@ -37,7 +37,6 @@ public class RestaurantServiceImpl implements RestaurantService{
         }
 
         return district + " " + neighborhood;
-
     }
 
 	
