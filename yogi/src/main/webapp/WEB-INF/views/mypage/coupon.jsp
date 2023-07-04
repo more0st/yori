@@ -47,7 +47,7 @@
 
 			<!-- forEach >> tr 한개만 남겨두고 지우기-->
 			<c:forEach var="couponlist" items="${couponlist}">
-				<c:if test="${couponlist.status eq 1}">>
+				<c:if test="${couponlist.status eq 1}">
 			<tr class="border">
 						<td>${couponlist.couponNum}</td>
 						<td>${couponlist.content}</td>
