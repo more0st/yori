@@ -6,6 +6,4 @@ public interface LikeService {
 	
 	public List<MyPage> likeList(String userId);
 	
-	
-	
 }

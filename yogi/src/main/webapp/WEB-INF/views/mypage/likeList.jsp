@@ -89,32 +89,15 @@
 		<!-- for문 돌릴거라 하나만 남겨두고 아래 삭제. 링크 다시 걸어주기. -->
 		<c:forEach var="likelist" items="${likelist}">
 		<a class="restaurant-info" href="${pageContext.request.contextPath}/restaurant/info?restaurantNum=${likelist.restaurantNum}">
-			<img class="res-img" src="${pageContext.request.contextPath}/resources/uploads/owner/market/${list.imgFilename}">
+			<img class="res-img" src="${pageContext.request.contextPath}/uploads/owner/market/${likelist.imgFileName}">
 			<span>
 				<span class="res-title">${likelist.restaurantName}</span><br>
 				<span class="res-info res-rank">★ ${likelist.rating}</span><span class="res-division">|</span><span class="res-info">리뷰 ${likelist.reviewCount}</span><br>
-				<span class="res-info res-80">${likelist.basePrice}원 이상 배달</span><span class="res-division">|</span><span class="res-info res-80">48~53분</span>
+				<span class="res-info res-80">${likelist.basePrice}원 이상 배달</span>
 			</span>
 		</a>
 		</c:forEach>
 		
-		
-		<a class="restaurant-info">
-			<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/amazing.png">
-			<span>
-				<span class="res-title">어메이징 농카이</span><br>
-				<span class="res-info res-rank">★ 4.8</span><span class="res-division">|</span><span class="res-info">리뷰 245</span><br>
-				<span class="res-info res-80">8,000원 이상 배달</span><span class="res-division">|</span><span class="res-info res-80">20~35분</span>
-			</span>
-		</a>
-		<a class="restaurant-info">
-			<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/downtowner.png">
-			<span>
-				<span class="res-title">다운타우너 연남점</span><br>
-				<span class="res-info res-rank">★ 5.0</span><span class="res-division">|</span><span class="res-info">리뷰 154</span><br>
-				<span class="res-info res-80">10,000원 이상 배달</span><span class="res-division">|</span><span class="res-info res-80">35~55분</span>
-			</span>
-		</a>
 		<!-- /forEach -->
 	</div>	
 </div>

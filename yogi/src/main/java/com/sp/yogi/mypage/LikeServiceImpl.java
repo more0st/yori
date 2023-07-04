@@ -5,15 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sp.yogi.common.FileManager;
 import com.sp.yogi.common.dao.CommonDAO;
 
 @Service("mypage.likeService")
 public class LikeServiceImpl implements LikeService {
 	@Autowired
 	private CommonDAO dao;
-	@Autowired
-	private FileManager fileManager;
 
 	@Override
 	public List<MyPage> likeList(String userId) {

@@ -204,6 +204,7 @@
 		ob.orderNum = #{orderNum};
 	</select>
 	
+	<!-- 찜목록 -->
 	<select id="likeList" parameterType="String" resultType="com.sp.yogi.mypage.Like">
 	SELECT
     rl.restaurantNum,
@@ -216,7 +217,7 @@
         FROM restaurantImg rimg
         WHERE rimg.restaurantNum = r.restaurantNum
         AND ROWNUM = 1
-    ) AS imageFilename
+    ) AS imgFileName 
 FROM
     restaurantLike rl
     INNER JOIN restaurant r ON rl.restaurantNum = r.restaurantNum
@@ -229,6 +230,13 @@ FROM
     WHERE userId = #{userId}
 	</select>
 	
-	
+	<!-- 쿠폰 리스트 -->
+	<select id="listCoupon" parameterType="String"
+		resultType="com.sp.yogi.mypage.Coupon">
+		SELECT eventNum, couponNum, content, discount, min_price, created_date, expired_date, status
+		FROM coupon
+		WHERE
+		userId = #{userId}
+	</select>
 
 </mapper>
