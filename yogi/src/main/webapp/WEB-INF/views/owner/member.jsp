@@ -44,6 +44,7 @@
 
 </style>
 
+<main id="main" class="main">
 <div class="whole-container">
 	<div class="body-main">
 
@@ -158,7 +159,7 @@
 			</form>
 		</div>
 </div>
-
+</main>
 
 <script type="text/javascript">
 function memberOk() {
