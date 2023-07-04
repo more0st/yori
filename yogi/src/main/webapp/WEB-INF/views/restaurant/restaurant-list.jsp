@@ -182,7 +182,7 @@
 	<div class="search-box">
 	<div class="search-box2">
 		<div class="search-info search-info1">
-			<input type="text" name="keyword" id="searchInput" placeholder="음식점이나 메뉴를 검색하세요."> 
+			<input type="text" name="keyword" id="searchInput" placeholder="음식점 이름을 검색하세요."> 
 		</div>
 		<div class="search-info search-info2">
 			<select name="condition" id="conditionval">
