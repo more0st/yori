@@ -62,8 +62,17 @@
 
 	<!-- 주문번호별 결제정보 -->
 	<select id="paymentInfo" parameterType="Long" resultType="com.sp.yogi.owner.order.Order">
-	SELECT payNum, orderNum, pay_date, payMethod, price, couponNum, state
-	FROM payment
+	SELECT payNum, orderNum, pay_date, payMethod, price, p.couponNum, content,state
+	FROM payment p
+    LEFT OUTER JOIN coupon c ON p.couponNum=c.couponNum
+	WHERE orderNum=#{orderNum}
+	</select>
+	
+	<!-- 주문번호별 쿠폰정보 -->
+	<select id="couponInfo" parameterType="Long" resultType="com.sp.yogi.owner.order.Order">
+	SELECT orderNum, p.couponNum, content, discount
+	FROM payment p
+    LEFT OUTER JOIN coupon c ON p.couponNum=c.couponNum
 	WHERE orderNum=#{orderNum}
 	</select>
 	

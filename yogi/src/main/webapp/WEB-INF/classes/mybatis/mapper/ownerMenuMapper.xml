@@ -90,7 +90,7 @@
 <!-- 옵션추가 -->
 <insert id="insertOption" parameterType="com.sp.yogi.owner.menu.Menu">
 	  INSERT INTO menuOption(optionNum, menuNum, option_group, option_name, price) 
-	VALUES(menuOption_seq.NEXVAL,#{menuNum},#{option_group},#{option_name},#{price})
+	VALUES(menuOption_seq.NEXTVAL,#{menuNum},#{option_group},#{option_name},#{option_price})
 </insert>
 
 <!-- 옵션 리스트 -->
@@ -110,7 +110,7 @@
 <!-- 옵션 삭제 -->
 <delete id="deleteOption" parameterType="long">
 	DELETE FROM menuOption
-	WHERE menuNum=#{menuNum}
+	WHERE optionNum=#{optionNum}
 </delete>
 
 <!-- 옵션그룹별 상세리스트 -->

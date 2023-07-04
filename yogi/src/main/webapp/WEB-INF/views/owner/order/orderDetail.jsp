@@ -88,9 +88,15 @@ width: 10%;
                       <c:set var="totalMenuPrice" value="${totalMenuPrice + dto.menuPrice}" />
                       </c:forEach>
                       <tr>
-                        <td colspan="3" style="text-align: right;"></td>
-                        <td colspan="1" style="text-align: left;">배달팁 ${paymentInfo.price - totalMenuPrice}원</td>
+                        <td colspan="3" style="text-align: center; background: #eee;">배달팁</td>
+                        <td colspan="1" style="text-align: left;">${paymentInfo.price - totalMenuPrice + couponInfo.discount}원</td>
                       </tr>
+                      <c:if test="${couponInfo.content!=null}">
+                      <tr>
+                        <td colspan="3" style="text-align: center; background: #eee;">${couponInfo.content}</td>
+                        <td colspan="1" style="text-align: left;">-${couponInfo.discount}원</td>
+                      </tr>
+                      </c:if>
                     </tbody>
                   </table>
                   <div style="text-align: right;">
@@ -114,7 +120,7 @@ width: 10%;
                       </tr>
                       <tr>
                         <th scope="col">사용쿠폰</th>
-                        <td>${paymentInfo.couponNum==0?'사용한 쿠폰이 없습니다.':paymentInfo.couponNum}</td>
+                        <td>${paymentInfo.couponNum==0?'사용한 쿠폰이 없습니다.':paymentInfo.content}</td>
                       </tr>
                       <tr>
                         <th scope="col">결제상태</th>

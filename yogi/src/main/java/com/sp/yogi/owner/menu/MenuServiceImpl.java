@@ -141,10 +141,13 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public void insertOption(Menu dto) throws Exception {
 		try {
+			System.out.println("임플 넘어옴");
 			for(int i=0; i<dto.getOption_names().size(); i++) {
 				dto.setOption_name(dto.getOption_names().get(i));
-				dto.setPrice(dto.getOption_prices().get(i));
-				
+				dto.setOption_price(dto.getOption_prices().get(i));
+				System.out.println("그룹명 : "+dto.getOption_group());
+				System.out.println("이름 : "+dto.getOption_name());
+				System.out.println("가격 : "+dto.getOption_price());
 				dao.insertData("ownerMenu.insertOption",dto);
 			}
 			

@@ -154,4 +154,15 @@ public class OrderServiceImpl implements OrderService{
 		}
 	}
 
+	@Override
+	public Order couponInfo(long orderNum) {
+		Order dto=null;
+		try {
+			dto=dao.selectOne("ownerOrder.couponInfo",orderNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
 }

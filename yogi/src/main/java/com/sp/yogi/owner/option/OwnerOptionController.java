@@ -73,10 +73,19 @@ public class OwnerOptionController {
 	//옵션추가
 	@RequestMapping(value = "insertOption", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> insertOption(Menu dto) throws Exception{
-		
+	public Map<String, Object> insertOption(
+			@RequestParam("option_names") List<String> option_names,
+			@RequestParam("option_prices") List<Integer> option_prices,
+			@RequestParam("option_group") String option_group,
+			@RequestParam("menuNum") long menuNum,
+			Menu dto) throws Exception{
+		System.out.println("<확인>옵션그룹명 :"+ option_group+"1 : "+option_names+" 2: "+option_prices+"메뉴번호 : "+menuNum);
 		String state = "true";
 		try {
+			dto.setOption_names(option_names);
+			dto.setOption_prices(option_prices);
+			dto.setMenuNum(menuNum);
+			
 			service.insertOption(dto);
 		} catch (Exception e) {
 			state = "false";

@@ -228,9 +228,8 @@ $(function(){
 		
 		let url="${pageContext.request.contextPath}/owner/option/insertOption";
 		let query = $('form[name=optionInsertForm]').serialize();
-		alert(query);
+		
 		const fn=function(data){
-			alert(data.state);
 			if(data.state=="false"){
 				alert("옵션을 등록하지 못했습니다.");
 				return false;

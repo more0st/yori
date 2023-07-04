@@ -19,6 +19,8 @@ public interface OrderService {
 	public Order orderInfoList(long orderNum);
 	//paymentInfo : 주문번호별 결제정보
 	public Order paymentInfo(long orderNum);
+	//couponInfo : 주문번호별 쿠폰정보
+	public Order couponInfo(long orderNum);
 	
 	//updateStatus2 : 주문상태변경(2:접수)
 	public void updateStatus2(long orderNum) throws Exception;

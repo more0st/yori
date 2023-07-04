@@ -50,12 +50,14 @@ public class OwnerOrderController {
 		Order orderInfo=service.orderInfoList(orderNum);
 		Order paymentInfo=service.paymentInfo(orderNum);
 		List<Order> orderMenu=service.orderMenuList(orderNum);
+		Order couponInfo=service.couponInfo(orderNum);
 		
 		model.addAttribute("orderNum",orderNum);
 		model.addAttribute("statusNum",statusName);
 		model.addAttribute("menuCount",menuCount);
 		model.addAttribute("orderInfo",orderInfo);
 		model.addAttribute("paymentInfo",paymentInfo);
+		model.addAttribute("couponInfo",couponInfo);
 		model.addAttribute("orderMenu",orderMenu);
 		
 		return ".owner.order.orderDetail";

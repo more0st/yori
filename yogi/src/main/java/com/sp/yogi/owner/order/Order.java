@@ -29,12 +29,26 @@ public class Order {
 	private String payMethod;
 	private String price;
 	private long couponNum;
+	private long discount;
+	private String content;
 	private long state;
 	private String optionName;
 	
 	private List<Order> menuList;
 	private String menu;
 	
+	public long getDiscount() {
+		return discount;
+	}
+	public void setDiscount(long discount) {
+		this.discount = discount;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public String getOptionName() {
 		return optionName;
 	}
