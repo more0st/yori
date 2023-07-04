@@ -104,20 +104,20 @@
 <select id="optionGroupList" parameterType="long" resultType="com.sp.yogi.owner.menu.Menu">
 	SELECT DISTINCT menuNum, option_group
 	FROM menuOption
-	WHERE menuNum=${menuNum}
+	WHERE menuNum=#{menuNum}
 </select>
 
 <!-- 옵션 삭제 -->
-<delete id="deleteOption" parameterType="long">
+<delete id="deleteOption" parameterType="map">
 	DELETE FROM menuOption
-	WHERE optionNum=#{optionNum}
+	WHERE menuNum=#{menuNum} AND option_group=#{option_group}
 </delete>
 
 <!-- 옵션그룹별 상세리스트 -->
 <select id="optionNameList" parameterType="map" resultType="com.sp.yogi.owner.menu.Menu">
 	SELECT optionNum, menuNum, option_group, option_name, price
 	FROM menuOption
-	WHERE option_group=#{option_group} AND menuNum=${menuNum}
+	WHERE option_group=#{option_group} AND menuNum=#{menuNum}
 </select>
 
 

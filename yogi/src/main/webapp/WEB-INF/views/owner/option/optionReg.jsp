@@ -91,23 +91,23 @@
 				<div class="accordion" id="accordionPanelsStayOpenExample">
 				<c:forEach var="option" items="${optionList}" varStatus="status">
 					<div class="accordion-item">
-						<h2 class="accordion-header" id="panelsStayOpen-headingOne">
-							<button class="accordion-button" type="button"
+						<h2 class="accordion-header" id="panelsStayOpen-heading${status.count}">
+							<button class="accordion-button ${status.count!=1?' collapsed':''}" type="button"
 								data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseOne"
-								aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+								data-bs-target="#panelsStayOpen-collapse${status.count}"
+								aria-expanded="${status.count==1?'true':'false'}" aria-controls="panelsStayOpen-collapse${status.count}">
 								${option.option_group}</button>
 						</h2>
-						<div id="panelsStayOpen-collapseOne"
-							class="accordion-collapse collapse ${status.count==1?'show':''}"
-							aria-labelledby="panelsStayOpen-headingOne">
+						<div id="panelsStayOpen-collapse${status.count}"
+							class="accordion-collapse collapse ${status.count==1?'show':'collapse'}"
+							aria-labelledby="panelsStayOpen-heading${status.count}">
 							<div class="accordion-body" style="display: inline-block;">
 							<c:forEach var="dto" items="${option.optionList}">
 								<span>${dto.option_name} - ${dto.price}원</span><br>
 							</c:forEach>
 							</div>
 							<div style="display: inline-block; float: right; padding: 20px;">
-							<button type="button" class="btn btn-secondary btn-sm" >삭제</button>
+							<button type="button" class="btn btn-secondary btn-sm btnDeleteOptionOk" data-menuNum="${menuNum}" data-option="${option.option_group}">삭제</button>
 							</div>
 						</div>
 					</div>
@@ -277,18 +277,23 @@ $(function(){
 	});
 });
 
+$(function() {
+	$("body").on("click", ".btnDeleteOptionOk", function() {
+		alert("버튼");
+		
+		let menuNum = $(this).attr("data-menuNum");
+		let option_group = $(this).attr("data-option");
+		
+		alert(menuNum + " : " +option_group);
+		
+		let query = "menuNum="+menuNum+"&option_group="+option_group;
+		let url="${pageContext.request.contextPath}/owner/option/deleteOption?"+query;
 
-
-
-
-
-
-
-
-
-
-
-
+	    if(confirm("옵션을 삭제하시겠습니까 ? ")) {
+	  	  location.href = url;
+	    }
+	});
+});
 
 </script>
 <script type="text/javascript">

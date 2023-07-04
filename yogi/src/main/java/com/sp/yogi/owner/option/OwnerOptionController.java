@@ -70,6 +70,21 @@ public class OwnerOptionController {
 		return ".owner.option.optionReg";
 	}
 	
+	@RequestMapping(value = "deleteOption", method = RequestMethod.GET)
+	public String deleteOption(
+			@RequestParam long menuNum, 
+			@RequestParam String option_group, 
+			Model model) throws Exception {
+		Map<String, Object> map=new HashMap<String, Object>();
+		
+		map.put("option_group", option_group);		
+		map.put("menuNum", menuNum);
+		
+		
+		service.deleteOption(map);
+		return "redirect:/owner/option/optionReg?menuNum="+menuNum;
+	}
+	
 	//옵션추가
 	@RequestMapping(value = "insertOption", method = RequestMethod.POST)
 	@ResponseBody
@@ -79,7 +94,6 @@ public class OwnerOptionController {
 			@RequestParam("option_group") String option_group,
 			@RequestParam("menuNum") long menuNum,
 			Menu dto) throws Exception{
-		System.out.println("<확인>옵션그룹명 :"+ option_group+"1 : "+option_names+" 2: "+option_prices+"메뉴번호 : "+menuNum);
 		String state = "true";
 		try {
 			dto.setOption_names(option_names);

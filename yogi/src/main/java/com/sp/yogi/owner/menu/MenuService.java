@@ -36,7 +36,7 @@ public interface MenuService {
 	//optionList : 옵션 리스트
 	public List<Menu> optionList(long menuNum);
 	//deleteOption : 옵션 삭제
-	public void deleteOption(long menuNum);
+	public void deleteOption(Map<String, Object> map);
 	//optionNameList : 옵션그룹별 옵션상세리스트
 	public List<Menu> optionNameList(Map<String,Object> map);
 	//optionGroup : 옵션 대분류

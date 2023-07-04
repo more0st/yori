@@ -167,9 +167,9 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public void deleteOption(long menuNum) {
+	public void deleteOption(Map<String, Object> map) {
 		try {
-			dao.deleteData("ownerMenu.deleteOption",menuNum);
+			dao.deleteData("ownerMenu.deleteOption",map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
