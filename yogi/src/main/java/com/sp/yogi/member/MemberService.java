@@ -21,5 +21,8 @@ public interface MemberService {
 	public void generatePwd(Member dto) throws Exception;
 	
 	public void sendIdInfo(Member dto) throws Exception;
-
+	
+	public boolean enableMember(String userId) throws Exception;
+	public void failCount(String userId) throws Exception;
+	public void updateEnabled(String userId) throws Exception;
 }

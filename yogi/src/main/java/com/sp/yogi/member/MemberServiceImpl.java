@@ -284,4 +284,34 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	// 정지된 회원인지 판별
+	@Override
+	public boolean enableMember(String userId) throws Exception {
+		boolean result = false;
+		
+		try {
+			int enabled = dao.selectOne("member.enableMember", userId);
+			if(enabled == 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	// 로그인 실패횟수 증가
+	@Override
+	public void failCount(String userId) throws Exception {
+		dao.updateData("member.failCount",userId);
+	}	
+	
+	// 회원 정지
+	@Override
+	public void updateEnabled(String userId) throws Exception {
+		dao.updateData("member.updateEnabled",userId);
+	}		
+	
+
 }

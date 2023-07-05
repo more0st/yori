@@ -89,38 +89,58 @@ public class MemberController {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String loginSubmit(@RequestParam String userId, @RequestParam String userPwd, HttpSession session,
 			Model model) {
+		
+		try {
+			if(service.enableMember(userId)) {
+				model.addAttribute("message", "정지된 회원입니다. 관리자에게 문의하세요.<br>(관리자 이메일 : admin@naver.com)");
+				return ".member.login";
+			} 
+			
+			Member dto = service.loginMember(userId);
+			if(dto.getFailure_cnt() >= 4) {
+				service.updateEnabled(userId);
+				model.addAttribute("message", "비밀번호 입력 허용횟수 [5]회를 초과하였습니다.<br> 관리자에게 문의하세요.(관리자 이메일 : admin@naver.com)");
+				return ".member.login";
+			}
+				
+				
+			if (dto == null || !userPwd.equals(dto.getUserPwd())) {
+				model.addAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다.");
+				
+				// failure_cnt 카운트 ++
+				service.failCount(userId);
+				
+				return ".member.login";
+			} 
 
-		Member dto = service.loginMember(userId);
-		if (dto == null || !userPwd.equals(dto.getUserPwd())) {
-			model.addAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다.");
-			return ".member.login";
+			// 세션에 로그인 정보 저장
+			SessionInfo info = new SessionInfo();
+			info.setMemberNum(dto.getMemberNum());
+			info.setUserId(dto.getUserId());
+			info.setUserName(dto.getUserName());
+			info.setMembership(dto.getMembership());
+
+			session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
+
+			session.setAttribute("member", info);
+
+			// 로그인 이전 URI로 이동
+			String uri = (String) session.getAttribute("preLoginURI");
+			session.removeAttribute("preLoginURI");
+			if (uri == null) {
+				uri = "redirect:/";
+			} else {
+				uri = "redirect:" + uri;
+			}
+			
+			Long memberNum = info.getMemberNum();
+			
+			List<Home> addr = homeservice.listAddr(memberNum);
+			
+			model.addAttribute("addr", addr);
+		} catch (Exception e) {
 		}
-
-		// 세션에 로그인 정보 저장
-		SessionInfo info = new SessionInfo();
-		info.setMemberNum(dto.getMemberNum());
-		info.setUserId(dto.getUserId());
-		info.setUserName(dto.getUserName());
-		info.setMembership(dto.getMembership());
-
-		session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
-
-		session.setAttribute("member", info);
-
-		// 로그인 이전 URI로 이동
-		String uri = (String) session.getAttribute("preLoginURI");
-		session.removeAttribute("preLoginURI");
-		if (uri == null) {
-			uri = "redirect:/";
-		} else {
-			uri = "redirect:" + uri;
-		}
 		
-		Long memberNum = info.getMemberNum();
-		
-		List<Home> addr = homeservice.listAddr(memberNum);
-		
-		model.addAttribute("addr", addr);
 
 		return ".home.home";
 	}

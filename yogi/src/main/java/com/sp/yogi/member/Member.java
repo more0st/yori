@@ -26,8 +26,15 @@ public class Member {
 	private String addr1;
 	private String addr2;
 	private int enabled;
+	private int failure_cnt;
 	
 	
+	public int getFailure_cnt() {
+		return failure_cnt;
+	}
+	public void setFailure_cnt(int failure_cnt) {
+		this.failure_cnt = failure_cnt;
+	}
 	public String getNickName() {
 		return nickName;
 	}
