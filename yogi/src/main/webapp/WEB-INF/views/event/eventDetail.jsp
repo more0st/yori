@@ -17,7 +17,8 @@
 
 .borderdiv {
     border-bottom: 1px solid #e5e5e5;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
 }
 
 .contain {
@@ -35,7 +36,6 @@
 	width : 100%;
     overflow-clip-margin: content-box;
     overflow: clip;
-    border-radius: 30px;
     margin-bottom: 20px;
     margin: 0 auto;
 }
@@ -53,11 +53,15 @@
 	position: relative;
 	overflow: hidden;
 	padding: 20px;
+	padding-bottom : 35px;
 	margin-bottom: 20px;
 }
 
 .event-info p{
-	font-weight: bold;
+	font-size: 15px;
+	font-weight : 700;
+	color: #d9d9d9;
+	margin-bottom: 0px;
 }
 
 .event-list {
@@ -118,6 +122,10 @@
 	margin-bottom: 50px;
 }
 
+.imgdiv img{
+	border-radius: 30px;
+}
+
 .eventMove{
 	cursor: pointer;
 	font-weight: bold;
@@ -128,12 +136,24 @@
 
 .dateDiv{
 	display: flex;
+	justify-content : right;
     align-items: flex-end;
-    color: #bdbdbd;
+    font-size: 17px;
 }
 
 .event-info h3{
 	font-family : 'Jalnan';
+	margin-bottom: 0px;
+}
+
+.res-img {
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.downloadBtn {
+	border: none;
+	background: none;
+	width: 250px;
 }
 
 </style>
@@ -142,10 +162,12 @@
 	<div class="contain whole-container">
 		<div class="event-box">
 			<div class="event-info">
-				<p>요리조리요 이벤트</p>
 				<div class="flexbetween borderdiv">
+				<div style="width: 100%;">
+				<p>요리조리요 이벤트</p>
 				<h3>이번엔 요리조리요에서 100만원 받아가세요</h3>
-				<div class="dateDiv">2023-06-01</div>
+				<div class="dateDiv">2023-06-01 - 2023-06-10</div>
+				</div>
 				</div>
 				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'" class="imgdiv">
 					<img src="${pageContext.request.contextPath}/resources/picture/event-01.jpg">
@@ -189,6 +211,11 @@
 				
 				2023년 7월 21일(금)<br>
 				
+				<div style="width: 100%; display: flex; justify-content: center;">
+					<button type="button" class="downloadBtn">
+						<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/download_coupon.jpg">
+					</button>
+				</div>
 				</div>
 			</div>
 		<div class="listdiv">
@@ -201,28 +228,3 @@
 		</div>
 	</div>
 
-<script type="text/javascript">
-
-var buttons = document.querySelectorAll(".eventbtn");
-var activeButton = document.getElementById("eventbtn1");
-
-buttons.forEach(function(button) {
-  button.addEventListener("click", function() {
-    // 이전 활성 버튼 스타일 초기화
-    activeButton.style.backgroundColor = "white";
-    activeButton.style.color = "#333";
-
-    // 클릭된 버튼 스타일 변경
-    button.style.backgroundColor = "#fa0050";
-    button.style.color = "white";
-
-    // 활성 버튼 업데이트
-    activeButton = button;
-  });
-});
-
-// 초기 화면 설정
-activeButton.style.backgroundColor = "#fa0050";
-activeButton.style.color = "white";
-
-</script>
