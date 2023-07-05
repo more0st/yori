@@ -31,10 +31,7 @@
 										<i class="bi bi-people"></i>
 									</div>
 									<div class="ps-3">
-										<h6>145</h6>
-										<span class="text-success small pt-1 fw-bold">12%</span> <span
-											class="text-muted small pt-2 ps-1">increase</span>
-
+										<h6>${memberCount} 명</h6>
 									</div>
 								</div>
 							</div>
@@ -51,7 +48,7 @@
 
 							<div class="card-body">
 								<h5 class="card-title">
-									업체 <span>| Total</span>
+									업체 <span>| Today</span>
 								</h5>
 
 								<div class="d-flex align-items-center">
@@ -60,9 +57,8 @@
 										<i class="bi bi-shop"></i>
 									</div>
 									<div class="ps-3">
-										<h6>$3,264</h6>
-										<span class="text-success small pt-1 fw-bold">8%</span> <span
-											class="text-muted small pt-2 ps-1">increase</span>
+										<h6>${ownerCount} 입점</h6>
+										<span class="text-success small pt-1 fw-bold"><fmt:formatNumber value="${totaySales}" type="currency"/></span> 
 
 									</div>
 								</div>
@@ -86,10 +82,7 @@
 										<i class="bi bi-person-plus-fill"></i>
 									</div>
 									<div class="ps-3">
-										<h6>1244</h6>
-										<span class="text-danger small pt-1 fw-bold">12%</span> <span
-											class="text-muted small pt-2 ps-1">decrease</span>
-
+										<h6>${ownerWaitCount} 대기</h6>
 									</div>
 								</div>
 
@@ -197,52 +190,21 @@
 										<tr>
 											<th scope="col">#</th>
 											<th scope="col">업체</th>
-											<th scope="col">메뉴</th>
+											<th scope="col">주문 시간</th>
 											<th scope="col">가격</th>
 											<th scope="col">주문한 회원</th>
 										</tr>
 									</thead>
 									<tbody>
+									<c:forEach var="sale" items="${recentSales}" varStatus="status">
 										<tr>
-											<th scope="row"><a href="#">#2457</a></th>
-											<td>Brandon Jacob</td>
-											<td><a href="#" class="text-primary">At praesentium
-													minu</a></td>
-											<td>$64</td>
-											<td><span class="badge bg-success">Approved</span></td>
+											<th scope="row">${status.count}</th>
+											<td>${sale.restaurantName}</td>
+											<td>${sale.order_date}</td>
+											<td><fmt:formatNumber value="${sale.total_price}" type="currency"/></td>
+											<td style="padding: 0; display: flex; align-items: center; justify-content: center; height: 37px;"><div class="badge bg-success" style="height: 80%; width: 80%; font-size: 14px; display: flex; align-items: center; justify-content: center;">${sale.nickName}</div></td>
 										</tr>
-										<tr>
-											<th scope="row"><a href="#">#2147</a></th>
-											<td>Bridie Kessler</td>
-											<td><a href="#" class="text-primary">Blanditiis
-													dolor omnis similique</a></td>
-											<td>$47</td>
-											<td><span class="badge bg-warning">Pending</span></td>
-										</tr>
-										<tr>
-											<th scope="row"><a href="#">#2049</a></th>
-											<td>Ashleigh Langosh</td>
-											<td><a href="#" class="text-primary">At recusandae
-													consectetur</a></td>
-											<td>$147</td>
-											<td><span class="badge bg-success">Approved</span></td>
-										</tr>
-										<tr>
-											<th scope="row"><a href="#">#2644</a></th>
-											<td>Angus Grady</td>
-											<td><a href="#" class="text-primar">Ut voluptatem id
-													earum et</a></td>
-											<td>$67</td>
-											<td><span class="badge bg-danger">Rejected</span></td>
-										</tr>
-										<tr>
-											<th scope="row"><a href="#">#2644</a></th>
-											<td>Raheem Lehner</td>
-											<td><a href="#" class="text-primary">Sunt similique
-													distinctio</a></td>
-											<td>$165</td>
-											<td><span class="badge bg-success">Approved</span></td>
-										</tr>
+									</c:forEach>
 									</tbody>
 								</table>
 
@@ -266,55 +228,21 @@
 										<tr>
 											<th scope="col">#</th>
 											<th scope="col">업체</th>
-											<th scope="col">주문수</th>
+											<th scope="col">매출</th>
 											<th scope="col">사장님</th>
 											<th scope="col">입점일</th>
 										</tr>
 									</thead>
 									<tbody>
+									<c:forEach var="dto" items="${bestOwner}" varStatus="status">
 										<tr>
-											<th scope="row">2233</th>
-											<td><a href="#" class="text-primary fw-bold">Ut
-													inventore ipsa voluptas nulla</a></td>
-											<td>$64</td>
-											<td class="fw-bold">124</td>
-											<td>$5,828</td>
+											<th scope="row">${status.count}</th>
+											<td scope="row">${dto.restaurantName}</td>
+											<td scope="row"><fmt:formatNumber value="${dto.total_price}" type="currency"/></td>
+											<td scope="row">${dto.userId}</td>
+											<td scope="row">${dto.reg_date}</td>
 										</tr>
-										<tr>
-											<th scope="row">2233</th>
-											<td><a href="#" class="text-primary fw-bold">Exercitationem
-													similique doloremque</a></td>
-											<td>$46</td>
-											<td class="fw-bold">98</td>
-											<td>$4,508</td>
-										</tr>
-										<tr>
-											<th scope="row"><a href="#"><img
-													src="assets/img/product-3.jpg" alt=""></a></th>
-											<td><a href="#" class="text-primary fw-bold">Doloribus
-													nisi exercitationem</a></td>
-											<td>$59</td>
-											<td class="fw-bold">74</td>
-											<td>$4,366</td>
-										</tr>
-										<tr>
-											<th scope="row"><a href="#"><img
-													src="assets/img/product-4.jpg" alt=""></a></th>
-											<td><a href="#" class="text-primary fw-bold">Officiis
-													quaerat sint rerum error</a></td>
-											<td>$32</td>
-											<td class="fw-bold">63</td>
-											<td>$2,016</td>
-										</tr>
-										<tr>
-											<th scope="row"><a href="#"><img
-													src="assets/img/product-5.jpg" alt=""></a></th>
-											<td><a href="#" class="text-primary fw-bold">Sit
-													unde debitis delectus repellendus</a></td>
-											<td>$79</td>
-											<td class="fw-bold">41</td>
-											<td>$3,239</td>
-										</tr>
+									</c:forEach>
 									</tbody>
 								</table>
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminMain">
+
+	<!-- 가입한 회원 수 -->
+	<select id="memberCount" resultType="long">
+		SELECT COUNT(*) FROM member1
+	</select>
+
+	<!-- 입점된 가게 수 -->
+	<select id="ownerCount" resultType="long">
+		SELECT COUNT(*) FROM RESTAURANTID WHERE status = 3
+	</select>
+
+	<!-- 입점 대기 가게 수 -->
+	<select id="ownerWaitCount" resultType="long">
+		SELECT COUNT(*) FROM RESTAURANTID WHERE status = 2
+	</select>
+
+	<!-- 오늘 매출 -->
+	<select id="todaySales" resultType="long">
+		SELECT NVL(SUM(total_price), 0) total_price FROM order_bundle WHERE
+		TRUNC(order_date) = TRUNC(SYSDATE)
+	</select>
+
+	<!-- 최근 5번 주문 -->
+	<select id="recentSales"
+		resultType="com.sp.yogi.admin.domain.MainDomain">
+		SELECT orderNum, restaurantName, o.userId, nickname, total_price, order_date
+		FROM order_bundle o
+		JOIN member1 m ON m.userId = o.userId
+		JOIN restaurantId ri ON o.restaurantNum = ri.restaurantNum
+		JOIN restaurant r ON r.restaurantNum = ri.restaurantNum
+		ORDER BY order_date DESC
+		FETCH FIRST 5 ROWS ONLY
+	</select>
+
+	<!-- 최고 매출 가게 -->
+	<select id="bestOwner"
+		resultType="com.sp.yogi.admin.domain.MainDomain">
+		SELECT r.restaurantName, ri.userId, r.reg_date,
+		(SELECT NVL(SUM(total_price), 0) FROM order_bundle WHERE restaurantNum =
+		r.restaurantNum AND order_date >= SYSDATE - 30) AS total_price
+		FROM restaurantId ri
+		JOIN restaurant r ON ri.restaurantNum = r.restaurantNum
+		ORDER BY total_price DESC
+		FETCH FIRST 5 ROWS ONLY
+	</select>
+
+</mapper>
+
+
+
