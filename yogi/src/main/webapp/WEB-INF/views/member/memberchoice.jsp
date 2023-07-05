@@ -47,7 +47,7 @@
 	border-radius: 10px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	cursor: pointer;
-	background: #fdc8c8;
+	background: #FCE4EC;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -59,7 +59,7 @@
 }
 
 .choice-button:hover {
-	background: #e1fbfe;
+	background: #F8BBD0;
 }
 
 .choice-button > i {
