@@ -2,6 +2,8 @@ package com.sp.yogi.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sp.yogi.admin.domain.MainDomain;
 import com.sp.yogi.admin.service.mainService;
+import com.sp.yogi.member.SessionInfo;
 
 @Controller("admin.mainController")
 public class MainController {
@@ -18,7 +21,17 @@ public class MainController {
 	private mainService mainService;
 	
 	@RequestMapping(value="/admin", method=RequestMethod.GET)
-	public String method(Model model) {
+	public String method(Model model,
+			HttpSession session
+			) {
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		int membership = info.getMembership();
+		
+		if(membership != 99) {
+			return ".home.home";
+		}
 		
 		List<MainDomain> bestOwner = mainService.bestOwner();
 		List<MainDomain> recentSales = mainService.recentSales();
