@@ -119,7 +119,7 @@ $(function(){
 								<tr>
 									<td scope="row">${dataCount - (page-1) * size - status.index}</td>
 									<td class="left">
-										<a href="${articleUrl}&num=${dto.eventNum}">${dto.subject}</a>
+										<a href="${articleUrl}&num=${dto.eventNum}&applyCount=${dto.applyCount}">${dto.subject}</a>
 									</td>
 									<td>${dto.start_date}</td>
 									<td>${dto.end_date}</td>

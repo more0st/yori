@@ -5,102 +5,84 @@
 
 <style type="text/css">
 
-.whole-container {
-	min-height: 800px;
-
-.event-wrap {
-	width: 700px;
-	margin: 0 auto;
-}
-
-.event-list {
-	padding-top: 15px;
-	padding-left: 15px;
-	margin: 0 auto;
-	width: 700px;
-	height: 70px;
-	text-align: left;
-	border: 1px solid #eee;
-	font-weight: bold;
-	font-size: 14px;
-	background-color: white;
-}
-
-.n-date {
-	font-weight: lighter;
-	font-size: smaller;
-	color: #999;
-}
-
-.n-body {
-	border: 1px solid #eee;
-	width: 700px;
-	min-height: 520px;
-	background-color: white;
-	margin: 0 auto 20px auto;
-	padding: 0px 20px 20px;
-}
-
-.btn-list {
-    border: 1px solid #ccc;
-    font-size: 14px;
-    color:black;
-    margin-bottom: 10px;
-}
-
-.btn-list:hover {
-    color: white;
-}
-
-.event-list:hover {
-    color: black;
-}
-
 .writebtn{
-	float:right;
+float:right;
+margin-right: 50px;
+margin-bottom: 30px;
 }
 
-.n-content >img {
+.title-container{
+width: 85%;
+}
 
-display: flex;
+.content {
+width: 100%;
+}
+
+.img-box{
 justify-content: center;
-width: 500px;
-border-radius: 30px;
-margin: 0 auto;
-
-margin-top: 30px;
-
 }
-.
+
 
 </style>
+
 <main id="main" class="main">
-	<div class="whole-container">
-		<div class="event-wrap">
-			<div style="padding-top: 20px; padding-bottom: 10px; margin: 0 auto;">
+
+	<section class="section">
+		<div class="card" style="margin-top: 20px;">
+			<div class="card-body">
 				
-				<a class="btn btn-outline-secondary btn-list" href="${pageContext.request.contextPath}/admin/eventManage/${category}/list"><i class="bi bi-caret-left-fill"></i> 목록으로
-				</a>
-				<div class="event-list">
-				${dto.subject}
-					<div class="n-date">
-					이벤트 기간 &nbsp;
-					${dto.start_date} ~ ${dto.end_date}
+				
+				
+				<div class="title-container">
+					
+					
+					<a class="btn btn-outline-secondary btn-list" style="float: left; margin-top: 13px; margin-bottom: 8px;" href="${pageContext.request.contextPath}/admin/eventManage/${category}/list">
+							<i class="bi bi-caret-left-fill"></i> 목록으로 </a>
+					
+					<h5 class="title" style="clear:both; margin-top: 10px; text-align: center;">${dto.subject}</h5>
+					<hr style="clear:both;">
+					
+					<div>
+						<span class="fw-semibold" style="float: left;">이벤트 기간 &nbsp;:&nbsp; ${dto.start_date} ~ ${dto.end_date}</span>
+						<hr style="clear:both;">
+						<span class="fw-semibold" style="float: left;">응모자 수 &nbsp;:&nbsp; ${applyCount} </span>
+						<hr style="clear:both;">
+						<span class="fw-semibold" style="float: left;">할인금액 &nbsp;:&nbsp; 
+						<fmt:formatNumber type="currency" value="${dto.discount}"/> </span>
+						<hr style="clear:both;">
+						<span class="fw-semibold" style="float: left;">최소주문금액 &nbsp;:&nbsp; 
+						<fmt:formatNumber type="currency" value="${dto.min_price}"/> </span>
+						<hr style="clear:both;">
+						<span class="fw-semibold" style="float: left;">유효기간 &nbsp;:&nbsp; ${dto.expired_date} </span>
+						<hr style="clear:both;">
 					</div>
+					
+					
+				</div>
+				
+				<div class="content">
+					<div class="img-box">
+						<img class="rounded mx-auto d-block" style="width: 70%; display:flex; justify-content: center;"
+							src="${pageContext.request.contextPath}/uploads/admin/event/${dto.imgFileName}">
+						<br>
+					
+					</div>
+					<div class=" justify-content-center" style="margin-top: 20px;">
+						${dto.content}
+					</div>
+						
+						<br> <br> 
+				</div>
+				
+				<div class="writebtn">
+					<button type="button" class="btn btn-primary"
+						onclick="location.href='${pageContext.request.contextPath}/admin/eventManage/${category}/update?num=${dto.eventNum}&page=${page}'">수정하기</button>
+					<button type="button" class="btn btn-danger">삭제하기</button>
 				</div>
 				
 				
-				<div class="n-body">
-					<div class="n-content">
-					<img src="${pageContext.request.contextPath}/uploads/admin/event/${dto.imgFileName}">
-					<br>
-					*** <br><br>
-					${dto.content}
-					</div>
-				</div>
-				<div class="writebtn"><button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/eventManage/${category}/update?num=${dto.eventNum}&page=${page}'">수정하기</button></div>
 			</div>
-		</div>	<!-- class="event-wrap" -->
-		
-	</div> <!-- class="whole-container" -->
+		</div>
+	</section>
 </main>

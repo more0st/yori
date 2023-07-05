@@ -136,7 +136,7 @@
 				</ul>
 				
 
-				<form name="eventForm" method="post" enctype="multipart/form-data">
+				<form name="eventForm" method="post" enctype="multipart/form-data" class="text-center">
 					<div class="row mb-3">
 						<label for="subject" class="col-sm-2 col-form-label">제목</label>
 						<div class="col-sm-6">
@@ -162,6 +162,24 @@
 						</div>
 					</div>
 					<div class="row mb-3">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">쿠폰 유효기간</label>
+						<div class="col-sm-3">
+							<input type="date" name="expired_date" class="form-control"value="${dto.end_day}"> 
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">쿠폰사용 최저금액</label>
+						<div class="col-sm-3">
+							<input type="text" name="min_price" class="form-control" value="${dto.min_price}"> 
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">쿠폰 할인금액</label>
+						<div class="col-sm-3">
+							<input type="text" name="discount" class="form-control" value="${dto.discount}"> 
+						</div>
+					</div>
+					<div class="row mb-3">
 						<label for="inputEmail3" class="col-sm-2 col-form-label">출력여부</label>
 						<div class="col-sm-1 col-form-label">
 							<div class="form-check">
@@ -181,16 +199,23 @@
 					<div class="row mb-3">
 						<label for="inputEmail3" class="col-sm-2 col-form-label">이미지</label>
 						<div class="col-6">
-							<input type="file" name="selectFile" accept="image/*" class="form-control" >	
+							<input type="file" name="selectFile" accept="image/*" class="form-control">	
 						</div>
 					</div>
+					<c:if test="${mode=='update'}">
+						<div class="row mb-3">
+							<label for="inputEmail3" class="col-sm-2 col-form-label">등록된 이미지</label>
+							<div class="col-6">
+								<input type="file" name="selectFile" accept="image/*" class="form-control" value="${dto.imgFileName}">	
+							</div>
+						</div>
+					</c:if>
 					<div class="text-center">
 						<button type="button" class="btn btn-success" onclick="check();">${mode=='update'?'수정완료':'등록하기'}</button>
 						<button type="reset" class="btn btn-secondary">다시입력</button>
 						<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/eventManage/${category}/list';">${mode=='update'?'수정취소':'등록취소'}</button>
 						<c:if test="${mode=='update'}">
 								<input type="hidden" name="num" value="${dto.eventNum}">
-								<input type="hidden" name="imageFilename" value="${dto.imageFilename}">
 								<input type="hidden" name="page" value="${page}">
 							</c:if>
 					</div>

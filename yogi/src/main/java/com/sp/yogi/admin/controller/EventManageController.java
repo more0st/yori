@@ -137,6 +137,7 @@ public class EventManageController {
 			@RequestParam String page,
 			@RequestParam(defaultValue = "all") String condition,
 			@RequestParam(defaultValue = "") String keyword,
+			@RequestParam(defaultValue = "0") int applyCount,
 			Model model) throws Exception {
 
 		keyword = URLDecoder.decode(keyword, "utf-8");
@@ -159,9 +160,10 @@ public class EventManageController {
 		map.put("keyword", keyword);
 		map.put("num", num);
 
+		
 		model.addAttribute("category", category);
 		model.addAttribute("dto", dto);
-		
+		model.addAttribute("applyCount", applyCount);
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
 

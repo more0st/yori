@@ -4,11 +4,11 @@
 <mapper namespace="event">
 	<insert id="insertEvent" parameterType="com.sp.yogi.event.Event">
 		INSERT INTO event(eventNum, subject, content, 
-			start_date, end_date, enabled, hitCount, imgFileName)
+			start_date, end_date, enabled, hitCount, imgFileName, expired_date, discount, min_price)
 		VALUES (event_seq.NEXTVAL, #{subject}, #{content},
 			TO_DATE(#{start_date}, 'YYYY-MM-DD HH24:MI:SS'), 
 			TO_DATE(#{end_date}, 'YYYY-MM-DD HH24:MI:SS'),
-			#{enabled}, 0, #{imgFileName})
+			#{enabled}, 0, #{imgFileName}, #{expired_date}, #{discount}, #{min_price})
 	</insert>
 
 	<sql id="where-list">
@@ -90,7 +90,8 @@
 		SELECT eventNum, subject, content, 
 			TO_CHAR(start_date,'YYYY-MM-DD HH24:MI') start_date,
 			TO_CHAR(end_date, 'YYYY-MM-DD HH24:MI') end_date, 
-			enabled, hitCount, imgFileName
+			TO_CHAR(expired_date, 'YYYY-MM-DD HH24:MI') expired_date,
+			enabled, hitCount, imgFileName, discount, min_price
 		FROM event 
 		WHERE eventNum = #{eventNum}
 	</select>
