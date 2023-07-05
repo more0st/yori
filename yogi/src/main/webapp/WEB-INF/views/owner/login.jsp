@@ -109,6 +109,11 @@ td {
 	cursor: pointer;
 }
 
+.msgdiv{
+	margin-top: 20px;
+	
+}
+
 </style>
 
 <script type="text/javascript">
@@ -163,9 +168,10 @@ function sendLogin() {
 				
 					
 			</div>
+			<div class="msgdiv">${message}</div>
 		</div>
 	</form>
-	<div>${message}</div>
+
 
 </div>
 </main>
