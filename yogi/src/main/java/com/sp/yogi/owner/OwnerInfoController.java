@@ -55,6 +55,8 @@ public class OwnerInfoController {
 			model.addAttribute("mode", "update");
 		}
 		
+		model.addAttribute("mode", "member");
+		
 		return ".owner.info.register";
 	}
 	
