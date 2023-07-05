@@ -181,7 +181,7 @@
 							</c:if>
 						</c:if>
 						<c:if test="${empty sessionScope.member}">
-							<div class="dropdown-content">로그인 후 이용하세요.</div>
+							<div class="dropdown-content" onclick="location.href='${pageContext.request.contextPath}/member/login'">로그인 후 이용하세요.</div>
 						</c:if>
 			  		</div>
 		  		</div>
