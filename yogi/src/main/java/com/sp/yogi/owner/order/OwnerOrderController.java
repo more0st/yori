@@ -120,7 +120,7 @@ public class OwnerOrderController {
 			
 			dto.setPayNum(paymentInfo.getPayNum());
 			service.updateStatus5(dto);//상태:취소로 변경
-			service.insertRefund(dto);//환불처리
+			//service.insertRefund(dto);//환불처리
 			
 		} catch (Exception e) {
 			e.printStackTrace();

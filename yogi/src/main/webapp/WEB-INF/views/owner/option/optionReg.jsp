@@ -279,12 +279,9 @@ $(function(){
 
 $(function() {
 	$("body").on("click", ".btnDeleteOptionOk", function() {
-		alert("버튼");
 		
 		let menuNum = $(this).attr("data-menuNum");
 		let option_group = $(this).attr("data-option");
-		
-		alert(menuNum + " : " +option_group);
 		
 		let query = "menuNum="+menuNum+"&option_group="+option_group;
 		let url="${pageContext.request.contextPath}/owner/option/deleteOption?"+query;

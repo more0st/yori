@@ -70,10 +70,11 @@
 	
 	<!-- 주문번호별 쿠폰정보 -->
 	<select id="couponInfo" parameterType="Long" resultType="com.sp.yogi.owner.order.Order">
-	SELECT orderNum, p.couponNum, content, discount
+	SELECT orderNum, p.couponNum, c.content, discount
 	FROM payment p
     LEFT OUTER JOIN coupon c ON p.couponNum=c.couponNum
-	WHERE orderNum=#{orderNum}
+    LEFT OUTER JOIN event e ON e.eventNum=c.eventNum
+    WHERE orderNum=#{orderNum}
 	</select>
 	
 	<!-- 주문상태변경(2:접수) -->

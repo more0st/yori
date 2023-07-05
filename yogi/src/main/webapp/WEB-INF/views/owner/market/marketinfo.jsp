@@ -630,14 +630,13 @@ $(function(){
 			if(data.state=="false"){
 				alert("로고를 등록하지 못했습니다.");
 				return false;
+			} else {
+				location.reload(true);
 			}
-			
 		};
 		
 		$('#menu-modal5').modal('hide');
 		ajaxFileFun(url,"post",formData,"json",fn);
-		
-		location.reload(true);
 		
 	});
 });

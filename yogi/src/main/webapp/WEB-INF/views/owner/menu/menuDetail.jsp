@@ -29,6 +29,12 @@
 	margin: 15px;
 }
 
+.imgsize2{
+	width: 75px;
+	margin: 15px;
+	border-radius: 15px;
+}
+
 .iconsize{
 	font-size:25px;
 }
@@ -46,6 +52,13 @@
     align-items: center;
     justify-content: center;
 }
+
+.updateImage {
+	border: none;
+	background: none;
+	margin: none;
+}
+
 
 </style>
 
@@ -86,7 +99,9 @@
 					</div>
 					<div>	
 						<div style="display:flex;">
-							<button type="button" class="btn graybtn btnSoldeOutOk"  data-num="${categoryNum}" data-stock="${dto.stock}" data-menuNum="${dto.menuNum}">${dto.stock==0?"품절":dto.stock==1?"판매중":dto.stock==2?"숨김":""}</button>
+							<button type="button" class="btn graybtn btnSoldeOutOk" 
+							data-num="${categoryNum}" data-stock="${dto.stock}" 
+							data-menuNum="${dto.menuNum}">${dto.stock==0?"품절":dto.stock==1?"판매중":dto.stock==2?"숨김":""}</button>
 							&nbsp;
 							<div class="dropdown">
 							  	<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -185,19 +200,25 @@
 	      <!-- 메뉴이름 -->
 	      <div>
 	      	<div class="title"><br>메뉴이름</div>
-	      	<div><input name="menu" type="text" class="form-control" value="사이다"></div>
+	      	<div><input name="menu" type="text" class="form-control"></div>
 	      </div>
 	      
 	      <!-- 가격 -->
 	      <div>
 	      	<div class="title"><br>가격</div>
-	      	<div><input name="price" type="text" class="form-control" value="1,500원"></div>
+	      	<div><input name="price" type="text" class="form-control"></div>
 	      </div>
 	      
 	      <!-- 이미지파일 -->
 	      <div>
 	      	<div class="title"><br>메뉴 사진</div>
 	      	<input type="file" name="selectFile" accept="image/*" class="form-control">
+	      	<input type="hidden" name="imageFilename">
+	      </div>
+	      <div>
+		      <button type="button" class="updateImage">
+		      	<img  name="saveImageFile" class="res-img imgsize2">
+		      	</button>
 	      </div>
 	      
 	      </div>
@@ -325,10 +346,13 @@ $(function(){
 		let menuNum = $(this).attr("data-menuNum");
 		let menu = $(this).attr("data-menu");
 		let price = $(this).attr("data-price");
+		let imageFilename = $(this).attr("data-imageFilename");
 		
 		document.menuUpdateForm.menu.value = menu;
 		document.menuUpdateForm.price.value = price;
 		document.menuUpdateForm.menuNum.value = menuNum;
+		document.menuUpdateForm.imageFilename.value = imageFilename;
+		document.menuUpdateForm.saveImageFile.src = "${pageContext.request.contextPath}/uploads/owner/menu/"+imageFilename;
 		
 		$('#menuUpdateModal').modal('show');
 	});
@@ -408,6 +432,7 @@ $(function(){
 				alert("메뉴를 등록하지 못했습니다.");
 				return false;
 			} else {
+               location.reload(true);
             }
 		};
                $('#menuInsertModal').modal('hide');
@@ -415,7 +440,6 @@ $(function(){
 		
                ajaxFileFun(url,"post",formData,"json",fn);
                
-               location.reload(true);
 		
 	});
 });
@@ -444,11 +468,7 @@ $(function(){
 			f.price.focus();
 			return;
 		}
-		if(! str){
-			alert("메뉴 이미지를 선택해주세요.");
-			f.selectFile.focus();
-			return;
-		}
+
 		
 		let url="${pageContext.request.contextPath}/owner/menu/updateMenu";
 		
@@ -457,15 +477,13 @@ $(function(){
 				alert("메뉴를 수정하지 못했습니다.");
 				return false;
 			} else {
+				location.reload(true);
             }
 		};
                $('#menuUpdateModal').modal('hide');
                location.href = "${pageContext.request.contextPath}/owner/menu/menuDetail?num="+category;
 		
                ajaxFileFun(url,"post",formData,"json",fn);
-               
-               location.reload(true);
-		
 	});
 });
 
