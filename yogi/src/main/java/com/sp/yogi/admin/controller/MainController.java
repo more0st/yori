@@ -27,6 +27,10 @@ public class MainController {
 		
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
+		if (info == null) {
+			return ".home.home";
+		}
+		
 		int membership = info.getMembership();
 		
 		if(membership != 99) {

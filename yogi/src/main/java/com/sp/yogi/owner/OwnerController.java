@@ -36,6 +36,10 @@ public class OwnerController {
 			return ".owner.login";
 		}
 		
+		if(info.getMembership()==1 || info.getMembership()==99) {
+			return ".home.home";
+		}
+		
 		int status = service.readStatus(info.getUserId());
 		
 		if(status == 0) {
