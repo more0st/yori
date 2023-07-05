@@ -101,7 +101,6 @@
 	입점 신청 요청이 <br>
 	<div class="messagediv"><div class="message">${message}</div> &nbsp;상태 입니다.</div>
 	<br><br>
-	<button type="button" onclick="location.href='https://tetris.com/play-tetris'">테트리스 하면서 기다리기</button>
 	
 </div>
 </c:if>	
