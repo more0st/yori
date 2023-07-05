@@ -10,5 +10,7 @@ public interface ReportManageService {
 	
 	public Report readReport(String reportNum);
 	
+	public void deleteReport(Map<String, Object> map) throws Exception;
 	
+	public void cancelReport(long reportNum, String pathname) throws Exception;
 }

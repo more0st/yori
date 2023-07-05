@@ -154,11 +154,11 @@
 														type="button" data-bs-toggle="dropdown"
 														aria-expanded="false">선택</button>
 													<ul class="dropdown-menu">
-														<li><button class="dropdown-item" type="button">삭제</button>
+														<li><button class="dropdown-item" type="button" onclick="">삭제</button>
 														</li>
 														<li><button class="dropdown-item" type="button">숨김</button>
 														</li>
-														<li><button class="dropdown-item" type="button">신고
+														<li><button class="dropdown-item" type="button" onclick="cancelReport(${dto.reportNum});">신고
 																취소</button></li>
 													</ul>
 												</div>
@@ -188,4 +188,18 @@
 		</div>
 	</section>
 </main>
+
+<script type="text/javascript">
+
+
+function cancelReport(reportNum) {
+	if(confirm("신고를 취소 하시겠습니까 ?")) {
+		let url = "${pageContext.request.contextPath}/admin/report/cancel?reportNum="+ reportNum;
+		alert(url);
+		location.href = url;
+	}
+}
+
+</script>
+
 <!-- End #main -->

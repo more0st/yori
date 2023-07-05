@@ -40,4 +40,25 @@ public class ReportManageServiceImpl implements ReportManageService {
 		return dto;
 	}
 
+	@Override
+	public void deleteReport(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void cancelReport(long reportNum, String pathname) throws Exception {
+		
+		try {
+			dao.deleteData("report.cancelReport ", reportNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	
+
 }
