@@ -1,5 +1,6 @@
 package com.sp.yogi.admin.controller;
 
+import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -84,7 +85,6 @@ public class EventManageController {
 		listUrl += "?" + query;
 		articleUrl += "&" + query;
 
-		String paging = myUtil.paging(current_page, total_page, listUrl);
 
 		model.addAttribute("list", list);
 		model.addAttribute("category", category);
@@ -92,8 +92,8 @@ public class EventManageController {
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("size", size);
 		model.addAttribute("total_page", total_page);
+		model.addAttribute("listUrl", listUrl);
 		model.addAttribute("articleUrl", articleUrl);
-		model.addAttribute("paging", paging);
 
 		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
@@ -113,12 +113,18 @@ public class EventManageController {
 	public String writeSubmit(
 			@PathVariable String category,
 			Event dto, HttpSession session) throws Exception {
+		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
-
+		
+		String root = session.getServletContext().getRealPath("/");
+		String path = root + "uploads" + File.separator + "admin"  + File.separator + "event";
+		
 		try {
 			dto.setUserId(info.getUserId());
-			service.insertEvent(dto);
+			service.insertEvent(dto, path);
 		} catch (Exception e) {
+			e.printStackTrace();
+			throw e; 
 		}
 
 		return "redirect:/admin/eventManage/all/list";
@@ -143,7 +149,7 @@ public class EventManageController {
 
 		Event dto = service.readEvent(num);
 		if (dto == null) {
-			return "redirect:/event/" + category + "/list?" + query;
+			return "redirect:/eventManage/" + category + "/list?" + query;
 		}
 		
 		// 이전 글, 다음 글
@@ -153,27 +159,16 @@ public class EventManageController {
 		map.put("keyword", keyword);
 		map.put("num", num);
 
-		Event preReadDto = service.preReadEvent(map);
-		Event nextReadDto = service.nextReadEvent(map);
-		
-		// 이벤트 참여자
-		List<Event> listEventTakers = service.listEventTakers(num);
-		// 이벤트 당첨자
-		List<Event> listEventWinner = service.listEventWinner(num);
-
 		model.addAttribute("category", category);
 		model.addAttribute("dto", dto);
-		model.addAttribute("preReadDto", preReadDto);
-		model.addAttribute("nextReadDto", nextReadDto);
-
-		model.addAttribute("listEventTakers", listEventTakers);
-		model.addAttribute("listEventWinner", listEventWinner);
 		
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
 
 		return ".admin.eventManage.article";
 	}
+	
+	
 	
 	@GetMapping("{category}/update")
 	public String updateForm(
@@ -186,7 +181,7 @@ public class EventManageController {
 		Event dto = service.readEvent(num);
 		
 		if (dto == null) {
-			return "redirect:/event/" + category + "/list?page=" + page;
+			return "redirect:/eventManage/" + category + "/list?page=" + page;
 		}
 
 		model.addAttribute("dto", dto);

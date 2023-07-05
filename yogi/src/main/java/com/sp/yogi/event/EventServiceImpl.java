@@ -6,17 +6,30 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sp.yogi.common.FileManager;
 import com.sp.yogi.common.dao.CommonDAO;
 
 @Service("event.eventService")
 public class EventServiceImpl implements EventService {
 	@Autowired
 	private CommonDAO dao;
+	@Autowired
+	private FileManager fileManager;
 	
 	@Override
-	public void insertEvent(Event dto) throws Exception {
+	public void insertEvent(Event dto, String pathname) throws Exception {
 		try {
-			dao.insertData("event.insertEvent", dto);
+			dto.setStart_date(dto.getStart_day() + " " + dto.getStart_time() + ":00");
+			dto.setEnd_date(dto.getEnd_day() + " " + dto.getEnd_time() + ":00");
+			
+			String saveFilename = fileManager.doFileUpload(dto.getSelectFile(), pathname);
+			
+			if (saveFilename != null) {
+				dto.setImgFileName(saveFilename);
+
+				dao.insertData("event.insertEvent", dto);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -48,7 +61,7 @@ public class EventServiceImpl implements EventService {
 		int result = 0;
 		
 		try {
-			//result = dao.selectOne("event.dataCount", map);
+			result = dao.selectOne("event.dataCount", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,7 +74,7 @@ public class EventServiceImpl implements EventService {
 		List<Event> list = null;
 		
 		try {
-			//list = dao.selectList("event.listEvent", map);
+			list = dao.selectList("event.listEvent", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -84,7 +97,15 @@ public class EventServiceImpl implements EventService {
 		Event dto = null;
 		
 		try {
-
+			dto = dao.selectOne("event.readEvent", num);
+			if(dto != null) { 
+				dto.setStart_day(dto.getStart_date().substring(0, 10));
+				dto.setStart_time(dto.getStart_date().substring(11));
+				
+				dto.setEnd_day(dto.getEnd_date().substring(0, 10));
+				dto.setEnd_time(dto.getEnd_date().substring(11));
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -79,7 +79,7 @@
 	
 	
   <!-- 페이징처리 js -->
-  <script src="${pageContext.request.contextPath}/resources/js/paginate.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/paginate-boot.js"></script>
 
 </body>
 
