@@ -6,6 +6,13 @@ public class Report {
 	private String reg_date;
 	private long orderNum;
 	
+	private String revContent;
+	private String userId;
+	private String userName;
+	private String revReg_date;
+	private String imgFileName;
+	private String restaurantName;
+	
 	public String getReportNum() {
 		return reportNum;
 	}
@@ -30,6 +37,44 @@ public class Report {
 	public void setOrderNum(long orderNum) {
 		this.orderNum = orderNum;
 	}
+	
+	public String getRevContent() {
+		return revContent;
+	}
+	public void setRevContent(String revContent) {
+		this.revContent = revContent;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getRevReg_date() {
+		return revReg_date;
+	}
+	public void setRevReg_date(String revReg_date) {
+		this.revReg_date = revReg_date;
+	}
+	public String getImgFileName() {
+		return imgFileName;
+	}
+	public void setImgFileName(String imgFileName) {
+		this.imgFileName = imgFileName;
+	}
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
+	}
+	
 	
 	
 }

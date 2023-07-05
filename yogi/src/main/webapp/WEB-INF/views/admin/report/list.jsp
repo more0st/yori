@@ -124,10 +124,10 @@
 										<span>${dto.reportNum}</span>
 									</div>
 									<div class="rep-2">
-										<span>상훈이네 족발집</span>
+										<span>${dto.restaurantName}</span>
 									</div>
 									<div class="rep-3">
-										<span>박상훈</span>
+										<span>${dto.userName}</span>
 									</div>
 									<div class="rep-4">
 										<span>${dto.content}</span>
@@ -145,8 +145,8 @@
 										<div class="review-top"
 											style="display: flex; justify-content: space-between; margin-bottom: 10px;">
 											<div class="review-name" style="display: flex; gap: 5px;">
-												<div class="res-333" style="font-weight: bold">박상훈님</div>
-												<div class="review-date">2023-06-13</div>
+												<div class="res-333" style="font-weight: bold">${dto.userName}</div>
+												<div class="review-date">${dto.revReg_date}</div>
 											</div>
 											<div>
 												<div class="dropdown">
@@ -164,11 +164,13 @@
 												</div>
 											</div>
 										</div>
+										<c:if test="${dto.imgFileName != null}">
 										<img class="review-img"
-											src="/yogi/resources/picture/burgerking.png"
+											src="${pageContext.request.contextPath}/uploads/review/${dto.imgFileName}"
 											style="width: 50%; border: 1px solid #d9d9d9;" />
+										</c:if>	
 										<div class="review-content"
-											style="font-size: #14; color: #666666; margin: 20px 0 0 0;">맛있는버거킹</div>
+											style="font-size: #14; color: #666666; margin: 20px 0 0 0;">${dto.revContent}</div>
 									</div>
 								</div>
 							</div>

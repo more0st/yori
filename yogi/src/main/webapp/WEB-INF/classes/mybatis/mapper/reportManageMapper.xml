@@ -6,10 +6,13 @@
 	
     
 	<select id="listReport" parameterType="map" resultType="com.sp.yogi.admin.domain.Report">
-		SELECT p.reportNum, p.content, p.reg_date, r.orderNum
+		SELECT p.reportNum, p.content, p.reg_date, r.orderNum, r.userId, m1.userName, rt.restaurantName,
+			r.content revContent, r.reg_date revReg_date, r.imgFileName
 		FROM review_report p
 		JOIN review r ON p.orderNum = r.orderNum
-		
+		JOIN member1 m1 ON r.userId = m1.userId
+    	JOIN restaurant rt ON r.restaurantNum = rt.restaurantNum
+<!-- 		LEFT OUTER JOIN member1 m1 ON r.userId = m1.userName -->
 		ORDER BY p.reportNum DESC
 	</select>
 	
