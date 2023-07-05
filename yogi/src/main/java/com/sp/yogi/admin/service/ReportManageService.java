@@ -10,7 +10,7 @@ public interface ReportManageService {
 	
 	public Report readReport(String reportNum);
 	
-	public void deleteReport(Map<String, Object> map) throws Exception;
+	public void deleteReview(Map<String, Object> map) throws Exception; // 리뷰 삭제
 	
-	public void cancelReport(long reportNum, String pathname) throws Exception;
+	public void cancelReport(long reportNum, String pathname) throws Exception; // 신고 취소
 }

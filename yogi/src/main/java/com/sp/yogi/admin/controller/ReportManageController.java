@@ -42,7 +42,7 @@ public class ReportManageController {
 	public String cancel(@RequestParam long reportNum,
 			HttpSession session) throws Exception {
 		
-		System.out.println(reportNum + "넘값");
+//		System.out.println(reportNum + "넘값");
 
 		String root = session.getServletContext().getRealPath("/");
 		String pathname = root + "uploads" + File.separator + "report";

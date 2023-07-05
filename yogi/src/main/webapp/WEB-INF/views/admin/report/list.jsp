@@ -154,12 +154,10 @@
 														type="button" data-bs-toggle="dropdown"
 														aria-expanded="false">선택</button>
 													<ul class="dropdown-menu">
-														<li><button class="dropdown-item" type="button" onclick="">삭제</button>
+														<li><button class="dropdown-item" type="button" onclick="">리뷰 삭제</button>
 														</li>
-														<li><button class="dropdown-item" type="button">숨김</button>
-														</li>
-														<li><button class="dropdown-item" type="button" onclick="cancelReport(${dto.reportNum});">신고
-																취소</button></li>
+														
+														<li><button class="dropdown-item" type="button" onclick="cancelReport(${dto.reportNum});">신고 취소</button></li>
 													</ul>
 												</div>
 											</div>
