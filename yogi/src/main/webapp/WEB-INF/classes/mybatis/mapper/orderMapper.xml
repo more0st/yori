@@ -31,8 +31,9 @@
 	</insert>
 	
 	<select id="listCoupon" parameterType="String" resultType="com.sp.yogi.order.Order">
-		SELECT couponNum, content, discount, TO_CHAR(expired_date, 'YYYY-MM-DD') expired_date, min_price
-		FROM coupon
+		SELECT couponNum, c.content, discount, TO_CHAR(expired_date, 'YYYY-MM-DD') expired_date, min_price
+		FROM coupon c
+		JOIN event e ON c.eventNum = e.eventNum
 		WHERE userId = #{userId} and expired_date >= SYSDATE AND status = 1
 	</select>
 	
