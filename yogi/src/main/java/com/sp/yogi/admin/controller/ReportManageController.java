@@ -30,7 +30,7 @@ public class ReportManageController {
 		
 		model.addAttribute("list", list);
 		
-		return "admin/report/list";
+		return ".admin.report.list";
 
 	}
 
