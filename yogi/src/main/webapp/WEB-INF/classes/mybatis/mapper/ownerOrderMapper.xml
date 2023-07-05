@@ -12,14 +12,14 @@
 	WHERE userId=#{userId}
 	</select>
 	
-	<!-- 가게별 주문 리스트(접수대기) -->
+	<!-- 가게별 주문 리스트 -->
 	<select id="orderList" parameterType="Long" resultType="com.sp.yogi.owner.order.Order">
 	SELECT ob.orderNum, userId, order_date, addr1, addr2, tel, ob.memo, total_price, r.restaurantNum, restaurantName, statusName
 	FROM order_bundle ob
 	LEFT JOIN order_status os ON ob.orderNum=os.orderNum
 	LEFT JOIN restaurant r ON ob.restaurantNum=r.restaurantNum
 	WHERE r.restaurantNum=#{restaurantNum}
-	ORDER BY order_date
+	ORDER BY order_date, statusName
 	</select>
 	
 	<!-- 가게별 주문 리스트(접수완료) 

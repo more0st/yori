@@ -18,7 +18,7 @@
   window.addEventListener('DOMContentLoaded', () => {
 	  const elements = document.querySelectorAll('.overflow-ellipsis');
 
-	  const maxLength = 20;
+	  const maxLength = 10;
 
 	  elements.forEach(element => {
 	    let text = element.innerText;
@@ -68,7 +68,7 @@
 		                        <th scope="row"><a href="${pageContext.request.contextPath}/owner/order/orderDetail?orderNum=${order.orderNum}&statusName=${order.statusName}">${order.orderNum}</a></th>
 		                        <td>${order.userId}</td>
 		                        <td>${order.addr1} ${order.addr2}</td>
-		                        <td>
+		                        <td class="overflow-ellipsis">
 		                        <c:forEach var="dto" items="${order.menuList}" varStatus="status">
 		                        ${dto.menu} &nbsp;
 		                        </c:forEach>
@@ -92,7 +92,7 @@
               <div class="card recent-sales overflow-auto">
 
                 <div class="card-body">
-                  <h5 class="card-title">완료<span> | ${res.restaurantName}</span></h5>
+                  <h5 class="card-title">접수완료</h5>
 
                   <table class="table table-borderless">
                     <thead>
@@ -109,12 +109,12 @@
                     </thead>
                     <tbody>
                     <c:forEach var="order" items="${orderList}" varStatus="status">
-                   		 <c:if test="${order.statusName!=1 && order.statusName!=5}"><!-- 접수완료인 목록(수정하기) -->
+                   		 <c:if test="${order.statusName==2 || order.statusName==3}"><!-- 접수완료인 목록(수정하기) -->
 	                      <tr><!-- forEach -->
 	                        <th scope="row"><a href="${pageContext.request.contextPath}/owner/order/orderDetail?orderNum=${order.orderNum}&statusName=${order.statusName}">${order.orderNum}</a></th>
 	                        <td>${order.userId}</td>
 	                        <td>${order.addr1}&nbsp;${order.addr2}</td>
-	                        <td>
+	                        <td class="overflow-ellipsis">
 	                       		<c:forEach var="dto" items="${order.menuList}" varStatus="status">
 		                        	${dto.menu} &nbsp;
 		                        </c:forEach>
@@ -132,6 +132,96 @@
 	                        <c:if test="${order.statusName==4}">
 	                        	<button type="button" class="btn btn-warning" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail?orderNum=${order.orderNum}&statusName=${order.statusName}'">배달완료</button>
 	                        </c:if>
+	                        </td>
+	                      </tr><!-- forEach -->
+	                      </c:if>
+                      </c:forEach>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div><!-- End Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+
+                <div class="card-body">
+                  <h5 class="card-title">배달완료</h5>
+
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col">주문번호</th>
+                        <th scope="col">유저아이디</th>
+                        <th scope="col">배달지</th>
+                        <th scope="col">메뉴</th>
+                        <th scope="col">금액</th>
+                        <th scope="col">전화번호</th>
+                        <th scope="col">요청사항</th>
+                        <th scope="col">주문상태</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="order" items="${orderList}" varStatus="status">
+                   		 <c:if test="${order.statusName==4}">
+	                      <tr><!-- forEach -->
+	                        <th scope="row"><a href="${pageContext.request.contextPath}/owner/order/orderDetail?orderNum=${order.orderNum}&statusName=${order.statusName}">${order.orderNum}</a></th>
+	                        <td>${order.userId}</td>
+	                        <td>${order.addr1}&nbsp;${order.addr2}</td>
+	                        <td class="overflow-ellipsis">
+	                       		<c:forEach var="dto" items="${order.menuList}" varStatus="status">
+		                        	${dto.menu} &nbsp;
+		                        </c:forEach>
+	                        </td>
+	                        <td>${order.total_price}원</td>
+	                        <td>${order.tel}</td>
+	                        <td class="overflow-ellipsis">${order.memo}</td>
+	                        <td>
+	                        	<button type="button" class="btn btn-warning" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail?orderNum=${order.orderNum}&statusName=${order.statusName}'">배달완료</button>
+	                        </td>
+	                      </tr><!-- forEach -->
+	                      </c:if>
+                      </c:forEach>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div><!-- End Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+
+                <div class="card-body">
+                  <h5 class="card-title">취소내역</h5>
+
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col">주문번호</th>
+                        <th scope="col">유저아이디</th>
+                        <th scope="col">배달지</th>
+                        <th scope="col">메뉴</th>
+                        <th scope="col">금액</th>
+                        <th scope="col">전화번호</th>
+                        <th scope="col">요청사항</th>
+                        <th scope="col">주문상태</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="order" items="${orderList}" varStatus="status">
+                   		 <c:if test="${order.statusName==5}"><!-- 접수완료인 목록(수정하기) -->
+	                      <tr><!-- forEach -->
+	                        <th scope="row">${order.orderNum}</th>
+	                        <td>${order.userId}</td>
+	                        <td>${order.addr1}&nbsp;${order.addr2}</td>
+	                        <td class="overflow-ellipsis">
+	                       		<c:forEach var="dto" items="${order.menuList}" varStatus="status">
+		                        	${dto.menu} &nbsp;
+		                        </c:forEach>
+	                        </td>
+	                        <td>${order.total_price}원</td>
+	                        <td>${order.tel}</td>
+	                        <td class="overflow-ellipsis">${order.memo}</td>
+	                        <td>
+	                        	<button type="button" class="btn btn-danger" disabled="disabled">취소완료</button>
 	                        </td>
 	                      </tr><!-- forEach -->
 	                      </c:if>
