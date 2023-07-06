@@ -10,7 +10,8 @@
 
 .container {
 	background: white;
-	margin: 30px auto;
+	max-width: 900px; 
+	padding: 20px 15px 20px 15px;
 }
 
 .bold {
@@ -25,15 +26,12 @@
 
 <main id="main" class="main">
 	<div class="whole-container">
-		<div class="container"
-			style="max-width: 900px; padding: 20px 15px 20px 15px;">
+		<div class="container">
+			<div class="pagetitle">
+				<h1> 1:1 문의 </h1>
+			</div>
 			<div class="body-container">
-				<div class="body-title">
-					<h3>1:1 문의</h3>
-				</div>
-
 				<div class="body-main">
-
 					<table class="table mb-0">
 						<tbody>
 							<tr>

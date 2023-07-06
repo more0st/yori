@@ -4,40 +4,24 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
 <style type="text/css">
-.whole-container {
-	min-height: 800px;
-}
-
-.container {
-	background: white;
-	margin: 30px auto;
-}
-
 .body-main {
 	text-align: center;
 	vertical-align: center;
 }
-
 </style>
 
 <main id="main" class="main">
-	<div class="whole-container">
-		<div class="container" style="max-width: 900px; padding : 20px 15px 20px 15px ;">
-		<div class="body-container">	
-			<div class="body-title">
-				<h3> 1:1 문의 </h3>
-			</div>
-			<hr><br>
-			
-			<div class="body-main">
-	
-		        <div class="row board-list-header">
-		            <div class="col-auto me-auto">
-		            	${dataCount}개(${page}/${total_page} 페이지)
-		            </div>
-		            <div class="col-auto">&nbsp;</div>
-		        </div>				
+	<div class="pagetitle ">
+		<h1> 1:1 문의 </h1>
+	</div>
+	<section class="section">
+		<div class="card">
+			<div class="card-body">	
+	            <div class="col-auto me-auto card-title">
+	            	${dataCount}개(${page}/${total_page} 페이지)
+	            </div>
 				
+				<div class="body-main">
 				<table class="table table-hover board-list">
 					<thead class="table-light">
 						<tr>
@@ -94,12 +78,11 @@
 					<div class="col text-end">
 					</div>
 				</div>
-	
+				</div>
 			</div>
 		</div>
-		</div>
 	
-	</div>
+	</section>
 </main>
 
 
