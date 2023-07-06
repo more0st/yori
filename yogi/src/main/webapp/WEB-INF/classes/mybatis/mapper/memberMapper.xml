@@ -6,7 +6,7 @@
 		SELECT m.memberNum, membership, userId, userName, nickName, enabled, userPwd, reg_date, modify_date, last_login, failure_cnt
 		FROM member m
 		JOIN member1 m1 ON m1.memberNum = m.memberNum
-		WHERE userId = #{userId} AND enabled != 0
+		WHERE userId = #{userId}
 	</select>
 	
 	<select id="enableMember" parameterType="String" resultType="int">

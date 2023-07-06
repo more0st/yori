@@ -91,28 +91,39 @@ public class MemberController {
 			Model model) {
 		
 		try {
-			/*
-			if(service.enableMember(userId)) {
-				model.addAttribute("message", "정지된 회원입니다. 관리자에게 문의하세요.<br>(관리자 이메일 : admin@naver.com)");
-				return ".member.login";
-			} 
-			
 			Member dto = service.loginMember(userId);
-			if(dto.getFailure_cnt() >= 4) {
-				service.updateEnabled(userId);
-				model.addAttribute("message", "비밀번호 입력 허용횟수 [5]회를 초과하였습니다.<br> 관리자에게 문의하세요.(관리자 이메일 : admin@naver.com)");
-				return ".member.login";
-			}
-			*/
-			Member dto = service.loginMember(userId);
-			if (dto == null || !userPwd.equals(dto.getUserPwd())) {
+			if(dto == null) {
 				model.addAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다.");
+				return ".member.login";
+			} else if(userPwd.equals(dto.getUserPwd())) {
+				
+				// 정지된 회원
+				if(service.enableMember(dto.getUserId())) {
+					model.addAttribute("message", "정지된 회원입니다. 관리자에게 문의하세요.<br>(관리자 이메일 : admin@naver.com)");
+					return ".member.login";
+				}
+			} else if (!userPwd.equals(dto.getUserPwd())) {
+				int failCount = dto.getFailure_cnt() +1;
+				
+				// 정지된 회원
+				if(service.enableMember(dto.getUserId())) {
+					model.addAttribute("message", "정지된 회원입니다. 관리자에게 문의하세요.<br>(관리자 이메일 : admin@naver.com)");
+					return ".member.login";
+				}
 				
 				// failure_cnt 카운트 ++
 				service.failCount(userId);
+				model.addAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다. [ 비밀번호 틀린 횟수 : "+ failCount +"/5 ]");
+
+				if(dto.getFailure_cnt() >= 4) {
+					service.updateEnabled(userId);
+					model.addAttribute("message", "비밀번호 입력 허용횟수 [5]회를 초과하였습니다.<br> 관리자에게 문의하세요.(관리자 이메일 : admin@naver.com)");
+					return ".member.login";
+				} 
 				
 				return ".member.login";
-			} 
+			}
+			
 
 			// 세션에 로그인 정보 저장
 			SessionInfo info = new SessionInfo();
