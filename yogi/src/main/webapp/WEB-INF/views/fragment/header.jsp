@@ -112,7 +112,9 @@ header .dropdown-item {
 			    	<div class="dropdiv">${sessionScope.member.userName}</div>
 				</button>
 			  	<ul class="dropdown-menu">
+			  	<c:if test="${sessionScope.member.membership == 1}">
 			    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/myhome">마이페이지</a></li>
+			    </c:if>	
 			    	
 			    	<!-- 관리자일 경우에만 -->
 			    	<c:if test="${sessionScope.member.membership == 99 || sessionScope.member.userName == '관리자'}">
