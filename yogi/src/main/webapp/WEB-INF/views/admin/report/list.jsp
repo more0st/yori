@@ -127,7 +127,7 @@
 										<span>${dto.restaurantName}</span>
 									</div>
 									<div class="rep-3">
-										<span>${dto.userName}</span>
+										<span>${dto.userId}</span>
 									</div>
 									<div class="rep-4">
 										<span>${dto.content}</span>
@@ -154,7 +154,7 @@
 														type="button" data-bs-toggle="dropdown"
 														aria-expanded="false">선택</button>
 													<ul class="dropdown-menu">
-														<li><button class="dropdown-item" type="button" onclick="">리뷰 삭제</button>
+														<li><button class="dropdown-item" type="button" onclick="deleteReview(${dto.orderNum});">리뷰 삭제</button>
 														</li>
 														<li><button class="dropdown-item" type="button" onclick="hideReview(${dto.orderNum});">리뷰 숨김</button>
 														</li>
@@ -191,6 +191,12 @@
 
 <script type="text/javascript">
 
+function deleteReview(orderNum) {
+	if(confirm("리뷰를 삭제하시겠습니까 ?")) {
+		let url = "${pageContext.request.contextPath}/admin/report/delete?orderNum="+ orderNum;
+		location.href = url;
+	}
+}
 
 function hideReview(orderNum) {
 	if(confirm("리뷰를 숨기시겠습니까 ?")) {

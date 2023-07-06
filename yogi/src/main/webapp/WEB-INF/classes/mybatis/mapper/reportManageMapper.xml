@@ -17,15 +17,15 @@
 	
 	
 	<!-- 리뷰 삭제 -->
-
+	<delete id="deleteReview" parameterType="long">
+		DELETE FROM review WHERE orderNum = #{orderNum}
+	</delete>
 
 	<!-- 리뷰 숨김 -->
 	<update id="hideReview" parameterType="com.sp.yogi.admin.domain.Report">
 		UPDATE review SET enabled=0
 		WHERE orderNum = #{orderNum}
 	</update>
-	
-	
 	
 	<!-- 신고 취소 -->
 	<delete id="cancelReport" parameterType="long">

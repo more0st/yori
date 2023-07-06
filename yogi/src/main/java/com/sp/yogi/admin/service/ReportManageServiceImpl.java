@@ -42,7 +42,13 @@ public class ReportManageServiceImpl implements ReportManageService {
 
 	@Override
 	public void deleteReview(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
+		
+		try {
+			dao.deleteData("report.deleteReview", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
 
