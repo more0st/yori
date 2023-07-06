@@ -156,8 +156,17 @@
 													<ul class="dropdown-menu">
 														<li><button class="dropdown-item" type="button" onclick="deleteReview(${dto.orderNum});">리뷰 삭제</button>
 														</li>
-														<li><button class="dropdown-item" type="button" onclick="hideReview(${dto.orderNum});">리뷰 숨김</button>
-														</li>
+														
+														<c:choose>
+															<c:when test="${dto.enabled == 0}">
+																<li><button class="dropdown-item" type="button" onclick="hideRelease(${dto.orderNum});">숨김 해제</button>
+																</li>
+															</c:when>
+															<c:otherwise>
+																<li><button class="dropdown-item" type="button" onclick="hideReview(${dto.orderNum});">리뷰 숨김</button>
+																</li>
+															</c:otherwise>
+														</c:choose>
 														
 														<li><button class="dropdown-item" type="button" onclick="cancelReport(${dto.reportNum});">신고 취소</button></li>
 													</ul>
@@ -201,6 +210,13 @@ function deleteReview(orderNum) {
 function hideReview(orderNum) {
 	if(confirm("리뷰를 숨기시겠습니까 ?")) {
 		let url = "${pageContext.request.contextPath}/admin/report/hide?orderNum="+ orderNum;
+		location.href = url;
+	}
+}
+
+function hideRelease(orderNum) {
+	if(confirm("숨김을 해제 하시겠습니까 ?")) {
+		let url = "${pageContext.request.contextPath}/admin/report/release?orderNum="+ orderNum;
 		location.href = url;
 	}
 }

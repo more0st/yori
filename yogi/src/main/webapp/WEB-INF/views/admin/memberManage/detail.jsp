@@ -84,6 +84,42 @@
                       </tr>
                   </table>
                   
+                  <h6 class="card-title"> <span>정지내역</span></h6>
+                  <c:choose>
+							<c:when test="${empty list}">
+								 <h6 class="card-title"> <span>정지내역이 없습니다.</span></h6>
+							</c:when>
+							
+							<c:otherwise>
+								 <table class="table table-bordered">
+								 <tr>
+			                        <th scope="col" style="width: 480px;">날짜</th>
+			                        <th scope="col" style="width: 480px;">정지 상태</th>
+			                        <th scope="col" style="width: 480px;">정지 사유</th>
+			                     </tr>
+			                     <c:forEach var="dtoState" items="${list}" varStatus="status">
+			                     <tr>
+			                     	<td>${dtoState.reg_date}</td>
+			                     	<td>
+				                     	<c:choose>
+				                     	
+					                     	<c:when test="${dtoState.stateCode==0}">
+					                     	리뷰 정지
+					                     	</c:when>
+				                     	
+					                     	<c:otherwise>
+												비밀번호 정지
+											</c:otherwise>
+				                     	
+				                     	</c:choose>
+			                     	</td>
+			                     	<td>${dtoState.memo}</td>
+			                     </tr>
+			                     </c:forEach>
+								 </table>
+							</c:otherwise>
+							
+				  </c:choose>
 	                  
 	                  <c:choose>
 							<c:when test="${dto.enabled==1}">
@@ -91,7 +127,7 @@
 								<input id="suspendId" type="hidden" value="${dto.userId}">
 							</c:when>
 							<c:otherwise>
-								<button type="button" class="btn btn-outline-primary btn-sm" onclick="release" data-bs-target="${status.index}">정지 해제</button>
+								<button type="button" class="btn btn-outline-primary btn-sm" onclick="release('${dto.userId}',${status.index})" >정지 해제</button>
 								<input id="suspendId" type="hidden" value="${dto.userId}">
 							</c:otherwise>
 						</c:choose>
@@ -106,7 +142,7 @@
 							      <form> 
 								      <div class="modal-body">
 										<div>
-											<textarea id="reason${status.index}" rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
+											<textarea id="reason" rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
 										</div>
 										<div>
 											
@@ -114,7 +150,7 @@
 								      </div>
 								      <div class="modal-footer">
 								        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-								        <button type="button" class="btn btn-primary" onclick="sendSuspension('${dto.userId}',${status.index})">보내기</button>
+								        <button type="button" class="btn btn-primary" onclick="sendSuspension('${dto.userId}')">보내기</button>
 								      </div>
 							      </form>
 							    </div>
@@ -129,6 +165,66 @@
             </div><!-- End Recent Sales -->
           </div>
     </section>
+    
+    <script type="text/javascript">
+
+function release(clickUserId) {
+	
+	// 회원 상태를 변경하기 위한 AJAX 요청
+	$.ajax({
+		type: "POST", // 혹은 "PUT" 등 HTTP 요청 메소드 선택
+		url: "${pageContext.request.contextPath}/admin/memberManage/releaseMemberState", // 실제 서버 요청 주소
+		data: {
+			userId: clickUserId,
+			registerId : "admin"
+			
+		},
+		success: function(data) {
+			// 서버 요청이 성공했을 때 실행할 코드
+			alert("정지가 해제되었습니다.");
+			location.href = '${pageContext.request.contextPath}/admin/memberManage/list'
+			
+			// 페이지 새로고침 등 필요한 동작 수행
+		},
+		error: function(jqXHR) {
+			// 서버 요청이 실패했을 때 실행할 코드
+			alert("정지 해제 실패");
+			console.log(jqXHR.responseText);
+		}
+	});
+	
+}
+
+function sendSuspension(clickUserId) {
+	// 정지 사유 입력란에서 값을 가져옴
+	var reason = document.getElementById("reason").value;
+	
+	// 회원 상태를 변경하기 위한 AJAX 요청
+	$.ajax({
+		type: "POST", // 혹은 "PUT" 등 HTTP 요청 메소드 선택
+		url: "${pageContext.request.contextPath}/admin/memberManage/updateMemberEnabled", // 실제 서버 요청 주소
+		data: {
+			userId: clickUserId,
+			registerId : "admin",
+			reason: reason,
+			
+		},
+		success: function(data) {
+			// 서버 요청이 성공했을 때 실행할 코드
+			alert("회원이 정지되었습니다.");
+			location.href = '${pageContext.request.contextPath}/admin/memberManage/list'
+			
+			// 페이지 새로고침 등 필요한 동작 수행
+		},
+		error: function(jqXHR) {
+			// 서버 요청이 실패했을 때 실행할 코드
+			alert("회원 정지 실패");
+			console.log(jqXHR.responseText);
+		}
+	});
+}
+
+</script>
 	
 	
   </main><!-- End #main -->

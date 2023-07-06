@@ -41,7 +41,6 @@
 						<tbody>
 							
 						<c:forEach var="dto" items="${list}" varStatus="status">
-<%-- 							 <tr class="hover" onclick="profile('${dto.userId}');"> --%>
 							<tr class="hover"> 
 								<th scope="row" style="text-align: center;">${dto.memberNum}</th>
 								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail?userId=${dto.userId}" class="text-primary">${dto.userName}</a></td>
@@ -58,11 +57,10 @@
 												<input id="suspendId" type="hidden" value="${dto.userId}">
 											</c:when>
 											<c:otherwise>
-												<button type="button" class="btn btn-outline-primary btn-sm" onclick="release" data-bs-target="${status.index}">해제</button>
+												<button type="button" class="btn btn-outline-primary btn-sm" onclick="release('${dto.userId}',${status.index})">해제</button>
 												<input id="suspendId" type="hidden" value="${dto.userId}">
 											</c:otherwise>
 										</c:choose>
-<!-- 										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button> -->
 									</div>
 								</td>
 							</tr>
@@ -111,8 +109,7 @@ function release(clickUserId, sIndex) {
 		url: "${pageContext.request.contextPath}/admin/memberManage/releaseMemberState", // 실제 서버 요청 주소
 		data: {
 			userId: clickUserId,
-			registerId : "admin",
-			reason: reason,
+			registerId : "admin"
 			
 		},
 		success: function(data) {
@@ -162,5 +159,5 @@ function sendSuspension(clickUserId, sIndex) {
 
 </script>
 
-	</main>
+</main>
 	<!-- End #main -->
