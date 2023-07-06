@@ -331,6 +331,7 @@ public class OwnerController {
 		// 회원정보수정폼
 		model.addAttribute("dto", dto);
 		model.addAttribute("mode", "update");
+		model.addAttribute("openState", info.getOpenState());
 		return ".owner.member";
 	}
 
