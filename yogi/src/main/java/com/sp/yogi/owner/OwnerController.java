@@ -270,14 +270,16 @@ public class OwnerController {
 	}
 
 	@RequestMapping(value = "check", method = RequestMethod.GET)
-	public String pwdForm(String dropout, Model model) {
+	public String pwdForm(String dropout, Model model, HttpSession session) {
 
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
 		if (dropout == null) {
 			model.addAttribute("mode", "update");
 		} else {
 			model.addAttribute("mode", "dropout");
 		}
-
+		model.addAttribute("openState", info.getOpenState());
 		return ".owner.pwdCheck";
 	}
 
