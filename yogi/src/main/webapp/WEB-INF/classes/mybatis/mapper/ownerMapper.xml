@@ -27,17 +27,19 @@
    
    <select id="todayOrderCount" parameterType="map" resultType="Integer">
        	SELECT count(*)
-		FROM order_bundle
+		FROM order_bundle o
+		JOIN payment p ON p.orderNum = o.orderNum
 		<where>
-			restaurantNum = #{restaurantNum} AND TRUNC(order_date) = TRUNC(SYSDATE)
+			restaurantNum = #{restaurantNum} AND TRUNC(order_date) = TRUNC(SYSDATE) AND state = 1
 		</where>
     </select>
     
     <select id="todayOrderSum" parameterType="map" resultType="Integer">
        	SELECT sum(total_price) today_sum
-		FROM order_bundle
+		FROM order_bundle o
+		JOIN payment p ON p.orderNum = o.orderNum
 		<where>
-			restaurantNum = #{restaurantNum} AND TRUNC(order_date) = TRUNC(SYSDATE)
+			restaurantNum = #{restaurantNum} AND TRUNC(order_date) = TRUNC(SYSDATE) AND state = 1
 		</where>
     </select>
     
