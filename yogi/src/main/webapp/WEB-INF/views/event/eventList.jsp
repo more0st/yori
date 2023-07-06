@@ -29,6 +29,7 @@
 
 .event-box img {
 	width : 90%;
+	max-height : 280px;
     overflow-clip-margin: content-box;
     overflow: clip;
     border-radius: 30px;
@@ -117,117 +118,83 @@
 
 </style>
 
-<div class="contain title-container"><div  onclick="location.href='${pageContext.request.contextPath}/event/eventList'" class="eventMove">이벤트</div></div>
-	<div class="contain whole-container">
-		<div class="btn-box">
-			<button id="eventbtn1" class="eventbtn">전체보기</button>
-			<button id="eventbtn2" class="eventbtn">진행중</button>
-			<button id="eventbtn3" class="eventbtn">종료</button>
-		</div>
-		<div class="event-box">
-			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
-				<div>
-					<img src="${pageContext.request.contextPath}/resources/picture/event-01.jpg">
-				</div>
-				<p>요리조리요 이벤트</p>
-				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
-				<span>2023-06-01 ~ 2023-06-30</span>
-			</div>
-			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
-				<div>
-					<img src="${pageContext.request.contextPath}/resources/picture/event-02.jpg">
-				</div>
-				<p>요리조리요 이벤트</p>
-				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
-				<span>2023-06-01 ~ 2023-06-30</span>
-			</div>
-			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
-				<div>
-					<img src="${pageContext.request.contextPath}/resources/picture/event-03.jpg">
-				</div>
-				<p>요리조리요 이벤트</p>
-				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
-				<span>2023-06-01 ~ 2023-06-30</span>
-			</div>
-			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
-				<div>
-					<img src="${pageContext.request.contextPath}/resources/picture/event-04.jpg">
-				</div>
-				<p>요리조리요 이벤트</p>
-				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
-				<span>2023-06-01 ~ 2023-06-30</span>
-			</div>
-			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
-				<div>
-					<img src="${pageContext.request.contextPath}/resources/picture/event-05.jpg">
-				</div>
-				<p>요리조리요 이벤트</p>
-				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
-				<span>2023-06-01 ~ 2023-06-30</span>
-			</div>
-			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
-				<div>
-					<img src="${pageContext.request.contextPath}/resources/picture/event-06.png">
-				</div>
-				<p>요리조리요 이벤트</p>
-				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
-				<span>2023-06-01 ~ 2023-06-30</span>
-			</div>
-			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
-				<div>
-					<img src="${pageContext.request.contextPath}/resources/picture/event-09.jpg">
-				</div>
-				<p>요리조리요 이벤트</p>
-				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
-				<span>2023-06-01 ~ 2023-06-30</span>
-			</div>
-			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
-				<div>
-					<img src="${pageContext.request.contextPath}/resources/picture/event-10.jpg">
-				</div>
-				<p>요리조리요 이벤트</p>
-				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
-				<span>2023-06-01 ~ 2023-06-30</span>
-			</div>
-			<div class="event-info" onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
-				<div>
-					<img src="${pageContext.request.contextPath}/resources/picture/event-11.png">
-				</div>
-				<p>요리조리요 이벤트</p>
-				<h4>이번엔 요리조리요에서 100만원 받아가세요</h4>
-				<span>2023-06-01 ~ 2023-06-30</span>
-			</div>
-
-			
-		</div>
-		
-		<div>
-		
-		</div>
-	</div>
+<c:url var="listUrl" value="/yogi/event/${category}/list">
+	<c:if test="${not empty keyword}">
+		<c:param name="condition" value="${condition}"/>
+		<c:param name="keyword" value="${keyword}"/>
+	</c:if>
+</c:url>
 
 <script type="text/javascript">
+window.addEventListener("load", function(){
+	let page = ${page};
+	let pageSize = ${size};
+	let dataCount = ${dataCount};
+	let url = "${listUrl}"; 
+	
+	let total_page = pageCount(dataCount, pageSize);
+	let paging = pagingUrl(page, total_page, url);
+	
+	document.querySelector(".dataCount").innerHTML = dataCount+"개 ("
+			+page+"/"+total_page+"페이지)";
 
-var buttons = document.querySelectorAll(".eventbtn");
-var activeButton = document.getElementById("eventbtn1");
-
-buttons.forEach(function(button) {
-  button.addEventListener("click", function() {
-    // 이전 활성 버튼 스타일 초기화
-    activeButton.style.backgroundColor = "white";
-    activeButton.style.color = "#333";
-
-    // 클릭된 버튼 스타일 변경
-    button.style.backgroundColor = "#fa0050";
-    button.style.color = "white";
-
-    // 활성 버튼 업데이트
-    activeButton = button;
-  });
+	document.querySelector(".page-navigation").innerHTML = 
+		dataCount === 0 ? "등록된 게시물이 없습니다." : paging;
 });
 
-// 초기 화면 설정
-activeButton.style.backgroundColor = "#fa0050";
-activeButton.style.color = "white";
+$(function(){
+	$('#tab-${category}').css("background", "#fa0050");
+	$('#tab-${category}').css("color","white");
 
+	$('div.btn-box button').click(function() {
+		let category = $(this).attr('data-category');
+		location.href = '${pageContext.request.contextPath}/event/'+category+'/list';
+	});
+});
 </script>
+
+
+
+
+
+<div class="contain title-container">
+	<div
+		onclick="location.href='${pageContext.request.contextPath}/event/all/list'"
+		class="eventMove">이벤트</div>
+</div>
+<div class="contain whole-container">
+	
+	
+
+	<div class="btn-box" name="btn-box">
+		<button id="tab-all" class="eventbtn" data-category="all">전체보기</button>
+		<button id="tab-progress" class="eventbtn" data-category="progress">진행중</button>
+		<button id="tab-ended" class="eventbtn" data-category="ended">종료</button>
+	</div>
+	
+	<div class="dataCount" style="margin-top: 10px;"></div>
+	
+	<div class="event-box">
+		
+		<c:forEach var="dto" items="${list}" varStatus="status">
+			<div class="event-info"
+				onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+				<div>
+					<img
+						src="${pageContext.request.contextPath}/uploads/admin/event/${dto.imgFileName}">
+				</div>
+				<h4 style="margin-top: 20px; text-align: center;">${dto.subject}</h4>
+				<div style="text-align: center;">${dto.start_date}~
+					${dto.end_date}</div>
+			</div>
+		</c:forEach>
+
+	</div>
+
+	<div class="page-navigation"></div>
+
+	
+
+</div>
+
+

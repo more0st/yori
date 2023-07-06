@@ -58,7 +58,7 @@
 
 	<!-- 글리스트 -->
 	<select id="listEvent" parameterType="map" resultType="com.sp.yogi.event.Event">
-		SELECT e.eventNum, subject, hitCount, enabled,
+		SELECT e.eventNum, subject, hitCount, enabled, imgFileName,
 			   TO_CHAR(start_date,'YYYY-MM-DD HH24:MI') start_date,
 			   TO_CHAR(end_date, 'YYYY-MM-DD HH24:MI') end_date, 
 			   NVL(applyCount, 0) applyCount
@@ -95,6 +95,22 @@
 		FROM event 
 		WHERE eventNum = #{eventNum}
 	</select>
+	
+	<!-- 수정 -->
+	<update id="updateEvent" parameterType="com.sp.yogi.event.Event">
+		UPDATE event SET subject=#{subject}, content=#{content},
+				start_date=TO_DATE(#{start_date}, 'YYYY-MM-DD HH24:MI:SS'), 
+				end_date=TO_DATE(#{end_date}, 'YYYY-MM-DD HH24:MI:SS'),
+				enabled=#{enabled}, 
+				imgFileName=#{imgFileName}, expired_date=#{expired_date}, 
+				discount=#{discount}, min_price=#{min_price}
+		WHERE eventNum = #{eventNum}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteEvent" parameterType="Long">
+		DELETE FROM event WHERE eventNum = #{eventNum}
+	</delete>
 	
 	
 </mapper>

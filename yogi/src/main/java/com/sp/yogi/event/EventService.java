@@ -6,7 +6,7 @@ import java.util.Map;
 public interface EventService {
 	// 이벤트 등록 / 수정 / 삭제
 	public void insertEvent(Event dto, String pathname) throws Exception;
-	public void updateEvent(Event dto) throws Exception;
+	public void updateEvent(Event dto, String pathname) throws Exception;
 	public void deleteEvent(long num) throws Exception;
 	
 	public int dataCount(Map<String, Object> map);

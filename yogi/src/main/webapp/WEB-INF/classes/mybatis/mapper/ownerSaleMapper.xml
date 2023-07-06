@@ -54,9 +54,11 @@
 		FROM order_bundle ob
 		JOIN member1 m ON ob.userId=m.userId
 		<where>
+			restaurantNum = #{restaurantNum}
 			<if test="date1 != null and date2 != null">
-				<include refid="where-list"/>
+				AND <include refid="where-list"/>
 			</if>
+			
 		</where>
 		ORDER BY order_date DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY

@@ -37,8 +37,23 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public void updateEvent(Event dto) throws Exception {
+	public void updateEvent(Event dto, String pathname) throws Exception {
 		try {
+			// 업로드한 파일이 존재한 경우
+			String saveFilename = fileManager.doFileUpload(dto.getSelectFile(), pathname);
+
+			if (saveFilename != null) {
+				// 이전 파일 지우기
+				if (dto.getImgFileName().length() != 0) {
+					fileManager.doFileDelete(dto.getImgFileName(), pathname);
+				}
+				dto.setImgFileName(saveFilename);
+			}
+			
+			dto.setStart_date(dto.getStart_day() + " " + dto.getStart_time() + ":00");
+			dto.setEnd_date(dto.getEnd_day() + " " + dto.getEnd_time() + ":00");
+			
+			dao.updateData("event.updateEvent", dto);
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,7 +64,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public void deleteEvent(long num) throws Exception {
 		try {
-			//dao.deleteData("event.deleteEvent", num);
+			dao.deleteData("event.deleteEvent", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -104,6 +119,8 @@ public class EventServiceImpl implements EventService {
 				
 				dto.setEnd_day(dto.getEnd_date().substring(0, 10));
 				dto.setEnd_time(dto.getEnd_date().substring(11));
+				
+				dto.setExpired_date(dto.getExpired_date().substring(0,10));
 			}
 			
 		} catch (Exception e) {

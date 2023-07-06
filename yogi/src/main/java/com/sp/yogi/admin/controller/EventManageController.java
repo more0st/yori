@@ -197,11 +197,19 @@ public class EventManageController {
 	public String updateSubmit(Event dto,
 			@PathVariable String category,
 			@RequestParam String page,
+			@RequestParam int num,
 			HttpSession session) throws Exception {
-
+		
+		String root = session.getServletContext().getRealPath("/");
+		String path = root + "uploads" + File.separator + "admin"  + File.separator + "event";
+		
+		dto.setEventNum(num);
+		
 		try {
-			service.updateEvent(dto);
+			service.updateEvent(dto, path);
 		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
 		
 		return "redirect:/admin/eventManage/" + category + "/list?page=" + page;
@@ -225,24 +233,12 @@ public class EventManageController {
 		try {
 			service.deleteEvent(num);
 		} catch (Exception e) {
-			
+			e.printStackTrace();
+			throw e;
 		}
 
 		return "redirect:/admin/eventManage/" + category + "/list?" + query;
 	}
 	
-	@PostMapping("{category}/win")
-	public String winner(
-			@PathVariable String category,
-			Event dto,
-			@RequestParam String page) throws Exception {
-		
-		try {
-			service.insertEventWinner(dto);
-		} catch (Exception e) {
-		}
-		
-		return "redirect:/admin/eventManage/winner/list?page=" + page;
-	}
 	
 }

@@ -22,9 +22,31 @@ width: 100%;
 .img-box{
 justify-content: center;
 }
-
-
 </style>
+
+<script type="text/javascript">
+function deleteOk() {
+	let query = 'num=${dto.eventNum}&${query}';
+	let url = '${pageContext.request.contextPath}/admin/eventManage/${category}/delete?' + query;
+
+	if(confirm('위 자료를 삭제 하시 겠습니까 ? ')) {
+		location.href = url;
+	}
+}
+
+$(function(){
+	$('#tab-all').removeClass('active');
+	$('#tab-${category}').addClass('active');
+
+	$('ul.nav-tabs li button').click(function() {
+		let category = $(this).attr('data-category');
+		location.href = '${pageContext.request.contextPath}/admin/eventManage/'+category+'/list';
+	});
+	
+	
+});
+	
+</script>
 
 <main id="main" class="main">
 
@@ -54,7 +76,9 @@ justify-content: center;
 						<span class="fw-semibold" style="float: left;">최소주문금액 &nbsp;:&nbsp; 
 						<fmt:formatNumber type="currency" value="${dto.min_price}"/> </span>
 						<hr style="clear:both;">
-						<span class="fw-semibold" style="float: left;">유효기간 &nbsp;:&nbsp; ${dto.expired_date} </span>
+						<span class="fw-semibold" style="float: left;">유효기간 &nbsp;:&nbsp; ${dto.expired_date} 00:00 </span>
+						<hr style="clear:both;">
+						<span class="fw-semibold" style="float: left;">표시여부 &nbsp;:&nbsp; ${dto.enabled}  </span>
 						<hr style="clear:both;">
 					</div>
 					
@@ -78,7 +102,8 @@ justify-content: center;
 				<div class="writebtn">
 					<button type="button" class="btn btn-primary"
 						onclick="location.href='${pageContext.request.contextPath}/admin/eventManage/${category}/update?num=${dto.eventNum}&page=${page}'">수정하기</button>
-					<button type="button" class="btn btn-danger">삭제하기</button>
+					<button type="button" class="btn btn-danger"
+						onclick="deleteOk();">삭제하기</button>
 				</div>
 				
 				

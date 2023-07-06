@@ -15,6 +15,18 @@
 	max-width: 900px;
 }
 
+.write-form .img-viewer {
+	cursor: pointer;
+	border: 1px solid #ccc;
+	width: 150px;
+	height: 150px;
+	border-radius: 20px;
+	background-image: url("${pageContext.request.contextPath}/resources/images/add_photo.png");
+	position: relative;
+	z-index: 9999;
+	background-repeat : no-repeat;
+	background-size : cover;
+}
 
 </style>
 
@@ -80,9 +92,15 @@
 			return;
 		}
 
-		if (mode === "write" && new Date().getTime() > ed.getTime()) {
+		if (new Date().getTime() > ed.getTime()) {
 			alert("종료날짜는 현재 시간보다 작을수 없습니다.");
 			f.end_day.focus();
+			return;
+		}
+		
+		if (new Date().getTime() > new Date(f.expired_date.value)) {
+			alert("유효기간은 현재 시간보다 작을수 없습니다.");
+			f.expired_date.focus();
 			return;
 		}
 		
@@ -99,10 +117,50 @@
 	        f.selectFile.focus();
 	        return;
 		}
-
+	
 		f.action = "${pageContext.request.contextPath}/admin/eventManage/${category}/${mode}";
 		f.submit();
 	}
+	
+	$(function() {
+		let img = "${dto.imgFileName}";
+		if( img ) { // 수정인 경우
+			img = "${pageContext.request.contextPath}/uploads/admin/event/" + img;
+			$(".write-form .img-viewer").empty();
+			$(".write-form .img-viewer").css("background-image", "url("+img+")");
+		}
+		
+		$(".write-form .img-viewer").click(function(){
+			$("form[name=eventForm] input[name=selectFile]").trigger("click"); 
+		});
+		
+		$("form[name=eventForm] input[name=selectFile]").change(function(){
+			let file = this.files[0];
+			if(! file) {
+				$(".write-form .img-viewer").empty();
+				if( img ) {
+					img = "${pageContext.request.contextPath}/uploads/admin/event/" + img;
+				} else {
+					img = "${pageContext.request.contextPath}/resources/images/add_photo.png";
+				}
+				$(".write-form .img-viewer").css("background-image", "url("+img+")");
+				
+				return false;
+			}
+			
+			if(! file.type.match("image.*")) {
+				this.focus();
+				return false;
+			}
+			
+			let reader = new FileReader();
+			reader.onload = function(e) {
+				$(".write-form .img-viewer").empty();
+				$(".write-form .img-viewer").css("background-image", "url("+e.target.result+")");
+			}
+			reader.readAsDataURL(file);
+		});
+	});
 </script>
 
 <main id="main" class="main">
@@ -138,13 +196,13 @@
 
 				<form name="eventForm" method="post" enctype="multipart/form-data" class="text-center">
 					<div class="row mb-3">
-						<label for="subject" class="col-sm-2 col-form-label">제목</label>
+						<label class="col-sm-2 col-form-label">제목</label>
 						<div class="col-sm-6">
 							<input type="text" class="form-control" name="subject" value="${dto.subject}">
 						</div>
 					</div>
 					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">시작일자</label>
+						<label class="col-sm-2 col-form-label">시작일자</label>
 						<div class="col-sm-3">
 							<input type="date" name="start_day" class="form-control" value="${dto.start_day}"> 
 						</div>
@@ -153,7 +211,7 @@
 						</div>
 					</div>
 					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">종료일자</label>
+						<label class="col-sm-2 col-form-label">종료일자</label>
 						<div class="col-sm-3">
 							<input type="date" name="end_day" class="form-control"value="${dto.end_day}"> 
 						</div>
@@ -162,25 +220,25 @@
 						</div>
 					</div>
 					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">쿠폰 유효기간</label>
+						<label class="col-sm-2 col-form-label">쿠폰 유효기간</label>
 						<div class="col-sm-3">
-							<input type="date" name="expired_date" class="form-control"value="${dto.end_day}"> 
+							<input type="date" name="expired_date" class="form-control"value="${dto.expired_date}"> 
 						</div>
 					</div>
 					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">쿠폰사용 최저금액</label>
+						<label class="col-sm-2 col-form-label">쿠폰사용 최저금액</label>
 						<div class="col-sm-3">
 							<input type="text" name="min_price" class="form-control" value="${dto.min_price}"> 
 						</div>
 					</div>
 					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">쿠폰 할인금액</label>
+						<label class="col-sm-2 col-form-label">쿠폰 할인금액</label>
 						<div class="col-sm-3">
 							<input type="text" name="discount" class="form-control" value="${dto.discount}"> 
 						</div>
 					</div>
 					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">출력여부</label>
+						<label class="col-sm-2 col-form-label">출력여부</label>
 						<div class="col-sm-1 col-form-label">
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" id="enabled" name="enabled" 
@@ -190,32 +248,31 @@
 						</div>
 					</div>
 					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">내용</label>
+						<label class="col-sm-2 col-form-label">내용</label>
 						<div class="col-6">
 							<textarea class="form-control" name="content" placeholder="내용" 
 									id="content" style="height: 300px;" >${dto.content}</textarea>	
 						</div>
 					</div>
-					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">이미지</label>
-						<div class="col-6">
-							<input type="file" name="selectFile" accept="image/*" class="form-control">	
-						</div>
-					</div>
-					<c:if test="${mode=='update'}">
+					<div class="write-form">
 						<div class="row mb-3">
-							<label for="inputEmail3" class="col-sm-2 col-form-label">등록된 이미지</label>
+							<label class="col-sm-2 col-form-label">이미지</label>
 							<div class="col-6">
-								<input type="file" name="selectFile" accept="image/*" class="form-control" value="${dto.imgFileName}">	
+								<input type="file" name="selectFile" accept="image/*" class="form-control" style="display: none;">	
+								<div class="img-viewer"></div>
 							</div>
 						</div>
-					</c:if>
+					</div>
+					
+					
+					
 					<div class="text-center">
 						<button type="button" class="btn btn-success" onclick="check();">${mode=='update'?'수정완료':'등록하기'}</button>
 						<button type="reset" class="btn btn-secondary">다시입력</button>
 						<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/eventManage/${category}/list';">${mode=='update'?'수정취소':'등록취소'}</button>
 						<c:if test="${mode=='update'}">
 								<input type="hidden" name="num" value="${dto.eventNum}">
+								<input type="hidden" name="imgFileName" value="${dto.imgFileName}">
 								<input type="hidden" name="page" value="${page}">
 							</c:if>
 					</div>

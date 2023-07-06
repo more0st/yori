@@ -23,6 +23,9 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/bootstrap5/js/bootstrap.bundle.min.js"></script>
 
+  <!-- 페이징처리 js -->
+  <script src="${pageContext.request.contextPath}/resources/js/paginate-boot.js"></script>
+
 
 <style type="text/css">
 @font-face {
