@@ -1,6 +1,7 @@
 package com.sp.yogi.mypage;
 
 public class Coupon {
+	private long orderNum;
 	private Long eventNum;
 	private Long couponNum;
 	private String content;
@@ -11,6 +12,14 @@ public class Coupon {
 	private String used_date;
 	private int status;
 	private String userId;
+
+	public long getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(long orderNum) {
+		this.orderNum = orderNum;
+	}
 
 	public Long getEventNum() {
 		return eventNum;

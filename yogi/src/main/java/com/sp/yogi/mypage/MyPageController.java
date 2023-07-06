@@ -22,6 +22,7 @@ import com.sp.yogi.common.MyUtil;
 import com.sp.yogi.home.Home;
 import com.sp.yogi.home.HomeService;
 import com.sp.yogi.member.SessionInfo;
+import com.sp.yogi.owner.order.OrderService;
 
 @Controller("mypage.myPageController")
 @RequestMapping("/mypage/*")
@@ -90,7 +91,7 @@ public class MyPageController {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		String cp = req.getContextPath();
 
-		int size = 5;
+		int size = 10;
 		int total_page;
 		int dataCount;
 
@@ -198,9 +199,12 @@ public class MyPageController {
 		
 		MyPage dto = service.readOrderDetail(num);
 		List<MyPage> list = service.listOrderDetail(num);
+		Coupon couponInfo = couponService.couponInfo(num);
+		
 
 		model.addAttribute("detailList", list);
 		model.addAttribute("detailList2", dto);
+		model.addAttribute("couponInfo", couponInfo);
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
 

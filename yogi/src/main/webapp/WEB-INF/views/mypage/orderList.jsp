@@ -147,16 +147,15 @@
 						<button type="button" class="reviewbtn reviewModal" data-bs-toggle="modal" data-bs-target="#reviewModal" data-orderNum="${dto.orderNum}" data-restaurantNum="${dto.restaurantNum}">리뷰쓰기</button>
 					</td>
 				</c:when>
-				<c:when test="${dto.content == null && dto.statusName == 4 }">
-					<td>
-						<button type="button" class="reviewbtn reviewModal" data-bs-toggle="modal" data-bs-target="#reviewModal" data-orderNum="${dto.orderNum}" data-restaurantNum="${dto.restaurantNum}">리뷰쓰기</button>
-					</td>
-				</c:when>
-				<c:otherwise>
+				<c:when test="${dto.content != null}">
 					<td>
 						<input type="hidden" name="reviewRating" value="${dto.rating}">
 						<input type="hidden" name="reviewContent" value="${dto.content}">
 						<button type="button" class="reviewbtn reviewUpdate" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" data-orderNum="${dto.orderNum}" data-restaurantNum="${dto.restaurantNum}">리뷰수정</button>
+					</td>
+				</c:when>
+				<c:otherwise>
+					<td>
 					</td>
 				</c:otherwise>
 				</c:choose>

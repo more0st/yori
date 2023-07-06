@@ -45,13 +45,15 @@
          </tr>
          
          <tr class="border">
-            <th >${detailList2.restaurantName}</th>
+            <th>${detailList2.restaurantName}</th>
          </tr>
+         <c:set var="totalMenuPrice" value="0" />
          <c:forEach var="vo" items="${detailList}">
          <tr class="border" >
 	         <td>${vo.menu}, ${vo.optionName} </td>
 	         <td class="right"><fmt:formatNumber value="${vo.option_price}" pattern="#,###원"/></td>
          </tr>
+         <c:set var="totalMenuPrice" value="${totalMenuPrice + vo.option_price}" />
          </c:forEach>
       
 
@@ -63,15 +65,28 @@
             <th colspan="2">결제정보</th>
          </tr>    
          
-         <!-- /forEach -->
-         <tr class="border">
-            <td>전체금액</td>
-             <td class="right"><fmt:formatNumber value="${detailList2.pay_price}" pattern="#,###원"/></td>
-         </tr>
 
          <tr class="border">
-            <th>결제방법</th>
+            <td>결제방법</td>
             <td class="right">${detailList2.payMethod}</td>
+         </tr>
+         <tr class="border">
+            <td>총 가격</td>
+            <td class="right"><fmt:formatNumber value="${totalMenuPrice}" pattern="#,###원"/></td>
+         </tr>
+         <tr class="border">
+            <td>배달팁</td>
+            <td class="right"><fmt:formatNumber value="${detailList2.pay_price - totalMenuPrice + couponInfo.discount}" pattern="#,###원"/></td>
+         </tr>
+         <c:if test="${couponInfo.discount != null}">
+         <tr class="border">
+            <td>쿠폰</td>
+            <td class="right"><fmt:formatNumber value="-${couponInfo.discount}" pattern="#,###원"/></td>
+         </tr>
+         </c:if>
+         <tr class="border">
+            <td>결제할 금액</td>
+             <td class="right"><fmt:formatNumber value="${detailList2.pay_price}" pattern="#,###원"/></td>
          </tr>
       </table>
     <table class="table">    

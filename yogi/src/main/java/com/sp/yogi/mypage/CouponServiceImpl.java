@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sp.yogi.common.dao.CommonDAO;
+import com.sp.yogi.owner.order.Order;
 
 @Service("mypage.couponService")
 public class CouponServiceImpl implements CouponService {
@@ -25,6 +26,17 @@ public class CouponServiceImpl implements CouponService {
 		}
 
 		return list;
+	}
+
+	@Override
+	public Coupon couponInfo(long orderNum) {
+		Coupon dto=null;
+		try {
+			dto=dao.selectOne("mypage.couponInfo",orderNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 }

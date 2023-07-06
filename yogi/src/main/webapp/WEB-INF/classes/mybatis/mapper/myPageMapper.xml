@@ -253,5 +253,15 @@ FROM
 		UPDATE payment SET state = 0
 		WHERE orderNum = #{orderNum}
 	</update>
+	
+	<!-- 주문번호별 쿠폰정보 -->
+	<select id="couponInfo" parameterType="Long" resultType="com.sp.yogi.mypage.Coupon">
+	SELECT orderNum, p.couponNum, c.content, discount
+	FROM payment p
+    LEFT OUTER JOIN coupon c ON p.couponNum=c.couponNum
+    LEFT OUTER JOIN event e ON e.eventNum=c.eventNum
+    WHERE orderNum=#{orderNum}
+	</select>
+	
 
 </mapper>
