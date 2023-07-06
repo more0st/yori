@@ -42,6 +42,7 @@ public class OwnerMenuController {
 		int categoryCount=service.categoryCount(restaurantNum);
 		List<Menu> categoryList=service.categoryList(restaurantNum);
 		
+		model.addAttribute("openState", info.getOpenState());
 		model.addAttribute("categoryList",categoryList);
 		model.addAttribute("categoryCount",categoryCount);
 		model.addAttribute("restaurantNum",restaurantNum);
@@ -131,6 +132,8 @@ public class OwnerMenuController {
 		int menuCount=service.menuCount(num);
 		List<Menu> categoryList= service.categoryList(restaurantNum);
 		String categoryName=service.categoryName(num);
+		
+		model.addAttribute("openState", info.getOpenState());
 		model.addAttribute("categoryNum",num);
 		model.addAttribute("menuList",menuList);
 		model.addAttribute("menuCount",menuCount);

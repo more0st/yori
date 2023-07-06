@@ -59,9 +59,9 @@
 										placeholder="아이디">
 							</div>
 							<div class="col-3 ps-1">
-								
-									<button type="button" class="btn btn-light" onclick="userIdCheck();" ${mode=="update" ? "disabled='disabled' ":""}>아이디중복검사</button>
-								
+								<c:if test="${mode=='member'}">
+									<button type="button" class="btn btn-light" onclick="userIdCheck();">아이디중복검사</button>
+								</c:if>								
 							</div>
 						</div>
 						<c:if test="${mode=='member'}">
@@ -130,7 +130,7 @@
 			        </div>
 			    </div>
 			 
-		
+				<c:if test="${mode=='member'}">
 			    <div class="row mb-3">
 			        <label class="col-sm-2 col-form-label" for="agree">약관 동의</label>
 					<div class="col-sm-8" style="padding-top: 5px;">
@@ -144,6 +144,7 @@
 						</label>
 					</div>
 			    </div>
+			    </c:if>
 			     
 			    <div class="row mb-3">
 			        <div class="text-center">

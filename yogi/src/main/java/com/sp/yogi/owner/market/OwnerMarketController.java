@@ -182,6 +182,7 @@ public class OwnerMarketController {
 	
 	@RequestMapping(value = "review", method = RequestMethod.GET)
 	public String review(HttpSession session, Model model) throws Exception{
+		
 		SessionInfo info=(SessionInfo) session.getAttribute("member");
 		
 		if(info==null) {
@@ -205,7 +206,7 @@ public class OwnerMarketController {
 		int reviewCount=rService.reviewCount(restaurantNum);
 		double avgRating=rService.avgRating(restaurantNum);
 		
-		
+		model.addAttribute("openState", info.getOpenState());
 		model.addAttribute("reviewList",reviewList);
 		model.addAttribute("reviewCount",reviewCount);
 		model.addAttribute("avgRating",avgRating);

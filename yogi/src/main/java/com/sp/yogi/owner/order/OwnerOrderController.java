@@ -44,7 +44,11 @@ public class OwnerOrderController {
 		return ".owner.order.orderList";
 	}
 	@RequestMapping(value = "orderDetail", method = RequestMethod.GET)
-	public String orderDetail(@RequestParam("orderNum") long orderNum, @RequestParam("statusName") long statusName, Model model) throws Exception {
+	public String orderDetail(@RequestParam("orderNum") long orderNum, @RequestParam("statusName") long statusName, 
+			HttpSession session,
+			Model model) throws Exception {
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
 		int menuCount=service.menuCount(orderNum);
 		Order orderInfo=service.orderInfoList(orderNum);
@@ -52,6 +56,7 @@ public class OwnerOrderController {
 		List<Order> orderMenu=service.orderMenuList(orderNum);
 		Order couponInfo=service.couponInfo(orderNum);
 		
+		model.addAttribute("openState", info.getOpenState());
 		model.addAttribute("orderNum",orderNum);
 		model.addAttribute("statusNum",statusName);
 		model.addAttribute("menuCount",menuCount);

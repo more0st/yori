@@ -34,6 +34,10 @@ public class OwnerSaleController {
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
+		if(info==null) {
+			return "redirect:/owner/home";
+		}
+		
 		int size = 10;
 		int total_page = 0;
 		int dataCount = 0;
@@ -107,6 +111,10 @@ public class OwnerSaleController {
 			Model model) throws Exception {
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		if(info==null) {
+			return "redirect:/owner/home";
+		}
 		
 		int size = 10;
 		int total_page = 0;

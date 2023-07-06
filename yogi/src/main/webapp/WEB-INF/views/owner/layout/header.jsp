@@ -68,59 +68,6 @@ header .login-button {
         
         </li><!-- End Profile Nav -->
 
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              모든 주문내역 보기
-              <a href="${pageContext.request.contextPath}/owner/order/orderList"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-lightbulb text-primary"></i>
-              <div>
-                <h4>새로운 주문</h4>
-                <p>서울특별시 마포구 월드컵북로 21 풍성빌딩 201호(주문 주소)</p>
-                <p>14,000원</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            
-             <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-lightbulb text-primary"></i>
-              <div>
-                <h4>새로운 주문</h4>
-                <p>서울특별시 마포구 월드컵북로 21 풍성빌딩 202호(주문 주소)</p>
-                <p>18,000원</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
 
       </ul>
 	</c:if>
@@ -213,7 +160,9 @@ header .login-button {
           </li>
         </ul>
       </li><!-- End Icons Nav -->
-
+      
+      <c:if test="${not empty sessionScope.member}">
+      
       <li class="nav-heading">Member</li>
 
       <li class="nav-item" style="cursor: pointer;">
@@ -243,7 +192,7 @@ header .login-button {
           <span>Log Out</span>
         </a>
       </li><!-- End Contact Page Nav -->
-
+	</c:if>
       <!-- End Blank Page Nav -->
     </ul>
 
