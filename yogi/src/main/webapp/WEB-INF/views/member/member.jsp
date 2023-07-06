@@ -85,7 +85,6 @@
 						<div class="row">
 							<div class="col-5 pe-1 ">
 								<input type="text" name="nickName" id="nickName" class="form-control" value="${dto.nickName}" 
-										${mode=="update" ? "readonly='readonly' ":""}
 										placeholder="닉네임">
 							</div>
 							<div class="col-3 ps-1">
