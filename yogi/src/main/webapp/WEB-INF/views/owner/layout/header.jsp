@@ -161,23 +161,25 @@ header .login-button {
         </ul>
       </li><!-- End Icons Nav -->
       
-      <c:if test="${not empty sessionScope.member}">
+      <c:if test="${not empty sessionScope.member}"><!-- 로그인 전엔 member메뉴가 보이지 않도록 설정 -->
       
       <li class="nav-heading">Member</li>
 
-      <li class="nav-item" style="cursor: pointer;">
-        <a class="nav-link collapsed openControl" onclick="">
-        	<c:choose>
-        		<c:when test="${openState eq 1}">
-        			<i class="bi bi-toggle-on" style="color: #e05c87"></i>
-        		</c:when>
-        		<c:otherwise>
-        		 	<i class="bi bi-toggle-off" style="color: #899bbd"></i>
-        		</c:otherwise>
-        	</c:choose>
-          <span>Open/Close</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
+		<c:if test="${openState!=null}"><!-- 입점신청 전엔 open/close 버튼이 보이지 않도록 설정-->
+		      <li class="nav-item" style="cursor: pointer;">
+		        <a class="nav-link collapsed openControl" onclick="">
+		        	<c:choose>
+		        		<c:when test="${openState eq 1}">
+		        			<i class="bi bi-toggle-on" style="color: #e05c87"></i>
+		        		</c:when>
+		        		<c:otherwise>
+		        		 	<i class="bi bi-toggle-off" style="color: #899bbd"></i>
+		        		</c:otherwise>
+		        	</c:choose>
+		          <span>Open/Close</span>
+		        </a>
+		      </li><!-- End F.A.Q Page Nav -->
+		</c:if>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="${pageContext.request.contextPath}/owner/check"> <!-- 정보수정이니까 update로 -->

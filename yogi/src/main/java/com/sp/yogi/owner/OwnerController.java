@@ -20,12 +20,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sp.yogi.member.SessionInfo;
+import com.sp.yogi.owner.market.Market;
+import com.sp.yogi.owner.market.MarketService;
 
 @Controller("owner.ownerController")
 @RequestMapping("/owner/*")
 public class OwnerController {
 	@Autowired
 	private OwnerService service;
+
+	@Autowired
+	private MarketService marketService;
 	
 	@GetMapping("home")
 	public String home(HttpSession session, Model model) {
@@ -273,13 +278,17 @@ public class OwnerController {
 	public String pwdForm(String dropout, Model model, HttpSession session) {
 
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		Market marketInfo=marketService.readRestaurant2(info.getUserId());
 		
+		//입점정보가 있으면 open/close를 보여줌
+		if(marketInfo!=null) {
+			model.addAttribute("openState", info.getOpenState());
+		}
 		if (dropout == null) {
 			model.addAttribute("mode", "update");
 		} else {
 			model.addAttribute("mode", "dropout");
 		}
-		model.addAttribute("openState", info.getOpenState());
 		return ".owner.pwdCheck";
 	}
 
@@ -288,6 +297,12 @@ public class OwnerController {
 			HttpSession session, Model model) {
 
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		Market marketInfo=marketService.readRestaurant2(info.getUserId());
+		
+		//입점정보가 있으면 open/close를 보여줌
+		if(marketInfo!=null) {
+			model.addAttribute("openState", info.getOpenState());
+		}
 
 		Owner dto = service.readOwner(info.getUserId());
 		if (dto == null) {
@@ -331,7 +346,6 @@ public class OwnerController {
 		// 회원정보수정폼
 		model.addAttribute("dto", dto);
 		model.addAttribute("mode", "update");
-		model.addAttribute("openState", info.getOpenState());
 		return ".owner.member";
 	}
 

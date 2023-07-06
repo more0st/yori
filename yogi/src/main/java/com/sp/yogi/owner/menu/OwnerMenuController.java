@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.yogi.member.SessionInfo;
+import com.sp.yogi.owner.market.Market;
 import com.sp.yogi.owner.market.MarketService;
 
 @Controller("owner.menu.ownerMenuController")
@@ -38,6 +39,12 @@ public class OwnerMenuController {
 		}
 		
 		String userId=info.getUserId();
+		
+		Market dto=marketService.readRestaurant2(userId);
+		if(dto==null) {
+			return "redirect:/owner/home";
+		}
+		
 		long restaurantNum=marketService.readRestaurant2(userId).getRestaurantNum();
 		int categoryCount=service.categoryCount(restaurantNum);
 		List<Menu> categoryList=service.categoryList(restaurantNum);
@@ -123,6 +130,13 @@ public class OwnerMenuController {
 		SessionInfo info=(SessionInfo) session.getAttribute("member");
 		
 		if(info==null) {
+			return "redirect:/owner/home";
+		}
+		
+		String userId=info.getUserId();
+		
+		Market dto=marketService.readRestaurant2(userId);
+		if(dto==null) {
 			return "redirect:/owner/home";
 		}
 		
