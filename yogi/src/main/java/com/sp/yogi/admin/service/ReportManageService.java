@@ -12,5 +12,7 @@ public interface ReportManageService {
 	
 	public void deleteReview(Map<String, Object> map) throws Exception; // 리뷰 삭제
 	
+	public void hideReview(Map<String, Object> map) throws Exception; // 리뷰 숨김
+	
 	public void cancelReport(long reportNum, String pathname) throws Exception; // 신고 취소
 }

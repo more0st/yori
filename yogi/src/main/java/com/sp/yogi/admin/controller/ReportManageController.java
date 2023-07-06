@@ -38,6 +38,26 @@ public class ReportManageController {
 
 	}
 	
+	@RequestMapping(value = "hide", method = RequestMethod.GET)
+	public String hide(@RequestParam long orderNum,
+			HttpSession session) throws Exception {
+		
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "review";
+		
+		// Map<String, Object> 생성
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("orderNum", orderNum);
+	    map.put("pathname", pathname);
+		
+		try {
+			service.hideReview(map);
+		} catch (Exception e) {
+		}
+		
+		return "redirect:/admin/report/list";
+	}
+	
 	@RequestMapping(value = "cancel", method = RequestMethod.GET)
 	public String cancel(@RequestParam long reportNum,
 			HttpSession session) throws Exception {

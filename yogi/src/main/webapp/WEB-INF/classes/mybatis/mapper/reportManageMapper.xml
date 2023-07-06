@@ -17,7 +17,13 @@
 	
 	
 	<!-- 리뷰 삭제 -->
-	
+
+
+	<!-- 리뷰 숨김 -->
+	<update id="hideReview" parameterType="com.sp.yogi.admin.domain.Report">
+		UPDATE review SET enabled=0
+		WHERE orderNum = #{orderNum}
+	</update>
 	
 	
 	

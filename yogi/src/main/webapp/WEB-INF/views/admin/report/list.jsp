@@ -156,6 +156,8 @@
 													<ul class="dropdown-menu">
 														<li><button class="dropdown-item" type="button" onclick="">리뷰 삭제</button>
 														</li>
+														<li><button class="dropdown-item" type="button" onclick="hideReview(${dto.orderNum});">리뷰 숨김</button>
+														</li>
 														
 														<li><button class="dropdown-item" type="button" onclick="cancelReport(${dto.reportNum});">신고 취소</button></li>
 													</ul>
@@ -190,10 +192,17 @@
 <script type="text/javascript">
 
 
+function hideReview(orderNum) {
+	if(confirm("리뷰를 숨기시겠습니까 ?")) {
+		let url = "${pageContext.request.contextPath}/admin/report/hide?orderNum="+ orderNum;
+		location.href = url;
+	}
+}
+
 function cancelReport(reportNum) {
 	if(confirm("신고를 취소 하시겠습니까 ?")) {
 		let url = "${pageContext.request.contextPath}/admin/report/cancel?reportNum="+ reportNum;
-		alert(url);
+// 		alert(url);
 		location.href = url;
 	}
 }

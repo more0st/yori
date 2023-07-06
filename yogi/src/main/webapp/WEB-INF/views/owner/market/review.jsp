@@ -200,6 +200,7 @@
          <!-- foreach로 돌리기 -->
          <!-- image가 없는 리뷰라면 if로 생략하기 -->
          <c:forEach var="rev" items="${reviewList}" varStatus="status">
+         <c:if test="${rev.enabled==1}">
          <div class="review">
             <div class="review-top">
                <div class="review-name">
@@ -254,6 +255,7 @@
             </div>
             </c:if>
          </div>         
+      </c:if>
       </c:forEach>
    </div>
    </div>

@@ -47,6 +47,19 @@ public class ReportManageServiceImpl implements ReportManageService {
 	}
 
 	@Override
+	public void hideReview(Map<String, Object> map) throws Exception {
+
+		try {
+			dao.deleteData("report.hideReview", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+		
+	
+	@Override
 	public void cancelReport(long reportNum, String pathname) throws Exception {
 		
 		try {
@@ -58,6 +71,7 @@ public class ReportManageServiceImpl implements ReportManageService {
 		}
 		
 	}
+
 
 	
 

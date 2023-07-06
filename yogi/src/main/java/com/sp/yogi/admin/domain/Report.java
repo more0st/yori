@@ -13,6 +13,9 @@ public class Report {
 	private String imgFileName;
 	private String restaurantName;
 	
+	private int enabled;
+	
+	
 	public String getReportNum() {
 		return reportNum;
 	}
@@ -73,6 +76,13 @@ public class Report {
 	}
 	public void setRestaurantName(String restaurantName) {
 		this.restaurantName = restaurantName;
+	}
+	
+	public int getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
 	}
 	
 	
