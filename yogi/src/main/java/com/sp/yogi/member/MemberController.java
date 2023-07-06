@@ -91,6 +91,7 @@ public class MemberController {
 			Model model) {
 		
 		try {
+			/*
 			if(service.enableMember(userId)) {
 				model.addAttribute("message", "정지된 회원입니다. 관리자에게 문의하세요.<br>(관리자 이메일 : admin@naver.com)");
 				return ".member.login";
@@ -102,8 +103,8 @@ public class MemberController {
 				model.addAttribute("message", "비밀번호 입력 허용횟수 [5]회를 초과하였습니다.<br> 관리자에게 문의하세요.(관리자 이메일 : admin@naver.com)");
 				return ".member.login";
 			}
-				
-				
+			*/
+			Member dto = service.loginMember(userId);
 			if (dto == null || !userPwd.equals(dto.getUserPwd())) {
 				model.addAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다.");
 				
