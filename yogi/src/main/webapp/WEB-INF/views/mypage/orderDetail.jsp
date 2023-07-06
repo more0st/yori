@@ -34,7 +34,7 @@
    
       <div class="tablediv">
       <div class="backPage">
-         <button type="button" class="btn btn-secondary left" onclick="location.href='${pageContext.request.contextPath}/mypage/orderList';">목록으로</button>
+         <button type="button" class="btn btn-secondary left" onclick="location.href='${pageContext.request.contextPath}/mypage/orderList?${query}';">목록으로</button>
       </div>
       <br>
     

@@ -42,6 +42,10 @@ public interface MyPageService {
 
 	public List<MyPage> listMyHome(Map<String, Object> map);
 	
+	public void updateOrder(Order dto) throws Exception;
+
+	public void updatePay(Order dto) throws Exception;
+	
 	
 	
 }
