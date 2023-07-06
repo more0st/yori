@@ -19,7 +19,6 @@
 	border: 1px solid #eee;
 	font-weight: bold;
 	font-size: 14px;
-	background-color: white;
 	color: black;
 }
 
@@ -46,16 +45,31 @@
 .writebtn{
 	padding-top: 15px;
 	padding-left: 15px;
+	padding-right: 15px;
 	margin: 0 auto;
 	width: 700px;
 	height: 70px;
 	text-align: right;
+}
+
+.card{
+	width:700px;
+	margin: 0 auto; 
+}
+
+.titlediv{
+	width: 700px;
+	text-align: left;
+	margin: 30px auto;
 }
 </style>
 
 
 <main id="main" class="main">
 <div class="whole-container">
+	<div class="pagetitle titlediv">
+		<h1> 공지사항 </h1>
+	</div>
 	<!-- 
 		<div align="right">
 			   test="${memberInfo eq 'admin'}" 
@@ -63,10 +77,8 @@
 		</div>
 	 -->
 		
-	<div class="notice-wrap">
-		<div style="padding-left: 120px; padding-top: 20px; padding-bottom: 10px;">
-		
-		<!-- c:for each로 div 태그 돌리기.. -->
+	<div class="card">
+			<!-- c:for each로 div 태그 돌리기.. -->
 			<c:forEach var="dto" items="${list}">
 				<div class="notice-list">
 					<a class="n-article" href="${articleUrl}num=${dto.noticeNum}">
@@ -81,7 +93,6 @@
 			<div class="writebtn">
 				<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/notice/write'">글쓰기</button>
 			</div>
-		</div>
-	</div>	<!-- class="notice-wrap" -->
-</div> <!-- class="whole-container" -->
+	</div>	
+</div> 
 </main>
