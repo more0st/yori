@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.yogi.member.SessionInfo;
+import com.sp.yogi.owner.market.Market;
 import com.sp.yogi.owner.market.MarketService;
 import com.sp.yogi.owner.menu.Menu;
 import com.sp.yogi.owner.menu.MenuService;
@@ -39,6 +40,13 @@ public class OwnerOptionController {
 			return "redirect:/owner/home";
 		}
 		
+		String userId=info.getUserId();
+		
+		Market dto=marketService.readRestaurant2(userId);
+		if(dto==null) {
+			return "redirect:/owner/home";
+		}
+		
 		long restaurantNum=marketService.readRestaurant2(info.getUserId()).getRestaurantNum();
 		
 		List<Menu> categoryList=service.categoryList(restaurantNum);
@@ -48,12 +56,15 @@ public class OwnerOptionController {
 		}
 		
 		model.addAttribute("categoryList",categoryList);
+		model.addAttribute("openState", info.getOpenState());
 		
 		return ".owner.option.menuList";
 	}
 	
 	@RequestMapping(value = "optionReg", method = RequestMethod.GET)
-	public String optionReg(@RequestParam long menuNum, Model model) throws Exception {
+	public String optionReg(@RequestParam long menuNum, Model model, HttpSession session) throws Exception {
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		Map<String, Object> map=new HashMap<String, Object>();
 		
 		List<Menu> optionGroup= service.optionGroup(menuNum);
@@ -64,6 +75,7 @@ public class OwnerOptionController {
 			map.clear();
 		}
 		
+		model.addAttribute("openState", info.getOpenState());
 		model.addAttribute("optionList",optionGroup);
 		model.addAttribute("menuNum",menuNum);
 		

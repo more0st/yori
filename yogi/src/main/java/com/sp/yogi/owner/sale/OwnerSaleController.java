@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sp.yogi.member.SessionInfo;
+import com.sp.yogi.owner.market.Market;
+import com.sp.yogi.owner.market.MarketService;
 
 
 @Controller("owner.sale.ownerSaleController")
@@ -23,6 +25,9 @@ public class OwnerSaleController {
 	
 	@Autowired
 	private OwnerSaleService service;
+
+	@Autowired
+	private MarketService marketService;
 
 	@RequestMapping(value = "saleTime")
 	public String saleTime(@RequestParam(value = "page", defaultValue = "1") int current_page,
@@ -35,6 +40,13 @@ public class OwnerSaleController {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
 		if(info==null) {
+			return "redirect:/owner/home";
+		}
+		
+		String userId=info.getUserId();
+		
+		Market marketInfo=marketService.readRestaurant2(userId);
+		if(marketInfo==null) {
 			return "redirect:/owner/home";
 		}
 		
@@ -113,6 +125,13 @@ public class OwnerSaleController {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
 		if(info==null) {
+			return "redirect:/owner/home";
+		}
+		
+		String userId=info.getUserId();
+		
+		Market marketInfo=marketService.readRestaurant2(userId);
+		if(marketInfo==null) {
 			return "redirect:/owner/home";
 		}
 		

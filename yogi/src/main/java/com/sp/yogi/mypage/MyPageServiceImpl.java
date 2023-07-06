@@ -17,7 +17,6 @@ public class MyPageServiceImpl implements MyPageService {
 	@Autowired
 	private FileManager fileManager;
 
-	
 	@Override
 	public void insertAddr(MyPage dto) throws Exception {
 		try {
@@ -26,36 +25,36 @@ public class MyPageServiceImpl implements MyPageService {
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 	}
 
 	@Override
 	public void deleteAddr(Long addressNum, String userId) throws Exception {
 		try {
 			Home dto = new Home();
-			
+
 			dto.setAddressNum(addressNum);
 			dto.setUserId(userId);
-			
+
 			dao.deleteData("mypage.deleteAddr", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 	}
 
 	@Override
 	public List<MyPage> listMyPage(Map<String, Object> map) {
 		List<MyPage> list = null;
-		
+
 		try {
-			
-			list = dao.selectList("mypage.listMyPage",map);
+
+			list = dao.selectList("mypage.listMyPage", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
 	}
 
@@ -71,10 +70,11 @@ public class MyPageServiceImpl implements MyPageService {
 
 		return result;
 	}
+
 	@Override
 	public MyPage readOrderDetail(long num) {
 		MyPage dto = null;
-		
+
 		try {
 			dto = dao.selectOne("mypage.orderDetail2", num);
 		} catch (Exception e) {
@@ -87,12 +87,12 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<MyPage> listOrderDetail(long num) {
 		List<MyPage> list = null;
 		try {
-			
+
 			list = dao.selectList("mypage.orderDetail", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
 	}
 
@@ -103,7 +103,7 @@ public class MyPageServiceImpl implements MyPageService {
 			if (imgFileName != null) {
 				dto.setImgFileName(imgFileName);
 			}
-			
+
 			dao.insertData("mypage.insertReview", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -133,40 +133,39 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public MyPage readData(long num) {
 		MyPage dto = null;
-		
+
 		try {
 			dto = dao.selectOne("mypage.readData", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return dto;
-		
+
 	}
 
 	@Override
 	public List<MyPage> listReview(Map<String, Object> map) {
 		List<MyPage> list = null;
 		try {
-			
+
 			list = dao.selectList("mypage.listReview", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
 	}
-		
-		
+
 	@Override
 	public List<MyPage> listMyHome(Map<String, Object> map) {
 		List<MyPage> list = null;
 		try {
-			
+
 			list = dao.selectList("mypage.listMyHome", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
 	}
 
@@ -178,8 +177,7 @@ public class MyPageServiceImpl implements MyPageService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return dto;
 	}
 
@@ -192,9 +190,25 @@ public class MyPageServiceImpl implements MyPageService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return dto;
 	}
 
-	
+	@Override
+	public void updateOrder(Order dto) throws Exception {
+		try {
+			dao.selectOne("mypage.orderUpdate", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void updatePay(Order dto) throws Exception {
+		try {
+			dao.selectOne("mypage.payUpdate", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

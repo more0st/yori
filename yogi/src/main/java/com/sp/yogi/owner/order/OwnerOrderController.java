@@ -19,6 +19,7 @@ public class OwnerOrderController {
 	
 	@Autowired
 	private OrderService service;
+
 	
 	@RequestMapping(value = "orderList", method = RequestMethod.GET)
 	public String list(HttpSession session, Model model) throws Exception {
@@ -29,13 +30,22 @@ public class OwnerOrderController {
 			return "redirect:/owner/home";
 		}
 		
+		
 		Order res=service.readResNum(info.getUserId());
+		
+		if(res==null) {
+			return "redirect:/owner/home";
+		}
+		
+		
+		
 		List<Order> orderList=service.orderList(res.getRestaurantNum());
 		//메뉴리스트
 		for(Order order : orderList) {
 			Long orderNum=order.getOrderNum();
 			order.setMenuList(service.orderMenuList(orderNum));
 		}
+		
 		model.addAttribute("openState", info.getOpenState());
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("res",res);
@@ -49,6 +59,16 @@ public class OwnerOrderController {
 			Model model) throws Exception {
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		if(info==null) {
+			return "redirect:/owner/home";
+		}
+		
+		Order res=service.readResNum(info.getUserId());
+		
+		if(res==null) {
+			return "redirect:/owner/home";
+		}
 		
 		int menuCount=service.menuCount(orderNum);
 		Order orderInfo=service.orderInfoList(orderNum);

@@ -99,7 +99,7 @@
 		<div class="search">
 			<span> ${dataCount}개(${page}/${total_page} 페이지)</span>
 			<input type="text" name="keyword" class="keyword">
-			<button type="submit" class="btn btn-secondary" onclick="serchList()">검색</button>
+			<button type="button" class="btn btn-secondary" onclick="searchList()">검색</button>
 		</div>
 	</form>
 		<br>
@@ -112,6 +112,7 @@
 				<th>주문상태</th>
 				<th>리뷰작성</th>
 				<th>주문상세정보</th>
+				<th></th>
 			</tr>
 			
 			<!-- forEach -->
@@ -141,19 +142,35 @@
 				</c:choose>
 				
 			 	<c:choose>
-	<c:when test="${dto.content == null}">
-		<td>
-			<button type="button" class="reviewbtn reviewModal" data-bs-toggle="modal" data-bs-target="#reviewModal" data-orderNum="${dto.orderNum}" data-restaurantNum="${dto.restaurantNum}">리뷰쓰기</button>
-		</td>
-	</c:when>
-	<c:otherwise>
-		<td>
-			<button type="button" class="reviewbtn reviewUpdate" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" data-orderNum="${dto.orderNum}" data-restaurantNum="${dto.restaurantNum}">리뷰수정</button>
-		</td>
-	</c:otherwise>
-</c:choose>
+				<c:when test="${dto.content == null && dto.statusName == 4 }">
+					<td>
+						<button type="button" class="reviewbtn reviewModal" data-bs-toggle="modal" data-bs-target="#reviewModal" data-orderNum="${dto.orderNum}" data-restaurantNum="${dto.restaurantNum}">리뷰쓰기</button>
+					</td>
+				</c:when>
+				<c:when test="${dto.content == null && dto.statusName == 4 }">
+					<td>
+						<button type="button" class="reviewbtn reviewModal" data-bs-toggle="modal" data-bs-target="#reviewModal" data-orderNum="${dto.orderNum}" data-restaurantNum="${dto.restaurantNum}">리뷰쓰기</button>
+					</td>
+				</c:when>
+				<c:otherwise>
+					<td>
+						<input type="hidden" name="reviewRating" value="${dto.rating}">
+						<input type="hidden" name="reviewContent" value="${dto.content}">
+						<button type="button" class="reviewbtn reviewUpdate" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" data-orderNum="${dto.orderNum}" data-restaurantNum="${dto.restaurantNum}">리뷰수정</button>
+					</td>
+				</c:otherwise>
+				</c:choose>
 				<!-- 해당 주문번호 맞춰서 이동하도록. -->
-				<td><button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/mypage/orderDetail?num=${dto.orderNum}&page=${page}';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
+				<td><button type="button" class="btn " onclick="location.href='${articleUrl}&num=${dto.orderNum}';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
+				 <c:choose>
+                <c:when test="${dto.statusName == 1}">
+                    <td>
+						<button type="button" class="btn btn-danger cancelOrderBtn" onclick="cancelOrder(${dto.orderNum});">주문 취소</button>
+                    </td>
+                </c:when>
+                <c:otherwise>
+                </c:otherwise>
+            </c:choose>
 			</tr>
 			</c:forEach>
 			<!-- /forEach -->
@@ -220,16 +237,16 @@
 	      <div class="modal-body">
 	      	<i class="fa-solid fa-chart-simple" style="color: #a8c4f5;"></i>&nbsp;리뷰 별점 <br>
 	        <div class="rating">
-			  <input type="radio" id="star15" name="rating" value="5" /><label for="star15"></label>
-			  <input type="radio" id="star14" name="rating" value="4" /><label for="star14"></label>
-			  <input type="radio" id="star13" name="rating" value="3" /><label for="star13"></label>
-			  <input type="radio" id="star12" name="rating" value="2" /><label for="star12"></label>
-			  <input type="radio" id="star11" name="rating" value="1" /><label for="star11"></label>
+			  <input type="radio" id="star15" name="rating2" value="5" /><label for="star15"></label>
+			  <input type="radio" id="star14" name="rating2" value="4" /><label for="star14"></label>
+			  <input type="radio" id="star13" name="rating2" value="3" /><label for="star13"></label>
+			  <input type="radio" id="star12" name="rating2" value="2" /><label for="star12"></label>
+			  <input type="radio" id="star11" name="rating2" value="1" /><label for="star11"></label>
 			</div>
 			
 			<div>
 				<br><i class="fa-regular fa-comment-dots" style="color: #a8c4f5;"></i>&nbsp;리뷰 내용<br><br>
-				<textarea name="content" id="content2" rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;">${dto.content}</textarea>
+				<textarea name="content" id="content2" rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
 				
 				<input type="file" name="selectFile" accept="image/*" class="form-control">
 			</div>
@@ -240,7 +257,7 @@
 	      <div class="modal-footer">
 	      	<input type="hidden" name="orderNum" value="">
 	        <input type="hidden" name="restaurantNum" value="">
-	        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 	        <button type="button" class="btn btn-primary"  onclick="reviewCheck2();">저장</button>
 	      </div>
       </form>
@@ -258,6 +275,12 @@ var rating = 3;
 function reviewSubmit(){
 	
 }
+
+function searchList() {
+	const f = document.searchForm;
+	f.submit();
+}
+
 $(function() {
 	$("body").on("click", ".reviewModal", function(){
 		
@@ -267,7 +290,6 @@ $(function() {
 		document.reviewForm.restaurantNum.value = restaurantNum;
 	
 		console.log(orderNum);
-		console.log(document.reviewForm.orderNum.value);
 		
 		
 		$('#reviewModal').show();
@@ -276,18 +298,23 @@ $(function() {
 });
 
 $(function() {
+	// 수정 버튼
 	$("body").on("click", ".reviewUpdate", function(){
+		let content = $(this).closest('td').find('input[name=reviewContent]').val();
+		let rating = $(this).closest('td').find('input[name=reviewRating]').val();
 		
 		let orderNum = $(this).attr("data-orderNum");
 		let restaurantNum = $(this).attr("data-restaurantNum");
+		
 		document.reviewUpdateForm.orderNum.value = orderNum;
 		document.reviewUpdateForm.restaurantNum.value = restaurantNum;
+		document.reviewUpdateForm.content2.value = content;
 		
-		//document.reviewUpdateForm.content2.value = ${revdto.content}123;
+		document.reviewUpdateForm.rating2.value = Math.ceil(rating);
 		
-		//console.log(content2);
 		console.log(orderNum);
-		console.log(document.reviewUpdateForm.orderNum.value);
+		console.log(content);
+		console.log(rating);
 		
 	
 		$('#reviewUpdateModal').show();
@@ -337,6 +364,46 @@ function reviewCheck2(){
 	    f.submit();
 	}
 	
+/*
+  
+ 
+	function cancelOrder() {
+		if (!confirm("주문을 취소하시겠습니까 ? ")) {
+			return false;
+		}
 
+		location.href = "${pageContext.request.contextPath}/mypage/orderUpdate";
+		submit();
+	}
+ */
+</script>
+
+<!-- JavaScript 코드 -->
+<script>
+  function cancelOrder(orderNum) {
+    // AJAX 요청 생성
+    if (!confirm("주문을 취소하시겠습니까 ? ")) {
+			return false;
+		}
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST','${pageContext.request.contextPath}/mypage/orderUpdate?orderNum='+ orderNum, true); // 주문 취소를 처리하는 URL로 변경해야 합니다.
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    
+    // 요청 완료 후 처리할 함수
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        // 성공적으로 처리된 경우
+        console.log(xhr.responseText); 
+        location.reload(); // 페이지 새로고침
+      } else {
+        // 요청이 실패한 경우
+        console.error(xhr.status);
+        // 실패 시 처리할 내용을 작성
+      }
+    };
+    
+    // 요청 전송
+    xhr.send();
+  }
 </script>
 
