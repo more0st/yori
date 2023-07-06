@@ -60,7 +60,7 @@
 .titlediv{
 	width: 700px;
 	text-align: left;
-	margin: 30px auto;
+	margin: 15px auto;
 }
 </style>
 

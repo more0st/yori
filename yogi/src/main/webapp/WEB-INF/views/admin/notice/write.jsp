@@ -52,7 +52,7 @@
 }
 .form-control[readonly] { background-color:#f8f9fa; }
 
-textarea.form-control { height: 170px; resize : none; }
+textarea.form-control { height: 200px; resize : none; }
 
 .form-select {
 	border: 1px solid #999999; border-radius: 4px; background-color: #ffffff;
@@ -137,10 +137,16 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 	border: 1px solid #eee;
 	width: 96%;
 }
+
+.card{
+	width:750px;
+	margin:0 auto;
+}
 </style>
 
 <main id="main" class="main">
 	<div class="whole-container">
+	<div class="card">
 		<div class="container body-container">
 		    <div class="body-title">
 				<h2> 공지사항 </h2>
@@ -202,7 +208,7 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 					</table>
 			
 				</form>
-	
+				</div>
 		    </div>
 		</div>
 	</div>	
