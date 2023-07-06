@@ -27,6 +27,12 @@
 		WHERE orderNum = #{orderNum}
 	</update>
 	
+	<!-- 리뷰 숨김 해제 -->
+	<update id="hideRelease" parameterType="com.sp.yogi.admin.domain.Report">
+		UPDATE review SET enabled=1
+		WHERE orderNum = #{orderNum}
+	</update>
+	
 	<!-- 신고 취소 -->
 	<delete id="cancelReport" parameterType="long">
 		DELETE FROM review_report WHERE reportNum = #{reportNum}

@@ -18,9 +18,14 @@ public interface MemberManageService {
 	public List<Member> listMemberState(String userId);
 	public Member readMemberState(String userId);
 	
+	public List<Member> selectMemberState(String userId);
+	
 	public MemberWithCount readMemberWithCount(String userId);
 	
 	public void updateMemberState(Map<String, Object> map) throws Exception;
+	
 	public void releaseMemberState(Map<String, Object> map) throws Exception;
+	
+	
 	
 }

@@ -78,6 +78,26 @@ public class ReportManageController {
 		return "redirect:/admin/report/list";
 	}
 	
+	@RequestMapping(value = "release", method = RequestMethod.GET)
+	public String release(@RequestParam long orderNum,
+			HttpSession session) throws Exception {
+		
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "review";
+		
+		// Map<String, Object> 생성
+		Map<String, Object> map = new HashMap<>();
+		map.put("orderNum", orderNum);
+		map.put("pathname", pathname);
+		
+		try {
+			service.hideRelease(map);
+		} catch (Exception e) {
+		}
+		
+		return "redirect:/admin/report/list";
+	}
+	
 	@RequestMapping(value = "cancel", method = RequestMethod.GET)
 	public String cancel(@RequestParam long reportNum,
 			HttpSession session) throws Exception {

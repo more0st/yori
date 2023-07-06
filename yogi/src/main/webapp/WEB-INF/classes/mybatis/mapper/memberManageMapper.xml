@@ -33,12 +33,12 @@
 	<select id="listMember" parameterType="map" resultType="com.sp.yogi.admin.domain.Member">
 		SELECT m1.memberNum, membership, m1.userId, userName, nickName,
 			m1.reg_date, m1.modify_date, last_login,
-			enabled, email, tel, m3.statecode as stateCode,  m3.memo as memo,
+			enabled, email, tel,
 			TO_CHAR(birth, 'YYYY-MM-DD') birth
 		FROM member m
 		JOIN member1 m1 ON m.memberNum = m1.memberNum
 		LEFT OUTER JOIN member2 m2 ON m1.userId = m2.userId
-        LEFT OUTER JOIN memberstate m3 ON m1.userId = m3.userId
+        
 		<where>
 			<if test="keyword!=null and keyword!='' ">
 				<include refid="where-list"/>
@@ -78,6 +78,12 @@
 		WHERE m1.userId = #{userId}
 	</select>
 	
+	<select id="selectMemberState" parameterType="String" resultType="com.sp.yogi.admin.domain.MemberWithCount">
+	
+		select * from memberstate
+		where userid = #{userId}
+	</select>
+	
 
 	<update id="updateFailureCountReset" parameterType="String">
 		UPDATE member1 SET failure_cnt = 0
@@ -86,13 +92,7 @@
 
 
 
-    <update id="updateMemberEnabled" parameterType="map">
-		UPDATE member1 SET enabled=0 WHERE userId=#{userId}
-    </update>
-
-<!--     <update id="releaseMemberEnabled" parameterType="map"> -->
-<!-- 		UPDATE member1 SET enabled=1 WHERE userId=#{userId} -->
-<!--     </update> -->
+   
     
 	<insert id="insertMemberState" parameterType="com.sp.yogi.admin.domain.Member">
 		INSERT INTO memberState(num, userId, stateCode, memo, registerId, reg_date)
@@ -114,21 +114,21 @@
 		FETCH FIRST 1 ROWS ONLY
 	</select>
 	
-	<update id="updateMemberState" parameterType="map">
-		UPDATE memberState
-		SET stateCode = 0,
-		    registerId = #{registerId},
-		    memo = #{reason}
-		WHERE userId = #{userId}
-	</update>	
+	 <update id="updateMemberEnabled" parameterType="map">
+		UPDATE member1 SET enabled=0 WHERE userId=#{userId}
+    </update>
+	
+	
+	<insert id="updateMemberState" parameterType="map">
+		INSERT INTO memberState(num, userId, registerId, statecode, memo)
+		VALUES (memberState_seq.NEXTVAL, #{userId}, #{registerId}, '0', #{reason})
+	</insert>
+	
 	
 	<update id="releaseMemberState" parameterType="map">
-		UPDATE memberState
-		SET stateCode = 1,
-		    registerId = #{registerId},
-		    memo = "해제"
-		WHERE userId = #{userId}
+		UPDATE member1 SET enabled=1 WHERE userId=#{userId}
 	</update>	
+	
 
 
 
