@@ -159,15 +159,15 @@ $(function(){
 
 <div class="contain title-container">
 	<div
-		onclick="location.href='${pageContext.request.contextPath}/event/all/list'"
+		onclick="location.href='${pageContext.request.contextPath}/event/userAll/list'"
 		class="eventMove">이벤트</div>
 </div>
 <div class="contain whole-container">
 	
 	
 
-	<div class="btn-box" name="btn-box">
-		<button id="tab-all" class="eventbtn" data-category="all">전체보기</button>
+	<div class="btn-box" >
+		<button id="tab-userAll" class="eventbtn" data-category="userAll">전체보기</button>
 		<button id="tab-progress" class="eventbtn" data-category="progress">진행중</button>
 		<button id="tab-ended" class="eventbtn" data-category="ended">종료</button>
 	</div>

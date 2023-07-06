@@ -35,6 +35,9 @@
 			<when test="category == 'ended' ">
 				( end_date &lt; SYSDATE )
 			</when>
+			<when test="category == 'userAll' ">
+				( start_date &lt;= SYSDATE  AND end_date &gt; SYSDATE ) OR ( end_date &lt; SYSDATE )
+			</when>
 		</choose>
 	</sql>
 	

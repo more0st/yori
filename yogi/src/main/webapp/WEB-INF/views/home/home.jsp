@@ -197,7 +197,7 @@
 	</form>
 	
 	<div class="category-box">
-		<a class="category-info" href="${pageContext.request.contextPath}/event/all/list">
+		<a class="category-info" href="${pageContext.request.contextPath}/event/userAll/list">
 			<img class="category-info-img" src="${pageContext.request.contextPath}/resources/picture/event.png">
 			<span class="category-info-title">이벤트</span>
 		</a>

@@ -96,6 +96,9 @@ public class EventController {
 
 	@GetMapping("{category}/article")
 	public String eventDetail() {
+		
+		
+		
 		return ".event.eventDetail";
 	}
 }
