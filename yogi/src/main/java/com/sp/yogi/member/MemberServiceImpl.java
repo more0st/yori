@@ -311,7 +311,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void updateEnabled(String userId) throws Exception {
 		dao.updateData("member.updateEnabled",userId);
-	}		
-	
+		dao.insertData("member.insertMemberState",userId);
+	}
 
 }

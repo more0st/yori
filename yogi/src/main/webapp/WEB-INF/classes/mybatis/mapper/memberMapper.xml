@@ -16,6 +16,11 @@
 		WHERE userId = #{userId}
 	</select>
 	
+	<insert id="insertMemberState" parameterType="String">
+		INSERT INTO memberState(num, userId, registerId, stateCode, memo, reg_date)
+		VALUES (memberState_seq.NEXTVAL, #{userId}, 'admin', 1, '비밀번호정지', SYSDATE)
+    </insert>
+	
 	<update id="failCount" parameterType="String">
 		UPDATE member1 SET failure_cnt = failure_cnt+1
 		WHERE userId=#{userId}
