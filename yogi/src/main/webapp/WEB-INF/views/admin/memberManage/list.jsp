@@ -25,7 +25,7 @@
 
 					<h3 class="card-title">총 회원 수 : ${dataCount} 명</h3>
 
-					<table class="table table-hover admin-restaurantList-table">
+					<table class="table table-hover admin-restaurantList-table datatable">
 						<thead>
 							<tr>
 								<th scope="col">회원번호</th>
@@ -49,11 +49,11 @@
 								<td>${dto.nickName}</td>
 								<td>${dto.reg_date}</td>
 								<td>${dto.last_login}</td>
-								<td>${dto.stateCode==1?"사용 가능":"정지"}</td>
+								<td>${dto.enabled==1?"사용 가능":"정지"}</td>
 								<td>
 									<div class="d-grid gap-2 d-md-block">
 										<c:choose>
-											<c:when test="${dto.stateCode==1}">
+											<c:when test="${dto.enabled==1}">
 												<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal${status.index}">정지</button>
 												<input id="suspendId" type="hidden" value="${dto.userId}">
 											</c:when>
@@ -92,9 +92,9 @@
 							</div>
 							
 						</c:forEach>
-							
-						</tbody>
-					</table>
+					</tbody>
+				</table>
+				
 				</div>
 			</div>
 			
@@ -138,7 +138,7 @@ function sendSuspension(clickUserId, sIndex) {
 	// 회원 상태를 변경하기 위한 AJAX 요청
 	$.ajax({
 		type: "POST", // 혹은 "PUT" 등 HTTP 요청 메소드 선택
-		url: "${pageContext.request.contextPath}/admin/memberManage/updateMemberState", // 실제 서버 요청 주소
+		url: "${pageContext.request.contextPath}/admin/memberManage/updateMemberEnabled", // 실제 서버 요청 주소
 		data: {
 			userId: clickUserId,
 			registerId : "admin",

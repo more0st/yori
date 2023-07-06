@@ -145,7 +145,7 @@
 										<div class="review-top"
 											style="display: flex; justify-content: space-between; margin-bottom: 10px;">
 											<div class="review-name" style="display: flex; gap: 5px;">
-												<div class="res-333" style="font-weight: bold">${dto.userName}</div>
+												<div class="res-333" style="font-weight: bold"><a href="${pageContext.request.contextPath}/admin/memberManage/detail?userId=${dto.userId}">${dto.userName}</a></div>
 												<div class="review-date">${dto.revReg_date}</div>
 											</div>
 											<div>

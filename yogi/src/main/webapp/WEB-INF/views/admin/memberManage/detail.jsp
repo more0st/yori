@@ -83,8 +83,45 @@
                        <td><span>${dto.last_login}</span></td>
                       </tr>
                   </table>
-                  <div style="display: flex; justify-content: center; gap : 5px;">
+                  
 	                  
+	                  <c:choose>
+							<c:when test="${dto.enabled==1}">
+								<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal${status.index}">회원 정지</button>
+								<input id="suspendId" type="hidden" value="${dto.userId}">
+							</c:when>
+							<c:otherwise>
+								<button type="button" class="btn btn-outline-primary btn-sm" onclick="release" data-bs-target="${status.index}">정지 해제</button>
+								<input id="suspendId" type="hidden" value="${dto.userId}">
+							</c:otherwise>
+						</c:choose>
+						
+							<div class="modal" id="modal${status.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="exampleModalLabel">정지 사유</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <form> 
+								      <div class="modal-body">
+										<div>
+											<textarea id="reason${status.index}" rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
+										</div>
+										<div>
+											
+										</div>
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+								        <button type="button" class="btn btn-primary" onclick="sendSuspension('${dto.userId}',${status.index})">보내기</button>
+								      </div>
+							      </form>
+							    </div>
+							  </div>
+							</div>
+						
+                  <div style="display: flex; justify-content: center; gap : 5px;">
 		              <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/memberManage/list'">목록</button>
                   </div>
                 </div>
