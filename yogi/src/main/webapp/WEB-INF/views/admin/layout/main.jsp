@@ -22,7 +22,7 @@
 
 							<div class="card-body">
 								<h5 class="card-title">
-									이용자 <span>| Total</span>
+									가입회원 <span>| Total</span>
 								</h5>
 
 								<div class="d-flex align-items-center">
@@ -48,7 +48,7 @@
 
 							<div class="card-body">
 								<h5 class="card-title">
-									업체 <span>| Today</span>
+									업체 <span>| Total</span>
 								</h5>
 
 								<div class="d-flex align-items-center">
@@ -95,81 +95,83 @@
 					<!-- Reports -->
 					<div class="col-12">
 						<div class="card">
-
-							<div class="filter">
-								<a class="icon" href="#" data-bs-toggle="dropdown"><i
-									class="bi bi-three-dots"></i></a>
-								<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-									<li class="dropdown-header text-start">
-										<h6>Filter</h6>
-									</li>
-
-									<li><a class="dropdown-item" href="#">Today</a></li>
-									<li><a class="dropdown-item" href="#">This Month</a></li>
-									<li><a class="dropdown-item" href="#">This Year</a></li>
-								</ul>
-							</div>
-
 							<div class="card-body">
 								<h5 class="card-title">
-									Reports <span>/Today</span>
+									주간유입분석 <span>/week</span>
 								</h5>
 
 								<!-- Line Chart -->
 								<div id="reportsChart"></div>
 
-								<script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: '이용자',
-                          data: [31, 40, 28, 51, 42, 82, 56],
-                        }, {
-                          name: 'Revenue',
-                          data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                          name: 'Customers',
-                          data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'yy/MM/dd HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
-                  </script>
+			<script type="text/javascript">
+			
+			//오늘날짜
+			var today = new Date();
+			// 오늘 기준 일주일전 날짜 계산
+			var oneWeekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+			// 날짜 형식 변경
+			function formatDate(date) {
+			  var year = date.getFullYear();
+			  var month = String(date.getMonth() + 1).padStart(2, '0');
+			  var day = String(date.getDate()).padStart(2, '0');
+			  return year + '-' + month + '-' + day;
+			}
+			//  날짜 배열 저장
+			var dateArray = [];
+			var currentDate = oneWeekAgo;
+			while (currentDate <= today) {
+			  dateArray.push(formatDate(currentDate));
+			  currentDate.setDate(currentDate.getDate() + 1);
+			}
+			
+            document.addEventListener("DOMContentLoaded", () => {
+              new ApexCharts(document.querySelector("#reportsChart"), {
+                series: [{
+                  name: '회원',
+                  data: [10,10,20,14,11,12,9],
+                }, {
+                  name: '업체',
+                  data: [11,10,9,3,18,22,11]
+                }],
+                chart: {
+                  height: 350,
+                  type: 'area',
+                  toolbar: {
+                    show: false
+                  },
+                },
+                markers: {
+                  size: 4
+                },
+                colors: ['#4154f1', '#2eca6a'],
+                fill: {
+                  type: "gradient",
+                  gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.3,
+                    opacityTo: 0.4,
+                    stops: [0, 90, 100]
+                  }
+                },
+                dataLabels: {
+                  enabled: false
+                },
+                stroke: {
+                  curve: 'smooth',
+                  width: 2
+                },
+                xaxis: {
+                  type: 'categories',
+                  categories: dateArray
+                },
+                tooltip: {
+                  x: {
+                    format: 'dd/MM/yy HH:mm'
+                  },
+                }
+              }).render();
+            });
+            </script>
 								<!-- End Line Chart -->
 
 							</div>
