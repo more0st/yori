@@ -564,10 +564,12 @@ public class OwnerController {
 				state = "open";
 				updateOpen.put("state", 1);
 				service.openControl(updateOpen);
+				info.setOpenState(1);
 			} else if(! isClose) {
 				state = "close";
 				updateOpen.put("state", 0);
 				service.openControl(updateOpen);
+				info.setOpenState(0);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
