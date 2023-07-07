@@ -15,7 +15,7 @@
 	<!-- 업체별 리뷰 개수 -->
 	<select id="reviewCount" parameterType="Long" resultType="Integer">
 		SELECT NVL(COUNT(*),0) FROM review
-		WHERE restaurantNum=#{restaurantNum}
+		WHERE restaurantNum=#{restaurantNum} AND enabled = 1
 	</select>
 	
 	<!-- 신고 내역 select : 해당 주문번호에 대한 신고 내역이 있는지 select -->
