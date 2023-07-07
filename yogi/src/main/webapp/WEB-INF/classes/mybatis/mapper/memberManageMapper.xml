@@ -92,8 +92,6 @@
 	</update>
 
 
-
-   
     
 	<insert id="insertMemberState" parameterType="com.sp.yogi.admin.domain.Member">
 		INSERT INTO memberState(num, userId, stateCode, memo, registerId, reg_date)

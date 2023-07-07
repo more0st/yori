@@ -14,7 +14,7 @@ public interface ResManageService {
 	
 	public void updateOwnerEnabled(Map<String, Object> map) throws Exception; // 업체 정지
 	public void releaseOwnerEnabled(Map<String, Object> map) throws Exception; // 업체 정지 해제
-	public void insertOwnerState(Owner dto) throws Exception;
+	public void insertOwnerState(Map<String, Object> map) throws Exception;
 	public List<Owner> listOwnerState(String userId);
 	public Owner readOwnerState(String userId);
 	

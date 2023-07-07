@@ -101,9 +101,8 @@
 				</div>
 			</div>
 			
-			
-			
 		</section>
+		
 <script type="text/javascript">
 
 function release(clickUserId, sIndex) {

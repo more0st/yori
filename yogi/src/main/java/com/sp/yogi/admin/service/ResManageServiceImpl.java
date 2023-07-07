@@ -65,9 +65,9 @@ public class ResManageServiceImpl implements ResManageService {
 	}
 
 	@Override
-	public void insertOwnerState(Owner dto) throws Exception {
+	public void insertOwnerState(Map<String, Object> map) throws Exception {
 		try {
-			dao.updateData("resManage.insertOwnerState", dto);
+			dao.updateData("resManage.insertOwnerState", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

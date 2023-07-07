@@ -136,7 +136,7 @@ public class ResManageController {
 	@RequestMapping(value = "updateOwnerEnabled", method = RequestMethod.POST)
 	@ResponseBody
 	public void updateOwnerEnabled(
-			@RequestParam(defaultValue = "") String restaurantNum,
+			@RequestParam(defaultValue = "") long restaurantNum,
 			@RequestParam(defaultValue = "") String registerId,
 			@RequestParam(defaultValue = "") String reason,
 			HttpServletRequest req
@@ -151,7 +151,7 @@ public class ResManageController {
 			map.put("registerId", registerId);
 			map.put("reason", reason);
 			
-			service.updateOwnerState(map);
+			service.insertOwnerState(map);
 			service.updateOwnerEnabled(map);
 
 		} catch (Exception e) {

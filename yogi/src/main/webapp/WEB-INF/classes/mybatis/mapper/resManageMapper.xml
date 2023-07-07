@@ -62,9 +62,9 @@
 		UPDATE restaurantID SET enabled=1 WHERE restaurantNum=#{restaurantNum}
     </update>
     
-	<insert id="insertOwnerState" parameterType="com.sp.yogi.owner.Owner">
-		INSERT INTO restaurantState(reportNum, restaurantNum, stateCode, memo, registerId, reg_date)
-		VALUES (restaurantState_seq.NEXTVAL, #{restaurantNum}, #{stateCode}, #{memo}, #{registerId}, SYSDATE)
+	<insert id="insertOwnerState" parameterType="map">
+		INSERT INTO restaurantState(reportNum, restaurantNum, stateCode, memo, registerId)
+		VALUES (restaurantState_seq.NEXTVAL, #{restaurantNum}, '0', #{reason}, #{registerId})
 	</insert>
 	
 	<select id="listOwnerState" parameterType="String" resultType="com.sp.yogi.owner.Owner">
