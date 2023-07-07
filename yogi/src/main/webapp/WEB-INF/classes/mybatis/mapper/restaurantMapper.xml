@@ -50,7 +50,7 @@
               FETCH FIRST 1 ROWS ONLY
         ) img ON img.restaurantNum = ri.restaurantNum
 		LEFT OUTER JOIN (
-		    SELECT COUNT(*) reviewCount, AVG(rating) rating, restaurantNum FROM review WHERE enabled=1 GROUP BY restaurantNum
+		    SELECT COUNT(*) reviewCount, NVL(TRUNC(AVG(rating),1), 0) rating, restaurantNum FROM review WHERE enabled=1 GROUP BY restaurantNum
 		) rv ON rv.restaurantNum = ri.restaurantNum
 		WHERE info.state = 1 AND ri.status = 3
 			  AND INSTR(d.addr,  #{addr1}) &gt; 0 
