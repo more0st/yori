@@ -124,7 +124,6 @@
    font-weight: bold;
    color: #333;
    border: 1px solid #d9d9d9;
-   border-bottom: none;
    background: white;
    width: 200px;
    padding: 10px;
