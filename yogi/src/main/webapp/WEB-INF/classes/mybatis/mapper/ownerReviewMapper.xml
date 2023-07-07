@@ -40,7 +40,7 @@
 	<select id="avgRating" parameterType="Long" resultType="double">
 	SELECT NVL(TRUNC(AVG(rating),1), 0) rating
 	FROM review
-	WHERE restaurantNum=#{restaurantNum}
+	WHERE restaurantNum=#{restaurantNum} AND enabled = 1
 	</select>
 	
 	<!-- 답글 작성 -->

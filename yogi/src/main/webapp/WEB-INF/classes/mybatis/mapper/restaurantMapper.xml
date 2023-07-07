@@ -145,7 +145,7 @@
 	<!-- 별점 -->
 	<select id="readRating" parameterType="Long" resultType="double">
 		SELECT NVL(TRUNC(AVG(rating),1), 0) rating FROM review 
-		where restaurantNum = #{restaurantNum}
+		WHERE restaurantNum = #{restaurantNum} AND enabled=1
 	</select>
 
 </mapper>
