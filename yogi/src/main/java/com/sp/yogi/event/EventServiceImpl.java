@@ -100,7 +100,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public void updateHitCount(long num) throws Exception {
 		try {
-			//dao.updateData("event.updateHitCount", num);
+			dao.updateData("event.updateHitCount", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -135,7 +135,7 @@ public class EventServiceImpl implements EventService {
 		Event dto = null;
 		
 		try {
-			//dto = dao.selectOne("event.preReadEvent", map);
+			dto = dao.selectOne("event.preReadEvent", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -148,7 +148,7 @@ public class EventServiceImpl implements EventService {
 		Event dto = null;
 		
 		try {
-			//dto = dao.selectOne("event.nextReadEvent", map);
+			dto = dao.selectOne("event.nextReadEvent", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -157,14 +157,26 @@ public class EventServiceImpl implements EventService {
 	}
 	
 	@Override
-	public void insertEventTakers(Event dto) throws Exception {
+	public void insertEventTakers(Map<String, Object> map) throws Exception {
 		try {
-			// 이벤트 응모자 등록
-			//dao.insertData("event.insertEventTakers", dto);
+			//이벤트 응모자 등록
+			dao.insertData("event.insertEventTakers", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
+	}
+	
+	@Override
+	public void insertCouponTakers(Map<String, Object> map) throws Exception {
+		try {
+			//쿠폰 등록
+			dao.insertData("event.insertCouponTakers", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
 	}
 
 	@Override
@@ -186,10 +198,10 @@ public class EventServiceImpl implements EventService {
 		boolean result = false;
 		try {
 			// 이벤트 응모 여부
-			//Event dto = dao.selectOne("event.readEventTakers", map);
-			//if(dto != null) {
-			//	result = true; 
-			//}
+			Event dto = dao.selectOne("event.readEventTakers", map);
+			if(dto != null) {
+				result = true; 
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -231,5 +243,9 @@ public class EventServiceImpl implements EventService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
+
+
 
 }

@@ -158,68 +158,97 @@
 
 </style>
 
-<div class="contain title-container"><div class="eventMove" onclick="location.href='${pageContext.request.contextPath}/event/eventList'">이벤트</div></div>
+<script type="text/javascript">
+function couponCheck() {
+	let subject = "${dto.subject}";
+	subject = encodeURIComponent(subject);
+	
+	let url = "${pageContext.request.contextPath}/event/couponCheck";
+	let query = "eventNum=${dto.eventNum}" + "&subject=" + subject;
+	
+	
+	$.ajax({
+		type:"POST"
+		,url:url
+		,data: query
+		,dataType:"json"
+		,success:function(data) {
+			let passed = data.passed;
+
+			if(passed === "true") {
+				alert("쿠폰은 한 아이디 당 하나씩만 발급받을 수 있습니다.")
+			} else {
+				alert( ${dto.discount} + " 원 쿠폰이 발급되었습니다.");
+			}
+		}
+	});
+}
+
+
+</script>
+
+
+<div class="contain title-container"><div class="eventMove" onclick="location.href='${pageContext.request.contextPath}/event/${category}/list'">이벤트</div></div>
 	<div class="contain whole-container">
 		<div class="event-box">
 			<div class="event-info">
 				<div class="flexbetween borderdiv">
 				<div style="width: 100%;">
 				<p>요리조리요 이벤트</p>
-				<h3>이번엔 요리조리요에서 100만원 받아가세요</h3>
-				<div class="dateDiv">2023-06-01 - 2023-06-10</div>
+				<h3>${dto.subject}</h3>
+				<div class="dateDiv">${dto.start_date} ~ ${dto.end_date}</div>
 				</div>
 				</div>
-				<div onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'" class="imgdiv">
-					<img src="${pageContext.request.contextPath}/resources/picture/event-01.jpg">
+				<div class="imgdiv">
+					<img src="${pageContext.request.contextPath}/uploads/admin/event/${dto.imgFileName}">
 				</div>
 				
 				<div>
-				■ 이벤트 기간 : ~ 6월 30일(금)까지<br><br>​
-
-​
-				■ 참여 대상 <br>
 				
-				(참여자1) 입점을 추천하고 싶은 요기요 사장님 누구나!<br>
+					<h4 class="fw-semibold">※ 이벤트 기간 : ${dto.start_date} ~ ${dto.end_date}</h4>
+					
+					<div style="margin-top: 20px;">${dto.content }</div>
 				
-				(참여자2) 요기요 입점을 희망하는 옆집 사장님 누구나!<br>
-				
-				
-				
-				■ 선물 안내<br>
-				
-				신세계 상품권 5만원권<br><br>
-				
+					<c:set var="close" value="${isClose}"></c:set>
+					<c:if test="${! close}">
+					<div style="width: 100%; display: flex; justify-content: center; margin-top: 50px;">
+						<button type="button" class="downloadBtn" onclick="couponCheck();">
+							<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/download_coupon.jpg">
+						</button>
+					</div>
+					</c:if>
 				
 				
-				■ 선물 지급 대상<br>
-				
-				(1) 요기요 사장님<br>
-				
-				추천받은 사장님이 입점 완료하신 경우<br><br><br>
-				
-				
-				
-				(2) 옆집 사장님<br>
-				
-				7월 5일(수)까지 전화로 입점 상담을 하고,<br>
-				
-				7월 7일(금)까지 입점 완료한 경우<br>
-				
-				
-				
-				■ 선물 지급일<br><br>
-				
-				2023년 7월 21일(금)<br>
-				
-				<div style="width: 100%; display: flex; justify-content: center;">
-					<button type="button" class="downloadBtn">
-						<img class="res-img" src="${pageContext.request.contextPath}/resources/picture/download_coupon.jpg">
-					</button>
+					
 				</div>
-				</div>
+				
+				<table class="table" style="margin-top: 40px;">
+	                <tbody>
+	                  <tr>
+	                    <td>이전글 : <c:if test="${not empty preReadDto}">
+								<a
+									href="${pageContext.request.contextPath}/event/${category}/article?${query}&num=${preReadDto.eventNum}">${preReadDto.subject}</a>
+							</c:if>
+	                    </td>
+	                  </tr>
+	                  <tr>
+	                    <td>다음글 : <c:if test="${not empty nextReadDto}">
+								<a
+									href="${pageContext.request.contextPath}/event/${category}/article?${query}&num=${nextReadDto.eventNum}">${nextReadDto.subject}</a>
+							</c:if>
+	                    </td>
+	                  </tr>
+	                </tbody>
+	            </table>
+				
 			</div>
+
+
+		
+		
+
 		<div class="listdiv">
-			<button class="listbtn" onclick="location.href='${pageContext.request.contextPath}/event/eventList'">목록으로</button>
+			<button class="listbtn" onclick="location.href='${pageContext.request.contextPath}/event/${category}/list'">목록으로</button>
 		</div>
 		</div>
 		

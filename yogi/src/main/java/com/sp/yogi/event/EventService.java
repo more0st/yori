@@ -18,10 +18,13 @@ public interface EventService {
 	public Event nextReadEvent(Map<String, Object> map);
 	
 	// 이벤트 응모자 등록 / 리스트 / 이벤트 참여 여부
-	public void insertEventTakers(Event dto) throws Exception;
+	public void insertEventTakers(Map<String, Object> map) throws Exception;
 	public List<Event> listEventTakers(long num);
 	public boolean userEventTakers(Map<String, Object> map);	
 	
+	// 쿠폰 발행
+	public void insertCouponTakers(Map<String, Object> map) throws Exception;
+
 	
 	// 모두가 당첨이므로 사용하지 않음
 	// 이벤트 당첨자 등록 / 리스트

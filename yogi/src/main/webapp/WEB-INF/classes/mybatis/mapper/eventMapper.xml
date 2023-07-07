@@ -36,7 +36,7 @@
 				( end_date &lt; SYSDATE )
 			</when>
 			<when test="category == 'userAll' ">
-				( start_date &lt;= SYSDATE  AND end_date &gt; SYSDATE ) OR ( end_date &lt; SYSDATE )
+				(( start_date &lt;= SYSDATE  AND end_date &gt; SYSDATE ) OR ( end_date &lt; SYSDATE ))
 			</when>
 		</choose>
 	</sql>
@@ -84,7 +84,7 @@
 				AND <include refid="where-list"/>
 			</if>
 		</where>
-		ORDER BY end_date DESC
+		ORDER BY eventNum DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	
@@ -115,5 +115,71 @@
 		DELETE FROM event WHERE eventNum = #{eventNum}
 	</delete>
 	
+	<!-- 조회수 증가 -->
+	<update id="updateHitCount" parameterType="Long">
+		UPDATE event SET hitCount = hitCount+1 WHERE eventNum = #{eventNum}
+	</update>
+	
+	<!-- AND 가 필요 없는 경우 자동으로 제거 됨 -->
+	<!-- 이전글 -->
+	<select id="preReadEvent" parameterType="map" resultType="com.sp.yogi.event.Event">
+		SELECT eventNum, subject
+		FROM event
+		<where>
+			<if test="enabled != null and enabled == 1">
+				enabled = 1
+			</if>
+			<if test="category != 'all' ">
+				AND <include refid="period-list"/>
+			</if>
+			<if test="keyword != null and keyword != '' ">
+				AND <include refid="where-list"/>
+			</if>
+			AND (eventNum &gt; #{eventNum}) 
+			
+		</where>
+		ORDER BY eventNum ASC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
+
+	<!-- 다음글 -->
+	<select id="nextReadEvent" parameterType="map" resultType="com.sp.yogi.event.Event">
+		SELECT eventNum, subject
+		FROM event
+		<where>
+			<if test="enabled != null and enabled == 1">
+				enabled = 1
+			</if>
+			<if test="category != 'all' ">
+				AND <include refid="period-list"/>
+			</if>
+			<if test="keyword != null and keyword != '' ">
+				AND <include refid="where-list"/>
+			</if>
+			AND (eventNum &lt; #{eventNum}) 
+			
+		</where>
+		ORDER BY eventNum DESC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
+	
+	<!-- 이벤트 응모 여부 -->
+	<select id="readEventTakers" parameterType="map" resultType="com.sp.yogi.event.Event">
+		SELECT eventNum, p.userId, userName 
+		FROM participant p
+		JOIN member1 m ON p.userId = m.userId
+		WHERE eventNum = #{eventNum} AND p.userId = #{userId}
+	</select>
+	
+	<!-- 이벤트 응모자 등록 -->
+	<insert id="insertEventTakers" parameterType="map">
+		INSERT INTO participant(eventNum, userId) VALUES (#{eventNum}, #{userId})
+	</insert>
+	
+	<!-- 이벤트 쿠폰 등록 -->
+	<insert id="insertCouponTakers" parameterType="map">
+		INSERT INTO coupon(eventNum, couponNum, content, created_date, status, userId) 
+			VALUES (#{eventNum}, coupon_seq.NEXTVAL, #{content}, SYSDATE, 1, #{userId})
+	</insert>
 	
 </mapper>

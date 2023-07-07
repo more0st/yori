@@ -151,6 +151,12 @@ $(function(){
 		location.href = '${pageContext.request.contextPath}/event/'+category+'/list';
 	});
 });
+
+function searchList() {
+	const f = document.searchForm;
+	
+	f.submit();
+}
 </script>
 
 
@@ -178,7 +184,7 @@ $(function(){
 		
 		<c:forEach var="dto" items="${list}" varStatus="status">
 			<div class="event-info"
-				onclick="location.href='${pageContext.request.contextPath}/event/eventDetail'">
+				onclick="location.href='${articleUrl}&num=${dto.eventNum}'">
 				<div>
 					<img
 						src="${pageContext.request.contextPath}/uploads/admin/event/${dto.imgFileName}">
@@ -193,7 +199,28 @@ $(function(){
 
 	<div class="page-navigation"></div>
 
-	
+	<form class="row g-3" name="searchForm" style="margin-bottom: 40px;"
+		action="${pageContext.request.contextPath}/event/${category}/list" method="post">
+		<div class="col-md-2"></div>
+		<div class="col-md-2 text-center">
+			<select id="condition" name="condition" class="form-select">
+				<option value="all" ${condition=="all"?"selected='selected'":""}>제목+내용</option>
+				<option value="start_date"
+					${condition=="start_date"?"selected='selected'":""}>시작일</option>
+				<option value="end_date"
+					${condition=="end_date"?"selected='selected'":""}>종료일</option>
+			</select>
+		</div>
+		<div class="col-md-4 text-center">
+			<input type="text" name="keyword" value="${keyword}"
+				class="form-control">
+		</div>
+		<div class="col-md-1 text-center">
+			<button type="button" class="btn btn-primary btn-sm"
+				onclick="searchList()">검색</button>
+		</div>
+	</form>
+
 
 </div>
 

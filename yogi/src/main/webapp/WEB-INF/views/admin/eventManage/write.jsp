@@ -92,18 +92,6 @@
 			return;
 		}
 
-		if (new Date().getTime() > ed.getTime()) {
-			alert("종료날짜는 현재 시간보다 작을수 없습니다.");
-			f.end_day.focus();
-			return;
-		}
-		
-		if (new Date().getTime() > new Date(f.expired_date.value)) {
-			alert("유효기간은 현재 시간보다 작을수 없습니다.");
-			f.expired_date.focus();
-			return;
-		}
-		
 
 		str = f.content.value;
 		if (!str || str === "<p><br></p>") {
