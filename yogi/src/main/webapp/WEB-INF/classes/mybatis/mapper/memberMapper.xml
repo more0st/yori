@@ -27,7 +27,7 @@
 	</update>
 
 	<update id="updateEnabled" parameterType="String">
-		UPDATE member1 SET enabled = 0
+		UPDATE member1 SET enabled = 0, failure_cnt = 0
 		WHERE userId=#{userId}
 	</update>
 	

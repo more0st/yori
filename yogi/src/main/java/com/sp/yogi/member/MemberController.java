@@ -111,11 +111,13 @@ public class MemberController {
 					return ".member.login";
 				}
 				
-				// failure_cnt 카운트 ++
-				service.failCount(userId);
-				model.addAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다. [ 비밀번호 틀린 횟수 : "+ failCount +"/5 ]");
-
-				if(dto.getFailure_cnt() >= 4) {
+				if(!dto.getUserId().equals("admin")) {
+					// failure_cnt 카운트 ++
+					service.failCount(userId);
+					model.addAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다. [ 비밀번호 틀린 횟수 : "+ failCount +"/5 ]");
+				}
+				
+				if(dto.getFailure_cnt() == 4) {
 					service.updateEnabled(userId);
 					model.addAttribute("message", "비밀번호 입력 허용횟수 [5]회를 초과하였습니다.<br> 관리자에게 문의하세요.(관리자 이메일 : admin@naver.com)");
 					return ".member.login";
