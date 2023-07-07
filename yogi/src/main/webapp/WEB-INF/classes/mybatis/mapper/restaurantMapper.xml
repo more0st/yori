@@ -50,10 +50,10 @@
               FETCH FIRST 1 ROWS ONLY
         ) img ON img.restaurantNum = ri.restaurantNum
 		LEFT OUTER JOIN (
-		    SELECT COUNT(*) reviewCount, AVG(rating) rating, restaurantNum FROM review GROUP BY restaurantNum
+		    SELECT COUNT(*) reviewCount, AVG(rating) rating, restaurantNum FROM review WHERE enabled=1 GROUP BY restaurantNum
 		) rv ON rv.restaurantNum = ri.restaurantNum
 		WHERE info.state = 1 AND ri.status = 3
-			  AND INSTR(d.addr,  #{addr1}) &gt; 0
+			  AND INSTR(d.addr,  #{addr1}) &gt; 0 
 			 <if test="categoryNum > 0">
 			 	 AND categoryNum = #{categoryNum} 
 			  </if>

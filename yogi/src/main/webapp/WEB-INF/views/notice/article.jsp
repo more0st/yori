@@ -70,14 +70,18 @@
 	padding-top: 10px;
 }
 
+.btnlist{
+    border: 1px solid #ccc;
+    font-size: 14px;
+    color:black;
+    margin-bottom: 10px;
+}
 </style>
 
 <div class="whole-container">
 	<div class="notice-wrap">
 		<div style="padding-top: 20px; padding-bottom: 10px; margin: 0 auto;">
-			
-			<a class="btn-list" href="${pageContext.request.contextPath}/notice/home" ><i class="bi bi-caret-left-fill"></i> 목록으로
-			</a>
+			<a class="btn btn-outline-secondary btnlist" href="${pageContext.request.contextPath}/notice/home"><i class="bi bi-caret-left-fill"></i> 목록으로</a>
 			<div class="notice-list">
 			${dto.subject}
 				<div class="n-date">
