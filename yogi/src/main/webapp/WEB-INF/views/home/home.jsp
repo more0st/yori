@@ -88,11 +88,12 @@
 	}
 	
 	.category-info {
-		border: 1px solid #d9d9d9;
 		background: white;
 		width: 250px;
 		position: relative;
 		overflow: hidden;
+		border-radius: 20px;
+  		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	}
 	
 	.category-info:hover {
