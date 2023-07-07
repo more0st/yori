@@ -144,12 +144,10 @@ public class MemberController {
 				uri = "redirect:" + uri;
 			}
 			
-			// 로그인 성공시 failure_cnt 초기화
-			service.updateFailCount(info.getUserId());
-			
 			Long memberNum = info.getMemberNum();
 			
 			List<Home> addr = homeservice.listAddr(memberNum);
+			service.updateLastLogin(info.getUserId());
 			
 			model.addAttribute("addr", addr);
 		} catch (Exception e) {
