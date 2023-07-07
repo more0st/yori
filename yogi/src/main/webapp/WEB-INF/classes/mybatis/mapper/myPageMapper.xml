@@ -47,7 +47,7 @@
 	<select id="listMyPage" parameterType="map"
 		resultType="com.sp.yogi.mypage.MyPage">
 		SELECT ob.orderNum, r.restaurantName, p.price total_price,
-		os.statusName, ob.userId, ob.order_date, ob.restaurantNum, rv.content,
+		os.statusName, ob.userId, ob.order_date, ob.restaurantNum, rv.content, rv.enabled,
 		rv.rating
 		FROM order_bundle ob
 		JOIN
@@ -78,7 +78,7 @@
 	<select id="listMyHome" parameterType="map"
 		resultType="com.sp.yogi.mypage.MyPage">
 		SELECT ob.orderNum, r.restaurantName, p.price total_price,
-		os.statusName, ob.userId, ob.order_date, ob.restaurantNum, rv.content,
+		os.statusName, ob.userId, ob.order_date, ob.restaurantNum, rv.content, rv.enabled,
 		rv.rating, m1.userName, m2.email
 		FROM order_bundle ob
 		JOIN
@@ -99,7 +99,8 @@
 		JOIN member2 m2 ON ob.userId =
 		m2.userId
 		WHERE
-		ob.userId = #{userId}
+		ob.userId =
+		#{userId}
 		ORDER BY ob.order_date DESC
 	</select>
 
@@ -205,18 +206,23 @@
 		(
 		SELECT imageFilename
 		FROM restaurantImg rimg
-		WHERE rimg.restaurantNum = r.restaurantNum
+		WHERE rimg.restaurantNum =
+		r.restaurantNum
 		AND ROWNUM = 1
 		) AS imgFileName
 		FROM
 		restaurantLike rl
 		INNER JOIN restaurant r ON rl.restaurantNum = r.restaurantNum
-		INNER JOIN restaurantInfo ri ON r.restaurantNum = ri.restaurantNum
-		LEFT JOIN (
-		SELECT restaurantNum, COUNT(*) AS reviewCount, TRUNC(AVG(rating),1) AS rating
+		INNER
+		JOIN restaurantInfo ri ON r.restaurantNum = ri.restaurantNum
+		LEFT JOIN
+		(
+		SELECT restaurantNum, COUNT(*) AS reviewCount, TRUNC(AVG(rating),1)
+		AS rating
 		FROM review
 		GROUP BY restaurantNum
-		) rv ON r.restaurantNum = rv.restaurantNum
+		) rv ON r.restaurantNum =
+		rv.restaurantNum
 		WHERE userId = #{userId}
 	</select>
 
@@ -249,11 +255,13 @@
 	<select id="couponInfo" parameterType="Long"
 		resultType="com.sp.yogi.mypage.Coupon">
 		SELECT orderNum, p.couponNum, c.content, discount
-		FROM payment p
+		FROM
+		payment p
 		LEFT OUTER JOIN coupon c ON p.couponNum=c.couponNum
-		LEFT OUTER JOIN event e ON e.eventNum=c.eventNum
+		LEFT OUTER
+		JOIN event e ON e.eventNum=c.eventNum
 		WHERE orderNum=#{orderNum}
 	</select>
-	
+
 
 </mapper>

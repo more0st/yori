@@ -142,6 +142,9 @@
 					</c:choose>
 
 					<c:choose>
+						<c:when test="${dto.enabled == 0}">
+							<td style="color: red; font-weight: bold;">신고 처리된 리뷰입니다.</td>
+						</c:when>
 						<c:when test="${dto.content == null && dto.statusName == 4 }">
 							<td>
 								<button type="button" class="reviewbtn reviewModal"
@@ -150,7 +153,7 @@
 									data-restaurantNum="${dto.restaurantNum}">리뷰쓰기</button>
 							</td>
 						</c:when>
-						<c:when test="${dto.content != null}">
+						<c:when test="${dto.content != null && dto.statusName == 4}">
 							<td><input type="hidden" name="reviewRating"
 								value="${dto.rating}"> <input type="hidden"
 								name="reviewContent" value="${dto.content}">
