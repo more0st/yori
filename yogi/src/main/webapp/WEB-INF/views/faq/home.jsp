@@ -19,15 +19,23 @@
 	vertical-align: center;
 }
 
+.body-title{
+	font-weight: 600;
+	font-size: 25px;
+	color: #012970;
+}
+
+
+.subjectdiv{
+	cursor:pointer;
+}
 </style>
 
 
 <div class="whole-container">
 	<div class="container" style="max-width: 800px; padding : 20px 15px 20px 15px ;">
 	<div class="body-container">	
-		<div class="body-title">
-			<h3> 1:1 문의 </h3>
-		</div>
+		<div class="body-title">1:1 문의</div>
 		<hr><br>
 		
 		<div class="body-main">
@@ -55,7 +63,7 @@
 						<tr>
 							<td>${dto.category}</td>
 							<td class="left">
-								<a href="${articleUrl}&num=${dto.qnum}">${dto.subject}</a>
+								<div onclick="location.href='${articleUrl}&num=${dto.qnum}'" class="subjectdiv">${dto.subject}</div>
 							</td>
 							<td>${sessionScope.member.userName}</td>
 							<td>${dto.reg_date}</td>
