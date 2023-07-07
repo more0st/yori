@@ -169,7 +169,6 @@ public class ResManageController {
 	public void releaseOwnerEnabled(
 			@RequestParam(defaultValue = "") String restaurantNum,
 			@RequestParam(defaultValue = "") String registerId,
-			@RequestParam(defaultValue = "") String reason,
 			HttpServletRequest req
 			) throws Exception {
 		
@@ -179,9 +178,7 @@ public class ResManageController {
 			
 			map.put("restaurantNum", restaurantNum);
 			map.put("registerId", registerId);
-			map.put("reason", reason);
 			
-			service.updateOwnerState(map);
 			service.releaseOwnerEnabled(map);
 			
 		} catch (Exception e) {
