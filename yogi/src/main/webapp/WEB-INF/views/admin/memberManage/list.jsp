@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<style>
+.datatable-table th a {
+	text-align: center;
+}
+</style>
 
 	<main id="main" class="main">
 
@@ -29,7 +34,7 @@
 						<thead>
 							<tr>
 								<th scope="col">회원번호</th>
-								<th scope="col">이름</th>
+								<th scope="col" style="text-align: center;">이름</th>
 								<th scope="col">아이디</th>
 								<th scope="col">닉네임</th>
 								<th scope="col">등록 일자</th>
@@ -42,7 +47,7 @@
 							
 						<c:forEach var="dto" items="${list}" varStatus="status">
 							<tr class="hover"> 
-								<th scope="row" style="text-align: center;">${dto.memberNum}</th>
+								<th scope="row" style="text-align: left;">${dto.memberNum}</th>
 								<td><a href="${pageContext.request.contextPath}/admin/memberManage/detail?userId=${dto.userId}" class="text-primary">${dto.userName}</a></td>
 								<td>${dto.userId}</td>
 								<td>${dto.nickName}</td>
@@ -102,7 +107,9 @@
 <script type="text/javascript">
 
 function release(clickUserId, sIndex) {
-	
+	if(!confirm("정지를 해제하시겠습니까?")) {
+		return false;
+	}
 	// 회원 상태를 변경하기 위한 AJAX 요청
 	$.ajax({
 		type: "POST", // 혹은 "PUT" 등 HTTP 요청 메소드 선택

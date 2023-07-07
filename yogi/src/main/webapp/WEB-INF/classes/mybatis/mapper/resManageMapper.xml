@@ -55,7 +55,7 @@
 
 
     <update id="updateOwnerEnabled" parameterType="map">
-		UPDATE restaurantID SET enabled=#{enabled} WHERE restaurantNum=#{restaurantNum}
+		UPDATE restaurantID SET enabled=0 WHERE restaurantNum=#{restaurantNum}
     </update>
     
 	<insert id="insertOwnerState" parameterType="com.sp.yogi.owner.Owner">

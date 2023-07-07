@@ -65,7 +65,7 @@
 
 .rep-5 {
 	display: inline-block;
-	width: 10%;
+	width: 15%;
 	font-weight: 700;
 }
 

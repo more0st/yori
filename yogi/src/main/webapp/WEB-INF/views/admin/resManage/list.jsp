@@ -85,7 +85,7 @@
 									      </div>
 									      <div class="modal-footer">
 									        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-									        <button type="button" class="btn btn-primary btnStopSend" >보내기</button>
+									        <button type="button" class="btn btn-primary btnStopSend">보내기</button>
 									      </div>
 								      </form>
 								    </div>

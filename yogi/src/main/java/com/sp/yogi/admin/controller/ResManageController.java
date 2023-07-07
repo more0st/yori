@@ -133,9 +133,9 @@ public class ResManageController {
 	}
 	
 	// 업체 정지
-	@RequestMapping(value = "updateOwnerState", method = RequestMethod.POST)
+	@RequestMapping(value = "updateOwnerEnabled", method = RequestMethod.POST)
 	@ResponseBody
-	public void updateOwnerState(
+	public void updateOwnerEnabled(
 			@RequestParam(defaultValue = "") String restaurantNum,
 			@RequestParam(defaultValue = "") String registerId,
 			@RequestParam(defaultValue = "") String reason,
@@ -144,13 +144,15 @@ public class ResManageController {
 
 		
 		try {
-			// 회원 활성/비활성 변경
+			// 업체 활성/비활성 변경
 			Map<String, Object> map = new HashMap<>();
 			
 			map.put("restaurantNum", restaurantNum);
 			map.put("registerId", registerId);
 			map.put("reason", reason);
+			
 			service.updateOwnerState(map);
+			service.updateOwnerEnabled(map);
 
 		} catch (Exception e) {
 			System.out.println(e);

@@ -11,6 +11,12 @@ public class Store {
 	private String tel;
 	private String categoryName;
 	private String email;
+	private int enabled;
+	
+	private long reportNum;
+	private int stateCode;
+	private String memo;
+	private String registerId;
 	
 	public String getEmail() {
 		return email;
@@ -65,6 +71,37 @@ public class Store {
 	}
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+	public int getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+	
+	public long getReportNum() {
+		return reportNum;
+	}
+	public void setReportNum(long reportNum) {
+		this.reportNum = reportNum;
+	}
+	public int getStateCode() {
+		return stateCode;
+	}
+	public void setStateCode(int stateCode) {
+		this.stateCode = stateCode;
+	}
+	public String getMemo() {
+		return memo;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+	public String getRegisterId() {
+		return registerId;
+	}
+	public void setRegisterId(String registerId) {
+		this.registerId = registerId;
 	}
 	
 	

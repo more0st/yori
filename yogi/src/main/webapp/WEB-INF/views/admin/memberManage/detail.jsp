@@ -169,7 +169,9 @@
     <script type="text/javascript">
 
 function release(clickUserId) {
-	
+	if(!confirm("정지를 해제하시겠습니까?")) {
+		return false;
+	}
 	// 회원 상태를 변경하기 위한 AJAX 요청
 	$.ajax({
 		type: "POST", // 혹은 "PUT" 등 HTTP 요청 메소드 선택
