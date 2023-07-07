@@ -124,9 +124,9 @@
 
 <script type="text/javascript">
 
-function deleteNotice(num) {
+function deleteNotice(noticeNum) {
 	if(confirm("공지를 삭제 하시겠습니까 ?")) {
-		let query = "num="+num+"&${query}";
+		let query = "noticeNum="+noticeNum+"&${query}";
 		let url = "${pageContext.request.contextPath}/admin/notice/delete?"+query;
 		location.href = url;
 	}

@@ -9,169 +9,87 @@
 	margin-top: 70px;
 }
 
-.main {
-	background: #fcf5f7;
-}
-
-.body-main {
-	max-width: 700px;
-	padding-top: 15px;
-}
-
-/* form-control */
-.butn {
-	color: #333;
-	background-color: #eee;
-	padding: 5px 10px;
-	border-radius: 4px;
-	font-weight: 500;
-	cursor:pointer;
-	font-size: 14px;
-	font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
-	vertical-align: baseline;
-}
-.butn:active, .butn:focus, .butn:hover {
-	background-color: #333;
-	color:#fff;
-}
-.butn[disabled], fieldset[disabled] .butn {
-	pointer-events: none;
-	cursor: not-allowed;
-	filter: alpha(opacity=65);
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	opacity: .65;
-}
-
-
-.form-control {
-	border: 1px solid #999999; border-radius: 4px; background-color: #ffffff;
-	padding: 5px 5px; 
-	font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
-	vertical-align: baseline;
-}
-.form-control[readonly] { background-color:#f8f9fa; }
-
-textarea.form-control { height: 200px; resize : none; }
-
-.form-select {
-	border: 1px solid #999999; border-radius: 4px; background-color: #ffffff;
-	padding: 4px 5px; 
-	font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
-	vertical-align: baseline;
-}
-.form-select[readonly] { background-color:#f8f9fa; }
-
-textarea:focus, input:focus { outline: none; }
-input[type=checkbox], input[type=radio] { vertical-align: middle; }
-
-/* table */
-.table { width: 100%; border-spacing: 0; border-collapse: collapse; }
-.table th, .table td { padding-top: 10px; padding-bottom: 10px; }
-
-.table2 {
-display: flex;
-justify-content: center;
-
-}
-
-
-.td-border td { border: 1px solid #eee; }
-
-tr.hover:hover { cursor: pointer; background: #f5fffa; }
-
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-
-.clear { clear: both; }
-.clear:after { content:''; display:block; clear: both; }
-
-.mx-auto { margin-left: auto; margin-right: auto; }
-
-
-
-/* body-container */
-.body-container {
-	min-height: 500px;
-	width: 800px;
-	background: white;
-	border: 1px solid #d9d9d9;
-}
-
-.body-title {
-    color: #424951;
-    padding-top: 35px;
-    padding-bottom: 7px;
-    margin: 0 0 25px 20px;
-    border-bottom: 1px solid #eee;
-}
-
-.body-title h2 {
-    font-size: 24px;
-    min-width: 300px;
-    color: #fa0050;
-    font-weight: 700;
-    padding-bottom: 10px;
-    display: inline-block;
-    margin: 0 0 -7px 0;
-}
-
-.body-main {
-	display: block;
-	padding-bottom: 15px;
-}
-
-.inner-page{
-	display: block;
-	padding-top: 35px;
-}
-
-
-.table-form td { padding: 7px 0; }
-.table-form p { line-height: 200%; }
-.table-form tr:first-child { border-top:none;  }
-.table-form tr > td:first-child {  font-weight : 900;  color : #fa0050; width: 110px; text-align: center; background: white; }
-.table-form tr > td:nth-child(2) { padding-left: 10px; }
-
-.table-form input[type=text], .table-form input[type=file], .table-form textarea {
-	border: 1px solid #eee;
-	width: 96%;
-}
-
 .card{
 	width:750px;
 	margin:0 auto;
+	border-radius: 10px;
+	padding: 20px;
+}
+
+.body-title {
+	color: #4154F1;
+	font-size: 20px;
+}
+
+.title-info {
+	width: 150px;
+	border-bottom: 3px solid #4154F1;
+}
+
+.table1 {
+	width: 100%;
+	margin: 30px 0;
+}
+
+.contenttxt {
+	width: 100%;
+	border-radius: 10px;
+	padding: 5px;
+	outline: none;
+	resize: none;
+	height: 300px;
+	border: 1px solid #d9d9d9;
+}
+
+.subjecttxt {
+	width: 100%;
+	border-radius: 10px;
+	padding: 5px;
+	border: 1px solid #d9d9d9;
+	outline: none;
+	height: 40px;
+}
+
+.table2 {
+	margin: 0 auto;
+}
+
+.table1tr {
+	height: 60px;
+}
+
+.table1 td:first-child {
+	font-weight: bold;
+	text-align: center;
 }
 </style>
 
 <main id="main" class="main">
 	<div class="whole-container">
 	<div class="card">
-		<div class="container body-container">
 		    <div class="body-title">
-				<h2> 공지사항 </h2>
+				<div class="title-info">&nbsp;&nbsp;공지사항</div>
 		    </div>
 		    
-		    <div class="body-main mx-auto">
 				<form name="noticeForm" method="post" enctype="multipart/form-data">
-					<table class="table table-border table-form">
-						<tr> 
+					<table class="table1">
+						<tr class="table1tr"> 
 							<td>제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
 							<td> 
-								<input type="text" name="subject" maxlength="100" class="form-control" value="${dto.subject}">
+								<input type="text" class="subjecttxt" name="subject" maxlength="100" class="form-control" value="${dto.subject}">
 							</td>
 						</tr>
 						
 					
 						
-						<tr> 
-							<td valign="top">내&nbsp;&nbsp;&nbsp;&nbsp;용</td>
+						<tr style="height: 320px;"> 
+							<td valign="middle">내&nbsp;&nbsp;&nbsp;&nbsp;용</td>
 							<td> 
-								<textarea name="content" class="form-control">${dto.content}</textarea>
+								<textarea name="content" class="contenttxt">${dto.content}</textarea>
 							</td>
 						</tr>
 						
-						<tr>
+						<tr class="table1tr">
 							<td>첨&nbsp;&nbsp;&nbsp;&nbsp;부</td>
 							<td> 
 								<input type="file" name="selectFile" accept="image/*" multiple="multiple" class="form-control">
@@ -179,13 +97,13 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 						</tr>
 						
 						<c:if test="${mode == 'update' }">
-							<tr>
+							<tr class="table1tr">
 								<td>등록이미지</td>
 								<td>
 									<div class="img-box">
 										<c:forEach var="vo" items="${listFile}">
-											<img src="${pageContext.request.contextPath}/uploads/notice/${dto.imgFileName}"
-												onclick="deleteFile('${dto.imgFileNum}');">
+											<img src="${pageContext.request.contextPath}/uploads/notice/${vo.imgFileName}"
+												onclick="deleteFile('${vo.imgFileName}', '${dto.noticeNum}','${vo.imgNum}');">
 										</c:forEach>
 									</div>
 								</td>
@@ -201,7 +119,6 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 								<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/notice/list';">${mode=="update"?"수정취소":"등록취소"}</button>
 								<c:if test="${mode=='update' }">
 									<input type="hidden" name="noticeNum" value="${dto.noticeNum}">
-									<input type="hidden" name="page" value="${page}">
 								</c:if>							
 							</td>
 						</tr>
@@ -209,9 +126,7 @@ tr.hover:hover { cursor: pointer; background: #f5fffa; }
 			
 				</form>
 				</div>
-		    </div>
 		</div>
-	</div>	
 </main>
 
 
@@ -243,12 +158,15 @@ function sendOk(elClickedObj) {
 }
 
 <c:if test="${mode == 'update'}">
-function deleteFile(imgNum) {
+function deleteFile(imgFileName, num, imgNum) {
 	let cnt = $(".img-box").find("img").length;
 	
+	alert(num);
+	alert(imgNum);
+	
 	if(confirm('이미지를 삭제하시겠습니까 ?')){
-		let query = "noticeNum=${dto.noticeNum}&imgNum=" + imgNum + "&page=${page}";
-		let url = "${pageContext.request.contextPath}/admin/notice/deleteFile.do";
+		let query = "num="+num+"&imgFileName=" + imgFileName + "&imgNum=" + imgNum;
+		let url = "${pageContext.request.contextPath}/admin/notice/deleteFile";
 		location.href = url + "?" + query;
 	}
 	

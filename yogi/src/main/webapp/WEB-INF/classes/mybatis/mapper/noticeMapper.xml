@@ -72,8 +72,9 @@
 		DELETE FROM notice WHERE noticeNum = #{noticeNum}
 	</delete>
 	
+	<!-- 파일 삭제 -->
 	<delete id="deleteFile" parameterType="map">
-		DELETE FROM noticeImg WHERE imgNum = #{num}
+		DELETE FROM noticeImg WHERE imgNum = #{imgNum}
 	</delete>	
 	
 </mapper>

@@ -11,12 +11,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sp.yogi.admin.domain.Notice;
 import com.sp.yogi.admin.service.NoticeService;
+import com.sp.yogi.common.FileManager;
 import com.sp.yogi.member.SessionInfo;
 
 @Controller("admin.noticeController")
@@ -24,6 +26,9 @@ import com.sp.yogi.member.SessionInfo;
 public class NoticeController {
 	@Autowired
 	private NoticeService service;
+	
+	@Autowired
+	private FileManager filemanager;
 	
 	@RequestMapping(value = "write", method = RequestMethod.GET)
 	public String writeForm(Model model, HttpSession session) throws Exception {
@@ -116,7 +121,6 @@ public class NoticeController {
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String updateSubmit(Notice dto,
-			@RequestParam String page,
 			HttpSession session) throws Exception {
 
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
@@ -134,7 +138,7 @@ public class NoticeController {
 	}	
 	
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
-	public String delete(@RequestParam long num,
+	public String delete(@RequestParam long noticeNum,
 			HttpSession session) throws Exception {
 
 		String root = session.getServletContext().getRealPath("/");
@@ -144,11 +148,35 @@ public class NoticeController {
 //		Notice dto = service.readNotice(num);
 
 		try {
-			service.deleteNotice(num, pathname);
+			service.deleteNotice(noticeNum, pathname);
 		} catch (Exception e) {
 		}
 
 		return "redirect:/admin/notice/list?";
+	}
+	
+	@GetMapping("deleteFile")
+	public String deleteFile(HttpSession session, @RequestParam("num") Long num, 
+			@RequestParam("imgFileName") String imgFileName,
+			@RequestParam("imgNum") Long imgNum) {
+		
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "notice";
+		
+		System.out.println("루트 : " + pathname);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("imgNum", imgNum);
+		
+		try {
+			service.deleteFile(map);
+		} catch (Exception e) {
+		}
+		
+		filemanager.doFileDelete(imgFileName, pathname);
+		
+		return "redirect:/admin/notice/update?num=" + num;
 	}
 	
 }
