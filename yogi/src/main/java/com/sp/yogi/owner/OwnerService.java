@@ -34,6 +34,10 @@ public interface OwnerService {
 	public int reviewRatingCount(Long restaurantNum);
 	
 	public void openControl(Map<String, Object> map);
+	
+	public void failCount(String userId) throws Exception;
+	
+	public void loginComplete(String userId) throws Exception;
 
 
 }

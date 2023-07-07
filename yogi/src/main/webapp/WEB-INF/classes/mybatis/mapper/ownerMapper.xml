@@ -3,10 +3,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="owner">
 	<select id="loginOwner" parameterType="String" resultType="com.sp.yogi.owner.Owner">
-		SELECT r.restaurantNum, userId, userName, userPwd, reg_date, modify_date, last_login, ri.state openState
+		SELECT r.restaurantNum, userId, userName, userPwd, reg_date, modify_date, last_login, ri.state openState, failure_cnt, enabled
 		FROM restaurantId r 
 		LEFT OUTER JOIN restaurantInfo ri ON r.restaurantNum = ri.restaurantNum
- 		WHERE userId = #{userId} AND enabled != 0 
+ 		WHERE userId = #{userId}
 
 	</select>
 	
@@ -117,6 +117,25 @@
     	SELECT state FROM restaurantInfo WHERE restaurantNum = #{restaurantNum}
     </select>
     
+    <!-- failure Count 증가 -->
+    <update id="updateFailCount" parameterType="String">
+    	UPDATE restaurantId SET failure_cnt = failure_cnt + 1 
+    	WHERE userId = #{userId}
+    </update>
+    
+    <!-- fail Count -->
+    <select id="failCount" parameterType="String" resultType="int">
+    	SELECT failure_cnt FROM restaurantId where userId = #{userId}
+    </select>
+    
+    <!-- 아이디 정지 -->
+    <update id="disableMember" parameterType="String">
+    	UPDATE restaurantId set enabled = 0, failure_cnt = 0 WHERE userId = #{userId}
+    </update>
+    
+    <!-- fail Count 초기화 -->
+    <update id="resetFail" parameterType="String">
+    	update restaurantId set failure_cnt = 0 where userId = #{userId}
+    </update>
 
-	
 </mapper>

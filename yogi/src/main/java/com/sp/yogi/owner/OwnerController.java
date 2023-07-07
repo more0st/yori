@@ -167,10 +167,35 @@ public class OwnerController {
 
 		Owner dto = service.loginOwner(userId);
 		
-		if (dto == null || !userPwd.equals(dto.getUserPwd())) {
-			model.addAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다.");
-			return ".owner.login";
+		try {
+			
+			if(dto == null) {
+				model.addAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다.");
+				return ".owner.login";
+			} else if (userPwd.equals(dto.getUserPwd())) {
+				if(dto.getEnabled() == 0) {
+					model.addAttribute("message", "정지된 회원입니다. 관리자에게 문의하세요.<br>(관리자 이메일 : admin@naver.com)");
+					return ".owner.login";
+				}
+			} else if (!userPwd.equals(dto.getUserPwd())) {
+				int failCount = dto.getFailure_cnt() + 1;
+
+				if(dto.getEnabled() == 0) {
+					model.addAttribute("message", "정지된 회원입니다. 관리자에게 문의하세요.<br>(관리자 이메일 : admin@naver.com)");
+					return ".owner.login";
+				}
+				
+				service.failCount(userId);
+				model.addAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다. [ 비밀번호 틀린 횟수 : "+ failCount +"/5 ]");
+				return ".owner.login";
+			}
+			
+			service.loginComplete(userId);
+			
+		} catch (Exception e) {
 		}
+		
+		
 
 		// 세션에 로그인 정보 저장
 		SessionInfo info = new SessionInfo();

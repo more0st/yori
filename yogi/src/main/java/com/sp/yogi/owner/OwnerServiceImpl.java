@@ -25,9 +25,6 @@ public class OwnerServiceImpl implements OwnerService {
 		try {
 			dto = dao.selectOne("owner.loginOwner", userId);
 			
-			if(dto != null) {
-				dao.updateData("owner.updateLastLogin", userId);
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -391,6 +388,35 @@ public class OwnerServiceImpl implements OwnerService {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void failCount(String userId) throws Exception {
+		try {
+			dao.updateData("owner.updateFailCount", userId);
+			
+			int failCount = dao.selectOne("owner.failCount", userId);
+			
+			if(failCount == 5) {
+				dao.updateData("owner.disableMember", userId);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public void loginComplete(String userId) throws Exception {
+		try {
+			dao.updateData("owner.updateLastLogin", userId);
+			dao.updateData("owner.resetFail", userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
 	}
 	
 }
