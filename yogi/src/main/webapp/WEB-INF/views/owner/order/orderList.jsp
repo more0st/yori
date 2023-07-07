@@ -147,7 +147,7 @@
                 <div class="card-body">
                   <h5 class="card-title">배달완료</h5>
 
-                  <table class="table table-borderless">
+                  <table class="table table-borderless datatable">
                     <thead>
                       <tr>
                         <th scope="col">주문번호</th>
@@ -156,7 +156,6 @@
                         <th scope="col">메뉴</th>
                         <th scope="col">금액</th>
                         <th scope="col">전화번호</th>
-                        <th scope="col">요청사항</th>
                         <th scope="col">주문상태</th>
                       </tr>
                     </thead>
@@ -174,7 +173,6 @@
 	                        </td>
 	                        <td>${order.total_price}원</td>
 	                        <td>${order.tel}</td>
-	                        <td class="overflow-ellipsis">${order.memo}</td>
 	                        <td>
 	                        	<button type="button" class="btn btn-warning" onclick="location.href='${pageContext.request.contextPath}/owner/order/orderDetail?orderNum=${order.orderNum}&statusName=${order.statusName}'">배달완료</button>
 	                        </td>
@@ -192,7 +190,7 @@
                 <div class="card-body">
                   <h5 class="card-title">취소내역</h5>
 
-                  <table class="table table-borderless">
+                  <table class="table table-borderless datatable">
                     <thead>
                       <tr>
                         <th scope="col">주문번호</th>
@@ -201,7 +199,6 @@
                         <th scope="col">메뉴</th>
                         <th scope="col">금액</th>
                         <th scope="col">전화번호</th>
-                        <th scope="col">요청사항</th>
                         <th scope="col">주문상태</th>
                       </tr>
                     </thead>
@@ -219,7 +216,6 @@
 	                        </td>
 	                        <td>${order.total_price}원</td>
 	                        <td>${order.tel}</td>
-	                        <td class="overflow-ellipsis">${order.memo}</td>
 	                        <td>
 	                        	<button type="button" class="btn btn-danger" disabled="disabled">취소완료</button>
 	                        </td>
