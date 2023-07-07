@@ -99,6 +99,12 @@
 .periodSet {
 	display: flex;
 }
+
+.page-navigation{
+	text-align: center;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
 </style>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/paginate-boot.js"></script>
