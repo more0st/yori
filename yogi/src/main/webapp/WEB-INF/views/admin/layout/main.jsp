@@ -339,7 +339,7 @@
 								<tbody>
 									<tr>
 										<td style="width: 80px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-										<a href="#" class="text-primary">이벤트이름 길게길게가가가가가가</a></td>
+										<a href="#" class="text-primary overflow-ellipsis">이벤트이름 길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게</a></td>
 										<td>2023.08.15</td>
 										<td>
 											<button type="button" class="btn btn-secondary btn-sm">종료</button>
@@ -369,3 +369,21 @@
 
 </main>
 <!-- End #main -->
+
+  <script type="text/javascript">
+  window.addEventListener('DOMContentLoaded', () => {
+	  const elements = document.querySelectorAll('.overflow-ellipsis');
+
+	  const maxLength = 15;
+
+	  elements.forEach(element => {
+	    let text = element.innerText;
+
+	    if (text.length > maxLength) {
+	      text = text.substring(0, maxLength) + '...';
+	    }
+
+	    element.innerText = text;
+	  });
+	});
+  </script>

@@ -14,7 +14,7 @@
 }
 
 </style>
-  <script>
+  <script type="text/javascript">
   window.addEventListener('DOMContentLoaded', () => {
 	  const elements = document.querySelectorAll('.overflow-ellipsis');
 
