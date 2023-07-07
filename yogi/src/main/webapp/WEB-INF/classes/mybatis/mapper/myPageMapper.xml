@@ -24,7 +24,8 @@
 
 	<sql id="where-list">
 		( INSTR(r.restaurantName, #{keyword}) &gt; 0
-		OR INSTR(ob.orderNum, #{keyword}) &gt; 0 )
+		OR
+		INSTR(ob.orderNum, #{keyword}) &gt; 0 )
 	</sql>
 
 	<!-- 데이터개수 -->
@@ -46,18 +47,22 @@
 	<select id="listMyPage" parameterType="map"
 		resultType="com.sp.yogi.mypage.MyPage">
 		SELECT ob.orderNum, r.restaurantName, p.price total_price,
-		os.statusName, ob.userId, ob.order_date, ob.restaurantNum, rv.content, rv.rating
+		os.statusName, ob.userId, ob.order_date, ob.restaurantNum, rv.content,
+		rv.rating
 		FROM order_bundle ob
 		JOIN
 		restaurant r ON
-		ob.restaurantNum = r.restaurantNum
+		ob.restaurantNum =
+		r.restaurantNum
 		JOIN payment p ON
 		ob.orderNum =
 		p.orderNum
-		JOIN order_status os ON ob.orderNum =
+		JOIN
+		order_status os ON ob.orderNum =
 		os.orderNum
-		LEFT OUTER JOIN review rv ON ob.orderNum =
-		rv.orderNum  
+		LEFT OUTER JOIN review rv
+		ON ob.orderNum =
+		rv.orderNum
 		<where>
 			<if test="keyword != null and keyword != ''">
 				<include refid="where-list" />
@@ -68,32 +73,36 @@
 		OFFSET #{offset} ROWS FETCH FIRST #{size}
 		ROWS ONLY
 	</select>
-	
+
 	<!-- 주문 내역 리스트 -->
 	<select id="listMyHome" parameterType="map"
 		resultType="com.sp.yogi.mypage.MyPage">
 		SELECT ob.orderNum, r.restaurantName, p.price total_price,
-		os.statusName, ob.userId, ob.order_date, ob.restaurantNum, rv.content, rv.rating, m1.userName, m2.email
+		os.statusName, ob.userId, ob.order_date, ob.restaurantNum, rv.content,
+		rv.rating, m1.userName, m2.email
 		FROM order_bundle ob
 		JOIN
-		restaurant r ON
+		restaurant r
+		ON
 		ob.restaurantNum = r.restaurantNum
 		JOIN payment p ON
 		ob.orderNum =
 		p.orderNum
 		JOIN order_status os ON ob.orderNum =
 		os.orderNum
-		LEFT OUTER JOIN review rv ON ob.orderNum =
+		LEFT OUTER
+		JOIN review rv ON ob.orderNum =
 		rv.orderNum
-		JOIN member1 m1 ON ob.userId =
+		JOIN member1 m1 ON ob.userId
+		=
 		m1.userId
-        JOIN member2 m2 ON ob.userId =
-		m2.userId  
+		JOIN member2 m2 ON ob.userId =
+		m2.userId
 		WHERE
 		ob.userId = #{userId}
 		ORDER BY ob.order_date DESC
 	</select>
-	
+
 	<select id="readMyhome" parameterType="String"
 		resultType="com.sp.yogi.mypage.MyPage">
 		SELECT
@@ -101,12 +110,11 @@
 		FROM
 		member1 m1
 		INNER
-		JOIN member2 m2 ON m1.userId = m2.userId
+		JOIN member2
+		m2 ON m1.userId = m2.userId
 		WHERE
 		m1.userId = #{userId}
 	</select>
-	
-	
 
 	<!-- 주문 내역 상세1 -->
 	<select id="orderDetail" parameterType="long"
@@ -118,10 +126,12 @@
 		oi.orderCount,
 		oi.menuPrice option_price,
 		m.menu,
-		m.price menu_price
+		m.price
+		menu_price
 		FROM
 		order_item oi
-		INNER JOIN menu1 m ON oi.menuNum = m.menuNum
+		INNER JOIN menu1 m ON oi.menuNum =
+		m.menuNum
 		WHERE
 		oi.orderNum = #{orderNum}
 	</select>
@@ -158,110 +168,92 @@
 		INSERT INTO review(orderNum, userId, rating, content,
 		imgFileName,
 		reg_date, enabled, reply, reply_date, restaurantNum)
-		VALUES(#{orderNum}, #{userId}, #{rating}, #{content}, #{imgFileName, jdbcType=VARCHAR},
-		SYSDATE, 1, #{reply, jdbcType=VARCHAR}, SYSDATE, #{restaurantNum})
+		VALUES(#{orderNum}, #{userId}, #{rating}, #{content}, #{imgFileName,
+		jdbcType=VARCHAR},
+		SYSDATE, 1, #{reply, jdbcType=VARCHAR}, SYSDATE,
+		#{restaurantNum})
 	</insert>
-	
+
 	<!-- 리뷰 리스트 -->
 	<select id="listReview" parameterType="map"
 		resultType="com.sp.yogi.mypage.MyPage">
-		SELECT orderNum, userId, rating, content, imgFileName, reg_date, enabled
+		SELECT orderNum, userId, rating, content, imgFileName,
+		reg_date, enabled
 		FROM review
 		WHERE
 		userId = #{userId}
 	</select>
 
-	<update id="reviewUpdate" parameterType="com.sp.yogi.mypage.MyPage">
-		UPDATE review SET rating = #{rating}, content=#{content}, imgFileName=#{imgFileName, jdbcType=VARCHAR}, reg_date=SYSDATE
+	<!-- 리뷰 업데이트 -->
+	<update id="reviewUpdate"
+		parameterType="com.sp.yogi.mypage.MyPage">
+		UPDATE review SET rating = #{rating},
+		content=#{content}, imgFileName=#{imgFileName, jdbcType=VARCHAR},
+		reg_date=SYSDATE
 		WHERE orderNum = #{orderNum}
 	</update>
-	
-	<select id="reviewRead" parameterType="long"
-		resultType="com.sp.yogi.mypage.MyPage">
-		SELECT
-		orderNum,
-		userId,
-		rating,
-		content,
-		imgFileName,
-		enabled,reply,
-		restaurantNum
-		FROM
-		review
-		WHERE
-		ob.orderNum = #{orderNum};
-	</select>
-	
-	<select id="readData" parameterType="long"
-		resultType="com.sp.yogi.mypage.MyPage">
-		SELECT
-		ob.orderNum,
-		r.restaurantName,
-		r.restaurantNum
-		FROM
-		order_bundle ob
-		INNER
-		JOIN restaurant r ON ob.restaurantNum = r.restaurantNum
-		WHERE
-		ob.orderNum = #{orderNum};
-	</select>
-	
+
 	<!-- 찜목록 -->
-	<select id="likeList" parameterType="String" resultType="com.sp.yogi.mypage.Like">
-	SELECT
-    rl.restaurantNum,
-    r.restaurantName,
-    ri.basePrice,
-    NVL(rv.reviewCount, 0) AS reviewCount,
-    NVL(rv.rating, 0) AS rating,
-    (
-        SELECT imageFilename
-        FROM restaurantImg rimg
-        WHERE rimg.restaurantNum = r.restaurantNum
-        AND ROWNUM = 1
-    ) AS imgFileName 
-FROM
-    restaurantLike rl
-    INNER JOIN restaurant r ON rl.restaurantNum = r.restaurantNum
-    INNER JOIN restaurantInfo ri ON r.restaurantNum = ri.restaurantNum
-    LEFT JOIN (
-        SELECT restaurantNum, COUNT(*) AS reviewCount, AVG(rating) AS rating
-        FROM review
-        GROUP BY restaurantNum
-    ) rv ON r.restaurantNum = rv.restaurantNum
-    WHERE userId = #{userId}
+	<select id="likeList" parameterType="String"
+		resultType="com.sp.yogi.mypage.Like">
+		SELECT
+		rl.restaurantNum,
+		r.restaurantName,
+		ri.basePrice,
+		NVL(rv.reviewCount, 0) AS reviewCount,
+		NVL(rv.rating, 0) AS rating,
+		(
+		SELECT imageFilename
+		FROM restaurantImg rimg
+		WHERE rimg.restaurantNum = r.restaurantNum
+		AND ROWNUM = 1
+		) AS imgFileName
+		FROM
+		restaurantLike rl
+		INNER JOIN restaurant r ON rl.restaurantNum = r.restaurantNum
+		INNER JOIN restaurantInfo ri ON r.restaurantNum = ri.restaurantNum
+		LEFT JOIN (
+		SELECT restaurantNum, COUNT(*) AS reviewCount, AVG(rating) AS rating
+		FROM review
+		GROUP BY restaurantNum
+		) rv ON r.restaurantNum = rv.restaurantNum
+		WHERE userId = #{userId}
 	</select>
-	
+
 	<!-- 쿠폰 리스트 -->
 	<select id="listCoupon" parameterType="String"
 		resultType="com.sp.yogi.mypage.Coupon">
-		SELECT c.eventNum, couponNum, c.content, e.discount, e.min_price, c.created_date, e.expired_date, c.status
+		SELECT c.eventNum, couponNum, c.content, e.discount,
+		e.min_price, c.created_date, e.expired_date, c.status
 		FROM coupon c
-		JOIN event e ON c.eventNum = e.eventNum 
+		JOIN event e ON c.eventNum = e.eventNum
 		WHERE
 		c.userId = #{userId}
 	</select>
-	
+
 	<!-- 주문상태 업데이트 -->
-	<update id="orderUpdate" parameterType="com.sp.yogi.mypage.Order">
+	<update id="orderUpdate"
+		parameterType="com.sp.yogi.mypage.Order">
 		UPDATE order_status SET statusName = 5, field = SYSDATE
 		WHERE orderNum = #{orderNum}
 	</update>
 
 	<!-- 결제상태 업데이트 -->
 	<update id="payUpdate" parameterType="com.sp.yogi.mypage.Order">
-		UPDATE payment SET state = 0
+		UPDATE payment SET state =
+		0
 		WHERE orderNum = #{orderNum}
 	</update>
-	
+
 	<!-- 주문번호별 쿠폰정보 -->
-	<select id="couponInfo" parameterType="Long" resultType="com.sp.yogi.mypage.Coupon">
-	SELECT orderNum, p.couponNum, c.content, discount
-	FROM payment p
-    LEFT OUTER JOIN coupon c ON p.couponNum=c.couponNum
-    LEFT OUTER JOIN event e ON e.eventNum=c.eventNum
-    WHERE orderNum=#{orderNum}
+	<select id="couponInfo" parameterType="Long"
+		resultType="com.sp.yogi.mypage.Coupon">
+		SELECT orderNum, p.couponNum, c.content, discount
+		FROM payment p
+		LEFT OUTER JOIN coupon c ON p.couponNum=c.couponNum
+		LEFT OUTER JOIN event e ON e.eventNum=c.eventNum
+		WHERE orderNum=#{orderNum}
 	</select>
-	
+
 
 </mapper>

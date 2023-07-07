@@ -122,7 +122,7 @@
                     document.addEventListener("DOMContentLoaded", () => {
                       new ApexCharts(document.querySelector("#reportsChart"), {
                         series: [{
-                          name: 'Sales',
+                          name: '이용자',
                           data: [31, 40, 28, 51, 42, 82, 56],
                         }, {
                           name: 'Revenue',
@@ -164,7 +164,7 @@
                         },
                         tooltip: {
                           x: {
-                            format: 'dd/MM/yy HH:mm'
+                            format: 'yy/MM/dd HH:mm'
                           },
                         }
                       }).render();

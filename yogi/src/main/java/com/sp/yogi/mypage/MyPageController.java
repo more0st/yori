@@ -22,7 +22,6 @@ import com.sp.yogi.common.MyUtil;
 import com.sp.yogi.home.Home;
 import com.sp.yogi.home.HomeService;
 import com.sp.yogi.member.SessionInfo;
-import com.sp.yogi.owner.order.OrderService;
 
 @Controller("mypage.myPageController")
 @RequestMapping("/mypage/*")
@@ -129,7 +128,7 @@ public class MyPageController {
 		}
 		listUrl += "?" + query;
 		articleUrl += "&" + query;
-		
+
 		String paging = myUtil.paging(current_page, total_page, listUrl);
 
 		model.addAttribute("list", list);
@@ -155,23 +154,13 @@ public class MyPageController {
 
 		int membership = info.getMembership();
 
-		System.out.println(membership + "멤버쉽");
-
 		if (membership != 1 && membership != 99) {
 			return ".home.home";
 		}
 
-		String cp = req.getContextPath();
-
-		int size = 5;
-		int total_page;
-		int dataCount;
-
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", info.getUserId());
 
-		dataCount = service.dataCount(map);
-		total_page = myUtil.pageCount(dataCount, size);
 
 		List<MyPage> list = service.listMyHome(map);
 		MyPage dto = service.readMyhome(info.getUserId());
@@ -187,20 +176,15 @@ public class MyPageController {
 	public String orderDetail(@RequestParam long num, @RequestParam String page,
 			@RequestParam(defaultValue = "all") String condition, @RequestParam(defaultValue = "") String keyword,
 			HttpServletRequest req, HttpSession session, Model model) throws Exception {
-		SessionInfo info = (SessionInfo) session.getAttribute("member");
-		String cp = req.getContextPath();
 
 		String query = "page=" + page;
 		if (keyword.length() != 0) {
 			query += "&condition=" + condition + "&keyword=" + URLEncoder.encode(keyword, "UTF-8");
 		}
 
-
-		
 		MyPage dto = service.readOrderDetail(num);
 		List<MyPage> list = service.listOrderDetail(num);
 		Coupon couponInfo = couponService.couponInfo(num);
-		
 
 		model.addAttribute("detailList", list);
 		model.addAttribute("detailList2", dto);

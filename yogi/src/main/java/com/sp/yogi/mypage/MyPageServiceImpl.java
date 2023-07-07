@@ -131,19 +131,6 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public MyPage readData(long num) {
-		MyPage dto = null;
-
-		try {
-			dto = dao.selectOne("mypage.readData", num);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return dto;
-
-	}
-
-	@Override
 	public List<MyPage> listReview(Map<String, Object> map) {
 		List<MyPage> list = null;
 		try {
@@ -169,17 +156,6 @@ public class MyPageServiceImpl implements MyPageService {
 		return list;
 	}
 
-	@Override
-	public MyPage reviewRead(long num) {
-		MyPage dto = null;
-		try {
-			dto = dao.selectOne("mypage.reviewRead", num);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return dto;
-	}
 
 	@Override
 	public MyPage readMyhome(String userId) {

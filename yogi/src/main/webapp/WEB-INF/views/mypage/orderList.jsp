@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
 .whole-container {
@@ -9,20 +9,20 @@
 	background: #fafafa;
 }
 
-.tablediv{
+.tablediv {
 	width: 1000px;
 	margin: 30px auto;
 }
 
-.tablediv tr th, tr td{
+.tablediv tr th, tr td {
 	text-align: center;
 }
 
-.tablediv tr td{
+.tablediv tr td {
 	vertical-align: middle;
 }
 
-.reviewbtn{
+.reviewbtn {
 	width: 80px;
 	height: 30px;
 	border-radius: 20px;
@@ -31,79 +31,78 @@
 	background: white;
 }
 
-.reviewbtn:hover{
+.reviewbtn:hover {
 	background: #eee;
 }
 
-
-.search{
+.search {
 	display: flex;
 	justify-content: right;
-	gap:10px;
+	gap: 10px;
 }
 
-.keyword{
-	outline:none;
-	border:1px solid #d9d9d9;
+.keyword {
+	outline: none;
+	border: 1px solid #d9d9d9;
 }
 
 .rating {
-  display: inline-block;
+	display: inline-block;
 }
 
 .rating input {
-  display: none;
+	display: none;
 }
 
 .rating label {
-  float: right;
-  cursor: pointer;
-  color: #ddd;
-  font-size:30px;
+	float: right;
+	cursor: pointer;
+	color: #ddd;
+	font-size: 30px;
 }
 
 .rating label:before {
-  content: "\2605";
-  margin-right: 5px;
+	content: "\2605";
+	margin-right: 5px;
 }
 
 .rating input:checked ~ label {
-  color: #ffca08;
+	color: #ffca08;
 }
 
-.rating label:hover,
-.rating label:hover ~ label {
-  color: #ffca08;
+.rating label:hover, .rating label:hover ~ label {
+	color: #ffca08;
 }
 
-
-.paging{
+.paging {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.reviewUpdate{
+.reviewUpdate {
 	background: #d9d9d9;
 }
-
 </style>
 
 
 <div class="whole-container">
 	<!-- 메뉴 -->
-	<jsp:include page="/WEB-INF/views/mypage/mymenu.jsp"/>
-	
+	<jsp:include page="/WEB-INF/views/mypage/mymenu.jsp" />
+
 	<div class="tablediv">
-	<form  name="searchForm" action="${pageContext.request.contextPath}/mypage/orderList" method="post">
-		<div class="search">
-			<span> ${dataCount}개(${page}/${total_page} 페이지)</span>
-			<input type="text" name="keyword" class="keyword">
-			<button type="button" class="btn btn-secondary" onclick="searchList()">검색</button>
-		</div>
-	</form>
+		<form name="searchForm"
+			action="${pageContext.request.contextPath}/mypage/orderList"
+			method="post">
+			<div class="search">
+				<span> ${dataCount}개(${page}/${total_page} 페이지)</span> <input
+					type="text" name="keyword" class="keyword">
+				<button type="button" class="btn btn-secondary"
+					onclick="searchList()">검색</button>
+			</div>
+		</form>
 		<br>
-		
+
 		<table class="table">
 			<tr class="table-secondary border">
 				<th>주문번호</th>
@@ -114,154 +113,180 @@
 				<th>주문상세정보</th>
 				<th></th>
 			</tr>
-			
+
 			<!-- forEach -->
 			<c:forEach var="dto" items="${list}">
-			<tr class="border" >
-				<td>${dto.orderNum}</td>
-				
-				<td>${dto.restaurantName}</td>
-				<td><fmt:formatNumber value="${dto.total_price}" pattern="#,###원"/></td>
-				
-				<c:choose>
-				  <c:when test="${dto.statusName == 1}">
-				    <td>결제완료</td>
-				  </c:when>
-				  <c:when test="${dto.statusName == 2}">
-				    <td>접수완료</td>
-				  </c:when>
-				  <c:when test="${dto.statusName == 3}">
-				    <td>배달중</td>
-				  </c:when>
-				  <c:when test="${dto.statusName == 4}">
-				    <td>배달완료</td>
-				  </c:when>
-				  <c:when test="${dto.statusName == 5}">
-				    <td>주문취소</td>
-				  </c:when>
-				</c:choose>
-				
-			 	<c:choose>
-				<c:when test="${dto.content == null && dto.statusName == 4 }">
-					<td>
-						<button type="button" class="reviewbtn reviewModal" data-bs-toggle="modal" data-bs-target="#reviewModal" data-orderNum="${dto.orderNum}" data-restaurantNum="${dto.restaurantNum}">리뷰쓰기</button>
-					</td>
-				</c:when>
-				<c:when test="${dto.content != null}">
-					<td>
-						<input type="hidden" name="reviewRating" value="${dto.rating}">
-						<input type="hidden" name="reviewContent" value="${dto.content}">
-						<button type="button" class="reviewbtn reviewUpdate" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" data-orderNum="${dto.orderNum}" data-restaurantNum="${dto.restaurantNum}">리뷰수정</button>
-					</td>
-				</c:when>
-				<c:otherwise>
-					<td>
-					</td>
-				</c:otherwise>
-				</c:choose>
-				<!-- 해당 주문번호 맞춰서 이동하도록. -->
-				<td><button type="button" class="btn " onclick="location.href='${articleUrl}&num=${dto.orderNum}';"> <i class="fa-solid fa-arrow-right" style="color: #345998; font-size:20px;"></i> </button></td>
-				 <c:choose>
-                <c:when test="${dto.statusName == 1}">
-                    <td>
-						<button type="button" class="btn btn-danger cancelOrderBtn" onclick="cancelOrder(${dto.orderNum});">주문 취소</button>
-                    </td>
-                </c:when>
-                <c:otherwise>
-                </c:otherwise>
-            </c:choose>
-			</tr>
+				<tr class="border">
+					<td>${dto.orderNum}</td>
+
+					<td>${dto.restaurantName}</td>
+					<td><fmt:formatNumber value="${dto.total_price}"
+							pattern="#,###원" /></td>
+
+					<c:choose>
+						<c:when test="${dto.statusName == 1}">
+							<td>결제완료</td>
+						</c:when>
+						<c:when test="${dto.statusName == 2}">
+							<td>접수완료</td>
+						</c:when>
+						<c:when test="${dto.statusName == 3}">
+							<td>배달중</td>
+						</c:when>
+						<c:when test="${dto.statusName == 4}">
+							<td>배달완료</td>
+						</c:when>
+						<c:when test="${dto.statusName == 5}">
+							<td>주문취소</td>
+						</c:when>
+					</c:choose>
+
+					<c:choose>
+						<c:when test="${dto.content == null && dto.statusName == 4 }">
+							<td>
+								<button type="button" class="reviewbtn reviewModal"
+									data-bs-toggle="modal" data-bs-target="#reviewModal"
+									data-orderNum="${dto.orderNum}"
+									data-restaurantNum="${dto.restaurantNum}">리뷰쓰기</button>
+							</td>
+						</c:when>
+						<c:when test="${dto.content != null}">
+							<td><input type="hidden" name="reviewRating"
+								value="${dto.rating}"> <input type="hidden"
+								name="reviewContent" value="${dto.content}">
+								<button type="button" class="reviewbtn reviewUpdate"
+									data-bs-toggle="modal" data-bs-target="#reviewUpdateModal"
+									data-orderNum="${dto.orderNum}"
+									data-restaurantNum="${dto.restaurantNum}">리뷰수정</button></td>
+						</c:when>
+						<c:otherwise>
+							<td></td>
+						</c:otherwise>
+					</c:choose>
+					<!-- 해당 주문번호 맞춰서 이동하도록. -->
+					<td><button type="button" class="btn "
+							onclick="location.href='${articleUrl}&num=${dto.orderNum}';">
+							<i class="fa-solid fa-arrow-right"
+								style="color: #345998; font-size: 20px;"></i>
+						</button></td>
+					<c:choose>
+						<c:when test="${dto.statusName == 1}">
+							<td>
+								<button type="button" class="btn btn-danger cancelOrderBtn"
+									onclick="cancelOrder(${dto.orderNum});">주문 취소</button>
+							</td>
+						</c:when>
+						<c:otherwise>
+						</c:otherwise>
+					</c:choose>
+				</tr>
 			</c:forEach>
 			<!-- /forEach -->
 		</table>
-		
-		<div class="paging">
-		${paging}
-		</div>
-	</div>	
+
+		<div class="paging">${paging}</div>
+	</div>
 </div>
 
 <!-- 모달 -->
 
 <!-- 리뷰 작성 모달 -->
-<div class="modal" id="reviewModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form name="reviewForm" method="post" enctype="multipart/form-data">
-     
-	      <div class="modal-body">
-	      	<i class="fa-solid fa-chart-simple" style="color: #a8c4f5;"></i>&nbsp;리뷰 별점 <br>
-	        <div class="rating">
-			  <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
-			  <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
-			  <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
-			  <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
-			  <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+<div class="modal" id="reviewModal" tabindex="-1"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
 			</div>
-			
-			<div>
-				<br><i class="fa-regular fa-comment-dots" style="color: #a8c4f5;"></i>&nbsp;리뷰 내용<br><br>
-				<textarea name="content" id="content" rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
-				
-				<input type="file" name="selectFile" accept="image/*" class="form-control">
-			</div>
-			<div>
-				
-			</div>
-	      </div>
-	      <div class="modal-footer">
-	        <input type="hidden" name="orderNum" value="">
-	        <input type="hidden" name="restaurantNum" value="">
-	        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-	        <button type="button" class="btn btn-primary" onclick="reviewCheck();">저장</button>
-	      </div>
-      </form>
-    </div>
-  </div>
+			<form name="reviewForm" method="post" enctype="multipart/form-data">
+
+				<div class="modal-body">
+					<i class="fa-solid fa-chart-simple" style="color: #a8c4f5;"></i>&nbsp;리뷰
+					별점 <br>
+					<div class="rating">
+						<input type="radio" id="star5" name="rating" value="5" /><label
+							for="star5"></label> <input type="radio" id="star4" name="rating"
+							value="4" /><label for="star4"></label> <input type="radio"
+							id="star3" name="rating" value="3" /><label for="star3"></label>
+						<input type="radio" id="star2" name="rating" value="2" /><label
+							for="star2"></label> <input type="radio" id="star1" name="rating"
+							value="1" /><label for="star1"></label>
+					</div>
+
+					<div>
+						<br> <i class="fa-regular fa-comment-dots"
+							style="color: #a8c4f5;"></i>&nbsp;리뷰 내용<br> <br>
+						<textarea name="content" id="content" rows="5" cols="60"
+							style="outline: none; resize: none; border: 1px solid #d5d5d5;"></textarea>
+
+						<input type="file" name="selectFile" accept="image/*"
+							class="form-control">
+					</div>
+					<div></div>
+				</div>
+				<div class="modal-footer">
+					<input type="hidden" name="orderNum" value=""> <input
+						type="hidden" name="restaurantNum" value="">
+					<button type="reset" class="btn btn-secondary"
+						data-bs-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-primary"
+						onclick="reviewCheck();">저장</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
 <!-- 리뷰수정모달 -->
-<div class="modal" id="reviewUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form name="reviewUpdateForm" method="post" enctype="multipart/form-data"> 
-	      <div class="modal-body">
-	      	<i class="fa-solid fa-chart-simple" style="color: #a8c4f5;"></i>&nbsp;리뷰 별점 <br>
-	        <div class="rating">
-			  <input type="radio" id="star15" name="rating2" value="5" /><label for="star15"></label>
-			  <input type="radio" id="star14" name="rating2" value="4" /><label for="star14"></label>
-			  <input type="radio" id="star13" name="rating2" value="3" /><label for="star13"></label>
-			  <input type="radio" id="star12" name="rating2" value="2" /><label for="star12"></label>
-			  <input type="radio" id="star11" name="rating2" value="1" /><label for="star11"></label>
+<div class="modal" id="reviewUpdateModal" tabindex="-1"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
 			</div>
-			
-			<div>
-				<br><i class="fa-regular fa-comment-dots" style="color: #a8c4f5;"></i>&nbsp;리뷰 내용<br><br>
-				<textarea name="content" id="content2" rows="5" cols="60" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
-				
-				<input type="file" name="selectFile" accept="image/*" class="form-control">
-			</div>
-			<div>
-				
-			</div>
-	      </div>
-	      <div class="modal-footer">
-	      	<input type="hidden" name="orderNum" value="">
-	        <input type="hidden" name="restaurantNum" value="">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-	        <button type="button" class="btn btn-primary"  onclick="reviewCheck2();">저장</button>
-	      </div>
-      </form>
-    </div>
-  </div>
+			<form name="reviewUpdateForm" method="post"
+				enctype="multipart/form-data">
+				<div class="modal-body">
+					<i class="fa-solid fa-chart-simple" style="color: #a8c4f5;"></i>&nbsp;리뷰
+					별점 <br>
+					<div class="rating">
+						<input type="radio" id="star15" name="rating2" value="5" /><label
+							for="star15"></label> <input type="radio" id="star14"
+							name="rating2" value="4" /><label for="star14"></label> <input
+							type="radio" id="star13" name="rating2" value="3" /><label
+							for="star13"></label> <input type="radio" id="star12"
+							name="rating2" value="2" /><label for="star12"></label> <input
+							type="radio" id="star11" name="rating2" value="1" /><label
+							for="star11"></label>
+					</div>
+
+					<div>
+						<br> <i class="fa-regular fa-comment-dots"
+							style="color: #a8c4f5;"></i>&nbsp;리뷰 내용<br> <br>
+						<textarea name="content" id="content2" rows="5" cols="60"
+							style="outline: none; resize: none; border: 1px solid #d5d5d5;"></textarea>
+
+						<input type="file" name="selectFile" accept="image/*"
+							class="form-control">
+					</div>
+					<div></div>
+				</div>
+				<div class="modal-footer">
+					<input type="hidden" name="orderNum" value=""> <input
+						type="hidden" name="restaurantNum" value="">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-primary"
+						onclick="reviewCheck2();">저장</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript">
@@ -290,7 +315,6 @@ $(function() {
 	
 		console.log(orderNum);
 		
-		
 		$('#reviewModal').show();
 
 	});
@@ -314,14 +338,11 @@ $(function() {
 		console.log(orderNum);
 		console.log(content);
 		console.log(rating);
-		
 	
 		$('#reviewUpdateModal').show();
 
 	});
 });
-
-
 
 
 function reviewCheck(){
@@ -377,31 +398,25 @@ function reviewCheck2(){
  */
 </script>
 
-<!-- JavaScript 코드 -->
-<script>
+<script type="text/javascript">
   function cancelOrder(orderNum) {
     // AJAX 요청 생성
     if (!confirm("주문을 취소하시겠습니까 ? ")) {
 			return false;
 		}
     var xhr = new XMLHttpRequest();
-    xhr.open('POST','${pageContext.request.contextPath}/mypage/orderUpdate?orderNum='+ orderNum, true); // 주문 취소를 처리하는 URL로 변경해야 합니다.
+    xhr.open('POST','${pageContext.request.contextPath}/mypage/orderUpdate?orderNum='+ orderNum, true); 
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     
-    // 요청 완료 후 처리할 함수
     xhr.onload = function() {
       if (xhr.status === 200) {
-        // 성공적으로 처리된 경우
         console.log(xhr.responseText); 
-        location.reload(); // 페이지 새로고침
+        location.reload();
       } else {
-        // 요청이 실패한 경우
         console.error(xhr.status);
-        // 실패 시 처리할 내용을 작성
       }
     };
     
-    // 요청 전송
     xhr.send();
   }
 </script>
