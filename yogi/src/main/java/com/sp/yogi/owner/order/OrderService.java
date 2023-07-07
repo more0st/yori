@@ -32,5 +32,7 @@ public interface OrderService {
 	public void updateStatus5(Order dto) throws Exception;
 	//insertRefund : 환불
 	public void insertRefund(Order dto) throws Exception;
+	//updatePayment : 결제상태 변경
+	public void updatePayment(long payNum) throws Exception;
 	
 }

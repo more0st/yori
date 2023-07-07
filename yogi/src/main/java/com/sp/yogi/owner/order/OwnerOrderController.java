@@ -144,8 +144,8 @@ public class OwnerOrderController {
 			Order paymentInfo=service.paymentInfo(orderNum);
 			
 			dto.setPayNum(paymentInfo.getPayNum());
-			service.updateStatus5(dto);//상태:취소로 변경
-			//service.insertRefund(dto);//환불처리
+			service.updateStatus5(dto);//주문상태 변경
+			service.updatePayment(dto.getPayNum());//결제상태 변경
 			
 		} catch (Exception e) {
 			e.printStackTrace();

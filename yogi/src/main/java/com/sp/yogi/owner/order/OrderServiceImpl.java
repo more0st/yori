@@ -165,4 +165,13 @@ public class OrderServiceImpl implements OrderService{
 		return dto;
 	}
 
+	@Override
+	public void updatePayment(long payNum) throws Exception {
+		try {
+			dao.updateData("ownerOrder.updatePayment",payNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

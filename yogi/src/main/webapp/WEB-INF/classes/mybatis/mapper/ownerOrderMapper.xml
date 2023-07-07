@@ -105,5 +105,11 @@
 	<insert id="insertRefund" parameterType="com.sp.yogi.owner.order.Order">
 	INSERT INTO refund(payNum, memo) VALUES(#{payNum},#{memo})
 	</insert>
+	
+	<!-- 결제상태 수정 -->
+	<update id="updatePayment" parameterType="long">
+	UPDATE payment SET state=0
+	WHERE payNum=#{payNum}
+	</update>
 
 </mapper>
