@@ -13,14 +13,21 @@
 	background: white;
 	margin: 30px auto;
 }
+
+
+.body-title{
+	font-weight: 600;
+	font-size: 25px;
+	margin-bottom: 15px;
+	color: #012970;
+}
+
 </style>
 
 <div class="whole-container">
 	<div class="container" style="max-width: 800px; padding: 20px 15px 20px 15px;">
 		<div class="body-container">	
-			<div class="body-title">
-				<h3> 1:1 문의 </h3>
-			</div>
+			<div class="body-title"> 1:1 문의</div>
 			
 			<div class="body-main">
 	
