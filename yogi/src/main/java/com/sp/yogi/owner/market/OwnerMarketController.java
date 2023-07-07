@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.yogi.member.SessionInfo;
+import com.sp.yogi.restaurant.RestaurantService;
 
 @Controller("owner.market.ownerMarketController")
 @RequestMapping("/owner/market/*")
@@ -28,6 +29,9 @@ public class OwnerMarketController {
 	
 	@Autowired
 	private ReviewService rService;
+	
+	@Autowired
+	private RestaurantService restaurantService;
 
 	@RequestMapping(value = "marketinfo", method = RequestMethod.GET)
 	public String marketSubmit(HttpSession session, Model model) throws Exception{
@@ -93,12 +97,16 @@ public class OwnerMarketController {
 	
 	//배달팁 등록
 	@RequestMapping(value = "insertTip", method = RequestMethod.POST)
-	public String insertTip(@RequestParam("addr")String ad, @RequestParam("deliveryFee")String df, @RequestParam("restaurantNum")long restaurantNum, Market dto, Model model) throws Exception{
+	public String insertTip(@RequestParam("addr1") String ad, @RequestParam("deliveryFee") String df, @RequestParam("restaurantNum")long restaurantNum, Market dto, Model model) throws Exception{
 		
 		try {
-			dto.setAddr(ad);
+			String address = restaurantService.extractAddress(ad);
+			dto.setAddr(address);
 			dto.setDeliveryFee(df);
 			dto.setRestaurantNum(restaurantNum);
+			
+			System.out.println(address + " : 주소");
+			
 			service.insertTip(dto);
 			
 			model.addAttribute("dto", dto);
