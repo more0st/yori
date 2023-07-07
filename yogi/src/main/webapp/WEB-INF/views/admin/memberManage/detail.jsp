@@ -3,6 +3,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
+<style>
+.button-container {
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	
+  	font-size: 20px;
+  	padding: 10px 20px;
+  	margin: auto 10px;
+}
+
+.btn-sm {
+    --bs-btn-padding-y: 0.5rem;
+    --bs-btn-padding-x: 0.75rem;
+    --bs-btn-font-size: 1rem;
+}
+
+</style>
+
   <main id="main" class="main">
     <div class="pagetitle">
       <h1>회원 목록</h1>
@@ -71,7 +90,7 @@
                       </tr>
                   </table>
                   
-                  <h6 class="card-title"> <span>정지내역</span></h6>
+                  <h5 class="card-title"> 정지내역</h5>
                   <c:choose>
 							<c:when test="${empty list}">
 								 <h6 class="card-title"> <span>정지내역이 없습니다.</span></h6>
@@ -91,7 +110,7 @@
 				                     	<c:choose>
 				                     	
 					                     	<c:when test="${dtoState.stateCode==0}">
-					                     	리뷰 정지
+					                     		리뷰 정지
 					                     	</c:when>
 				                     	
 					                     	<c:otherwise>
@@ -107,18 +126,20 @@
 							</c:otherwise>
 							
 				  </c:choose>
-	                  
-	                  <c:choose>
-							<c:when test="${dto.enabled==1}">
-								<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal${status.index}">회원 정지</button>
-								<input id="suspendId" type="hidden" value="${dto.userId}">
-							</c:when>
-							<c:otherwise>
-								<button type="button" class="btn btn-outline-primary btn-sm" onclick="release('${dto.userId}',${status.index})" >정지 해제</button>
-								<input id="suspendId" type="hidden" value="${dto.userId}">
-							</c:otherwise>
-						</c:choose>
-						
+				  
+	                  <div class="button-container">
+		                  <c:choose>
+								<c:when test="${dto.enabled==1}">
+									<button type="button" class="btn btn-secondary btn-sm" style="text-align: center;" data-bs-toggle="modal" data-bs-target="#modal${status.index}">회원 정지</button>
+									<input id="suspendId" type="hidden" value="${dto.userId}">
+								</c:when>
+								<c:otherwise>
+									<button type="button" class="btn btn-primary btn-sm" onclick="release('${dto.userId}',${status.index})" >정지 해제</button>
+									<input id="suspendId" type="hidden" value="${dto.userId}">
+								</c:otherwise>
+							</c:choose>
+					  </div>
+					  
 							<div class="modal" id="modal${status.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							  <div class="modal-dialog">
 							    <div class="modal-content">
@@ -144,8 +165,8 @@
 							  </div>
 							</div>
 						
-                  <div style="display: flex; justify-content: center; gap : 5px;">
-		              <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/memberManage/list'">목록</button>
+                  <div style="display: flex; justify-content: right; gap : 5px;">
+		              <button type="button" class="btn btn-outline-primary" onclick="location.href='${pageContext.request.contextPath}/admin/memberManage/list'">목록</button>
                   </div>
                 </div>
               </div>
