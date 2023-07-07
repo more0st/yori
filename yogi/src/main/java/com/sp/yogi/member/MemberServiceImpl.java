@@ -314,4 +314,9 @@ public class MemberServiceImpl implements MemberService {
 		dao.insertData("member.insertMemberState",userId);
 	}
 
+	@Override
+	public void updateFailCount(String userId) throws Exception {
+		dao.updateData("member.updateFailCount",userId);
+	}
+
 }

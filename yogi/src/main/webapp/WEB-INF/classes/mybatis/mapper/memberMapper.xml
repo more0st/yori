@@ -26,6 +26,11 @@
 		WHERE userId=#{userId}
 	</update>
 	
+	<update id="updateFailCount" parameterType="String">
+		UPDATE member1 SET failure_cnt = 0
+		WHERE userId=#{userId}
+	</update>	
+	
 	<update id="updateEnabled" parameterType="String">
 		UPDATE member1 SET enabled = 0
 		WHERE userId=#{userId}

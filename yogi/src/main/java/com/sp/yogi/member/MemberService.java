@@ -25,4 +25,5 @@ public interface MemberService {
 	public boolean enableMember(String userId) throws Exception;
 	public void failCount(String userId) throws Exception;
 	public void updateEnabled(String userId) throws Exception;
+	public void updateFailCount(String userId) throws Exception;
 }

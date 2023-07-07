@@ -124,7 +124,6 @@ public class MemberController {
 				return ".member.login";
 			}
 			
-
 			// 세션에 로그인 정보 저장
 			SessionInfo info = new SessionInfo();
 			info.setMemberNum(dto.getMemberNum());
@@ -144,6 +143,9 @@ public class MemberController {
 			} else {
 				uri = "redirect:" + uri;
 			}
+			
+			// 로그인 성공시 failure_cnt 초기화
+			service.updateFailCount(info.getUserId());
 			
 			Long memberNum = info.getMemberNum();
 			
