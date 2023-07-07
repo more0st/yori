@@ -82,6 +82,7 @@
 	
 		select * from memberstate
 		where userid = #{userId}
+		order by reg_date DESC
 	</select>
 	
 

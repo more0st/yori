@@ -137,4 +137,15 @@ public class ResManageServiceImpl implements ResManageService {
 		return orderListCount;
 	}
 
+	@Override
+	public void releaseOwnerEnabled(Map<String, Object> map) throws Exception {
+		try {
+			dao.updateData("resManage.releaseOwnerEnabled", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
 }

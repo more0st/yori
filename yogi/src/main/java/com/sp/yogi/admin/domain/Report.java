@@ -14,7 +14,8 @@ public class Report {
 	private String restaurantName;
 	
 	private int enabled;
-	
+	private String nickName;
+	private double rating;
 	
 	public String getReportNum() {
 		return reportNum;
@@ -83,6 +84,18 @@ public class Report {
 	}
 	public void setEnabled(int enabled) {
 		this.enabled = enabled;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public double getRating() {
+		return rating;
+	}
+	public void setRating(double rating) {
+		this.rating = rating;
 	}
 	
 	

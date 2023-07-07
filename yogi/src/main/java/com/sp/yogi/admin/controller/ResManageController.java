@@ -156,12 +156,38 @@ public class ResManageController {
 
 		} catch (Exception e) {
 			System.out.println(e);
-//			state = "false";
 		}
 
 //		Map<String, Object> model = new HashMap<>();
 //		model.put("state", state);
 	
+	}
+	
+	// 업체 정지 해제
+	@RequestMapping(value = "releaseOwnerEnabled", method = RequestMethod.POST)
+	@ResponseBody
+	public void releaseOwnerEnabled(
+			@RequestParam(defaultValue = "") String restaurantNum,
+			@RequestParam(defaultValue = "") String registerId,
+			@RequestParam(defaultValue = "") String reason,
+			HttpServletRequest req
+			) throws Exception {
+		
+		try {
+			// 업체 활성/비활성 변경
+			Map<String, Object> map = new HashMap<>();
+			
+			map.put("restaurantNum", restaurantNum);
+			map.put("registerId", registerId);
+			map.put("reason", reason);
+			
+			service.updateOwnerState(map);
+			service.releaseOwnerEnabled(map);
+			
+		} catch (Exception e) {
+		}
+		
+		
 	}
 	
 }

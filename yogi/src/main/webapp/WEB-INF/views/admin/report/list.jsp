@@ -69,6 +69,12 @@
 	font-weight: 700;
 }
 
+.review-rating {
+    color: #ffa800;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
 </style>
 
 <main id="main" class="main">
@@ -143,9 +149,9 @@
 									<div class="review"
 										style="background: white; border: 1px solid #d9d9d9; padding: 20px 15px;">
 										<div class="review-top"
-											style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+											style="display: flex; justify-content: space-between;">
 											<div class="review-name" style="display: flex; gap: 5px;">
-												<div class="res-333" style="font-weight: bold"><a href="${pageContext.request.contextPath}/admin/memberManage/detail?userId=${dto.userId}">${dto.userName}</a></div>
+												<div class="res-333" style="font-weight: bold"><a href="${pageContext.request.contextPath}/admin/memberManage/detail?userId=${dto.userId}">${dto.nickName}님</a></div>
 												<div class="review-date">${dto.revReg_date}</div>
 											</div>
 											<div>
@@ -173,6 +179,11 @@
 												</div>
 											</div>
 										</div>
+										
+										<div class="review-rating">
+							            <c:forEach var="i" begin="1" end="${dto.rating}">★</c:forEach>&nbsp;
+							            ${dto.rating}</div>
+										
 										<c:if test="${dto.imgFileName != null}">
 										<img class="review-img"
 											src="${pageContext.request.contextPath}/uploads/review/${dto.imgFileName}"

@@ -111,10 +111,6 @@ public class MemberManageController {
 	
 	
 	
-	
-	
-	
-	
 	@RequestMapping(value = "detail", method=RequestMethod.GET)
 	public String detail(@RequestParam(value = "userId") String userId, Model model) throws Exception{
 		
@@ -123,21 +119,10 @@ public class MemberManageController {
 		// 회원상태 리스트
 		List<Member> list = service.selectMemberState(userId);
 		
-		
 		model.addAttribute("list", list);
-		
-		
-		
-		
 		
 		return ".admin.memberManage.detail";
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	@RequestMapping(value = "updateMemberEnabled", method = RequestMethod.POST)
@@ -149,7 +134,6 @@ public class MemberManageController {
 			HttpServletRequest req
 			) throws Exception {
 
-		
 		try {
 			// 회원 활성/비활성 변경
 			Map<String, Object> map = new HashMap<>();
@@ -157,8 +141,6 @@ public class MemberManageController {
 			map.put("userId", userId);
 			map.put("registerId", registerId);
 			map.put("reason", reason);
-			
-			
 			
 			service.updateMemberState(map);
 			service.updateMemberEnabled(map);
@@ -181,7 +163,6 @@ public class MemberManageController {
 			HttpServletRequest req
 			) throws Exception {
 		
-		
 		try {
 			// 회원 활성/비활성 변경
 			Map<String, Object> map = new HashMap<>();
@@ -193,11 +174,7 @@ public class MemberManageController {
 			
 		} catch (Exception e) {
 			System.out.println(e);
-//			state = "false";
 		}
-		
-//		Map<String, Object> model = new HashMap<>();
-//		model.put("state", state);
 		
 	}
 	

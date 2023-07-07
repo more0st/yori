@@ -54,20 +54,19 @@
 									<div class="d-grid gap-2 d-md-block">
 										<c:choose>
 											<c:when test="${dto.enabled==1}">
-												<button type="button" class="btn btn-outline-secondary btn-sm btnStop" data-restaurantNum="${dto.restaurantNum}">정지</button>
+												<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal${status.index}">정지</button>
 												<input id="suspendId" type="hidden" value="${dto.restaurantNum}">
 											</c:when>
 											<c:otherwise>
-												<button type="button" class="btn btn-outline-primary btn-sm" onclick="release" data-bs-target="${status.index}">해제</button>
+												<button type="button" class="btn btn-outline-primary btn-sm" onclick="release('${dto.restaurantNum}',${status.index})">해제</button>
 												<input id="suspendId" type="hidden" value="${dto.restaurantNum}">
 											</c:otherwise>
 										</c:choose>
-<!-- 										<button type="button" class="btn btn-outline-danger btn-sm">탈퇴</button> -->
 									</div>
 								</td>
 							</tr>
 							
-							<div class="modal" id="myDialogModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal" id="modal${status.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								  <div class="modal-dialog">
 								    <div class="modal-content">
 								      <div class="modal-header">
@@ -77,7 +76,7 @@
 								      <form> 
 									      <div class="modal-body">
 											<div>
-												<textarea id="reason" rows="5" cols="52" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
+												<textarea id="reason${status.index}" rows="5" cols="52" style="outline:none; resize:none; border:1px solid #d5d5d5;"></textarea>
 											</div>
 											<div>
 												
@@ -85,7 +84,7 @@
 									      </div>
 									      <div class="modal-footer">
 									        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-									        <button type="button" class="btn btn-primary btnStopSend">보내기</button>
+									        <button type="button" class="btn btn-primary" onclick="sendSuspension('${dto.restaurantNum}',${status.index})">보내기</button>
 									      </div>
 								      </form>
 								    </div>
@@ -104,23 +103,83 @@
 
 
 <script type="text/javascript">
-$(function(){
-	$(".btnStop").click(function(){
-		let restaurantNum = $(this).attr("data-restaurantNum");
-		
-		$(".btnStopSend").attr("data-restaurantNum", restaurantNum);
-		
-		$("#myDialogModal").modal("show");
+
+function sendSuspension(clickRestaurantNum, sIndex) {
+	// 정지 사유 입력란에서 값을 가져옴
+	var reason = document.getElementById("reason"+sIndex).value;
+	
+	// 회원 상태를 변경하기 위한 AJAX 요청
+	$.ajax({
+		type: "POST", // 혹은 "PUT" 등 HTTP 요청 메소드 선택
+		url: "${pageContext.request.contextPath}/admin/resManage/updateOwnerEnabled", // 실제 서버 요청 주소
+		data: {
+			restaurantNum: clickRestaurantNum,
+			registerId : "admin",
+			reason: reason,
+			
+		},
+		success: function(data) {
+			// 서버 요청이 성공했을 때 실행할 코드
+			alert("업체가 정지되었습니다.");
+			location.href = '${pageContext.request.contextPath}/admin/resManage/main'
+			
+			// 페이지 새로고침 등 필요한 동작 수행
+		},
+		error: function(jqXHR) {
+			// 서버 요청이 실패했을 때 실행할 코드
+			alert("업체 정지 실패");
+			console.log(jqXHR.responseText);
+		}
+	});
+}
+
+
+function release(clickRestaurantNum, sIndex) {
+	if(!confirm("정지를 해제하시겠습니까?")) {
+		return false;
+	}
+	// 회원 상태를 변경하기 위한 AJAX 요청
+	$.ajax({
+		type: "POST", // 혹은 "PUT" 등 HTTP 요청 메소드 선택
+		url: "${pageContext.request.contextPath}/admin/resManage/releaseOwnerEnabled", // 실제 서버 요청 주소
+		data: {
+			restaurantNum: clickRestaurantNum,
+			registerId : "admin"
+			
+		},
+		success: function(data) {
+			// 서버 요청이 성공했을 때 실행할 코드
+			alert("정지가 해제되었습니다.");
+			location.href = '${pageContext.request.contextPath}/admin/resManage/main'
+			
+			// 페이지 새로고침 등 필요한 동작 수행
+		},
+		error: function(jqXHR) {
+			// 서버 요청이 실패했을 때 실행할 코드
+			alert("정지 해제 실패");
+			console.log(jqXHR.responseText);
+		}
 	});
 	
-	$(".btnStopSend").click(function(){
-		let restaurantNum = $(this).attr("data-restaurantNum");
-		let reason = $("#reason").val();
+}
+
+// $(function(){
+// 	$(".btnStop").click(function(){
+// 		let restaurantNum = $(this).attr("data-restaurantNum");
 		
-		alert("업체가 정지되었습니다.");
-	});
+// 		$(".btnStopSend").attr("data-restaurantNum", restaurantNum);
+		
+// 		$("#myDialogModal").modal("show");
+// 	});
 	
-});
+// 	$(".btnStopSend").click(function(){
+// 		let restaurantNum = $(this).attr("data-restaurantNum");
+// 		let reason = $("#reason").val();
+		
+// 		alert("업체가 정지되었습니다.");
+// 	});
+	
+// });
 
 </script>
 

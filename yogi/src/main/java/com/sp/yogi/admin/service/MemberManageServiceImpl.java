@@ -41,15 +41,6 @@ public class MemberManageServiceImpl implements MemberManageService {
 		return list;
 	}
 	
-	
-	
-	
-
-	
-	
-	
-	
-
 	@Override
 	public Member readMember(String userId) {
 		Member dto = null;
@@ -63,7 +54,6 @@ public class MemberManageServiceImpl implements MemberManageService {
 
 		return dto;
 	}
-	
 	
 
 	@Override
@@ -134,11 +124,6 @@ public class MemberManageServiceImpl implements MemberManageService {
 		return list;
 	}
 	
-	
-	
-	
-	
-	
 
 	@Override
 	public Member readMemberState(String userId) {
@@ -174,7 +159,5 @@ public class MemberManageServiceImpl implements MemberManageService {
 		
 	}
 
-
-	
 	
 }
