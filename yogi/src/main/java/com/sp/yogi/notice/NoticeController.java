@@ -30,6 +30,10 @@ public class NoticeController {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		String cp = req.getContextPath();
 		
+		if(info == null) {
+			return "redirect:/member/login";
+		}
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", info.getUserId());
 		

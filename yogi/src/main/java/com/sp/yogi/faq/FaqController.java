@@ -40,6 +40,10 @@ public class FaqController {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		String cp = req.getContextPath();
 
+		if(info == null) {
+			return "redirect:/member/login";
+		}
+		
 		int size = 10;
 		int total_page;
 		int dataCount;
