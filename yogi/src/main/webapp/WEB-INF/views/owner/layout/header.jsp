@@ -189,7 +189,7 @@ header .login-button {
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/owner/logout">
+        <a class="nav-link collapsed" onclick="logout();">
           <i class="bi bi-box-arrow-right"></i>
           <span>Log Out</span>
         </a>
@@ -199,4 +199,16 @@ header .login-button {
     </ul>
 
   </aside><!-- End Sidebar-->
+  
+  <script>
+function logout() {
+	if(${sessionScope.member.openState} == 1) {
+		alert("마감 후 새로고침해주세요.");
+		return;
+	}
+	
+	location.href="${pageContext.request.contextPath}/owner/logout"
+}
+  
+  </script>
   
