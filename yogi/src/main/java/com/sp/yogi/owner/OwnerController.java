@@ -202,6 +202,7 @@ public class OwnerController {
 		info.setRestaurantNum(dto.getRestaurantNum());
 		info.setUserId(dto.getUserId());
 		info.setUserName(dto.getUserName());
+		info.setMembership(51);
 		
 		int status = service.readStatus(userId);
 		

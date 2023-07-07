@@ -49,7 +49,7 @@ header .login-button {
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
-    <c:if test="${not empty sessionScope.member}">
+    <c:if test="${not empty sessionScope.member && sessionScope.member.membership == 51}">
       <ul class="d-flex align-items-center">
 
         
@@ -71,7 +71,7 @@ header .login-button {
 
       </ul>
 	</c:if>
-	<c:if test="${empty sessionScope.member}">
+	<c:if test="${empty sessionScope.member || sessionScope.member.membership == 1}">
 		<div class="login-button">
 			<div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/login'">로그인</div><span>&nbsp;|&nbsp;</span>
 			<div class="login-div" onclick="location.href='${pageContext.request.contextPath}/member/choice'">회원가입</div>
