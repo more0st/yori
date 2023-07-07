@@ -213,7 +213,7 @@
 		INNER JOIN restaurant r ON rl.restaurantNum = r.restaurantNum
 		INNER JOIN restaurantInfo ri ON r.restaurantNum = ri.restaurantNum
 		LEFT JOIN (
-		SELECT restaurantNum, COUNT(*) AS reviewCount, AVG(rating) AS rating
+		SELECT restaurantNum, COUNT(*) AS reviewCount, TRUNC(AVG(rating),1) AS rating
 		FROM review
 		GROUP BY restaurantNum
 		) rv ON r.restaurantNum = rv.restaurantNum
@@ -254,6 +254,6 @@
 		LEFT OUTER JOIN event e ON e.eventNum=c.eventNum
 		WHERE orderNum=#{orderNum}
 	</select>
-
+	
 
 </mapper>

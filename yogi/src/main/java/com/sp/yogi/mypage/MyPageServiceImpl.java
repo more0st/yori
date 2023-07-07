@@ -187,4 +187,5 @@ public class MyPageServiceImpl implements MyPageService {
 			e.printStackTrace();
 		}
 	}
+	
 }

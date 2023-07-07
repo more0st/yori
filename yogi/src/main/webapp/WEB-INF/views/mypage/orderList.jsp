@@ -255,14 +255,11 @@
 					<i class="fa-solid fa-chart-simple" style="color: #a8c4f5;"></i>&nbsp;리뷰
 					별점 <br>
 					<div class="rating">
-						<input type="radio" id="star15" name="rating2" value="5" /><label
-							for="star15"></label> <input type="radio" id="star14"
-							name="rating2" value="4" /><label for="star14"></label> <input
-							type="radio" id="star13" name="rating2" value="3" /><label
-							for="star13"></label> <input type="radio" id="star12"
-							name="rating2" value="2" /><label for="star12"></label> <input
-							type="radio" id="star11" name="rating2" value="1" /><label
-							for="star11"></label>
+						<input type="radio" id="star15" name="rating" value="5" /><label for="star15"></label> 
+						<input type="radio" id="star14"	name="rating" value="4" /><label for="star14"></label> 
+						<input type="radio" id="star13" name="rating" value="3" /><label for="star13"></label> 
+						<input type="radio" id="star12"	name="rating" value="2" /><label for="star12"></label> 
+						<input type="radio" id="star11" name="rating" value="1" /><label for="star11"></label>
 					</div>
 
 					<div>
@@ -292,7 +289,6 @@
 <script type="text/javascript">
 var reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
 var reviewUpdateModal = new bootstrap.Modal(document.getElementById('reviewUpdateModal'));
-var rating = 3;
 
 
 // 리뷰 작성시 별점 확인 후. 리뷰 작성 못하도록.
@@ -333,7 +329,7 @@ $(function() {
 		document.reviewUpdateForm.restaurantNum.value = restaurantNum;
 		document.reviewUpdateForm.content2.value = content;
 		
-		document.reviewUpdateForm.rating2.value = Math.ceil(rating);
+		document.reviewUpdateForm.rating.value = Math.ceil(rating);
 		
 		console.log(orderNum);
 		console.log(content);
