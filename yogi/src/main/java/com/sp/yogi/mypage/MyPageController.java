@@ -196,12 +196,19 @@ public class MyPageController {
 	}
 
 	@RequestMapping(value = "reviewSubmit", method = RequestMethod.POST)
-	public String reviewSubmit(@RequestParam("orderNum") long orderNum,
-			@RequestParam("restaurantNum") long restaurantNum, MyPage dto, HttpSession session, Model model)
+	public String reviewSubmit(@RequestParam("orderNum") long orderNum, @RequestParam String page,
+			@RequestParam("restaurantNum") long restaurantNum, MyPage dto,
+			@RequestParam(defaultValue = "all") String condition, @RequestParam(defaultValue = "") String keyword,
+			HttpSession session, Model model)
 			throws Exception {
 
 		String root = session.getServletContext().getRealPath("/");
 		String pathname = root + "uploads" + File.separator + "review";
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+
 
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		try {
@@ -213,13 +220,15 @@ public class MyPageController {
 			throw e;
 		}
 
-		return "redirect:/mypage/orderList";
+		return "redirect:/mypage/orderList?page=" + page;
 
 	}
 
 	@RequestMapping(value = "reviewUpdate", method = RequestMethod.POST)
 	public String reviewUpdateSubmit(@RequestParam("orderNum") long orderNum,
-			@RequestParam("restaurantNum") long restaurantNum, MyPage dto, HttpSession session, Model model)
+			@RequestParam("restaurantNum") long restaurantNum, @RequestParam String page, 
+			@RequestParam(defaultValue = "all") String condition, @RequestParam(defaultValue = "") String keyword,
+			MyPage dto, HttpSession session, Model model)
 			throws Exception {
 
 		String root = session.getServletContext().getRealPath("/");
@@ -235,7 +244,7 @@ public class MyPageController {
 			throw e;
 		}
 
-		return "redirect:/mypage/orderList";
+		return "redirect:/mypage/orderList?page=" + page;
 
 	}
 

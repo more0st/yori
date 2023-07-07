@@ -40,6 +40,7 @@ public class MyPage {
 	private String reply;
 	private String reply_date;
 	private Long restaurantNum;
+	private Long reportNum;
 	private MultipartFile selectFile; // <input type='file' name='selectFile' ..
 
 	// 찜 목록에 필요한 DTO
@@ -309,5 +310,15 @@ public class MyPage {
 	public void setBasePrice(Long basePrice) {
 		this.basePrice = basePrice;
 	}
+
+	public Long getReportNum() {
+		return reportNum;
+	}
+
+	public void setReportNum(Long reportNum) {
+		this.reportNum = reportNum;
+	}
+	
+	
 
 }

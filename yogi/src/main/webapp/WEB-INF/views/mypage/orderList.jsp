@@ -30,6 +30,14 @@
 	font-size: 5px;
 	background: white;
 }
+.reviewbtn2 {
+	width: 80px;
+	height: 30px;
+	border-radius: 20px;
+	border: 1px solid #333;
+	font-size: 5px;
+	background: white;
+}
 
 .reviewbtn:hover {
 	background: #eee;
@@ -145,23 +153,42 @@
 						<c:when test="${dto.enabled == 0}">
 							<td style="color: red; font-weight: bold;">신고 처리된 리뷰입니다.</td>
 						</c:when>
-						<c:when test="${dto.content == null && dto.statusName == 4 }">
-							<td>
-								<button type="button" class="reviewbtn reviewModal"
-									data-bs-toggle="modal" data-bs-target="#reviewModal"
+						<c:when test="${dto.content != null && dto.statusName == 4 && dto.reportNum != null}">
+							<td><input  type="hidden" name="reviewRating"
+								value="${dto.rating}"> <input type="hidden"
+								name="reviewContent" value="${dto.content}">
+								<button disabled="disabled" type="button" class="reviewbtn2 reviewUpdate"
+									data-bs-toggle="modal" data-bs-target="#reviewUpdateModal"
+									data-page="${page}"
 									data-orderNum="${dto.orderNum}"
-									data-restaurantNum="${dto.restaurantNum}">리뷰쓰기</button>
-							</td>
+									data-restaurantNum="${dto.restaurantNum}">리뷰수정</button></td>
 						</c:when>
+						
+						
 						<c:when test="${dto.content != null && dto.statusName == 4}">
 							<td><input type="hidden" name="reviewRating"
 								value="${dto.rating}"> <input type="hidden"
 								name="reviewContent" value="${dto.content}">
 								<button type="button" class="reviewbtn reviewUpdate"
 									data-bs-toggle="modal" data-bs-target="#reviewUpdateModal"
+									data-page="${page}"
 									data-orderNum="${dto.orderNum}"
 									data-restaurantNum="${dto.restaurantNum}">리뷰수정</button></td>
 						</c:when>
+						
+						
+						<c:when test="${dto.content == null && dto.statusName == 4 }">
+							<td>
+								<button type="button" class="reviewbtn reviewModal"
+									data-bs-toggle="modal" data-bs-target="#reviewModal"
+									data-page="${page}"
+									data-orderNum="${dto.orderNum}"
+									data-restaurantNum="${dto.restaurantNum}">리뷰쓰기</button>
+							</td>
+						</c:when>
+						
+						
+						
 						<c:otherwise>
 							<td></td>
 						</c:otherwise>
@@ -230,10 +257,10 @@
 					<div></div>
 				</div>
 				<div class="modal-footer">
-					<input type="hidden" name="orderNum" value=""> <input
-						type="hidden" name="restaurantNum" value="">
-					<button type="reset" class="btn btn-secondary"
-						data-bs-dismiss="modal">닫기</button>
+					<input type="hidden" name="page" value="">
+					<input type="hidden" name="orderNum" value=""> 
+					<input type="hidden" name="restaurantNum" value="">
+					<button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 					<button type="button" class="btn btn-primary"
 						onclick="reviewCheck();">저장</button>
 				</div>
@@ -277,10 +304,10 @@
 					<div></div>
 				</div>
 				<div class="modal-footer">
-					<input type="hidden" name="orderNum" value=""> <input
-						type="hidden" name="restaurantNum" value="">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">닫기</button>
+					<input type="hidden" name="page" value="">
+					<input type="hidden" name="orderNum" value="">
+					<input type="hidden" name="restaurantNum" value="">
+					<button type="button" class="btn btn-secondary"	data-bs-dismiss="modal">닫기</button>
 					<button type="button" class="btn btn-primary"
 						onclick="reviewCheck2();">저장</button>
 				</div>
@@ -307,12 +334,15 @@ function searchList() {
 $(function() {
 	$("body").on("click", ".reviewModal", function(){
 		
+		let page = $(this).attr("data-page");
 		let orderNum = $(this).attr("data-orderNum");
 		let restaurantNum = $(this).attr("data-restaurantNum");
 		document.reviewForm.orderNum.value = orderNum;
 		document.reviewForm.restaurantNum.value = restaurantNum;
+		document.reviewForm.page.value = page;
 	
 		console.log(orderNum);
+		console.log(page);
 		
 		$('#reviewModal').show();
 
@@ -322,6 +352,7 @@ $(function() {
 $(function() {
 	// 수정 버튼
 	$("body").on("click", ".reviewUpdate", function(){
+		let page = $(this).attr("data-page");
 		let content = $(this).closest('td').find('input[name=reviewContent]').val();
 		let rating = $(this).closest('td').find('input[name=reviewRating]').val();
 		
@@ -331,12 +362,14 @@ $(function() {
 		document.reviewUpdateForm.orderNum.value = orderNum;
 		document.reviewUpdateForm.restaurantNum.value = restaurantNum;
 		document.reviewUpdateForm.content2.value = content;
+		document.reviewUpdateForm.page.value = page;
 		
 		document.reviewUpdateForm.rating.value = Math.ceil(rating);
 		
 		console.log(orderNum);
 		console.log(content);
 		console.log(rating);
+		console.log(page);
 	
 		$('#reviewUpdateModal').show();
 

@@ -48,7 +48,7 @@
 		resultType="com.sp.yogi.mypage.MyPage">
 		SELECT ob.orderNum, r.restaurantName, p.price total_price,
 		os.statusName, ob.userId, ob.order_date, ob.restaurantNum, rv.content, rv.enabled,
-		rv.rating
+		rv.rating, rp.reportNum 
 		FROM order_bundle ob
 		JOIN
 		restaurant r ON
@@ -63,6 +63,9 @@
 		LEFT OUTER JOIN review rv
 		ON ob.orderNum =
 		rv.orderNum
+		LEFT OUTER JOIN
+		review_report rp ON ob.orderNum =
+		rp.orderNum
 		<where>
 			<if test="keyword != null and keyword != ''">
 				<include refid="where-list" />
