@@ -19,8 +19,8 @@
 	padding: 10px;
 	background: #fafafa;
 	color: #333;
-	border-top: 2px solid black;
-	border-bottom: 2px solid black;
+	border-top: 1.5px solid #d9d9d9;
+	border-bottom: 1.5px solid #d9d9d9;
 }
 
 .list-table td {

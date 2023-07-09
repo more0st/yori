@@ -35,8 +35,12 @@
 	display: flex;
 	align-items: center;
 	width: 180px;
-	border-bottom: 3px solid #333;
+	border-bottom: 3px solid #d9d9d9;
 	padding-left: 10px;
+}
+
+.list-title-main{
+	border-bottom: 3px solid #333;
 }
 
 .info-detail {
@@ -284,8 +288,8 @@
 <div class="whole-container">
 	
 	<div class="info-container">
-		<div class="list-title" style="margin-bottom: 20px; width: 220px;">
-			가게정보
+		<div class="list-title list-title-main" style="margin-bottom: 20px; width: 220px;">
+			가게 정보
 		</div>
 		<div class="info-picture">
 			<div class="info-picture-img">
