@@ -34,7 +34,7 @@ public class MainController {
 		int membership = info.getMembership();
 		
 		if(membership != 99) {
-			return ".home.home";
+			return "redirect:/home/home";
 		}
 		
 		List<MainDomain> bestOwner = mainService.bestOwner();
