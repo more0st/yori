@@ -162,7 +162,7 @@
 
 </style>
 <div class="whole-container">
-	
+	<!-- 카테고리 -->
 	<div class="category-box">
 		<div class="category-info ${categoryNum == 0 ? 'category-select' : ''}" onclick="checkAddress(0)">전체보기</div>
 		<div class="category-info ${categoryNum == 1 ? 'category-select' : ''}" onclick="checkAddress(1)">프랜차이즈</div>
@@ -181,9 +181,12 @@
 	<form name="searchForm">
 	<div class="search-box">
 	<div class="search-box2">
+		<!-- 음식점 검색 -->
 		<div class="search-info search-info1">
 			<input type="text" name="keyword" id="searchInput" placeholder="음식점 이름을 검색하세요."> 
 		</div>
+		
+		<!-- 정렬 -->
 		<div class="search-info search-info2">
 			<select name="condition" id="conditionval">
 				<option value="all" 			${condition=="all"?"selected='selected'":"" }>기본 정렬순</option>
@@ -203,6 +206,7 @@
 
 
 <script type="text/javascript">
+<!-- 카테고리별 리스트 보여주기 -->
 function checkAddress(param) {
     var address = "${sessionScope.member.addr1}";
 
@@ -213,7 +217,6 @@ function checkAddress(param) {
       window.location.href = "${pageContext.request.contextPath}/restaurant/list?categoryNum="+param;
     }
 }
-
 
 window.onload = function(){
 	getList();
@@ -230,8 +233,7 @@ $(document).ready(function() {
 });
 
 
-
-//카테고리(프랜차이즈.치킨), 키워드(검색어), 정렬순, 배달주소
+<!-- 카테고리(프랜차이즈.치킨), 키워드(검색어), 정렬순, 배달주소 -->
 function getList() {
 	 let categoryNum = ${categoryNum};
 	 let addr = "${sessionScope.member.addr1}"; // addr은 사용자의 주소로 초기화합니다.

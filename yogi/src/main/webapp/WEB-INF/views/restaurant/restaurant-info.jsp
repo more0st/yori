@@ -516,13 +516,16 @@ body {
          <div class="res-title">
             <div class="res-name">
                <div class="res-name-left">${restaurantInfo.restaurantName}</div>
+               <!-- 가게 찜 -->
                <div class="res-name-right">
-                  <button type="button" class="btn btnSendRecipeLike" title="좋아요" style="border: none; padding-left: 0; height: 30px; display: flex; align-items: center;">
-                              <i class="fa-solid fa-heart" id="likeBtn"></i> 
-                              <span id="recipeLikeCount">${dto.recipeLikeCount}</span>
-                        </button>
-                    </div>
+              	 	<button type="button" class="btn btnSendRecipeLike" title="찜" style="border: none; padding-left: 0; height: 30px; display: flex; align-items: center;">
+                           <i class="fa-solid fa-heart" id="likeBtn"></i> 
+                           <span id="recipeLikeCount">${dto.recipeLikeCount}</span>
+                     </button>
+                </div>
             </div>
+            
+            <!-- 가게사진 / 별점 / 최소주문금액 -->
             <div class="res-main">
                <div>
                   <c:if test="${empty restaurantInfo.imageFilename}">
@@ -542,16 +545,15 @@ body {
          </div>
          
          <div class="res-detail">
+         	<!-- 탭 -->
             <div class="choice-form">
                <div class="choice-detail choice-menu">메뉴 ${restaurantInfo2.menuCount}</div>
                <div class="choice-detail choice-review">클린리뷰 ${restaurantInfo2.reviewCount}</div>
                <div class="choice-detail choice-info">정보</div>
             </div>
             
-            <!-- 메뉴 -->
+            <!-- 탭(1) 메뉴 -->
             <div class="res-show1">
-               
-               
                <div class="accordion" id="accordionExample">
                  <div class="accordion-item">
                   <c:forEach var="category" items="${categoryList}" varStatus="status">
@@ -579,7 +581,7 @@ body {
 	                        </div>
                         </c:if>
                         
-                        <!-- 품절상태 -->
+                        <!-- 품절 상태 -->
                         <c:if test="${menu.stock==0}">
 	                        <div class="accordion-body" style="background:#F8F7F7">
 	                        <input type="hidden" id="menuNum" value="${menu.menuNum}"> 
@@ -596,7 +598,7 @@ body {
 	                        </div>
                         </c:if>
                         
-                           <!-- 모달 -->
+                        <!-- 메뉴 클릭시 모달 -->
                         <div class="modal" id="modal-${menu.menuNum}" tabindex="-1" aria-labelledby="staticBackdropLabel">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
@@ -667,12 +669,10 @@ body {
                    </div>
                  </c:forEach>
                  </div>
-               </div> <!-- 아코디언 끝 -->
-                  
-                  
+               </div> 
             </div>
 
-            <!-- 리뷰 -->
+            <!-- 탭(2) 리뷰 -->
             <div class="res-show2" style="display: none;">
                <div class="review-rank">
                   <div class="res-rank" style="font-size: 40px;">★</div>
@@ -718,7 +718,7 @@ body {
                </c:if>
             </div>
             
-            <!-- 정보 -->
+            <!-- 탭(3) 정보 -->
             <div class="res-show3" style="display: none;">
                <div class="res-information">
                   <div  class="information-category">
@@ -771,6 +771,8 @@ body {
             </div>
          </div>
       </div>
+      
+      <!-- 주문표 -->
       <div class="cart-info">
          <div class="cart-top">
             <div>
@@ -784,12 +786,11 @@ body {
          <!-- 주문 내역 -->
          <div class="cart-order"></div>
          
-         
          <div class="cart-tip">
             배달요금 ${restaurantInfo2.deliveryFee}원 별도
          </div>
          
-         <!-- 장바구니에 메뉴가 담길 시 출력 -->
+         <!-- 합계 금액 -->
          <div class="cart-total">
             합계 : <input type="text" value="0" class="valueinput">원         
          </div>
@@ -849,8 +850,6 @@ body {
    
    choiceMenu.classList.add('active');
    
-   
-   // 모달 
    function openModal(menuNum){
       $('#modal-' + menuNum).modal('show');
    }
@@ -862,7 +861,7 @@ body {
       });
    });
    
-   
+   // ajax
     function ajaxFun(url, method, query, dataType, fn) {
         $.ajax({
             type: method,
@@ -875,8 +874,7 @@ body {
         });
     }
 
-    // 게시물 좋아요----------------------------------------------------------------------------
-
+	<!-- 가게 찜 -->	// ----------------------------------------------------------------------
     let likeStatus = ${likeStatus};
     let likeBtn = document.getElementById('likeBtn');
 
@@ -890,14 +888,14 @@ body {
     function changeLikeStatus() {
        console.log(likeStatus);
         if (likeStatus) {
-            // 좋아요 
+        	<!-- 찜 -->
             // 1. 상태변경
             likeStatus = !likeStatus
             // 2. 색 변경
             $('#likeBtn').css("color", likeColor)
 
         } else {
-            // 좋아요 취소
+            <!-- 찜 취소 -->
             // 1. 상태변경
             likeStatus = !likeStatus
             // 2. 색 변경
@@ -908,7 +906,7 @@ body {
 
     $(function () {
         $(".btnSendRecipeLike").click(function () {
-            let msg = likeStatus ? "가게 찜 하시겠습니까 ?" : "찜을 취소하시겠습니까??";
+            let msg = likeStatus ? "가게 찜 하시겠습니까 ?" : "찜을 취소하시겠습니까?";
 
             if (!confirm(msg)) {
                 return false;
@@ -930,12 +928,12 @@ body {
     });
     
     
-    //--------------------------------------------------------
+    <!-- 메뉴/옵션 배열  --> // --------------------------------------------------------------------
     let menuarr = [];
     let optionarr = [];
     let optionOne = [];
     
-    // 모달 내부 가격 ------------------------------------------
+    <!-- 모달에서 옵션이름/옵션가격 체크시 --> // ----------------------------------------------------------------------
 	function updateTotalOption(menuNum, firstPrice, price, checked, optionName) {
        const totalOptionField = document.querySelector('.totalOption-'+menuNum);
        const currentTotal = parseInt(totalOptionField.value);
@@ -963,7 +961,7 @@ body {
        totalOptionField.value = updatedTotal;
     }
     
-    // [ 모달 창이 닫힐 때 호출되는 함수 ]
+    <!-- 모달 창이 닫힐 때 호출되는 함수 --> // ---------------------------------------------------------------------------
 	function closeModal(price, menuNum) {
 		const totalOptionField = document.querySelector('.totalOption-'+menuNum);
 		totalOptionField.value = price;
@@ -978,8 +976,7 @@ body {
 		});
 	}
     
-    
-    // [ String으로 바꿔주기 ]
+    <!-- 옵션 String으로 바꿔주기 --> //-------------------------------------------------------------------------
     var options;
  
     function makeString() {
@@ -990,10 +987,10 @@ body {
        console.log(options);
    }
 
+    <!-- 주문표에 추가 -->// -----------------------------------------------------------------------------------
     let cartCount = 1;
     var quantity = 1;
     
-    // [주문표에 추가] ---------------------------------------------
     function addToCart(menuNum, menuName) {
        const totalOptionField = document.querySelector('.totalOption-'+menuNum);
        const price = parseInt(totalOptionField.value);
@@ -1011,13 +1008,14 @@ body {
           cartCount: cartCount
        }
        
-		// 이미 있는지 검사하기
+		// 해당 메뉴,옵션이 이미 담겨있는지 검사하기
 		var isAlreadyAdded = menuarr.some(function(menuItem){
 		   return menuItem.menuNum == menuNum && menuItem.options == options;
 		});
        
 		const index = menuarr.findIndex(menuItem => menuItem.menuNum == menuNum && menuItem.options == options);
-         
+        
+		// 이미 담겨있으면 수량+1
 		if(isAlreadyAdded){
 		   if (index !== -1) {
 		      menuItem.quantity = parseInt(menuarr[index].quantity) + 1;
@@ -1028,6 +1026,7 @@ body {
 		
 		menuarr.push(menuItem);
 		
+		// 총 가격 구하기
 		let totalPrice = 0;
 		menuarr.forEach((item) => {
 		     totalPrice += item.quantity * item.price;
@@ -1036,6 +1035,7 @@ body {
 		const total = document.querySelector('.valueinput');
 		total.value = parseInt(totalPrice);
 		
+		// 주문표에 추가
 		let out = "";
 	   
 		out += "<div class='yes-cart'><div class='yes-cart-top'><div style='font-weight: bold;'>"+ menuName +" : "+ options +"</div>";
@@ -1053,7 +1053,7 @@ body {
 		checkCondition();
 	}
     
-    // 최소 주문금액 확인 -------------------------------------------
+    <!-- 최소 주문금액 확인 --> // -----------------------------------------------------------------------
     let orderbtn = document.querySelector(".cart-button");	// 주문하기 버튼
     let condition = false;	// 조건 만족하는지
     
@@ -1081,7 +1081,7 @@ body {
     checkCondition();
    
     
-    // [주문표 부분 삭제]-------------------------------------------------
+    <!-- 주문표 부분 삭제 --> // -------------------------------------------------
     $(document).on("click", ".delete-btn", function() {
       $(this).closest(".yes-cart").remove();
       let cartCount = $(this).closest(".yes-cart").find('.minus').attr("data-count");
@@ -1106,7 +1106,7 @@ body {
       checkCondition();
    });
     
-    // [주문표 전체 삭제]
+   <!-- 주문표 전체 삭제 --> // --------------------------------------------------------
    function deleteAll(){
      let msg = "삭제하시겠습니까?";
      if(!confirm(msg)){
@@ -1128,7 +1128,7 @@ body {
       checkCondition();
     }
     
-    // [-] 버튼 클릭 시
+    <!-- [-] 버튼 클릭 시 --> // --------------------------------------------------------
     $(function() {
 		$("body").on("click", ".minus", function() {
 			let cartCount = $(this).attr("data-count");
@@ -1148,7 +1148,7 @@ body {
 		});
 	});
     
-	// [+] 버튼 클릭 시
+	<!-- [+] 버튼 클릭 시 --> // --------------------------------------------------------
     $(function() {
 		$("body").on("click", ".plus", function() {
 			let cartCount = $(this).attr("data-count");
@@ -1167,7 +1167,7 @@ body {
 		});
 	});
     
-   
+    <!-- 수량 변경 시 가격 업데이트 --> // --------------------------------------------------------
     function updateProductQuantity(menuNum, quantity, cartCount) {
         let menuItem = menuarr.find(menuItem => menuItem.cartCount == cartCount);
       
@@ -1190,8 +1190,7 @@ body {
       
     }
     
-    
-    // [string으로 바꿔주기2]
+    <!-- 메뉴번호, 메뉴옵션, 메뉴수량, 메뉴개별가격 String으로 바꿔주기 --> // --------------------------------------------------------
     var menuNums;
     var menuOptions;
     var menuQuantities;
@@ -1203,7 +1202,7 @@ body {
        }).join(',');
 
        menuOptions = menuarr.map(function(menuItem) {
-          if(menuItem.options == ''){
+          if(menuItem.options == ''){ // 옵션 없을경우
              return '옵션없음'
           }else{
              return menuItem.options
@@ -1224,9 +1223,8 @@ body {
        
    }
     
-    // [주문버튼] 주문시 필요한 정보를 담아 order로
+    <!-- [주문버튼] 주문시 필요한 정보를 담아 order로 전송 --> // ----------------------------------------------------------
     function addToOrder(restaurantNum, deliveryFee){
-       
        let minimum = document.querySelector('.infoinput').value;
 
        let totalPrice = 0;
@@ -1255,14 +1253,13 @@ body {
                 +"&menuPrices="+menuPrices;
     }
     
+    <!-- [주문버튼] 개별 주문 -->	 //----------------------------------------------------------
     menuNums = 0;
     menuOptions = 0;
     menuQuantities = 0;
     menuPrices = 0;
     
-    // [주문버튼] 개별 주문
-    //${menu.menuNum},'${menu.menu}',${restaurantNum},${restaurantInfo2.deliveryFee}
-    function addToOrder2(menuNum, menuName, restaurantNum, deliveryFee){
+    function addToOrder2(menuNum, menuName, restaurantNum, deliveryFee){  //${menu.menuNum},'${menu.menu}',${restaurantNum},${restaurantInfo2.deliveryFee}
         let minimum = document.querySelector('.infoinput').value;
         
         const totalOptionField = document.querySelector('.totalOption-'+menuNum);
@@ -1280,7 +1277,7 @@ body {
            cartCount: cartCount
         }
         
- 		// 이미 있는지 검사하기
+ 		// 해당 메뉴-옵션이 같은 것이 존재하는지 검사
  		var isAlreadyAdded = menuarr.some(function(menuItem){
  		   return menuItem.menuNum == menuNum && menuItem.options == options;
  		});
@@ -1319,7 +1316,7 @@ body {
 			$(".modal").modal("hide");
 		
 			checkCondition();
-           return;
+            return;
         }
         
         makeString2();
@@ -1336,8 +1333,6 @@ body {
                 +'&deliveryFee='+deliveryFee+"&totalPrice=" + totalPrice
                 +"&menuNums="+menuNums+"&menuNames="+menuNames+"&menuOptions="+menuOptions+"&menuQuantities="+menuQuantities
                 +"&menuPrices="+menuPrices;
-       
-        
     }
     
 </script>
