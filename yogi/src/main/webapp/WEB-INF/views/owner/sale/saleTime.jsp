@@ -105,6 +105,10 @@
 	margin-bottom: 20px;
 	font-weight: bold;
 }
+
+.dataCount{
+	margin-bottom: 5px;
+}
 </style>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/paginate-boot.js"></script>
@@ -210,28 +214,6 @@ function searchList() {
 							<td class="right">${dto.order_price}</td>
 						</tr>
 				</c:forEach>
-				
-				
-				<!-- 
-					<tr>
-						<td class="center">2</td>
-						<td>2023061619150101</td>
-						<td>wldbsqkqh</td>
-						<td>기네스 머쉬룸 와퍼</td>
-						<td>서울시 마포구 월드컵북로 21 풍성빌딩 201호</td>
-						<td>010-1111-1111</td>
-						<td class="right">7,000원</td>
-					</tr>
-					<tr>
-						<td class="center">1</td>
-						<td>2023061619120431</td>
-						<td>Tkddyd</td>
-						<td>와퍼 세트</td>
-						<td>서울시 마포구 월드컵북로 21 풍성빌딩 202호</td>
-						<td>010-1111-2222</td>
-						<td class="right">6,000원</td>
-					</tr>
-					 -->
 				</tbody>
 
 			</table>
