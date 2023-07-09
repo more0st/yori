@@ -42,7 +42,9 @@ public class OwnerController {
 		}
 		
 		if(info.getMembership()==1 || info.getMembership()==99) {
-			return ".home.home";
+			session.removeAttribute("member");
+			session.invalidate();
+			return ".owner.login";
 		}
 		
 		int status = service.readStatus(info.getUserId());
