@@ -25,6 +25,10 @@
    text-align: right;
 }
 
+.orderNum th{
+	width: 400px;
+}
+
 </style>
 
 
@@ -39,7 +43,7 @@
       <br>
     
       <table class="table">
-         <tr class="table-secondary border">
+         <tr class="table-secondary border orderNum">
             <th>주문번호 : ${detailList2.orderNum} </th>
             <td class="right">${detailList2.order_date}</td>
          </tr>
