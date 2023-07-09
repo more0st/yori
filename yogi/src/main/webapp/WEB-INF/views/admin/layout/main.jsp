@@ -266,14 +266,14 @@
 
 
 					<div class="card-body">
-						<h5 class="card-title">관리자 주의사항</h5>
+						<h5 class="card-title">관리자 체크리스트✔</h5>
 
 						<div class="activity">
 
 							<div class="activity-item d-flex">
 								<div>1</div>
 								<div class="activity-content">
-									<span class="fw-bold text-dark">진상 응대 피하기</span>
+									<span class="fw-bold text-dark">입점업체 확인하기</span>
 								</div>
 							</div>
 							<!-- End activity item-->
@@ -281,7 +281,7 @@
 							<div class="activity-item d-flex">
 								<div>2</div>
 								<div class="activity-content">
-									<span class="fw-bold text-dark">김선영 피하기</span>
+									<span class="fw-bold text-dark">신고된 회원 확인하기</span>
 								</div>
 							</div>
 							<!-- End activity item-->
@@ -289,7 +289,7 @@
 							<div class="activity-item d-flex">
 								<div>3</div>
 								<div class="activity-content">
-									<span class="fw-bold text-dark">김지윤 피하기</span>
+									<span class="fw-bold text-dark">업체 관리하기</span>
 								</div>
 							</div>
 							<!-- End activity item-->
@@ -297,7 +297,7 @@
 							<div class="activity-item d-flex">
 								<div>4</div>
 								<div class="activity-content">
-									<span class="fw-bold text-dark">민찬이형은 정상이 아니야</span>
+									<span class="fw-bold text-dark">민찬오빠 공지사항 띄어쓰기 야매로 할래요?</span>
 								</div>
 							</div>
 							<!-- End activity item-->
@@ -305,7 +305,7 @@
 							<div class="activity-item d-flex">
 								<div>5</div>
 								<div class="activity-content">
-									<span class="fw-bold text-dark">내가 퍼스트가 되겠어</span>
+									<span class="fw-bold text-dark">승현오빠 1:1문의 끝나면 왜 list로 넘어가죠?</span>
 								</div>
 							</div>
 							<!-- End activity item-->
@@ -313,7 +313,7 @@
 							<div class="activity-item d-flex">
 								<div>6</div>
 								<div class="activity-content">
-									<span class="fw-bold text-dark">민찬어록</span>
+									<span class="fw-bold text-dark">ㅡㅅㅡ</span>
 								</div>
 							</div>
 							<!-- End activity item-->

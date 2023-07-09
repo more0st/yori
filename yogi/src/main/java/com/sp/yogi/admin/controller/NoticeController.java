@@ -67,6 +67,8 @@ public class NoticeController {
 			return "redirect:/admin/notice/list?";
 		}
 		
+		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+		
 		// 이미지 파일
 		List<Notice> listFile = service.listFile(num);
 		
