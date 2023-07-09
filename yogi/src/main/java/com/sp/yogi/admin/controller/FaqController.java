@@ -155,13 +155,14 @@ public class FaqController {
 	@RequestMapping(value = "answer", method = RequestMethod.POST)
 	public String answerSubmit(Faq dto, 
 			@RequestParam String page,
+			@RequestParam String qnum,
 			@RequestParam(defaultValue = "all") String condition,
 			@RequestParam(defaultValue = "") String keyword,
 			HttpSession session) throws Exception {
 
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 
-		String query = "page=" + page;
+		String query = "page=" + page +"&num=" + qnum;
 		if (keyword.length() != 0) {
 			query += "&condition=" + condition + "&keyword=" + URLEncoder.encode(keyword, "UTF-8");
 		}
@@ -173,19 +174,21 @@ public class FaqController {
 		} catch (Exception e) {
 		}
 
-		return "redirect:/admin/faq/list?" + query;
+		return "redirect:/admin/faq/article?" + query;
 	}
 	
 	@RequestMapping(value = "deleteAnswer", method = RequestMethod.POST)
 	public String deleteAnswer(Faq dto, 
 			@RequestParam String page,
+			@RequestParam String qnum,
+
 			@RequestParam(defaultValue = "all") String condition,
 			@RequestParam(defaultValue = "") String keyword,
 			HttpSession session) throws Exception {
 
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 
-		String query = "page=" + page;
+		String query = "page=" + page +"&num=" + qnum;
 		if (keyword.length() != 0) {
 			query += "&condition=" + condition + "&keyword=" + URLEncoder.encode(keyword, "UTF-8");
 		}
@@ -197,7 +200,7 @@ public class FaqController {
 		} catch (Exception e) {
 		}
 
-		return "redirect:/admin/faq/list?" + query;
+		return "redirect:/admin/faq/article?" + query;
 	}
 	
 	
