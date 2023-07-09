@@ -47,6 +47,19 @@
 		ORDER BY total_price DESC
 		FETCH FIRST 5 ROWS ONLY
 	</select>
+	
+	<!-- 이벤트 릿스트 -->
+	<select id="listEvent" resultType="com.sp.yogi.event.Event">
+		SELECT eventNum, subject, enabled, TO_CHAR(end_date, 'YYYY-MM-DD') end_date 
+		FROM event 
+		WHERE enabled = 1 AND end_date >= SYSDATE
+		ORDER BY end_date
+	</select>
+	
+	<!-- 이벤트 종료 -->
+	<update id="endEvent" parameterType="Long">
+		UPDATE event SET enabled = 0 WHERE eventNum = #{eventNum}
+	</update>
 
 </mapper>
 

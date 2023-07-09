@@ -332,22 +332,23 @@
 				<div class="card">
 					<div class="card-body pb-0">
 						<h5 class="card-title">
-							이벤트 <span>| current</span>
+							이벤트 <span>| Event</span>
 						</h5>
 
 						<div style="min-height: 400px;">
 							<table class="table table-borderless">
-
+							
 								<tbody>
-									<tr>
+								<c:forEach var="event" items="${listEvent}">
+									<tr style="white-space: nowrap;">
 										<td style="width: 80px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-										<a href="#" class="text-primary overflow-ellipsis">이벤트이름 길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게</a></td>
-										<td>2023.08.15</td>
+										<div class="overflow-ellipsis" style="font-weight: bold;">${event.subject}</div></td>
+										<td>${event.end_date}</td>
 										<td>
-											<button type="button" class="btn btn-secondary btn-sm">종료</button>
+											<button type="button" class="btn btn-secondary btn-sm eventEndBtn" data-eventNum="${event.eventNum}" style="white-space: nowrap;">종료</button>
 										</td>
 									</tr>
-
+								</c:forEach>
 								</tbody>
 							</table>
 
@@ -388,4 +389,15 @@
 	    element.innerText = text;
 	  });
 	});
+  
+$(function() {
+	$("body").on("click", ".eventEndBtn", function() {
+		let eventNum = $(this).attr("data-eventNum");
+		if(!confirm("이벤트를 종료하시겠습니까 ?")) {
+			return;
+		}
+		
+		location.href="${pageContext.request.contextPath}/endEventAdminOnly?eventNum=" + eventNum;
+	});
+});
   </script>
