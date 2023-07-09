@@ -139,39 +139,37 @@ function sendLogin() {
 </script>
 
 <main id="main" class="main">
-<div class="whole-container">
-	
-	<form action="post" name="loginForm" method="post">
-		<div class="login-form">
-			<div class="login-ment">
-				<img src="${pageContext.request.contextPath}/resources/logoImg/owner.png" style="margin-bottom: 30px;">
+	<div class="whole-container">
+		
+		<form action="post" name="loginForm" method="post">
+			<div class="login-form">
+				<div class="login-ment">
+					<img src="${pageContext.request.contextPath}/resources/logoImg/owner.png" style="margin-bottom: 30px;">
+				</div>
+				<div class="login-box">
+					<table class="login-table">
+						<tr>
+							<td class="login-input left">아이디</td>
+							<td style="width: 60%"><input class="login-table input" type="text" name="userId"></td>
+							<td rowspan="2" class="center"><button class="login-button2" type="button" onclick="sendLogin();">로그인</button></td>
+						</tr>
+						<tr>
+							<td class="login-input left">비밀번호</td>
+							<td style="width: 60%"><input class="login-table input" type="password" name="userPwd"></td>
+						</tr>
+						
+						
+						<tr>
+							<td colspan="3" class="center"><a class="login-table rink" href="${pageContext.request.contextPath}/owner/member">회원가입</a>&nbsp;<span class="rink">|</span>&nbsp;
+							<a class="login-table rink" href="${pageContext.request.contextPath}/owner/findId">아이디</a> <span style="color: #fa0050;">/</span>
+							<a class="login-table rink" href="${pageContext.request.contextPath}/owner/findPwd"> 비밀번호 찾기</a></td>
+						</tr>
+					</table>
+					
+						
+				</div>
+				<div class="msgdiv">${message}</div>
 			</div>
-			<div class="login-box">
-				<table class="login-table">
-					<tr>
-						<td class="login-input left">아이디</td>
-						<td style="width: 60%"><input class="login-table input" type="text" name="userId"></td>
-						<td rowspan="2" class="center"><button class="login-button2" type="button" onclick="sendLogin();">로그인</button></td>
-					</tr>
-					<tr>
-						<td class="login-input left">비밀번호</td>
-						<td style="width: 60%"><input class="login-table input" type="password" name="userPwd"></td>
-					</tr>
-					
-					
-					<tr>
-						<td colspan="3" class="center"><a class="login-table rink" href="${pageContext.request.contextPath}/owner/member">회원가입</a>&nbsp;<span class="rink">|</span>&nbsp;
-						<a class="login-table rink" href="${pageContext.request.contextPath}/owner/findId">아이디</a> <span style="color: #fa0050;">/</span>
-						<a class="login-table rink" href="${pageContext.request.contextPath}/owner/findPwd"> 비밀번호 찾기</a></td>
-					</tr>
-				</table>
-				
-					
-			</div>
-			<div class="msgdiv">${message}</div>
-		</div>
-	</form>
-
-
-</div>
+		</form>
+	</div>
 </main>

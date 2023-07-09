@@ -106,24 +106,25 @@ function sendOk() {
 	f.submit();
 }
 </script>
-
-<div class="whole-container">
-	<form action="" method="post" name="idForm">
-		<div class="login-form">
-			<div class="login-ment">
-				<img src="${pageContext.request.contextPath}/resources/picture/logo.png">아이디찾기
+<main id="main" class="main">
+	<div class="whole-container">
+		<form action="" method="post" name="idForm">
+			<div class="login-form">
+				<div class="login-ment">
+					<img src="${pageContext.request.contextPath}/resources/picture/logo.png">아이디찾기
+				</div>
+				<div class="login-input">
+					<input class="login-input name" type="text" name="userName" placeholder="이름 입력(필수)">
+					<input class="login-input email" type="text" name="email" placeholder="이메일 주소 입력(필수)"><br>
+				</div>
+				<button class="login-btn" type="button" onclick="sendOk();">확인</button>
+				
+				<div class="d-grid">
+						<p class="form-control-plaintext text-center py-3">${message}</p>
+	            </div>
+				
 			</div>
-			<div class="login-input">
-				<input class="login-input name" type="text" name="userName" placeholder="이름 입력(필수)">
-				<input class="login-input email" type="text" name="email" placeholder="이메일 주소 입력(필수)"><br>
-			</div>
-			<button class="login-btn" type="button" onclick="sendOk();">확인</button>
-			
-			<div class="d-grid">
-					<p class="form-control-plaintext text-center py-3">${message}</p>
-            </div>
-			
-		</div>
-	</form>
-
-</div>
+		</form>
+	
+	</div>
+</main>

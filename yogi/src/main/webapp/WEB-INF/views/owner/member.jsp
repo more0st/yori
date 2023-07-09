@@ -36,7 +36,7 @@
 .body-main {
 	width: 900px;
 	border: 1px solid #eee;
-	margin: 130px auto;
+	margin: 50px auto;
 	border-radius: 4px;
 	padding: 25px;
 	background: white;
@@ -45,9 +45,8 @@
 </style>
 
 <main id="main" class="main">
-<div class="whole-container">
-	<div class="body-main">
-
+	<div class="whole-container">
+		<div class="body-main">
 			<form name="memberForm" method="post">
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label" for="userId">아이디</label>
@@ -159,7 +158,7 @@
 			    </div>
 			</form>
 		</div>
-</div>
+	</div>
 </main>
 
 <script type="text/javascript">

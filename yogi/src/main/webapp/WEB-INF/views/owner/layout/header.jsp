@@ -74,7 +74,7 @@ header .login-button {
 	<c:if test="${empty sessionScope.member || sessionScope.member.membership == 1}">
 		<div class="login-button">
 			<div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/login'">로그인</div><span>&nbsp;|&nbsp;</span>
-			<div class="login-div" onclick="location.href='${pageContext.request.contextPath}/member/choice'">회원가입</div>
+			<div class="login-div" onclick="location.href='${pageContext.request.contextPath}/owner/member'">회원가입</div>
 		</div>
 	</c:if>
     </nav><!-- End Icons Navigation -->

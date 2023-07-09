@@ -81,18 +81,19 @@
 }
 
 </style>
-
-<div class="whole-container">
-	<form action="" method="post" name="loginForm">
-		<div class="login-form">
-			<div class="login-ment">
-				<img src="${pageContext.request.contextPath}/resources/picture/logo.png">
+<main id="main" class="main">
+	<div class="whole-container">
+		<form action="" method="post" name="loginForm">
+			<div class="login-form">
+				<div class="login-ment">
+					<img src="${pageContext.request.contextPath}/resources/picture/logo.png">
+				</div>
+				<div class="complete">
+					<span>아이디가 메일로 발송되었습니다.</span>
+				
+				</div>
+				<button class="login-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/home/home'">확인</button>
 			</div>
-			<div class="complete">
-				<span>아이디가 메일로 발송되었습니다.</span>
-			
-			</div>
-			<button class="login-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/home/home'">확인</button>
-		</div>
-	</form>
-</div>
+		</form>
+	</div>
+</main>	

@@ -55,27 +55,27 @@
   
 </style>
 <main id="main" class="main">
-<div class="whole-container">
-	<div class="home-container shadow">
-		<div class="list-title" style="margin-bottom: 20px; width: 220px;">
-			HOME
-		</div>
-		<div class="flexdiv">
-			<div class="saleCnt">
-				<div>오늘의 주문건수</div>
-				<div><span class="saleCount">5</span>&nbsp;회</div>
+	<div class="whole-container">
+		<div class="home-container shadow">
+			<div class="list-title" style="margin-bottom: 20px; width: 220px;">
+				HOME
 			</div>
-			<div class="saleCnt">
-				<div>오늘의 매출</div>
-				<div><span class="saleCount">50,000</span>&nbsp;원</div>
-			</div>
-			<div class="saleCnt">
-				<div>
-					리뷰 평점
+			<div class="flexdiv">
+				<div class="saleCnt">
+					<div>오늘의 주문건수</div>
+					<div><span class="saleCount">5</span>&nbsp;회</div>
 				</div>
-				<div class="saleCount">5.0</div>
+				<div class="saleCnt">
+					<div>오늘의 매출</div>
+					<div><span class="saleCount">50,000</span>&nbsp;원</div>
+				</div>
+				<div class="saleCnt">
+					<div>
+						리뷰 평점
+					</div>
+					<div class="saleCount">5.0</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </main>
