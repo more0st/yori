@@ -85,10 +85,17 @@
 
 		let sd = new Date(f.start_day.value + " " + f.start_time.value);
 		let ed = new Date(f.end_day.value + " " + f.end_time.value);
+		let cd = new Date(f.expired_date.value);
 
 		if (sd.getTime() >= ed.getTime()) {
 			alert("시작날짜는 종료날짜보다 크거나 같을 수 없습니다.");
 			f.start_day.focus();
+			return;
+		}
+		
+		if(ed.getTime() > cd.getTime()){
+			alert("쿠폰 유효기간은 이벤트 종료기간보다 늦어야합니다.")
+			f.expired_date.focus();
 			return;
 		}
 
