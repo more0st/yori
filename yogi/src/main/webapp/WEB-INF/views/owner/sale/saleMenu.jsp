@@ -137,7 +137,7 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/paginate-boot.js"></script>
 
-<c:url var="listUrl" value="/owner/sale/saleTime">
+<c:url var="listUrl" value="/owner/sale/saleMenu">
 	<c:if test="${not empty date1 || not empty date1}">
 		<c:param name="date1" value="${date1}"/>
 		<c:param name="date2" value="${date2}"/>
@@ -202,6 +202,11 @@ function searchList() {
 			</form>
 		</div>
 		
+		<div class="row board-list-header">
+	            <div class="col-auto me-auto dataCount">
+	            </div>
+	            <div class="col-auto">&nbsp;</div>
+	    </div>	
 			
 		<table class="list-table">
 			<thead>
@@ -218,7 +223,9 @@ function searchList() {
 						<tr>
 							<td class="center">${dataCount - (page-1) * size - status.index}</td>
 							<td class="center">${dto.menu}</td>
-							<td class="center">${dto.menuPrice}</td>
+							<td class="center">
+								<fmt:formatNumber value="${dto.menuPrice}" type="currency"/>
+							</td>
 							<td class="center">${dto.orderCount}</td>
 						</tr>
 					</c:forEach>
@@ -229,24 +236,6 @@ function searchList() {
 		
 		<div class="page-navigation"></div>
 		
-		
-		<div class="list-table-bottom">
-			<div class="search-box">
-				<div class="search-input">
-					<input type="text" class="menuSearch shadow-sm">
-				</div>
-				<button type="button" class="search-button shadow-sm"><i class="bi bi-search"></i></button>
-			</div>
-			
-			<!-- 
-			<div class="list-table-bottom-left shadow-sm">
-				총계
-			</div>
-			<div class="list-table-bottom-right shadow-sm">
-				32,000원
-			</div>
-			 -->
-		</div>
 	</div>
 
 </div>

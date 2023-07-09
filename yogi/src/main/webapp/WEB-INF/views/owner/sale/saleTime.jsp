@@ -211,7 +211,9 @@ function searchList() {
 							</td>
 							<td>${dto.addr1}</td>
 							<td>${dto.tel}</td>
-							<td class="right">${dto.order_price}</td>
+							<td class="right">
+								<fmt:formatNumber value="${dto.order_price}" type="currency"/>
+							</td>
 						</tr>
 				</c:forEach>
 				</tbody>
@@ -222,7 +224,9 @@ function searchList() {
 
 			<div class="list-table-bottom">
 				<div class="list-table-bottom-left shadow-sm">총계</div>
-				<div class="list-table-bottom-right shadow-sm">${total_price}</div>
+				<div class="list-table-bottom-right shadow-sm">
+				  <fmt:formatNumber value="${total_price}" type="currency"/>
+				</div>
 			</div>
 
 		</div>
