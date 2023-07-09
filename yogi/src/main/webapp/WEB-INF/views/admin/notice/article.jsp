@@ -66,7 +66,7 @@
 <main id="main" class="main">
 	<div class="whole-container">
 		<div class="notice-wrap">
-			<div style="padding-top: 20px; padding-bottom: 10px; margin: 0 auto;">
+			<div style="padding-top: 20px; padding-bottom: 10px; margin: 0 auto; margin-bottom: 20px;">
 				
 				<a class="btn btn-outline-secondary btn-list" href="${pageContext.request.contextPath}/admin/notice/list"><i class="bi bi-caret-left-fill"></i> 목록으로</a>
 				<div class="notice-list">
