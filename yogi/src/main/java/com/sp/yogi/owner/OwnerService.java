@@ -1,6 +1,9 @@
 package com.sp.yogi.owner;
 
+import java.util.List;
 import java.util.Map;
+
+import com.sp.yogi.admin.domain.MainDomain;
 
 public interface OwnerService {
 	public Owner loginOwner(String userId);
@@ -38,6 +41,8 @@ public interface OwnerService {
 	public void failCount(String userId) throws Exception;
 	
 	public void loginComplete(String userId) throws Exception;
+	
+	public List<MainDomain> recentSale(Long restaurantNum);
 
 
 }

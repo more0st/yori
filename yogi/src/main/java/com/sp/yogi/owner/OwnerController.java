@@ -2,6 +2,7 @@ package com.sp.yogi.owner;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sp.yogi.admin.domain.MainDomain;
 import com.sp.yogi.member.SessionInfo;
 import com.sp.yogi.owner.market.Market;
 import com.sp.yogi.owner.market.MarketService;
@@ -99,6 +101,9 @@ public class OwnerController {
 			reviewAvg = "0";
 		}
 		
+		List<MainDomain> list = service.recentSale(info.getRestaurantNum());
+		
+		model.addAttribute("recentlist", list);
 		model.addAttribute("openState", info.getOpenState());
 		model.addAttribute("restaurantNum", info.getRestaurantNum());
 		model.addAttribute("todayOrder",todayOrder);

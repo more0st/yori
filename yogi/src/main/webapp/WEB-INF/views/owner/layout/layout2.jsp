@@ -17,7 +17,7 @@
   <title><tiles:insertAttribute name="title"/></title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
   <!-- Favicons -->
   <link href="${pageContext.request.contextPath}/resources/template/img/hamburger.png" rel="icon" type="image/x-icon">
   <link href="${pageContext.request.contextPath}/resources/template/img/hamburger.png" rel="hamburger">

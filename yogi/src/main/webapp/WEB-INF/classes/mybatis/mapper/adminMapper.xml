@@ -27,11 +27,13 @@
 	<!-- 최근 5번 주문 -->
 	<select id="recentSales"
 		resultType="com.sp.yogi.admin.domain.MainDomain">
-		SELECT orderNum, restaurantName, o.userId, nickname, total_price, order_date
+		SELECT o.orderNum, restaurantName, o.userId, nickname, total_price, order_date
 		FROM order_bundle o
+		JOIN payment p ON o.orderNum = p.orderNum
 		JOIN member1 m ON m.userId = o.userId
 		JOIN restaurantId ri ON o.restaurantNum = ri.restaurantNum
 		JOIN restaurant r ON r.restaurantNum = ri.restaurantNum
+		WHERE state = 1
 		ORDER BY order_date DESC
 		FETCH FIRST 5 ROWS ONLY
 	</select>
@@ -40,8 +42,9 @@
 	<select id="bestOwner"
 		resultType="com.sp.yogi.admin.domain.MainDomain">
 		SELECT r.restaurantName, ri.userId, r.reg_date,
-		(SELECT NVL(SUM(total_price), 0) FROM order_bundle WHERE restaurantNum =
-		r.restaurantNum AND order_date >= SYSDATE - 30) AS total_price
+		(SELECT NVL(SUM(total_price), 0) FROM order_bundle o
+		JOIN payment p ON p.orderNum = o.orderNum 
+		WHERE restaurantNum = r.restaurantNum AND state = 1 AND order_date >= SYSDATE - 30) AS total_price
 		FROM restaurantId ri
 		JOIN restaurant r ON ri.restaurantNum = r.restaurantNum
 		ORDER BY total_price DESC

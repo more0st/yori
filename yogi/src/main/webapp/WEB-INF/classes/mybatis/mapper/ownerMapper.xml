@@ -137,5 +137,17 @@
     <update id="resetFail" parameterType="String">
     	update restaurantId set failure_cnt = 0 where userId = #{userId}
     </update>
+    
+    <select id="recentSale" parameterType="Long" resultType="com.sp.yogi.admin.domain.MainDomain">
+    	SELECT o.orderNum, restaurantName, o.userId, nickname, total_price, order_date
+		FROM order_bundle o
+		JOIN member1 m ON m.userId = o.userId
+		JOIN payment p ON o.orderNum = p.orderNum
+		JOIN restaurantId ri ON o.restaurantNum = ri.restaurantNum
+		JOIN restaurant r ON r.restaurantNum = ri.restaurantNum
+		WHERE state = 1 AND o.restaurantNum = #{restaurantNum}
+		ORDER BY order_date DESC
+		FETCH FIRST 10 ROWS ONLY
+    </select>
 
 </mapper>

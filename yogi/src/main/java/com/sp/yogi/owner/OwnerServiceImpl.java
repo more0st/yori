@@ -1,11 +1,13 @@
 package com.sp.yogi.owner;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sp.yogi.admin.domain.MainDomain;
 import com.sp.yogi.common.dao.CommonDAO;
 import com.sp.yogi.mail.Mail;
 import com.sp.yogi.mail.MailSender;
@@ -417,6 +419,19 @@ public class OwnerServiceImpl implements OwnerService {
 			throw e;
 		}
 		
+	}
+
+	@Override
+	public List<MainDomain> recentSale(Long restaurantNum) {
+		List<MainDomain> list = null;
+		
+		try {
+			list = dao.selectList("owner.recentSale", restaurantNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 }
