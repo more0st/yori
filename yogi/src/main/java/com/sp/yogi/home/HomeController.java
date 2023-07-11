@@ -28,6 +28,12 @@ public class HomeController {
 			return ".mainLayout";
 		}
 		
+		if(info.getMembership()!=1 && info.getMembership()!=99) {
+			session.removeAttribute("member");
+			session.invalidate();
+			return ".mainLayout";
+		}
+		
 		Long memberNum = info.getMemberNum();
 		
 		List<Home> addr = service.listAddr(memberNum);
