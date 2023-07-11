@@ -25,8 +25,8 @@
     </insert>
 
    <!-- 가게이미지 삭제 -->
-    <delete id="deleteResImg" parameterType="Long">
-    DELETE FROM restaurantImg WHERE fileNum=#{fileNum}
+    <delete id="deleteResImg" parameterType="com.sp.yogi.owner.market.Market">
+    DELETE FROM restaurantImg WHERE restaurantNum=#{restaurantNum}
     </delete>
     
    <!-- 가게 이미지 가져오기 -->

@@ -26,6 +26,8 @@ public class MarketServiceImpl implements MarketService{
 			
 			if (saveFilename != null) {
 				dto.setImageFilename(saveFilename);
+				
+				dao.deleteData("marketinfo.deleteResImg", dto);
 			
 				dao.insertData("marketinfo.insertResImg", dto);
 			}

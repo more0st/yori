@@ -79,6 +79,8 @@ public class OwnerMarketController {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		Map<String, Object> model=new HashMap<>();
 		
+		dto.setRestaurantNum(restaurantNum);
+		
 		try {
 			
 			dto.setUserId(info.getUserId());
