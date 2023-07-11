@@ -631,8 +631,8 @@ body {
                                         </div>
                                         <c:forEach var="optionDetail" items="${option.nameList}" varStatus="status">
                                            <div class="modal-option">
-                                              <div style="display: flex; width: 250px; gap: 10px; align-items: center;">
-                                                 <input class="modal-radio" type="checkbox" name="check${optionDetail.optionNum}" onchange="updateTotalOption(${menu.menuNum}, ${menu.price}, ${optionDetail.price}, this.checked, '${optionDetail.optionName}')"><div style="width: 250px;">${optionDetail.optionName}</div>
+                                              <div style="display: flex; width: 150px; gap: 10px; align-items: center;">
+                                                 <input class="modal-radio" type="checkbox" name="check${optionDetail.optionNum}" onchange="updateTotalOption(${menu.menuNum}, ${menu.price}, ${optionDetail.price}, this.checked, '${optionDetail.optionName}')"><div>${optionDetail.optionName}</div>
                                               </div>
                                               <div>
                                                  ${optionDetail.price} 원
@@ -1019,7 +1019,6 @@ body {
 		if(isAlreadyAdded){
 		   if (index !== -1) {
 		      menuItem.quantity = parseInt(menuarr[index].quantity) + 1;
-		      menuItem.price = price*menuItem.quantity;
 		      menuarr.splice(index, 1);
 		      $('.cart-order .yes-cart').eq(index).remove();
 		   }
@@ -1041,7 +1040,7 @@ body {
 	   
 		out += "<div class='yes-cart'><div class='yes-cart-top'><div style='font-weight: bold;'>"+ menuName +" : "+ options +"</div>";
 		out +=   "<button type='button' class='delete-btn'><i class='fa-regular fa-circle-xmark'></i></button></div>"
-		out +=   "<div class='yes-cart-bottom'><div><input class='cart-price cartPrice-"+ cartCount +"' value='"+ menuItem.price +"' readonly='readonly'></div>"
+		out +=   "<div class='yes-cart-bottom'><div><input class='cart-price cartPrice-"+ cartCount +"' value='"+ menuItem.price * menuItem.quantity +"' readonly='readonly'></div>"
 		out +=   "<div style='display:flex;'><button type='button' class='quantity-btn minus' data-count='"+ cartCount +"' data-product-id='" + menuNum + "'><i class='fa-solid fa-minus'></i></button>"
 		out +=   "<input name='cart-quantity' class='cart-quantity' value='"+ menuItem.quantity +"' readonly='readonly'>"
 		out +=   "<button type='button' class='quantity-btn plus' data-count='"+ cartCount +"' data-product-id='" + menuNum + "'><i class='fa-solid fa-plus'></i></button>"
