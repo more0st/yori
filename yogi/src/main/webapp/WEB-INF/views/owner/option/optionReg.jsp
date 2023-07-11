@@ -67,12 +67,6 @@
 	<div onclick="location.href='${pageContext.request.contextPath}/owner/option/menuList'" class="iconsize"><i class="bi bi-arrow-left-circle iconPointer"></i></div>
 	<div class="pagetitle">
 		<h1>옵션 메뉴 </h1>
-		<nav>
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item">치킨</li>
-				<li class="breadcrumb-item active">양념치킨</li>
-			</ol>
-		</nav>
 	</div>
 
 	<!-- list 조회 -->
