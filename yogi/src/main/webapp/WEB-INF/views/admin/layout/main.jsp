@@ -297,7 +297,7 @@
 							<div class="activity-item d-flex">
 								<div>4</div>
 								<div class="activity-content">
-									<span class="fw-bold text-dark">민찬오빠 공지사항 띄어쓰기 야매로 할래요?</span>
+									<span class="fw-bold text-dark">정지된 업체 관리하기</span>
 								</div>
 							</div>
 							<!-- End activity item-->
@@ -305,7 +305,7 @@
 							<div class="activity-item d-flex">
 								<div>5</div>
 								<div class="activity-content">
-									<span class="fw-bold text-dark">승현오빠 1:1문의 끝나면 왜 list로 넘어가죠?</span>
+									<span class="fw-bold text-dark">1:1문의 확인하기</span>
 								</div>
 							</div>
 							<!-- End activity item-->
@@ -313,7 +313,7 @@
 							<div class="activity-item d-flex">
 								<div>6</div>
 								<div class="activity-content">
-									<span class="fw-bold text-dark">ㅡㅅㅡ</span>
+									<span class="fw-bold text-dark">이벤트 관리하기</span>
 								</div>
 							</div>
 							<!-- End activity item-->
