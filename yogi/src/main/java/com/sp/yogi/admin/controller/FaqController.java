@@ -127,11 +127,17 @@ public class FaqController {
 		}
 		
 		// 바꿔야함
-		if (!info.getUserId().equals("admin")) {
-			return "redirect:/";		
+		if (info.getMembership() != 99) {
+			return "redirect:/yogi/home/home";		
 		}
 		
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+		
+		if(dto.getAnswer() != null) {
+			dto.setAnswer(dto.getAnswer().replaceAll("\n", "<br>"));
+		}
+		
+
 		
 		List<Faq> listFile = service.listFile(num);
 		

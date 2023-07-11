@@ -118,12 +118,14 @@
 								<td width="50%">
 									<button type="button" class="btn btn-light bordergray"
 										onclick="deleteFaq('${dto.qnum}');">질문삭제</button>
+										<c:if test="${! empty dto.answer}">
 									<button type="button" class="btn btn-light bordergray"
 										onclick="deleteAnswer();">답변삭제</button> <input type="hidden"
 									name="qnum" value="${dto.qnum}"> <input type="hidden"
 									name="page" value="${page}"> <input type="hidden"
 									name="condition" value="${condition}"> <input
 									type="hidden" name="keyword" value="${keyword}">
+										</c:if>
 								</td>
 								<td class="text-end">
 									<button type="button" class="btn btn-light bordergray"
