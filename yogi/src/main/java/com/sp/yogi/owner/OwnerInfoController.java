@@ -53,6 +53,7 @@ public class OwnerInfoController {
 			
 			model.addAttribute("dto", dto);
 			model.addAttribute("mode", "update");
+			return ".owner.info.register";
 		}
 		
 		model.addAttribute("mode", "member");
