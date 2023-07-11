@@ -42,7 +42,7 @@
 						
 						<c:forEach var="dto" items="${list}" varStatus="status">
 							<tr>
-								<th scope="row" style="text-align: center;">${dto.restaurantNum}</th>
+								<th scope="row" style="text-align: center;">${status.count}</th>
 								<td>${dto.restaurantName}</td>
 								<td>${dto.userName}</td>
 								<td>${dto.restaurantTel}</td>

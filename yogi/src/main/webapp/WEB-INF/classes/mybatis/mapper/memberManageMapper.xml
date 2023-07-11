@@ -32,24 +32,14 @@
     
 	<select id="listMember" parameterType="map" resultType="com.sp.yogi.admin.domain.Member">
 		SELECT m1.memberNum, membership, m1.userId, userName, nickName,
-			m1.reg_date, m1.modify_date, last_login,
-			enabled, email, tel,
-			TO_CHAR(birth, 'YYYY-MM-DD') birth
+		    m1.reg_date, m1.modify_date, last_login,
+		    enabled, email, tel,
+		    TO_CHAR(birth, 'YYYY-MM-DD') birth
 		FROM member m
 		JOIN member1 m1 ON m.memberNum = m1.memberNum
 		LEFT OUTER JOIN member2 m2 ON m1.userId = m2.userId
-        
-		<where>
-			<if test="keyword!=null and keyword!='' ">
-				<include refid="where-list"/>
-			</if>
-			<if test="enabled!=''">
-				AND enabled = #{enabled}
-			</if>
-			AND m.membership &lt; 50
-		</where> 
-		ORDER BY reg_date DESC
-		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+		WHERE membership = 1
+		ORDER BY reg_date
 	</select>
 
 	<select id="readMember" parameterType="String" resultType="com.sp.yogi.admin.domain.Member">
