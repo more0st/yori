@@ -202,10 +202,10 @@ header .login-button {
   
   <script>
 function logout() {
-	if(${sessionScope.member.openState} == 1) {
-		alert("마감 후 새로고침해주세요.");
-		return;
-	}
+// 	if(${sessionScope.member.openState} == 1) {
+// 		alert("마감 후 새로고침해주세요.");
+// 		return;
+// 	}
 	
 	location.href="${pageContext.request.contextPath}/owner/logout"
 }
