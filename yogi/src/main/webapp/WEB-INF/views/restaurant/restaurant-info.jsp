@@ -631,8 +631,8 @@ body {
                                         </div>
                                         <c:forEach var="optionDetail" items="${option.nameList}" varStatus="status">
                                            <div class="modal-option">
-                                              <div style="display: flex; width: 150px; gap: 10px; align-items: center;">
-                                                 <input class="modal-radio" type="checkbox" name="check${optionDetail.optionNum}" onchange="updateTotalOption(${menu.menuNum}, ${menu.price}, ${optionDetail.price}, this.checked, '${optionDetail.optionName}')"><div>${optionDetail.optionName}</div>
+                                              <div style="display: flex; width: 250px; gap: 10px; align-items: center;">
+                                                 <input class="modal-radio" type="checkbox" name="check${optionDetail.optionNum}" onchange="updateTotalOption(${menu.menuNum}, ${menu.price}, ${optionDetail.price}, this.checked, '${optionDetail.optionName}')"><div style="width: 250px;">${optionDetail.optionName}</div>
                                               </div>
                                               <div>
                                                  ${optionDetail.price} 원
