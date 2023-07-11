@@ -440,6 +440,22 @@ public class OwnerController {
 		return model;
 	}
 	
+	// 이메일 체크
+	@RequestMapping(value = "emailCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> emailCheck(@RequestParam String email) throws Exception {
+
+		String p = "true";
+		Owner dto = service.readOwnerEmail(email);
+		if (dto != null) {
+			p = "false";
+		}
+
+		Map<String, Object> model = new HashMap<>();
+		model.put("passed", p);
+		return model;
+	}
+	
 	// 아이디 찾기
 		@RequestMapping(value="findId", method=RequestMethod.GET)
 		public String idFindForm(HttpSession session) throws Exception {
@@ -459,6 +475,8 @@ public class OwnerController {
 			
 					
 			Owner dto = service.readOwnerEmail(email);
+			
+			System.out.println("디티오" + dto.getEmail() + " : " + dto.getEnabled());
 			
 			if(dto == null || dto.getEmail() == null || dto.getEnabled() == 0) {
 				model.addAttribute("message", "등록된 아이디가 아닙니다.");

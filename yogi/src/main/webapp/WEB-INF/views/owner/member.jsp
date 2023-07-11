@@ -87,7 +87,7 @@
 			 
 			    <div class="row mb-3" style="display: flex; align-items: center;">
 			        <label class="col-sm-2 col-form-label" for="selectownerEmail" >이메일</label>
-			        <div class="col-sm-8 row">
+			        <div class="col-sm-8 row email-box">
 						<div class="col-3 pe-0">
 							<select name="email" id="selectownerEmail" class="form-select" onchange="changeownerEmail();" style="margin-top: 24px;">
 								<option value="">선 택</option>
@@ -100,11 +100,18 @@
 						</div>
 
 						<div class="col input-group" style="width: 180px;">
-							<input type="text" name="email1" class="form-control" maxlength="30" value="${dto.email1}" >
+							<input type="text" id="email1" name="email1" class="form-control" maxlength="30" value="${dto.email1}" >
 						    <span class="input-group-text p-1" style="border: none; background: none;">@</span>
-							<input type="text" name="email2" class="form-control" maxlength="30" value="${dto.email2}" readonly="readonly">
-						</div>		
-
+							<input type="text" id="email2" name="email2" class="form-control" maxlength="30" value="${dto.email2}" readonly="readonly">
+						<div class="col-4 ps-1">
+							<c:if test="${mode=='member'}">
+								<button type="button" class="btn btn-light" onclick="emailCheck();">메일중복검사</button>
+							</c:if>
+						</div>
+						</div>
+						<c:if test="${mode=='member'}">
+							<small class="form-control-plaintext help-block"></small>
+						</c:if>		
 			        </div>
 			    </div>
 
@@ -283,5 +290,39 @@ function userIdCheck() {
 			}
 		}
 	});
+}
+
+function emailCheck() {
+	let email1 = $("#email1").val();
+	let email2 = $("#email2").val();
+	let email=email1+"@"+email2;
+	
+	let url = "${pageContext.request.contextPath}/owner/emailCheck";
+	let query = "email=" + email;
+	$.ajax({
+		type:"POST"
+		,url:url
+		,data:query
+		,dataType:"json"
+		,success:function(data) {
+			let passed = data.passed;
+
+			if(passed === "true") {
+				let str = "<span style='color:blue; font-weight: bold;'>" + email + "</span> 이메일은 사용가능 합니다.";
+				$(".email-box").find(".help-block").html(str);
+				$("#emailValid").val("true");
+			} else {
+				let str = "<span style='color:red; font-weight: bold;'>" + email + "</span> 이미 가입된 이메일입니다.";
+				$(".email-box").find(".help-block").html(str);
+				$("#selectownerEmail").val("");
+				$("#email1").val("");
+				$("#email2").val("");
+				$("#emailValid").val("false");
+				$("#email").focus();
+			}
+		}
+	});
+	
+	$("#email").focus();
 }
 </script>
