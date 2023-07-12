@@ -1305,7 +1305,7 @@ body {
 	   
 			out += "<div class='yes-cart'><div class='yes-cart-top'><div style='font-weight: bold;'>"+ menuName +" : "+ options +"</div>";
 			out +=   "<button type='button' class='delete-btn'><i class='fa-regular fa-circle-xmark'></i></button></div>"
-			out +=   "<div class='yes-cart-bottom'><div><input class='cart-price cartPrice-"+ cartCount +"' value='"+ price +"' readonly='readonly'></div>"
+			out +=   "<div class='yes-cart-bottom'><div><input class='cart-price cartPrice-"+ cartCount +"' value='"+ menuItem.price * menuItem.quantity +"' readonly='readonly'></div>"
 			out +=   "<div style='display:flex;'><button type='button' class='quantity-btn minus' data-count='"+ cartCount +"' data-product-id='" + menuNum + "'><i class='fa-solid fa-minus'></i></button>"
 			out +=   "<input name='cart-quantity' class='cart-quantity' value='"+ menuItem.quantity +"' readonly='readonly'>"
 			out +=   "<button type='button' class='quantity-btn plus' data-count='"+ cartCount +"' data-product-id='" + menuNum + "'><i class='fa-solid fa-plus'></i></button>"
