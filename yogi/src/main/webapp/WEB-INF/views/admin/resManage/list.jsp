@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<style>
+.datatable-table th a {
+	text-align: center;
+}
+</style>
 
 	<main id="main" class="main">
 
@@ -25,7 +30,7 @@
 
 					<h3 class="card-title">총 ${dataCount} 건</h3>
 
-					<table class="table table-hover admin-restaurantList-table">
+					<table class="table table-hover admin-restaurantList-table datatable">
 						<thead>
 							<tr>
 								<th scope="col">업체번호</th>

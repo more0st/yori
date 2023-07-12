@@ -47,7 +47,7 @@ public class ResManageController {
 
 		String cp = req.getContextPath();
 
-		int size = 10;
+		int size = 100;
 		int total_page = 0;
 		int dataCount = 0;
 

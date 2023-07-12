@@ -149,6 +149,10 @@ public class FaqController {
 			return "redirect:/";
 
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+		
+		if(dto.getAnswer() != null) {
+			dto.setAnswer(dto.getAnswer().replaceAll("\n", "<br>"));
+		}
 
 		// 이미지 파일
 		List<Faq> listFile = service.listFile(num);
