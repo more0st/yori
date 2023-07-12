@@ -103,6 +103,8 @@ public class OwnerController {
 		
 		List<MainDomain> list = service.recentSale(info.getRestaurantNum());
 		
+		System.out.println("레스토랑 넘 : " + info.getRestaurantNum());
+		
 		model.addAttribute("recentlist", list);
 		model.addAttribute("openState", info.getOpenState());
 		model.addAttribute("restaurantNum", info.getRestaurantNum());
@@ -285,6 +287,12 @@ public class OwnerController {
 		} else if(reviewRatingCount == 0) {
 			reviewAvg = "0";
 		}
+		
+		List<MainDomain> list = service.recentSale(info.getRestaurantNum());
+		
+		System.out.println("레스토랑 넘 : " + info.getRestaurantNum());
+		
+		model.addAttribute("recentlist", list);
 		
 		model.addAttribute("openState", dto.getOpenState());
 		model.addAttribute("restaurantNum", info.getRestaurantNum());
