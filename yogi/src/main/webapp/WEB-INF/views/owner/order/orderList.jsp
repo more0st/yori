@@ -50,7 +50,7 @@
                   <h5 class="card-title">접수대기<span> | ${res.restaurantName}</span></h5>
                   <table class="table table-borderless">
                     <thead>
-                      <tr>
+                      <tr style="white-space: nowrap;">
                         <th scope="col">주문번호</th>
                         <th scope="col">유저아이디</th>
                         <th scope="col">배달지</th>

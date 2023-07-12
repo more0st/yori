@@ -176,7 +176,7 @@
    outline: none;
    resize: none;
    padding-top: 5px;
-
+   min-height: 60px;
 }
 
 </style>

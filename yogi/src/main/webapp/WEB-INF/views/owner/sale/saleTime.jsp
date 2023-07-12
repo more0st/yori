@@ -186,7 +186,7 @@ function searchList() {
 
 			<table class="list-table">
 				<thead>
-					<tr>
+					<tr style="white-space: nowrap;">
 						<th class="center">번호</th>
 						<th class="center">주문번호</th>
 						<th class="center">유저닉네임</th>
