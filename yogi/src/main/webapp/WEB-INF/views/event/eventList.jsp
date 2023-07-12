@@ -178,7 +178,6 @@ function searchList() {
 		<button id="tab-ended" class="eventbtn" data-category="ended">종료</button>
 	</div>
 	
-	<div class="dataCount" style="margin-top: 10px;"></div>
 	
 	<div class="event-box">
 		
