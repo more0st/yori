@@ -38,14 +38,6 @@ function sendOk() {
         return;
     }
     
-    let mode = "${mode}";
-    if( (mode === "write") && (!f.selectFile.value) ) {
-        alert("이미지 파일을 추가 하세요. ");
-        f.selectFile.focus();
-        return;
-    }
-    
-    
     f.action = "${pageContext.request.contextPath}/faq/write";
     f.submit();
 }
