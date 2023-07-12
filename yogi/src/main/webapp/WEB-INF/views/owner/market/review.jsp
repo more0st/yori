@@ -19,6 +19,7 @@
    background: #f0f0f0;
    margin: 10px;
    padding: 10px;
+   min-height: 110px;
 }
 
 .ownerReview-top {
@@ -176,7 +177,8 @@
    outline: none;
    resize: none;
    padding-top: 5px;
-   min-height: 60px;
+   height: auto;
+   overflow-y: hidden;
 }
 
 </style>
@@ -242,7 +244,7 @@
                         </div>
                      </div>
                   </div>   
-                  <div class="ownerReview-content">
+                  <div class="ownerReview-content" style="min-height: 66.4px;">
                   	<textarea name="reply2" id="reply2-${rev.orderNum}" class="replyText" readOnly>${rev.reply}</textarea>
                   </div>
                </div>
@@ -454,6 +456,27 @@ $(function(){
 		
 	});
 });
+
+function adjustTextareaHeight(textarea) {
+	  textarea.style.height = 'auto';
+	  textarea.style.height = textarea.scrollHeight + 'px';
+	}
+
+	// textarea의 높이 조정 이벤트 처리
+	document.addEventListener('input', function(event) {
+	  if (event.target && event.target.classList.contains('replyText')) {
+	    adjustTextareaHeight(event.target);
+	  }
+	});
+
+	// 페이지 로드 후 모든 textarea에 대해 높이 조정 적용
+	window.addEventListener('DOMContentLoaded', function() {
+	  const textareas = document.querySelectorAll('.replyText');
+	  textareas.forEach(function(textarea) {
+	    adjustTextareaHeight(textarea);
+	  });
+	});
+
 
 
 </script>
