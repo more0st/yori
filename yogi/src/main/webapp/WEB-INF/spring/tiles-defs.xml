@@ -36,7 +36,7 @@
 	
 	<!-- 음식점 사장님 -->
 	<definition name=".ownerLayout" template="/WEB-INF/views/owner/layout/layout2.jsp">
-	    <put-attribute name="title" value="요기요 사장님" />
+	    <put-attribute name="title" value="요리조리요 사장님" />
 	  	<put-attribute name="header" value="/WEB-INF/views/owner/layout/header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/owner/layout/main.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/owner/layout/footer.jsp" />
