@@ -40,9 +40,11 @@ BootStrap을 활용해 화면을 만들었습니다.
 ### 사용자 화면
 ![사용자페이지_메인](https://github.com/more0st/yori/assets/118714351/b90aed13-5298-4497-9be2-73210ccc5127)
 <br>
+
 ### 사장님 화면
 ![사장님페이지_메뉴관리](https://github.com/more0st/yori/assets/118714351/2d3e00ec-e98e-4535-9482-6695eb20fa74)
 <br>
+
 ### 관리자 화면
 ![2  관리자 home](https://github.com/more0st/yori/assets/118714351/8f053fee-99e4-4ed4-8087-6d9d61390df8)
 <br>
@@ -50,9 +52,15 @@ BootStrap을 활용해 화면을 만들었습니다.
 <br>
 <br>
 
+
+
 ## 프로젝트 DB ERD
 <img width="878" alt="요리조리_erd" src="https://github.com/more0st/yori/assets/118714351/2a62801c-c062-44c0-984b-606aec4673b4">
 <br>
+<br>
+<br>
+<br>
+
 
 ## 결제 시퀀스 다이어그램
 ![결제_시퀀스](https://github.com/more0st/yori/assets/118714351/31b1a410-13ef-47c5-b282-c15ffd2a8ba1)
