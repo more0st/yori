@@ -1,11 +1,13 @@
 # 🍕음식 배달 사이트 요리조리요
-
 <br>
+
 ## 프로젝트 환경
+
 ### 인원 및 기간
-6명 (김지윤(팀장), 강재혁, 김선영, 박상훈, 한승현, 홍민찬)
+6명 (김지윤, 강재혁, 김선영, 박상훈, 한승현, 홍민찬)
 <br>
 2023.06.16 ~ 2023.07.12
+
 ### 사용 기술 및 환경
 Spring Framework(5.3.27 version), JSP, Maven, Javascript, Oracle, Mybatis, AWS ec2, github, bootstrap
 <br>
