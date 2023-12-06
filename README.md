@@ -1,8 +1,6 @@
 # 🍕음식 배달 사이트 요리조리요
-사용자 / 사장님 / 관리자 기능을 구현했습니다.  
-<br>
-<br>
 
+<br>
 ## 프로젝트 환경
 ### 인원 및 기간
 6명 (김지윤(팀장), 강재혁, 김선영, 박상훈, 한승현, 홍민찬)
@@ -17,31 +15,46 @@ Spring Framework(5.3.27 version), JSP, Maven, Javascript, Oracle, Mybatis, AWS e
 <br>
 
 ## 프로젝트 소개
-
-### 프로젝트 개요 👀
-![image](https://github.com/JiYoon0712/yorizori/assets/98688979/1c1dbaf1-39d9-4ecb-872f-fb0569e9626d)
-![image](https://github.com/JiYoon0712/yorizori/assets/98688979/f4bcc59c-0daa-473b-a432-99eecc6691b1)
+웹 페이지에서 배달 서비스를 제공하는 요기요 클론 코딩. 
+BootStrap을 활용해 화면을 만들었습니다. 
 
 <br>
 
-### 화면 소개
-#### 사용자 화면
+## 프로젝트의 전체적인 구조
+추후 작성
+
+<br>
+<br>
+
+## 프로젝트의 관심사
+결제 기능 구현
+<br>
+인터셉터로 회원 아이디 관리
+<br>
+지역에 따른 가게 분류를 어떻게 할 것인가
+
+
+<br>
+
+## 화면 설계
+### 사용자 화면
 ![사용자페이지_메인](https://github.com/more0st/yori/assets/118714351/b90aed13-5298-4497-9be2-73210ccc5127)
 <br>
-#### 사장님 화면
+### 사장님 화면
 ![사장님페이지_메뉴관리](https://github.com/more0st/yori/assets/118714351/2d3e00ec-e98e-4535-9482-6695eb20fa74)
 <br>
-#### 관리자 화면
+### 관리자 화면
 ![2  관리자 home](https://github.com/more0st/yori/assets/118714351/8f053fee-99e4-4ed4-8087-6d9d61390df8)
 <br>
 <br>
 <br>
 <br>
-### ERD
+
+## 프로젝트 DB ERD
 <img width="878" alt="요리조리_erd" src="https://github.com/more0st/yori/assets/118714351/2a62801c-c062-44c0-984b-606aec4673b4">
 <br>
 
-### 결제 시퀀스 다이어그램
+## 결제 시퀀스 다이어그램
 ![결제_시퀀스](https://github.com/more0st/yori/assets/118714351/31b1a410-13ef-47c5-b282-c15ffd2a8ba1)
 
 
