@@ -3,8 +3,12 @@
 3개의 관점에서 개발을 진행했습니다.
 웹 배달 서비스를 구현하였습니다.
 
-### 기간
+# 기간
 2023.06.16 ~ 2023.07.12
+
+# 기술스택
+Spring Framework(5.3.27 version), JSP, Javascript, Oracle, Mybatis, AWS ec2
+개발환경 : java 11, STS 3.9.18, apache-tomcat-9.0.75
 
 # <img width = "100%" src = "!https://github.com/JiYoon0712/yorizori/assets/98688979/78e0c9d6-2475-488a-99ee-49238a40f184"/>
 
