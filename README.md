@@ -9,9 +9,9 @@
 2023.06.16 ~ 2023.07.12
 
 ### 사용 기술 및 환경
-Spring Framework(5.3.27 version), JSP, Maven, Javascript, Oracle, Mybatis, AWS ec2, github, bootstrap
+java 11, Spring Framework(5.3.27 version), JSP, Maven, Javascript, Oracle, Mybatis, AWS ec2, bootstrap
 <br>
-개발환경 : java 11, STS 3.9.18, apache-tomcat-9.0.75
+개발환경 : STS 3.9.18, apache-tomcat-9.0.75, github 
 <br>
 <br>
 <br>
