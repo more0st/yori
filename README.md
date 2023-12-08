@@ -24,8 +24,7 @@ Spring Framework(5.3.27 version), JSP, Maven, Javascript, Oracle, Mybatis, AWS e
 
 
 ## 프로젝트 구조
-추후 작성
-
+![제목 없음-2023-12-06-0906](https://github.com/more0st/yori/assets/118714351/d2d7157a-9d73-4511-9233-dcbdb298309a)
 <br>
 <br>
 
