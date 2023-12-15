@@ -56,8 +56,7 @@ java 11, Spring Framework(5.3.27 version), JSP, Maven, Javascript, Oracle, Mybat
 
 
 ## 결제 시퀀스 다이어그램
-![결제_시퀀스](https://github.com/more0st/yori/assets/118714351/31b1a410-13ef-47c5-b282-c15ffd2a8ba1)
-<br>
+<img width="754" alt="요리조리-주문-시퀀스" src="https://github.com/more0st/yori/assets/118714351/e0901c78-b8c5-4526-9990-ca1b1cfc42c9"><br>
 <br>
 <br>
 <br>
